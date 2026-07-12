@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getProject } from "@/lib/projects";
+import { getProject, type Milestone, type ProjectLink } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -90,7 +90,7 @@ function ProjectDetail() {
                 About
               </h2>
               <div className="text-lg text-zinc-800 leading-relaxed text-pretty max-w-[56ch] space-y-6">
-                {project.about.map((p, i) => (
+                {project.about.map((p: string, i: number) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
@@ -125,7 +125,7 @@ function ProjectDetail() {
                 Progress
               </h2>
               <div className="space-y-6">
-                {project.progress.map((m) => (
+                {project.progress.map((m: Milestone) => (
                   <div key={m.label} className="flex items-center gap-6">
                     <div className={`size-2 rounded-full ${statusDot[m.status]}`} />
                     <div className="flex-1 flex justify-between items-center border-b border-zinc-950/5 pb-4">
@@ -145,7 +145,7 @@ function ProjectDetail() {
                   Resources
                 </h2>
                 <ul className="space-y-4">
-                  {project.links.map((link) => (
+                  {project.links.map((link: ProjectLink) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
