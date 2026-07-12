@@ -7,10 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteFooter, SiteHeader } from "../components/site-chrome";
 
 function NotFoundComponent() {
@@ -38,9 +37,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -78,18 +74,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Elias Thorne — Founder & Operator" },
+      { title: "Modern Telepathy" },
       {
         name: "description",
         content:
-          "Portfolio of Elias Thorne — a founder-operator building infrastructure for the distributed economy.",
+          "Modern Telepathy — open-source AI research, models, and systems for shared intelligence.",
       },
-      { name: "author", content: "Elias Thorne" },
-      { property: "og:title", content: "Elias Thorne — Founder & Operator" },
+      { name: "author", content: "Modern Telepathy" },
+      { property: "og:title", content: "Modern Telepathy" },
       {
         property: "og:description",
         content:
-          "Portfolio of Elias Thorne — a founder-operator building infrastructure for the distributed economy.",
+          "Modern Telepathy — open-source AI research, models, and systems for shared intelligence.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
