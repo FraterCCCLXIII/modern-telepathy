@@ -111,6 +111,7 @@ export const projects: Project[] = [
     pitchBody:
       "Ship a Faust-powered headless store with WooCommerce data and modern UI without rebuilding the CMS.",
     links: [
+      { label: "Website", href: "https://nextpresser.com" },
       { label: "GitHub", href: "https://github.com/NextPresser/NextPresser" },
       { label: "Docs", href: "https://docs.nextpresser.com" },
     ],
@@ -133,7 +134,10 @@ export const projects: Project[] = [
     pitchHeadline: "Write something. Leave it.",
     pitchBody:
       "Anonymous posts with memorable URLs and enough moderation to keep a calm public writing space running.",
-    links: [{ label: "GitHub", href: "https://github.com/FraterCCCLXIII/Prompt" }],
+    links: [
+      { label: "Website", href: "https://theprompt.site" },
+      { label: "GitHub", href: "https://github.com/FraterCCCLXIII/Prompt" },
+    ],
     progress: [
       { label: "Core writing app", note: "Live", status: "done" },
       { label: "Moderation admin", note: "Shipped", status: "done" },
