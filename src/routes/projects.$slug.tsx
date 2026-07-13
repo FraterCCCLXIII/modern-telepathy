@@ -33,7 +33,7 @@ export const Route = createFileRoute("/projects/$slug")({
       <p className="text-sm uppercase tracking-widest text-zinc-400 mb-4">404</p>
       <h1 className="text-4xl font-medium tracking-tight mb-6">Project not found</h1>
       <Link to="/" className="text-sm font-medium underline">
-        Back to portfolio
+        Back to projects
       </Link>
     </div>
   ),
@@ -47,7 +47,7 @@ const statusDot: Record<"done" | "active" | "planned", string> = {
 
 function ProjectDetail() {
   const { project } = Route.useLoaderData();
-  const { Logo } = project;
+  const primaryLink = project.links[0];
 
   return (
     <div className="bg-canvas pt-16 pb-32">
@@ -56,30 +56,42 @@ function ProjectDetail() {
           to="/"
           className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-ink transition-colors mb-16"
         >
-          <span className="text-zinc-400">←</span> All ventures
+          <span className="text-zinc-400">←</span> All projects
         </Link>
 
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-24">
           <div className="flex-1">
-            <div className="size-16 bg-zinc-900 text-canvas rounded-2xl flex items-center justify-center mb-8 shadow-sm">
-              <Logo className="size-8" />
+            <div className="size-16 bg-zinc-100 text-ink rounded-2xl flex items-center justify-center mb-8 shadow-sm outline-1 -outline-offset-1 outline-black/5 overflow-hidden p-3">
+              <img
+                src={project.logoSrc}
+                alt=""
+                className="max-h-full max-w-full object-contain"
+              />
             </div>
             <h1 className="text-5xl font-medium tracking-tight mb-4">{project.name}</h1>
             <p className="text-xl text-zinc-500 max-w-[40ch] text-pretty">{project.tagline}</p>
           </div>
           <div className="w-full md:w-64 space-y-4">
-            <a
-              href={project.links[0]?.href ?? "#"}
-              className="block text-center bg-zinc-900 text-canvas px-4 py-2.5 rounded-lg text-sm font-medium ring-1 ring-zinc-900 hover:bg-zinc-800 transition-colors"
-            >
-              Launch Website
-            </a>
-            <a
-              href="#"
-              className="block text-center bg-canvas text-ink px-4 py-2.5 rounded-lg text-sm font-medium ring-1 ring-black/5 hover:bg-zinc-50 transition-colors"
-            >
-              Technical Deck
-            </a>
+            {primaryLink ? (
+              <a
+                href={primaryLink.href}
+                target="_blank"
+                rel="noreferrer"
+                className="block text-center bg-zinc-900 text-canvas px-4 py-2.5 rounded-lg text-sm font-medium ring-1 ring-zinc-900 hover:bg-zinc-800 transition-colors"
+              >
+                {primaryLink.label}
+              </a>
+            ) : null}
+            {project.links[1] ? (
+              <a
+                href={project.links[1].href}
+                target="_blank"
+                rel="noreferrer"
+                className="block text-center bg-canvas text-ink px-4 py-2.5 rounded-lg text-sm font-medium ring-1 ring-black/5 hover:bg-zinc-50 transition-colors"
+              >
+                {project.links[1].label}
+              </a>
+            ) : null}
           </div>
         </div>
 
@@ -101,16 +113,30 @@ function ProjectDetail() {
                 The Pitch
               </h2>
               <div className="w-full aspect-video bg-zinc-100 rounded-xl outline-1 -outline-offset-1 outline-black/5 grid place-items-center mb-10 relative overflow-hidden">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 opacity-60"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle at 20% 30%, rgba(24,24,27,0.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(24,24,27,0.06), transparent 40%), linear-gradient(to right, rgba(24,24,27,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,24,27,0.04) 1px, transparent 1px)",
-                    backgroundSize: "auto, auto, 32px 32px, 32px 32px",
-                  }}
-                />
-                <Logo className="size-20 text-zinc-400 relative" />
+                {project.imageSrc ? (
+                  <img
+                    src={project.imageSrc}
+                    alt=""
+                    className="absolute inset-0 size-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 opacity-60"
+                      style={{
+                        backgroundImage:
+                          "radial-gradient(circle at 20% 30%, rgba(24,24,27,0.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(24,24,27,0.06), transparent 40%), linear-gradient(to right, rgba(24,24,27,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,24,27,0.04) 1px, transparent 1px)",
+                        backgroundSize: "auto, auto, 32px 32px, 32px 32px",
+                      }}
+                    />
+                    <img
+                      src={project.logoSrc}
+                      alt=""
+                      className="relative size-20 object-contain opacity-50"
+                    />
+                  </>
+                )}
               </div>
               <div className="max-w-[56ch] space-y-6">
                 <h3 className="text-2xl font-medium tracking-tight text-balance">
@@ -149,6 +175,8 @@ function ProjectDetail() {
                     <li key={link.label}>
                       <a
                         href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
                         className="group flex items-center justify-between py-2 text-zinc-600 hover:text-ink transition-colors"
                       >
                         <span className="text-sm font-medium">{link.label}</span>
@@ -161,7 +189,7 @@ function ProjectDetail() {
                 </ul>
               </div>
               <div className="p-6 rounded-2xl bg-zinc-50 ring-1 ring-black/5">
-                <h3 className="text-sm font-medium mb-2">My Role</h3>
+                <h3 className="text-sm font-medium mb-2">Role</h3>
                 <p className="text-sm text-zinc-500">{project.role}</p>
               </div>
             </div>

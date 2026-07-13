@@ -14,7 +14,7 @@ export function SiteHeader() {
             activeProps={{ className: "text-ink" }}
             className="hover:text-ink transition-colors"
           >
-            Ventures
+            Projects
           </Link>
           <Link
             to="/thesis"

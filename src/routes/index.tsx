@@ -101,15 +101,19 @@ function Index() {
               ref={scrollerRef}
               className="flex gap-6 overflow-x-auto no-scrollbar snap-x pb-4"
             >
-              {projects.map(({ slug, name, description, Logo }) => (
+              {projects.map(({ slug, name, description, logoSrc }) => (
                 <div key={slug} className="flex-none w-80 snap-start">
                   <Link
                     to="/projects/$slug"
                     params={{ slug }}
                     className="group bg-canvas p-6 rounded-2xl ring-1 ring-black/5 hover:ring-black/10 transition-shadow h-full flex flex-col"
                   >
-                    <div className="size-12 bg-zinc-100 rounded-xl mb-6 flex items-center justify-center outline-1 -outline-offset-1 outline-black/5 text-zinc-800">
-                      <Logo className="size-6" />
+                    <div className="size-12 bg-zinc-100 rounded-xl mb-6 flex items-center justify-center outline-1 -outline-offset-1 outline-black/5 overflow-hidden p-2">
+                      <img
+                        src={logoSrc}
+                        alt=""
+                        className="max-h-full max-w-full object-contain"
+                      />
                     </div>
                     <h3 className="text-lg font-medium mb-2">{name}</h3>
                     <p className="text-sm text-zinc-500 mb-8 leading-relaxed text-pretty">
