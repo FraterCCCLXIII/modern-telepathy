@@ -121,7 +121,7 @@ function Index() {
                     </p>
                     <span className="mt-auto inline-flex items-center text-sm font-medium py-2 pr-3 pl-2 group-hover:bg-zinc-50 rounded-lg transition-colors">
                       <span className="mr-2 text-zinc-400">→</span>
-                      View breakdown
+                      View
                     </span>
                   </Link>
                 </div>
