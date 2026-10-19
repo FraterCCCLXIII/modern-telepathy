@@ -18,6 +18,31 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "keybox",
+    name: "Keybox",
+    tagline: "Seal a secret. The agent can spend it. The model never reads it.",
+    description:
+      "A vault for Cursor, VS Code, Claude, and Codex. Highlight a key, send a handle, and the agent spends it without seeing the value.",
+    logoSrc: "/projects/keybox/logo.svg",
+    imageSrc: "/projects/keybox/image.png",
+    role: "Creator. Vault, host installers, and the public site.",
+    about: [
+      "Keybox replaces a pasted key with a handle such as «kb:openai». The agent calls the API through that handle. There is no tool that returns the value.",
+      "Cursor, Claude Code, and Codex block a raw key on send. VS Code and Claude Desktop use the same vault and MCP server, and you seal before you send. One install covers every host.",
+    ],
+    pitchHeadline: "Spend the handle, not the key",
+    pitchBody:
+      "The site and the download are hosted on Vercel. The case study lives here. The source is on GitHub.",
+    links: [
+      { label: "Site", href: "https://keybox-cyan.vercel.app" },
+      { label: "GitHub", href: "https://github.com/Modern-Telepathy/keybox" },
+    ],
+    progress: [
+      { label: "Vault, MCP, and host installers", note: "0.1.0", status: "done" },
+      { label: "Public site on Vercel", note: "Live", status: "done" },
+    ],
+  },
+  {
     slug: "kosmos",
     name: "Kosmos",
     tagline: "A generative AI operating system for integrated work and life.",
