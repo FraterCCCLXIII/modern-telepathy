@@ -5,6 +5,8 @@ export type Milestone = { label: string; note: string; status: "done" | "active"
 
 export type Project = {
   slug: string;
+  /** Logo is a bare glyph with no tile of its own: show it padded instead of full-bleed. */
+  logoPad?: boolean;
   /** Own page instead of /projects/$slug. */
   href?: string;
   group: GroupId;
@@ -197,6 +199,7 @@ export const projects: Project[] = [
   },
   {
     slug: "newsphere",
+    logoPad: true,
     group: "language",
     name: "Newsphere",
     tagline: "Built to read, not to scroll.",
@@ -245,6 +248,7 @@ export const projects: Project[] = [
   },
   {
     slug: "openbook",
+    logoPad: true,
     group: "business",
     name: "OpenBook",
     tagline: "TypeScript appointment platform — NestJS API + React SPA.",
@@ -291,6 +295,7 @@ export const projects: Project[] = [
   },
   {
     slug: "holons",
+    logoPad: true,
     group: "knowledge",
     name: "Holons",
     tagline: "Learning communities of people evolving together.",

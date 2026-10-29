@@ -62,11 +62,11 @@ function ProjectDetail() {
 
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-24">
           <div className="flex-1">
-            <div className="size-16 bg-zinc-100 text-ink rounded-2xl flex items-center justify-center mb-8 shadow-sm outline-1 -outline-offset-1 outline-black/5 overflow-hidden">
+            <div className={`size-16 bg-zinc-100 text-ink rounded-2xl flex items-center justify-center mb-8 shadow-sm outline-1 -outline-offset-1 outline-black/5 overflow-hidden ${project.logoPad ? "p-3" : ""}`}>
               <img
                 src={project.logoSrc}
                 alt=""
-                className="size-full object-cover"
+                className={project.logoPad ? "max-h-full max-w-full object-contain" : "size-full object-cover"}
               />
             </div>
             <h1 className="text-5xl font-medium tracking-tight mb-4">{project.name}</h1>
