@@ -135,3 +135,10 @@
 .hero { min-height: 0; }
 .hero .hero-main { padding-bottom: 24px; }
 .hero + .section { padding-top: 4rem; }
+
+/* Hands page only: centre the hero hand in the right half, clear of the headline. */
+@media (min-width: 900px) {
+  .stage { --hw: clamp(260px, 48svh, 560px); }
+  .stage .hero-viewer,
+  .stage .shadow { margin-right: calc(25% - var(--hw) / 2); }
+}
