@@ -45,13 +45,146 @@ const PROJECTS = [
   { group: "more", name: "Previs", note: "Story map, timeline and storyboard where every scene node renders live in 3D. Working prototype; no audio or export yet.", status: "prototype", href: "previs/index.html", g: "M3 5h8v6H3zM13 13h8v6h-8zM11 8h4a2 2 0 012 2v3M3 18h6M3 21h10" },
   { group: "more", name: "Studio", note: "Character creator: swap parts, morph sliders, colours and accessories across human, creature and Kamiji styles. Prototype; GLB export is partial.", status: "prototype", href: "studio/index.html", g: "M12 4a3 3 0 100 6 3 3 0 000-6zM6 20v-3a6 6 0 0112 0v3M3 12h2M19 12h2M12 1v2" },
 ];
+// Modern Telepathy projects (src/lib/projects.tsx), generated; each opens its page on the parent site.
+const MT_PROJECTS = [
+ {
+  "group": "mt",
+  "name": "TempleOS desktop",
+  "note": "Plans, specs and status for rebuilding a modern desktop and browser inside TempleOS.",
+  "status": "link",
+  "href": "/projects/templeos",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Keybox",
+  "note": "A vault for Cursor, VS Code, Claude, and Codex. Highlight a key, send a handle, and the agent spends it without seeing the value.",
+  "status": "link",
+  "href": "/projects/keybox",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Kosmos",
+  "note": "One shell for chat, code, files, and generated apps — agents and UI sharing a single session.",
+  "status": "link",
+  "href": "/projects/kosmos",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "DocTransit",
+  "note": "Send, sign, and track agreements — with Agents API, MCP, CLI, and webhooks for AI-driven contract flows.",
+  "status": "link",
+  "href": "/projects/doctransit",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "NextPresser",
+  "note": "Faust.js + WPGraphQL storefront with cart, checkout, auth, and multi-gateway payments.",
+  "status": "link",
+  "href": "/projects/nextpresser",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Prompt",
+  "note": "Leave a text post — public or link-only — at a human-readable five-word URL.",
+  "status": "link",
+  "href": "/projects/prompt",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Newsphere",
+  "note": "Desktop RSS/Atom reader with a column grid, focused reader, and optional on-device AI.",
+  "status": "link",
+  "href": "/projects/newsphere",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Castbook",
+  "note": "Manage talent and productions — with public actor submissions and multilingual UI.",
+  "status": "link",
+  "href": "/projects/castflow",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "OpenBook",
+  "note": "Modern booking for services and providers with public scheduling and staff tools.",
+  "status": "link",
+  "href": "/projects/openbook",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Kosmographica",
+  "note": "Federated, citation-backed encyclopedia with trust-rated claims across religion and mythology.",
+  "status": "link",
+  "href": "/projects/kosmographica",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Holons",
+  "note": "LMS where each Holon hosts courses, modules, members, and a social feed.",
+  "status": "link",
+  "href": "/projects/holons",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Public Search",
+  "note": "Modern YaCy front end — no tracking, themeable UI, optional SearxNG.",
+  "status": "link",
+  "href": "/projects/public-search",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Public Translate",
+  "note": "Speech-to-text, bilingual display, and TTS — built for temples, classrooms, and cast-to-TV.",
+  "status": "link",
+  "href": "/projects/public-translate",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Dharma Atlas",
+  "note": "Interactive map and list of 5,600+ spiritual places with tradition filters.",
+  "status": "link",
+  "href": "/projects/dharma-atlas",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Podium",
+  "note": "Podcast post-production that turns episodes into editable transcripts and shareable collateral.",
+  "status": "link",
+  "href": "/projects/podium",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt",
+  "name": "Fathom",
+  "note": "The podcast pipeline behind diarized transcripts, vectors, and episode enrichment at fathom.fm.",
+  "status": "link",
+  "href": "/projects/fathom",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ }
+];
+PROJECTS.push(...MT_PROJECTS);
 const GROUPS = [
   { id: "family", label: "Kamiji family" },
   { id: "more", label: "More projects" },
+  { id: "mt", label: "Modern Telepathy projects" },
 ];
 
 const css = `
-.sx { position: absolute; top: 0; left: 0; right: 0; z-index: 30; height: 40px; display: flex; align-items: center; background: var(--bg, #f0efe7); border-bottom: 1px solid var(--faint, rgba(31,42,34,.13)); }
+.sx { position: absolute; top: 0; left: 0; right: 0; z-index: 30; display: flex; flex-direction: column; align-items: stretch; background: var(--bg, #f0efe7); border-bottom: 1px solid var(--faint, rgba(31,42,34,.13)); }
 .sx-in { width: 100%; max-width: none; margin: 0; padding: 0 var(--gutter, 24px); box-sizing: border-box; display: flex; align-items: center; gap: 6px 22px; }
 .sx a { font: .66rem/1 var(--mono, ui-monospace, monospace); text-transform: uppercase; letter-spacing: .16em; color: var(--muted, #5f665a); text-decoration: none; padding: 12px 0; white-space: nowrap; }
 .sx a:hover, .sx a:focus-visible { color: var(--fg, #1f2a22); }
@@ -73,16 +206,20 @@ const css = `
 .sx-sp { flex: 1; }
 .sx-links { display: flex; align-items: center; gap: 6px 22px; justify-self: center; }
 @media (max-width: 1099px) { .sx-in { overflow-x: auto; scrollbar-width: none; } .sx-in::-webkit-scrollbar { display: none; } }
-@media (min-width: 1100px) { .sx-in { display: grid; grid-template-columns: 1fr auto 1fr; } .sx-in > .sx-lead { justify-self: start; } .sx-in > .sx-end { justify-self: end; } .sx-in > .sx-sp { display: none; } }
 .sx-ext::after { content: " \\2197"; opacity: .6; }
-body { padding-top: 40px; }
-.site-header { top: 40px; }
+body { padding-top: 76px; }
+.site-header { top: 76px; }
+.sx-in { height: 40px; justify-content: space-between; }
+.sx-sub { height: 36px; border-top: 1px solid var(--faint, rgba(31,42,34,.13)); }
+.sx-sub .sx-in { height: 36px; justify-content: flex-start; }
+.sx-sub .sx-ext { margin-left: auto; }
+.sx-badge[data-s="link"] { opacity: .8; }
 .sx-dark .sx { background: #0d0d0f; border-bottom-color: rgba(255,255,255,.09); }
 .sx-dark .sx a { color: #a8a8ae; }
 .sx-dark .sx a:hover, .sx-dark .sx a:focus-visible, .sx-dark .sx a[aria-current="page"] { color: #ececee; }
 .sx-dark .sx a[aria-current="page"] { box-shadow: inset 0 -2px 0 #7c9dff; }
 .sx-dark .sx-logo { filter: invert(1); }
-@media (max-width: 560px) { .sx-in { overflow-x: auto; scrollbar-width: none; } .sx-in::-webkit-scrollbar { display: none; } .sx-in { gap: 4px 14px; } .sx-ext, .sx-mt { display: none; } }
+@media (max-width: 560px) { .sx-in { overflow-x: auto; scrollbar-width: none; } .sx-in::-webkit-scrollbar { display: none; } .sx-in { gap: 4px 14px; } .sx-ext { display: none; } }
 @media (max-width: 420px) { .sx-in { gap: 4px 11px; padding: 0 16px; } .sx a { font-size: .6rem; letter-spacing: .08em; } .sx-logo { margin-right: 0; height: 18px; } }
 .sx-pj { position: static; }
 .sx.sx-open { z-index: 9999; }
@@ -183,7 +320,13 @@ function build() {
   const path = location.pathname;
   const links = document.createElement("span");
   links.className = "sx-links";
-  nav.append(links);
+  const sub = document.createElement("div");
+  sub.className = "sx-sub";
+  const nav2 = document.createElement("nav");
+  nav2.className = "sx-in";
+  nav2.setAttribute("aria-label", "Projects");
+  nav2.append(links);
+  sub.append(nav2);
   PAGES.forEach((p) => {
     const a = document.createElement("a");
     a.href = new URL(p.href, base).href;
@@ -201,7 +344,7 @@ function build() {
   btn.id = "sx-pjbtn";
   btn.setAttribute("aria-expanded", "false");
   btn.setAttribute("aria-controls", "sx-panel");
-  btn.innerHTML = 'Projects <svg width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  btn.innerHTML = 'All projects <svg width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   pj.append(btn);
   links.append(pj);
   const panel = document.createElement("div");
@@ -272,9 +415,6 @@ function build() {
   });
   document.addEventListener("pointerdown", (e) => { if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
   panel.addEventListener("focusout", (e) => { if (!panel.hidden && e.relatedTarget && !panel.contains(e.relatedTarget) && e.relatedTarget !== btn) setOpen(false); });
-  const sp = document.createElement("span");
-  sp.className = "sx-sp";
-  nav.append(sp);
   const mt = document.createElement("span");
   mt.className = "sx-mt";
   MT.forEach((l) => {
@@ -287,16 +427,16 @@ function build() {
   const end = document.createElement("span");
   end.className = "sx-end";
   end.append(mt);
+  nav.append(end);
   ELSEWHERE.forEach((l) => {
     const a = document.createElement("a");
     a.className = "sx-ext";
     a.href = l.href;
     a.rel = "noopener";
     a.textContent = l.label;
-    end.append(a);
+    nav2.append(a);
   });
-  nav.append(end);
-  bar.append(nav);
+  bar.append(nav, sub);
   document.body.prepend(bar);
 }
 

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { projects } from "@/lib/projects";
 
 /*
  * One header for the whole site. It mirrors public/labs/kamiji/site/shared-header.js (the bar on every Kamiji page):
@@ -11,12 +12,6 @@ const NAV = [
   { to: "/labs/templeos/docs/", label: "Docs", plain: true },
   { to: "/thesis", label: "Thesis" },
 ] as const;
-
-const KAMIJI = [
-  { label: "Kamiji", href: "/labs/kamiji/site/" },
-  { label: "Studio", href: "/labs/kamiji/site/studio/" },
-  { label: "Kosmos", href: "/labs/kamiji/site/kosmos/" },
-];
 
 // Wheel faces: [src, width, height]. Four sides, 90 degrees apart, apothem = 20px / 2.
 const FACES: [string, number, number][] = [
@@ -74,47 +69,58 @@ function LogoWheel() {
 
 const bar =
   "font-mono text-[.66rem] leading-none uppercase tracking-[.16em] text-muted-foreground hover:text-ink focus-visible:text-ink transition-colors py-3";
+const pad = "px-[clamp(16px,5vw,80px)]";
 const active = "text-ink font-semibold shadow-[inset_0_-2px_0_var(--primary)]";
 
 export function SiteHeader() {
   return (
-    <nav
-      aria-label="Sites"
-      className="sticky top-0 z-50 h-10 bg-canvas border-b border-border"
-    >
-      <div className="h-full px-[clamp(16px,5vw,80px)] flex items-center justify-between gap-x-6 overflow-x-auto no-scrollbar">
-        <span className="flex items-center gap-x-4 flex-none">
-          <LogoWheel />
-          <Link to="/" className={`${bar} text-ink font-semibold`}>
-            Modern Telepathy
-          </Link>
-        </span>
-        <span className="flex items-center gap-x-6 flex-none">
-          {KAMIJI.map((l) => (
-            <a key={l.href} href={l.href} className={`${bar} hidden md:inline`}>
-              {l.label}
-            </a>
+    <header className="sticky top-0 z-50 bg-canvas">
+      <nav aria-label="Sites" className="h-10 border-b border-border">
+        <div className={`${pad} h-full flex items-center justify-between gap-x-6 overflow-x-auto no-scrollbar`}>
+          <span className="flex items-center gap-x-4 flex-none">
+            <LogoWheel />
+            <Link to="/" className={`${bar} text-ink font-semibold`}>
+              Modern Telepathy
+            </Link>
+          </span>
+          <span className="flex items-center gap-x-6 flex-none">
+            {NAV.map((n) =>
+              "plain" in n ? (
+                <a key={n.to} href={n.to} className={bar}>
+                  {n.label}
+                </a>
+              ) : (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  activeOptions={{ exact: "exact" in n }}
+                  activeProps={{ className: active }}
+                  className={bar}
+                >
+                  {n.label}
+                </Link>
+              ),
+            )}
+          </span>
+        </div>
+      </nav>
+      {/* Subnav: every project. On the Kamiji pages the same row holds that family's pages and an "All projects" menu. */}
+      <nav aria-label="Projects" className="h-9 border-b border-border">
+        <div className={`${pad} h-full flex items-center gap-x-6 overflow-x-auto no-scrollbar`}>
+          {projects.map((p) => (
+            <Link
+              key={p.slug}
+              to="/projects/$slug"
+              params={{ slug: p.slug }}
+              activeProps={{ className: active }}
+              className={`${bar} flex-none`}
+            >
+              {p.name}
+            </Link>
           ))}
-          {NAV.map((n) =>
-            "plain" in n ? (
-              <a key={n.to} href={n.to} className={bar}>
-                {n.label}
-              </a>
-            ) : (
-              <Link
-                key={n.to}
-                to={n.to}
-                activeOptions={{ exact: "exact" in n }}
-                activeProps={{ className: active }}
-                className={bar}
-              >
-                {n.label}
-              </Link>
-            ),
-          )}
-        </span>
-      </div>
-    </nav>
+        </div>
+      </nav>
+    </header>
   );
 }
 
