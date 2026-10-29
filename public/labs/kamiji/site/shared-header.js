@@ -12,6 +12,13 @@ const PAGES = [
   { id: "longformer", label: "Longformer", href: "longformer/index.html", match: /\/site\/longformer\// },
   { id: "computer", label: "Computer", href: "kosmos-computer/index.html", match: /\/site\/kosmos-computer\// },
 ];
+// Modern Telepathy: the parent site. Keep in step with SiteHeader in src/components/site-chrome.tsx.
+const MT = [
+  { label: "Projects", href: "/" },
+  { label: "Labs", href: "/labs" },
+  { label: "Docs", href: "/labs/templeos/docs/" },
+  { label: "Thesis", href: "/thesis" },
+];
 const ELSEWHERE = [
   { label: "yakopop.com", href: "https://yakopop.com" },
 ];
@@ -54,15 +61,19 @@ const css = `
 .sx-wheel { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.5, 0, .2, 1); }
 .sx-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-start; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .sx-face img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
-.sx-face:nth-child(1) { transform: rotateX(0deg) translateZ(5.8px); }
-.sx-face:nth-child(2) { transform: rotateX(120deg) translateZ(5.8px); }
-.sx-face:nth-child(3) { transform: rotateX(240deg) translateZ(5.8px); }
+.sx-face:nth-child(1) { transform: rotateX(0deg) translateZ(10px); }
+.sx-face:nth-child(2) { transform: rotateX(90deg) translateZ(10px); }
+.sx-face:nth-child(3) { transform: rotateX(180deg) translateZ(10px); }
+.sx-face:nth-child(4) { transform: rotateX(270deg) translateZ(10px); }
+.sx .sx-brand { color: var(--fg, #1f2a22); font-weight: 600; margin-right: 10px; }
+.sx-lead, .sx-end { display: flex; align-items: center; gap: 6px 22px; flex: none; }
+.sx-mt { display: flex; align-items: center; gap: 6px 22px; }
 .sx-dark .sx-turn img { filter: invert(1); }
 @media (prefers-reduced-motion: reduce) { .sx-wheel { transition: none; } }
 .sx-sp { flex: 1; }
 .sx-links { display: flex; align-items: center; gap: 6px 22px; justify-self: center; }
 @media (max-width: 1099px) { .sx-in { overflow-x: auto; scrollbar-width: none; } .sx-in::-webkit-scrollbar { display: none; } }
-@media (min-width: 1100px) { .sx-in { display: grid; grid-template-columns: 1fr auto 1fr; } .sx-in > .sx-turn { justify-self: start; } .sx-in > .sx-ext { justify-self: end; } .sx-in > .sx-sp { display: none; } }
+@media (min-width: 1100px) { .sx-in { display: grid; grid-template-columns: 1fr auto 1fr; } .sx-in > .sx-lead { justify-self: start; } .sx-in > .sx-end { justify-self: end; } .sx-in > .sx-sp { display: none; } }
 .sx-ext::after { content: " \\2197"; opacity: .6; }
 body { padding-top: 40px; }
 .site-header { top: 40px; }
@@ -71,7 +82,7 @@ body { padding-top: 40px; }
 .sx-dark .sx a:hover, .sx-dark .sx a:focus-visible, .sx-dark .sx a[aria-current="page"] { color: #ececee; }
 .sx-dark .sx a[aria-current="page"] { box-shadow: inset 0 -2px 0 #7c9dff; }
 .sx-dark .sx-logo { filter: invert(1); }
-@media (max-width: 560px) { .sx-in { overflow-x: auto; scrollbar-width: none; } .sx-in::-webkit-scrollbar { display: none; } .sx-in { gap: 4px 14px; } .sx-ext { display: none; } }
+@media (max-width: 560px) { .sx-in { overflow-x: auto; scrollbar-width: none; } .sx-in::-webkit-scrollbar { display: none; } .sx-in { gap: 4px 14px; } .sx-ext, .sx-mt { display: none; } }
 @media (max-width: 420px) { .sx-in { gap: 4px 11px; padding: 0 16px; } .sx a { font-size: .6rem; letter-spacing: .08em; } .sx-logo { margin-right: 0; height: 18px; } }
 .sx-pj { position: static; }
 .sx.sx-open { z-index: 9999; }
@@ -123,14 +134,15 @@ function build() {
   const nav = document.createElement("nav");
   nav.className = "sx-in";
   nav.setAttribute("aria-label", "Sites");
-  // The Artec logo turns like a turnstile through the Kosmos logos (a three-sided wheel).
+  // The Modern Telepathy mark turns like a turnstile through the Artec and Kosmos logos (a four-sided wheel).
   const turn = document.createElement("span");
   turn.className = "sx-turn";
   turn.setAttribute("role", "img");
-  turn.setAttribute("aria-label", "Artec");
+  turn.setAttribute("aria-label", "Modern Telepathy");
   const wheel = document.createElement("span");
   wheel.className = "sx-wheel";
   [
+    ["/favicon.svg", 20, 20],
     ["img/artek-logo.svg", 46, 20],
     ["kosmos-computer/img/kosmos-mark-dark.svg", 28, 20],
     ["img/kosmos-logo.svg", 56, 11],
@@ -139,7 +151,7 @@ function build() {
     face.className = "sx-face";
     face.setAttribute("aria-hidden", "true");
     const im = document.createElement("img");
-    im.src = new URL(src, base).href;
+    im.src = src.startsWith("/") ? src : new URL(src, base).href;
     im.alt = "";
     im.width = w;
     im.height = h;
@@ -147,14 +159,21 @@ function build() {
     wheel.append(face);
   });
   turn.append(wheel);
-  nav.append(turn);
+  const lead = document.createElement("span");
+  lead.className = "sx-lead";
+  const brand = document.createElement("a");
+  brand.className = "sx-brand";
+  brand.href = "/";
+  brand.textContent = "Modern Telepathy";
+  lead.append(turn, brand);
+  nav.append(lead);
   const still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!still) {
     let step = 0;
     let timer = 0;
     const tick = () => {
       step += 1;
-      wheel.style.transform = "rotateX(" + (-120 * step) + "deg)";
+      wheel.style.transform = "rotateX(" + (-90 * step) + "deg)";
     };
     const start = () => { if (!timer) timer = setInterval(tick, 3600); };
     const stop = () => { clearInterval(timer); timer = 0; };
@@ -256,14 +275,27 @@ function build() {
   const sp = document.createElement("span");
   sp.className = "sx-sp";
   nav.append(sp);
+  const mt = document.createElement("span");
+  mt.className = "sx-mt";
+  MT.forEach((l) => {
+    const a = document.createElement("a");
+    a.href = l.href;
+    a.textContent = l.label;
+    if (l.href !== "/" && path.startsWith(l.href)) a.setAttribute("aria-current", "page");
+    mt.append(a);
+  });
+  const end = document.createElement("span");
+  end.className = "sx-end";
+  end.append(mt);
   ELSEWHERE.forEach((l) => {
     const a = document.createElement("a");
     a.className = "sx-ext";
     a.href = l.href;
     a.rel = "noopener";
     a.textContent = l.label;
-    nav.append(a);
+    end.append(a);
   });
+  nav.append(end);
   bar.append(nav);
   document.body.prepend(bar);
 }

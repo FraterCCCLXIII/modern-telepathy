@@ -32,3 +32,9 @@ A project page shows a "Try it" list built from labs whose `project` equals its 
 - Not merged: `kosmos-www` (its Vite build assumes it is served from `/`; link to www.kosmos.computer instead), `kosmos-docs` (own domain), `kosmos-web` (needs the WASM build).
 - The Kamiji embeddable library (built bundle on a versioned URL) is planned, not built.
 - Project copy for Kamiji and TempleOS is draft text.
+
+## One header, one theme
+
+- **Header:** `SiteHeader` (`src/components/site-chrome.tsx`) and `public/labs/kamiji/site/shared-header.js` draw the same bar: 40px, mono uppercase labels, and a logo wheel that turns through the Modern Telepathy mark, Artec and the two Kosmos logos. The React bar links to Kamiji, Studio and Kosmos; the Kamiji bar adds Modern Telepathy, Projects, Labs, Docs and Thesis. The link lists are duplicated, so change both.
+- **Theme:** Kamiji is the base. `src/styles.css` holds Kamiji's palette (`site/style.css`: bg `#f0efe7`, fg `#1f2a22`, card `#fafaf3`, selection `#1d1d1b`) in oklch, remaps the Tailwind `zinc-*` scale to its warm neutrals, and uses its system-ui and mono font stacks. The Google Fonts links (Instrument Sans and Serif) are gone.
+- The `.dark` block in `styles.css` is unused and still has the old blue-grey values. Kamiji has no site-wide dark theme (only per-page `sx-dark`).
