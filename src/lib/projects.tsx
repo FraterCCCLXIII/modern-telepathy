@@ -28,7 +28,7 @@ export const projects: Project[] = [
     name: "Kamiji",
     tagline: "A rigged, expressive 3D hand avatar, plus the characters and tools around it.",
     description: "A three.js hand avatar for React with faces, poses and motions, a character Studio and the Kamikin cast.",
-    logoSrc: "/projects/kamiji/logo.svg",
+    logoSrc: "/projects/kamiji/logo.png",
     role: "Creator. Rig, characters, library and tools.",
     about: [
       "Kamiji gives each agent or character a tinted, animated hand with a morph-target face: expressions, poses, whole-hand motions, emotes and status icons. One shared WebGL renderer draws many avatars on a page, with a flat SVG fallback.",
