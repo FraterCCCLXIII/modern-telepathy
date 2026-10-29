@@ -14,16 +14,15 @@ const PAGES = [
 ];
 // Modern Telepathy: the parent site. Keep in step with SiteHeader in src/components/site-chrome.tsx.
 const MT = [
-  { label: "Projects", href: "/" },
+  { label: "Products", href: "/" },
   { label: "Labs", href: "/labs" },
-  { label: "Docs", href: "/labs/templeos/docs/" },
   { label: "Thesis", href: "/thesis" },
 ];
 const ELSEWHERE = [
   { label: "yakopop.com", href: "https://yakopop.com" },
 ];
 
-// PROJECTS: the one list behind the "Projects" mega-menu. Edit here. status: available | prototype | planned | unverified.
+// PROJECTS: the one list behind the "All products" mega-menu. Edit here. status: available | prototype | planned | unverified.
 // g = tiny monochrome glyph (24x24 stroke paths, our own neutral marks). group: "family" or "more".
 const PROJECTS = [
   { group: "family", name: "Kamiji", note: "Rigged 3D hand avatars and the characters around them.", status: "available", href: "index.html", g: "M12 4a8 8 0 100 16 8 8 0 000-16zM9 10v1M15 10v1M9 15c1.5 1.2 4.5 1.2 6 0" },
@@ -48,15 +47,15 @@ const PROJECTS = [
 // Modern Telepathy projects (src/lib/projects.tsx), generated; each opens its page on the parent site.
 const MT_PROJECTS = [
  {
-  "group": "mt",
+  "group": "mt-systems",
   "name": "TempleOS desktop",
   "note": "Plans, specs and status for rebuilding a modern desktop and browser inside TempleOS.",
   "status": "link",
-  "href": "/projects/templeos",
+  "href": "/templeos",
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-systems",
   "name": "Keybox",
   "note": "A vault for Cursor, VS Code, Claude, and Codex. Highlight a key, send a handle, and the agent spends it without seeing the value.",
   "status": "link",
@@ -64,7 +63,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-systems",
   "name": "Kosmos",
   "note": "One shell for chat, code, files, and generated apps — agents and UI sharing a single session.",
   "status": "link",
@@ -72,7 +71,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-business",
   "name": "DocTransit",
   "note": "Send, sign, and track agreements — with Agents API, MCP, CLI, and webhooks for AI-driven contract flows.",
   "status": "link",
@@ -80,7 +79,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-business",
   "name": "NextPresser",
   "note": "Faust.js + WPGraphQL storefront with cart, checkout, auth, and multi-gateway payments.",
   "status": "link",
@@ -88,7 +87,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-creative",
   "name": "Prompt",
   "note": "Leave a text post — public or link-only — at a human-readable five-word URL.",
   "status": "link",
@@ -96,7 +95,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-language",
   "name": "Newsphere",
   "note": "Desktop RSS/Atom reader with a column grid, focused reader, and optional on-device AI.",
   "status": "link",
@@ -104,7 +103,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-creative",
   "name": "Castbook",
   "note": "Manage talent and productions — with public actor submissions and multilingual UI.",
   "status": "link",
@@ -112,7 +111,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-business",
   "name": "OpenBook",
   "note": "Modern booking for services and providers with public scheduling and staff tools.",
   "status": "link",
@@ -120,7 +119,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-knowledge",
   "name": "Kosmographica",
   "note": "Federated, citation-backed encyclopedia with trust-rated claims across religion and mythology.",
   "status": "link",
@@ -128,7 +127,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-knowledge",
   "name": "Holons",
   "note": "LMS where each Holon hosts courses, modules, members, and a social feed.",
   "status": "link",
@@ -136,7 +135,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-knowledge",
   "name": "Public Search",
   "note": "Modern YaCy front end — no tracking, themeable UI, optional SearxNG.",
   "status": "link",
@@ -144,7 +143,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-language",
   "name": "Public Translate",
   "note": "Speech-to-text, bilingual display, and TTS — built for temples, classrooms, and cast-to-TV.",
   "status": "link",
@@ -152,7 +151,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-knowledge",
   "name": "Dharma Atlas",
   "note": "Interactive map and list of 5,600+ spiritual places with tradition filters.",
   "status": "link",
@@ -160,7 +159,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-language",
   "name": "Podium",
   "note": "Podcast post-production that turns episodes into editable transcripts and shareable collateral.",
   "status": "link",
@@ -168,7 +167,7 @@ const MT_PROJECTS = [
   "g": "M5 12h14M13 6l6 6-6 6"
  },
  {
-  "group": "mt",
+  "group": "mt-language",
   "name": "Fathom",
   "note": "The podcast pipeline behind diarized transcripts, vectors, and episode enrichment at fathom.fm.",
   "status": "link",
@@ -179,8 +178,12 @@ const MT_PROJECTS = [
 PROJECTS.push(...MT_PROJECTS);
 const GROUPS = [
   { id: "family", label: "Kamiji family" },
-  { id: "more", label: "More projects" },
-  { id: "mt", label: "Modern Telepathy projects" },
+  { id: "more", label: "More products" },
+  { id: "mt-systems", label: "Kosmos & systems" },
+  { id: "mt-creative", label: "Characters & creative" },
+  { id: "mt-language", label: "Language, audio & reading" },
+  { id: "mt-knowledge", label: "Knowledge & community" },
+  { id: "mt-business", label: "Business & web tools" },
 ];
 
 const css = `
@@ -324,7 +327,7 @@ function build() {
   sub.className = "sx-sub";
   const nav2 = document.createElement("nav");
   nav2.className = "sx-in";
-  nav2.setAttribute("aria-label", "Projects");
+  nav2.setAttribute("aria-label", "Products");
   nav2.append(links);
   sub.append(nav2);
   PAGES.forEach((p) => {
@@ -344,14 +347,14 @@ function build() {
   btn.id = "sx-pjbtn";
   btn.setAttribute("aria-expanded", "false");
   btn.setAttribute("aria-controls", "sx-panel");
-  btn.innerHTML = 'All projects <svg width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  btn.innerHTML = 'All products <svg width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   pj.append(btn);
   links.append(pj);
   const panel = document.createElement("div");
   panel.id = "sx-panel";
   panel.className = "sx-panel";
   panel.setAttribute("role", "region");
-  panel.setAttribute("aria-label", "Projects");
+  panel.setAttribute("aria-label", "Products");
   panel.hidden = true;
   GROUPS.forEach((g) => {
     const h = document.createElement("h2");

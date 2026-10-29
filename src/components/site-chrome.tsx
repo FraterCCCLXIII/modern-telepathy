@@ -1,15 +1,16 @@
-import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { projects } from "@/lib/projects";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useState, type ReactNode } from "react";
+import { groups, type GroupId } from "@/lib/groups";
+import { labsInGroup } from "@/lib/labs";
+import { projectsInGroup, type Project } from "@/lib/projects";
 
 /*
  * One header for the whole site. It mirrors public/labs/kamiji/site/shared-header.js (the bar on every Kamiji page):
  * same height, mono labels and turning logo wheel. Keep NAV in step with MT in that file.
  */
 const NAV = [
-  { to: "/", label: "Projects", exact: true },
+  { to: "/", label: "Products", exact: true },
   { to: "/labs", label: "Labs" },
-  { to: "/labs/templeos/docs/", label: "Docs", plain: true },
   { to: "/thesis", label: "Thesis" },
 ] as const;
 
@@ -72,6 +73,114 @@ const bar =
 const pad = "px-[clamp(16px,5vw,80px)]";
 const active = "text-ink font-semibold shadow-[inset_0_-2px_0_var(--primary)]";
 
+/** Link to a project's page: its own route when it has one, else /projects/$slug. */
+export function ProjectLink({ p, ...rest }: { p: Project; className?: string; onClick?: () => void; children: ReactNode }) {
+  return p.href ? (
+    <Link to={p.href as "/templeos"} {...rest} />
+  ) : (
+    <Link to="/projects/$slug" params={{ slug: p.slug }} {...rest} />
+  );
+}
+
+function Menu({ label, children }: { label: string; children: (close: () => void) => ReactNode }) {
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+  return (
+    <div
+      className="relative flex-none"
+      onMouseLeave={close}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) close();
+      }}
+      onKeyDown={(e) => e.key === "Escape" && close()}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        onMouseEnter={() => setOpen(true)}
+        className={`${bar} inline-flex items-center gap-2`}
+      >
+        {label}
+        <svg width="9" height="6" viewBox="0 0 9 6" aria-hidden className={open ? "rotate-180" : ""}>
+          <path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+      </button>
+      {open && (
+        <ul className="absolute left-0 top-full z-50 min-w-60 max-w-80 rounded-2xl bg-card p-2 shadow-[0_18px_40px_-20px_rgba(31,42,34,.35)] ring-1 ring-black/5">
+          {children(close)}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+const itemCls = "block rounded-xl px-3 py-2 hover:bg-primary hover:text-primary-foreground";
+function Item({ name, note }: { name: string; note: string }) {
+  return (
+    <>
+      <span className="block font-mono text-[.7rem] font-semibold uppercase tracking-[.1em]">{name}</span>
+      <span className="block text-sm opacity-70 text-pretty">{note}</span>
+    </>
+  );
+}
+
+/** Second row. Its items follow the top tab: Products, Labs, or nothing (Thesis). */
+function SubNav() {
+  const path = useRouterState({ select: (r) => r.location.pathname });
+  const inLabs = path.startsWith("/labs");
+  if (path.startsWith("/thesis")) return null;
+  return (
+    <nav aria-label={inLabs ? "Labs" : "Products"} className="h-9 border-b border-border">
+      <div className={`${pad} h-full flex items-center gap-x-6`}>
+        {inLabs ? (
+          <>
+            {groups
+              .filter((g) => labsInGroup(g.id).length > 0)
+              .map((g) => (
+                <Menu key={g.id} label={g.label}>
+                  {() =>
+                    labsInGroup(g.id).map((l) => (
+                      <li key={l.id}>
+                        <a href={l.href} className={itemCls}>
+                          <Item name={l.title} note={l.blurb} />
+                        </a>
+                      </li>
+                    ))
+                  }
+                </Menu>
+              ))}
+            <Link to="/labs" className={`${bar} ml-auto flex-none`}>
+              All labs →
+            </Link>
+          </>
+        ) : (
+          <>
+            {groups
+              .filter((g) => projectsInGroup(g.id).length > 0)
+              .map((g) => (
+                <Menu key={g.id} label={g.label}>
+                  {(close) =>
+                    projectsInGroup(g.id).map((p) => (
+                      <li key={p.slug}>
+                        <ProjectLink p={p} onClick={close} className={itemCls}>
+                          <Item name={p.name} note={p.tagline} />
+                        </ProjectLink>
+                      </li>
+                    ))
+                  }
+                </Menu>
+              ))}
+            <Link to="/" className={`${bar} ml-auto flex-none`}>
+              All products →
+            </Link>
+          </>
+        )}
+      </div>
+    </nav>
+  );
+}
+
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-canvas">
@@ -84,42 +193,21 @@ export function SiteHeader() {
             </Link>
           </span>
           <span className="flex items-center gap-x-6 flex-none">
-            {NAV.map((n) =>
-              "plain" in n ? (
-                <a key={n.to} href={n.to} className={bar}>
-                  {n.label}
-                </a>
-              ) : (
-                <Link
-                  key={n.to}
-                  to={n.to}
-                  activeOptions={{ exact: "exact" in n }}
-                  activeProps={{ className: active }}
-                  className={bar}
-                >
-                  {n.label}
-                </Link>
-              ),
-            )}
+            {NAV.map((n) => (
+              <Link
+                key={n.to}
+                to={n.to}
+                activeOptions={{ exact: "exact" in n }}
+                activeProps={{ className: active }}
+                className={bar}
+              >
+                {n.label}
+              </Link>
+            ))}
           </span>
         </div>
       </nav>
-      {/* Subnav: every project. On the Kamiji pages the same row holds that family's pages and an "All projects" menu. */}
-      <nav aria-label="Projects" className="h-9 border-b border-border">
-        <div className={`${pad} h-full flex items-center gap-x-6 overflow-x-auto no-scrollbar`}>
-          {projects.map((p) => (
-            <Link
-              key={p.slug}
-              to="/projects/$slug"
-              params={{ slug: p.slug }}
-              activeProps={{ className: active }}
-              className={`${bar} flex-none`}
-            >
-              {p.name}
-            </Link>
-          ))}
-        </div>
-      </nav>
+      <SubNav />
     </header>
   );
 }

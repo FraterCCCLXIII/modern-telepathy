@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LabsRouteImport } from './routes/labs'
+import { Route as TempleosRouteImport } from './routes/templeos'
 import { Route as ThesisRouteImport } from './routes/thesis'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const LabsRoute = LabsRouteImport.update({
   id: '/labs',
   path: '/labs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TempleosRoute = TempleosRouteImport.update({
+  id: '/templeos',
+  path: '/templeos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ThesisRoute = ThesisRouteImport.update({
@@ -38,12 +44,14 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/labs': typeof LabsRoute
+  '/templeos': typeof TempleosRoute
   '/thesis': typeof ThesisRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/labs': typeof LabsRoute
+  '/templeos': typeof TempleosRoute
   '/thesis': typeof ThesisRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/labs': typeof LabsRoute
+  '/templeos': typeof TempleosRoute
   '/thesis': typeof ThesisRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/labs' | '/thesis' | '/projects/$slug'
+  fullPaths: '/' | '/labs' | '/templeos' | '/thesis' | '/projects/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/labs' | '/thesis' | '/projects/$slug'
-  id: '__root__' | '/' | '/labs' | '/thesis' | '/projects/$slug'
+  to: '/' | '/labs' | '/templeos' | '/thesis' | '/projects/$slug'
+  id: '__root__' | '/' | '/labs' | '/templeos' | '/thesis' | '/projects/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LabsRoute: typeof LabsRoute
+  TempleosRoute: typeof TempleosRoute
   ThesisRoute: typeof ThesisRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/labs'
       fullPath: '/labs'
       preLoaderRoute: typeof LabsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templeos': {
+      id: '/templeos'
+      path: '/templeos'
+      fullPath: '/templeos'
+      preLoaderRoute: typeof TempleosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/thesis': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LabsRoute: LabsRoute,
+  TempleosRoute: TempleosRoute,
   ThesisRoute: ThesisRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
 }

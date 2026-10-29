@@ -1,8 +1,13 @@
+import type { GroupId } from "@/lib/groups";
+
 export type ProjectLink = { label: string; href: string };
 export type Milestone = { label: string; note: string; status: "done" | "active" | "planned" };
 
 export type Project = {
   slug: string;
+  /** Own page instead of /projects/$slug. */
+  href?: string;
+  group: GroupId;
   name: string;
   tagline: string;
   description: string;
@@ -19,6 +24,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "kamiji",
+    group: "creative",
     name: "Kamiji",
     tagline: "A rigged, expressive 3D hand avatar, plus the characters and tools around it.",
     description: "A three.js hand avatar for React with faces, poses and motions, a character Studio and the Kamikin cast.",
@@ -39,6 +45,8 @@ export const projects: Project[] = [
   },
   {
     slug: "templeos",
+    href: "/templeos",
+    group: "systems",
     name: "TempleOS desktop",
     tagline: "A HolyC desktop with its own browser, apps and a host bridge.",
     description: "Plans, specs and status for rebuilding a modern desktop and browser inside TempleOS.",
@@ -50,7 +58,7 @@ export const projects: Project[] = [
     ],
     pitchHeadline: "A modern desktop in HolyC",
     pitchBody: "Read the browser architecture, the app plans and the dev box study.",
-    links: [{ label: "GitHub", href: "https://github.com/Modern-Telepathy/templeos" }],
+    links: [{ label: "Docs", href: "/templeos" }, { label: "GitHub", href: "https://github.com/Modern-Telepathy/templeos" }],
     progress: [
       { label: "Desktop shell and host hub", note: "Active", status: "active" },
       { label: "Browser v0", note: "In progress", status: "active" },
@@ -58,6 +66,7 @@ export const projects: Project[] = [
   },
   {
     slug: "keybox",
+    group: "systems",
     name: "Keybox",
     tagline: "Seal a secret. The agent can spend it. The model never reads it.",
     description:
@@ -83,6 +92,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kosmos",
+    group: "systems",
     name: "Kosmos",
     tagline: "A generative AI operating system for integrated work and life.",
     description: "One shell for chat, code, files, and generated apps — agents and UI sharing a single session.",
@@ -110,6 +120,7 @@ export const projects: Project[] = [
   },
   {
     slug: "doctransit",
+    group: "business",
     name: "DocTransit",
     tagline: "E-signatures that just work.",
     description: "Send, sign, and track agreements — with Agents API, MCP, CLI, and webhooks for AI-driven contract flows.",
@@ -136,6 +147,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nextpresser",
+    group: "business",
     name: "NextPresser",
     tagline: "Next.js headless toolkit for WordPress and WooCommerce.",
     description: "Faust.js + WPGraphQL storefront with cart, checkout, auth, and multi-gateway payments.",
@@ -161,6 +173,7 @@ export const projects: Project[] = [
   },
   {
     slug: "prompt",
+    group: "creative",
     name: "Prompt",
     tagline: "A minimal anonymous writing app.",
     description: "Leave a text post — public or link-only — at a human-readable five-word URL.",
@@ -184,6 +197,7 @@ export const projects: Project[] = [
   },
   {
     slug: "newsphere",
+    group: "language",
     name: "Newsphere",
     tagline: "Built to read, not to scroll.",
     description: "Desktop RSS/Atom reader with a column grid, focused reader, and optional on-device AI.",
@@ -208,6 +222,7 @@ export const projects: Project[] = [
   },
   {
     slug: "castflow",
+    group: "creative",
     name: "Castbook",
     tagline: "Casting companion for actors, projects, roles, and assignments.",
     description: "Manage talent and productions — with public actor submissions and multilingual UI.",
@@ -230,6 +245,7 @@ export const projects: Project[] = [
   },
   {
     slug: "openbook",
+    group: "business",
     name: "OpenBook",
     tagline: "TypeScript appointment platform — NestJS API + React SPA.",
     description: "Modern booking for services and providers with public scheduling and staff tools.",
@@ -251,6 +267,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kosmographica",
+    group: "knowledge",
     name: "Kosmographica",
     tagline: "A knowledge graph of human thought, culture, and history.",
     description: "Federated, citation-backed encyclopedia with trust-rated claims across religion and mythology.",
@@ -274,6 +291,7 @@ export const projects: Project[] = [
   },
   {
     slug: "holons",
+    group: "knowledge",
     name: "Holons",
     tagline: "Learning communities of people evolving together.",
     description: "LMS where each Holon hosts courses, modules, members, and a social feed.",
@@ -295,6 +313,7 @@ export const projects: Project[] = [
   },
   {
     slug: "public-search",
+    group: "knowledge",
     name: "Public Search",
     tagline: "Private, peer-to-peer search for the free web.",
     description: "Modern YaCy front end — no tracking, themeable UI, optional SearxNG.",
@@ -318,6 +337,7 @@ export const projects: Project[] = [
   },
   {
     slug: "public-translate",
+    group: "language",
     name: "Public Translate",
     tagline: "Open-source live voice translation for cross-cultural dialogue.",
     description: "Speech-to-text, bilingual display, and TTS — built for temples, classrooms, and cast-to-TV.",
@@ -340,6 +360,7 @@ export const projects: Project[] = [
   },
   {
     slug: "dharma-atlas",
+    group: "knowledge",
     name: "Dharma Atlas",
     tagline: "Discover temples, monasteries, and ashrams worldwide.",
     description: "Interactive map and list of 5,600+ spiritual places with tradition filters.",
@@ -364,6 +385,7 @@ export const projects: Project[] = [
   },
   {
     slug: "podium",
+    group: "language",
     name: "Podium",
     tagline: "AI show notes, chapters, transcripts, and clips for podcasts.",
     description: "Podcast post-production that turns episodes into editable transcripts and shareable collateral.",
@@ -388,6 +410,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fathom",
+    group: "language",
     name: "Fathom",
     tagline: "Audio intelligence — ingest, transcribe, chapterize, enrich.",
     description: "The podcast pipeline behind diarized transcripts, vectors, and episode enrichment at fathom.fm.",
@@ -412,3 +435,6 @@ export const projects: Project[] = [
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+export const projectsInGroup = (id: GroupId) => projects.filter((p) => p.group === id);
+export const projectHref = (p: Project) => p.href ?? `/projects/${p.slug}`;

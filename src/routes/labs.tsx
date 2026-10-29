@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { labGroups, labs } from "@/lib/labs";
+import { groups } from "@/lib/groups";
+import { labs } from "@/lib/labs";
 
 export const Route = createFileRoute("/labs")({
   head: () => ({
@@ -7,7 +8,7 @@ export const Route = createFileRoute("/labs")({
       { title: "Labs — Modern Telepathy" },
       {
         name: "description",
-        content: "Live demos, tools and docs from Modern Telepathy projects: Kamiji, Kosmos, TempleOS and more.",
+        content: "Live demos, tools and docs from Modern Telepathy products: Kamiji, Kosmos, TempleOS and more.",
       },
     ],
   }),
@@ -21,17 +22,20 @@ function LabsPage() {
         <div className="max-w-screen-xl mx-auto px-6">
           <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-balance leading-none">Labs</h1>
           <p className="mt-8 text-lg text-zinc-500 max-w-[56ch] text-pretty leading-relaxed">
-            Working demos, tools and docs from our projects. Each opens as its own page; most run in the browser with no sign-in.
+            Working demos, tools and docs from our products. Each opens as its own page; most run in the browser with no sign-in.
           </p>
         </div>
       </header>
-      {labGroups.map((group, i) => (
-        <section key={group} className={`py-16 ${i % 2 === 0 ? "bg-zinc-100" : "bg-canvas"}`}>
+      {groups
+        .filter((g) => labs.some((l) => l.group === g.id))
+        .map((group, i) => (
+        <section key={group.id} id={group.id} className={`py-16 ${i % 2 === 0 ? "bg-zinc-100" : "bg-canvas"}`}>
           <div className="max-w-screen-xl mx-auto px-6">
-            <h2 className="text-2xl font-medium mb-10">{group}</h2>
+            <h2 className="text-2xl font-medium">{group.label}</h2>
+            <p className="text-sm text-zinc-500 mt-2 mb-10">{group.blurb}</p>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {labs
-                .filter((l) => l.group === group)
+                .filter((l) => l.group === group.id)
                 .map((lab) => (
                   <a
                     key={lab.id}

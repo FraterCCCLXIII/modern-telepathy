@@ -12,7 +12,7 @@ export const Route = createFileRoute("/projects/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Project not found" },
+          { title: "Product not found" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -32,9 +32,9 @@ export const Route = createFileRoute("/projects/$slug")({
   notFoundComponent: () => (
     <div className="max-w-screen-xl mx-auto px-6 py-32">
       <p className="text-sm uppercase tracking-widest text-zinc-400 mb-4">404</p>
-      <h1 className="text-4xl font-medium tracking-tight mb-6">Project not found</h1>
+      <h1 className="text-4xl font-medium tracking-tight mb-6">Product not found</h1>
       <Link to="/" className="text-sm font-medium underline">
-        Back to projects
+        Back to products
       </Link>
     </div>
   ),
@@ -57,7 +57,7 @@ function ProjectDetail() {
           to="/"
           className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-ink transition-colors mb-16"
         >
-          <span className="text-zinc-400">←</span> All projects
+          <span className="text-zinc-400">←</span> All products
         </Link>
 
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-24">
