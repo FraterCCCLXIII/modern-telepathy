@@ -66,7 +66,7 @@ function ProjectDetail() {
               <img
                 src={project.logoSrc}
                 alt=""
-                className="max-h-full max-w-full object-contain"
+                className="size-full object-cover"
               />
             </div>
             <h1 className="text-5xl font-medium tracking-tight mb-4">{project.name}</h1>
