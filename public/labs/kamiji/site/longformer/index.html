@@ -1,0 +1,298 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Longformer: from long-form audio to a book plan</title>
+<meta name="description" content="Longformer is a Nuxt app, called Podbook inside, that plans a book from podcast and other long-form content: add sources, get a chapter plan, edit it. Today it runs on a mock backend.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/longformer-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="longformer.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-longformer" href="#top" aria-label="Longformer, top of page">
+      <img src="img/longformer-logo.svg" alt="" width="28" height="28">
+      <span>Longformer</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#screens">Screens</a>
+      <a href="#model">Data model</a>
+      <a href="#inputs">Inputs</a>
+      <a href="#canvas">Canvas</a>
+      <a href="#status">Status</a>
+      <a href="#start">Get started</a>
+      <a href="#related">Related</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Turn long-form content into a book plan.</h1>
+      <p class="lead">Longformer is a web app for planning a book from a podcast or other long-form content. You add audio, video or text, or pick episodes from an RSS feed, and it lays out a chapter plan that you can edit. The app calls itself Podbook.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#how">How it works</a>
+        <a class="btn" href="https://github.com/FraterCCCLXIII/longformer" rel="noopener">View on GitHub</a>
+      </p>
+      <p class="quiet">Early stage. Everything you see on this page runs on a mock backend in the repository: no real transcription, no real AI and no real export yet. See the status table.</p>
+    </div>
+
+    <div class="mock" role="img" aria-label="Illustration of the Longformer project planner: a list of sources on the left and a numbered chapter plan on the right. All content is made up.">
+      <div class="mock-win" aria-hidden="true">
+        <div class="mock-top"><i></i><i></i><i></i><span>Podbook</span><b>Planner</b><em>Illustrative</em></div>
+        <div class="mock-body">
+          <div>
+            <p class="mock-h">Sources</p>
+            <ul class="src-list">
+              <li><span class="ty">audio</span><b>Episode 1: The first walk</b><small>30 min</small></li>
+              <li><span class="ty">audio</span><b>Episode 2: Slow reading</b><small>35 min</small></li>
+              <li><span class="ty">audio</span><b>Episode 3: Notes that last</b><small>40 min</small></li>
+              <li><span class="ty">text</span><b>Essay collection</b><small>txt</small></li>
+            </ul>
+          </div>
+          <div>
+            <p class="mock-h">Chapter plan</p>
+            <ol class="chap-list">
+              <li><b>Introduction</b><small>Welcome and overview</small><span class="from">from 1 source</span></li>
+              <li><b>Main content</b><small>Core topics and discussion</small><span class="from">from 4 sources</span></li>
+              <li><b>Conclusion</b><small>Summary and next steps</small><span class="from">from 1 source</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="sub">The repository's own landing copy describes four steps. This is how far each one goes in the code today.</p>
+    <ol class="steps-n">
+      <li><div><h3>Upload or import <span class="badge proto">prototype</span></h3><p>Drop audio, video, text or document files, or paste a podcast RSS feed and pick episodes. The screens and the upload widget exist; the server side is simulated.</p><p class="from">Source: components/marketing/HowItWorks.vue, pages/projects/new.vue</p></div></li>
+      <li><div><h3>Plan chapters <span class="badge proto">prototype</span></h3><p>The planner takes the chosen sources and returns a list of chapters, each with a title, a summary and the sources it draws on. The mock returns the same three chapters every time: Introduction, Main content and Conclusion. No AI is called.</p><p class="from">Source: stores/planner.ts, lib/api/MockService.ts (createPlan)</p></div></li>
+      <li><div><h3>Draft and edit <span class="badge proto">prototype</span></h3><p>The planner store can rename a chapter, add one, remove one and reorder the list. There is no screen for it in the repository yet: the route that the project page links to, <code>/projects/:id/plan</code>, has no page file.</p><p class="from">Source: stores/planner.ts; pages/ (no projects/[id] pages)</p></div></li>
+      <li><div><h3>Export and publish <span class="badge plan">planned</span></h3><p>The data model and the mock API know about previews and exports in DOCX, EPUB, PDF and Markdown. No screen calls them, and the mock only hands back a made-up download link. The marketing copy lists DOCX, EPUB and PDF.</p><p class="from">Source: types/index.ts, lib/api/MockService.ts (createPreview, createExport)</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>What the app offers</h2>
+    <p class="sub">The six cards on the repository's marketing page, each with what the code behind it does. The badge tells you how far it goes.</p>
+    <ul class="grid-cards">
+      <li><h3>Audio processing <span class="badge proto">prototype</span></h3><p>Upload audio files. The marketing copy says they are transcribed; no transcription code exists in the repository.</p><p class="from">Source: components/uploads/FileUploaderUppy.vue</p></li>
+      <li><h3>Video support <span class="badge unv">unverified</span></h3><p>Video files are accepted by the uploader. Extracting audio or a transcript is not in the code.</p><p class="from">Source: components/uploads/FileUploaderUppy.vue</p></li>
+      <li><h3>RSS import <span class="badge proto">prototype</span></h3><p>Paste a feed address, load a list of episodes and tick the ones you want (the first ten are ticked by default). The list is five made-up episodes from the mock.</p><p class="from">Source: components/rss/*, lib/api/MockService.ts</p></li>
+      <li><h3>AI planning <span class="badge plan">planned</span></h3><p>The planner request and response are defined and the HTTP client calls <code>/planner/plan</code>. Only the mock exists, and it is not AI.</p><p class="from">Source: lib/api/ApiClient.ts, MockService.ts</p></li>
+      <li><h3>Easy editing <span class="badge proto">prototype</span></h3><p>Chapter edit, add, remove and reorder are in the planner store. No editing screen yet.</p><p class="from">Source: stores/planner.ts</p></li>
+      <li><h3>Multiple formats <span class="badge plan">planned</span></h3><p>The export request accepts <code>docx</code>, <code>epub</code>, <code>pdf</code> and <code>md</code>. Nothing builds a file yet.</p><p class="from">Source: types/index.ts (ExportRequestSchema)</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="screens" class="section">
+  <div class="wrap">
+    <h2>The screens</h2>
+    <p class="sub">Drawn in HTML and CSS from the app's own structure. <strong>Illustrative</strong>: the names and numbers are invented, and these are not screenshots.</p>
+    <div class="screens">
+      <figure class="scr" role="img" aria-label="Illustration of the dashboard: a heading Your Projects with a New Project button and two project cards with status badges.">
+        <div class="scr-win" aria-hidden="true">
+          <div class="scr-bar"><b>Dashboard</b><span>Manage your book projects</span></div>
+          <div class="scr-in">
+            <div class="scr-row"><h4>Your Projects</h4><span class="scr-btn">+ New Project</span></div>
+            <div class="pcard"><div class="ph"><b>Walking Podcast Book</b><span class="badge ok">planned</span></div><small>7 days ago &middot; 3 sources</small><div class="pb"><span>View Details</span><span class="dk">Edit plan</span></div></div>
+            <div class="pcard"><div class="ph"><b>Blog to Book</b><span class="badge plan">draft</span></div><small>3 days ago &middot; 1 source</small><div class="pb"><span>View Details</span></div></div>
+          </div>
+        </div>
+        <figcaption>Dashboard <span class="badge proto">prototype</span> <em>Illustrative</em></figcaption>
+      </figure>
+
+      <figure class="scr" role="img" aria-label="Illustration of the new project screen: two tabs, Upload Files and Import RSS, a feed address field, a list of episodes with check boxes and a Create Project button.">
+        <div class="scr-win" aria-hidden="true">
+          <div class="scr-bar"><b>New Project</b><span>Choose your content sources</span></div>
+          <div class="scr-in">
+            <div class="scr-tabs"><span>Upload Files</span><span class="on">Import RSS</span></div>
+            <div class="scr-field">https://example.com/feed.xml</div>
+            <ul class="eps">
+              <li><i class="ck on"></i>Episode 1<small>30 min</small></li>
+              <li><i class="ck on"></i>Episode 2<small>35 min</small></li>
+              <li><i class="ck"></i>Episode 3<small>40 min</small></li>
+            </ul>
+            <div class="scr-row"><small>2 sources selected</small><span class="scr-btn">Create project</span></div>
+          </div>
+        </div>
+        <figcaption>New project <span class="badge proto">prototype</span> <em>Illustrative</em></figcaption>
+      </figure>
+
+      <figure class="scr" role="img" aria-label="Illustration of a chapter planner: three numbered chapters with titles, summaries and handles for reordering.">
+        <div class="scr-win" aria-hidden="true">
+          <div class="scr-bar"><b>Planner</b><span>Not built in the repository</span></div>
+          <div class="scr-in">
+            <div class="chap"><i>1</i><div><b>Introduction</b><small>Welcome and overview</small></div><u>&#8942;&#8942;</u></div>
+            <div class="chap"><i>2</i><div><b>Main content</b><small>Core topics and discussion</small></div><u>&#8942;&#8942;</u></div>
+            <div class="chap"><i>3</i><div><b>Conclusion</b><small>Summary and next steps</small></div><u>&#8942;&#8942;</u></div>
+            <div class="scr-row"><span class="scr-btn ghost">+ Add chapter</span><span class="scr-btn">Export</span></div>
+          </div>
+        </div>
+        <figcaption>Chapter planner <span class="badge plan">planned</span> <em>Illustrative: drawn from the store, no screen exists</em></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="section">
+  <div class="wrap split">
+    <h2>The data model</h2>
+    <div>
+      <p class="sub">The shapes are written once as Zod schemas, and the types come from them. A project holds sources and chapters, and each chapter lists the sources it comes from.</p>
+      <div class="model" role="img" aria-label="Diagram: a Project has many Sources and many Chapters. A Chapter lists the ids of the Sources it comes from. A Project can have Previews and Exports.">
+        <div class="mrow">
+          <div class="mbox"><b>Project</b><small>id, name, status, createdAt, sourceCount</small><em>draft / processing / planned / error</em></div>
+        </div>
+        <div class="mrow two">
+          <div class="mbox"><b>Source</b><small>id, type, title, durationSec, key, url, size, contentType</small><em>audio / video / text / rss-episode</em></div>
+          <div class="mbox"><b>Chapter</b><small>id, order, title, summary, fromSources[]</small><em>fromSources holds Source ids</em></div>
+        </div>
+        <div class="mrow two">
+          <div class="mbox soft"><b>Preview</b><small>status, downloadUrl</small><em>queued / processing / succeeded / failed</em></div>
+          <div class="mbox soft"><b>Export</b><small>status, downloadUrl</small><em>format: docx / epub / pdf / md</em></div>
+        </div>
+      </div>
+      <p class="sub">Three Pinia stores hold the state: <code>projects</code> (list, current project, create), <code>planner</code> (chapters, selected sources, edit and reorder) and <code>auth</code> (current user).</p>
+      <p class="from">Source: types/index.ts, stores/*.ts</p>
+    </div>
+  </div>
+</section>
+
+<section id="inputs" class="section">
+  <div class="wrap">
+    <h2>Inputs</h2>
+    <ul class="grid-cards two">
+      <li><h3>File upload <span class="badge proto">prototype</span></h3><p>An Uppy dashboard takes up to 10 files of up to 100 MB each. Accepted: audio, video, plain text, Markdown, PDF, DOC and DOCX. It is written for multipart upload to S3 with signed part addresses; in mock mode the signed addresses are fake and nothing is stored.</p><p class="from">Source: components/uploads/FileUploaderUppy.vue, lib/api/*</p></li>
+      <li><h3>RSS feed <span class="badge proto">prototype</span></h3><p>Enter a feed address and the app asks the API for the episode list (<code>/rss/episodes</code>); you choose episodes and carry them into the project. In mock mode the answer is five sample episodes whatever address you type.</p><p class="from">Source: components/rss/RssImportForm.vue, EpisodePicker.vue</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="canvas" class="section">
+  <div class="wrap split">
+    <h2>As a Canvas app view</h2>
+    <div>
+      <p class="sub">The repository includes a small extension for OpenHands Canvas. Its manifest is named <code>longformer</code>, shows as &ldquo;Podbook&rdquo;, is version 0.1.0 and describes itself as the Podbook book planner hosted as a Canvas app backend view.</p>
+      <ul class="list">
+        <li><h3>One page <span class="badge proto">prototype</span></h3><p>It contributes a single page, <code>studio</code>, at the path <code>/studio</code>, with the navigation label &ldquo;Podbook&rdquo;.</p></li>
+        <li><h3>A static build behind the server <span class="badge proto">prototype</span></h3><p>The page mounts the app's static build through Canvas's app-backend view. If the Agent Server does not have the app backend bridge enabled, it shows a message saying so instead.</p></li>
+        <li><h3>Serving the build</h3><p><code>npm run build:canvas</code> makes a static build with a relative base path, and <code>npm run serve:canvas</code> serves it with a small Node script (port 3000 unless <code>PORT</code> is set). The files do not describe how to register the extension in Canvas, so that step is not covered here.</p></li>
+      </ul>
+      <p class="from">Source: canvas-extension/canvas-extension.json, canvas-extension/index.js, scripts/serve-static.mjs, package.json, nuxt.config.ts</p>
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="section">
+  <div class="wrap">
+    <h2>Stack</h2>
+    <ul class="tags" aria-label="Technologies in package.json">
+      <li>Nuxt 4</li><li>Vue 3.5</li><li>Pinia</li><li>Tailwind CSS</li><li>Zod 4</li><li>Uppy 4</li><li>TypeScript</li>
+    </ul>
+    <p class="sub">Version ranges are from package.json. The package list also names TanStack Vue Query and Vue Draggable, but nothing in the source imports them yet. The sign-in design is Amazon Cognito hosted login (see the environment names below), and uploads are designed for S3 behind CloudFront.</p>
+    <p class="from">Source: package.json, nuxt.config.ts, components/uploads, components/auth/HostedLoginButton.vue</p>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>What is real and what is mock</h2>
+    <p class="sub">An inventory taken from the repository on 2026-10-25. The repository has no README and two commits (both by the same author, on 2026-10-21).</p>
+    <ul class="legend">
+      <li><span class="badge ok">available</span> works in the code as shipped</li>
+      <li><span class="badge proto">prototype</span> built, but on mock data or without a screen</li>
+      <li><span class="badge plan">planned</span> defined in types or the client, not working</li>
+      <li><span class="badge unv">unverified</span> not checked against a running build</li>
+    </ul>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Part</th><th>Status</th><th>What the code does</th></tr></thead>
+      <tbody>
+        <tr><td data-l="Part">Mock mode</td><td data-l="Status"><span class="badge ok">available</span></td><td data-l="Code">The Nuxt setting is <code>mockMode = (env === 'true') || true</code>, which is always true, so the mock is always used. Setting the environment variable to false does not turn it off.</td></tr>
+        <tr><td data-l="Part">Mock service</td><td data-l="Status"><span class="badge ok">available</span></td><td data-l="Code">Fake user, two sample projects, five sample episodes, a fixed three-chapter plan, and preview and export jobs that move from queued to processing to succeeded as they are polled.</td></tr>
+        <tr><td data-l="Part">HTTP API client</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Code">A typed client for <code>/auth</code>, <code>/me</code>, <code>/projects</code>, <code>/uploads</code>, <code>/rss</code>, <code>/planner</code>, <code>/previews</code> and <code>/exports</code>. No server for it is in this repository.</td></tr>
+        <tr><td data-l="Part">Sign-in</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Code">In mock mode a demo user is signed in automatically and kept in browser storage. The real flow (Cognito hosted login, code exchange) is wired to the client but not to a server.</td></tr>
+        <tr><td data-l="Part">File upload</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Code">Real Uppy widget and limits; fake signed addresses in mock mode, so no file is stored.</td></tr>
+        <tr><td data-l="Part">RSS import</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Code">Real form and picker; the episode list is fixed sample data.</td></tr>
+        <tr><td data-l="Part">Transcription</td><td data-l="Status"><span class="badge plan">planned</span></td><td data-l="Code">Promised by the marketing copy; no code.</td></tr>
+        <tr><td data-l="Part">Chapter planning</td><td data-l="Status"><span class="badge plan">planned</span></td><td data-l="Code">Store and API call exist; the plan is a fixed list, not generated.</td></tr>
+        <tr><td data-l="Part">Plan editor screen</td><td data-l="Status"><span class="badge plan">planned</span></td><td data-l="Code">Linked from the project page and the create flow, but the route has no page.</td></tr>
+        <tr><td data-l="Part">Export</td><td data-l="Status"><span class="badge plan">planned</span></td><td data-l="Code">Schemas and mock jobs only; no document is built.</td></tr>
+        <tr><td data-l="Part">Canvas extension</td><td data-l="Status"><span class="badge unv">unverified</span></td><td data-l="Code">Manifest and entry point are present and small. Not run in Canvas for this page.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="from">Source: nuxt.config.ts, lib/api/index.ts, ApiClient.ts, MockService.ts, stores/auth.ts, components/*, pages/*</p>
+  </div>
+</section>
+
+<section id="start" class="section">
+  <div class="wrap">
+    <h2>Get started</h2>
+    <div class="cols">
+      <article class="panel">
+        <h3>Run it locally</h3>
+        <p>You need Node.js and npm. Clone the public repository, then:</p>
+<pre><code>npm install
+npm run dev</code></pre>
+        <p class="from">Other scripts in package.json: <code>build</code>, <code>generate</code>, <code>preview</code>, <code>build:canvas</code>, <code>serve:canvas</code>.</p>
+      </article>
+      <article class="panel">
+        <h3>Environment</h3>
+        <p>An <code>env.example</code> lists the settings the app reads. Because mock mode is always on, none is needed to try the app.</p>
+        <ul class="envs">
+          <li><code>NUXT_PUBLIC_API_BASE_URL</code></li>
+          <li><code>NUXT_PUBLIC_COGNITO_DOMAIN</code></li>
+          <li><code>NUXT_PUBLIC_COGNITO_CLIENT_ID</code></li>
+          <li><code>NUXT_PUBLIC_COGNITO_REDIRECT_URI</code></li>
+          <li><code>NUXT_PUBLIC_AWS_REGION</code></li>
+          <li><code>NUXT_PUBLIC_UPLOAD_BUCKET</code></li>
+          <li><code>NUXT_PUBLIC_CLOUDFRONT_PUBLIC_URL</code></li>
+          <li><code>NUXT_PUBLIC_MOCK_MODE</code></li>
+        </ul>
+      </article>
+    </div>
+    <p class="cta-row"><a class="btn primary" href="https://github.com/FraterCCCLXIII/longformer" rel="noopener">View on GitHub</a></p>
+  </div>
+</section>
+
+<section id="related" class="section">
+  <div class="wrap">
+    <h2>Related projects</h2>
+    <p class="sub">Several projects share these names. Only what the files show is stated here.</p>
+    <ul class="inv">
+      <li><h4>Podbook folders <span class="badge unv">unverified</span></h4><div><p>The repository contains a <code>podbook</code> folder with an earlier Nuxt starter copy, and the commit history starts with &ldquo;import existing Podbook Nuxt project files&rdquo;. So the app is Podbook and the repository is named Longformer. Why it was renamed is not written anywhere.</p></div></li>
+      <li><h4>Other Podbook work <span class="badge unv">unverified</span></h4><div><p>Separate folders on the same machine use the Podbook name: a React and Vite web app, an Express and PostgreSQL API, and a waitlist landing page (published under a different GitHub organisation). Their READMEs describe an RSS-to-book converter. They share the name and the idea, but no file says they are the same code base as Longformer.</p></div></li>
+      <li><h4>Book Builder <span class="badge unv">unverified</span></h4><div><p>A separate repository that turns uploaded transcripts and documents into books with OpenAI. Same goal, different code. Nothing links it to Longformer.</p></div></li>
+      <li><h4>Longformer UI <span class="badge unv">unverified</span></h4><div><p>A separate Longformer exists in an experiments workspace: a React component kit with tokens, generative blocks and a marketing site, described there as a presentation OS for integrated AI work. It has the same name, and both repositories belong to the same GitHub account. This app does not import it, use its tokens or mention it, and it is built on Vue and Tailwind rather than React. Whether it was meant to be this app's design system is not stated in any file.</p></div></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Longformer. A book planner for long-form content. Early stage.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

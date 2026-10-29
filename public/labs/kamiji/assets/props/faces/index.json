@@ -1,0 +1,728 @@
+[
+  {
+    "name": "face_grin",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2132,
+    "bytes": 42404,
+    "file": "face_grin.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Teeth": "#f8f2e6"
+    },
+    "keywords": [
+      "grin",
+      "grinning",
+      "happy",
+      "teeth",
+      "smile"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_smile",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1512,
+    "bytes": 30020,
+    "file": "face_smile.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "smile",
+      "smiling",
+      "happy",
+      "pleased",
+      "content",
+      "warm"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_laugh_cry",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2872,
+    "bytes": 56704,
+    "file": "face_laugh_cry.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Tongue": "#ee8c98",
+      "Tear": "#8fcdf0"
+    },
+    "keywords": [
+      "laugh cry",
+      "tears of joy",
+      "lol",
+      "laughing",
+      "crying laughing",
+      "funny"
+    ],
+    "kamijiExpression": "excited"
+  },
+  {
+    "name": "face_joy",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2412,
+    "bytes": 48424,
+    "file": "face_joy.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Teeth": "#f8f2e6",
+      "Tongue": "#ee8c98"
+    },
+    "keywords": [
+      "joy",
+      "squinting",
+      "laughing",
+      "xd",
+      "haha",
+      "hilarious"
+    ],
+    "kamijiExpression": "excited"
+  },
+  {
+    "name": "face_wink",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1476,
+    "bytes": 29372,
+    "file": "face_wink.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "wink",
+      "winking",
+      "flirt",
+      "joke",
+      "playful"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_blush",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1872,
+    "bytes": 37584,
+    "file": "face_blush.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Blush": "#f08c92",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "blush",
+      "blushing",
+      "shy",
+      "bashful",
+      "smiling eyes",
+      "sweet"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_heart_eyes",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2582,
+    "bytes": 51712,
+    "file": "face_heart_eyes.glb",
+    "materials": {
+      "Red": "#d9574c",
+      "Mouth": "#8c3a34",
+      "Tongue": "#ee8c98"
+    },
+    "keywords": [
+      "heart eyes",
+      "love",
+      "heart eyes",
+      "crush",
+      "adore",
+      "smitten"
+    ],
+    "kamijiExpression": "excited"
+  },
+  {
+    "name": "face_star_eyes",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2780,
+    "bytes": 55088,
+    "file": "face_star_eyes.glb",
+    "materials": {
+      "Gold": "#f3c455",
+      "Mouth": "#8c3a34",
+      "Teeth": "#f8f2e6"
+    },
+    "keywords": [
+      "star eyes",
+      "starstruck",
+      "wow",
+      "amazed",
+      "awesome",
+      "star eyes"
+    ],
+    "kamijiExpression": "excited"
+  },
+  {
+    "name": "face_kiss",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1736,
+    "bytes": 35252,
+    "file": "face_kiss.glb",
+    "materials": {
+      "Mouth": "#8c3a34",
+      "Red": "#d9574c",
+      "Eye": "#3a2a28"
+    },
+    "keywords": [
+      "kiss",
+      "kissing",
+      "blow kiss",
+      "love",
+      "xoxo",
+      "muah"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_cool",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2548,
+    "bytes": 49608,
+    "file": "face_cool.glb",
+    "materials": {
+      "Glass": "#3b4256",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "cool",
+      "sunglasses",
+      "shades",
+      "cool",
+      "swag",
+      "chill"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_nerd",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2628,
+    "bytes": 51976,
+    "file": "face_nerd.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Glass": "#3b4256",
+      "Teeth": "#f8f2e6"
+    },
+    "keywords": [
+      "nerd",
+      "geek",
+      "glasses",
+      "smart",
+      "studious",
+      "clever"
+    ],
+    "kamijiExpression": "thinking"
+  },
+  {
+    "name": "face_thinking",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1892,
+    "bytes": 37896,
+    "file": "face_thinking.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "thinking",
+      "hmm",
+      "pondering",
+      "wondering",
+      "considering",
+      "chin"
+    ],
+    "kamijiExpression": "thinking"
+  },
+  {
+    "name": "face_shush",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1844,
+    "bytes": 37024,
+    "file": "face_shush.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "shush",
+      "shh",
+      "quiet",
+      "silence",
+      "secret",
+      "hush"
+    ]
+  },
+  {
+    "name": "face_zany",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2098,
+    "bytes": 42012,
+    "file": "face_zany.glb",
+    "materials": {
+      "Mouth": "#8c3a34",
+      "Eye": "#3a2a28",
+      "Tongue": "#ee8c98"
+    },
+    "keywords": [
+      "zany",
+      "crazy",
+      "silly",
+      "goofy",
+      "tongue",
+      "wacky"
+    ],
+    "kamijiExpression": "excited"
+  },
+  {
+    "name": "face_smirk",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1524,
+    "bytes": 31120,
+    "file": "face_smirk.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "smirk",
+      "smug",
+      "sly",
+      "suggestive",
+      "confident"
+    ]
+  },
+  {
+    "name": "face_neutral",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1332,
+    "bytes": 26780,
+    "file": "face_neutral.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "neutral",
+      "neutral",
+      "meh",
+      "plain",
+      "blank",
+      "calm"
+    ],
+    "kamijiExpression": "neutral"
+  },
+  {
+    "name": "face_expressionless",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1236,
+    "bytes": 25064,
+    "file": "face_expressionless.glb",
+    "materials": {
+      "Mouth": "#8c3a34",
+      "Eye": "#3a2a28"
+    },
+    "keywords": [
+      "expressionless",
+      "deadpan",
+      "blank",
+      "no expression",
+      "bored",
+      "stare"
+    ],
+    "kamijiExpression": "neutral"
+  },
+  {
+    "name": "face_unamused",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1760,
+    "bytes": 35700,
+    "file": "face_unamused.glb",
+    "materials": {
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34",
+      "Eye": "#3a2a28"
+    },
+    "keywords": [
+      "unamused",
+      "side eye",
+      "annoyed",
+      "skeptical",
+      "meh",
+      "unimpressed"
+    ]
+  },
+  {
+    "name": "face_sleeping",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1848,
+    "bytes": 37940,
+    "file": "face_sleeping.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Tear": "#8fcdf0",
+      "Teeth": "#f8f2e6"
+    },
+    "keywords": [
+      "sleeping",
+      "asleep",
+      "zzz",
+      "nap",
+      "rest",
+      "snoring"
+    ],
+    "kamijiExpression": "sleepy"
+  },
+  {
+    "name": "face_sleepy",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1986,
+    "bytes": 39900,
+    "file": "face_sleepy.glb",
+    "materials": {
+      "Mouth": "#8c3a34",
+      "Eye": "#3a2a28",
+      "Sweat": "#a6dcf5"
+    },
+    "keywords": [
+      "sleepy",
+      "tired",
+      "yawn",
+      "drowsy",
+      "exhausted",
+      "sweat"
+    ],
+    "kamijiExpression": "sleepy"
+  },
+  {
+    "name": "face_sad",
+    "category": "face",
+    "tint": "#8fb4ff",
+    "triangles": 1608,
+    "bytes": 32628,
+    "file": "face_sad.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "sad",
+      "unhappy",
+      "frown",
+      "down",
+      "disappointed",
+      "blue"
+    ],
+    "kamijiExpression": "sad"
+  },
+  {
+    "name": "face_cry",
+    "category": "face",
+    "tint": "#8fb4ff",
+    "triangles": 1896,
+    "bytes": 39324,
+    "file": "face_cry.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Tear": "#8fcdf0",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "cry",
+      "crying",
+      "tear",
+      "upset",
+      "sob",
+      "hurt"
+    ],
+    "kamijiExpression": "sad"
+  },
+  {
+    "name": "face_loud_cry",
+    "category": "face",
+    "tint": "#8fb4ff",
+    "triangles": 2734,
+    "bytes": 54892,
+    "file": "face_loud_cry.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Tear": "#8fcdf0",
+      "Mouth": "#8c3a34",
+      "Tongue": "#ee8c98"
+    },
+    "keywords": [
+      "loud cry",
+      "sobbing",
+      "wailing",
+      "bawling",
+      "tears",
+      "devastated"
+    ],
+    "kamijiExpression": "sad"
+  },
+  {
+    "name": "face_angry",
+    "category": "face",
+    "tint": "#ff6b4a",
+    "triangles": 1608,
+    "bytes": 32612,
+    "file": "face_angry.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "angry",
+      "mad",
+      "annoyed",
+      "irritated",
+      "furious",
+      "grr"
+    ],
+    "kamijiExpression": "angry"
+  },
+  {
+    "name": "face_rage",
+    "category": "face",
+    "tint": "#ff4a3a",
+    "triangles": 2820,
+    "bytes": 56160,
+    "file": "face_rage.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Vein": "#b3302c",
+      "Teeth": "#f8f2e6"
+    },
+    "keywords": [
+      "rage",
+      "furious",
+      "enraged",
+      "livid",
+      "grr",
+      "growl",
+      "vein"
+    ],
+    "kamijiExpression": "angry"
+  },
+  {
+    "name": "face_scream",
+    "category": "face",
+    "tint": "#8fb4ff",
+    "triangles": 2940,
+    "bytes": 58368,
+    "file": "face_scream.glb",
+    "materials": {
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34",
+      "Eye": "#3a2a28",
+      "Tongue": "#ee8c98"
+    },
+    "keywords": [
+      "scream",
+      "fear",
+      "scared",
+      "shocked",
+      "terrified",
+      "horror"
+    ],
+    "kamijiExpression": "surprised"
+  },
+  {
+    "name": "face_surprised",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1896,
+    "bytes": 38312,
+    "file": "face_surprised.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34"
+    },
+    "keywords": [
+      "surprised",
+      "wow",
+      "shock",
+      "astonished",
+      "oh",
+      "gasp"
+    ],
+    "kamijiExpression": "surprised"
+  },
+  {
+    "name": "face_flushed",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2676,
+    "bytes": 51912,
+    "file": "face_flushed.glb",
+    "materials": {
+      "Mouth": "#8c3a34",
+      "Eye": "#3a2a28",
+      "Blush": "#f08c92"
+    },
+    "keywords": [
+      "flushed",
+      "embarrassed",
+      "blushing",
+      "shy",
+      "awkward",
+      "bashful"
+    ],
+    "kamijiExpression": "surprised"
+  },
+  {
+    "name": "face_dizzy",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 1968,
+    "bytes": 38228,
+    "file": "face_dizzy.glb",
+    "materials": {
+      "Mouth": "#8c3a34",
+      "Blue": "#6d9fd8"
+    },
+    "keywords": [
+      "dizzy",
+      "spiral",
+      "woozy",
+      "confused",
+      "knocked out",
+      "hypnotized"
+    ]
+  },
+  {
+    "name": "face_sick",
+    "category": "face",
+    "tint": "#9be36b",
+    "triangles": 1928,
+    "bytes": 39588,
+    "file": "face_sick.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Teeth": "#f8f2e6",
+      "Red": "#d9574c"
+    },
+    "keywords": [
+      "sick",
+      "ill",
+      "fever",
+      "thermometer",
+      "unwell",
+      "nauseous"
+    ],
+    "kamijiExpression": "sad"
+  },
+  {
+    "name": "face_party_hat",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2304,
+    "bytes": 46012,
+    "file": "face_party_hat.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Blue": "#6d9fd8",
+      "Gold": "#f3c455"
+    },
+    "keywords": [
+      "party hat",
+      "party",
+      "birthday",
+      "celebrate",
+      "festive",
+      "hat"
+    ],
+    "kamijiExpression": "excited"
+  },
+  {
+    "name": "face_halo",
+    "category": "face",
+    "tint": "#ffd23f",
+    "triangles": 2384,
+    "bytes": 47640,
+    "file": "face_halo.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Mouth": "#8c3a34",
+      "Blush": "#f08c92",
+      "Gold": "#f3c455"
+    },
+    "keywords": [
+      "halo",
+      "angel",
+      "innocent",
+      "blessed",
+      "saint",
+      "heaven"
+    ],
+    "kamijiExpression": "happy"
+  },
+  {
+    "name": "face_devil",
+    "category": "face",
+    "tint": "#b07bff",
+    "triangles": 1784,
+    "bytes": 36736,
+    "file": "face_devil.glb",
+    "materials": {
+      "Eye": "#3a2a28",
+      "Brow": "#5a4036",
+      "Mouth": "#8c3a34",
+      "Red": "#d9574c"
+    },
+    "keywords": [
+      "devil",
+      "imp",
+      "evil",
+      "mischief",
+      "horns",
+      "naughty"
+    ],
+    "kamijiExpression": "angry"
+  }
+]

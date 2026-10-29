@@ -1,0 +1,27 @@
+/* Light-page mapping for the owner's --lf-* tokens: the kit's own light theme re-pointed at the Arco page's
+   surfaces (--card #fafaf3, hairline border, #7c9dff fills, #2b51c7 accent ink, as in ../../arco.css). */
+.arco-lf[data-lf-theme="light"] {
+  --lf-surface-canvas: transparent;
+  --lf-surface-1: #fafaf3;
+  --lf-surface-2: #f3f2e9;
+  --lf-surface-3: #e9e8dd;
+  --lf-surface-overlay: #fafaf3;
+  --lf-surface-sunken: #e7e8dc;
+  --lf-border-subtle: rgba(31, 42, 34, .08);
+  --lf-border-default: rgba(31, 42, 34, .13);
+  --lf-border-strong: rgba(31, 42, 34, .22);
+  --lf-text-primary: #1f2a22;
+  --lf-text-secondary: #5f665a;
+  --lf-text-tertiary: #6f766a;
+  --lf-accent: #2b51c7;
+  --lf-accent-hover: #3a60d6;
+  --lf-accent-active: #2442a8;
+  --lf-accent-muted: rgba(124, 157, 255, .22);
+  --lf-accent-border: rgba(124, 157, 255, .6);
+  --lf-info: #2b51c7;
+  --lf-focus-ring: rgba(43, 81, 199, .6);
+  background: transparent;
+  max-width: 100%;
+}
+.arco-lf { min-width: 0; }
+.arco-lf img { max-width: 100%; }

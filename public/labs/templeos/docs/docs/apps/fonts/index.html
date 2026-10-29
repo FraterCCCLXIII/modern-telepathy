@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Font Manager: plan | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html" aria-current="page">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Font Manager: plan</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Font Manager: plan</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/fonts.md</span></div>
+        <div class="doc-body">
+
+<p>Status: plan, not code. Branch task/templeos-shell. Written 2026-10-27. Read with <code>docs/browser-architecture.md</code> section h5a (the font stages A to D) and h6 (non-Latin runs), <code>docs/apps/music.md</code> (channel families), and <code>docs/apps/00-kosmos-os-primitives.md</code> (no <code>os.fonts@1</code> contract exists yet).</p>
+<p>Tags: <strong>[V]</strong> checked in a repo or on this Mac, file named. <strong>[R]</strong> from a web search this session (snippets, URL given). <strong>[M]</strong> from memory, to verify.</p>
+<h2 id="1-purpose">1. Purpose<a class="headerlink" href="#1-purpose" title="Link to this section">#</a></h2>
+<p>A desk app that lists the fonts the user chooses, previews any text in any of them at any size, and activates a font for the desk's own apps (Notes, the browser, slides). The guest never parses a font file. The host scans, validates and rasterises. The guest receives bitmaps, metrics and coverage tables.</p>
+<p>"Activate" means: the desk's font table gains a family the apps can request by name. It does not install a font into macOS.</p>
+<h2 id="2-features">2. Features<a class="headerlink" href="#2-features" title="Link to this section">#</a></h2>
+<p>Reference set: Font Book, FontBase, Typeface.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Feature</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0</td>
+<td>List families and styles from chosen folders and the system font folders (read-only)</td>
+<td>FontBase keeps files where they are and shows them without a system install [R] (fontba.se/learn/font-activation)</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>Activate and deactivate per font; active set survives restart</td>
+<td>FontBase: new fonts start inactive, active ones return at launch [R] (fontba.se/learn/font-activation)</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>Preview: editable sample text, size slider, weight picker</td>
+<td>Typeface preview settings [R] (thesweetbits.com/tools/typeface/)</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>Metadata: name, version, licence name, weight, glyph count</td>
+<td>Font Book info panel (not fetched)</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Charset grid: glyphs by Unicode block, with coverage</td>
+<td>Typeface organisation [R]</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Collections, tags, search</td>
+<td>FontBase free tier includes collections and watched folders [R] (fontba.se/learn/font-activation)</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Variable fonts: axis sliders, named instances</td>
+<td>Typeface (variable fonts not checked) [M]</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Compare two fonts side by side</td>
+<td>Typeface Compare [R] (thesweetbits.com/tools/typeface/)</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>OpenType features (stylistic sets, figures)</td>
+<td>FontBase shows features, free tier [R]</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Google Fonts catalogue, downloads from the host</td>
+<td>FontBase and Typeface both integrate Google Fonts [R]; a download is a PROMPT (section 9)</td>
+</tr>
+<tr>
+<td>Out</td>
+<td>Cloud sync, auto-activate for other apps</td>
+<td>Typeface's auto-activation and paid tiers [R]: not in scope</td>
+</tr>
+</tbody>
+</table></div>
+<p>Typeface is Mac-only and paid [R]. FontBase is cross-platform with a paid tier [R]. Font Book is free and built in, and reviewers call it basic [R] (thesweetbits.com), but we did not open Apple's guide. Pricing and tiers change, so none of them is a dependency.</p>
+<h2 id="3-architecture">3. Architecture<a class="headerlink" href="#3-architecture" title="Link to this section">#</a></h2>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>TempleOS guest (HolyC)                     Mac host (Python font service, sandboxed workers)
+ FontApp: list, preview, activate          font index: SQLite (path hash, metadata, licence)
+ active-font table, atlas cache (RAM)      scan: user folders, /System/Library/Fonts (read-only)
+                     &lt;-- channel --&gt;       validate (worker process, limits, timeout)
+                                           render: Pillow/FreeType atlases; CoreText runs (RUNIMG)
+                                           variable instances: fontTools instancer [M]</code></pre></figure>
+<p>Rules:</p>
+<ol>
+<li><strong>Parsing happens on the host only</strong>, in a worker process with CPU time, memory and file-size limits. The guest never receives a font file for a user or system font.</li>
+<li><strong>Rendering is the host's job.</strong> The host draws text in a font at a size and weight, and sends a bitmap atlas or a run image.</li>
+<li><strong>Only validated results reach the guest.</strong> A failed font shows a reason ("table <code>glyf</code> truncated") and is never rendered.</li>
+</ol>
+<h3 id="31-host-tools">3.1 Host tools<a class="headerlink" href="#31-host-tools" title="Link to this section">#</a></h3>
+<p>Installed [V]: Python 3.13, fontTools (MIT [R], pypi.org/project/fonttools), Pillow (its ImageFont uses FreeType [M]). Not installed [V]: the Python <code>freetype</code> binding. Not checked: CoreText via PyObjC, HarfBuzz. CoreText covers macOS runs, so HarfBuzz is needed only for our own rasteriser, which we do not plan to build.</p>
+<h2 id="4-three-ways-to-get-glyphs-to-the-guest">4. Three ways to get glyphs to the guest<a class="headerlink" href="#4-three-ways-to-get-glyphs-to-the-guest" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>How</th>
+<th>Cost</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. Build-time atlases (the current pipeline)</td>
+<td><code>scripts/gen-font.py</code> rasterises Inter into <code>assets/KSFONT.BIN</code> at 4 sizes and 2 scales, ASCII only [V]</td>
+<td>zero at run time; fixed set; baked into the boot image</td>
+<td><strong>keep for built-in faces</strong></td>
+</tr>
+<tr>
+<td>B. Host atlases per request</td>
+<td>the host rasterises a family at a size, weight and range, sends it over the channel, and the guest caches it by hash</td>
+<td>link time per new size; needs a cache</td>
+<td><strong>use for user and system fonts</strong></td>
+</tr>
+<tr>
+<td>C. Port stb_truetype to HolyC and ship TTF bytes</td>
+<td>the guest parses fonts and draws any size</td>
+<td>a port of about 5,000 lines of C (brief figure, [M]; check the header); font bytes in guest RAM; untrusted parsing in the guest breaks rule 1; no shaping</td>
+<td><strong>defer</strong>, only for trusted built-in OFL fonts at M6 (browser h5a stage D)</td>
+</tr>
+</tbody>
+</table></div>
+<p>stb_truetype is a single-file library, public domain or MIT, dual licensed per file [R] (github.com/nothings/stb). That makes option C legally clean; the problem is safety and size, not licence.</p>
+<h3 id="41-atlas-format">4.1 Atlas format<a class="headerlink" href="#41-atlas-format" title="Link to this section">#</a></h3>
+<p>Current format [V: <code>scripts/gen-font.py</code> docstring]: per face, one byte ascent, one byte line height, then 95 records of <code>U16 advance (1/16 px), U8 w, U8 h, I8 bearing x, I8 bearing y, U16 offset</code>, then <code>U32</code> data length and 4-bit alpha pixels.</p>
+<p>The U16 offset is a limit. Measured on this machine with the current script [V: run in a scratch folder]: the eight ASCII faces hold 3.0, 3.4, 2.3, 8.6, 10.5, 11.8, 7.7 and 32.2 KB of pixel data. The largest face is 32,237 bytes, half the 65,535-byte offset range. Browser stage B (about 350 glyphs, roughly 3.7 times the ASCII set [browser-architecture h5a]) would take the 44 px face to about 120 KB [estimate], and the offsets would wrap silently.</p>
+<p>Format v2 (proposal): <code>U32</code> offsets, one page per 64 KB, and a family header with the Unicode ranges present. Every guest atlas carries its own version byte, so the v1 faces keep working during migration.</p>
+<h3 id="42-atlas-cache">4.2 Atlas cache<a class="headerlink" href="#42-atlas-cache" title="Link to this section">#</a></h3>
+<p>Key: SHA-256 over (font file hash, face index, variation axes, size, weight, scale, code range, renderer version). Host cache under the user's cache folder. Guest RAM cache with a budget (browser budget reused, section d3 in browser-architecture). The guest sends HAVE with the hashes it holds, so a reconnect costs nothing.</p>
+<p>Cost check with the measured numbers: an ASCII atlas for one family at four sizes is about 20 to 60 KB [estimate, from the table above]. At the reported 47 KB/s serial rate that is about 1 s. At the old 1.4 to 2.7 KB/s lockstep rate it is 10 to 40 s. So the channel spike gate (50 KB/s) decides whether option B is interactive. Without the gate it is a background fetch with a placeholder face.</p>
+<h2 id="5-non-latin-text-and-emoji">5. Non-Latin text and emoji<a class="headerlink" href="#5-non-latin-text-and-emoji" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Latin, Greek, Cyrillic</strong> (stage B): atlases in format v2 from Inter, which covers them [V: browser h5a; coverage to confirm in the font file].</li>
+<li><strong>Everything else</strong> (CJK, Arabic, Hebrew, Devanagari, Thai, any font the user adds): a run image (RUNIMG, browser 0x09 and h6). The host shapes and draws the run in the font with CoreText, sends an alpha mask and the colour token, and the guest caches it by hash. Cost estimate from h6: a 20-character CJK run is about 8 KB compressed.</li>
+<li><strong>Emoji</strong>: Apple Color Emoji ships with macOS and its font terms restrict redistribution [M]. We render emoji on the host only and send RUNIMG RGBA. We never bundle it. Noto Color Emoji is an open alternative, licence to be checked [M].</li>
+<li><strong>Encoding</strong>: the guest is 8-bit HolyC text. The font manager shows UTF-8 names by sending them as a pre-rendered label or a transliterated ASCII name. Typed input in the preview field is ASCII in v1.</li>
+</ul>
+<h2 id="6-variable-fonts">6. Variable fonts<a class="headerlink" href="#6-variable-fonts" title="Link to this section">#</a></h2>
+<p>The host reads the <code>fvar</code> table and its named instances. For a requested axis set (for example <code>wght</code> 620 and <code>wdth</code> 100), it makes a static instance with fontTools' instancer [M: <code>fontTools.varLib.instancer</code>], then rasterises that. The guest sees each instance as an ordinary face, with a name like "Family Bold 620". Slider changes are debounced to 150 ms so the link is not flooded while dragging.</p>
+<h2 id="7-system-fonts-and-redistribution">7. System fonts and redistribution<a class="headerlink" href="#7-system-fonts-and-redistribution" title="Link to this section">#</a></h2>
+<ul>
+<li>macOS system fonts (in <code>/System/Library/Fonts</code> and <code>/Library/Fonts</code>) are listed and previewed on the host only. Their licence terms restrict redistribution and extraction [M, Apple's font terms not checked].</li>
+<li>Rule: the host may render a system font for the local user's preview. It must not write those glyphs into the repo, the boot image, the test fixtures or any shared file. The boot image stamp in <code>scripts/image-path.sh</code> lists its inputs explicitly [V]; system-font atlases are excluded from it.</li>
+<li>User-added fonts follow their own licence. The index stores the licence name from the font's name table (nameID 13 and 14) [M] and shows it.</li>
+<li><code>ls</code> of <code>/System/Library/Fonts</code> and <code>/Library/Fonts</code> gives about 134 entries together [V; includes folder headers, so approximate]. Design the list for hundreds of files.</li>
+</ul>
+<h2 id="8-licence-hygiene-in-the-repo">8. Licence hygiene in the repo<a class="headerlink" href="#8-licence-hygiene-in-the-repo" title="Link to this section">#</a></h2>
+<ul>
+<li><code>assets/</code> holds <code>KSFONT.BIN</code>, <code>KSICONS.BIN</code> and <code>LUCIDE-LICENSE.txt</code> [V]. <strong>No OFL text is in the repo.</strong> The Inter licence the atlas uses is required by OFL 1.1 to travel with the font. Add <code>assets/licenses/OFL-Inter.txt</code> before the next image build.</li>
+<li><code>scripts/gen-font.py</code> reads Inter from an absolute path outside the repo, <code>/Users/paulbloch/Documents/github/puter-ui/src/gui/src/fonts</code> [V]. Vendor the two files it uses, or record their checksums and source in a README, so the build does not depend on another checkout.</li>
+<li>That folder holds nine Inter weights (Black, Bold, ExtraBold, ExtraLight, Light, Medium, Regular, SemiBold, Thin) [V]. The generator uses two. Record which weights are intended.</li>
+<li>OFL reserved font names: Inter's name is not reserved in what we checked [M]; any modified Inter must be renamed if it is distributed. We do not modify it.</li>
+</ul>
+<h2 id="9-activation-consent-and-the-channel">9. Activation, consent and the channel<a class="headerlink" href="#9-activation-consent-and-the-channel" title="Link to this section">#</a></h2>
+<p>Message family 0x30 to 0x3F (proposal; the browser uses 0x01 to 0x14 and music uses 0x20 to 0x2F).</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x30</td>
+<td>FONT_LIST (H to G)</td>
+<td>font id, family, style, weight, width, source (system, user, google), glyph count, licence name. No bytes</td>
+</tr>
+<tr>
+<td>0x31</td>
+<td>FONT_QUERY (G to H)</td>
+<td>view, filter, sort, offset, count</td>
+</tr>
+<tr>
+<td>0x32</td>
+<td>PREVIEW (G to H)</td>
+<td>font id, axes, text (ASCII, up to 256 bytes), size, scale, colour token</td>
+</tr>
+<tr>
+<td>0x33</td>
+<td>ATLAS (H to G)</td>
+<td>hash, font id, size, weight, scale, range, format v2 data</td>
+</tr>
+<tr>
+<td>0x34</td>
+<td>ACTIVATE (G to H)</td>
+<td>font id, on or off; the host stores the active set</td>
+</tr>
+<tr>
+<td>0x35</td>
+<td>COVERAGE (H to G)</td>
+<td>code ranges present, for the charset grid</td>
+</tr>
+<tr>
+<td>0x36</td>
+<td>VALIDATE (H to G)</td>
+<td>ok, or a reason string, and the table that failed</td>
+</tr>
+<tr>
+<td>0x37</td>
+<td>ADD_FOLDER (G to H)</td>
+<td>a path chosen in a host dialog; the guest only asks, the host shows the dialog</td>
+</tr>
+<tr>
+<td>0x2C, 0x0D, 0x0E</td>
+<td>PROMPT and answer</td>
+<td>shared with music and the browser</td>
+</tr>
+</tbody>
+</table></div>
+<p>Activation is local, and it changes what the desk's apps see, so it needs no PROMPT. Adding a Google Fonts download, a folder outside the user's home, or any write outside the cache is a PROMPT showing the file name, size and source, with the default "no". Install of a font into macOS is never done.</p>
+<p>Apps consume families by name: <code>FontFace(family, weight, size, scale)</code> returns a face id from the active table, or falls back to the built-in Inter face and records the miss. Browser pages use the same table. Slides (<code>DeckDoc</code> <code>fontFamily</code>) and Notes do the same [V: primitives 3, <code>DeckDoc</code> schema].</p>
+<h2 id="10-ui-mockup-window-about-900-by-560">10. UI mockup (window about 900 by 560)<a class="headerlink" href="#10-ui-mockup-window-about-900-by-560" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+------------------------------------------------------------------------------+
+| Font Manager                           [ search families            ]          |
++------------------+-----------------------------------------------------------+
+| COLLECTIONS      | Inter                                 OFL 1.1   active  [x]|
+|  All (412)       | Regular  Medium  SemiBold  Bold  Black                     |
+|  Active (6)      |                                                            |
+|  Serif           | Preview text:  [The quick brown fox 0123          ]        |
+|  Mono            |                                                            |
+| SOURCE           | Size [=====o=====]  24     Weight [ Regular v ]            |
+|  System (371)    |                                                            |
+|  User (38)       |  The quick brown fox jumps over the lazy dog.              |
+|  Google (3)      |  ABCDEFGHIJKLMNOPQRSTUVWXYZ                                |
+|                  |  abcdefghijklmnopqrstuvwxyz 0123456789 !?@#$%             |
+|                  |                                                            |
+|                  | Glyphs: 384 (Latin, Greek, Cyrillic)   [ Charset ] [ Compare ]|
++------------------+-----------------------------------------------------------+
+| Active: Inter, IBM Plex Sans, Source Serif 4                 Adds folder  ...   |
++------------------------------------------------------------------------------+</code></pre></figure>
+<p>Example names are placeholders for the mockup. The active toggle is the <code>[x]</code> control; a non-Latin sample shows a run image with a "rendered on host" label.</p>
+<h2 id="11-framework-needs">11. Framework needs<a class="headerlink" href="#11-framework-needs" title="Link to this section">#</a></h2>
+<ul>
+<li>Virtual list with family rows, search field, collections sidebar, slider (exists [V: <code>Slider</code> in 02-ui.HC]), toggle, a segmented control for weight, a text field with caret for preview input.</li>
+<li>A glyph grid (charset) with block headers, drawn from COVERAGE.</li>
+<li>An atlas blit with scale 1 or 2 [V: the desk draws at 1 or 2 with <code>ks_s</code>].</li>
+<li>The channel client and the PROMPT dialog shared with Music.</li>
+</ul>
+<h2 id="12-milestones-and-gates">12. Milestones and gates<a class="headerlink" href="#12-milestones-and-gates" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Work</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F0 atlas format spike</td>
+<td>format v2 writer on host, reader in HolyC; one family, four sizes</td>
+<td>guest atlas matches the host render within one level per pixel, on x86 and Aiwnios (golden method in <code>aiwnios/README.md</code>)</td>
+</tr>
+<tr>
+<td>F1 host index and validation</td>
+<td>scan, SQLite index, sandbox worker</td>
+<td>500 fonts indexed; 2,000 corrupted copies of Inter (byte flips, truncation) give no crash and no hang, each with a reason</td>
+</tr>
+<tr>
+<td>F2 guest Font Manager</td>
+<td>list, search, preview, activate</td>
+<td>activating a font makes it selectable in Notes</td>
+</tr>
+<tr>
+<td>F3 user fonts and variable instances</td>
+<td>ATLAS for user fonts, instancer, charset grid</td>
+<td><code>wght</code> 400 and 700 instances render, with distinct atlas hashes</td>
+</tr>
+<tr>
+<td>F4 browser stage B</td>
+<td>Latin-1, Ext-A, Greek, Cyrillic in format v2</td>
+<td>the German and Russian article gate in browser h5a</td>
+</tr>
+<tr>
+<td>F5 run images</td>
+<td>CoreText runs for CJK, Arabic, emoji</td>
+<td>one CJK run and one emoji run legible at 2x</td>
+</tr>
+<tr>
+<td>F6 Google Fonts</td>
+<td>catalogue fetch on the host, OFL only, PROMPT for each download</td>
+<td>a download prompt shows name and size before any byte moves</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every phase needs the owner's go. F0 is the cheapest decision: it proves or kills option B before any UI is built.</p>
+<h2 id="13-test-plan">13. Test plan<a class="headerlink" href="#13-test-plan" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Golden atlases.</strong> For each built-in face and two user fonts, the atlas hash is stored; a change needs a reason.</li>
+<li><strong>Metadata golden.</strong> The index output for a fixed folder (the Inter set and two Google fonts we vendor) as JSON, compared on each run.</li>
+<li><strong>Fuzz.</strong> Byte flips and truncations of Inter in the scratch folder (never committed), with a 10 s timeout and 256 MB memory cap per worker. Pass: no crash, no hang, a reason for each failure.</li>
+<li><strong>Licence check.</strong> A script fails the build if any bundled font lacks its OFL text in <code>assets/licenses/</code>.</li>
+<li><strong>Boot.</strong> <code>KS-READY</code> stays in the 0.5 to 0.7 s range recorded for Aiwnios [V: aiwnios/README.md] after each stage.</li>
+<li><strong>Parity.</strong> <code>golden.py</code> on x86 and Aiwnios for the Font Manager window, once it exists.</li>
+</ul>
+<h2 id="14-risks">14. Risks<a class="headerlink" href="#14-risks" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>Parsing risk.</strong> FreeType and fontTools are C and Python code that parse hostile input [M]. Mitigation: worker sandbox, limits, no guest parsing, patch the library as CVEs appear.</li>
+<li><strong>Redistribution.</strong> System fonts and Apple Color Emoji. Mitigation: host-only rendering, exclusion from the image stamp and repo (section 7).</li>
+<li><strong>Link cost.</strong> A family at four sizes can be tens of KB. Mitigation: the F0 gate decides; placeholders while atlases stream.</li>
+<li><strong>Offset wrap</strong> (section 4.1). Mitigation: format v2 with a version byte, tested with a 44 px stress face.</li>
+<li><strong>Font count.</strong> Hundreds of families can overwhelm the guest's RAM. Mitigation: the active set is capped (16 faces, a number to check) and atlases are evicted by LRU.</li>
+<li><strong>Text encoding.</strong> 8-bit guest text. Mitigation: names transliterated, non-ASCII shown as run images.</li>
+<li><strong>Stale boot image.</strong> New font assets not in <code>scripts/image-path.sh</code> leave an old image in use. Mitigation: add them to the stamp in the same change.</li>
+</ol>
+<h2 id="15-verified-and-from-memory">15. Verified and from memory<a class="headerlink" href="#15-verified-and-from-memory" title="Link to this section">#</a></h2>
+<p>Verified here: the desk3 font loader and constants (<code>desk3/01-core.HC</code> lines 1007 to 1060, <code>FontLoad</code>, <code>TW</code>, <code>Txt</code>); <code>scripts/gen-font.py</code> record format and its external Inter path; the atlas sizes (measured by running the generator in a scratch folder); the assets folder contents; the image stamp inputs (<code>scripts/image-path.sh</code>); the nine Inter files; the Python tool presence (fontTools, Pillow; no freetype); the Kosmos OS primitives (no <code>os.fonts@1</code>, shell font presets); the browser h5a and h6 plans.</p>
+<p>From web searches (snippets only): FontBase (fontba.se/learn/font-activation), Typeface (thesweetbits.com/tools/typeface/), stb_truetype licence (github.com/nothings/stb), fontTools licence (pypi.org/project/fonttools).</p>
+<p>From memory, not checked: Font Book's features; Apple's font licence; Apple Color Emoji and Noto Color Emoji licences; the fontTools instancer API name; FreeType and fontTools CVE history; the 5,000-line stb_truetype size; the active-set cap of 16.</p>
+<p>Not run: any rasterised atlas for the guest, any worker sandbox, the VM with the font manager.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/email/index.html" rel="prev"><span>Previous</span>Email client for the Kosmos HolyC desktop: plan</a><a class="next" href="../../../docs/apps/icon-style-editor/index.html" rel="next"><span>Next</span>Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-purpose">1. Purpose</a></li><li><a href="#2-features">2. Features</a></li><li><a href="#3-architecture">3. Architecture</a><ul><li><a href="#31-host-tools">3.1 Host tools</a></li></ul></li><li><a href="#4-three-ways-to-get-glyphs-to-the-guest">4. Three ways to get glyphs to the guest</a><ul><li><a href="#41-atlas-format">4.1 Atlas format</a></li><li><a href="#42-atlas-cache">4.2 Atlas cache</a></li></ul></li><li><a href="#5-non-latin-text-and-emoji">5. Non-Latin text and emoji</a></li><li><a href="#6-variable-fonts">6. Variable fonts</a></li><li><a href="#7-system-fonts-and-redistribution">7. System fonts and redistribution</a></li><li><a href="#8-licence-hygiene-in-the-repo">8. Licence hygiene in the repo</a></li><li><a href="#9-activation-consent-and-the-channel">9. Activation, consent and the channel</a></li><li><a href="#10-ui-mockup-window-about-900-by-560">10. UI mockup (window about 900 by 560)</a></li><li><a href="#11-framework-needs">11. Framework needs</a></li><li><a href="#12-milestones-and-gates">12. Milestones and gates</a></li><li><a href="#13-test-plan">13. Test plan</a></li><li><a href="#14-risks">14. Risks</a></li><li><a href="#15-verified-and-from-memory">15. Verified and from memory</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

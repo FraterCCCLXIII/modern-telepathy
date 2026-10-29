@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html" aria-current="page">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/podcast-port.md</span></div>
+        <div class="doc-body">
+
+<p>Source read 2026-10-27: kosmos-os-frame <code>src/apps/podcast/</code> (13 files, 3131 lines), <code>shared/podcastDirectory.ts</code> (221, the 108-show directory), <code>shared/podcastFeeds.ts</code> (59), the server services <code>server/services/podcast*.ts</code> (1713) and the 82 <code>APPS$PODCAST_*</code> copy keys in <code>public/locales/en/arco.json</code>. The user's own project, no licence file: behaviour, layout, data model and copy are translated; nothing is pasted. Host side is done (<code>apps-host/hub/svc_podcast.py</code>, protocol in <code>apps-host/hub/PODCAST.md</code>, 18 offline tests pass).</p>
+<h2 id="1-what-the-source-app-really-has-verified-by-reading">1. What the source app really has (verified by reading)<a class="headerlink" href="#1-what-the-source-app-really-has-verified-by-reading" title="Link to this section">#</a></h2>
+<ul>
+<li>Shell: app id <code>podcast</code> ("Podcasts"), one window; a shell-level audio engine (PodcastEngine, an <code>&lt;audio&gt;</code> element) keeps playing when the window is minimised. No agent tools, intents or contracts: it only talks to the shell through the window store and <code>/api/podcast/*</code>.</li>
+<li>Sidebar: search box; Browse section (Main Feed, Home, Browse, Library, Downloads, Transcripts); Sources (Local library, RSS feeds, Spotify, Apple Podcasts, Audible, Connect account); Manage (Settings).</li>
+<li>Home: Continue listening card (Play), Following (grid of followed shows), New in your feed (episode rows), Discover more; empty state "Your feed is empty" with Browse podcasts.</li>
+<li>Browse (directory): 12 category chips plus All, grouped sections or a Results list when searching or filtering (search matches title, publisher, description), cards with cover, publisher, blurb and Follow/Following. Directory show page: hero cover, publisher, episode count, blurb, Play latest, Follow, episode list with loading, refreshing and error states (previews a show without following).</li>
+<li>Show page (from Home/Library): back, hero, Play latest, All episodes. Episode page: About / Transcript tabs, Play, Transcribe, Save to Drive.</li>
+<li>Library: content filter chips (All, Podcasts, Audiobooks) plus Local, downloaded episodes, continue listening, your shows, episodes, "Open in provider". Downloads: locally scanned files. Transcripts: list with word counts and engine.</li>
+<li>Settings: feed manager (paste RSS URL, Add feed, list with publisher and "auto-download on", remove, sync downloads).</li>
+<li>Main Feed: full-screen vertical snap slides built from continue, up to 14 new episodes, up to 4 shows, a Discover slide; arrow/PageUp/PageDown keys; blurred cover backdrop; an unwired "Save to queue" button.</li>
+<li>Player bar (shared MediaPlayerBar): cover, title, show, previous, play/pause, next, progress seek with elapsed and duration, volume, Transcribe, Save to Drive. Previous/next cycle through the catalog of the same source, wrapping; end of episode plays the next.</li>
+<li>Cover art: server proxies the feed image; fallback is a coloured tile from one of 12 tones (sum of char codes modulo 12).</li>
+<li>NOT in the source (verified by grep): playback speed, sleep timer, chapters, a real queue, shuffle, repeat, skip 15/30 s, saved resume position (progress is in memory and resets to 0 on every play), played flags, manual download. The host service adds speed, sleep timer, resume, played, download and auto-next anyway because the brief asks for them; queue and chapters stay out (S, below).</li>
+</ul>
+<h2 id="2-data-model-typests-and-podcaststorets">2. Data model (types.ts and podcastStore.ts)<a class="headerlink" href="#2-data-model-typests-and-podcaststorets" title="Link to this section">#</a></h2>
+<ul>
+<li>PodcastEpisode: id, title, showTitle, host, durationLabel "m:ss", publishedAt, kind podcast|audiobook, artTone (12), source local|rss|remote, provider, streamSrc, listenUrl, coverUrl, feedUrl. Episode id for RSS = "rss-" + 16 hex of sha256(feed URL, guid). Ours: <code>eid</code> = 10 hex of sha1(show id, guid).</li>
+<li>PodcastShow: id, title, host, episodeCount, artTone, feedUrl. Feed subscription: id, url, label, publisher, addedAt, autoDownload. Directory entry: id, category (12), label, publisher, url, description. NowPlaying: episode, progress 0..100, elapsed, duration.</li>
+<li>Store: three catalogs (local, rss, remote), subscribed feeds, drive saves, transcripts, selection (nav section, show, episode, directory show), filters, <code>playing</code>, nowPlaying. Home = RSS episodes of subscribed feeds, newest first, search and kind filter; server keeps 20 episodes per feed, 30 min cache, downloads at most 5 new per feed.</li>
+<li>Ours: the same records, flattened into the <code>S</code> <code>D</code> <code>E</code> <code>PS</code> records of PODCAST.md; the guest keeps only the current page (10 rows) and the selection; the host keeps state.json (subs, progress, files, speed, autonext).</li>
+</ul>
+<h2 id="3-classification-lines-in-the-source">3. Classification (lines in the source)<a class="headerlink" href="#3-classification-lines-in-the-source" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Lines</th>
+<th>Class</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PodcastParts.tsx</td>
+<td>1098</td>
+<td>N</td>
+<td>sidebar, rows, home, library, show, episode, settings, player bar; Transcripts, Drive, providers, Connect: X</td>
+</tr>
+<tr>
+<td>podcastStore.ts</td>
+<td>892</td>
+<td>S + H</td>
+<td>state machine rewritten as globals; fetch/sync/progress are <code>svc_podcast.py</code>; remote providers, Drive, transcribe: X</td>
+</tr>
+<tr>
+<td>PodcastDirectory.tsx</td>
+<td>295</td>
+<td>N</td>
+<td>grid becomes a 2-column card list; data is H (catalog.json)</td>
+</tr>
+<tr>
+<td>MainFeed.tsx 200 + podcastMainFeedData.ts</td>
+<td>315</td>
+<td>N (reduced)</td>
+<td>one card at a time with Up/Down; blurred backdrop and snap scroll X</td>
+</tr>
+<tr>
+<td>podcastCatalog.ts</td>
+<td>187</td>
+<td>S</td>
+<td>helpers (time format, filters, grouping) reimplemented; it holds no show list; provider rail X</td>
+</tr>
+<tr>
+<td>PodcastEngine.tsx + PodcastShell.tsx</td>
+<td>112</td>
+<td>H</td>
+<td>the music service plays (afplay), see section 6</td>
+</tr>
+<tr>
+<td>PodcastApp.tsx</td>
+<td>53</td>
+<td>N</td>
+<td>composition and init</td>
+</tr>
+<tr>
+<td>types.ts</td>
+<td>83</td>
+<td>S</td>
+<td>section 2</td>
+</tr>
+<tr>
+<td>podcastDirectoryCatalog.ts</td>
+<td>44</td>
+<td>H + S</td>
+<td>data in fixtures/podcasts/catalog.json, tone function in HolyC</td>
+</tr>
+<tr>
+<td>PodcastCover.tsx</td>
+<td>51</td>
+<td>H + N</td>
+<td><code>cover</code> record, tone tile fallback</td>
+</tr>
+<tr>
+<td>usePodcast.ts</td>
+<td>1</td>
+<td>X</td>
+<td>re-export</td>
+</tr>
+<tr>
+<td>Totals: N about 1.7k lines of source, H/S about 1.4k, X the rest. Estimated HolyC: 900 to 1100 lines in one file (Music app is 500, Weather 440).</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Skipped on purpose (X): Spotify/Apple/Audible rails and connections, Save to Drive, Transcripts and Transcribe (server Whisper; no host service), audiobooks filter (no audiobook source), i18n (English only), mobile.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-mapping-to-desk3-window-820-x-560-logical-body-below-the-title-bar">4. Mapping to desk3 (window 820 x 560 logical, body below the title bar)<a class="headerlink" href="#4-mapping-to-desk3-window-820-x-560-logical-body-below-the-title-bar" title="Link to this section">#</a></h2>
+<p>Colours only through <code>P(C_*)</code> so all five window styles work; cover tones are a 12-entry table mixed 60% into C_CARD. Widgets: Button (kind 0/1), Radio (category chips), Slider (volume and speed), Toggle, Check, RRFill/RRRing, Txt/TxtC, Hit, LIcon. Missing in the framework: tab strip (draw chips with Button, a selected index), text entry (copy BrowserKey/LpKey: focus flag, caret, Backspace, Enter), progress bar (use the Music seek bar: Hit region plus <code>ks_cx</code>), list scrolling (wheel hook + DamageL, as MusicWheel), image blit (loop of <code>Rect</code> per pixel from the cover record, cached in a layer).</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+--[ Podcasts ]----------------------------------------------------------------------+ 0
+| (headphones) Listen | [Home][Browse][Library][Downloads][Feed]   [ search...   ]   | 8   top row 40 px
+|  Main Feed          |------------------------------------------------------------- |
+|  Home        &lt;      |  Continue listening                                          |
+|  Browse             |  [cover 96] Episode title that is long ...                   |
+|  Library            |             Show name   32:10  [&gt; Play]                      |
+|  Downloads          |  Following                                                   |
+|  Feed (settings)    |  [c48] Planet Money  [c48] Radiolab  [c48] 99% Invisible     |
+|---------------------|  New in your feed                                            |
+|  Sources: Local,RSS |  [c40] Ep 12 title ...........................  20240128 31m |
+|                     |  [c40] Ep 11 title ...........................  20240121 28m |
+|---------------------+--------------------------------------------------------------|
+| [c40] Title - Show  (&lt;&lt;) (&gt; ) (&gt;&gt;)  12:04 [=====o------] 41:10  1.5x  (z) 30m  vol  | 64 px player bar
++-------------------------------------------------------------------------------------+</code></pre></figure>
+<p>Sidebar 170 px (6 rows of 34), main 650 px, player bar 64 px, rows 44 px (about 8 visible). Sidebar items: Main Feed, Home, Browse, Library, Downloads, Settings (Transcripts dropped).</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>Browse:  [All][News][True Crime][Science][Business][Comedy][Culture] ... (two rows of chips, 28 px)
+         [c48] The Daily            [ Follow ]   &lt;- 10 per page, 52 px rows, Prev/Next page, count &quot;108 in directory&quot;
+               The New York Times - Twenty minutes on the biggest stories ...
+Show:    &lt; Back   [cover 96]  Planet Money / NPR - 12 episodes   [&gt; Play latest] [Following]
+         About text (2 lines)    Episodes: rows with  [v] downloaded  (.) unplayed  title  date  dur  [Download]
+Player:  speed chip cycles 0.75 1 1.25 1.5 2; sleep chip cycles off 15 30 45 60 end; seek bar 330 px; volume slider 80 px.
+Settings: Subscribed feeds list (title, publisher, [Remove]); entry &quot;Paste podcast RSS feed URL&quot; [Add feed]; storage line
+         &quot;Downloads: 3 files, 41 MB&quot; [Refresh all]; Speed default; Auto-play next [toggle]; Prompt: Allow / Not now.</code></pre></figure>
+<p>Copy: reuse the source strings ("Your feed is empty", "Follow podcasts from Browse to see new episodes from your shows here.", "Continue listening", "New in your feed", "Browse podcasts", "No podcasts found", "Try another category or search term.", "Loading episodes...", "No episodes found for this feed.").
+Icons (Lucide): present in KSICONS.BIN: layers, search, settings, check, play, pause, skip-back, skip-forward, volume-2, refresh-cw (spinner), moon (sleep), star, hard-drive (downloaded), clock, music, chevron-right, x. New, add to NAMES in scripts/gen-icons.py: headphones (app icon), house, book-open, library, download, chevron-left, plus, trash-2 (8). Optional: gauge (speed).</p>
+<h2 id="5-host-mapping">5. Host mapping<a class="headerlink" href="#5-host-mapping" title="Link to this section">#</a></h2>
+<p>Search is client side in the source; ours: <code>directory ... QUERY</code> on the host (108 entries) and the title filter of the page on the guest. Follow = <code>subscribe</code> (local) then <code>refresh</code> (approval naming the feed host). Episode rows come 10 at a time (<code>episodes FID off 10</code>, 658 bytes). Cover <code>cover ID 48</code> per visible row, lazily, at most one call in flight (HostCall takes turns), cached by the guest per id. Progress bar and clock from <code>status</code> polled at 250 ms like Music.</p>
+<h2 id="6-playback-decision">6. Playback decision<a class="headerlink" href="#6-playback-decision" title="Link to this section">#</a></h2>
+<p>Reuse the Music service (one afplay, one spectrum, one volume). Facts tested: afplay cannot open URLs (so download first, approval each), <code>afplay -r</code> changes speed (measured: 3 s file, rate 2 saves 1.5 s, 0.75 adds 1 s), no pause/seek in afplay (music service uses SIGSTOP and a trimmed file, a 100 to 200 ms gap). The podcast service hands one flagged entry to the Music instance and wraps <code>spawn</code>/<code>position</code> for the rate; Music's own tracks are untouched. While a podcast plays, the Music app shows it as the current track; stop in either app stops both.
+S only: queue, chapters (Podcasting 2.0 JSON), transcripts, shuffle, repeat, skip 15/30 s (guest can <code>seek pos+30</code>).</p>
+<h2 id="7-phase-b-plan-after-the-shared-tree-merge-re-check-every-number-against-the-merged-tree">7. Phase B plan (after the shared tree merge; re-check every number against the merged tree)<a class="headerlink" href="#7-phase-b-plan-after-the-shared-tree-merge-re-check-every-number-against-the-merged-tree" title="Link to this section">#</a></h2>
+<p>Files: new <code>desk3/03m-podcast.HC</code> (after 03j and 03l, before 03k-hostpoll if HlDeliver needs the owner; check order in <code>scripts/send-to-vm.sh</code> and <code>aiwnios/build.py</code> lists); hooks in shared files, each a one-liner:
+1. 01-core.HC: <code>#define NA</code> +1 (16 now, so the app id is NA-1; define <code>PD_ID</code> after the other ids in 03h-hostlink.HC or in 03m with the Clock method, <code>PdId()</code> looks up "Podcasts" in <code>ks_an</code>); L_ icons after L_HDD (63): L_HEADPH 64 .. L_TRASH 71; <code>NICON</code> 64 to 72.
+2. 02-ui.HC: append "Podcasts" to ks_an, ks_acol, ks_aico (L_HEADPH), ks_aw 820, ks_ah 560, ks_fx, ks_fy, ks_dord (last in the dock).
+3. 06-run.HC <code>BodyOf</code>: <code>else if (a==PD_ID) AppPodcast(a,x,y,ks_aw[a],ks_ah[a]);</code>
+4. 04-main.HC: <code>AppClick</code> <code>else if (a==PD_ID) PodcastClick(k);</code>; wheel <code>if (dz &amp;&amp; f==PD_ID) PodcastWheel(dz);</code>; <code>Keys</code>: <code>else if (f==PD_ID &amp;&amp; PodcastKey(ch,sc)) {}</code> before the Notes fallthrough (search box, Up/Down, space = play/pause).
+5. 03k-hostpoll.HC <code>HlDeliver</code>: owner <code>PD_OWN</code> calls <code>PodcastDone(st)</code>; <code>HostPoll</code> unchanged. Main loop: <code>PodcastTick</code> once a frame (poll status 250 ms while open, like MusicTick); close hook (Music stops on close; Podcasts keeps playing, stops only by Stop).
+6. send-to-vm.sh and aiwnios/build.py file lists; gen-icons.py NAMES (8) then rebuild KSICONS.BIN.
+Framework needs: all listed in section 4; tab strip, text entry and cover blit are new local helpers inside 03m (no shared change). Widget ids from AID(PD_ID): 1..9 transport, 10..19 nav, 20..39 chips, 40..59 header buttons, 90/91 allow/not now, 100..109 page rows (Play), 110..119 row buttons, 200.. directory rows.
+Order and gates (each ends with a screenshot in all five window styles, and <code>kslint</code> clean):
+1. Icons and hooks only, empty window opens, closes, dock tile. Gate: boots, existing apps unchanged (compare screenshot hash of Music and Weather).
+2. Nav, Home empty state, Browse with directory paging and categories (<code>directory</code>, offline, no approval). Gate: 108 entries, 12 chips, page 10 in under 100 ms.
+3. Follow, refresh approval prompt, episodes list with paging against a localhost fixture feed (<code>podcast_allow_loopback</code>). Gate: approval text names the host; list scrolls by wheel.
+4. Download, play, pause, seek, resume, player bar. Gate: fake-afplay run first (<code>FAKE_AFPLAY_LOG</code>), then one audible run on the Mac; Music app still works after.
+5. Speed, sleep, autonext chips; covers (p4) on rows and hero; Settings feed manager with text entry. Gate: 48x48 cover paints in one frame; idle CPU not above Music's.
+6. Main Feed (reduced), polish, Aiwnios build, docs and status note. One live feed smoke test only with the user's approval of the URL.
+Risks: HolyC cannot patch forward calls (define before use, follow the Clock <code>lp_req</code> pattern for OpenApp); one host call in flight (cover prefetch must yield to status polling); reply buffer 12000 bytes caps a 96x96 cover at 9.6 KB.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/music/index.html" rel="prev"><span>Previous</span>Music app: plan</a><a class="next" href="../../../docs/apps/slides/index.html" rel="next"><span>Next</span>Slides for the TempleOS desktop (HolyC)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-what-the-source-app-really-has-verified-by-reading">1. What the source app really has (verified by reading)</a></li><li><a href="#2-data-model-typests-and-podcaststorets">2. Data model (types.ts and podcastStore.ts)</a></li><li><a href="#3-classification-lines-in-the-source">3. Classification (lines in the source)</a></li><li><a href="#4-mapping-to-desk3-window-820-x-560-logical-body-below-the-title-bar">4. Mapping to desk3 (window 820 x 560 logical, body below the title bar)</a></li><li><a href="#5-host-mapping">5. Host mapping</a></li><li><a href="#6-playback-decision">6. Playback decision</a></li><li><a href="#7-phase-b-plan-after-the-shared-tree-merge-re-check-every-number-against-the-merged-tree">7. Phase B plan (after the shared tree merge; re-check every number against the merged tree)</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

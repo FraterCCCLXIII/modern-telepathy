@@ -1,0 +1,660 @@
+[
+  {
+    "name": "info",
+    "category": "status",
+    "tint": "#4aa8ff",
+    "triangles": 1116,
+    "bytes": 22052,
+    "file": "info.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "information",
+      "about",
+      "note",
+      "details",
+      "i"
+    ]
+  },
+  {
+    "name": "help_circle",
+    "category": "status",
+    "tint": "#8f7bff",
+    "triangles": 2492,
+    "bytes": 46808,
+    "file": "help_circle.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "help",
+      "question",
+      "support",
+      "faq",
+      "unknown"
+    ]
+  },
+  {
+    "name": "stop",
+    "category": "status",
+    "tint": "#ff5a5a",
+    "triangles": 960,
+    "bytes": 18356,
+    "file": "stop.glb",
+    "keywords": [
+      "stop",
+      "halt",
+      "square",
+      "cancel",
+      "end"
+    ]
+  },
+  {
+    "name": "play",
+    "category": "status",
+    "tint": "#4cd964",
+    "triangles": 1304,
+    "bytes": 25564,
+    "file": "play.glb",
+    "keywords": [
+      "play",
+      "start",
+      "run",
+      "resume",
+      "go"
+    ]
+  },
+  {
+    "name": "pause",
+    "category": "status",
+    "tint": "#ffb020",
+    "triangles": 1440,
+    "bytes": 27076,
+    "file": "pause.glb",
+    "keywords": [
+      "pause",
+      "hold",
+      "wait",
+      "break"
+    ]
+  },
+  {
+    "name": "refresh",
+    "category": "status",
+    "tint": "#4aa8ff",
+    "triangles": 1000,
+    "bytes": 19272,
+    "file": "refresh.glb",
+    "keywords": [
+      "refresh",
+      "reload",
+      "loop",
+      "sync",
+      "retry",
+      "repeat",
+      "cycle"
+    ]
+  },
+  {
+    "name": "link",
+    "category": "symbol",
+    "tint": "#6aa0ff",
+    "triangles": 800,
+    "bytes": 15428,
+    "file": "link.glb",
+    "keywords": [
+      "link",
+      "chain",
+      "url",
+      "hyperlink",
+      "attach"
+    ]
+  },
+  {
+    "name": "lock",
+    "category": "security",
+    "tint": "#ffc400",
+    "triangles": 1604,
+    "bytes": 30932,
+    "file": "lock.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "lock",
+      "locked",
+      "secure",
+      "private",
+      "password",
+      "closed"
+    ]
+  },
+  {
+    "name": "unlock",
+    "category": "security",
+    "tint": "#4cd964",
+    "triangles": 1564,
+    "bytes": 30212,
+    "file": "unlock.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "unlock",
+      "unlocked",
+      "open",
+      "access",
+      "public"
+    ]
+  },
+  {
+    "name": "key",
+    "category": "security",
+    "tint": "#ffc400",
+    "triangles": 920,
+    "bytes": 17760,
+    "file": "key.glb",
+    "keywords": [
+      "key",
+      "access",
+      "credential",
+      "api key",
+      "auth",
+      "login"
+    ]
+  },
+  {
+    "name": "shield",
+    "category": "security",
+    "tint": "#5a8fff",
+    "triangles": 2736,
+    "bytes": 53740,
+    "file": "shield.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "shield",
+      "protect",
+      "defense",
+      "safe",
+      "guard",
+      "security"
+    ]
+  },
+  {
+    "name": "shield_check",
+    "category": "security",
+    "tint": "#4cd964",
+    "triangles": 1880,
+    "bytes": 37404,
+    "file": "shield_check.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "shield",
+      "verified",
+      "safe",
+      "approved",
+      "secure",
+      "check"
+    ]
+  },
+  {
+    "name": "bell",
+    "category": "comms",
+    "tint": "#ffc400",
+    "triangles": 924,
+    "bytes": 18656,
+    "file": "bell.glb",
+    "materials": {
+      "Bronze": "#9a6a3a"
+    },
+    "keywords": [
+      "bell",
+      "notification",
+      "alert",
+      "alarm",
+      "ring"
+    ]
+  },
+  {
+    "name": "bookmark",
+    "category": "ui",
+    "tint": "#ff5a7a",
+    "triangles": 2592,
+    "bytes": 50360,
+    "file": "bookmark.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "bookmark",
+      "save",
+      "favorite",
+      "ribbon",
+      "mark"
+    ]
+  },
+  {
+    "name": "flag",
+    "category": "ui",
+    "tint": "#ff4d4d",
+    "triangles": 2216,
+    "bytes": 44112,
+    "file": "flag.glb",
+    "materials": {
+      "Wood": "#c28a54",
+      "Gold": "#e3b341"
+    },
+    "keywords": [
+      "flag",
+      "report",
+      "mark",
+      "goal",
+      "milestone",
+      "banner"
+    ]
+  },
+  {
+    "name": "pin",
+    "category": "ui",
+    "tint": "#ff4d4d",
+    "triangles": 1036,
+    "bytes": 20588,
+    "file": "pin.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "pin",
+      "location",
+      "map",
+      "marker",
+      "place",
+      "gps"
+    ]
+  },
+  {
+    "name": "eye",
+    "category": "ui",
+    "tint": "#fbf8f2",
+    "triangles": 2010,
+    "bytes": 40452,
+    "file": "eye.glb",
+    "materials": {
+      "Iris": "#5f93d4",
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "eye",
+      "view",
+      "visible",
+      "show",
+      "watch",
+      "look",
+      "see"
+    ]
+  },
+  {
+    "name": "eye_off",
+    "category": "ui",
+    "tint": "#c8c2b8",
+    "triangles": 2030,
+    "bytes": 41580,
+    "file": "eye_off.glb",
+    "materials": {
+      "Iris": "#5f93d4",
+      "Ink": "#454a5c",
+      "Red": "#d9534f"
+    },
+    "keywords": [
+      "eye",
+      "hide",
+      "hidden",
+      "invisible",
+      "private",
+      "blind"
+    ]
+  },
+  {
+    "name": "search_plus",
+    "category": "tool",
+    "tint": "#5ac8fa",
+    "triangles": 1480,
+    "bytes": 29560,
+    "file": "search_plus.glb",
+    "materials": {
+      "Glass": "#bfe0f2",
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "search",
+      "zoom",
+      "magnify",
+      "find",
+      "zoom in",
+      "plus"
+    ]
+  },
+  {
+    "name": "bolt",
+    "category": "status",
+    "tint": "#ffd23f",
+    "triangles": 1258,
+    "bytes": 25240,
+    "file": "bolt.glb",
+    "keywords": [
+      "bolt",
+      "lightning",
+      "power",
+      "fast",
+      "energy",
+      "electric",
+      "zap"
+    ]
+  },
+  {
+    "name": "sparkles_small",
+    "category": "emote",
+    "tint": "#ffe680",
+    "triangles": 2024,
+    "bytes": 41372,
+    "file": "sparkles_small.glb",
+    "materials": {
+      "Gold": "#e3b341"
+    },
+    "keywords": [
+      "sparkles",
+      "magic",
+      "shine",
+      "new",
+      "glitter",
+      "stars",
+      "twinkle"
+    ]
+  },
+  {
+    "name": "hourglass",
+    "category": "status",
+    "tint": "#e8dcc4",
+    "triangles": 2880,
+    "bytes": 54780,
+    "file": "hourglass.glb",
+    "materials": {
+      "Wood": "#c28a54",
+      "Sand": "#e0a23a"
+    },
+    "keywords": [
+      "hourglass",
+      "wait",
+      "loading",
+      "time",
+      "sand",
+      "pending",
+      "timer"
+    ]
+  },
+  {
+    "name": "timer",
+    "category": "status",
+    "tint": "#7a8cff",
+    "triangles": 1876,
+    "bytes": 36096,
+    "file": "timer.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "timer",
+      "stopwatch",
+      "clock",
+      "duration",
+      "countdown",
+      "time"
+    ]
+  },
+  {
+    "name": "battery",
+    "category": "status",
+    "tint": "#4cd964",
+    "triangles": 2400,
+    "bytes": 45268,
+    "file": "battery.glb",
+    "materials": {
+      "Green": "#5cb872"
+    },
+    "keywords": [
+      "battery",
+      "power",
+      "charge",
+      "energy",
+      "level"
+    ]
+  },
+  {
+    "name": "wifi",
+    "category": "status",
+    "tint": "#4aa8ff",
+    "triangles": 1152,
+    "bytes": 21988,
+    "file": "wifi.glb",
+    "keywords": [
+      "wifi",
+      "wireless",
+      "signal",
+      "network",
+      "connection",
+      "online"
+    ]
+  },
+  {
+    "name": "plug",
+    "category": "tool",
+    "tint": "#9aa4b2",
+    "triangles": 1360,
+    "bytes": 26540,
+    "file": "plug.glb",
+    "materials": {
+      "Brass": "#d9a441"
+    },
+    "keywords": [
+      "plug",
+      "power",
+      "connect",
+      "outlet",
+      "cable",
+      "integration"
+    ]
+  },
+  {
+    "name": "cursor",
+    "category": "ui",
+    "tint": "#f4f1ea",
+    "triangles": 1184,
+    "bytes": 23688,
+    "file": "cursor.glb",
+    "keywords": [
+      "cursor",
+      "pointer",
+      "mouse",
+      "arrow",
+      "click",
+      "select"
+    ]
+  },
+  {
+    "name": "speech_bubble",
+    "category": "comms",
+    "tint": "#e8f0ff",
+    "triangles": 2790,
+    "bytes": 53988,
+    "file": "speech_bubble.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "speech",
+      "chat",
+      "message",
+      "comment",
+      "talk",
+      "bubble",
+      "reply"
+    ]
+  },
+  {
+    "name": "thought_bubble",
+    "category": "comms",
+    "tint": "#e8f0ff",
+    "triangles": 2364,
+    "bytes": 44812,
+    "file": "thought_bubble.glb",
+    "materials": {
+      "Blue": "#8fb4e8"
+    },
+    "keywords": [
+      "thought",
+      "think",
+      "idea",
+      "cloud",
+      "dream",
+      "reasoning",
+      "bubble"
+    ]
+  },
+  {
+    "name": "megaphone",
+    "category": "comms",
+    "tint": "#ff7a1a",
+    "triangles": 1320,
+    "bytes": 26644,
+    "file": "megaphone.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Gold": "#e3b341"
+    },
+    "keywords": [
+      "megaphone",
+      "announce",
+      "broadcast",
+      "loudspeaker",
+      "marketing",
+      "shout"
+    ]
+  },
+  {
+    "name": "mail",
+    "category": "comms",
+    "tint": "#f4f1ea",
+    "triangles": 1152,
+    "bytes": 22664,
+    "file": "mail.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "mail",
+      "email",
+      "envelope",
+      "inbox",
+      "message",
+      "letter"
+    ]
+  },
+  {
+    "name": "paperclip",
+    "category": "tool",
+    "tint": "#9aa4b2",
+    "triangles": 1056,
+    "bytes": 20128,
+    "file": "paperclip.glb",
+    "keywords": [
+      "paperclip",
+      "attach",
+      "attachment",
+      "file",
+      "clip"
+    ]
+  },
+  {
+    "name": "trash",
+    "category": "ui",
+    "tint": "#9aa4b2",
+    "triangles": 1072,
+    "bytes": 21400,
+    "file": "trash.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "trash",
+      "delete",
+      "bin",
+      "remove",
+      "garbage",
+      "discard"
+    ]
+  },
+  {
+    "name": "pencil",
+    "category": "tool",
+    "tint": "#ffc400",
+    "triangles": 696,
+    "bytes": 16144,
+    "file": "pencil.glb",
+    "materials": {
+      "Eraser": "#ef8f9a",
+      "Metal": "#b8bec9",
+      "Lead": "#4a4e5e"
+    },
+    "keywords": [
+      "pencil",
+      "edit",
+      "write",
+      "draw",
+      "compose",
+      "modify"
+    ]
+  },
+  {
+    "name": "anger_v2",
+    "category": "emote",
+    "tint": "#ff4d4d",
+    "triangles": 2904,
+    "bytes": 55908,
+    "file": "anger_v2.glb",
+    "keywords": [
+      "anger",
+      "angry",
+      "mad",
+      "vein",
+      "rage",
+      "annoyed",
+      "irritated"
+    ]
+  },
+  {
+    "name": "pull_request_v2",
+    "category": "dev",
+    "tint": "#a371f7",
+    "triangles": 2056,
+    "bytes": 39952,
+    "file": "pull_request_v2.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Green": "#5cb872"
+    },
+    "keywords": [
+      "pull request",
+      "pr",
+      "merge request",
+      "git",
+      "review",
+      "code",
+      "diff"
+    ]
+  }
+]

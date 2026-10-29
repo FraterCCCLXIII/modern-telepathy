@@ -1,0 +1,18 @@
+/* Cozy garden: seasonal tints. */
+.gd { background: #f2efe0; }
+.gd-main { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 8px; padding: 8px 10px 10px; }
+.gd-board { flex: 1; min-height: 0; display: grid; place-items: center; border-radius: 16px; transition: background 1s; }
+.gd-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 6px; padding: 8px; width: min(100%, calc((100cqh - 150px) * 1.33)); aspect-ratio: 4 / 3; }
+.gd-p { position: relative; appearance: none; border: 0; padding: 0; border-radius: 12px; background: radial-gradient(circle at 50% 30%, #9a7452, #7a5a44); box-shadow: inset 0 -4px rgba(0, 0, 0, .18); cursor: pointer; min-width: 0; min-height: 0; display: grid; place-items: center; }
+.gd-p.wet { background: radial-gradient(circle at 50% 30%, #6f5239, #5a412f); }
+.gd-p svg { width: 80%; height: 80%; }
+.gd-w { position: absolute; right: 6px; top: 5px; width: 9px; height: 12px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: #4aa8ff; }
+.gd-r { position: absolute; left: 50%; top: 4px; width: 8px; height: 8px; margin-left: -4px; background: #ffd23f; transform: rotate(45deg); }
+.gd-p.ripe { box-shadow: inset 0 -4px rgba(0, 0, 0, .18), 0 0 0 3px #ffd23f; }
+.gd-side { flex: none; display: grid; gap: 6px; }
+.gd-adv { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: #5f665a; } .gd-adv .tg-av { width: 40px; height: 40px; flex: none; }
+.gd-tools, .gd-seeds { display: flex; flex-wrap: wrap; gap: 4px; }
+.gd-mkt { justify-content: flex-start; padding-top: 24px; overflow: auto; } .gd-mk { display: grid; gap: 8px; width: min(100%, 420px); }
+.gd-mk > div { display: grid; grid-template-columns: 1fr auto auto; gap: 6px; align-items: center; text-align: left; padding: 8px 10px; background: #fff; border: 1px solid rgba(31, 42, 34, .12); border-radius: 14px; font-size: .82rem; } .gd-mk span { grid-column: 1; color: #5f665a; font-size: .74rem; } .gd-mk b { grid-column: 1; } .gd-mk button { grid-row: 1 / span 2; }
+@container (min-width: 600px) { .gd-main { flex-direction: row; } .gd-side { width: 200px; align-content: start; } .gd-grid { width: min(100%, calc((100cqh - 30px) * 1.33)); } }
+@media (prefers-reduced-motion: reduce) { .gd-board { transition: none; } }

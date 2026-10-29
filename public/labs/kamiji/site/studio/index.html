@@ -1,0 +1,125 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio: a character creator with swappable parts and morphs</title>
+<meta name="description" content="Studio is a prototype character creator: swap parts, move morph sliders, recolour, add accessories and export JSON or GLB. Human, creature and the Kamiji family styles, in the browser with three.js.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Ccircle cx=%2712%27 cy=%278%27 r=%274%27 fill=%27none%27 stroke=%27%231d1d1b%27 stroke-width=%272%27/%3E%3Cpath d=%27M5 21v-3a7 7 0 0114 0v3%27 fill=%27none%27 stroke=%27%231d1d1b%27 stroke-width=%272%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="studio.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body class="st" data-tab="parts">
+<nav aria-label="Skip link"><a class="skip" href="#st-view">Skip to the 3D viewport</a></nav>
+
+<div class="st-app" id="st-app">
+  <header class="st-top">
+    <div class="st-brand">
+      <h1>Studio</h1>
+      <a class="st-link" href="#status">Intended workflow vs what works today</a>
+    </div>
+    <label class="st-namewrap"><span class="sr-only">Character name</span><input id="st-name" class="st-name" type="text" maxlength="60" autocomplete="off" spellcheck="false"></label>
+    <div class="st-actions" role="toolbar" aria-label="Character">
+      <button class="st-btn" type="button" data-cmd="undo" disabled title="Undo (Ctrl/Cmd+Z)">Undo</button>
+      <button class="st-btn" type="button" data-cmd="redo" disabled title="Redo (Shift+Ctrl/Cmd+Z)">Redo</button>
+      <span class="st-sep" aria-hidden="true"></span>
+      <button class="st-btn" type="button" data-cmd="new" title="Start a new character in the current style">New</button>
+      <label class="st-sel"><span class="sr-only">Presets</span>
+        <select id="st-preset" class="st-select" aria-label="Load a preset"><option value="">Presets</option></select></label>
+      <button class="st-btn" type="button" data-cmd="random" title="Randomise parts, morphs and colours. Locked slots and groups are kept (R)">Randomise</button>
+      <span class="st-sep" aria-hidden="true"></span>
+      <button class="st-btn" type="button" data-cmd="save" title="Save to the roster (this browser)">Save</button>
+      <button class="st-btn" type="button" data-cmd="import" title="Import a character or library JSON file">Import</button>
+      <div class="st-menuwrap">
+        <button class="st-btn" type="button" id="st-export-btn" aria-haspopup="true" aria-expanded="false" aria-controls="st-export-menu">Export</button>
+        <div class="st-menu" id="st-export-menu" role="menu" aria-label="Export" hidden>
+          <button type="button" role="menuitem" data-cmd="export-json">Character JSON</button>
+          <button type="button" role="menuitem" data-cmd="export-library">Roster library JSON</button>
+          <button type="button" role="menuitem" data-cmd="copy-json">Copy share JSON</button>
+          <button type="button" role="menuitem" data-cmd="export-glb">GLB (model, morphs, clips)</button>
+          <button type="button" role="menuitem" data-cmd="export-png">PNG portrait</button>
+          <button type="button" role="menuitem" data-cmd="export-turn">PNG turntable sheet</button>
+        </div>
+      </div>
+      <input id="st-file" type="file" accept="application/json,.json" hidden>
+    </div>
+  </header>
+
+  <div class="st-tabbar" role="tablist" aria-label="Panels">
+    <button class="st-tab" role="tab" type="button" id="tab-parts" data-tab="parts" aria-selected="true" aria-controls="st-parts">Parts</button>
+    <button class="st-tab" role="tab" type="button" id="tab-morphs" data-tab="morphs" aria-selected="false" aria-controls="st-insp">Morphs</button>
+    <button class="st-tab" role="tab" type="button" id="tab-roster" data-tab="roster" aria-selected="false" aria-controls="st-roster">Roster</button>
+  </div>
+
+  <div class="st-main">
+    <nav class="st-nav" id="st-nav" aria-label="Categories"></nav>
+
+    <section class="st-parts st-panel" id="st-parts" aria-labelledby="st-parts-h">
+      <div class="st-panel-h"><h2 id="st-parts-h">Parts</h2><span class="st-legend" id="st-legend"></span></div>
+      <div class="st-scroll" id="st-parts-body"></div>
+    </section>
+
+    <main class="st-view" id="st-view" aria-label="3D viewport">
+      <div class="st-vp-host" id="st-host" tabindex="0" role="group" aria-label="3D viewport. Arrow keys orbit, plus and minus zoom, F frames the character, Space plays or pauses"></div>
+      <div class="st-vp-top" role="toolbar" aria-label="Viewport"></div>
+      <div class="st-vp-bot" role="toolbar" aria-label="Pose and face"></div>
+      <div class="st-vp-msg" id="st-vp-msg" hidden></div>
+      <div class="st-drop" id="st-drop" hidden aria-hidden="true">Drop to wear</div>
+    </main>
+
+    <aside class="st-insp st-panel" id="st-insp" aria-labelledby="st-insp-h">
+      <div class="st-panel-h"><h2 id="st-insp-h">Morphs</h2></div>
+      <div class="st-scroll" id="st-insp-body"></div>
+    </aside>
+  </div>
+
+  <section class="st-roster st-panel" id="st-roster" aria-labelledby="st-roster-h">
+    <div class="st-panel-h"><h2 id="st-roster-h">Roster</h2><span class="st-legend" id="st-roster-note"></span></div>
+    <ul class="st-strip" id="st-strip" aria-label="Saved characters"></ul>
+  </section>
+  <aside class="st-statusbar" aria-label="Status"><p class="st-rules" id="st-rules"></p>
+  <div class="sr-only" id="st-live" role="status" aria-live="polite"></div></aside>
+</div>
+
+<section id="status" class="st-notes" aria-labelledby="st-status-h">
+  <div class="wrap">
+    <h2 id="st-status-h">Intended workflow vs what works today</h2>
+    <p class="st-lead">Studio is a prototype in the Kamiji family. It shows the shape of a character creator; it is not a finished tool. Everything stays in your browser.</p>
+    <div class="st-two">
+      <div><h3>Intended</h3><ol>
+        <li>Pick a style and a body plan, then swap parts per slot until the silhouette is right.</li>
+        <li>Fine-tune with morph sliders, recolour per region, dress the character and add accessories on sockets.</li>
+        <li>Check it in motion and with expressions, save it to a roster, and hand it to a game, to Previs or to a DCC tool as JSON plus GLB.</li>
+        <li>Bring your own parts: GLB meshes that declare a slot, sockets and morphs.</li>
+      </ol></div>
+      <div><h3>Works today</h3><ul>
+        <li>Seven styles and 19 presets. Human, Creature and Mix are built from procedural parts and a small bone rig with idle, wave, walk, run, jump, cheer and sit clips.</li>
+        <li>Kamikin (14), Rubbernose (16), Shapes (34 morph targets) and the Kamiji hand are the repository's real GLBs, used as bases with colour, face, clips and accessories.</li>
+        <li>Mix also uses parts cut out of real GLBs at runtime: Kamikin ears and tails, Rubbernose gloves and shoes, and GLB shape heads.</li>
+        <li>Undo and redo, a roster in localStorage, JSON import and export, PNG portrait and turntable sheet, and a GLB export that re-loads with its skeleton and morph targets (limits below).</li>
+      </ul>
+      <h3>Not done</h3><ul>
+        <li>No bring-your-own-part import yet. No hair simulation, no cloth, no facial rig on the procedural face beyond expressions and mouth open.</li>
+        <li>Procedural parts are rigid (no skin blending at the joints); only head shapes are real blendshapes. Kamikin and Rubbernose bases are single skinned meshes, so their parts cannot be swapped, only recoloured and dressed.</li>
+        <li>GLB export keeps the shader look only as plain colours: toon steps, gradients, the outline and the RTK and tube face decals are viewport effects.</li>
+      </ul></div>
+    </div>
+    <h3>Which parts are real GLBs</h3>
+    <div class="st-legend-box" id="st-legend-box"></div>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="wrap"><p>Studio is a Kamiji prototype. Characters are made from this repository's own assets and procedural parts. Licence: see LICENSE.md.</p></div></footer>
+
+<script type="module" src="studio.js"></script>
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

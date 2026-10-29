@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Window Style Editor (2026-10-27) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" open data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../readme/index.html" aria-current="page">Desktop README</a></li><li><a href="../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><span>Overview</span></li><li aria-current="page">Desktop README</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Window Style Editor (2026-10-27)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">README.md</span></div>
+        <div class="doc-body">
+
+<ul>
+<li><strong>Windows app (id 12)</strong>: live preview of two sample windows, a colour picker and an inspector (chrome kind, geometry, title bar gradient, buttons, body, shadow, motion, nine colour schemes); every control restyles all open windows at once.</li>
+<li><strong>WinStyle</strong>: <code>ws[]</code> in <code>desk3/01-core.HC</code>, drawn by <code>desk3/01-winstyle.HC</code>, edited by <code>desk3/03e-windowstyle.HC</code>. -1 follows the desktop style, so defaults are pixel identical to before (Aiwnios, five styles, measured).</li>
+<li><strong>Themes</strong>: the five styles are read-only bases, Customize makes an editable copy; Export prints <code>ws1 ...</code> on COM1 and B:/WINSTYLE.TXT, Import reads it.</li>
+<li>Minimise and maximise buttons now exist (minimise closes with its own animation). Aiwnios: avoid <code>A(1)&lt;=x&lt;A(2)</code> chains.</li>
+<li>Details, numbers and limits: <code>docs/apps/window-style-editor.md</code>. Screenshots: <code>shots/window-style-*.png</code>. Not run on the x86 VM yet.</li>
+</ul>
+<h1 id="icon-style-editor-2026-10-27">Icon Style Editor (2026-10-27)<a class="headerlink" href="#icon-style-editor-2026-10-27" title="Link to this section">#</a></h1>
+<ul>
+<li><strong>The Icons app</strong> (<code>desk3/03c-iconstyle.HC</code>, key <code>i</code> or the paintbrush in the dock): a live preview of every app icon at three sizes on light and dark backdrops, and ten pages of controls (shape, fill and gradients, colour schemes, tone, bevel and gloss, shadows, glyph, border and glass, glow and grain, dock layout), eight presets, Export and Import of a one-line style string (<code>KSI1 rd50 sq1 ...</code>) through Notes.</li>
+<li><strong>One style, one function.</strong> <code>is_v[]</code> is the style; <code>DrawIconTile(x,y,size,app,state)</code> draws for the dock and the preview. The default style draws exactly as before; any other is built once per (app, size, signature, state) into cached colour tiles from shared alpha planes and blitted per frame. <code>docs/apps/icon-style-editor.md</code> has the controls, the format, the numbers and the limits.</li>
+<li>The dock calls the renderer through the pointer <code>ks_ictile</code> (forward declared calls do not reach a later definition). Works on Aiwnios unchanged; <code>aiwnios/drive-icons.HC</code> is a headless driver. Screenshots: <code>shots/icon-style-*.png</code>.</li>
+</ul>
+<h1 id="dock-backdrop-and-monitor-2026-10-27">Dock backdrop and Monitor (2026-10-27)<a class="headerlink" href="#dock-backdrop-and-monitor-2026-10-27" title="Link to this section">#</a></h1>
+<ul>
+<li><strong>Translucent dock.</strong> The pill is a 205-alpha tint over a blurred copy of what is actually behind it: wallpaper and any window under the dock. Outside the rounded shape nothing changes (no rectangle). The backdrop is sampled every fourth pixel, box blurred and enlarged by four (<code>DockBackdrop</code>), and recomputed only when the scene in the dock band changes; the dock's own redraws (hover, magnification, icon size) reuse it. <code>DockGlass</code> composites it through the corner coverage, so the edges are anti-aliased at 1x and 2x. Cost at 2x: the rebuild is about 2.4 ms (shown as "Dock backdrop" in the Monitor; 0.7 ms at 1x); a warm dock sweep is 3.4 ms, against 3.1 before.</li>
+<li><strong>Monitor.</strong> The graph takes one sample per 100 ms of wall time (the largest frame in that time, 0 when idle) on a fixed 0 to 50 ms scale, drawn as an anti-aliased line that scrolls between samples. An open Monitor redraws only its numbers and graph, ten times a second, instead of the whole window once a second.</li>
+<li><strong>Settings and Monitor pixel readouts</strong> show the real screen size (they read the window width while a window was being drawn).</li>
+</ul>
+<p>Screenshots: <code>shots/fix-*.png</code>.</p>
+<h1 id="boot-experience-2026-10-27">Boot experience (2026-10-27)<a class="headerlink" href="#boot-experience-2026-10-27" title="Link to this section">#</a></h1>
+<p><code>scripts/run.sh /path/to/TempleOS.ISO</code> opens the QEMU window on the Kosmos splash: a near-black screen, one mark (a ring with a dot set into it) and a thin loading bar, then a 600 ms crossfade to the desktop (a cut when Settings, Animations is off). The TempleOS terminal is never shown.</p>
+<p>How: the desktop is loaded and compiled once into a saved VM image (<code>scripts/build-image.sh</code>, about 2.5 minutes, headless; <code>savevm splash</code>) with <code>Main</code> parked on the splash at 0 percent. <code>run.sh</code> starts QEMU with <code>-loadvm splash</code> and sends a go byte over the serial port (<code>scripts/ks-go.py</code>). The guest then does the real remaining start-up work, with the bar following it: icons, window state, the wallpaper (about 1.4 s, reported row by row), the first frame; it then fades from the splash to that frame. The image lives in <code>~/.cache/kosmos-os/desk3-s&lt;scale&gt;.qcow2</code> (not in the repo); <code>run.sh</code> builds it on first use and rebuilds it when <code>desk3/*.HC</code> or the assets change. KS_S, KS_W and KS_H each get their own image. Display changes in Settings work as before (the splash code is not used again after start-up).</p>
+<p>Keys: <strong>T</strong> on the splash shows the original TempleOS screen (the 640x480 <code>gr.dc2</code>, enlarged 3x at 2880x1800, 1x at 1440x900, on a dark ground); <strong>F12</strong> returns to Kosmos, from the splash and also from the desktop (F12 on the desktop opens the original view at any time). <strong>R</strong> on the splash restarts: QEMU is started with <code>-no-reboot</code>, the guest tells <code>run.sh</code> over serial, and <code>run.sh</code> reloads the image. The <strong>Kosmos menu</strong> (top left): Restart reruns the whole session through the splash (a full guest reset that <code>run.sh</code> reloads from the image, because the desktop state cannot be rebuilt cleanly in place; if Notes were edited the row first asks once, as Notes live in the RAM drive that a restart reloads; outside <code>run.sh</code> it ends at the TempleOS prompt), and Quit Desktop opens the original TempleOS view (F12 returns). In the original view keys go to a TempleOS terminal (forwarded by Kosmos), the pointer is the TempleOS pointer.</p>
+<p>Cold path (old behaviour, about two minutes, the TempleOS terminal is visible while the files go in): <code>KS_COLD=1 scripts/run.sh ISO</code>. The dev loop is unchanged: <code>scripts/snap.sh</code>, then <code>KS_S=2 KS_MODE=desk3 KS_RESTORE=1 scripts/send-to-vm.sh</code> (it shows the splash too, with <code>KS_PARK=0</code>). <code>KS_PARK=1</code> is only for building the image.</p>
+<p>Measured (QEMU on Apple Silicon, 2880x1800): from QEMU launch to desktop ready about 3.6 s with the image, of which about 1.9 s was the guest's start-up work after the go byte plus the 0.6 s fade (after the performance pass below the guest work is 0.56 s, KS-READY 1.5 s after go, as the wallpaper now builds in about 60 ms); the cold path is about 2.5 minutes after the 50 s boot. Drag benchmark after the change: 9.5 ms a frame (unchanged). Screenshots: <code>shots/boot-*.png</code>. The splash crossfade uses the two-source blend <code>KsLerpRow</code> (<code>LerpRow</code>); the <code>KsMix3</code> routine this work first added was the same loop and was merged into it (see the performance pass below, which also replaced the style crossfade with a blend of two snapshots).</p>
+<h1 id="window-and-animation-performance-pass-2026-10-27">Window and animation performance pass (2026-10-27)<a class="headerlink" href="#window-and-animation-performance-pass-2026-10-27" title="Link to this section">#</a></h1>
+<p>Branch <code>perf/window-animation-speed</code>. Everything below was measured in QEMU (TCG, x86-64 emulated on an Apple Silicon Mac)
+with the benchmark suite behind the <code>b</code> key: each scenario renders real frames through <code>Render</code> and records the average and
+worst frame; the Monitor app (key <code>6</code>) shows the table and the same lines go out on the serial port
+(<code>bench|name|avg|worst|frames|phase split</code>, tenths of a millisecond). <code>t</code> runs a self-test that checks every assembly
+routine against the HolyC formula and times the big copies.</p>
+<h2 id="before-and-after-milliseconds-a-frame-average-worst">Before and after, milliseconds a frame (average / worst)<a class="headerlink" href="#before-and-after-milliseconds-a-frame-average-worst" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>2880x1800 before</th>
+<th>2880x1800 after</th>
+<th>1440x900 before</th>
+<th>1440x900 after</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full redraw</td>
+<td>31.1 / 31.6</td>
+<td>14.0 / 14.9</td>
+<td>19.8 / 26.6</td>
+<td>3.4 / 3.5</td>
+<td></td>
+</tr>
+<tr>
+<td>Drag large window (Projects, 700x500)</td>
+<td>10.3 / 12.3</td>
+<td>5.0 to 5.6 / 6.0 to 6.8</td>
+<td>8.0 / 27.5</td>
+<td>1.3 / 1.4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Drag small window (Calculator)</td>
+<td>12.0 / 20.8</td>
+<td>3.6 / 4.3</td>
+<td>8.3 / 28.8</td>
+<td>0.9 / 1.0</td>
+<td></td>
+</tr>
+<tr>
+<td>Open and close animation</td>
+<td>9.9 / 33.2</td>
+<td>5.6 / 8.7</td>
+<td>3.8 / 14.7</td>
+<td>1.4 / 2.3</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Focus change (shadow animation, both windows)</td>
+<td>19.1 / 29.0</td>
+<td>9.4 / 17.5</td>
+<td>5.2 / 8.0</td>
+<td>2.3 / 4.5</td>
+<td></td>
+</tr>
+<tr>
+<td>Style switch, first time (wallpaper build, snapshot, first frame)</td>
+<td>1830</td>
+<td>163</td>
+<td>429</td>
+<td>69</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Style crossfade frames</td>
+<td>277 / 297</td>
+<td>60 / 63</td>
+<td>50.4 / 54.9</td>
+<td>3.7 / 3.8</td>
+<td>25 (missed at 2x)</td>
+</tr>
+<tr>
+<td>Dock magnify sweep, cold (icon sizes seen for the first time)</td>
+<td>42.9 / 116.6</td>
+<td>3.4 / 5.1</td>
+<td>14.5 / 60.8</td>
+<td>1.0 / 2.0</td>
+<td>no hitch over 20</td>
+</tr>
+<tr>
+<td>Dock magnify sweep, warm</td>
+<td>12.3 / 13.7</td>
+<td>2.7 / 2.9</td>
+<td>3.7 / 4.3</td>
+<td>0.8 / 0.8</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Files list scrolling</td>
+<td>13.4 / 16.5</td>
+<td>7.8 / 8.1</td>
+<td>4.0 / 5.9</td>
+<td>2.1 / 2.5</td>
+<td></td>
+</tr>
+<tr>
+<td>Notes typing</td>
+<td>9.8 / 11.4</td>
+<td>6.5 / 6.9</td>
+<td>2.9 / 3.5</td>
+<td>1.8 / 1.9</td>
+<td></td>
+</tr>
+<tr>
+<td>Caret blink</td>
+<td>1.4 / 1.5</td>
+<td>0.5 / 0.6</td>
+<td>0.5 / 0.6</td>
+<td>0.3 / 0.3</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>The drag number varies between 5.0 and 5.6 ms from run to run (three runs of the final code); the phase split of a
+5.6 ms frame is wallpaper 1.1, windows 2.7 (shadow 1.2, layer copy 1.5), copy to the card 1.5.</p>
+<h2 id="what-changed-in-the-order-it-was-measured">What changed, in the order it was measured<a class="headerlink" href="#what-changed-in-the-order-it-was-measured" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>Copy32 on an unrolled 64-byte MOV loop</strong> (<code>KsCpu</code>): a 2880x1800 copy takes 15.7 ms against 52.5 ms with <code>REP MOVSQ</code>
+   (the copy to the video card is 4.0 ms either way). Every wallpaper, layer and card copy uses it.</li>
+<li><strong>Wallpaper build</strong> (<code>BuildWall</code>, <code>Up4</code>, <code>BoxLow</code>): 1830 ms to 70 ms. The gradient and blobs are computed at a sixteenth of
+   the native size in HolyC (20k pixels), enlarged by four in assembly (<code>KsLerpRow</code> down the rows, <code>KsUp4H</code> along them, the same
+   bilinear maths as before), box blurred by an assembly sliding window (<code>KsBox8</code>, eight taps each way, edges repeated), and
+   enlarged by four again. The picture is the same to the eye (screenshots compared); the blobs are a touch smoother.</li>
+<li><strong>Style crossfade from two snapshots</strong>: <code>SetStyle</code> keeps the old screen in <code>prev</code>, <code>Render</code> draws the new one once into <code>nxt</code>,
+   and every crossfade frame is <code>bb = prev*k + nxt*(1-k)</code> in assembly plus the copy to the card, instead of a full redraw and a
+   HolyC <code>Mix</code> per pixel. 277 ms to 60 ms a frame at 2x, 16 ms at 1x. The 25 ms target is missed at 2x: the blend of
+   5.2 million pixels is 53 ms of pure instruction count (about 11 instructions a pixel; TCG runs close to one guest
+   instruction a nanosecond on this Mac). A four-pixel SSE2 version, byte-encoded because the TempleOS assembler has no SSE
+   opcodes (CR4.OSFXSR set by hand), gave the right pixels but took 83 ms: QEMU runs the packed integer instructions through
+   helper calls. Dropped.</li>
+<li><strong>Icon masks in integer arithmetic</strong> (<code>SegMask</code>, <code>DistTab</code>): the stroke rasteriser projected each pixel onto each segment
+   with x87 floating point and a <code>Sqrt</code>. It now works in sixteenths of a pixel, one division a segment, and reads the coverage
+   from a squared-distance table per icon size. Eleven dock icons at 64 px: 2.8 ms, against about 11 ms each before, so a dock
+   size seen for the first time no longer hitches (cold sweep worst 117 ms to 5 ms).</li>
+<li><strong>Retained window layers with damage</strong> (<code>LayerBuild</code>, <code>Composite</code>, <code>Damage*</code>): each open window keeps its chrome and body in
+   a bitmap and is rebuilt only inside its damage rectangle; content changes call <code>Damage</code> (whole window), <code>DamageL</code> (a
+   rectangle: hover highlights, the Viewport animation, the Notes text area, the Files list, the title bar on a focus change),
+   while moving, raising and shadow animation only expose (<code>DirtyWin</code>) and copy the layer. Hit regions are stored per window
+   and replayed each frame. The corners blend through the corner coverage table so they stay transparent over the shadow.
+   Drag 7.9 to 5.1 ms, drag small 9.9 to 3.4, open and close 7.8 to 5.8, focus change 15.0 to 9.1, full redraw 25.5 to 19.0.</li>
+<li><strong>Opaque hole</strong>: the topmost window shown from an opaque layer overwrites its inner rectangle, so the wallpaper and the
+   layers under it are not copied there (the opaque-region idea of Weston and wlroots). Small on its own (wallpaper 1.3 to
+   1.0 ms in a drag) but free.</li>
+<li><strong>Cached shadow tiles and corner tables</strong>: <code>ShadowTile</code> kept one (radius, blur) tile and <code>CornerTab</code> one radius, both built
+   with a <code>Sqrt</code> per pixel; a frame that drew the dock and a window rebuilt both, and the magnified dock asked for a dozen
+   radii. Four tiles and one table per radius are cached: dock sweep 12.3 to 2.7 ms, full redraw 19.7 to 14.0.</li>
+<li><code>ToFront</code> dirties the raised window and the two title bars instead of every window: open and close worst frame 23 to 9 ms.</li>
+</ol>
+<p>Merged with the boot splash work: its <code>KsMix3</code> blend was the same two-pixel loop as <code>KsLerpRow</code> (same maths, same instruction count), so one copy was kept, <code>KsLerpRow</code>, because the self-test checks it and <code>Up4</code> uses it; <code>SplashFade</code> calls <code>LerpRow</code>. Its <code>BoxLow</code>, <code>Up4</code> and <code>BuildWall</code> progress hooks (<code>SplashTick</code>) were carried into the new assembly-based versions.</p>
+<p>Tried and dropped: SSE2 (above). Not done: <code>-smp</code> with worker tasks (not measured; the remaining per-frame cost is copies and
+blends that would need the work split by row band, and TempleOS task switching under MTTCG is untested); a real backdrop blur
+for the glass style; pixman's exact divide-by-255 in the blend routines (our alpha runs 0 to 256, so 256 is exactly opaque and
+coverage 255 lands 0.4 percent short, which is below what the eye sees; the fix costs two instructions a lane).</p>
+<p>Idle: with the default desktop (Projects and the animated Viewport open, nothing else happening) QEMU uses about 36 percent of one core after this pass against 38 to 49 percent before, and 8 percent at the bare TempleOS prompt; the Viewport redraws its scene 30 times a second (about 3 ms each at 2x) and the loop wakes every 5 ms to poll the mouse and keyboard. Near zero was not reached; closing the Viewport, or sleeping longer when no window animates, is the next step. The main loop sleeps 5 ms when
+nothing is dirty and otherwise paces to the frame cap (60, or 30 in Settings, Display; QEMU refreshes its window about every
+30 ms, so 30 is enough for a shown frame).</p>
+<p>Ideas read in compositor sources (MIT, ideas only, no code copied): the per-node damage of wlroots <code>wlr_scene</code>
+(https://gitlab.freedesktop.org/wlroots/wlroots, types/scene/wlr_scene.c) and the opaque regions and damage merging of Weston
+(https://gitlab.freedesktop.org/wayland/weston, libweston/compositor.c) are what the layers, <code>Damage*</code> and the hole implement;
+pixman (https://gitlab.freedesktop.org/pixman/pixman, pixman-combine32.h) for the divide-by-255 note above. Hyprland
+(GPL-3) was not read.</p>
+<p>HolyC traps met in this pass: global arrays without an initialiser are not zeroed (a cache of pointers held garbage), a new
+global pointer must be nulled before its first <code>Free</code>, <code>ks_hx0</code> was already the hit-region array (name clash gives
+"Invalid lval"), and anything printed from inside the renderer has to go out on COM1 because the screen is in VBE mode.</p>
+<p>Scripts: <code>KS_TVM</code> (state directory, default <code>/tmp/tvm</code>) and <code>KS_SERIAL_PORT</code> (default 4555) let two VMs run side by side;
+<code>boot-vm.sh</code> records its pid in <code>$KS_TVM/qemu.pid</code>, <code>stop-vm.sh</code> kills only that one, <code>shot.sh NAME</code> screenshots to
+<code>$KS_TVM/NAME.png</code>.</p>
+<hr />
+<h1 id="renderer-performance-pass-2026-10-27">Renderer performance pass (2026-10-27)<a class="headerlink" href="#renderer-performance-pass-2026-10-27" title="Link to this section">#</a></h1>
+<p>Dragging the Projects window at 2880x1800 (press <code>b</code> in the desktop; the Monitor app shows the result) went from <strong>72.1 ms to 9.5 ms a frame</strong>.
+Measured in QEMU on an Apple Silicon Mac, 40 drag steps, redraw rectangles merged as in normal use:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Phase (ms a frame)</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wallpaper copy</td>
+<td>12.7</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Windows (shadows, chrome, app bodies)</td>
+<td>46.3</td>
+<td>5.7</td>
+</tr>
+<tr>
+<td>Copy to the video card</td>
+<td>12.9</td>
+<td>1.6</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>72.1</td>
+<td>9.5</td>
+</tr>
+</tbody>
+</table></div>
+<p>What changed, each measured first (<code>spike/KsBench.HC</code>, <code>spike/KsBlend.HC</code>, run with <code>KS_MODE=bench</code> or <code>KS_MODE=blend</code>):
+- TempleOS <code>MemCpy</code> is <code>REP MOVSB</code>: 2392 ms for 168 MB. <code>REP MOVSQ</code> takes 321 ms (7.5x). <code>MemSetU32</code> is <code>REP STOSD</code> (62 ms); an unrolled store loop takes 12 ms (5x). <code>Copy32</code> and <code>Fill32</code> in <code>desk3/01-core.HC</code> use them.
+- Blending in HolyC costs about 31 ns a pixel because of the code the compiler emits; the same maths in assembly, two pixels a pass, costs under 1 ns a pixel (0 mismatches against the HolyC formula). <code>KsBlendRow</code>, <code>KsBlendCol</code>, <code>KsBlendA</code> and <code>KsBlendA2D</code> do constant-alpha spans and columns, per-pixel alpha rows, and 2D alpha blocks.
+- Shadows were 42 of the 46 ms: a per-pixel function-call loop. They are now constant-alpha rows and columns plus a cached corner tile (2.8 ms).
+- Glyphs, Lucide icons, disks and rounded corners use the 2D alpha blit, so no function call per pixel.
+- Windows that miss a redraw rectangle are skipped after the first pass of a frame.</p>
+<p>Remaining cost is mostly app bodies (2.5 ms), window chrome (3 ms) and the two copies (3.6 ms). Next candidates: retained window layers with tile damage, and <code>-smp</code> with worker tasks.</p>
+<hr />
+<h1 id="kosmos-temple-desktop-3-retina-settings-and-more-apps">Kosmos Temple Desktop 3 (retina, Settings and more apps)<a class="headerlink" href="#kosmos-temple-desktop-3-retina-settings-and-more-apps" title="Link to this section">#</a></h1>
+<p><code>desk3/*.HC</code> is the current desktop. It draws in logical units (1440x900) at a scale of 1 or 2, so retina is a real
+2880x1800 framebuffer with every shape and glyph rasterised natively (Inter atlases for both scales in <code>assets/KSFONT.BIN</code>).
+Only the rectangles that changed are redrawn and copied to the card, so an idle desktop costs nothing and a moving
+window costs about 25 ms at 2880x1800. Window corners and shadows are anti-aliased and the shadow follows the rounded
+shape, so corners are truly transparent; the glass style clips its blurred backdrop to the same shape.</p>
+<p>Icons are Lucide (ISC, notice in <code>assets/LUCIDE-LICENSE.txt</code>): <code>scripts/gen-icons.py</code> flattens the SVGs to strokes in <code>assets/KSICONS.BIN</code>, and the desktop
+rasterises them as anti-aliased strokes at any size, cached per size. Plan for the rest of the OS apps: <code>docs/core-apps-plan.md</code>.</p>
+<p>The <strong>TempleOS</strong> app mirrors the real TempleOS screen (its 640x480 <code>gr.dc2</code> buffer) into a window, so any TempleOS program runs for real: in Files, select a <code>.HC</code> file and press Run, or click it twice (other files open in Notes). The program runs in its own terminal task; while the window is in front the keyboard goes to it and the pointer is mapped into 640x480. Close the window to stop it.</p>
+<p>Apps: Files (browses the real TempleOS drives and Demo, Apps and Doc folders), Projects, Notes (a text editor that saves to
+B:/NOTES.TXT), Calculator, Monitor (frame times and redraw cost), Viewport, Palette, Scene and Settings.
+Settings: Appearance (five themes with previews, accent colour, wallpaper), Display (resolution, 1x or 2x retina,
+frame cap; Apply switches the running desktop), Dock (icon size, magnification, indicators, translucency), About
+(system info, animations, frame time, corner radius, restart). Settings are not saved: the live CD has no writable disk.</p>
+<p>Run it (about two minutes; pass the TempleOS V5.03 ISO): <code>scripts/run.sh /path/to/TempleOS.ISO</code>
+Keys: 1 to 9 and 0 open apps in dock order, Tab brings the back window forward, s cycles the style, r toggles retina, p the next Settings page, b runs the benchmark suite, t the renderer self-test,
+f forces a full redraw, Esc reboots. Notes and Calculator take typing when in front. Mouse: click, drag title bars.
+The QEMU window is 2880 points wide at 2x; resize it (zoom-to-fit) so each guest pixel lands on a screen pixel.
+Measured in QEMU on an Apple Silicon Mac (x86 emulated): 7 ms per redraw at 1440x900 for the animated Viewport,
+about 25 ms at 2880x1800; the first switch to a theme at 2x pauses about 0.3 s while its wallpaper is built.
+Quick edit and test: <code>scripts/snap.sh</code> saves a booted snapshot with the font in it, then
+<code>KS_S=2 KS_MODE=desk3 KS_RESTORE=1 scripts/send-to-vm.sh</code> loads new code in about 20 seconds.
+Port research for running kosmos-app inside this desktop: <code>docs/kosmos-app-port-research.md</code>.</p>
+<hr />
+<h1 id="kosmos-temple-desktop-2-1440x900-32-bit-colour">Kosmos Temple Desktop 2 (1440x900, 32-bit colour)<a class="headerlink" href="#kosmos-temple-desktop-2-1440x900-32-bit-colour" title="Link to this section">#</a></h1>
+<p><code>KsDesk2.HC</code> is the version that matches <code>apps/os-styles</code>: Inter text, anti-aliased rounded windows, soft shadows, a blurred
+wallpaper behind a translucent menubar and floating dock, five styles, window open and close animations, a dock that
+magnifies icons toward the cursor, and a crossfade when the style changes. Screenshots: <code>shots/desk2-*.png</code>.</p>
+<p>How it works, with no kernel patch: QEMU standard VGA is switched to a linear 1440x900x32 framebuffer through its Bochs VBE
+ports (0x1CE and 0x1CF), the framebuffer address comes from PCI BAR0, and the desktop keeps its own back buffer, draws
+everything itself in HolyC and copies the frame to the card each time (the VGA bank register is moved past the visible
+memory so the TempleOS text compositor cannot scribble on the picture). TempleOS stays underneath as the runtime for HolyC,
+timers, files and input. The mouse is read as relative motion, because the system mouse is clamped to 640x480. Esc reboots.</p>
+<p>Run it (about two minutes; pass the TempleOS V5.03 ISO):</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>scripts/run.sh /path/to/TempleOS.ISO</code></pre></figure>
+<p>Keys: 1 to 4 open an app, s cycles the style, Esc quits. Click the dock to open, focus or close an app, drag title bars.
+Apps: Projects (click a row), Viewport, Palette, Scene. Styles: Longformer light and dark, macOS, Windows 11, Kosmica glass.</p>
+<p>Measured in QEMU on an Apple Silicon Mac (x86 emulated): about 30 to 40 ms per frame at 1440x900 with four windows, so 25 to 30 frames
+per second. A full-screen copy is about 7 ms and a 64000 pixel HolyC loop about 1 ms (<code>spike/KsSpike.HC</code>). 2560x1600 works
+(KS_W, KS_H and KS_VGAMEM=32, see <code>scripts/run.sh</code>) but frames take about three times as long.
+Limits: only works on the QEMU standard VGA card; the glass style blurs the wallpaper, not the windows underneath; the text atlas
+is Inter (SIL Open Font License) at four fixed sizes, rasterised by <code>scripts/gen-font.py</code> into <code>assets/KSFONT.BIN</code>;
+rebuilding it needs Pillow and the Inter TTFs. For quick edit and test cycles, <code>scripts/snap.sh</code> boots once and saves a VM
+snapshot, then <code>KS_MODE=desk2 KS_RESTORE=1 scripts/send-to-vm.sh</code> reloads in about 40 seconds.</p>
+<hr />
+<h1 id="kosmos-temple-desktop-custom-drawn">Kosmos Temple Desktop (custom drawn)<a class="headerlink" href="#kosmos-temple-desktop-custom-drawn" title="Link to this section">#</a></h1>
+<p><code>KsDesk.HC</code> is a desktop that paints itself, to match <code>apps/os-styles</code>: menubar with a clock and a style pill, windows with
+title bars and rounded cards, and a floating dock with running dots and hover labels. One full-screen TempleOS window draws
+everything from a <code>draw_it</code> callback and reads the mouse (<code>ms.pos</code>, <code>ms.lb</code>) and keyboard in its own loop, so Esc, mouse
+clicks and dragging all work. Five styles reprogram the 16-colour palette and pick a window chrome: Longformer light and dark,
+macOS (traffic lights), Windows 11 (caption buttons), Kosmica glass. Apps: Projects (click a row), Viewport, Palette, Scene.</p>
+<p>Run it (about four minutes, the files go in over the serial port; pass the TempleOS V5.03 ISO):</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>scripts/run.sh /path/to/TempleOS.ISO</code></pre></figure>
+<p>Keys: 1 to 4 open an app, s cycles the style, Esc quits. Click the dock to open, focus or close an app; drag title bars.
+Screenshots: <code>shots/desktop-*.png</code>. Limits: 640x480 and 16 colours, an 8x8 bitmap font, no anti-aliasing; the TempleOS title
+bar and border still frame the screen. The older tiled-window shell (<code>KosmosShell.HC</code>, <code>KsLib.HC</code>) loads with <code>KS_MODE=shell scripts/send-to-vm.sh</code>.</p>
+<hr />
+<h1 id="kosmos-temple-shell-holyc-runs-inside-real-templeos">Kosmos Temple Shell (HolyC, runs inside real TempleOS)<a class="headerlink" href="#kosmos-temple-shell-holyc-runs-inside-real-templeos" title="Link to this section">#</a></h1>
+<p>Tiled app windows above a persistent launcher bar, written in HolyC against the official TempleOS V5.03 sources
+(<code>Adam/Win.HC</code> for <code>WinHorz</code>/<code>WinVert</code>/<code>WinToTop</code>/<code>WinMax</code>, <code>Demo/DolDoc/MenuBttn.HC</code>, <code>Demo/Graphics/Life.HC</code> for the draw_it idiom).
+Tested in QEMU on this Mac. See <code>shots/</code>.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KosmosShell.HC</code></td>
+<td>loader. <code>#include "KosmosShell.HC";</code> loads the library into the Adam task, then starts the bar</td>
+</tr>
+<tr>
+<td><code>KsLib.HC</code></td>
+<td>the shell: four apps, the tiler, the bar</td>
+</tr>
+<tr>
+<td><code>ProjectsData.HC</code></td>
+<td>generated from <code>../os-styles/projects.json</code> by <code>scripts/gen-projects.py</code> (17 kamiji projects)</td>
+</tr>
+<tr>
+<td><code>scripts/boot-vm.sh</code></td>
+<td>boots the TempleOS ISO headless in QEMU and answers the two start-up questions</td>
+</tr>
+<tr>
+<td><code>scripts/send-to-vm.sh</code></td>
+<td>copies the three files into the running VM over the serial port and starts the shell</td>
+</tr>
+<tr>
+<td><code>scripts/vmkeys.py</code></td>
+<td>types text into the VM through the QEMU monitor</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Link to this section">#</a></h2>
+<ul>
+<li>The terminal you start it from becomes the <strong>bar</strong>, pinned to the bottom 4 text rows: <code>Projects Viewport Palette Scene | Tile Close Quit</code>. A star marks an open app.</li>
+<li>Each app opens in <strong>its own terminal window</strong> and the tiler re-flows all open apps into a grid above the bar (1 app full, 2 side by side, 3 and 4 in a 2x2, the last row stretches).</li>
+<li><strong>Projects</strong>: the 17 kamiji projects as a menu, green for available and brown for prototype, with a popup per project.</li>
+<li><strong>Viewport</strong>: the box-drop scene as spinning wire cubes, drawn into an off-screen buffer that the window blits, so it stays inside its tile.</li>
+<li><strong>Palette</strong>: the 16 VGA colours. <strong>Scene</strong>: the box-drop entities with a live jiffies counter.</li>
+<li><strong>Tile</strong> re-flows, <strong>Close</strong> closes the most recently opened app, <strong>Quit</strong> kills every app and restores the terminal.</li>
+</ul>
+<h2 id="keys-inside-templeos">Keys inside TempleOS<a class="headerlink" href="#keys-inside-templeos" title="Link to this section">#</a></h2>
+<p>Arrow keys move, <strong>Space</strong> presses a button (Enter is right-click), <strong>Shift-Esc</strong> closes a popup. A new app takes keyboard focus;
+click the bar to give it back, then use the arrow keys and Space.</p>
+<h2 id="run-it">Run it<a class="headerlink" href="#run-it" title="Link to this section">#</a></h2>
+<ol>
+<li><code>scripts/boot-vm.sh /path/to/TempleOS.ISO</code> (ISO from templeos.org, 17,350,656 bytes; needs <code>qemu-system-x86_64</code> and <code>nc</code>).</li>
+<li><code>scripts/send-to-vm.sh</code> (about a minute).</li>
+</ol>
+<h2 id="things-learned-the-hard-way">Things learned the hard way<a class="headerlink" href="#things-learned-the-hard-way" title="Link to this section">#</a></h2>
+<ul>
+<li>Only Core0 tasks get a window, and a bare <code>Spawn</code> task has no document or key input. Apps run in <code>User</code> terminals instead, with the command typed in by <code>XTalk</code>.</li>
+<li>Functions defined in one terminal are private to it, so the library is loaded with <code>AdamFile</code> to make them global.</li>
+<li>The compiler reads one token ahead, so <code>AdamFile(...); KosmosShell;</code> fails: the second name is looked up before the first line has run. The loader types the call with <code>XTalk</code>.</li>
+<li>A dollar sign or apostrophe in a <strong>comment</strong> is still parsed as a DolDoc command or a character constant.</li>
+<li><code>DCFill</code> on a window alias fills the whole screen. Draw into your own <code>DCNew</code> buffer and blit it from <code>Fs-&gt;draw_it</code>.</li>
+<li>The QEMU mouse is relative and scales by about 0.48, so mouse tests slam to the corner first. Mouse clicks on bar buttons worked in some runs and missed in others; the keyboard path is the verified one.</li>
+<li>The ISO9660 route for getting files in failed (<code>ISOInit</code> exception); the serial route works.</li>
+</ul>
+<h2 id="not-done">Not done<a class="headerlink" href="#not-done" title="Link to this section">#</a></h2>
+<ul>
+<li>Runs on the live CD, so nothing is saved across reboots.</li>
+<li>The bar does not refresh when an app is closed by other means (it redraws on the next click), and Close only closes the most recent app.</li>
+<li>The Viewport is a wireframe, not the engine.</li>
+</ul>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="next" href="../docs/os-foundation-plan/index.html" rel="next"><span>Next</span>Kosmos OS foundation: apps that run normally, no capture</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#before-and-after-milliseconds-a-frame-average-worst">Before and after, milliseconds a frame (average / worst)</a></li><li><a href="#what-changed-in-the-order-it-was-measured">What changed, in the order it was measured</a></li><li><a href="#what-it-does">What it does</a></li><li><a href="#keys-inside-templeos">Keys inside TempleOS</a></li><li><a href="#run-it">Run it</a></li><li><a href="#things-learned-the-hard-way">Things learned the hard way</a></li><li><a href="#not-done">Not done</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

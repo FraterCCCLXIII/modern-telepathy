@@ -1,0 +1,255 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Previs: a story map, timeline and storyboard with live 3D scenes</title>
+<meta name="description" content="Previs is a prototype for planning a short film in 3D: a node map where every scene renders live, a timeline, a storyboard strip and a viewport. Runs in the browser with the Kamiji, Kamikin and Rubbernose models.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Crect x=%273%27 y=%275%27 width=%2718%27 height=%2714%27 rx=%273%27 fill=%27none%27 stroke=%27%231d1d1b%27 stroke-width=%272%27/%3E%3Cpath d=%27M10 9l5 3-5 3z%27 fill=%27%231d1d1b%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="previs.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body class="pv" data-tab="map">
+<a class="skip" href="#pv-map">Skip to the story map</a>
+
+<div class="pv-app">
+  <header class="pv-top">
+    <div class="pv-brand">
+      <h1>Previs</h1>
+      <a class="pv-link" href="#status">Intended workflow vs what works today</a>
+    </div>
+    <label class="pv-namewrap"><span class="sr-only">Project name</span><input id="pv-name" class="pv-projname" type="text" maxlength="80" autocomplete="off" spellcheck="false"></label>
+    <div class="pv-top-actions" role="toolbar" aria-label="Project">
+      <button class="pv-btn" type="button" data-cmd="undo" disabled aria-label="Undo" title="Undo (Ctrl/Cmd+Z)">Undo</button>
+      <button class="pv-btn" type="button" data-cmd="redo" disabled aria-label="Redo" title="Redo (Shift+Ctrl/Cmd+Z)">Redo</button>
+      <span class="pv-sep" aria-hidden="true"></span>
+      <button class="pv-btn" type="button" data-cmd="new" title="Start an empty project (undo restores the old one)">New</button>
+      <button class="pv-btn" type="button" data-cmd="sample" title="Replace with the 5-scene sample">Sample</button>
+      <button class="pv-btn" type="button" data-cmd="import" title="Import a project JSON file">Import</button>
+      <button class="pv-btn" type="button" data-cmd="export" title="Download the project as JSON">Export</button>
+      <button class="pv-btn" type="button" data-cmd="script" aria-expanded="false" aria-controls="pv-script" title="Open the Script drawer: all lines by character (S)">Script</button>
+      <button class="pv-btn" type="button" data-cmd="print" title="Print the storyboard, 6 shots per page (P)">Print board</button>
+      <span class="pv-sep" aria-hidden="true"></span>
+      <button class="pv-btn" type="button" data-cmd="debug" aria-label="Toggle the performance overlay (G)">Debug</button>
+      <button class="pv-btn" type="button" data-cmd="help" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">?</button>
+    </div>
+    <input id="pv-file" type="file" accept="application/json,.json" hidden>
+    <input id="pv-srcfile" type="file" hidden aria-hidden="true" tabindex="-1">
+  </header>
+
+  <div class="pv-tabbar">
+    <button id="pv-rail-open" class="pv-btn pv-btn-sm pv-rail-open" type="button" aria-expanded="false" aria-controls="pv-rail-panels">Menu</button>
+    <div class="pv-tabs" role="tablist" aria-label="Panels">
+      <button class="pv-tab" role="tab" data-tab="map" aria-selected="true" type="button">Map</button>
+      <button class="pv-tab" role="tab" data-tab="view" aria-selected="false" tabindex="-1" type="button"><span class="pv-long">Shot view</span><span class="pv-short">View</span></button>
+      <button class="pv-tab" role="tab" data-tab="board" aria-selected="false" tabindex="-1" type="button">Board</button>
+      <button class="pv-tab" role="tab" data-tab="timeline" aria-selected="false" tabindex="-1" type="button"><span class="pv-long">Timeline</span><span class="pv-short">Time</span></button>
+    </div>
+    <div class="pv-minibar"><button id="pv-mini-play" class="pv-btn pv-btn-sm" type="button" aria-pressed="false">Play</button><output id="pv-mini-tc" class="pv-tc-mini">00:00:00:00</output></div>
+  </div>
+
+  <main class="pv-main">
+    <nav id="pv-rail" class="pv-rail" aria-label="Project navigation"></nav>
+    <section id="pv-map" class="pv-panel pv-map" data-area="map" aria-label="Nodal map">
+      <div class="pv-panel-h">
+        <h2 class="pv-h-story">Story map</h2>
+        <nav class="pv-crumbs" aria-label="Breadcrumb"><button class="pv-crumb" type="button" data-cmd="closeart" title="Back to the story map (Esc)">Story map</button><span aria-hidden="true">&rsaquo;</span><span id="pv-crumb-name" aria-current="page"></span></nav>
+        <div class="pv-map-tools" role="toolbar" aria-label="Map tools">
+          <button class="pv-btn pv-btn-primary pv-btn-sm" type="button" data-cmd="add" aria-haspopup="menu" aria-expanded="false" title="Add a scene node (N)">Add node</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="dup" title="Duplicate the selection (D)">Duplicate</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="connect" title="Connect the first two selected nodes, or the selected one to the next on the right (C)">Connect</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="pipeview" aria-pressed="false" title="Show the pipeline lanes: Cut, Provider, Review, Export (mockup)">Pipeline view</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="rename" title="Rename the selected node (F2)">Rename</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="del" title="Delete the selection (Delete)">Delete</button>
+          <span class="pv-sep" aria-hidden="true"></span>
+          <button class="pv-btn pv-btn-sm pv-btn-icon" type="button" data-cmd="zout" aria-label="Zoom out" title="Zoom out (-)">&minus;</button>
+          <output class="pv-zoom-read" aria-label="Zoom level">80%</output>
+          <button class="pv-btn pv-btn-sm pv-btn-icon" type="button" data-cmd="zin" aria-label="Zoom in" title="Zoom in (+)">+</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="z100" title="Zoom to 100%">100%</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="fit" title="Fit all nodes in view (F)">Fit</button>
+        </div>
+      </div>
+      <div class="pv-pipe" id="pv-pipe" hidden role="region" aria-label="Pipeline view (mockup)"></div>
+      <div class="pv-map-vp" tabindex="-1" role="listbox" aria-multiselectable="true" aria-label="Story map. Arrow keys move between scenes, Enter selects, Alt+arrows nudge, C connects, F2 renames, Delete removes.">
+        <div class="pv-world">
+          <svg class="pv-edges" width="1" height="1" aria-hidden="true"></svg>
+          <div class="pv-chips" aria-hidden="true"></div>
+        </div>
+        <div class="pv-marquee" hidden></div>
+        <div class="pv-empty" hidden>
+          <h3>An empty map</h3>
+          <p>Each node is a scene that renders live. Connect nodes to set the story flow; the timeline plays them in that order.</p>
+          <p><button class="pv-btn pv-btn-primary" type="button" data-cmd="add" aria-haspopup="menu">Add a scene</button> <button class="pv-btn" type="button" data-cmd="sample">Load the sample</button></p>
+        </div>
+        <div class="pv-mini" aria-hidden="true"><svg class="pv-mini-svg" viewBox="0 0 400 300"></svg></div>
+        <p class="pv-map-hint" aria-hidden="true">Drag to pan &middot; wheel to zoom &middot; drag from a port to connect &middot; Shift+drag to select</p>
+      </div>
+      <div class="pv-map-vp pv-ab-vp" tabindex="-1" role="listbox" aria-multiselectable="true" aria-label="Scene artboard. Arrow keys move between sub-nodes, Enter selects, C connects the first two selected, F2 renames, Delete removes. Drag from a port to connect; the shape of a port is its type.">
+        <div class="pv-world"><svg class="pv-edges" width="1" height="1" aria-hidden="true"></svg><div class="pv-chips" aria-hidden="true"></div></div>
+        <div class="pv-marquee" hidden></div>
+        <div class="pv-mini" aria-hidden="true"><svg class="pv-mini-svg" viewBox="0 0 400 300"></svg></div>
+        <ul class="pv-ports-key" aria-hidden="true"><li><i class="pk type-model"></i>model</li><li><i class="pk type-entity"></i>scene</li><li><i class="pk type-ctrl"></i>control</li><li><i class="pk type-text"></i>script</li><li><i class="pk type-attach"></i>attach</li><li><i class="pk type-cam"></i>camera</li><li><i class="pk type-light"></i>light</li><li><i class="pk type-audio"></i>audio</li></ul>
+      </div>
+    
+    </section>
+
+    <aside id="pv-view" class="pv-panel pv-viewp" data-area="viewport" aria-label="Viewport and inspector">
+      <div class="pv-panel-h"><h2>Viewport</h2><button class="pv-btn pv-btn-sm" type="button" data-act="subs" aria-pressed="true" title="Captions: speech bubbles with the dialogue, on or off (T)">Captions on</button><button class="pv-btn pv-btn-sm pv-audio-btn" type="button" data-audio="full" aria-pressed="false" title="Audio: speak each dialogue line with its character's voice while the cut plays (A)"><span class="pv-audio-t">Audio off</span></button><button class="pv-btn pv-btn-sm" type="button" data-act="mode" aria-pressed="false" title="Free orbit camera or the shot's keyframed camera">Free camera</button></div>
+      <div class="pv-view-stage" tabindex="0" role="group" aria-label="3D viewport">
+        <canvas class="pv-view-canvas" width="640" height="360"></canvas>
+        <div class="pv-view-hud" aria-hidden="true"></div>
+        <p class="pv-view-msg" hidden>Select a scene node to see it here.</p>
+        <div class="pv-subs"></div>
+        <div class="pv-safe" hidden aria-hidden="true"><span>title safe</span></div>
+      </div>
+      <p class="pv-audio-note" role="status" hidden></p>
+      <details class="pv-subs-set"><summary>Subtitle style</summary>
+        <div class="pv-subs-grid">
+          <label class="pv-lbl" for="pv-ss-style">Style</label><select id="pv-ss-style" class="pv-select pv-sm"><option>classic</option><option>boxed</option><option>karaoke</option><option>bubble</option><option>cinematic</option><option>typewriter</option></select>
+          <label class="pv-lbl" for="pv-ss-size">Size</label><input id="pv-ss-size" type="range" min="0.6" max="2.2" step="0.1" value="1">
+          <label class="pv-lbl" for="pv-ss-bg">Background</label><input id="pv-ss-bg" type="range" min="0" max="1" step="0.05" value="0.7">
+          <span class="pv-lbl">Show</span><span class="pv-ss-checks"><label><input id="pv-ss-labels" type="checkbox" checked> Speaker labels</label><label><input id="pv-ss-safe" type="checkbox"> Safe area guide</label></span>
+          <span class="pv-lbl">Reading speed</span><span><button id="pv-ss-extend" class="pv-btn pv-btn-sm" type="button" title="Lengthen shots whose dialogue reads faster than 17 characters a second">Auto-extend short lines</button></span>
+        </div>
+      </details>
+      <div class="pv-cam-presets" role="group" aria-label="Camera presets"></div>
+      <div class="pv-inspector"><div class="pv-panel-h"><h2>Inspector</h2></div><div class="pv-inspector-body"></div></div>
+    </aside>
+
+    <section id="pv-board" class="pv-panel pv-board" data-area="board" aria-label="Storyboard">
+      <div class="pv-split" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the storyboard strip (Up and Down arrows; double-click resets)" aria-valuemin="96" aria-valuenow="190" title="Drag to resize the storyboard"></div>
+      <div class="pv-panel-h">
+        <h2>Storyboard</h2>
+        <div class="pv-map-tools"><button class="pv-btn pv-btn-sm" type="button" data-act="addshot" title="Add a shot to the selected scene (Shift+S)">Add shot</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-cmd="print">Print board</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="toggleboard" aria-expanded="true" aria-controls="pv-strip">Collapse</button></div>
+      </div>
+      <ol id="pv-strip" class="pv-strip" aria-label="Shots in cut order"></ol>
+    </section>
+
+    <section id="pv-timeline" class="pv-panel pv-timeline" data-area="timeline" aria-label="Timeline">
+      <div class="pv-panel-h pv-tl-bar">
+        <h2 class="sr-only">Timeline</h2>
+        <div class="pv-tl-group" role="group" aria-label="Transport">
+          <button class="pv-btn pv-btn-sm pv-btn-primary pv-play" type="button" data-act="play" aria-pressed="false" title="Play / pause (Space)">Play</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="stop" title="Stop and return to the start (Home)">Stop</button>
+          <button class="pv-btn pv-btn-sm pv-btn-icon" type="button" data-act="prev" aria-label="Previous frame" title="Previous frame (,)">&lsaquo;</button>
+          <button class="pv-btn pv-btn-sm pv-btn-icon" type="button" data-act="next" aria-label="Next frame" title="Next frame (.)">&rsaquo;</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="loop" aria-pressed="false" title="Loop the range (\)">Loop</button>
+          <button class="pv-btn pv-btn-sm pv-audio-btn" type="button" data-audio="short" aria-pressed="false" title="Audio on or off (A): speak the dialogue with each character's voice"><span class="pv-audio-t">Audio</span></button>
+        </div>
+        <output class="pv-tc" aria-label="Timecode">00:00:00:00</output><span class="pv-tc-frame">f 0 / 0</span>
+        <div class="pv-tl-group" role="group" aria-label="Range, markers and notes">
+          <button class="pv-btn pv-btn-sm" type="button" data-act="in" title="Set in point (I)">In</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="out" title="Set out point (O)">Out</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="clear" title="Clear in and out">Clear range</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="marker" title="Add a marker at the playhead (M)">Marker</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="note" title="Add an audio note at the playhead">Audio note</button>
+        </div>
+        <div class="pv-tl-group pv-tl-right">
+          <label class="pv-fpslab">fps <select class="pv-select pv-sm pv-fps" aria-label="Frame rate"><option>24</option><option>25</option><option>30</option></select></label>
+          <button class="pv-btn pv-btn-sm pv-btn-icon" type="button" data-act="zout" aria-label="Zoom timeline out">&minus;</button>
+          <button class="pv-btn pv-btn-sm pv-btn-icon" type="button" data-act="zin" aria-label="Zoom timeline in">+</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-act="zfit">Fit</button>
+        </div>
+      </div>
+      <div class="pv-tl-body">
+        <div class="pv-tl-heads" aria-hidden="true"><span class="pv-h-ruler"></span><span>Shots</span><span>Camera</span><span>Audio</span><span>Dialogue</span></div>
+        <div class="pv-tl-scroll"><div class="pv-tl-content"></div></div>
+      </div>
+    </section>
+    <aside id="pv-script" class="pv-drawer" data-area="script" aria-label="Script" hidden>
+      <div class="pv-drawer-grip" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize the script drawer (Left and Right arrows)" aria-valuemin="280" aria-valuemax="640" aria-valuenow="380"></div>
+      <div class="pv-drawer-h"><h2>Script</h2>
+        <div class="pv-drawer-acts" role="toolbar" aria-label="Script export">
+          <button class="pv-btn pv-btn-sm" type="button" data-sc="md" title="Download as Markdown">MD</button><button class="pv-btn pv-btn-sm" type="button" data-sc="fountain" title="Download as Fountain">Fountain</button><button class="pv-btn pv-btn-sm" type="button" data-sc="txt" title="Download as plain text">TXT</button><button class="pv-btn pv-btn-sm" type="button" data-sc="print" title="Printable view">Print</button>
+          <button class="pv-btn pv-btn-sm" type="button" data-sc="close" aria-label="Close the script drawer (S)">Close</button></div></div>
+      <div class="pv-sc-tools"><input class="pv-text pv-sm pv-sc-q" type="search" placeholder="Search lines" aria-label="Search script lines"><select class="pv-select pv-sm pv-sc-scene" aria-label="Filter by scene"></select><button class="pv-btn pv-btn-sm" type="button" data-sc="by" aria-pressed="false" title="Group the list under scene headings">By scene</button></div>
+      <div class="pv-sc-chars" role="listbox" aria-label="Characters (arrow keys, Enter to choose)"></div>
+      <p class="pv-sc-stats" aria-live="polite"></p>
+      <ul class="pv-sc-list" aria-label="Script lines in story order"></ul>
+      <form class="pv-sc-addform" aria-label="Add a line"><select class="pv-select pv-sm pv-sc-addchar" aria-label="Character for the new line"></select><select class="pv-select pv-sm pv-sc-addkind" aria-label="Type of the new line"><option value="dialogue">Dialogue</option><option value="action">Action</option><option value="paren">Parenthetical</option></select><input class="pv-text pv-sm pv-sc-addtext" type="text" maxlength="2000" placeholder="New line, then Enter" aria-label="Text of the new line"><button class="pv-btn pv-btn-sm pv-btn-primary" type="submit">Add</button></form>
+    </aside>
+  </main>
+
+  <div class="pv-statusbar"><span id="pv-status-line"></span><span class="pv-grow"></span><span id="pv-save"></span></div>
+</div>
+
+<div id="pv-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+<div id="pv-menu" class="pv-menu" role="menu" aria-label="Add a node" hidden></div>
+<pre id="pv-debug" class="pv-debug" hidden aria-hidden="true"></pre>
+
+<dialog id="pv-dialog" class="pv-dlg"></dialog>
+<dialog id="pv-help" class="pv-dlg pv-help" aria-labelledby="pv-help-h">
+  <div class="pv-dlg-in">
+    <h2 id="pv-help-h">Keyboard shortcuts</h2>
+    <div class="pv-keys">
+      <section><h3>Playback</h3><dl>
+        <dt><kbd>Space</kbd></dt><dd>Play / pause</dd><dt><kbd>K</kbd></dt><dd>Pause</dd><dt><kbd>J</kbd> <kbd>L</kbd></dt><dd>Back / forward 1 second</dd>
+        <dt><kbd>,</kbd> <kbd>.</kbd></dt><dd>Step one frame</dd><dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>Start / end</dd>
+        <dt><kbd>I</kbd> <kbd>O</kbd></dt><dd>Set in / out point</dd><dt><kbd>M</kbd></dt><dd>Marker at playhead</dd><dt><kbd>\</kbd></dt><dd>Loop on / off</dd></dl></section>
+      <section><h3>Map</h3><dl>
+        <dt><kbd>N</kbd></dt><dd>Add node menu</dd><dt><kbd>F</kbd></dt><dd>Fit all in view</dd><dt><kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd></dt><dd>Zoom (0 = 100%)</dd>
+        <dt><kbd>Arrows</kbd></dt><dd>Move between nodes (pan when none focused)</dd><dt><kbd>Enter</kbd></dt><dd>Select the focused node (Shift adds)</dd>
+        <dt><kbd>Alt</kbd>+<kbd>Arrows</kbd></dt><dd>Nudge selection (Shift = 50)</dd><dt><kbd>C</kbd></dt><dd>Connect first two selected (or to next on the right); again removes</dd>
+        <dt><kbd>E</kbd></dt><dd>Cycle edge: cut, dissolve, branch</dd><dt><kbd>D</kbd></dt><dd>Duplicate</dd><dt><kbd>F2</kbd></dt><dd>Rename</dd><dt><kbd>Delete</kbd></dt><dd>Delete selection or shot</dd>
+        <dt><kbd>Space</kbd>+drag</dt><dd>Pan; wheel zooms, Shift+wheel pans</dd></dl></section>
+      <section><h3>Shots and timeline</h3><dl>
+        <dt><kbd>S</kbd></dt><dd>Script drawer</dd><dt><kbd>Shift</kbd>+<kbd>S</kbd></dt><dd>Add a shot to the selected scene</dd><dt><kbd>B</kbd></dt><dd>Left rail on / off</dd><dt><kbd>Enter</kbd></dt><dd>On a selected scene card: open its artboard. <kbd>Esc</kbd> goes back</dd><dt><kbd>Left</kbd> <kbd>Right</kbd></dt><dd>On a clip: previous / next shot</dd>
+        <dt><kbd>Alt</kbd>+<kbd>Left</kbd>/<kbd>Right</kbd></dt><dd>Move the clip earlier / later</dd><dt><kbd>Shift</kbd>+<kbd>Left</kbd>/<kbd>Right</kbd></dt><dd>Trim the end by 1 frame (add Ctrl for 10)</dd>
+        <dt><kbd>Ctrl</kbd>+wheel</dt><dd>Zoom the timeline</dd></dl></section>
+      <section><h3>Project</h3><dl>
+        <dt><kbd>Ctrl/Cmd</kbd>+<kbd>Z</kbd></dt><dd>Undo</dd><dt><kbd>Shift</kbd>+<kbd>Ctrl/Cmd</kbd>+<kbd>Z</kbd></dt><dd>Redo</dd><dt><kbd>P</kbd></dt><dd>Print board</dd>
+        <dt><kbd>G</kbd></dt><dd>Performance overlay</dd><dt><kbd>?</kbd></dt><dd>This list</dd></dl></section>
+    </div>
+    <div class="pv-dlg-actions"><button id="pv-help-close" class="pv-btn pv-btn-primary" type="button" autofocus>Close</button></div>
+  </div>
+</dialog>
+
+<div id="pv-print" class="pv-print" aria-hidden="true"></div>
+
+<section id="status" class="pv-notes">
+  <div class="wrap">
+    <h2>Intended workflow vs what works today</h2>
+    <p class="pv-lead">Previs is a prototype page in the Kamiji family. It shows the shape of the tool; it is not a finished editor and nothing leaves your browser.</p>
+    <div class="pv-two">
+      <div><h3>Intended</h3><ol>
+        <li>Block each scene as a node: pick the cast, a clip, a light, and see it live.</li>
+        <li>Wire the nodes into story flow, with branches for alternates and cut or dissolve between scenes.</li>
+        <li>Cut shots on the timeline, set camera A and B per shot, write dialogue and notes.</li>
+        <li>Hand a printed or exported board to the team, and play the animatic with sound.</li>
+      </ol></div>
+      <div><h3>Works today</h3><ul>
+        <li>Map: pan, zoom, drag, connect, branch, marquee, minimap, undo. Cards render live under a budget.</li>
+        <li>Timeline: play, scrub, trim, reorder, markers, in and out, 24, 25 or 30 fps.</li>
+        <li>Storyboard with real start-frame renders, and a 6-up print layout.</li>
+        <li>Project saved in this browser; Export and Import JSON.</li>
+      </ul></div>
+      <div><h3>Stubbed or missing</h3><ul>
+        <li>No audio playback: the audio track holds notes only.</li>
+        <li>A dissolve is drawn on the map but plays as a cut.</li>
+        <li>Camera animation is two keyframes per shot; scene animation is the model's own clips.</li>
+        <li>No video export, no user models, no multi-user editing.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Previs. A prototype. Models: Kamiji, Kamikin and Rubbernose from this repository.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="previs.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

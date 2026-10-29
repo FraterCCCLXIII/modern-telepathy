@@ -1,0 +1,136 @@
+/* Kamikin front page: only what differs from ../style.css. */
+
+.brand-logo { display: inline-flex; align-items: center; }
+.brand-logo img { display: block; height: 40px; width: auto; }
+
+.hero-copy h1 { font-size: clamp(3.2rem, 8.4vw, 13rem); }
+.small { font-size: .88rem; color: var(--muted); max-width: 40rem; margin: .9em 0 0; }
+.side .quiet { margin-top: 1.6em; }
+.section { position: relative; }
+
+/* hero rail: wider hit target for three dropdowns */
+.rail-btn { max-width: 100%; }
+.rail-text { white-space: nowrap; }
+.rail-menu li small { font: .62rem/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; opacity: .65; margin-left: auto; padding-left: 14px; }
+
+/* facts list under "The game" */
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; margin: 2.4rem 0 0; padding: 0; border-top: 1px solid var(--faint); }
+.facts > div { padding: 14px 0; border-bottom: 1px solid var(--faint); min-width: 0; }
+.facts dt { font: .64rem/1 var(--mono); text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin-bottom: 8px; }
+.facts dd { margin: 0; font-weight: 600; }
+
+/* screenshots */
+.shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 4rem; }
+.shots figure { margin: 0; min-width: 0; }
+.shots img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 20px; background: var(--pill); box-shadow: 0 1px 0 var(--faint), 0 18px 40px -28px var(--shadow); }
+.shots figcaption { margin-top: 10px; font: .66rem/1.5 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.shot-note { margin-top: 20px; font: .64rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+
+/* the five patches */
+.patches { list-style: none; margin: .8em 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.patches li { padding: 12px 14px; border: 0; background: var(--card); border-radius: 16px; display: grid; gap: 2px; box-shadow: 0 1px 0 var(--faint); }
+.patches li:first-child { padding-top: 12px; }
+.patches b { font: 600 .72rem/1.3 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
+.patches span { font-size: .88rem; color: var(--muted); }
+.list .patches + .small { margin-top: 1em; }
+
+/* Meet the Kamikin carousel */
+.meet-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.meet-head .sub { max-width: 34rem; margin: 1em 0 0; }
+.meet-status { margin: 1em 0 0; min-height: 1.4em; font: .7rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--fg); }
+.meet-status a { color: var(--accent); }
+.meet-wrap { margin-top: 28px; }
+.k-track { list-style: none; margin: 0 calc(-1 * var(--gutter)); padding: 8px var(--gutter) 24px; display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding: 0 var(--gutter); scrollbar-width: thin; }
+.k-item { flex: 0 0 220px; scroll-snap-align: start; display: flex; }
+.k-card { all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; width: 100%; padding: 14px 14px 18px; background: var(--card); border-radius: 24px; box-shadow: 0 1px 0 var(--faint), 0 18px 40px -30px var(--shadow); }
+.k-card:hover { box-shadow: 0 1px 0 var(--faint), 0 18px 40px -22px var(--shadow); }
+.k-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.k-card[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--sel); }
+.k-card .viewer { width: 100%; aspect-ratio: 1; border-radius: 16px; background: var(--bg); }
+.k-name { margin-top: 12px; font-weight: 700; font-size: 1.15rem; letter-spacing: -.01em; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.k-name i { font: normal .6rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--sel); white-space: nowrap; }
+.k-meta { font: .64rem/1.5 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-top: 2px; }
+.k-persona { margin: 10px 0 0; font-size: .92rem; line-height: 1.45; color: var(--fg); }
+.k-role { margin: 8px 0 0; font-size: .82rem; line-height: 1.4; color: var(--muted); }
+.k-card .viewer .fallback { font-size: .75rem; }
+
+/* How they are made */
+.stats { list-style: none; margin: 0 0 1.6rem; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.stats li { padding: 18px 0 0; border-top: 1px solid var(--faint); }
+.stats b { display: block; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1; letter-spacing: -.03em; }
+.stats span { display: block; margin-top: 8px; font: .66rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.made-note { color: var(--muted); max-width: 40rem; }
+.made-tl { list-style: none; margin: 2rem 0 0; padding: 0; }
+.made-tl li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 16px; padding: 18px 0; border-top: 1px solid var(--faint); }
+.made-tl time { font: .7rem/1.6 var(--mono); letter-spacing: .08em; color: var(--muted); }
+.made-tl p { margin: 0; color: var(--muted); max-width: 36rem; }
+.made-tl b { color: var(--fg); }
+
+/* Use them */
+.use-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2rem; }
+.pill-link { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 18px; border-radius: 999px; background: var(--pill); color: var(--fg); text-decoration: none; font-size: .92rem; }
+.pill-link:hover, .pill-link:focus-visible { background: var(--sel); color: var(--sel-fg); }
+
+@media (max-width: 900px) {
+  .shots, .shots-2 { grid-template-columns: repeat(3, minmax(240px, 1fr)); overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 8px; }
+  .shots figure { scroll-snap-align: start; }
+}
+@media (max-width: 700px) {
+  .brand-logo img { height: 34px; }
+  .hero-copy h1 { font-size: clamp(2.6rem, 13vw, 3.6rem); }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .made-tl li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .k-item { flex-basis: 200px; }
+  .meet-head { align-items: flex-start; }
+}
+@media (pointer: coarse) { .car-nav { display: none; } }
+
+.yk-block { margin-top: 2rem; padding: 20px; background: var(--card); border-radius: 24px; box-shadow: 0 1px 0 var(--faint); max-width: 22rem; }
+.yk-block img { display: block; height: 40px; width: auto; max-width: 100%; margin-bottom: 8px; }
+.yk-block .use-links { margin: 1rem 0 0; }
+.yk-block .small { margin-top: .8em; }
+.foot-logo { display: block; height: 30px; width: auto; margin: 0 0 14px; }
+
+/* Hero roster: every character in a scrolling strip under the model, centred with it, no backgrounds, edge gradients. */
+.hero-roster { list-style: none; margin: 14px 0 0; padding: 6px 48px 10px; width: min(100%, calc(var(--model-w, 520px) + 120px)); display: flex; justify-content: flex-start; gap: 4px; overflow-x: auto; scroll-padding: 0 48px; scrollbar-width: none; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%); }
+.hero-roster::-webkit-scrollbar { display: none; }
+.hr-item { flex: none; width: 84px; }
+.hr-item button { width: 100%; padding: 4px 0 6px; border: 0; background: none; color: var(--fg); font: inherit; cursor: pointer; display: grid; justify-items: center; gap: 4px; text-align: center; border-radius: 14px; transition: transform .18s ease; }
+.hr-item button:hover { transform: translateY(-3px); }
+.hr-item .viewer { width: 84px; height: 112px; }
+.hr-name { font: .66rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .14em; text-align: center; }
+.hr-sp { font: .6rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); text-align: center; }
+.hr-item button[aria-pressed="true"] .hr-name { color: var(--accent); font-weight: 700; }
+@media (min-width: 900px) {
+  .stage .hero-roster { align-self: flex-end; margin-right: calc(clamp(0px, 7vw, 140px) - 60px); }
+}
+@media (max-width: 899px) { .hero-roster { align-self: center; } }
+@media (prefers-reduced-motion: reduce) { .hr-item button { transition: none; } }
+
+/* Large screens: a calmer headline that clears the model column, a bigger model, and everything under it centred on it. */
+@media (min-width: 900px) {
+  .stage { --model-w: clamp(260px, 58svh, 780px); }
+  .hero-copy { max-width: min(42vw, 46rem); }
+  .hero-copy h1 { font-size: clamp(3.2rem, 5vw, 8rem); }
+  .hero-copy .lead { max-width: 32rem; }
+  .stage .hero-viewer { width: var(--model-w); }
+  .stage .hero-cap { width: var(--model-w); text-align: center; }
+  .stage .shadow { width: calc(var(--model-w) * .7); margin-right: calc(clamp(0px, 7vw, 140px) + var(--model-w) * .15); }
+}
+
+/* Module 1 episodes */
+.eps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--faint); }
+.ep { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 18px; padding: 26px 0; border-bottom: 1px solid var(--faint); }
+.ep-n { font: 600 .74rem/1.9 var(--mono); letter-spacing: .14em; color: var(--accent); }
+.ep-body h3 { margin: 0 0 .35em; font-size: 1.35rem; }
+.ep-body p { margin: 0; color: var(--muted); line-height: 1.55; }
+.words { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.words li { display: grid; gap: 2px; padding: 8px 14px 9px; background: var(--card); border-radius: 14px; box-shadow: 0 1px 0 var(--faint); }
+.words b { font-size: 1.15rem; font-weight: 600; color: var(--fg); }
+.words span { font: .62rem/1.3 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.words-none { margin-top: 12px !important; }
+.ep-meta { margin-top: 14px !important; font: .66rem/1.7 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.ep-meta span { color: var(--fg); font-weight: 600; margin-left: 6px; }
+.ep-meta span:first-child { margin-left: 0; }
+@media (max-width: 640px) { .ep { grid-template-columns: 2rem minmax(0, 1fr); gap: 0 10px; } }

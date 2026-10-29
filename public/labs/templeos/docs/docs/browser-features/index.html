@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos Browser: feature inventory | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html" aria-current="page">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Browser</span></li><li aria-current="page">Kosmos Browser: feature inventory</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kosmos Browser: feature inventory</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/browser-features.md</span></div>
+        <div class="doc-body">
+
+<p>Status: specification, not code. Branch task/templeos-shell. Companion documents: <code>browser-architecture.md</code> (how these features are built) and <code>browser-test-sites.md</code> (what to test them on). Written 2026-10-27.</p>
+<h2 id="how-to-read-this">How to read this<a class="headerlink" href="#how-to-read-this" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Priority.</strong> P0 = needed for a usable browser (we do not ship without it). P1 = expected by a Chrome user within the first month of use. P2 = real Chrome feature, later or never.</li>
+<li><strong>Effort.</strong> S = under a week of one agent. M = one to three weeks. L = more than three weeks, or depends on another L item.</li>
+<li><strong>Provider.</strong> Where the feature actually runs: <code>guest</code> (HolyC, TempleOS side), <code>host-engine</code> (headless Chrome, driven by CDP), <code>host-store</code> (our SQLite profile store, <code>browser-architecture.md</code> section a), <code>host-shell</code> (our Python bridge, no Chrome involved), or <code>none</code> (out of scope). CDP domain names are given where the feature has one.</li>
+<li><strong>Sources.</strong> Each group ends with the URLs used. Anything not backed by a source below is marked <strong>(memory)</strong> and should be checked before a gate depends on it.</li>
+</ul>
+<h2 id="verified-facts-that-shape-the-inventory">Verified facts that shape the inventory<a class="headerlink" href="#verified-facts-that-shape-the-inventory" title="Link to this section">#</a></h2>
+<p>These are the facts this document depends on. Each was checked in this pass.</p>
+<ol>
+<li><strong>Local Chrome is 156.0.8078.48</strong> (<code>/Applications/Google Chrome.app</code>, <code>--version</code>, checked on this Mac).</li>
+<li><strong>Chrome 136+ ignores <code>--remote-debugging-port</code> and <code>--remote-debugging-pipe</code> when the data directory is the default one.</strong> Any automation needs a non-default <code>--user-data-dir</code>. Source: <a href="https://issues.chromium.org/issues/417456892" class="ext" target="_blank" rel="noopener noreferrer">Chromium issue 417456892</a> and secondary write-ups (for example <a href="https://github.com/sidonsoft/quay/pull/16" class="ext" target="_blank" rel="noopener noreferrer">the Chrome 136/144 requirements PR</a>). The tracker text is the primary source; the rest are secondary.</li>
+<li><strong>Chrome 137+ branded builds no longer load extensions from <code>--load-extension</code>.</strong> Chromium and Chrome for Testing still do. Source: <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/c/1-g8EFx2BBY/m/S0ET5wPjCAAJ" class="ext" target="_blank" rel="noopener noreferrer">Chromium extensions group PSA</a>, <a href="https://developer.chrome.com/blog/extension-news-june-2025" class="ext" target="_blank" rel="noopener noreferrer">Chrome Extensions news, June 2025</a>. Consequence: our extension host must run extensions itself (architecture section g). Nothing in the extension plan depends on the flag.</li>
+<li><strong>Chrome 144+ prompts the user to allow each attach to a running browser.</strong> Secondary sources only (<a href="https://github.com/ChromeDevTools/chrome-devtools-mcp/issues/1794" class="ext" target="_blank" rel="noopener noreferrer">chrome-devtools-mcp issue 1794</a>, <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp/issues/825" class="ext" target="_blank" rel="noopener noreferrer">issue 825</a>). This does not affect us if we launch our own throwaway instance with the debug flags; it would matter if we ever attached to the user's real Chrome, which we will not do.</li>
+<li><strong>The old headless mode left the main binary in Chrome 132.</strong> The default <code>--headless</code> now runs the full Chrome; the old-style shell is a separate <code>chrome-headless-shell</code> binary. Sources: <a href="https://developer.chrome.com/docs/automation-and-testing/headless" class="ext" target="_blank" rel="noopener noreferrer">Chrome headless docs</a>, <a href="https://developer.chrome.com/blog/chrome-headless-shell" class="ext" target="_blank" rel="noopener noreferrer">headless shell post</a>, <a href="https://github.com/GoogleChromeLabs/chrome-for-testing" class="ext" target="_blank" rel="noopener noreferrer">Chrome for Testing</a>.</li>
+<li><strong>Chrome's MV3 extension namespaces</strong> (the full list, as published): accessibilityFeatures, action, alarms, audio, bookmarks, browsingData, certificateProvider, commands, contentSettings, contextMenus, cookies, debugger, declarativeContent, declarativeNetRequest, desktopCapture, devtools.<em> (inspectedWindow, network, panels, performance, recorder), dns, documentScan, dom, downloads, enterprise.</em>, events, extension, fileSystemProvider, fontSettings, gcm, history, i18n, identity, idle, input.ime, instanceID, management, notifications, offscreen, omnibox, pageCapture, permissions, platformKeys, power, printerProvider, printing, privacy, processes, proxy, readingList, runtime, scripting, search, sessions, sidePanel, storage, system.*, tabCapture, tabGroups, tabs, topSites, tts, userScripts, webAuthenticationProxy, webNavigation, webRequest, windows. Source: <a href="https://developer.chrome.com/docs/extensions/reference/api" class="ext" target="_blank" rel="noopener noreferrer">chrome.* reference</a>.</li>
+<li><strong>Install-time permission warnings</strong>: permissions with a warning show a dialog at install, and adding one to an installed extension disables it until accepted. <code>activeTab</code> shows none. Some warnings are suppressed when paired (for example <code>tabs</code> with <code>&lt;all_urls&gt;</code>). Source: <a href="https://developer.chrome.com/docs/extensions/develop/concepts/permission-warnings" class="ext" target="_blank" rel="noopener noreferrer">permission warnings</a>.</li>
+<li><strong>DevTools panels</strong> (official list): Elements, Styles, Console, Sources, Network, Performance, Recorder, Rendering, Security, Memory, Lighthouse, Application, Animations, Changes, Coverage, CSS overview, Issues, Layers, Media, Memory Inspector, Network conditions, Performance monitor, Protocol monitor, Quick source, Sensors, WebAudio, WebAuthn, Autofill. Source: <a href="https://developer.chrome.com/docs/devtools" class="ext" target="_blank" rel="noopener noreferrer">DevTools overview</a>. Accessibility is a sidebar tool, not a panel. Source: same page.</li>
+<li><strong>Widevine is closed-source and not redistributable in open builds.</strong> Chromium builds ship without it. Sources: <a href="https://chromiumbuilds.org/docs/widevine-drm/" class="ext" target="_blank" rel="noopener noreferrer">Chromium Widevine DRM notes</a>, <a href="https://groups.google.com/a/chromium.org/g/chromium-dev/c/16hDHEpgUb8" class="ext" target="_blank" rel="noopener noreferrer">chromium-dev thread</a>. This is a secondary reading of licensing, not a Google licence document.</li>
+<li><strong>Not verified in this pass</strong>: the exact CDP method list. The CDP index page could not be fetched at its <code>tot</code> path (404), and the DOMSnapshot page returned only a redirect. CDP domain and method names in this document are from memory and are marked as such where they matter; <code>browser-architecture.md</code> lists the ones the design needs so the M1 spike can confirm them against the protocol JSON that ships with Chrome 156.</li>
+</ol>
+<h2 id="1-tabs-and-windows">1. Tabs and windows<a class="headerlink" href="#1-tabs-and-windows" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tab strip with rounded tabs, close button, new tab button</td>
+<td>P0</td>
+<td>M</td>
+<td>guest</td>
+<td>Tab state lives in the guest; each tab maps to one host browser context and one page target.</td>
+</tr>
+<tr>
+<td>Several tabs, switching, close, reopen closed (Ctrl+Shift+T)</td>
+<td>P0 / P1</td>
+<td>S</td>
+<td>guest + host-store</td>
+<td>Closed-tab stack is in the store so it survives a restart. Switching does not reload the page; the host keeps the page alive.</td>
+</tr>
+<tr>
+<td>Tab title and favicon</td>
+<td>P0 / P1</td>
+<td>S</td>
+<td>host-engine (Target, Page), guest</td>
+<td>Title from the page target; favicon fetched by the host and sent as a small image.</td>
+</tr>
+<tr>
+<td>Loading indicator per tab, stop button</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Page lifecycle events)</td>
+<td></td>
+</tr>
+<tr>
+<td>Tab crash / hang page ("Aw, snap" style)</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Target.targetCrashed)</td>
+<td>Show our own error page; never show the Chrome error page.</td>
+</tr>
+<tr>
+<td>Pinned tabs</td>
+<td>P1</td>
+<td>S</td>
+<td>guest + host-store</td>
+<td>Pinned tabs keep their order and show only the icon.</td>
+</tr>
+<tr>
+<td>Tab groups (name, colour, collapse)</td>
+<td>P2</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td>Chrome has <code>tabGroups</code> in MV3; for us it is UI only.</td>
+</tr>
+<tr>
+<td>Drag tabs to reorder; drag out to a new window</td>
+<td>P1 / P2</td>
+<td>M</td>
+<td>guest</td>
+<td>Dragging out to a second window needs a second window. Multi-window is P2 because the desktop has one framebuffer.</td>
+</tr>
+<tr>
+<td>Windows (one window per browser window, or single-window with tabs)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest</td>
+<td>Start with one window; a second window opens as another app window in the desktop.</td>
+</tr>
+<tr>
+<td>Session restore after restart</td>
+<td>P1</td>
+<td>M</td>
+<td>host-store</td>
+<td>Tab URLs, titles, scroll position (scroll offset, not page state).</td>
+</tr>
+<tr>
+<td>Discard (unload background tabs)</td>
+<td>P2</td>
+<td>M</td>
+<td>host-engine (Page.navigate to about:blank, or Target.closeTarget + reopen)</td>
+<td>Chrome discards under memory pressure. We keep a stored URL and reload on activate.</td>
+</tr>
+<tr>
+<td>Sleep / memory saver</td>
+<td>P2</td>
+<td>S</td>
+<td>host-shell</td>
+<td>Same as discard.</td>
+</tr>
+<tr>
+<td>Incognito window</td>
+<td>P1</td>
+<td>S</td>
+<td>host-engine (Target.createBrowserContext)</td>
+<td>Separate browser context, no store writes, cookies discarded on close. Chrome's incognito has more features (it hides extensions by default).</td>
+</tr>
+<tr>
+<td>Guest keyboard shortcuts for tab operations (Ctrl+T, Ctrl+W, Ctrl+Tab)</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td>TempleOS key codes differ from macOS ones; map on the guest and document the mapping.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://support.google.com/chrome/answer/2391819" class="ext" target="_blank" rel="noopener noreferrer">Chrome tab features</a> (memory for the exact URL), <a href="https://developer.chrome.com/docs/extensions/reference/api/tabGroups" class="ext" target="_blank" rel="noopener noreferrer">tabGroups API</a>, <a href="https://developer.chrome.com/docs/extensions/reference/api/sessions" class="ext" target="_blank" rel="noopener noreferrer">sessions API</a>, <a href="https://chromedevtools.github.io/devtools-protocol/tot/Target/" class="ext" target="_blank" rel="noopener noreferrer">Target domain</a> (memory for the exact URL: the <code>tot</code> path returns 404 from this environment).</p>
+<h2 id="2-omnibox-address-bar-and-search">2. Omnibox (address bar and search)<a class="headerlink" href="#2-omnibox-address-bar-and-search" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type URL, Enter loads it</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td>Already in v0.</td>
+</tr>
+<tr>
+<td>Scheme inference (<code>http://</code> for hosts, <code>https://</code> by default)</td>
+<td>P0</td>
+<td>S</td>
+<td>host-shell</td>
+<td>Keep the v0 rule, moved to the host so the guest does no URL work beyond sending text.</td>
+</tr>
+<tr>
+<td>Search when the text is not a URL, with a configurable engine</td>
+<td>P0</td>
+<td>S</td>
+<td>host-shell</td>
+<td>Default: a search URL template in settings. The v0 used DuckDuckGo's HTML endpoint; keep a fixed template and allow a change in settings.</td>
+</tr>
+<tr>
+<td>Suggestions from history and bookmarks (as you type)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-store</td>
+<td>Prefix and fuzzy match over our store. Not from a search provider in v1 (that is a network request the user did not ask for).</td>
+</tr>
+<tr>
+<td>Search-provider suggestions (the search engine's autocomplete)</td>
+<td>P2</td>
+<td>M</td>
+<td>host-shell, with approval</td>
+<td>Off by default; needs a settings toggle and a prompt the first time.</td>
+</tr>
+<tr>
+<td>Omnibox keywords and shortcuts (type <code>@</code> for a site search)</td>
+<td>P2</td>
+<td>M</td>
+<td>host-shell</td>
+<td>Chrome's <code>omnibox</code> MV3 API covers extension keywords.</td>
+</tr>
+<tr>
+<td>Security indicator (https, insecure, certificate error)</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Security domain, Page.getNavigationHistory)</td>
+<td>Padlock glyph in the omnibox. Certificate errors open a host-generated interstitial that the guest can only approve with an explicit prompt.</td>
+</tr>
+<tr>
+<td>Copy URL, edit, select all, paste with Ctrl+V</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td>Clipboard between the guest and the host is out of v1 unless the Aiwnios build can reach the Mac clipboard (see architecture risks).</td>
+</tr>
+<tr>
+<td>Show full URL on focus</td>
+<td>P1</td>
+<td>S</td>
+<td>guest</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://support.google.com/chrome/answer/95426" class="ext" target="_blank" rel="noopener noreferrer">Chrome omnibox help</a> (memory for the exact URL), <a href="https://developer.chrome.com/docs/extensions/reference/api/omnibox" class="ext" target="_blank" rel="noopener noreferrer">omnibox API</a>, <a href="https://chromedevtools.github.io/devtools-protocol/tot/Security/" class="ext" target="_blank" rel="noopener noreferrer">Security domain</a> (memory).</p>
+<h2 id="3-navigation">3. Navigation<a class="headerlink" href="#3-navigation" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Back, forward, reload, stop</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Page.navigateToHistoryEntry, Page.reload, Page.stopLoading)</td>
+<td>Reload also re-sends the page display list.</td>
+</tr>
+<tr>
+<td>Hold back or forward for the history menu</td>
+<td>P1</td>
+<td>S</td>
+<td>host-engine (Page.getNavigationHistory)</td>
+<td></td>
+</tr>
+<tr>
+<td>Link clicks and same-page anchors</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (Input dispatch; the page navigates)</td>
+<td>Clicking a link goes to the host as a mouse event, not as a guest-side navigation. The host decides what happened (new tab, new window, download, form).</td>
+</tr>
+<tr>
+<td>Middle-click, Ctrl-click, Shift-click, target=_blank</td>
+<td>P1</td>
+<td>M</td>
+<td>host-engine (Target.createTarget, Page.frameNavigated)</td>
+<td>The guest maps modifiers to a "new tab" request.</td>
+</tr>
+<tr>
+<td>Redirects and the final URL in the omnibox</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Page.frameNavigated)</td>
+<td></td>
+</tr>
+<tr>
+<td>Client-side navigation (History API, hash changes)</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (Page.navigatedWithinDocument)</td>
+<td>SPA route changes must update the omnibox without a reload.</td>
+</tr>
+<tr>
+<td>Open in a new tab from the link context menu</td>
+<td>P1</td>
+<td>S</td>
+<td>guest + host-engine</td>
+<td></td>
+</tr>
+<tr>
+<td>Page not found, DNS failure, offline pages</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Network.loadingFailed), host-shell</td>
+<td>Chrome's error page is replaced by ours; the reason text comes from the host.</td>
+</tr>
+<tr>
+<td>Navigation prompts: "leave site" on a form with edits</td>
+<td>P2</td>
+<td>M</td>
+<td>host-engine (Page.javascriptDialogOpening, beforeunload)</td>
+<td></td>
+</tr>
+<tr>
+<td>Form submission (POST)</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine</td>
+<td><strong>Outward action:</strong> the guest shows "Send form data to <host>?" before submission. GET forms are navigations and need no prompt.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://chromedevtools.github.io/devtools-protocol/tot/Page/" class="ext" target="_blank" rel="noopener noreferrer">Page domain</a> (memory for the exact URL), <a href="https://chromedevtools.github.io/devtools-protocol/tot/Network/" class="ext" target="_blank" rel="noopener noreferrer">Network.loadingFailed</a> (memory).</p>
+<h2 id="4-bookmarks">4. Bookmarks<a class="headerlink" href="#4-bookmarks" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add bookmark (star or Ctrl+D), edit name and folder</td>
+<td>P1</td>
+<td>S</td>
+<td>guest + host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>Bookmarks bar under the omnibox</td>
+<td>P1</td>
+<td>M</td>
+<td>guest</td>
+<td>Dimensions in <code>browser-architecture.md</code> section h.</td>
+</tr>
+<tr>
+<td>Bookmark manager (folders, search, delete)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>Import from a bookmarks HTML file</td>
+<td>P2</td>
+<td>S</td>
+<td>host-shell</td>
+<td>Netscape bookmark format. Import needs a file the user picks on the host.</td>
+</tr>
+<tr>
+<td>Import from the real Chrome profile</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>We never read the user's real Chrome profile (architecture section e).</td>
+</tr>
+<tr>
+<td>Sync across devices</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/extensions/reference/api/bookmarks" class="ext" target="_blank" rel="noopener noreferrer">bookmarks API</a>.</p>
+<h2 id="5-history">5. History<a class="headerlink" href="#5-history" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Record visits (URL, title, time)</td>
+<td>P1</td>
+<td>S</td>
+<td>host-store</td>
+<td>Written on navigation commit, not on request. Incognito writes nothing.</td>
+</tr>
+<tr>
+<td>History page (list, by day, search, delete entry)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td>Delete is permanent and needs a confirmation prompt in the UI.</td>
+</tr>
+<tr>
+<td>Clear browsing data (time range, history, cookies, cache)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-store + host-engine (Storage.clearDataForOrigin, Network.clearBrowserCache)</td>
+<td>Confirmation required.</td>
+</tr>
+<tr>
+<td>Clear on exit</td>
+<td>P2</td>
+<td>S</td>
+<td>host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>Synced history and tabs from other devices</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/extensions/reference/api/history" class="ext" target="_blank" rel="noopener noreferrer">history API</a>, <a href="https://developer.chrome.com/docs/extensions/reference/api/browsingData" class="ext" target="_blank" rel="noopener noreferrer">browsingData API</a>.</p>
+<h2 id="6-downloads">6. Downloads<a class="headerlink" href="#6-downloads" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Download on link or Content-Disposition, with a prompt</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (Browser.setDownloadBehavior, Browser.downloadWillBegin, Browser.downloadProgress)</td>
+<td><strong>Outward action:</strong> prompt "Download <name> (<size>) from <host>?" before any byte is written. Default behaviour is deny.</td>
+</tr>
+<tr>
+<td>Download bar and download list</td>
+<td>P1</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td>Shows progress, pause (P2), open, show.</td>
+</tr>
+<tr>
+<td>Save into the guest disk (B:)</td>
+<td>P1</td>
+<td>S</td>
+<td>host-shell + guest file service</td>
+<td>The guest saves on the TempleOS disk after the user confirms.</td>
+</tr>
+<tr>
+<td>Save to the host Mac Downloads folder</td>
+<td>P2</td>
+<td>S</td>
+<td>host-shell, with approval</td>
+<td>Only after the user picks it; a host file-write permission prompt.</td>
+</tr>
+<tr>
+<td>Dangerous file types (.exe, .dmg, .app, .sh, .command, .pkg, scripts)</td>
+<td>P0</td>
+<td>S</td>
+<td>host-shell</td>
+<td>Refuse by default; allow only after a second prompt. Do not run downloaded files anywhere.</td>
+</tr>
+<tr>
+<td>Resume interrupted downloads</td>
+<td>P2</td>
+<td>M</td>
+<td>host-shell</td>
+<td></td>
+</tr>
+<tr>
+<td>Downloads on the host using Chrome's own downloader</td>
+<td>P0</td>
+<td>included above</td>
+<td>host-engine</td>
+<td>Chrome does the HTTP; we move the bytes. Keep Chrome's download store out of the real profile (it is throwaway).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://chromedevtools.github.io/devtools-protocol/tot/Browser/" class="ext" target="_blank" rel="noopener noreferrer">Browser domain</a> (memory for the exact URL), <a href="https://developer.chrome.com/docs/extensions/reference/api/downloads" class="ext" target="_blank" rel="noopener noreferrer">downloads API</a>.</p>
+<h2 id="7-find-in-page-zoom-print-and-pdf">7. Find in page, zoom, print and PDF<a class="headerlink" href="#7-find-in-page-zoom-print-and-pdf" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Find in page (Ctrl+F) with match count and next or previous</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (Runtime, a find routine in page context; or the DOMSnapshot text boxes)</td>
+<td>Chrome's find-in-page is a native browser feature with no full CDP call (memory). We search the text boxes in the display list on the host and return hit rectangles. Search runs on the host; the guest draws the highlights.</td>
+</tr>
+<tr>
+<td>Find highlights (all matches, active match)</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>Zoom in, out, reset (Ctrl +/-/0)</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Emulation.setPageScaleFactor or the device scale)</td>
+<td>Zoom changes layout, so the host re-lays out; the guest only scales. Pinch zoom is P2.</td>
+</tr>
+<tr>
+<td>Per-site zoom</td>
+<td>P2</td>
+<td>S</td>
+<td>host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>Print (Ctrl+P) to PDF</td>
+<td>P1</td>
+<td>M</td>
+<td>host-engine (Page.printToPDF)</td>
+<td>Output goes to the host file store after a prompt. The guest cannot show a PDF viewer yet.</td>
+</tr>
+<tr>
+<td>Print to printer</td>
+<td>P2</td>
+<td>M</td>
+<td>host-shell</td>
+<td>Host printer dialog; a prompt.</td>
+</tr>
+<tr>
+<td>Save page as (HTML, MHTML)</td>
+<td>P2</td>
+<td>S</td>
+<td>host-engine (Page.captureSnapshot for MHTML)</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://chromedevtools.github.io/devtools-protocol/tot/Page/" class="ext" target="_blank" rel="noopener noreferrer">Page.printToPDF</a> (memory), <a href="https://chromedevtools.github.io/devtools-protocol/tot/Emulation/" class="ext" target="_blank" rel="noopener noreferrer">Emulation domain</a> (memory).</p>
+<h2 id="8-passwords-autofill-and-payments">8. Passwords, autofill and payments<a class="headerlink" href="#8-passwords-autofill-and-payments" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Password manager</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>Security reasons. The guest never sees a password, and the host does no credential autofill.</td>
+</tr>
+<tr>
+<td>Keychain access on the Mac</td>
+<td><strong>Out of scope</strong> unless approved</td>
+<td>none</td>
+<td>host-shell</td>
+<td>Only after an explicit user approval per use. Default launch uses a mock keychain.</td>
+</tr>
+<tr>
+<td>Autofill of addresses and card numbers</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>Payment and identity data stay out of the guest.</td>
+</tr>
+<tr>
+<td>Autocomplete of plain form text from history (the browser's own form-history)</td>
+<td>P2</td>
+<td>M</td>
+<td>host-store</td>
+<td>Form-history is the lowest-risk item here. Off by default.</td>
+</tr>
+<tr>
+<td>Chrome's own password store in the throwaway profile</td>
+<td><strong>Disable</strong></td>
+<td>S</td>
+<td>host-engine (launch flags and prefs)</td>
+<td>Set the password-manager and autofill prefs off in the throwaway profile's Preferences file before launch. Verify the flag names on Chrome 156 (memory).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/devtools" class="ext" target="_blank" rel="noopener noreferrer">DevTools overview</a> (lists "Autofill" as a panel; we do not need it).</p>
+<h2 id="9-permissions-and-site-settings">9. Permissions and site settings<a class="headerlink" href="#9-permissions-and-site-settings" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Permission prompts (camera, microphone, location, notifications, clipboard, MIDI, USB, Bluetooth)</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (Browser.setPermission)</td>
+<td><strong>Outward action / sensitive:</strong> every request is shown in the guest and is answered by the user. Default: deny. No device access exists in the guest; a camera prompt answers "no" in v1.</td>
+</tr>
+<tr>
+<td>Site settings page (per-origin permission, cookies, JavaScript on or off)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>JavaScript on/off per site</td>
+<td>P1</td>
+<td>S</td>
+<td>host-engine (Emulation.setScriptExecutionDisabled)</td>
+<td>Chrome's content setting; useful for debugging and for battery.</td>
+</tr>
+<tr>
+<td>Popups and redirects</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (Target handling)</td>
+<td>Block by default with an indicator in the omnibox.</td>
+</tr>
+<tr>
+<td>Pop-up exceptions</td>
+<td>P2</td>
+<td>S</td>
+<td>host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>The guest has no notification service.</td>
+</tr>
+<tr>
+<td>Clipboard read</td>
+<td>P2</td>
+<td>S</td>
+<td>host-engine</td>
+<td>Prompt before the page reads the clipboard.</td>
+</tr>
+<tr>
+<td>Geolocation</td>
+<td>P2</td>
+<td>S</td>
+<td>host-engine (Emulation.setGeolocationOverride)</td>
+<td>Prompt; the host Mac's location is not sent unless approved.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/extensions/reference/api/permissions" class="ext" target="_blank" rel="noopener noreferrer">permissions API</a>, <a href="https://support.google.com/chrome/answer/114662" class="ext" target="_blank" rel="noopener noreferrer">Chrome site settings help</a> (memory for the exact URL).</p>
+<h2 id="10-cookies-and-storage">10. Cookies and storage<a class="headerlink" href="#10-cookies-and-storage" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookies held by the host browser context, per tab context</td>
+<td>P0</td>
+<td>S</td>
+<td>host-engine (browser context, Storage.*)</td>
+<td>The guest never receives cookies, tokens or <code>Set-Cookie</code>. The page only sees its own cookies, through the page.</td>
+</tr>
+<tr>
+<td>Third-party cookie blocking</td>
+<td>P1</td>
+<td>S</td>
+<td>host-engine (launch flag or prefs)</td>
+<td>Chrome's default is now partially blocked (memory; verify on 156). We keep the Chrome default and expose a toggle.</td>
+</tr>
+<tr>
+<td>Cookie viewer (name, domain, expiry, delete)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest, host-engine (Storage.getCookies, Storage.deleteCookies)</td>
+<td>This is also a DevTools Application panel item.</td>
+</tr>
+<tr>
+<td>localStorage, sessionStorage, IndexedDB, Cache Storage viewer</td>
+<td>P1</td>
+<td>M</td>
+<td>host-engine (Storage, DOMStorage, IndexedDB domains)</td>
+<td>DevTools Application.</td>
+</tr>
+<tr>
+<td>Service workers</td>
+<td>P2</td>
+<td>M</td>
+<td>host-engine (ServiceWorker domain)</td>
+<td>Chrome runs them for us; the viewer is P2.</td>
+</tr>
+<tr>
+<td>Clear site data</td>
+<td>P1</td>
+<td>S</td>
+<td>host-engine (Storage.clearDataForOrigin)</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/extensions/reference/api/cookies" class="ext" target="_blank" rel="noopener noreferrer">cookies API</a>, <a href="https://developer.chrome.com/docs/extensions/reference/api/storage" class="ext" target="_blank" rel="noopener noreferrer">storage API</a>.</p>
+<h2 id="11-extensions">11. Extensions<a class="headerlink" href="#11-extensions" title="Link to this section">#</a></h2>
+<h3 id="11a-extension-host-our-own">11a. Extension host (our own)<a class="headerlink" href="#11a-extension-host-our-own" title="Link to this section">#</a></h3>
+<p>Chrome 137+ branded builds do not load extensions from the command line (verified fact 3), so we run them ourselves. The minimal and honest plan is in <code>browser-architecture.md</code> section g. The feature list here is the MV3 subset.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load an unpacked extension folder (user chooses it)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-shell</td>
+<td>Prompt for permissions.</td>
+</tr>
+<tr>
+<td>Install from a <code>.crx</code> or the Chrome Web Store</td>
+<td><strong>Out of scope</strong> for v1</td>
+<td>none</td>
+<td>none</td>
+<td>Store downloads are an untrusted source; CRX install is a prompt-and-review flow we do not build in v1. Store terms also apply (memory).</td>
+</tr>
+<tr>
+<td>manifest.json: name, version, description, icons, permissions, host_permissions</td>
+<td>P1</td>
+<td>S</td>
+<td>host-shell</td>
+<td></td>
+</tr>
+<tr>
+<td>content_scripts (matches, run_at, js, css)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-engine (Page.addScriptToEvaluateOnNewDocument, Page.createIsolatedWorld)</td>
+<td>Isolated world per extension.</td>
+</tr>
+<tr>
+<td>action (toolbar button and popup)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-engine (a page target for the popup), guest (button and popup area)</td>
+<td>The popup renders as a host page target; the guest paints its display list in a popup area.</td>
+</tr>
+<tr>
+<td>background service worker</td>
+<td>P1</td>
+<td>L</td>
+<td>host-engine (a dedicated page target with our shim)</td>
+<td>MV3 service workers have no DOM; ours run in a page target. Behaviour differs.</td>
+</tr>
+<tr>
+<td>chrome.runtime (sendMessage, onMessage, getURL, getManifest, id)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-shell (shim)</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.storage (local; sync is local-only for us)</td>
+<td>P1</td>
+<td>S</td>
+<td>host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.tabs (query, create, update, remove, sendMessage)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-shell + host-engine</td>
+<td><code>tabs</code> permission warning.</td>
+</tr>
+<tr>
+<td>chrome.scripting (executeScript, insertCSS, registerContentScripts)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-engine (Runtime.evaluate in an isolated world)</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.alarms</td>
+<td>P1</td>
+<td>S</td>
+<td>host-shell</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.i18n</td>
+<td>P1</td>
+<td>S</td>
+<td>host-shell</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.permissions (request, contains, remove)</td>
+<td>P1</td>
+<td>S</td>
+<td>host-shell</td>
+<td>Prompts in the guest.</td>
+</tr>
+<tr>
+<td>chrome.action (setBadgeText, setIcon, setPopup)</td>
+<td>P1</td>
+<td>S</td>
+<td>host-shell</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.contextMenus</td>
+<td>P2</td>
+<td>M</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.commands (keyboard shortcuts)</td>
+<td>P2</td>
+<td>S</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.webNavigation</td>
+<td>P2</td>
+<td>S</td>
+<td>host-engine (Page events)</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.cookies</td>
+<td>P2</td>
+<td>M</td>
+<td>host-engine (Storage)</td>
+<td><code>cookies</code> permission, prompt.</td>
+</tr>
+<tr>
+<td>chrome.bookmarks, chrome.history, chrome.downloads</td>
+<td>P2</td>
+<td>M</td>
+<td>host-store</td>
+<td>Permission prompts.</td>
+</tr>
+<tr>
+<td>chrome.declarativeNetRequest</td>
+<td>P2</td>
+<td>L</td>
+<td>host-engine (Fetch domain)</td>
+<td>Ad blockers need this; large effort, honest limit.</td>
+</tr>
+<tr>
+<td>chrome.webRequest (blocking)</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>MV2-era; not in MV3 for most uses.</td>
+</tr>
+<tr>
+<td>chrome.debugger</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>An extension that drives other tabs through CDP is a security boundary we do not expose.</td>
+</tr>
+<tr>
+<td>chrome.sidePanel, chrome.offscreen, chrome.tabGroups</td>
+<td>P2</td>
+<td>M</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>chrome.identity, chrome.management, chrome.enterprise.*</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>OAuth and enterprise policy.</td>
+</tr>
+<tr>
+<td>chrome.nativeMessaging</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>Would let an extension run host programs.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/extensions/reference/api" class="ext" target="_blank" rel="noopener noreferrer">chrome.* reference</a>, <a href="https://developer.chrome.com/docs/extensions/develop/concepts/permission-warnings" class="ext" target="_blank" rel="noopener noreferrer">permission warnings</a>, <a href="https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3" class="ext" target="_blank" rel="noopener noreferrer">MV3 overview</a> (memory for the exact URL).</p>
+<h2 id="12-devtools">12. DevTools<a class="headerlink" href="#12-devtools" title="Link to this section">#</a></h2>
+<p>DevTools is a host-side product: the page is the host Chrome; the panels are our own guest UI that talks to CDP domains. The mapping is in <code>browser-architecture.md</code> section f. Per panel:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>P</th>
+<th>Effort</th>
+<th>CDP domains</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elements (DOM tree, outer HTML, select to highlight)</td>
+<td>P1</td>
+<td>M</td>
+<td>DOM, DOMSnapshot, Overlay</td>
+<td>Tree from DOM.getDocument; highlight on the page via Overlay.highlightNode, and as a guest-side box.</td>
+</tr>
+<tr>
+<td>Elements: Styles pane (computed and matched rules)</td>
+<td>P2</td>
+<td>L</td>
+<td>CSS (getMatchedStylesForNode, getComputedStyleForNode)</td>
+<td>Edit styles in place is P2.</td>
+</tr>
+<tr>
+<td>Elements: box model</td>
+<td>P2</td>
+<td>M</td>
+<td>DOM.getBoxModel</td>
+<td></td>
+</tr>
+<tr>
+<td>Console (messages, eval, errors, warnings)</td>
+<td>P1</td>
+<td>M</td>
+<td>Runtime (consoleAPICalled, exceptionThrown), Log, Console</td>
+<td>Our console input is a guest text field that calls Runtime.evaluate.</td>
+</tr>
+<tr>
+<td>Sources (files, breakpoints, step)</td>
+<td>P2</td>
+<td>L</td>
+<td>Debugger, Runtime</td>
+<td>Breakpoints and stepping go through the host. Large; the guest shows source text and line numbers.</td>
+</tr>
+<tr>
+<td>Network (request list, timing, headers, response size)</td>
+<td>P1</td>
+<td>M</td>
+<td>Network (requestWillBeSent, responseReceived, loadingFinished)</td>
+<td>Headers are shown to the user; they are not a secret store. Redact cookies and Authorization by default.</td>
+</tr>
+<tr>
+<td>Application (cookies, storage, service workers, cache)</td>
+<td>P1</td>
+<td>M</td>
+<td>Storage, DOMStorage, IndexedDB, CacheStorage, ServiceWorker</td>
+<td>Storage viewer shares its code with section 10.</td>
+</tr>
+<tr>
+<td>Performance (basic recording, a timeline of the main thread)</td>
+<td>P2</td>
+<td>L</td>
+<td>Tracing, Profiler, Performance</td>
+<td>Basic only: start, stop, a flame summary. The Chrome Performance panel is much more (see the official page).</td>
+</tr>
+<tr>
+<td>Memory (heap snapshot)</td>
+<td>P2</td>
+<td>L</td>
+<td>HeapProfiler</td>
+<td>Heap snapshots are large; cap the size.</td>
+</tr>
+<tr>
+<td>Lighthouse</td>
+<td>P2</td>
+<td>L</td>
+<td>none (runs Lighthouse on the host)</td>
+<td>Needs Node and the Lighthouse package on the host; out of the first version.</td>
+</tr>
+<tr>
+<td>Security (certificate and mixed content summary)</td>
+<td>P2</td>
+<td>S</td>
+<td>Security</td>
+<td></td>
+</tr>
+<tr>
+<td>Issues, Rendering, Layers, Animations</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>Recorder</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>Autofill panel</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>Section 8.</td>
+</tr>
+<tr>
+<td>Accessibility tree</td>
+<td>P2</td>
+<td>M</td>
+<td>Accessibility (getFullAXTree)</td>
+<td>Reuse for section 14.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/devtools" class="ext" target="_blank" rel="noopener noreferrer">DevTools overview</a>, <a href="https://developer.chrome.com/docs/devtools/performance/overview" class="ext" target="_blank" rel="noopener noreferrer">Performance panel overview</a>. The Elements, Network, Sources, Application, Memory and Lighthouse descriptions came from secondary guides, not official pages, and should be checked before M5.</p>
+<h2 id="13-accessibility">13. Accessibility<a class="headerlink" href="#13-accessibility" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keyboard navigation of the page (Tab, Shift+Tab, Enter on links and buttons)</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (Input.dispatchKeyEvent)</td>
+<td>The host Chrome focus model is authoritative; the guest shows focus rings from the display list.</td>
+</tr>
+<tr>
+<td>Focus ring drawn from the focused element's box</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>Screen reader output</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>The TempleOS guest has no speech; a text-only accessibility export is P2.</td>
+</tr>
+<tr>
+<td>Contrast and text scaling (zoom)</td>
+<td>P1</td>
+<td>S</td>
+<td>host-engine + guest</td>
+<td>Zoom is section 7.</td>
+</tr>
+<tr>
+<td>Reduced motion (prefers-reduced-motion)</td>
+<td>P2</td>
+<td>S</td>
+<td>host-engine (Emulation.setEmulatedMedia)</td>
+<td></td>
+</tr>
+<tr>
+<td>Accessibility tree export (dump the AX tree to the Console)</td>
+<td>P2</td>
+<td>S</td>
+<td>host-engine (Accessibility.getFullAXTree)</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/" class="ext" target="_blank" rel="noopener noreferrer">Accessibility domain</a> (memory for the exact URL).</p>
+<h2 id="14-reader-mode">14. Reader mode<a class="headerlink" href="#14-reader-mode" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reader view (article extraction, our typography)</td>
+<td>P1</td>
+<td>M</td>
+<td>host-shell (v0 reader code, upgraded) or host-engine (Readability.js injected into the page target)</td>
+<td>Readability.js is Apache-2.0 (memory; check the licence file before vendoring). The v0 reader lives in <code>scripts/browser-bridge.py</code> and stays available as a fallback.</td>
+</tr>
+<tr>
+<td>Reader mode toggle in omnibox</td>
+<td>P1</td>
+<td>S</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>Reader font, size, colours</td>
+<td>P1</td>
+<td>S</td>
+<td>guest + host-store</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://github.com/mozilla/readability" class="ext" target="_blank" rel="noopener noreferrer">Readability.js</a> (memory for the URL; check the licence).</p>
+<h2 id="15-media">15. Media<a class="headerlink" href="#15-media" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Images (JPEG, PNG, GIF first frame, WebP, AVIF, SVG)</td>
+<td>P0</td>
+<td>M</td>
+<td>host-engine (decode by Chrome), guest (cache and paint)</td>
+<td>Downscaled on the host to exact paint size (architecture section d). Animated GIF: first frame in v1.</td>
+</tr>
+<tr>
+<td>Video (HTML5 video element)</td>
+<td>P1</td>
+<td>L</td>
+<td>host-engine (screenshot tiles at intervals), host-shell (poster), guest (controls)</td>
+<td>The guest cannot decode video. Plan: poster frame plus a tile stream at 2 to 5 frames a second for a short clip; long video is out of scope in v1.</td>
+</tr>
+<tr>
+<td>Audio (HTML5 audio)</td>
+<td>P2</td>
+<td>L</td>
+<td>none in guest; host plays on the Mac speakers only with user approval</td>
+<td>The TempleOS guest has no audio driver (native-apps plan). Audio plays on the host only after the user's explicit approval per page, with a mute control.</td>
+</tr>
+<tr>
+<td>Widevine and other DRM (EME)</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>Verified fact 9. DRM content shows a placeholder: "Protected content is not supported".</td>
+</tr>
+<tr>
+<td>WebGL and canvas</td>
+<td>P1</td>
+<td>L</td>
+<td>host-engine (screenshot tiles of the element)</td>
+<td>Read-back of canvas pixels is slow; the tile stream is the fallback. Interactivity works through input events (the page keeps running on the host).</td>
+</tr>
+<tr>
+<td>Media controls and play/pause state</td>
+<td>P2</td>
+<td>M</td>
+<td>host-engine (Runtime on the media element)</td>
+<td></td>
+</tr>
+<tr>
+<td>Picture-in-picture</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://developer.chrome.com/docs/chromium" class="ext" target="_blank" rel="noopener noreferrer">Chrome media support (memory)</a>, <a href="https://chromiumbuilds.org/docs/widevine-drm/" class="ext" target="_blank" rel="noopener noreferrer">Widevine notes</a>.</p>
+<h2 id="16-new-tab-page-settings-and-other-ui">16. New-tab page, settings, and other UI<a class="headerlink" href="#16-new-tab-page-settings-and-other-ui" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New-tab page: omnibox, shortcut tiles (from bookmarks and most-visited), background</td>
+<td>P0</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td>Layout in <code>browser-architecture.md</code> section h.</td>
+</tr>
+<tr>
+<td>Most-visited tiles</td>
+<td>P1</td>
+<td>S</td>
+<td>host-store</td>
+<td>Local only.</td>
+</tr>
+<tr>
+<td>Settings page (search engine, startup page, default zoom, JS toggle, downloads folder, permissions list)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest + host-store</td>
+<td></td>
+</tr>
+<tr>
+<td>About page (version, Chrome engine version, licences)</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td>Must say which engine runs; include the Chrome version and the licence text.</td>
+</tr>
+<tr>
+<td>Context menus (link, image, text, page)</td>
+<td>P1</td>
+<td>M</td>
+<td>guest</td>
+<td>Page-level menu items: Back, Reload, Save, Print, Inspect.</td>
+</tr>
+<tr>
+<td>Keyboard shortcuts (Ctrl+L, Ctrl+T, Ctrl+W, Ctrl+R, Ctrl+F, Ctrl+Shift+I for DevTools, Ctrl+Shift+J for Console)</td>
+<td>P0</td>
+<td>S</td>
+<td>guest</td>
+<td>The Ctrl+Shift+I and Ctrl+Shift+J shortcuts are Chrome's (memory); map them so muscle memory works.</td>
+</tr>
+<tr>
+<td>Main menu (three dots)</td>
+<td>P0</td>
+<td>M</td>
+<td>guest</td>
+<td>Items: New tab, New window, New incognito window, History, Downloads, Bookmarks, Zoom, Print, Find, More tools (DevTools, Extensions), Settings, Help.</td>
+</tr>
+<tr>
+<td>Help and "About this browser"</td>
+<td>P1</td>
+<td>S</td>
+<td>guest</td>
+<td></td>
+</tr>
+<tr>
+<td>Profile switch</td>
+<td><strong>Out of scope</strong></td>
+<td>none</td>
+<td>none</td>
+<td>One throwaway profile per browser run; incognito is the second profile.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://support.google.com/chrome/answer/157179" class="ext" target="_blank" rel="noopener noreferrer">Chrome keyboard shortcuts help</a> (memory for the exact URL).</p>
+<h2 id="suggested-priority-cut">Suggested priority cut<a class="headerlink" href="#suggested-priority-cut" title="Link to this section">#</a></h2>
+<p><strong>P0 for the first usable build (M3):</strong> tab strip, omnibox with search, navigation, display list rendering, link clicks, text input into forms, scroll, zoom, find, downloads with prompt, permission prompts (deny), new-tab page, about page, keyboard shortcuts, main menu, security indicator.</p>
+<p><strong>P1 (M4 and M5):</strong> bookmarks and bar, history, session restore, reader mode, cookies viewer, site settings, print to PDF, DevTools Elements, Console, Network, Application; extensions: manifest, content scripts, action, background, storage, runtime, tabs, scripting, alarms.</p>
+<p><strong>P2 and out of scope:</strong> everything marked as such above. Sources of pressure: DevTools Performance and Memory, declarativeNetRequest, sync, passwords.</p>
+<h2 id="open-questions-for-the-user">Open questions for the user<a class="headerlink" href="#open-questions-for-the-user" title="Link to this section">#</a></h2>
+<ol>
+<li>Is the "Chrome Web Store installs" item out of scope for v1 (proposed: yes)?</li>
+<li>Is downloading to the host's Downloads folder acceptable as P2 with a prompt (proposed: yes)?</li>
+<li>Should audio play on the host Mac when a user approves it (proposed: yes, P2 with a mute control)?</li>
+<li>The name in the UI: "Kosmos Browser" with a Chrome-like layout (proposed) rather than any Google mark.</li>
+</ol>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/browser-architecture/index.html" rel="prev"><span>Previous</span>Kosmos Browser: architecture and specification</a><a class="next" href="../../docs/browser-plan/index.html" rel="next"><span>Next</span>Browser v0 for the HolyC desktop</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#how-to-read-this">How to read this</a></li><li><a href="#verified-facts-that-shape-the-inventory">Verified facts that shape the inventory</a></li><li><a href="#1-tabs-and-windows">1. Tabs and windows</a></li><li><a href="#2-omnibox-address-bar-and-search">2. Omnibox (address bar and search)</a></li><li><a href="#3-navigation">3. Navigation</a></li><li><a href="#4-bookmarks">4. Bookmarks</a></li><li><a href="#5-history">5. History</a></li><li><a href="#6-downloads">6. Downloads</a></li><li><a href="#7-find-in-page-zoom-print-and-pdf">7. Find in page, zoom, print and PDF</a></li><li><a href="#8-passwords-autofill-and-payments">8. Passwords, autofill and payments</a></li><li><a href="#9-permissions-and-site-settings">9. Permissions and site settings</a></li><li><a href="#10-cookies-and-storage">10. Cookies and storage</a></li><li><a href="#11-extensions">11. Extensions</a><ul><li><a href="#11a-extension-host-our-own">11a. Extension host (our own)</a></li></ul></li><li><a href="#12-devtools">12. DevTools</a></li><li><a href="#13-accessibility">13. Accessibility</a></li><li><a href="#14-reader-mode">14. Reader mode</a></li><li><a href="#15-media">15. Media</a></li><li><a href="#16-new-tab-page-settings-and-other-ui">16. New-tab page, settings, and other UI</a></li><li><a href="#suggested-priority-cut">Suggested priority cut</a></li><li><a href="#open-questions-for-the-user">Open questions for the user</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

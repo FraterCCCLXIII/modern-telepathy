@@ -1,0 +1,438 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yakopop: learn languages from the words on screen</title>
+<meta name="description" content="Yakopop is a language learning platform built on word-synced, colour-coded subtitles. This page lists its components, how they can be used anywhere, how transcripts and translations are made, and runs real extracted components live.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../kamikin/img/yakopop-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="assets/yakopop-demo.css">
+<link rel="stylesheet" href="yakopop.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-yakopop" href="#top" aria-label="Yakopop, top of page">
+      <img src="../kamikin/img/yakopop-logo.svg" alt="Yakopop" width="116" height="28">
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#learn">Learning</a>
+      <a href="#components">Components</a>
+      <a href="#demos">Live demos</a>
+      <a href="#anywhere">Use anywhere</a>
+      <a href="#transcripts">Transcripts</a>
+      <a href="#voices">Voices</a>
+      <a href="#games">Games</a>
+      <a href="#status">Status</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Learn a language from the words on screen.</h1>
+      <p class="lead">Yakopop turns video, and game dialogue, into subtitles you can study. Every word shows how it is written, how it is read, what it means and how it works in the sentence, and lights up with the part of the translation it matches.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#demos">Try the live components</a>
+        <a class="btn" href="#components">All the components</a>
+        <a class="btn" href="https://yakopop.com" rel="noopener">yakopop.com</a>
+      </p>
+      <p class="quiet">Yakopop is its own project. The Kamikin characters on this site come from the Kamikin game, which lives in the Yakopop repository. Source code is private.</p>
+    </div>
+
+    <figure class="hero-art" style="margin:0">
+      <div class="ykd ykd-frame" role="img" aria-label="A Japanese subtitle as Yakopop draws it: each word is a column with its reading, the word, its romanisation and its meaning, coloured by word, with the English translation underneath where each part has the colour of its word.">
+        <div class="subs hide-gr" aria-hidden="true" style="position:relative;left:auto;right:auto;bottom:auto;padding:0">
+          <div class="src" style="width:fit-content;max-width:100%;margin:0 auto;padding:6px 8px;border-radius:14px;background:rgba(0,0,0,.55)">
+            <div class="tok spoken" style="--c:#ff7a7a"><span class="rd">きょう</span><span class="og">今日</span><span class="ro">kyō</span><span class="gl">today</span></div>
+            <div class="tok p spoken" style="--c:var(--particle)"><span class="rd">は</span><span class="og">は</span><span class="ro">wa</span><span class="gl"><span class="tag">TOPIC</span></span></div>
+            <div class="tok active" style="--c:#ffb454"><span class="rd">てんき</span><span class="og">天気</span><span class="ro">tenki</span><span class="gl">weather</span></div>
+            <div class="tok p" style="--c:var(--particle)"><span class="rd">が</span><span class="og">が</span><span class="ro">ga</span><span class="gl"><span class="tag">SUBJ</span></span></div>
+            <div class="tok" style="--c:#ffe066"><span class="rd">いい</span><span class="og">いい</span><span class="ro">ii</span><span class="gl">good</span></div>
+            <div class="tok" style="--c:#5ee7a0"><span class="rd">ですね</span><span class="og">ですね</span><span class="ro">desu ne</span><span class="gl">isn't it</span></div>
+          </div>
+          <div class="en" style="width:fit-content;max-width:100%;margin:10px auto 0"><span class="plain">The </span><span class="w active" style="--c:#ffb454">weather</span><span class="plain"> is </span><span class="w" style="--c:#ffe066">nice</span><span class="plain"> </span><span class="w spoken" style="--c:#ff7a7a">today</span><span class="plain">, </span><span class="w" style="--c:#5ee7a0">isn't it</span><span class="plain">?</span></div>
+        </div>
+      </div>
+      <figcaption>A still made with the overlay's own markup and style sheet. The sentence is one of the sample sentences shipped in <code>packages/shared/src/langs.ts</code>. Live versions are in the demos below.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="learn" class="section">
+  <div class="wrap">
+    <h2>What Yakopop is for learning</h2>
+    <p class="sub">Yakopop is a platform for learning a language from things you already want to watch. The repository describes it as word-synced, colour-coded bilingual subtitles for language learners. A learner watches, reads along, looks up what they do not know, practises, and comes back to review.</p>
+
+    <ol class="steps-n">
+      <li><div>
+        <h3>Watch with layers <span class="badge ok">available</span></h3>
+        <p>Each subtitle word is a column of up to five rows: the <b>reading</b> (hiragana for Japanese, syllables with stress for Spanish), the <b>word</b> in its own script, the <b>romanisation</b> (rōmaji, pinyin, IPA and so on), the <b>meaning</b> in context and the <b>grammar</b> (part of speech and form). Below the words sits a <b>translation</b> in the language you choose, split into chunks that are linked to words. Particles are drawn grey; every other word gets its own colour, and its chunk in the translation uses the same colour. Rows can be shown, hidden, resized and reordered, and profiles remember the choice.</p>
+        <p class="from">Source: packages/overlay/src/SubtitleStack.tsx, player/LayersPanel.tsx, player/prefs.ts</p>
+      </div></li>
+      <li><div>
+        <h3>Look a word up <span class="badge ok">available</span></h3>
+        <p>Resting on a word opens a card with the word, its reading, its meaning in this sentence, the grammar, role markers explained (a topic marker is not translated, it is labelled) and a play button. For Japanese the card also pulls extra dictionary meanings, a JLPT level and a common-word flag from Jisho. While a card is open the video waits.</p>
+        <p class="from">Source: packages/overlay/src/WordCard.tsx, apps/server/src/dict/jisho.ts</p>
+      </div></li>
+      <li><div>
+        <h3>Practise <span class="badge ok">available</span> <span class="badge proto">prototype</span></h3>
+        <p>Available in the web app: a practice quiz on a video, favourites, completion and progress, flashcard decks with spaced repetition, and a learning path per language made of video lessons, full-screen practice lessons with hearts and XP, daily quests and a weekly leaderboard. Speaking practice (record yourself saying the line, each word marked said, close or missed) is built into the player but only appears when the host supplies a speech-to-text service, so it is marked prototype.</p>
+        <p class="from">Source: README.md "Supported now", docs/plans/learning-path.md, packages/overlay/src/player/practice.ts</p>
+      </div></li>
+      <li><div>
+        <h3>Hear it <span class="badge ok">available</span></h3>
+        <p>Click-to-hear voices: Kokoro for many languages, VOICEVOX characters for Japanese, and a designed-voice library. When no neural voice is reachable the player falls back to the browser's own voice. More in <a href="#voices">Voices</a>.</p>
+        <p class="from">Source: packages/overlay/src/player/neuralVoice.ts, apps/server/src/routes/tts.ts</p>
+      </div></li>
+      <li><div>
+        <h3>Many languages <span class="badge ok">available</span></h3>
+        <p>Videos in Japanese, Mandarin, Korean, Russian, Spanish, Hindi, Nepali, Thai and Tibetan. Translations into 12 languages (English, Spanish, French, German, Portuguese, Italian, Dutch, Polish, Turkish, Indonesian, Vietnamese, Hindi). The interface comes in 12 languages. Without a Claude key only Japanese can be built, with a free local annotator.</p>
+        <p class="from">Source: README.md "Languages", packages/shared/src/text.ts (OUTPUT_LANGS)</p>
+      </div></li>
+    </ol>
+
+    <p class="mini-h">The layers, per language</p>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Language</th><th>Reading row</th><th>Word row</th><th>Romanisation row</th></tr></thead>
+      <tbody>
+        <tr><td data-l="Language">Japanese</td><td data-l="Reading">Hiragana</td><td data-l="Word">Kanji and kana</td><td data-l="Romanisation">Rōmaji (Hepburn)</td></tr>
+        <tr><td data-l="Language">Mandarin</td><td data-l="Reading">Zhuyin</td><td data-l="Word">Hanzi</td><td data-l="Romanisation">Pinyin</td></tr>
+        <tr><td data-l="Language">Korean</td><td data-l="Reading">Pronounced, in Hangul</td><td data-l="Word">Hangul</td><td data-l="Romanisation">Revised Romanization</td></tr>
+        <tr><td data-l="Language">Russian</td><td data-l="Reading">Stress marks</td><td data-l="Word">Cyrillic</td><td data-l="Romanisation">Latin transliteration</td></tr>
+        <tr><td data-l="Language">Spanish</td><td data-l="Reading">Syllables, stress in capitals</td><td data-l="Word">Spanish</td><td data-l="Romanisation">IPA</td></tr>
+      </tbody>
+    </table></div>
+    <p class="from">Source: packages/shared/src/langs.ts (layers) and apps/server/src/pipeline/annotate.ts (LANG_RULES). Hindi, Nepali, Thai and Tibetan have their own rules in the same file.</p>
+  </div>
+</section>
+
+<section id="components" class="section">
+  <div class="wrap">
+    <h2>Every component, and how far along it is</h2>
+    <p class="sub">An inventory taken from the repository on 2026-10-25. Each badge repeats the status the sources give for that part. Paths are inside the private <code>yakopop</code> repository.</p>
+    <ul class="legend" aria-label="Status key">
+      <li><span class="badge ok">available</span> in the shipped web app or its README "Supported now"</li>
+      <li><span class="badge proto">prototype</span> built and working in the repo or a lab, not claimed as shipped</li>
+      <li><span class="badge plan">planned</span> a plan or a staged hook, not working yet</li>
+      <li><span class="badge unv">unverified</span> not checked against a running build</li>
+    </ul>
+
+    <h3 class="inv-group">The subtitle overlay (<code>packages/overlay</code>)</h3>
+    <ul class="inv">
+      <li><h4>SubtitleStack <span class="badge ok">available</span></h4><div><p>The colour-coded word columns over the linked translation, with the lit word, the half-lit spoken words, speaking-practice marks and an optional bouncing ball that lands on each syllable. Live demos 1 and 2.</p><p class="from">Source: packages/overlay/src/SubtitleStack.tsx, overlay.css</p></div></li>
+      <li><h4>WordCard <span class="badge ok">available</span></h4><div><p>The hover card: word, reading, meaning, grammar, dictionary extras (Jisho, Japanese only), a play button. Kept inside the player; can be drawn in a separate layer when the host scrolls (a chat thread).</p><p class="from">Source: packages/overlay/src/WordCard.tsx</p></div></li>
+      <li><h4>SubtitlePlayer <span class="badge ok">available</span></h4><div><p>The whole stage: stack, progress track with a tick per line, play and pause, previous and next line, replay, speed, full screen, keyboard shortcuts, the translation language menu, layers and look panels. It follows any <code>PlayerEngine</code>, so it plays over a video, a film or a game cut scene. Live demo 1.</p><p class="from">Source: packages/overlay/src/player/SubtitlePlayer.tsx</p></div></li>
+      <li><h4>PlayerEngine, videoEngine, useEnginePlayer <span class="badge ok">available</span></h4><div><p>The small interface a host implements (<code>time</code>, <code>duration</code>, <code>play</code>, <code>pause</code>, <code>seek</code>, <code>setRate</code>, <code>subscribe</code>), a ready-made one for an HTML5 <code>&lt;video&gt;</code>, and the hook that turns the clock into the current line and lit word.</p><p class="from">Source: packages/overlay/src/engine.ts, useEnginePlayer.ts</p></div></li>
+      <li><h4>Language and layer switch <span class="badge ok">available</span></h4><div><p>The translation language menu, the layers panel (show, hide, drag to reorder, size), looks (box, shadow, colours, highlight, ball) and built-in profiles Classic and Learner. In the Talk overlay the same idea is the 文A card. Live demos 1, 2 and 3.</p><p class="from">Source: packages/overlay/src/player/{LayersPanel,LookControls,prefs}.ts(x); apps/world/src/features/meeting/logic/talkView.ts (subsPanel)</p></div></li>
+      <li><h4>Speaking practice <span class="badge proto">prototype</span></h4><div><p>Record the learner, send the recording to an OpenAI-style transcription server the host supplies, match the words said against the line, show each word as said, close or missed. No microphone button appears without a host-supplied transcriber.</p><p class="from">Source: packages/overlay/src/player/{practice,recorder,speech,transcribe}.ts, PracticeCard.tsx</p></div></li>
+      <li><h4>Neural voice client <span class="badge ok">available</span></h4><div><p>Probes the voice server, speaks a word or a line with a neural voice, and falls back to the browser's voice when the server is not a 200. Needs a TTS server behind it.</p><p class="from">Source: packages/overlay/src/player/neuralVoice.ts</p></div></li>
+    </ul>
+
+    <h3 class="inv-group">The web app (<code>apps/web</code>)</h3>
+    <ul class="inv">
+      <li><h4>Watch page <span class="badge ok">available</span></h4><div><p>Overlay player over a YouTube lesson, plus transcript, word list, practice quiz, up next and creator info. Not extractable as a single component, so no demo here.</p><p class="from">Source: README.md "Pages" (/watch/lesson/:id)</p></div></li>
+      <li><h4>Flashcard decks <span class="badge ok">available</span></h4><div><p>Word and sentence cards with spaced repetition (due date, interval, ease).</p><p class="from">Source: README.md, docs/plans/curriculum.md</p></div></li>
+      <li><h4>Learning path, lessons, quests, leaderboard <span class="badge ok">available</span></h4><div><p>Per language: units of video lessons, full-screen practice lessons with hearts and XP, daily quests and a weekly leaderboard learners can opt out of.</p><p class="from">Source: docs/plans/learning-path.md</p></div></li>
+      <li><h4>Reels and clips <span class="badge ok">available</span></h4><div><p>Cut a 2 second to 3 minute clip with a word-snapped trimmer, keep it in a library, optionally publish it to a vertical feed of looping lines.</p><p class="from">Source: README.md, docs/plans/clips.md</p></div></li>
+      <li><h4>Studio <span class="badge ok">available</span></h4><div><p>Creators import YouTube videos, playlists or channels and choose languages, caption source, annotator, layers, range, level, style and a glossary. This is where transcripts become lessons (see <a href="#transcripts">Transcripts</a>).</p><p class="from">Source: README.md, apps/web studio pages, apps/server/src/routes/studio.ts</p></div></li>
+      <li><h4>Dubbed audio <span class="badge proto">prototype</span></h4><div><p>Swap a video's soundtrack for a dub in the language being learned; dubs may come from a creator, an AI voice or a service. Phase 1 is built.</p><p class="from">Source: docs/plans/dubbed-audio.md</p></div></li>
+      <li><h4>Curriculum package <span class="badge plan">planned</span></h4><div><p>Draft courses (Japanese units 1 to 6, primers for six other scripts) with exercises: choose, match, build, gap, compose, type. Its own doc calls the primers a draft needing a native speaker's read. Whether the public site uses it is <span class="badge unv">unverified</span>.</p><p class="from">Source: packages/curriculum, docs/plans/curriculum.md</p></div></li>
+    </ul>
+
+    <h3 class="inv-group">Everywhere else</h3>
+    <ul class="inv">
+      <li><h4>Browser extension <span class="badge proto">prototype</span></h4><div><p>The overlay drawn over streaming sites. Two sites are listed as tested; selectors for the others still need checking. A store listing is listed as "later".</p><p class="from">Source: apps/extension/README.md, docs/plans/extension.md</p></div></li>
+      <li><h4>Talk overlay <span class="badge proto">prototype</span></h4><div><p>Speech bubbles, thought clouds and shouts that follow characters' heads, a typewriter reveal with voice blips, the 文A language and layer card, word choices for the player. Live demo 3 (logic extracted, markup re-implemented).</p><p class="from">Source: apps/world/src/features/meeting/Talk.tsx, logic/talkView.ts, talkLangs/</p></div></li>
+      <li><h4>AI chat with characters <span class="badge proto">prototype</span></h4><div><p>Free conversation with townsfolk in the game, shown with the same subtitle stack inside the chat bubble, signed-in players only.</p><p class="from">Source: apps/world/src/features/npcChat/, apps/server/src/routes/npc.ts</p></div></li>
+      <li><h4>Godot HUD: SubtitleView and TalkBubbles <span class="badge proto">prototype</span></h4><div><p>The same stack in Godot (<code>SubtitleView</code>: reading, word, romanisation, colours, particles grey, English chunks in their word's colour, hover for meaning and grammar) and Solid-on-Godot talk bubbles. Not browser code, so it cannot run on this page. The web stack above is the reference it is held to.</p><p class="from">Source: apps/godot/hud/subtitle_view.gd, apps/godot/kosmos-js/js/hud/TalkBubbles.tsx</p></div></li>
+      <li><h4>Film subtitles <span class="badge proto">prototype</span></h4><div><p>The same player mounted on cut scenes, with a second "typed out letter by letter" style. Built in the film lab, ready to mount in the world game.</p><p class="from">Source: docs/plans/film-subtitles.md, apps/world/src/film/</p></div></li>
+      <li><h4>Speech server (TTS) <span class="badge ok">available</span></h4><div><p>One OpenAI-style endpoint over Kokoro, VOICEVOX and a designed-voice library, returning WAV with mouth shapes. A guarded proxy in the app server exposes it to the browser.</p><p class="from">Source: tools/tts/server.py, apps/server/src/routes/tts.ts</p></div></li>
+      <li><h4>Speech-to-text server <span class="badge proto">prototype</span></h4><div><p>faster-whisper behind <code>POST /v1/audio/transcriptions</code>, used by speaking practice and the film voice tool. In the lesson pipeline the transcribe stage exists but is not used yet.</p><p class="from">Source: tools/stt/server.py, apps/server/src/pipeline/providers.ts</p></div></li>
+      <li><h4>Face rigs and lip sync <span class="badge proto">prototype</span></h4><div><p>Characters' faces are 45 blendable channels (lids, special eyes, brows, mouths, manga marks, gaze) with about 65 named expressions, and the mouth follows the voice's viseme timings.</p><p class="from">Source: apps/world/src/face/README.md, tools/tts/server.py (x-visemes)</p></div></li>
+      <li><h4>Character kits: mochi, rubber hose, noodle <span class="badge proto">prototype</span></h4><div><p>Code-built cute characters. The mochi kit made the Kamikin cast.</p><p class="from">Source: apps/world/src/mochi/README.md, apps/world/src/hose/README.md</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="demos" class="section">
+  <div class="wrap">
+    <h2>Live components, taken from the app</h2>
+    <p class="sub">The demos below are Yakopop's own React components, bundled from copies of the source files into one small module that loads when you scroll here. They run with no network and no model: the sentences are the samples shipped in the repository, and a timer stands in for a video. Nothing leaves your browser.</p>
+    <p class="fine">The module is about 316 KB minified (see <code>README.md</code> in this folder for the build). Layer and language choices in demo 1 are kept in your browser's local storage under <code>yakopop.*</code> keys, as in the app.</p>
+
+    <article class="demo" id="demo-player">
+      <header><h3>1. SubtitlePlayer</h3><span class="badge ok">available</span></header>
+      <p class="fidelity">Faithful extraction. Only the clock behind it is ours.</p>
+      <p class="sub">The full player on a sample timeline. Press play; hover or tap a word for its card; open the translation menu, the CC panel (layers) and the gear (speed, look, keys). Space, arrow keys and F work while the player has focus.</p>
+      <div class="langs" role="group" aria-label="Sample language" data-lang-for="player">
+        <button type="button" aria-pressed="true" data-lang="ja">日本語</button>
+        <button type="button" aria-pressed="false" data-lang="es">Español</button>
+        <button type="button" aria-pressed="false" data-lang="ko">한국어</button>
+        <button type="button" aria-pressed="false" data-lang="zh">中文</button>
+      </div>
+      <div class="mount" data-demo="player" data-lang="ja"><p class="loading">Live demo loads when it comes into view.</p></div>
+      <noscript><p class="fine">This demo needs JavaScript.</p></noscript>
+      <details class="shape"><summary>Props and data shape</summary>
+<pre><code>&lt;SubtitlePlayer
+  lines={Line[]}        // timed lines, see "Transcripts" below
+  engine={PlayerEngine} // anything with a clock: &lt;video&gt;, a film, a cut scene
+  lang="ja"             // language of the words (layer names, word cards)
+  primary="en"          // language of line.en
+  title="Sample timeline"
+  captureKeys={false}   // keyboard only while the player has focus
+/&gt;
+
+interface PlayerEngine {
+  time(): number; duration(): number;
+  play(): void; pause(): void; seek(t: number): void; setRate(r: number): void;
+  subscribe(fn: (e: EngineEvent) =&gt; void): () =&gt; void;
+}</code></pre></details>
+      <p class="from">Source: packages/overlay/src/player/SubtitlePlayer.tsx, engine.ts, useEnginePlayer.ts. Sample data: packages/shared/src/langs.ts. One change: the player's accent colour is set to off-white so its bar matches this site's monochrome buttons.</p>
+    </article>
+
+    <article class="demo" id="demo-stack">
+      <header><h3>2. SubtitleStack, word card and layer switches</h3><span class="badge ok">available</span></header>
+      <p class="fidelity">Faithful extraction. The checkboxes call the same <code>profileStyle</code> the app uses.</p>
+      <p class="sub">The stack on its own, driven by the same engine hook. Press play to follow the sync, or tap a word to jump to it. Rest the pointer on a word (or focus it with Tab) for the word card. Switch the reading, romanisation, meaning and grammar rows, the colours and the translation language.</p>
+      <div class="langs" role="group" aria-label="Sample language" data-lang-for="stack">
+        <button type="button" aria-pressed="true" data-lang="ja">日本語</button>
+        <button type="button" aria-pressed="false" data-lang="es">Español</button>
+        <button type="button" aria-pressed="false" data-lang="ko">한국어</button>
+        <button type="button" aria-pressed="false" data-lang="zh">中文</button>
+      </div>
+      <div class="mount" data-demo="stack" data-lang="ja"><p class="loading">Live demo loads when it comes into view.</p></div>
+      <details class="shape"><summary>Props and data shape</summary>
+<pre><code>&lt;SubtitleStack
+  line={Line}            // one subtitle line
+  out="es"               // viewer's translation language
+  primary="en"           // language of line.en
+  mark={{ active: 2, spokenBefore: 2 }}   // lit word / half-lit words
+  lang="ja"              // turns on the hover card
+  className="hide-gl hide-gr"             // from profileStyle(profile)
+  style={{ "--s-og": 30, "--o-og": 0 }}   // row sizes and order
+  clock={() =&gt; mediaTime}                 // optional, for the ball
+/&gt;</code></pre></details>
+      <p class="from">Source: packages/overlay/src/SubtitleStack.tsx, WordCard.tsx, player/prefs.ts (profileStyle). The dictionary part of the card is switched off here (no network); the card's Jisho link is a plain link.</p>
+    </article>
+
+    <article class="demo" id="demo-talk">
+      <header><h3>3. Talk bubbles with word choices and the 文A card</h3><span class="badge proto">prototype</span></header>
+      <p class="fidelity">Logic extracted, markup re-implemented. The React component <code>Talk.tsx</code> is tied to the game engine (camera, entities), so only its pure logic file <code>talkView.ts</code>, the dialogue and the language tables run here. The bubbles' HTML and CSS are ours.</p>
+      <p class="sub">A conversation with the game's fox. Open 文A to pick the language (Japanese, Mandarin, Korean, Russian, Spanish, Hindi, Nepali, Thai, Tibetan or English) and switch the reading, romanisation and English layers. Tap a word to hear it with your browser's voice, if it has one. Choose what to say; thoughts are dashed.</p>
+      <div class="mount" data-demo="talk"><p class="loading">Live demo loads when it comes into view.</p></div>
+      <details class="shape"><summary>Props and data shape</summary>
+<pre><code>said(english, shown, lang, prefs, choice?) → {
+  plain: { typed, ghost } | null,        // English: the typewriter text
+  words: [{ rd, og, typed, ghost, ro, full, hear, title }],
+  spaced: boolean, bcp: "ja-JP", en: string | null,
+  enGhosted: boolean, hear: string | null, length: number
+}
+prefs = { lang: "ja", reading: true, romanization: true, english: true, readAloud: false }
+// a language file maps an English line to its words: "word|hiragana|romaji"
+"Hi! I'm here for the Sakura Trial.": ["こんにちは！||konnichiwa", "さくら||sakura", ...]</code></pre></details>
+      <p class="from">Source: apps/world/src/features/meeting/logic/talkView.ts (said, subsPanel, talkPrefs, typeStepMs, lingerMs), dialogue.ts, talkLangs/*.ts. Re-implementation of the markup in Talk.tsx and talk.css; the fox's dialogue is the game's own text.</p>
+    </article>
+
+    <article class="demo" id="demo-transcript">
+      <header><h3>4. Transcript to translation, to a subtitle file</h3><span class="badge proto">prototype</span></header>
+      <p class="fidelity">Sample data. Reading the cues uses the repository's real subtitle parser; the annotation and translation are looked up from the sample sentences, not computed. No model is called.</p>
+      <p class="sub">Pick a sample transcript or paste your own: a JSON list of cues, WebVTT or SRT. Cues that match a sample sentence get their word layers and translations in English, Spanish or French (Japanese, Korean, Mandarin) or English (Spanish). Anything else is reported as missing: that is the step where the real pipeline would call an annotator. Then download the translation as <code>.srt</code> or <code>.vtt</code>, made in your browser.</p>
+      <div class="mount" data-demo="transcript"><p class="loading">Live demo loads when it comes into view.</p></div>
+      <p class="from">Source: packages/shared/src/subtitles.ts (parseSubtitles), text.ts (translationOf, outputsFor), langs.ts (samples and their translations). File writing is ours.</p>
+    </article>
+  </div>
+</section>
+
+<section id="anywhere" class="section">
+  <div class="wrap">
+    <h2>Using it anywhere</h2>
+    <p class="sub">The subtitle player does not know about video. It reads a list of lines and a clock, so anything that has a clock can carry it. These are the integration paths the sources support, with how far each one goes.</p>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Where</th><th>How</th><th>Status</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td data-l="Where">The Yakopop web app</td><td data-l="How">A YouTube lesson with the player, transcript, quiz and decks.</td><td data-l="Status"><span class="badge ok">available</span></td><td data-l="Source">README.md</td></tr>
+        <tr><td data-l="Where">Over any HTML5 video</td><td data-l="How"><code>videoEngine(video)</code> wraps a <code>&lt;video&gt;</code> element in the engine interface; the player draws over it.</td><td data-l="Status"><span class="badge ok">available</span> in the repo</td><td data-l="Source">overlay/engine.ts</td></tr>
+        <tr><td data-l="Where">Over a streaming site</td><td data-l="How">Browser extension: a page hook reads the site's subtitle tracks, windows of about five minutes are annotated by the server and drawn in a shadow root over the player.</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Source">apps/extension</td></tr>
+        <tr><td data-l="Where">Over a film, a cut scene, a game</td><td data-l="How">Implement <code>PlayerEngine</code> over the film's or the game's clock (this page does it with a timer). Game dialogue goes through the overlay by design.</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Source">film-subtitles.md, ADR 0003</td></tr>
+        <tr><td data-l="Where">Inside a chat or a bubble</td><td data-l="How">The stack and its cards can be drawn in a layer of their own, for a host whose subtitles sit in a scrolling box.</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Source">overlay/env.tsx (portal)</td></tr>
+        <tr><td data-l="Where">Godot</td><td data-l="How"><code>SubtitleView</code> builds the stack from the same line data.</td><td data-l="Status"><span class="badge proto">prototype</span></td><td data-l="Source">apps/godot/hud</td></tr>
+        <tr><td data-l="Where">Game consoles</td><td data-l="How">The overlay is DOM today; the decision record says consoles need a native subtitle renderer.</td><td data-l="Status"><span class="badge plan">planned</span></td><td data-l="Source">ADR 0003</td></tr>
+        <tr><td data-l="Where">Your own annotation service</td><td data-l="How">Point the worker at a service that speaks the annotate contract (see Transcripts).</td><td data-l="Status"><span class="badge ok">available</span></td><td data-l="Source">providers.ts</td></tr>
+        <tr><td data-l="Where">Your own voice</td><td data-l="How">Any server speaking <code>POST /v1/audio/speech</code>; see Voices.</td><td data-l="Status"><span class="badge ok">available</span></td><td data-l="Source">tools/tts</td></tr>
+        <tr><td data-l="Where">Any web page, as an embeddable widget or published package</td><td data-l="How">No iframe widget or npm release is documented. <code>@yakopop/overlay</code> is a private workspace package with a React 18 peer dependency.</td><td data-l="Status"><span class="badge plan">planned</span> <span class="badge unv">unverified</span></td><td data-l="Source">overlay/package.json</td></tr>
+      </tbody>
+    </table></div>
+
+    <p class="mini-h">A host in a few lines</p>
+<pre><code>import { SubtitlePlayer, videoEngine } from "@yakopop/overlay";
+import "@yakopop/overlay/overlay.css";
+import "@yakopop/overlay/player.css";
+
+const engine = videoEngine(document.querySelector("video")!);
+// lines: Line[] from GET /api/lessons/:id, or your own annotated lines
+&lt;SubtitlePlayer lines={lines} engine={engine} lang="ja" primary="en" /&gt;</code></pre>
+    <p class="from">Source: packages/overlay/package.json (exports), src/index.ts, src/player/SubtitlePlayer.tsx. The package is inside the repository only. The hook <code>useOverlayEnv</code> lets a host supply its own translator for the UI strings, a dictionary lookup and the box word cards stay inside.</p>
+
+    <div class="note-card">
+      <p class="mono-h">Kamikin chat on this site</p>
+      <p>The Kamikin page on this site has a scripted Japanese practice chat built from the ideas of the Talk overlay and the subtitle stack. It does not use Yakopop's code: it is a separate vanilla implementation with hand-written lines, no AI model, and an optional local voice server. <a href="../kamikin/index.html">Open Kamikin</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="transcripts" class="section">
+  <div class="wrap">
+    <h2>How transcripts and translations are made</h2>
+    <p class="sub">The pipeline runs on the Yakopop server as queued jobs, not in the browser. Each stage is swappable: a provider registry lets a stage move to another service without touching the build. This is the real flow in <code>apps/server/src/pipeline/build.ts</code>.</p>
+
+    <ol class="steps-n">
+      <li><div>
+        <h3>1. Get the words <span class="badge ok">available</span> <span class="badge plan">planned</span></h3>
+        <p><b>Available:</b> the creator's or auto-generated YouTube captions, fetched with yt-dlp without downloading the video, or a <code>.vtt</code>, <code>.srt</code> or TTML file the creator uploads. The browser extension instead reads the text tracks the streaming page already loads (DASH and HLS manifests, WebVTT and TTML responses, or <code>video.textTracks</code>).</p>
+        <p><b>Planned:</b> speech-to-text for a video with no captions. The hook exists (<code>transcribe</code> stage, an OpenAI-compatible <code>POST …/audio/transcriptions</code> with <code>response_format=verbose_json</code>, reference server <code>tools/stt/server.py</code> running faster-whisper) but the pipeline does not use it yet, and video file upload is listed under "not yet".</p>
+        <p class="from">Source: apps/server/src/pipeline/captions.ts, providers.ts, docs/plans/extension.md, README.md</p>
+      </div></li>
+      <li><div>
+        <h3>2. Cues <span class="badge ok">available</span></h3>
+        <p>Whatever the source, the result is a list of timed text pieces. The builder groups caption text into chunks of about 200 characters with a per-character time map, so annotated sentences can be timed afterwards. Sound notes in SDH captions are dropped. The extension cuts a track into windows of about five minutes, each cached under a hash of language, target, annotator and text, so an episode is annotated once.</p>
+<pre><code>// packages/shared/src/subtitles.ts
+{ "start": 0.8, "end": 5.7, "text": "今日は天気がいいですね" }</code></pre>
+        <p class="from">Source: packages/shared/src/subtitles.ts (Piece, parseSubtitles, splitWindows), pipeline/captions.ts</p>
+      </div></li>
+      <li><div>
+        <h3>3. Annotate: words, readings, meanings, grammar <span class="badge ok">available</span></h3>
+        <p>An annotator turns caption text into sentence-sized lines. Each line is a list of tokens <code>[surface, reading, romanisation, gloss, grammar]</code> and a translation made of chunks that point at token numbers. Three annotators exist:</p>
+        <p><b>Claude</b> (a language model with structured JSON output and per-language rules for the reading and romanisation systems; best quality; may be limited to admins on a server). <b>A free local annotator for Japanese</b>: kuromoji for splitting, readings and parts of speech, wanakana for kana and rōmaji, Jisho's public API for meanings, with rougher results and a label saying so. <b>An external annotation service</b> that speaks Yakopop's contract: <code>POST {url}</code> with <code>{ lang, target, pieces, options }</code>, answering <code>{ lines: [{ start, end, t, en }] }</code>.</p>
+        <p>The rules the model follows are visible in the source: the tokens must add up to the caption text with nothing invented or dropped, a gloss is one to three words, particles with no equivalent get a role tag (<code>#TOPIC</code>, <code>#SUBJ</code>, <code>#OBJ</code>) instead of a translation, and every translated chunk carries the index of the source word it translates, or -1.</p>
+        <p class="from">Source: apps/server/src/pipeline/annotate.ts (systemPrompt, LANG_RULES), local-ja.ts, providers.ts</p>
+      </div></li>
+      <li><div>
+        <h3>4. Translate <span class="badge ok">available</span></h3>
+        <p>The annotator writes the translation into the creator's chosen target language as part of annotation, with every chunk linked to a word. Extra output languages travel on the same line as <code>line.tr</code> (a translation and one gloss per token, per language). Where an annotator does not translate on its own (the free local one), a sentence translator is used: a LibreTranslate-compatible service you configure, or MyMemory's free API (about 5,000 characters a day). A track in a dub's language starts from the captions in that language, or from the original captions machine-translated piece by piece, timings kept.</p>
+        <p class="from">Source: pipeline/providers.ts (translators), build.ts (translatePieces), packages/shared/src/text.ts (translationOf)</p>
+      </div></li>
+      <li><div>
+        <h3>5. Time the words <span class="badge ok">available</span> <span class="badge plan">planned</span></h3>
+        <p><b>Today:</b> timing is per line, taken from the caption cues (<code>timing: "line"</code>). The words inside a line are spread across it by weight, the length of their romanisation plus a constant, on the client (<code>wordAt</code>, <code>wordTime</code>). That is what lights the words in the demos above. <b>Planned:</b> per-word forced alignment. The speech-to-text server can already return word times (<code>timestamp_granularities[]=word</code>), and the film voice tool uses them.</p>
+        <p class="from">Source: pipeline/build.ts ("word timing is interpolated on the client for now"), packages/shared/src/text.ts, tools/stt/server.py</p>
+      </div></li>
+      <li><div>
+        <h3>6. Save and play <span class="badge ok">available</span></h3>
+        <p>The track is saved as a new version of that language's lesson, the player fetches it as JSON, and the extension asks the server for windows. A creator can edit lines afterwards in the studio, with revisions and restore.</p>
+<pre><code>GET  /api/lessons/:id
+POST /api/overlay/windows        { lang, target, site, pieces }  → key
+GET  /api/overlay/windows/:key   → status or lines
+GET  /api/translation/providers  → which stages are configured
+GET  /api/dict/:lang/:word       → dictionary entry for a word card</code></pre>
+        <p class="from">Source: apps/server/src/routes/{lessons,overlay,system,studio}.ts. The window cache returns lines only for a key the client could compute, so it never hands subtitles to someone who does not hold them.</p>
+      </div></li>
+    </ol>
+
+    <p class="mini-h">The data shapes</p>
+    <p class="fine">A line, as the repository defines it (<code>Line</code>, <code>Token</code>, <code>Segment</code> in packages/shared/src/types.ts). This is the first Japanese sample sentence with the times a lesson line would carry. <code>start</code> and <code>end</code> are absent on the shared demo sentences.</p>
+<pre><code>{
+  "start": 0.8, "end": 5.7,
+  "t": [
+    ["今日", "きょう", "kyō", "today", "noun · time"],
+    ["は", "は", "wa", "#TOPIC", "particle"],
+    ["天気", "てんき", "tenki", "weather", "noun"],
+    ["が", "が", "ga", "#SUBJ", "particle"],
+    ["いい", "いい", "ii", "good", "i-adjective"],
+    ["ですね", "ですね", "desu ne", "isn't it", "copula + particle"]
+  ],
+  "en": ["The ", ["weather", 2], " is ", ["nice", 4], " ", ["today", 0], ", ", ["isn't it", 5], "?"],
+  "tr": {
+    "es": {
+      "line": [["Hoy", 0], " hace ", ["buen", 4], " ", ["tiempo", 2], ", ", ["¿verdad?", 5]],
+      "gloss": ["hoy", "#TOPIC", "tiempo", "#SUBJ", "bueno", "¿verdad?"]
+    }
+  }
+}</code></pre>
+    <p class="fine">A lesson wraps lines with: <code>id</code>, <code>lang</code>, <code>videoLang</code>, <code>target</code>, <code>title</code>, <code>source</code> (YouTube id or upload), <code>captions</code> (<code>manual</code>, <code>auto</code>, <code>uploaded</code>), <code>annotatedBy</code> (<code>claude</code>, <code>hand</code>, <code>local</code>, <code>external</code>), <code>timing</code> (<code>line</code> or <code>word</code>), <code>audio</code> dubs and the sibling <code>subtitles</code> tracks.</p>
+    <p class="fine">What the speech-to-text server answers, when asked for word times:</p>
+<pre><code>{ "task": "transcribe", "language": "ja", "duration": 0, "text": "…",
+  "segments": [{ "id": 0, "start": 0, "end": 0, "text": "…",
+                 "words": [{ "word": "…", "start": 0, "end": 0, "probability": 0 }] }],
+  "words": [ … ] }</code></pre>
+    <p class="from">Source: tools/stt/server.py. Numbers are placeholders; the keys are the server's.</p>
+
+    <p class="mini-h">Try it yourself</p>
+    <p class="sub">The same flow from the command line, on a machine with the repository running. Only fetch captions for videos you have the rights to use.</p>
+<pre><code>npm run build-lesson -w @yakopop/server -- &lt;video url&gt; --lang ja --to en --max-minutes 3
+# the lesson is queued as a job; the worker fetches captions, annotates, translates and saves
+npm run prewarm-overlay -w @yakopop/server -- path/to/file.srt --lang ja --to en --site demo</code></pre>
+    <p class="from">Source: README.md "Video lessons (beta)", apps/extension/README.md. Demo 4 above shows the shape of the result with sample data.</p>
+  </div>
+</section>
+
+<section id="voices" class="section">
+  <div class="wrap">
+    <h2>Voices and mouth shapes</h2>
+    <p class="sub">Voices come from one text-to-speech server that speaks the OpenAI speech API, so a client does not care which engine says the line. The voice name picks the engine by its prefix. In the app, the browser never talks to that server directly: a thin proxy in the app server checks the request, limits it per user (or per address for guests) and passes it on.</p>
+    <ul class="grid-cards">
+      <li><h3>Kokoro <span class="badge ok">available</span></h3><p>Fast, soft voices in many languages, including Japanese. Voices can be blended to make new ones. Apache 2.0 model.</p><p class="from">Voice prefix kokoro:</p></li>
+      <li><h3>VOICEVOX <span class="badge ok">available</span></h3><p>Anime-style Japanese character voices. Each voice has its own terms of use and asks for a credit.</p><p class="from">Voice prefix voicevox:</p></li>
+      <li><h3>Designed-voice library <span class="badge proto">prototype</span></h3><p>Base voices designed from text descriptions with Qwen3-TTS and cloned into ten languages, with moods. It needs its own speech server (Apple silicon, or a PyTorch backend elsewhere), so it runs in development.</p><p class="from">Voice prefix qwen:, tools/voices</p></li>
+    </ul>
+<pre><code>POST /v1/audio/speech
+{ "input": "こんにちは", "voice": "kokoro:jf_alpha", "speed": 1.0, "reading": "こんにちは" }
+
+200 audio/wav   24 kHz, mono
+x-visemes: [[viseme, start, end], ...]   seconds into the audio; visemes aa ee ih oh ou fv mbp sil</code></pre>
+    <p class="fine">The <code>reading</code> field gives Kokoro the kana when the Japanese pronunciation engine is not installed. The proxy accepts one short text per request (up to 400 characters), speed from 0.5 to 2, and answers 404 when no neural voice exists, so clients fall back to the browser's voice. Mouth shapes drive the characters' faces; the library's voices send speech start and end times instead.</p>
+    <p class="from">Source: tools/tts/server.py, apps/server/src/routes/tts.ts, packages/overlay/src/player/neuralVoice.ts, docs/plans/anime-voices.md. Credits as the repository states them: VOICEVOX (春日部つむぎ, 白上虎太郎, ずんだもん), Kokoro, and Whisper via faster-whisper.</p>
+  </div>
+</section>
+
+<section id="games" class="section">
+  <div class="wrap">
+    <h2>Games, characters and where Kamikin fits</h2>
+    <p class="sub">Yakopop's decision record says it is the learning layer inside every game: games show dialogue through the overlay and words met in play are meant to go to the player's deck. Kamikin, the cute mochi universe for young children, is the first game built that way, and it teaches Japanese words.</p>
+    <ul class="grid-cards two">
+      <li><h3>Kamikin <span class="badge proto">prototype</span></h3><p>Mochi friends on a round meadow wake things by saying their words, first in Japanese and then in the player's language. Two implementations exist in the repositories, a Godot slice and a port to the Kosmos engine. A public play site is not documented, so availability is <span class="badge unv">unverified</span>.</p><p class="from">Source: docs/kamikin-context.md, games/kamikin/README.md</p></li>
+      <li><h3>Season 1 and the curriculum <span class="badge plan">planned</span></h3><p>A design for lessons Monday to Friday (Hello Meadow, Pond Friends, Count the Stones, Snack Share, Review) with at most six new items each. Design and draft content, not a shipped course.</p><p class="from">Source: docs/plans/kamikin-season1.md, packages/curriculum</p></li>
+      <li><h3>Words to the deck <span class="badge plan">planned</span></h3><p>The design sends words met in a game to the learner's flashcard deck. The notes say nothing in the game calls the deck yet.</p><p class="from">Source: docs/adr/0003-yakopop-learning-layer.md</p></li>
+      <li><h3>Other games on the same platform <span class="badge unv">unverified</span></h3><p>The repository also holds the Yakopop world game and Kosmica. They use the same overlay but are not described here beyond that.</p><p class="from">Source: docs/ROADMAP.md</p></li>
+    </ul>
+    <div class="note-card kam-note">
+      <img src="../kamikin/img/yakopop-logo.svg" alt="Yakopop" width="150" height="36">
+      <div>
+        <p class="mono-h">Provenance</p>
+        <p>Yakopop is the language learning platform; its repository is private (<code>Modern-Telepathy/yakopop</code>) and its README says it is live at <a href="https://yakopop.com" rel="noopener">yakopop.com</a>. Kamikin is the game that lives in that repository. The Kamikin characters shown on the <a href="../kamikin/index.html">Kamikin page</a> of this site are the game's mochi cast, converted for this site. This page is a Kamiji study of Yakopop's public description and of its code, read-only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap split">
+    <h2>What is not claimed</h2>
+    <div>
+      <p class="sub">Yakopop's README lists these as not yet built: video file uploads, speech-to-text for videos without captions, connecting a YouTube account, follows, playlists or series, reports from learners, analytics and billing (plans and limits work, but an admin sets plans until a payment provider is connected). The pricing page in the app is a mock-up, and this page states no prices.</p>
+      <p class="sub">Left out of this page on purpose: server addresses, deployment files, keys and settings, user accounts and data, and the way the voice server is reached in production. The TTS proxy is described only by what it accepts and returns.</p>
+      <p class="sub">Not checked against running builds: the status badges repeat what the repository's documents say. Nothing here was run against the live site except the extracted components on this page, which run on sample data.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Yakopop study page. Yakopop is a separate project; its components are shown here as read-only copies for demonstration.</p>
+    <p>Credits: VOICEVOX, Kokoro and Whisper as stated in the Yakopop README. Kamikin characters from the Kamikin game.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="yakopop.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

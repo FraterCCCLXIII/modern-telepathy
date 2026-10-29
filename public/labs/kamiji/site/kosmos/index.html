@@ -1,0 +1,660 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reality Kosmos Engine</title>
+<meta name="description" content="Reality Kosmos Engine is an experimental 3D engine written in Rust on wgpu. This page shows what it is, what runs on it, and what has been measured.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='9' fill='%231f2a22'/%3E%3Cpath d='M11 9v14M11 16l9-7M11 16l9 7' stroke='%23f0efe7' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="kosmos.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-logo" href="#top" aria-label="Kosmos, back to top"><img src="../img/kosmos-logo.svg" alt="Kosmos" width="128" height="26"></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#what">What it is</a>
+      <a href="#features">Features</a>
+      <a href="#previs">Previs</a>
+      <a href="#animation">Animation</a>
+      <a href="#studio">Studio</a>
+      <a href="#effects">Effects</a>
+      <a href="#engine">Engine</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#libraries">Libraries</a>
+      <a href="#compatibility">Compatibility</a>
+      <a href="#built">Built on it</a>
+      <a href="#builder">Try it</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#faces">Faces</a>
+      <a href="#licence">Licence</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <p class="kicker">Reality Kosmos Engine</p>
+      <h1>Build a reality,<br>not a scene.</h1>
+      <p class="lead">An experimental 3D engine written in Rust on wgpu. Prototype games, a film player, character labs and an editor run on it, and agents can drive it over a headless protocol.</p>
+    </div>
+  </div>
+  <figure class="hero-wide">
+    <img src="img/kamikin-in-engine.webp" width="1400" height="788" alt="Pocket Meadow running in the engine: a pink bunny, a fox and an orange friend in a park with a fountain, with a Japanese dialogue line at the bottom">
+    <figcaption class="wrap">Pocket Meadow in the engine. Real capture from kosmos-engine, 16 Oct 2026.</figcaption>
+  </figure>
+</section>
+
+<section id="what" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>What it is</h2>
+      <p class="sub">Experimental. Started on 15 October 2026.</p>
+    </div>
+    <div class="prose">
+      <p>Kosmos Engine is a 3D engine in Rust. Its README calls it a third backend beside PlayCanvas on the web and Godot in the Yakopop repository. The plan of record asks for a fixed-tick, seeded, replayable simulation, everything stored as text, and a headless mode, so that people and AI agents can build and test with the same commands.</p>
+      <p>It is a private repository today. The games below are prototypes, not products.</p>
+      <dl class="facts">
+        <div><dt>Language</dt><dd>Rust, edition 2024</dd></div>
+        <div><dt>Renderer</dt><dd>wgpu 30.0.1 (Metal, Vulkan, DX12, WebGPU)</dd></div>
+        <div><dt>Workspace</dt><dd>45 crates plus runner apps</dd></div>
+        <div><dt>Runners</dt><dd>Native window, headless CLI and MCP, browser runner in the repo</dd></div>
+        <div><dt>Browser build</dt><dd>Code exists, no public build found</dd></div>
+        <div><dt>Licence</dt><dd>MIT OR Apache-2.0</dd></div>
+      </dl>
+      <p class="src">Sources: kosmos-engine README.md, Cargo.toml, rust-toolchain.toml, docs/plans/rust-engine.md, apps/kosmos-web. Counts taken 24 Oct 2026.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="shots" aria-label="Captures from the engine">
+      <figure><img src="img/kamikin-in-engine.webp" width="1400" height="788" loading="lazy" alt="Pocket Meadow in the engine: two mochi characters on grass, a fountain and a dialogue box."><figcaption>Kamikin on the engine. Capture of 16 Oct 2026.</figcaption></figure>
+      <figure><img src="img/kosmica-in-engine.webp" width="1400" height="788" loading="lazy" alt="Kosmica prototype in the engine: a village square with a quest list, a compass and a dialogue box."><figcaption>Kosmica prototype, HUD on the native painter. Capture of 16 Oct 2026.</figcaption></figure>
+      <figure><img src="img/editor.webp" width="1400" height="875" loading="lazy" alt="The engine editor: a scene tree, three coloured cubes in the viewport and an inspector."><figcaption>The editor with the cube demo scene. Capture of 16 Oct 2026.</figcaption></figure>
+    </div>
+    <p class="shot-note">Captured from the native app (kosmos-app), not from a browser. Source: kosmos-engine reports/.</p>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>Features</h2>
+    <p class="sub intro">What the engine does today and what is only planned, from the crates, the plans and the reports. A badge says how far each one is. Nothing here is a shipped product.</p>
+    <p class="jump" aria-label="Jump to a feature in detail">In detail: <a href="#ui">The UI</a>, <a href="#workshops">Workshops</a>, <a href="#physics">Physics</a>, <a href="#airships">Airships</a>, <a href="#previs">Previs and games</a>, <a href="#animation">Animation</a>, <a href="#studio">Character Studio</a>, <a href="#effects">Effects</a>.</p>
+    <ul class="cards feat">
+      <li><h3>Replayable simulation <span class="badge ok">tested</span></h3><p>Fixed tick of 1/64 s, seeded random numbers, a state hash, snapshot, restore and replay. CI compares the hash of native builds with the wasm32 build under wasmtime, and on macOS.</p><p class="src">Source: kosmos-core, kosmos-sim, .github/workflows/engine.yml, engine-matrix.yml.</p></li>
+      <li><h3>wgpu renderer <span class="badge">prototype</span></h3><p>Flat, toon and PBR looks, shadows, sky and clouds, grass, water, motion blur and an HDR tone map, with 54 JSON schemas for the data around it. Shaders are WGSL files in the repo.</p><p class="src">Source: crates/kosmos-render/src, schemas/, looks/.</p></li>
+      <li><h3>Headless protocol <span class="badge">prototype</span></h3><p>Typed JSON messages over stdio or WebSocket, a typed TypeScript client, and an MCP server over the same protocol. The step request is the only thing that advances the sim.</p><p class="src">Source: kosmos-protocol, apps/kosmos-cli, packages/kosmos-protocol-sdk.</p></li>
+      <li><h3>Editor <span class="badge">prototype</span></h3><p>An egui editor inside the native app: scene tree, inspector, gizmos, undo, and a list of labs. See The UI below.</p><p class="src">Source: apps/kosmos-app/src/editor, kosmos-cmd.</p></li>
+      <li><h3>HUD in TypeScript <span class="badge">prototype</span></h3><p>Solid components run on Hermes and drive a retained HUD tree that the app paints natively. See Architecture.</p><p class="src">Source: crates/kosmos-host, kosmos-ui, games/kosmica-real.</p></li>
+      <li><h3>Characters and faces <span class="badge">prototype</span></h3><p>Animation graph, 45 face channels, a face plate for heads without morph targets, wardrobe arithmetic, a mochi importer and glTF morph targets.</p><p class="src">Source: kosmos-anim, -face, -faceplate, -wardrobe, -model.</p></li>
+      <li><h3>Film, subtitles, audio <span class="badge">prototype</span></h3><p>Compiled film timelines with camera, actors, subtitles and cues. Cue-driven audio over kira, and a client for a local text-to-speech server.</p><p class="src">Source: kosmos-film, kosmos-audio.</p></li>
+      <li><h3>Assets <span class="badge">prototype</span></h3><p>A content-hashed cache with hot reload, and importers for glTF, FBX, OBJ and mochi. Mesh writers for STL, PLY, OBJ and 3MF, and a KTX2 writer.</p><p class="src">Source: kosmos-assets, kosmos-model, kosmos-meshops, kosmos-texops.</p></li>
+      <li><h3>Physics <span class="badge">prototype</span></h3><p>Rapier colliders, queries and a character controller. A rigid-body world exists but no app uses it. See Physics below.</p><p class="src">Source: crates/kosmos-physics.</p></li>
+      <li><h3>Airships <span class="badge">prototype</span></h3><p>Flight, decks, docking, sway and a planet to land on, checked against numbers from the web code. See Airships below.</p><p class="src">Source: crates/kosmos-airship.</p></li>
+      <li><h3>Browser runner <span class="badge">unverified</span></h3><p>A wasm and WebGPU runner builds a single canvas of the default scene. No public build was found and no browser frame time is measured.</p><p class="src">Source: apps/kosmos-web.</p></li>
+      <li><h3>Networking, game scripting in wasm <span class="badge plan">planned</span></h3><p>Named in the plan (kosmos-net, wasm components). No such crate exists. The plugin crate is data-only.</p><p class="src">Source: docs/plans/rust-engine.md, crates/kosmos-plugin.</p></li>
+      <li><h3>Mobile and consoles <span class="badge plan">not found</span></h3><p>Nothing in the repository targets iOS, Android or a console. The consoles idea belongs to the Godot work in Yakopop.</p><p class="src">Source: searched Cargo.toml and CI files.</p></li>
+    </ul>
+
+    <h3 class="tbl-h">Support matrix</h3>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Support matrix, scrolls sideways on small screens">
+    <table>
+      <caption>Platforms, backends and formats. Tested means a run in the reports or in CI.</caption>
+      <thead><tr><th scope="col">Target</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">macOS, Metal, Apple M3 Max</th><td>Tested</td><td>Parity and frame-time reports</td></tr>
+        <tr><th scope="row">Linux, Vulkan on lavapipe (software)</th><td>Tested in CI</td><td>Render goldens in engine.yml</td></tr>
+        <tr><th scope="row">Linux, native against wasm32 hash</th><td>Tested in CI</td><td>engine-hash job</td></tr>
+        <tr><th scope="row">Windows</th><td>Unverified</td><td>A CI build job exists, its scope was not read</td></tr>
+        <tr><th scope="row">Real-GPU Vulkan, DX12</th><td>Untested</td><td>Offered by wgpu, no report</td></tr>
+        <tr><th scope="row">WebGPU in a browser</th><td>Untested</td><td>Runner code exists, no public build</td></tr>
+        <tr><th scope="row">Audio: CoreAudio, WASAPI, ALSA, Web Audio</th><td>Untested</td><td>Listed by the audio crate through cpal</td></tr>
+        <tr><th scope="row">Gamepads</th><td>Unverified</td><td>gilrs is a dependency, no test seen</td></tr>
+        <tr><th scope="row">Scene JSON, schemas</th><td>Tested</td><td>Goldens under tests/</td></tr>
+        <tr><th scope="row">glTF import and export, mochi import</th><td>Implemented</td><td>kosmos-model, tests/golden</td></tr>
+        <tr><th scope="row">FBX, OBJ import</th><td>Implemented</td><td>Dependencies fbxcel, tobj. Coverage not read</td></tr>
+        <tr><th scope="row">Godot scenes or GDScript</th><td>Not found</td><td>No importer in the model crate</td></tr>
+        <tr><th scope="row">iOS, Android, consoles</th><td>Not found</td><td>No target in the repository</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src">Sources: kosmos-engine .github/workflows, Cargo.toml, crates/kosmos-model, kosmos-audio, apps/kosmos-web. Read 24 Oct 2026.</p>
+  </div>
+</section>
+
+<section id="ui" class="section breakout-sec">
+  <div class="wrap breakout">
+    <figure class="bo-img"><img src="img/feat-ui.webp" width="1400" height="875" loading="lazy" alt="The engine editor showing the Ball worlds lab: a list of labs on the left, controls beside it, and a small green round planet with trees and a path in the viewport."><figcaption>Editor with the Ball worlds lab. Capture of 17 Oct 2026.</figcaption></figure>
+    <div class="bo-text">
+      <h2>The UI <span class="badge">prototype</span></h2>
+      <p>The editor lives inside kosmos-app and is built with egui. It has a left rail of views, a scene tree, an inspector, gizmos, a bottom output panel and a list of labs, each lab a small playable page. Commands go through typed edit commands with undo and redo.</p>
+      <p>The editor has three themes: Dark, Kosmica and a Godot HUD theme taken from Yakopop's tokens. Headless UI tests drive the widgets through their accessibility labels. An older Solid and Vite dev UI is parked. A separate Watch view is described in a plan and was not checked.</p>
+      <p class="src">Source: apps/kosmos-app/src/editor, docs/themes/godot-hud.md, apps/dev-ui/README.md, reports/labs-ball.png.</p>
+    </div>
+  </div>
+</section>
+
+<section id="workshops" class="section breakout-sec">
+  <div class="wrap breakout rev">
+    <figure class="bo-img"><img src="img/feat-workshop.webp" width="1400" height="875" loading="lazy" alt="The Kamikin studio on this site: a list of options on the left, and a brown fawn mochi character with large ears on a cream background."><figcaption>Kamikin studio on this site. Capture of 24 Oct 2026.</figcaption></figure>
+    <div class="bo-text">
+      <h2>Workshops <span class="badge">prototype</span></h2>
+      <p>The word covers two things. On this site the Workshops are three studios for building a character: a Kamiji hand, a Kamikin mochi and an emoji face. They run on three.js in the browser, not on the Kosmos renderer.</p>
+      <p>In the engine, labs are the working equivalent: more than 40 lab files in the editor, such as broom, hoverboard, mecha, dragon, wardrobe and airship. A draft plan of 17 Oct 2026 proposes one workshop space per area on the editor rail. It says nothing in it is built, so treat that part as planned.</p>
+      <p class="links"><a href="../workshop/kamikin.html">Open the Kamikin studio</a></p>
+      <p class="src">Source: site/workshop/studios.js, kosmos-engine docs/plans/workshops.md, apps/kosmos-app/src/editor/lab_*.rs.</p>
+    </div>
+  </div>
+</section>
+
+<section id="physics" class="section breakout-sec">
+  <div class="wrap breakout">
+    <figure class="bo-img"><img src="img/feat-physics.webp" width="1400" height="875" loading="lazy" alt="The Broom lab in the editor: a small character on a broom over a flat lilac meadow with hills and floating rings in the distance."><figcaption>Broom lab, which asks the physics crate for the ground. Capture of 17 Oct 2026.</figcaption></figure>
+    <div class="bo-text">
+      <h2>Physics engine <span class="badge">prototype</span></h2>
+      <p>The physics crate wraps Rapier 0.36.1 with its enhanced-determinism option and no threads or SIMD, so results depend only on the scene. It has static colliders, ray and shape queries, and a kinematic character controller. A stepped rigid-body world exists, but no sim or app code uses it. Its gate is a hash case that must match between native and wasm.</p>
+      <p>The broom, mecha, capture and ball labs and the HUD world queries use the static part. Vehicles are a separate arcade handling model ported from the web code, not Rapier. No buoyancy or water physics and no ragdoll were found. The flesh crate does cosmetic soft chains only. The one measured number is crowd steering: 300 people took 1.25 ms per tick, against 9.2 ms for the TypeScript version on V8. The capture shows a lab that uses the ground queries, not colliders drawn.</p>
+      <p class="src">Source: crates/kosmos-physics/src/lib.rs, kosmos-vehicle, kosmos-flesh, reports/parity-frametime.md, reports/labs-broom-rider.png.</p>
+    </div>
+  </div>
+</section>
+
+<section id="airships" class="section breakout-sec">
+  <div class="wrap breakout rev">
+    <figure class="bo-img"><img src="img/feat-airship.webp" width="1400" height="875" loading="lazy" alt="The Airship lab: a wooden galleon hung under four striped balloons flying over the curved horizon of a planet, with a flight readout at the top."><figcaption>Airship lab, the Heron galleon, 1 of 41 designs. Capture of 18 Oct 2026.</figcaption></figure>
+    <div class="bo-text">
+      <h2>Airship support <span class="badge">prototype</span></h2>
+      <p>The airship crate ports the web game's flight model, deck geometry and walking on a moving deck, sway and rope, docking and landing, the globe maths and part of the Terra planet. Each part is checked against numbers from the TypeScript, and the hashes match between native and wasm. A loader reads 41 of 42 baked ship designs, and an Airship lab in the editor flies them.</p>
+      <p>Not done, per the plan of 18 Oct 2026: rigging and livery, sails in the lab, the race lab, and Terra roads and rivers. The sail rigging study lives in a Yakopop worktree. The port does not use a physics engine. Flight is a formula, not a simulation of air.</p>
+      <p class="src">Source: crates/kosmos-airship, docs/plans/airship-port.md, yakopop-sails docs/plans/sail-rigging.md, reports/labs-airship-ships.png.</p>
+    </div>
+  </div>
+</section>
+
+<section id="previs" class="section breakout-sec">
+  <div class="wrap">
+    <div class="breakout">
+      <figure class="bo-img"><img src="img/feat-previs.webp" width="1400" height="875" loading="lazy" alt="The engine editor on its Timeline tab with a film loaded: tracks for camera shots, two actors, dialogue lines and a title card, laid out along a time ruler of about 25 seconds."><figcaption>Timeline tab with the demo film. Capture of 18 Oct 2026.</figcaption></figure>
+      <div class="bo-text">
+        <h2>Previs and game development <span class="badge">prototype</span></h2>
+        <p>Previs, short for previsualization, is the planning stage before final production: you block out shots, cameras, staging and timing, then cut them into a rough timed version (an animatic) to judge the sequence before anything is polished. Dedicated tools exist for that job. Kosmos is not one of them. It has several parts a previs workflow needs, in an engine where the same data can also become a game.</p>
+        <p>A film in the engine is a compiled timeline: a list of scenes, each with tracks of timed events for camera shots, actors, dialogue and subtitles, cards, fades and sound cues. Every channel is a pure function of time, so the film can be scrubbed, skipped and played frame by frame with the same result. The editor shows those tracks on its Timeline tab.</p>
+        <p class="src">Source: crates/kosmos-film/src/lib.rs, schemas/film.schema.json, apps/kosmos-app/src/editor/timeline.rs, reports/timeline-film.png.</p>
+      </div>
+    </div>
+    <div class="cols2 after-bo">
+      <div>
+        <h3>Previs: what is there</h3>
+        <ul class="list">
+          <li><h3>Shots and cameras <span class="badge">prototype</span></h3><p>The film player outputs a camera as position, look-at, field of view and roll, with shot cuts, transitions and accents. The demo film in the capture cuts through eight shots, from fixed and medium to over-the-shoulder and close.</p></li>
+          <li><h3>Staging and actors <span class="badge">prototype</span></h3><p>Each actor has an acts track that sets animation parameters on the engine's own characters, plus hands and face from the film data. Staging uses the same models and rigs as the games.</p></li>
+          <li><h3>Timing, subtitles and cues <span class="badge">prototype</span></h3><p>Time runs on the sim's 64 Hz tick. A frame carries the subtitle line, a card, a fade, light and screen effects, and the cues that fire in that tick: a line begins, a sound, a cut.</p></li>
+          <li><h3>Agents can drive it <span class="badge">prototype</span></h3><p>The headless protocol steps the sim, applies typed scene edits and takes screenshots on a build with rendering, over stdio, WebSocket or MCP. That film playback is exposed through the protocol was not checked.</p></li>
+          <li><h3>Animatic export, shot lists <span class="badge plan">not found</span></h3><p>No video, image-sequence or shot-list export, and no previs mode, was found. Films are compiled from sources written outside this repository, so the editor reads them rather than authoring them.</p></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Game development: what is there</h3>
+        <ul class="list">
+          <li><h3>Scenes and assets <span class="badge">prototype</span></h3><p>Scenes are JSON that can be parsed, written, diffed and resolved from prefabs. Models come in through glTF, FBX, OBJ and mochi importers, with a content-hashed cache and hot reload.</p></li>
+          <li><h3>Character controller and physics <span class="badge">prototype</span></h3><p>A kinematic character controller and ray and shape queries on Rapier, plus a walker for round planets. See Physics above.</p></li>
+          <li><h3>HUD and input <span class="badge">prototype</span></h3><p>A retained HUD tree painted natively, driven by TypeScript on Hermes. An action map handles rebinding and input recording.</p></li>
+          <li><h3>Replay and tests <span class="badge ok">tested</span></h3><p>The fixed tick, state hash, snapshot and replay let a game run the same way twice. CI checks the hash on native and wasm.</p></li>
+          <li><h3>Games <span class="badge">prototype</span></h3><p>Kamikin and Kosmica run on the engine as prototypes. No public game build and no player-facing packaging step was found.</p></li>
+        </ul>
+      </div>
+    </div>
+    <p class="src">Sources: kosmos-film, kosmos-scene, kosmos-model, kosmos-assets, kosmos-physics, kosmos-ui, kosmos-input, kosmos-protocol, docs/plans/kamikin-port.md, .github/workflows. Searched for ffmpeg, mp4, animatic and previs in crates, apps, docs and tools: no match.</p>
+  </div>
+</section>
+
+<section id="animation" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Animation and rigging <span class="badge">prototype</span></h2>
+      <p class="sub">Skeletons, clips, faces and hands. The graph and importers are in the crates. The Faces section below covers the face channels in more detail.</p>
+    </div>
+    <div>
+      <ul class="list">
+        <li><h3>Animation graph <span class="badge">prototype</span></h3><p>A data file (*.anim.json) holds a state machine, one-dimensional blend trees, crossfades and masked layers over the skinned clips of a character. Fed the fixed tick, a pose is a pure function of its inputs. The crate also has two-bone and FABRIK reach, spring follow-through and crowd walking.</p></li>
+        <li><h3>Rigged characters <span class="badge">prototype</span></h3><p>Skinned models with a skeleton, named clips and clips retargeted by bone name from a donor model. The editor has a Rig lab, which plays a quadruped rig through moves and attacks with effects, and a rig registry that marks some rigs as partial.</p></li>
+        <li><h3>Face channels and morph targets <span class="badge">prototype</span></h3><p>45 face channels, morph targets carried through glTF, and a face plate for heads without them.</p></li>
+        <li><h3>The Kamiji hand rig <span class="badge">prototype</span></h3><p>The Kamiji hand model is among the engine's assets, and the editor builds finger grids from a skeleton's finger chains with curl and spread controls, so a hand with six fingers gets six columns. The hand library on this site is a separate three.js and React build.</p></li>
+        <li><h3>Mochi importer <span class="badge">prototype</span></h3><p>Turns an exported mochi (skinned body, face shell, baked motions, six face states) into the same model type as glTF import. The Kamikin cast loads this way.</p></li>
+        <li><h3>glTF import and export <span class="badge">prototype</span></h3><p>Meshes, skins, clips and morph targets in and out, with golden files under tests/golden.</p></li>
+        <li><h3>FBX <span class="badge warn">unverified</span></h3><p>Binary FBX import reads meshes, normals and UVs. Its source says node transforms, materials, skins and animation are not read yet. A writer exists too, and its coverage was not read. OBJ, Collada, USD, STL, PLY and 3MF readers are in the model crate.</p></li>
+        <li><h3>Motion capture, ragdoll <span class="badge plan">not found</span></h3><p>No capture or BVH importer was found. The physics crate names ragdoll only as not built.</p></li>
+      </ul>
+      <p class="src">Sources: crates/kosmos-anim/src/lib.rs, ik.rs, crates/kosmos-model/src (fbx_import.rs, gltf_import.rs, mochi_import.rs, anim.rs), apps/kosmos-app/src/editor/rig_hands.rs, lab_rig.rs, assets/models/kamiji. Read 25 Oct 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section id="studio" class="section breakout-sec">
+  <div class="wrap">
+    <div class="breakout rev">
+      <figure class="bo-img"><img src="img/feat-studio.webp" width="1400" height="875" loading="lazy" alt="The Character studio in the engine editor: a panel with Body, Clothing, Library and Pose tabs and a list of body bases, beside a grey stylised woman wearing a beret on a green ground."><figcaption>Character studio in the editor, a stylised base with a beret. Capture of 19 Oct 2026.</figcaption></figure>
+      <div class="bo-text">
+        <h2>Character Studio <span class="badge">prototype</span></h2>
+        <p>The character builders exist in two places. In the engine, the Character studio lab is one page for a character: a body, head shape, hair plates, clothing and a pose. Garments are shells cut from the body's own skin, so they follow the same bones. Hair guides sway with the head, and the ears of the animal-eared characters flop with its movement. The lab's own file marks its status as work in progress.</p>
+        <p>On this site the Workshops are the character builders you can open now, and the demo further down this page lets you pick a Kamikin, a face and a clip. They run on three.js, not on the Kosmos renderer.</p>
+        <p class="links"><a href="../workshop/hand.html">Hand studio</a>, <a href="../workshop/kamikin.html">Kamikin studio</a>, <a href="../workshop/emoji.html">Emoji studio</a>, <a href="#builder">Try a character</a></p>
+        <p class="src">Source: labs/character/lab.json, apps/kosmos-app/src/editor/lab_character, crates/kosmos-wardrobe, site/workshop/studios.js, reports/labs-wardrobe-studio.png.</p>
+      </div>
+    </div>
+    <div class="cols2 after-bo">
+      <div>
+        <h3>In the engine</h3>
+        <ul class="list">
+          <li><h3>Bodies and sliders <span class="badge">prototype</span></h3><p>Sculpt bases and rigged bodies to start from, with shape sliders for girth and length per bone, ported from the Yakopop wardrobe code.</p></li>
+          <li><h3>Wardrobe <span class="badge">prototype</span></h3><p>Shell garments, hiding what clothes cover, atlas merging, outfits and static garments fitted onto a model.</p></li>
+          <li><h3>Saving and exporting a finished character <span class="badge warn">unverified</span></h3><p>A character file with a sparse sculpt layer exists. Whether the studio writes out a finished, dressed model was not checked.</p></li>
+        </ul>
+      </div>
+      <div>
+        <h3>On this site</h3>
+        <ul class="list">
+          <li><h3>Hand studio <span class="badge">prototype</span></h3><p>Build a Kamiji hand: tint, face, pose, shape and halo.</p></li>
+          <li><h3>Kamikin studio <span class="badge">prototype</span></h3><p>Pick one of 14 mochi, then a face, a clip and a tint.</p></li>
+          <li><h3>Emoji studio <span class="badge">prototype</span></h3><p>Make a character from a 3D emoji face.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="effects" class="section">
+  <div class="wrap">
+    <h2>Particles, liquid and fabric</h2>
+    <p class="sub intro">What exists for effects and soft things, taken from the crates, the plans and the reports. Particles are built and drawn. Water is a flat rendered sheet. A liquid simulation and simulated cloth are plans with no code.</p>
+    <ul class="cards feat">
+      <li><h3>GPU particles <span class="badge">prototype</span></h3><p>A compute runtime in kosmos-fx reads the web effects library: all 58 effects and 1628 emitters parse, 20 sprite shapes draw, and the GPU motion matches the CPU reference. One million simple particles stepped in 0.197 ms of GPU time on an M3 Max. They are drawn in the editor's lab viewport over the scene, without depth testing. The plan lists joining them to the main render pass as open, and no particle pass was found in the renderer's frame graph.</p><p class="src">Source: crates/kosmos-fx, apps/kosmos-app/src/editor/lab_fx.rs, docs/plans/fluid-vfx.md (F0, F1).</p></li>
+      <li><h3>Particle lighting and collision <span class="badge">prototype</span></h3><p>Billboards are lit by the sun and the lamps. Particles can stop or bounce on static triangles, and a CPU test marches light through a uniform density slab. All of it is visual only and never enters the state hash.</p><p class="src">Source: kosmos-fx light.rs, ballistic.rs, volume.rs, kosmos-render particle_light.rs.</p></li>
+      <li><h3>Water surface <span class="badge">prototype</span></h3><p>The renderer has a water sheet: a grid whose height moves with time, drawn only when a look asks for it. It is not a simulation, and the Kamikin port does not use animated water yet.</p><p class="src">Source: crates/kosmos-render/src/water.rs, water.wgsl, docs/plans/kamikin-port.md.</p></li>
+      <li><h3>Liquid simulation <span class="badge plan">planned</span></h3><p>Pouring, splashes, rivers and waterfalls are steps F3, F6 and F7 in the fluid plan. No fluid solver exists in the crates: the fx crate holds particles and a density march only. Buoyancy and water physics were not found either.</p><p class="src">Source: docs/plans/fluid-vfx.md, crates/kosmos-fx, kosmos-physics.</p></li>
+      <li><h3>Rope, cape and tail solver <span class="badge">prototype</span></h3><p>A cosmetic XPBD solver for ropes, capes and tails sits in kosmos-flesh with a golden file and two tests. No app code calls it yet. The character studio uses the same crate's springs for ear and tail jiggle.</p><p class="src">Source: crates/kosmos-flesh/src/xpbd.rs, jiggle.rs, tests/golden/rigs/xpbd.json.</p></li>
+      <li><h3>Cloth, garments in motion, soft bodies <span class="badge plan">planned</span></h3><p>Garments are static shells on the skin. Airship sails move by formula and are not cloth. A cloth decision record and jelly-like soft objects are planned and unbuilt.</p><p class="src">Source: docs/plans/flesh-dynamics.md (FLS.6, PHY.D7), crates/kosmos-wardrobe, kosmos-airship.</p></li>
+      <li><h3>Fire and smoke grids <span class="badge plan">planned</span></h3><p>Step F8 in the fluid plan. No grid solver was found.</p><p class="src">Source: docs/plans/fluid-vfx.md, crates/kosmos-fx.</p></li>
+      <li><h3>Breaking things <span class="badge">prototype</span></h3><p>Voxel fracture matches the web code's numbers in tests. A separate crate cuts closed meshes into convex pieces, marked a spike. The strike tools, shapes and burn rules are not ported.</p><p class="src">Source: crates/kosmos-voxel, kosmos-break, reports/fx-f4b-voxel.md.</p></li>
+    </ul>
+    <figure class="wide">
+      <img src="img/feat-fx.webp" width="1400" height="875" loading="lazy" alt="The Rig lab in the editor: a panel of effect looks and moves on the left, and two small fox characters on a green plain, the nearer one inside a glowing ring with sparks.">
+      <figcaption>Rig lab with the solar effect on a kitsune. Capture of 18 Oct 2026.</figcaption>
+    </figure>
+    <p class="src">Sources: kosmos-engine docs/plans/fluid-vfx.md, flesh-dynamics.md, crates/kosmos-fx, kosmos-flesh, kosmos-render, reports/labs-rig-fx.png. No code for liquid simulation or cloth was found. Searched 25 Oct 2026.</p>
+  </div>
+</section>
+
+<section id="engine" class="section">
+  <div class="wrap">
+    <h2>Engine</h2>
+    <p class="sub intro">A Cargo workspace. These are the crates, grouped by what they do, with the description each crate gives itself.</p>
+    <ul class="cards">
+      <li><h3>Core and simulation</h3>
+        <dl class="crates">
+          <dt>kosmos-core</dt><dd>Ids, seeded RNG, tick clock, state hash.</dd>
+          <dt>kosmos-sim</dt><dd>ECS world, fixed tick, snapshot, restore, replay.</dd>
+          <dt>kosmos-scene</dt><dd>Scene JSON: parse, write, prefab resolve, diff.</dd>
+          <dt>kosmos-protocol</dt><dd>Headless protocol with typed messages and a stdio server.</dd>
+          <dt>kosmos-cmd</dt><dd>Typed edit commands, undo, redo, transactions.</dd>
+          <dt>kosmos-agent</dt><dd>Headless agent loop with a mock provider and a confirm gate.</dd>
+        </dl></li>
+      <li><h3>Rendering</h3>
+        <dl class="crates">
+          <dt>kosmos-render</dt><dd>The wgpu renderer. Metal, Vulkan, DX12, WebGPU.</dd>
+          <dt>kosmos-layers</dt><dd>One override stack for looks, post and camera.</dd>
+          <dt>kosmos-fx</dt><dd>GPU compute for particles, as built. Its description also names fluids and smoke, which are planned. Visual only.</dd>
+          <dt>kosmos-clouds, -weather, -blur</dt><dd>Sky and clouds, weather as numbers, screen-space motion blur.</dd>
+          <dt>kosmos-texops, -meshops</dt><dd>Deterministic CPU texture and mesh operations.</dd>
+        </dl></li>
+      <li><h3>Characters</h3>
+        <dl class="crates">
+          <dt>kosmos-model</dt><dd>Model import to one ModelData, including the mochi importer.</dd>
+          <dt>kosmos-anim</dt><dd>Animation graph: state machine, blend trees, masked layers.</dd>
+          <dt>kosmos-face</dt><dd>Gaze, attention, expressions, talk and symbols.</dd>
+          <dt>kosmos-faceplate</dt><dd>Paints the face channels onto a texture for a skinned head.</dd>
+          <dt>kosmos-human</dt><dd>MakeHuman-style base meshes and morph targets.</dd>
+          <dt>kosmos-film</dt><dd>Plays compiled film timelines: camera, actors, subtitles, cues.</dd>
+        </dl></li>
+      <li><h3>Worlds</h3>
+        <dl class="crates">
+          <dt>kosmos-planet</dt><dd>Round worlds: cube-map ground and a radial-gravity walker.</dd>
+          <dt>kosmos-physics</dt><dd>Deterministic Rapier wrapper and a character controller.</dd>
+          <dt>kosmos-crowd</dt><dd>Crowd steering, planted feet, walk-grid A*.</dd>
+          <dt>kosmos-voxel, -gen</dt><dd>Voxel objects and seeded procedural geometry.</dd>
+          <dt>kosmos-roads, -settlement</dt><dd>Roads, street graphs, lots and buildings as data.</dd>
+        </dl></li>
+      <li><h3>Audio, input, UI</h3>
+        <dl class="crates">
+          <dt>kosmos-audio</dt><dd>Cue-driven audio over kira, plus a client for a local TTS server.</dd>
+          <dt>kosmos-input</dt><dd>Action map, rebinding, input recording.</dd>
+          <dt>kosmos-ui, -host</dt><dd>A retained HUD tree. Games run TypeScript on Hermes with Solid.</dd>
+        </dl></li>
+      <li><h3>Runners and tools</h3>
+        <dl class="crates">
+          <dt>kosmos-app</dt><dd>Native window and editor (winit, wgpu).</dd>
+          <dt>kosmos-cli, kosmos-mcp</dt><dd>Headless runs, replay, hash, and an MCP server over the same protocol.</dd>
+          <dt>kosmos-web</dt><dd>Browser runner on WebGPU. In the repo, no public build found.</dd>
+          <dt>kosmos-genai</dt><dd>Job queue and router for 3D generation. No model code. Draft.</dd>
+        </dl></li>
+    </ul>
+    <p class="src">Sources: each crate's Cargo.toml description, README.md, docs/plans/kamikin-port.md. Not every crate is equally complete: several plans in docs/plans are drafts.</p>
+  </div>
+</section>
+
+<section id="architecture" class="section">
+  <div class="wrap">
+    <h2>Architecture</h2>
+    <p class="sub intro">The layers as the code has them, top to bottom. Read each box as a group of crates or files, and each line as the way it talks to the layer below. The list under the diagram says the same in words.</p>
+    <figure class="arch" role="group" aria-labelledby="arch-cap">
+      <ol class="layers">
+        <li class="ly ly-top"><h3>Games and labs</h3><p>Kamikin, Kosmica, film player, 40+ labs</p></li>
+        <li class="ly-arrow" aria-hidden="true">run inside</li>
+        <li class="ly ly-apps"><h3>Runners</h3>
+          <ul><li>kosmos-app<small>winit window, egui editor</small></li><li>kosmos-cli, kosmos-mcp<small>headless, MCP</small></li><li>kosmos-web<small>wasm, WebGPU</small></li><li>kosmos-hudlab</li></ul></li>
+        <li class="ly-arrow" aria-hidden="true">send input and ticks, get deltas</li>
+        <li class="ly ly-js"><h3>JavaScript side</h3>
+          <ul><li>Hermes<small>facebook/hermes, JIT off, own thread</small></li><li>Solid 1.9.9<small>universal renderer, one esbuild bundle per game</small></li><li>Bridge<small>four UI ops plus host calls (engine/wit)</small></li></ul></li>
+        <li class="ly-arrow" aria-hidden="true">UI ops, camera, lights, objects</li>
+        <li class="ly ly-rust"><h3>Rust engine crates</h3>
+          <ul><li>kosmos-sim<small>bevy_ecs, fixed tick</small></li><li>kosmos-physics<small>Rapier</small></li><li>kosmos-anim, -face, -film<small>characters</small></li><li>kosmos-protocol, -agent<small>headless agents</small></li><li>kosmos-ui<small>retained HUD tree</small></li><li>kosmos-audio<small>kira, TTS client</small></li></ul></li>
+        <li class="ly-arrow" aria-hidden="true">draw with</li>
+        <li class="ly ly-gpu"><h3>kosmos-render</h3><p>wgpu 30 on Metal, Vulkan, DX12 or WebGPU, with WGSL shaders and look layers</p></li>
+        <li class="ly-arrow" aria-hidden="true">read</li>
+        <li class="ly ly-data"><h3>Data</h3><p>54 JSON schemas, scenes, looks, glTF and mochi models, exported packs, content-hashed asset cache</p></li>
+      </ol>
+      <figcaption id="arch-cap">Layers of the engine. Sources: Cargo.toml, crates/kosmos-host, games/kosmica-real/build.mjs, engine/wit.</figcaption>
+    </figure>
+
+    <div class="cols2">
+      <div>
+        <h3>How a frame and a HUD update flow</h3>
+        <ol class="flow">
+          <li>The window loop sends the game thread a tick (milliseconds since the last one) and any input lines.</li>
+          <li>Hermes cannot move between threads, so the runtime is created inside its own thread and only messages cross.</li>
+          <li>The JS bundle runs. Solid's effects call four host operations: create, set property, insert, remove.</li>
+          <li>Each batch comes back as a delta of UI ops, camera, lights, objects and logs. If many batches pile up, only the newest heading is run and the ticks are summed.</li>
+          <li>The app applies the ops to the retained HUD tree, then paints it natively over the wgpu frame.</li>
+          <li>The sim steps on its own fixed 1/64 s tick. A headless agent calls the same step through the protocol.</li>
+        </ol>
+        <p class="src">Sources: crates/kosmos-host/src/inproc.rs, hermes.rs, crates/kosmos-ui/src/op.rs, kosmos-core. Step 6 and the painter come from module docs and were not traced in a run.</p>
+      </div>
+      <div>
+        <h3>How the JavaScript is built</h3>
+        <ul class="plain">
+          <li>Game and HUD source is TypeScript and TSX. Babel with babel-preset-solid compiles the JSX in universal mode against the engine's own renderer module, then esbuild bundles it to one ES2018 script.</li>
+          <li>Hermes is built from a pinned facebook/hermes revision with the JIT compiled out and linked as a static library through a small C++ shim. If that library is missing, the crate still builds and the fixture runner is used.</li>
+          <li>Rust and JS talk through a fixed list of host functions (set_pose, raycast, ground_at, emit and more) described once in engine/wit, from which the TypeScript types are generated.</li>
+          <li>HUD screens come from Yakopop's Solid sources, copied unchanged. The web dev UI is parked.</li>
+          <li>Agents use the headless protocol (JSON lines or WebSocket) with a typed TypeScript client, and an MCP server over the same messages.</li>
+        </ul>
+        <p class="src">Sources: games/kosmica-real/build.mjs and PROVENANCE.md, tools/hermes, crates/kosmos-host/build.rs, engine/wit, packages/kosmos-protocol-sdk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="libraries" class="section">
+  <div class="wrap">
+    <h2>Libraries</h2>
+    <p class="sub intro">What the engine builds on, grouped by job. Versions are exact pins from the workspace Cargo.toml and package.json files, read 24 Oct 2026. Links go to each project's own page.</p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Libraries table, scrolls sideways on small screens">
+    <table class="libs">
+      <caption>Libraries by group.</caption>
+      <thead><tr><th scope="col">Group</th><th scope="col">Library</th><th scope="col">Version</th><th scope="col">Role</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Rendering</th><td><a href="https://wgpu.rs" rel="noopener">wgpu</a></td><td>30.0.1</td><td>GPU API on Metal, Vulkan, DX12, WebGPU</td></tr>
+        <tr><th scope="row"></th><td><a href="https://github.com/gfx-rs/wgpu" rel="noopener">naga</a> (in the wgpu repo)</td><td>30.0.1</td><td>Reads WGSL shaders</td></tr>
+        <tr><th scope="row">Window, input</th><td><a href="https://github.com/rust-windowing/winit" rel="noopener">winit</a></td><td>0.30.13</td><td>Window and events</td></tr>
+        <tr><th scope="row"></th><td><a href="https://crates.io/crates/gilrs" rel="noopener">gilrs</a></td><td>0.11.0</td><td>Gamepads</td></tr>
+        <tr><th scope="row">Math</th><td><a href="https://crates.io/crates/glam" rel="noopener">glam</a></td><td>0.34.1</td><td>Vectors and matrices, with libm for repeatable results</td></tr>
+        <tr><th scope="row">Sim, physics</th><td><a href="https://github.com/bevyengine/bevy" rel="noopener">bevy_ecs</a></td><td>0.20.0</td><td>ECS only, not the Bevy engine</td></tr>
+        <tr><th scope="row"></th><td><a href="https://rapier.rs" rel="noopener">Rapier</a> (rapier3d)</td><td>0.36.1</td><td>Colliders, queries, rigid bodies</td></tr>
+        <tr><th scope="row">Data</th><td><a href="https://serde.rs" rel="noopener">serde</a>, serde_json</td><td>1.0.229, 1.0.154</td><td>Scenes and messages as JSON</td></tr>
+        <tr><th scope="row"></th><td><a href="https://crates.io/crates/postcard" rel="noopener">postcard</a>, <a href="https://crates.io/crates/blake3" rel="noopener">blake3</a>, <a href="https://crates.io/crates/jsonschema" rel="noopener">jsonschema</a></td><td>1.1.3, 1.8.7, 0.58.6</td><td>Snapshots, content hashes, schema checks</td></tr>
+        <tr><th scope="row"></th><td><a href="https://crates.io/crates/gltf" rel="noopener">gltf</a>, fbxcel, tobj</td><td>1.4, 0.9.0, 4.0.5</td><td>Model import</td></tr>
+        <tr><th scope="row">Audio, speech</th><td><a href="https://crates.io/crates/kira" rel="noopener">kira</a></td><td>0.12.5</td><td>Cue playback over cpal</td></tr>
+        <tr><th scope="row"></th><td>Local TTS server (in Yakopop)</td><td>n/a</td><td>Speech and mouth shapes over HTTP. The engine holds the client only</td></tr>
+        <tr><th scope="row">JS runtime</th><td><a href="https://github.com/facebook/hermes" rel="noopener">Hermes</a> (<a href="https://hermesengine.dev" rel="noopener">site</a>)</td><td>pinned rev 1d2fc48c</td><td>Runs the game and HUD scripts</td></tr>
+        <tr><th scope="row"></th><td><a href="https://www.solidjs.com" rel="noopener">Solid</a></td><td>1.9.9</td><td>HUD components, universal renderer</td></tr>
+        <tr><th scope="row"></th><td><a href="https://esbuild.github.io" rel="noopener">esbuild</a>, <a href="https://www.typescriptlang.org" rel="noopener">TypeScript</a></td><td>0.25.5, 5.8.3</td><td>Bundling and types</td></tr>
+        <tr><th scope="row">UI</th><td><a href="https://github.com/emilk/egui" rel="noopener">egui</a>, egui-wgpu, egui-winit</td><td>0.37.0</td><td>The editor</td></tr>
+        <tr><th scope="row"></th><td><a href="https://crates.io/crates/tiny-skia" rel="noopener">tiny-skia</a>, ab_glyph, <a href="https://github.com/DioxusLabs/taffy" rel="noopener">taffy</a></td><td>0.11.4, 0.2.32, 0.15.0</td><td>HUD painting, text, layout (taffy in hudlab)</td></tr>
+        <tr><th scope="row"></th><td>AccessKit</td><td>0.25.1</td><td>Accessibility labels</td></tr>
+        <tr><th scope="row">Testing</th><td>egui_kittest, cargo-deny, wasmtime, lavapipe</td><td>0.37.0 (kittest)</td><td>UI tests, licence check, native against wasm hash, software Vulkan</td></tr>
+        <tr><th scope="row">Tooling</th><td><a href="https://github.com/rustwasm/wasm-bindgen" rel="noopener">wasm-bindgen</a>, clap</td><td>0.2.129, 4.6.7</td><td>Browser glue, command lines</td></tr>
+        <tr><th scope="row"></th><td>Rust toolchain</td><td>1.97.1</td><td>Edition 2024, wasm32 target</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src">Sources: kosmos-engine Cargo.toml, Cargo.lock, crates/*/Cargo.toml, games/kosmica-real/package.json, tools/hermes/hermes.sh. Cargo.lock holds several glam versions, the engine pins 0.34.1.</p>
+    <h3 class="tbl-h">Related, not part of the engine</h3>
+    <ul class="list rel">
+      <li><h3><a href="https://godotengine.org" rel="noopener">Godot</a></h3><p>The native reference engine in the Yakopop repository. Used for parity captures. See Compatibility.</p></li>
+      <li><h3><a href="https://playcanvas.com" rel="noopener">PlayCanvas</a></h3><p>The web engine of the Yakopop client (playcanvas ^2.23.0). See Compatibility.</p></li>
+      <li><h3><a href="https://threejs.org" rel="noopener">three.js</a></h3><p>Renders the character demos in this page and the Kamiji library (0.186.1). Not used by the Kosmos engine.</p></li>
+      <li><h3><a href="https://github.com/bevyengine/bevy" rel="noopener">Bevy</a></h3><p>Only its ECS crate is used. The full Bevy tree is kept as a read-only reference in vendor/. The repositories do not mention Fyrox.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="compatibility" class="section">
+  <div class="wrap">
+    <h2>Compatibility</h2>
+    <p class="sub intro">Kosmos is a third backend beside Godot and PlayCanvas in the Yakopop project. Compatibility means shared data, shared code and a way to compare pictures. It does not mean Kosmos opens Godot or PlayCanvas projects.</p>
+    <div class="compat">
+      <article class="compat-card" aria-labelledby="godot-h">
+        <img class="compat-logo" src="img/godot-logo.svg" width="944" height="333" alt="Godot Engine logo" loading="lazy">
+        <h3 id="godot-h">Godot <span class="badge">partial</span></h3>
+        <p><strong>Shared.</strong> The same exported Kamikin data (planet, height cube, grass, the mochi cast) from Yakopop's Godot folder, copied by one script. The toon shader's header says it follows toon_shade in Godot and celShade in the web code. The Hermes build and the HUD Solid sources are copied from Yakopop's Godot binding.</p>
+        <p><strong>Measured.</strong> Six poses scored against Godot 4.7.2 on Metal. Best is pond at MAE 20.7 and SSIM 0.752. Most error is missing content. No pass or fail threshold is approved. See Numbers.</p>
+        <p><strong>Not done.</strong> No loader for Godot scenes or GDScript. Yakopop's pack files (kamikin.json, kamikin-village.json) feed Godot, and no reader for them was found in the engine. The native extensions in the Godot checkout were dead links, so the references have no Hermes HUD or audio. Embedding Godot as a renderer is a proposal only.</p>
+        <p class="src">Sources: tools/kamikin-export/sync-data.sh, tests/parity/ref/kamikin/godot/provenance.json, reports/parity-kamikin.md, docs/plans/godot-embed-multi-renderer.md, yakopop apps/godot.</p>
+        <p class="links"><a href="https://godotengine.org" rel="noopener">godotengine.org</a>, <a href="https://godotengine.org/press/" rel="noopener">Godot logo page</a></p>
+      </article>
+      <article class="compat-card" aria-labelledby="pc-h">
+        <h3 id="pc-h">PlayCanvas <span class="badge">partial</span></h3>
+        <p><strong>Shared.</strong> Yakopop's web client runs on PlayCanvas 2.23.0, and many engine ports start from its pure TypeScript logic, checked against goldens. A recording stand-in for the playcanvas module lets Yakopop's model builders run inside a Hermes bundle with no rendering.</p>
+        <p><strong>Measured.</strong> PlayCanvas frame times on three web scenes in Chrome (a dense town at 24.1 ms CPU median). The PlayCanvas column of the Kamikin parity table is unmeasured because Kamikin has no web build. Kosmos cells for those three scenes are also unmeasured.</p>
+        <p><strong>Not done.</strong> No PlayCanvas adapter in the engine. A script that captures a PlayCanvas reference exists for the Sakura Town scene. Streaming one scene to several renderers is a proposal.</p>
+        <p class="src">Sources: yakopop apps/world/package.json, kosmos-engine tools/pc-record, tools/parity/ref-playcanvas.mjs, reports/parity-frametime.md.</p>
+        <p class="links"><a href="https://playcanvas.com" rel="noopener">playcanvas.com</a>, <a href="https://developer.playcanvas.com" rel="noopener">developer docs</a>, <a href="https://github.com/playcanvas/engine" rel="noopener">engine on GitHub</a></p>
+      </article>
+    </div>
+    <figure class="wide compat-fig">
+      <img src="img/parity-pond-sbs.webp" width="964" height="180" loading="lazy" alt="Three crops of the same Kamikin pond pose side by side: Godot on the left, Kosmos in the middle, and on the right a dark difference image with bright patches where they disagree.">
+      <figcaption>Pond pose, Godot then Kosmos then difference times four. Our own render, 20 Oct 2026. Source: reports/parity/kamikin/pond-godot-sbs.jpg.</figcaption>
+    </figure>
+    <p class="credit" role="note">Godot logo: godotengine.org/press, <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, shown unmodified to name the engine. No PlayCanvas logo is shown: the PlayCanvas site has no brand or press page, so only the name is used. Logos and names belong to their owners. They describe compatibility only and imply no endorsement.</p>
+  </div>
+</section>
+
+<section id="built" class="section">
+  <div class="wrap">
+    <h2>Built on Kosmos</h2>
+    <p class="sub intro">Four projects connect to the engine. Status labels follow the sources, not hopes.</p>
+    <ul class="cards built">
+      <li>
+        <img class="logo" src="../img/kamikin-game-logo-light.svg" alt="Kamikin" width="150" height="54" loading="lazy">
+        <h3>Kamikin <span class="badge">prototype</span></h3>
+        <p>A mochi game on a round meadow planet that teaches Japanese words. A Godot slice exists, and a port runs in the engine: walker, grass, the mochi cast, toon look, rules with 29 tests. Missing in the port: sky shaders, animated water, shadows, meadow sound. A public play site is planned, not live.</p>
+        <p class="src">Source: kosmos-engine docs/plans/kamikin-port.md, reports/parity-kamikin.md.</p>
+        <p class="links"><a href="../kamikin/index.html">Kamikin page</a></p>
+      </li>
+      <li>
+        <h3>Kosmica <span class="badge">prototype</span></h3>
+        <p>The wider universe and flagship game behind Kamikin. The engine runs a real HUD and dialogue from the Yakopop sources through Solid and Hermes. No public build found, and the full game is a draft design document.</p>
+        <p class="src">Source: kosmos-engine docs/plans/kosmica-port.md, yakopop docs/plans/kosmica.md (draft 2026-10-13).</p>
+      </li>
+      <li>
+        <img class="logo" src="../kamikin/img/yakopop-logo.svg" alt="Yakopop" width="150" height="40" loading="lazy">
+        <h3>Yakopop <span class="badge ok">live</span></h3>
+        <p>A language learning site with word-synced, colour-coded bilingual subtitles. The site is a separate web product and is live. Its role with the engine is the learning layer inside the games.</p>
+        <p class="src">Source: yakopop README.md (status October 2026), checked 24 Oct 2026.</p>
+        <p class="links"><a href="https://yakopop.com" rel="noopener">yakopop.com</a></p>
+      </li>
+      <li>
+        <img class="logo logo-hand" src="../workshop/img/hand.png" alt="" width="64" height="64" loading="lazy">
+        <h3>Kamiji <span class="badge">prototype</span></h3>
+        <p>Rigged, expressive 3D hand avatars with a morph-target face, for React and three.js. The hand model is also copied into the engine's assets. The library itself renders with three.js, not with the Kosmos renderer.</p>
+        <p class="src">Source: kamiji README.md, kosmos-engine assets/models/kamiji.</p>
+        <p class="links"><a href="../index.html">Kamiji page</a></p>
+      </li>
+    </ul>
+    <figure class="wide">
+      <img src="img/kamikin-planet.webp" width="1400" height="788" loading="lazy" alt="The Kamikin planet seen from above: a green round world with a brown path and a blue marker.">
+      <figcaption>The Kamikin planet in the engine, from above. Capture of 16 Oct 2026.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="builder" class="section">
+  <div class="wrap">
+    <h2>Try a character</h2>
+    <p class="intro">A small demo of the characters that run on the engine. Pick a character, a face and a clip. It is rendered with three.js in this page, not with the Kosmos renderer.</p>
+    <div class="stage stage-center">
+      <div class="viewer hero-viewer" id="hero-model" role="img" aria-label="Live 3D Kamikin character, a demo of what runs on the engine">
+        <canvas></canvas>
+        <p class="fallback" hidden></p>
+      </div>
+      <div class="shadow" aria-hidden="true"></div>
+      <p class="hero-cap" id="hero-cap" aria-live="polite">Kamikin demo, rendered with three.js in this page, not the Kosmos renderer</p>
+      <div class="card controls" data-selector="rail" id="hero-rail" role="group" aria-label="Character controls"></div>
+    </div>
+  </div>
+</section>
+
+<section id="numbers" class="section">
+  <div class="wrap">
+    <h2>Numbers</h2>
+    <p class="quiet" role="note"><strong>Read first.</strong> Measurement only, on one Mac. The engine is not at parity with Godot, and the reports say so. No threshold has been approved.</p>
+
+    <h3 class="tbl-h">Look against Godot (lower MAE, higher SSIM is closer)</h3>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Parity score table, scrolls sideways on small screens">
+    <table>
+      <caption>Kamikin, six poses at 640 by 360. Score run 20 Oct 2026.</caption>
+      <thead><tr><th scope="col">Pose</th><th scope="col">MAE</th><th scope="col">SSIM</th><th scope="col">Godot against itself (MAE / SSIM)</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">pond</th><td>20.7</td><td>0.752</td><td>0.021 / 0.999</td></tr>
+        <tr><th scope="row">sky</th><td>28.0</td><td>0.892</td><td>0.076 / 1.000</td></tr>
+        <tr><th scope="row">patch</th><td>29.4</td><td>0.545</td><td>0.013 / 1.000</td></tr>
+        <tr><th scope="row">meadow-wide</th><td>37.0</td><td>0.554</td><td>0.185 / 0.994</td></tr>
+        <tr><th scope="row">character-close</th><td>43.2</td><td>0.598</td><td>0.438 / 0.982</td></tr>
+        <tr><th scope="row">planet-far</th><td>68.1</td><td>0.601</td><td>0.001 / 1.000</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="caveats">
+      <li>Debug build, Metal, Apple M3 Max. Two captures of each pose are byte-identical (6 of 6). Godot 4.7.2, Metal.</li>
+      <li>The Kosmos shots show the world only. Godot shows the player, the cast, village shells and labels, so most of the error is missing content, not the renderer.</li>
+      <li>planet-far compares against a Godot frame that is flat sky colour, so that row measures the reference.</li>
+      <li>Sky and cloud shaders, animated water and shadows are not done in the port. The report proposes a looser target (MAE at most 10, SSIM at least 0.85) for the owner to decide. The best row today is pond.</li>
+    </ul>
+    <p class="src">Source: kosmos-engine reports/parity-kamikin.md, committed 20 Oct 2026. MAE is on a 0 to 255 scale, SSIM on luma.</p>
+
+    <h3 class="tbl-h">Frame time</h3>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Frame time table, scrolls sideways on small screens">
+    <table>
+      <caption>Milliseconds per frame, median and 95th percentile, 240 frames.</caption>
+      <thead><tr><th scope="col">Pose</th><th scope="col">Godot p50 / p95</th><th scope="col">Kosmos p50 / p95</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">character-close</th><td>5.13 / 5.30</td><td>2.34 / 2.63</td></tr>
+        <tr><th scope="row">meadow-wide</th><td>5.32 / 5.53</td><td>3.70 / 7.89</td></tr>
+        <tr><th scope="row">pond</th><td>5.74 / 5.95</td><td>3.20 / 4.30</td></tr>
+        <tr><th scope="row">patch</th><td>5.74 / 5.90</td><td>3.18 / 3.85</td></tr>
+        <tr><th scope="row">sky</th><td>3.97 / 4.13</td><td>1.93 / 2.14</td></tr>
+        <tr><th scope="row">planet-far</th><td>2.80 / 3.12</td><td>3.02 / 3.23</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="caveats">
+      <li>These are not the same measurement and are not a ratio. Kosmos times one headless render including GPU completion and a pixel readback. Godot times a forced draw and sync, and the report could not verify that this waits for the GPU on Metal.</li>
+      <li>Kosmos is a release build, Apple M3 Max. Only 640 by 360 shots of one game were measured. No other hardware, no browser.</li>
+      <li>On three web scenes the report lists PlayCanvas in Chrome (for example a dense town at 24.1 ms CPU median), and the Kosmos cells are unmeasured because no Kosmos scene exists yet.</li>
+    </ul>
+    <p class="src">Source: kosmos-engine reports/parity-frametime.md, committed 20 Oct 2026. Read the columns as orders of magnitude.</p>
+  </div>
+</section>
+
+<section id="faces" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Faces and voices <span class="badge">prototype</span></h2>
+      <p class="sub">Try the Face and Clip menus in the hero. They show the Kamikin face states in this page, not the Rust face crate.</p>
+    </div>
+    <div>
+      <ul class="list">
+        <li><h3>Face channels</h3><p>The face crate holds 45 numeric channels for eyes, brows, mouth, gaze and more. It was ported from the web code in Yakopop and is checked against golden data from that code.</p></li>
+        <li><h3>Face plate</h3><p>For characters whose head has no morph targets, the faceplate crate paints eyes, brows, mouth, blush and marks onto a texture for the head. Morph targets are also carried through glTF import and export.</p></li>
+        <li><h3>Visemes and phonemes</h3><p>Mouth shapes come from a viseme table with phonemes and coarticulation. A draft proposal asks for a way to author them by hand, and nothing in that proposal is built.</p></li>
+        <li><h3>Voices</h3><p>The audio crate has a client for a local text-to-speech server. The server returns audio plus timed mouth shapes in a header. The server lives in the Yakopop repository. Which voices ship is not settled in the files.</p></li>
+        <li><h3>Mochi importer</h3><p>The model crate turns exported mochi characters (skinned body, face shell, baked motions, six face states) into the same model type that glTF import gives. The Kamikin characters in the hero are those mochi, as GLB files.</p></li>
+      </ul>
+      <p class="src">Sources: kosmos-engine crates/kosmos-face, kosmos-faceplate, kosmos-audio/src/tts.rs, kosmos-model/src/mochi_import.rs, docs/plans/rig-authoring.md (proposal, 23 Oct 2026), tests/golden/face.</p>
+    </div>
+  </div>
+</section>
+
+<section id="licence" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Open source and licence</h2>
+    </div>
+    <div>
+      <ul class="licence">
+        <li><h3>The engine</h3><p>Dual licensed under MIT or Apache-2.0, at your option, as declared in the workspace and in the LICENSE-MIT and LICENSE-APACHE files. The repository is private today, so the declared licence does not mean the code is public. Dependencies are limited by a cargo-deny allow list. Third-party assets have their own terms, and the asset ledger is still a draft.</p></li>
+        <li><h3>Kamiji and Kamikin assets</h3><p>The characters and assets (the hand, every Kamikin mochi, models, textures, props) are not part of the engine licence. They are free for non-commercial use under CC BY-NC 4.0 with credit, and for-profit use needs the paid Premium Licence. The Kamiji code is MIT.</p></li>
+        <li><h3>Names</h3><p>"Kamiji" and "Kamikin" are trademarks of Paul Bloch. Registration status in the repository: unregistered, to be filed. You may say a project uses Kamiji in plain text. Do not name a product after them or imply endorsement.</p></li>
+      </ul>
+      <p class="src">Sources: kosmos-engine Cargo.toml, README.md, deny.toml, docs/licences/assets.md. Kamiji LICENSE.md, TRADEMARKS.md. This is a summary, read the files for the terms.</p>
+    </div>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Links</h2>
+      <p class="sub">Only places that exist. Private repositories are listed as text.</p>
+    </div>
+    <div>
+      <ul class="list links">
+        <li><h3>Public</h3>
+          <p><a href="https://kosmos.computer" rel="noopener">kosmos.computer</a>: the Kosmos site. Kosmos there is a generative AI operating system with the Arco UI library. It is a different product from this engine.</p>
+          <p><a href="https://github.com/Kosmos-computer" rel="noopener">github.com/Kosmos-computer</a>: public repositories include Kosmos, www, docs (Arco) and kosmos-sdk.</p>
+          <p><a href="https://yakopop.com" rel="noopener">yakopop.com</a>: the live language learning site.</p></li>
+        <li><h3>Private, no link</h3>
+          <p>Modern-Telepathy/kosmos-engine (the engine), Modern-Telepathy/yakopop, FraterCCCLXIII/kamiji.</p></li>
+        <li><h3>On this site</h3>
+          <p><a href="../index.html">Kamiji</a>, <a href="../kamikin/index.html">Kamikin</a>, <a href="../hands/index.html">Hands</a>.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Reality Kosmos Engine, experimental. Facts from the repositories on 24 Oct 2026. Hero model: Kamikin by Paul Bloch, CC BY-NC 4.0.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+<script type="module" src="kosmos.js"></script>
+</body>
+</html>

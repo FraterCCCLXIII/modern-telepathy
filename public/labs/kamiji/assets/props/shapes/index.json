@@ -1,0 +1,796 @@
+[
+  {
+    "name": "shape_sphere",
+    "category": "shape",
+    "tint": "#ffd23f",
+    "triangles": 3072,
+    "bytes": 56360,
+    "file": "shape_sphere.glb",
+    "keywords": [
+      "ball",
+      "round",
+      "circle",
+      "default"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_cube_rounded",
+    "category": "shape",
+    "tint": "#7fd4ff",
+    "triangles": 3072,
+    "bytes": 56372,
+    "file": "shape_cube_rounded.glb",
+    "keywords": [
+      "box",
+      "square",
+      "block",
+      "dice"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_bean",
+    "category": "shape",
+    "tint": "#ff9f7a",
+    "triangles": 3072,
+    "bytes": 56420,
+    "file": "shape_bean.glb",
+    "keywords": [
+      "kidney",
+      "jelly bean",
+      "curved"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_drop",
+    "category": "shape",
+    "tint": "#5ab8ff",
+    "triangles": 3072,
+    "bytes": 56416,
+    "file": "shape_drop.glb",
+    "keywords": [
+      "teardrop",
+      "water",
+      "droplet"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_star_body",
+    "category": "shape",
+    "tint": "#ffd23f",
+    "triangles": 3072,
+    "bytes": 56428,
+    "file": "shape_star_body.glb",
+    "keywords": [
+      "star",
+      "five point",
+      "favorite"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_heart_body",
+    "category": "shape",
+    "tint": "#ff5a7a",
+    "triangles": 3072,
+    "bytes": 56432,
+    "file": "shape_heart_body.glb",
+    "keywords": [
+      "heart",
+      "love",
+      "like"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_cloud_body",
+    "category": "shape",
+    "tint": "#cfe3ff",
+    "triangles": 3072,
+    "bytes": 56428,
+    "file": "shape_cloud_body.glb",
+    "keywords": [
+      "cloud",
+      "puffy",
+      "weather",
+      "sky"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_ghost",
+    "category": "shape",
+    "tint": "#e8e4ff",
+    "triangles": 3072,
+    "bytes": 56420,
+    "file": "shape_ghost.glb",
+    "keywords": [
+      "ghost",
+      "spooky",
+      "halloween",
+      "boo"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_blob",
+    "category": "shape",
+    "tint": "#8be0a4",
+    "triangles": 3072,
+    "bytes": 56416,
+    "file": "shape_blob.glb",
+    "keywords": [
+      "slime",
+      "amoeba",
+      "organic",
+      "goo"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_mochi_bun",
+    "category": "shape",
+    "tint": "#ffc8dd",
+    "triangles": 3072,
+    "bytes": 56432,
+    "file": "shape_mochi_bun.glb",
+    "keywords": [
+      "mochi",
+      "two lump",
+      "snowman",
+      "dango",
+      "bun"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_pill",
+    "category": "shape",
+    "tint": "#b07bff",
+    "triangles": 3072,
+    "bytes": 56416,
+    "file": "shape_pill.glb",
+    "keywords": [
+      "capsule",
+      "tablet",
+      "stadium"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_triangle_rounded",
+    "category": "shape",
+    "tint": "#ff9f1c",
+    "triangles": 3072,
+    "bytes": 56440,
+    "file": "shape_triangle_rounded.glb",
+    "keywords": [
+      "triangle",
+      "delta",
+      "play",
+      "warning"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_egg",
+    "category": "shape",
+    "tint": "#fff1d6",
+    "triangles": 3072,
+    "bytes": 56416,
+    "file": "shape_egg.glb",
+    "keywords": [
+      "egg",
+      "oval",
+      "breakfast",
+      "easter",
+      "hatch"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_onigiri",
+    "category": "shape",
+    "tint": "#f7f3ea",
+    "triangles": 3172,
+    "bytes": 59056,
+    "file": "shape_onigiri.glb",
+    "keywords": [
+      "rice ball",
+      "triangle",
+      "japanese",
+      "food",
+      "sushi"
+    ],
+    "materials": {
+      "Ink": "#4a3c48"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_dango",
+    "category": "shape",
+    "tint": "#ffc8dd",
+    "triangles": 3072,
+    "bytes": 56424,
+    "file": "shape_dango.glb",
+    "keywords": [
+      "three balls",
+      "skewer",
+      "wagashi",
+      "sweet",
+      "stack"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_mushroom",
+    "category": "shape",
+    "tint": "#e8483c",
+    "triangles": 3328,
+    "bytes": 63748,
+    "file": "shape_mushroom.glb",
+    "keywords": [
+      "toadstool",
+      "fungus",
+      "forest",
+      "mario",
+      "cap"
+    ],
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_flower",
+    "category": "shape",
+    "tint": "#ff8fb8",
+    "triangles": 3172,
+    "bytes": 59052,
+    "file": "shape_flower.glb",
+    "keywords": [
+      "blossom",
+      "petal",
+      "daisy",
+      "spring",
+      "garden"
+    ],
+    "materials": {
+      "Gold": "#f2c14e"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_moon_crescent",
+    "category": "shape",
+    "tint": "#ffe680",
+    "triangles": 3072,
+    "bytes": 56436,
+    "file": "shape_moon_crescent.glb",
+    "keywords": [
+      "crescent",
+      "night",
+      "sleep",
+      "lunar",
+      "dark mode"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_sun_disc",
+    "category": "shape",
+    "tint": "#ffb020",
+    "triangles": 3072,
+    "bytes": 56396,
+    "file": "shape_sun_disc.glb",
+    "keywords": [
+      "sun",
+      "sunny",
+      "day",
+      "light mode",
+      "rays",
+      "weather"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_cat_head",
+    "category": "shape",
+    "tint": "#ffb089",
+    "triangles": 3272,
+    "bytes": 60912,
+    "file": "shape_cat_head.glb",
+    "keywords": [
+      "cat",
+      "kitten",
+      "pet",
+      "meow",
+      "kitty"
+    ],
+    "materials": {
+      "Blush": "#f4a6b8"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_bunny_head",
+    "category": "shape",
+    "tint": "#f2ece4",
+    "triangles": 3272,
+    "bytes": 60916,
+    "file": "shape_bunny_head.glb",
+    "keywords": [
+      "rabbit",
+      "bunny",
+      "easter",
+      "pet",
+      "long ears"
+    ],
+    "materials": {
+      "Blush": "#f4a6b8"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_bear_head",
+    "category": "shape",
+    "tint": "#c28a54",
+    "triangles": 3272,
+    "bytes": 60912,
+    "file": "shape_bear_head.glb",
+    "keywords": [
+      "bear",
+      "teddy",
+      "panda",
+      "cub",
+      "animal"
+    ],
+    "materials": {
+      "Blush": "#f4a6b8"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_fox_head",
+    "category": "shape",
+    "tint": "#ff8a3d",
+    "triangles": 3272,
+    "bytes": 60904,
+    "file": "shape_fox_head.glb",
+    "keywords": [
+      "fox",
+      "animal",
+      "wild",
+      "triangle face",
+      "sly"
+    ],
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_jellyfish",
+    "category": "shape",
+    "tint": "#d9b8ff",
+    "triangles": 3072,
+    "bytes": 56428,
+    "file": "shape_jellyfish.glb",
+    "keywords": [
+      "jelly",
+      "sea",
+      "ocean",
+      "tentacle",
+      "float",
+      "medusa"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_daruma",
+    "category": "shape",
+    "tint": "#e8483c",
+    "triangles": 3300,
+    "bytes": 62236,
+    "file": "shape_daruma.glb",
+    "keywords": [
+      "luck",
+      "japanese",
+      "doll",
+      "goal",
+      "wish",
+      "tumbler"
+    ],
+    "materials": {
+      "Ink": "#4a3c48",
+      "White": "#f7f3ea"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_bell",
+    "category": "shape",
+    "tint": "#ffc400",
+    "triangles": 3072,
+    "bytes": 56420,
+    "file": "shape_bell.glb",
+    "keywords": [
+      "notification",
+      "ring",
+      "chime",
+      "alarm",
+      "jingle"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_acorn",
+    "category": "shape",
+    "tint": "#e0a96a",
+    "triangles": 3072,
+    "bytes": 58744,
+    "file": "shape_acorn.glb",
+    "keywords": [
+      "oak",
+      "nut",
+      "autumn",
+      "squirrel",
+      "seed"
+    ],
+    "materials": {
+      "Wood": "#c28a54"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_pear",
+    "category": "shape",
+    "tint": "#b6e06a",
+    "triangles": 3072,
+    "bytes": 56420,
+    "file": "shape_pear.glb",
+    "keywords": [
+      "fruit",
+      "green",
+      "food",
+      "orchard",
+      "snack"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_leaf_blob",
+    "category": "shape",
+    "tint": "#5fcf80",
+    "triangles": 3072,
+    "bytes": 56428,
+    "file": "shape_leaf_blob.glb",
+    "keywords": [
+      "leaf",
+      "plant",
+      "nature",
+      "eco",
+      "green",
+      "grow"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_diamond_rounded",
+    "category": "shape",
+    "tint": "#7fd4ff",
+    "triangles": 3072,
+    "bytes": 56408,
+    "file": "shape_diamond_rounded.glb",
+    "keywords": [
+      "gem",
+      "jewel",
+      "crystal",
+      "premium",
+      "rhombus"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_hexagon_rounded",
+    "category": "shape",
+    "tint": "#ffa94d",
+    "triangles": 3072,
+    "bytes": 56440,
+    "file": "shape_hexagon_rounded.glb",
+    "keywords": [
+      "hex",
+      "honeycomb",
+      "six",
+      "nut",
+      "cell"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_octagon_rounded",
+    "category": "shape",
+    "tint": "#ff6b6b",
+    "triangles": 3072,
+    "bytes": 56412,
+    "file": "shape_octagon_rounded.glb",
+    "keywords": [
+      "stop sign",
+      "eight",
+      "badge",
+      "halt",
+      "sign"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_speech_blob",
+    "category": "shape",
+    "tint": "#e8f0ff",
+    "triangles": 3072,
+    "bytes": 56432,
+    "file": "shape_speech_blob.glb",
+    "keywords": [
+      "chat",
+      "bubble",
+      "talk",
+      "message",
+      "comment",
+      "say"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_shield_blob",
+    "category": "shape",
+    "tint": "#5a8fff",
+    "triangles": 3072,
+    "bytes": 56432,
+    "file": "shape_shield_blob.glb",
+    "keywords": [
+      "shield",
+      "guard",
+      "protect",
+      "defense",
+      "badge",
+      "safe"
+    ],
+    "materials": {},
+    "morph": true
+  },
+  {
+    "name": "shape_crown_blob",
+    "category": "shape",
+    "tint": "#ffc400",
+    "triangles": 3172,
+    "bytes": 59064,
+    "file": "shape_crown_blob.glb",
+    "keywords": [
+      "crown",
+      "king",
+      "queen",
+      "royal",
+      "winner",
+      "tiara"
+    ],
+    "materials": {
+      "Red": "#d9534f"
+    },
+    "morph": true
+  },
+  {
+    "name": "shape_donut",
+    "category": "shape",
+    "tint": "#e8b070",
+    "triangles": 2720,
+    "bytes": 50736,
+    "file": "shape_donut.glb",
+    "keywords": [
+      "torus",
+      "ring",
+      "doughnut",
+      "sweet",
+      "snack",
+      "food"
+    ],
+    "materials": {
+      "Blush": "#f4a6b8"
+    },
+    "morph": false,
+    "note": "Torus (genus 1): cannot share the cube-sphere topology, so it is not a morph target."
+  },
+  {
+    "name": "kamiji-shapes-morph",
+    "category": "morph",
+    "tint": "#ffd23f",
+    "triangles": 3072,
+    "bytes": 1326464,
+    "file": "kamiji-shapes-morph.glb",
+    "vertices": 1538,
+    "keywords": [
+      "morph",
+      "shape keys",
+      "tween",
+      "blend shapes"
+    ],
+    "morphTargets": [
+      "cube_rounded",
+      "bean",
+      "drop",
+      "star_body",
+      "heart_body",
+      "cloud_body",
+      "ghost",
+      "blob",
+      "mochi_bun",
+      "pill",
+      "triangle_rounded",
+      "egg",
+      "onigiri",
+      "dango",
+      "mushroom",
+      "flower",
+      "moon_crescent",
+      "sun_disc",
+      "cat_head",
+      "bunny_head",
+      "bear_head",
+      "fox_head",
+      "jellyfish",
+      "daruma",
+      "bell",
+      "acorn",
+      "pear",
+      "leaf_blob",
+      "diamond_rounded",
+      "hexagon_rounded",
+      "octagon_rounded",
+      "speech_blob",
+      "shield_blob",
+      "crown_blob"
+    ],
+    "note": "Basis is the sphere; morph targets are absolute shapes. Tween A to B with influence[A]=1-t, influence[B]=t (sphere = all influences 0). Same 1538-vertex cube-sphere topology as every shape_*.glb with morph=true (Clay body only; accent colours exist only in the standalone files). Larger than the 60 KB prop budget because it carries 34 targets with normals."
+  },
+  {
+    "name": "hundred",
+    "category": "reaction",
+    "tint": "#ff4d4d",
+    "triangles": 1552,
+    "bytes": 29948,
+    "file": "hundred.glb",
+    "keywords": [
+      "100",
+      "perfect",
+      "score",
+      "hundred",
+      "keep it real"
+    ],
+    "materials": {
+      "Red": "#d9534f"
+    }
+  },
+  {
+    "name": "eyes",
+    "category": "reaction",
+    "tint": "#ffffff",
+    "triangles": 1296,
+    "bytes": 25368,
+    "file": "eyes.glb",
+    "keywords": [
+      "look",
+      "watching",
+      "see",
+      "side eye",
+      "peek",
+      "attention"
+    ],
+    "materials": {
+      "Eye": "#3b3946"
+    }
+  },
+  {
+    "name": "fire_heart",
+    "category": "reaction",
+    "tint": "#ff5a3a",
+    "triangles": 3238,
+    "bytes": 65240,
+    "file": "fire_heart.glb",
+    "keywords": [
+      "love fire",
+      "burning",
+      "passion",
+      "hot",
+      "heart on fire"
+    ],
+    "materials": {
+      "Flame": "#f08a3c",
+      "Glow": "#ffd866"
+    }
+  },
+  {
+    "name": "party_confetti",
+    "category": "reaction",
+    "tint": "#ff9f1c",
+    "triangles": 2664,
+    "bytes": 52840,
+    "file": "party_confetti.glb",
+    "keywords": [
+      "party",
+      "popper",
+      "celebrate",
+      "congrats",
+      "tada",
+      "birthday"
+    ],
+    "materials": {
+      "ConfettiA": "#ee7fa3",
+      "ConfettiB": "#6fb7e6",
+      "ConfettiC": "#82cf9c",
+      "ConfettiD": "#f5c84c"
+    }
+  },
+  {
+    "name": "sparkling_heart",
+    "category": "reaction",
+    "tint": "#ff6a9a",
+    "triangles": 2930,
+    "bytes": 58828,
+    "file": "sparkling_heart.glb",
+    "keywords": [
+      "love",
+      "sparkle",
+      "shiny heart",
+      "affection",
+      "cute"
+    ],
+    "materials": {
+      "Gold": "#f2c14e"
+    }
+  },
+  {
+    "name": "broken_heart",
+    "category": "reaction",
+    "tint": "#c9506b",
+    "triangles": 1882,
+    "bytes": 38380,
+    "file": "broken_heart.glb",
+    "keywords": [
+      "heartbreak",
+      "sad",
+      "split heart",
+      "breakup",
+      "hurt"
+    ],
+    "materials": {
+      "Ink": "#4a3c48"
+    }
+  }
+]

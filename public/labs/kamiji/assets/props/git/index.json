@@ -1,0 +1,368 @@
+[
+  {
+    "name": "git_commit",
+    "category": "git",
+    "tint": "#7aa7ff",
+    "triangles": 872,
+    "bytes": 17700,
+    "file": "git_commit.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "commit",
+      "save",
+      "snapshot",
+      "node",
+      "history",
+      "git"
+    ]
+  },
+  {
+    "name": "git_branch",
+    "category": "git",
+    "tint": "#7ee787",
+    "triangles": 2112,
+    "bytes": 40116,
+    "file": "git_branch.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "branch",
+      "fork path",
+      "line of work",
+      "feature",
+      "git"
+    ]
+  },
+  {
+    "name": "git_fork",
+    "category": "git",
+    "tint": "#7ee787",
+    "triangles": 2496,
+    "bytes": 47032,
+    "file": "git_fork.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "fork",
+      "copy",
+      "split",
+      "clone repo",
+      "duplicate",
+      "git"
+    ]
+  },
+  {
+    "name": "git_pull_request",
+    "category": "git",
+    "tint": "#3fb261",
+    "triangles": 1984,
+    "bytes": 37876,
+    "file": "git_pull_request.glb",
+    "materials": {
+      "Green": "#3fb261"
+    },
+    "keywords": [
+      "pull request",
+      "pr",
+      "open",
+      "propose",
+      "review request",
+      "git"
+    ]
+  },
+  {
+    "name": "git_pull_request_merged",
+    "category": "git",
+    "tint": "#a371f7",
+    "triangles": 2176,
+    "bytes": 41296,
+    "file": "git_pull_request_merged.glb",
+    "materials": {
+      "Purple": "#a371f7"
+    },
+    "keywords": [
+      "pull request",
+      "merged",
+      "pr",
+      "done",
+      "landed",
+      "git"
+    ]
+  },
+  {
+    "name": "git_merge",
+    "category": "git",
+    "tint": "#ba8cff",
+    "triangles": 2112,
+    "bytes": 40068,
+    "file": "git_merge.glb",
+    "materials": {
+      "Purple": "#a371f7"
+    },
+    "keywords": [
+      "merge",
+      "join",
+      "combine",
+      "integrate",
+      "converge",
+      "git"
+    ]
+  },
+  {
+    "name": "git_tag",
+    "category": "git",
+    "tint": "#ffc400",
+    "triangles": 2578,
+    "bytes": 50596,
+    "file": "git_tag.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "tag",
+      "label",
+      "version",
+      "release tag",
+      "mark",
+      "git"
+    ]
+  },
+  {
+    "name": "git_issue_open",
+    "category": "git",
+    "tint": "#3fb261",
+    "triangles": 1148,
+    "bytes": 23332,
+    "file": "git_issue_open.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Green": "#3fb261"
+    },
+    "keywords": [
+      "issue",
+      "open",
+      "bug",
+      "ticket",
+      "todo",
+      "git"
+    ]
+  },
+  {
+    "name": "git_issue_closed",
+    "category": "git",
+    "tint": "#a371f7",
+    "triangles": 1100,
+    "bytes": 22472,
+    "file": "git_issue_closed.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Purple": "#a371f7"
+    },
+    "keywords": [
+      "issue",
+      "closed",
+      "resolved",
+      "done",
+      "ticket",
+      "git"
+    ]
+  },
+  {
+    "name": "git_check_pass",
+    "category": "git",
+    "tint": "#4cd964",
+    "triangles": 1216,
+    "bytes": 24660,
+    "file": "git_check_pass.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Green": "#3fb261"
+    },
+    "keywords": [
+      "check",
+      "pass",
+      "passed",
+      "success",
+      "ci",
+      "green",
+      "done",
+      "git"
+    ]
+  },
+  {
+    "name": "git_ci_fail",
+    "category": "git",
+    "tint": "#ff6b6b",
+    "triangles": 1168,
+    "bytes": 23836,
+    "file": "git_ci_fail.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Red": "#e5534b"
+    },
+    "keywords": [
+      "fail",
+      "failed",
+      "error",
+      "ci",
+      "red",
+      "broken",
+      "cross",
+      "git"
+    ]
+  },
+  {
+    "name": "git_ci_running",
+    "category": "git",
+    "tint": "#ffc24a",
+    "triangles": 1440,
+    "bytes": 28744,
+    "file": "git_ci_running.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Amber": "#eba93a"
+    },
+    "keywords": [
+      "running",
+      "pending",
+      "in progress",
+      "ci",
+      "spinner",
+      "build",
+      "wait",
+      "git"
+    ]
+  },
+  {
+    "name": "git_conflict",
+    "category": "git",
+    "tint": "#ff8a5c",
+    "triangles": 1412,
+    "bytes": 29264,
+    "file": "git_conflict.glb",
+    "materials": {
+      "Red": "#e5534b",
+      "Amber": "#eba93a"
+    },
+    "keywords": [
+      "conflict",
+      "clash",
+      "collision",
+      "merge conflict",
+      "diverge",
+      "git"
+    ]
+  },
+  {
+    "name": "git_diff",
+    "category": "git",
+    "tint": "#8fb4ff",
+    "triangles": 1848,
+    "bytes": 37732,
+    "file": "git_diff.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Green": "#3fb261",
+      "Red": "#e5534b",
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "diff",
+      "changes",
+      "compare",
+      "added removed",
+      "patch",
+      "git"
+    ]
+  },
+  {
+    "name": "git_stash",
+    "category": "git",
+    "tint": "#c9a56a",
+    "triangles": 1840,
+    "bytes": 36020,
+    "file": "git_stash.glb",
+    "materials": {
+      "Ink": "#454a5c",
+      "Amber": "#eba93a"
+    },
+    "keywords": [
+      "stash",
+      "shelve",
+      "box",
+      "store",
+      "save for later",
+      "temporary",
+      "git"
+    ]
+  },
+  {
+    "name": "git_repo",
+    "category": "git",
+    "tint": "#8fb4ff",
+    "triangles": 2480,
+    "bytes": 48676,
+    "file": "git_repo.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Ink": "#454a5c",
+      "Red": "#e5534b"
+    },
+    "keywords": [
+      "repo",
+      "repository",
+      "project",
+      "book",
+      "codebase",
+      "git"
+    ]
+  },
+  {
+    "name": "git_review",
+    "category": "git",
+    "tint": "#5ac8fa",
+    "triangles": 1712,
+    "bytes": 33752,
+    "file": "git_review.glb",
+    "materials": {
+      "Glass": "#bfe0f2",
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "review",
+      "inspect",
+      "code review",
+      "magnifier",
+      "read",
+      "brackets",
+      "git"
+    ]
+  },
+  {
+    "name": "git_release",
+    "category": "git",
+    "tint": "#ff6a4a",
+    "triangles": 1998,
+    "bytes": 41736,
+    "file": "git_release.glb",
+    "materials": {
+      "Red": "#e5534b",
+      "White": "#f7f3ea",
+      "Glass": "#bfe0f2",
+      "Amber": "#eba93a"
+    },
+    "keywords": [
+      "release",
+      "ship",
+      "launch",
+      "deploy",
+      "rocket",
+      "publish",
+      "git"
+    ]
+  }
+]

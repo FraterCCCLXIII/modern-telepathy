@@ -17,6 +17,16 @@ export function SiteHeader() {
             Projects
           </Link>
           <Link
+            to="/labs"
+            activeProps={{ className: "text-ink" }}
+            className="hover:text-ink transition-colors"
+          >
+            Labs
+          </Link>
+          <a href="/labs/templeos/docs/" className="hover:text-ink transition-colors">
+            Docs
+          </a>
+          <Link
             to="/thesis"
             activeProps={{ className: "text-ink" }}
             className="hover:text-ink transition-colors"

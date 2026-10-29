@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { labsForProject } from "@/lib/labs";
 import { getProject, type Milestone, type ProjectLink } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -166,6 +167,26 @@ function ProjectDetail() {
 
           <div className="md:col-span-4">
             <div className="sticky top-24 space-y-12">
+              {labsForProject(project.slug).length > 0 && (
+                <div>
+                  <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
+                    Try it
+                  </h2>
+                  <ul className="space-y-4">
+                    {labsForProject(project.slug).map((lab) => (
+                      <li key={lab.id}>
+                        <a
+                          href={lab.href}
+                          className="group flex items-center justify-between py-2 text-zinc-600 hover:text-ink transition-colors"
+                        >
+                          <span className="text-sm font-medium">{lab.title}</span>
+                          <span className="text-zinc-300 group-hover:translate-x-1 transition-transform">→</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div>
                 <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
                   Resources

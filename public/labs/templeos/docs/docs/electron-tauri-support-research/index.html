@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running Electron and Tauri apps inside the TempleOS desktop: research and route | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" open data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html" aria-current="page">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Research and reviews</span></li><li aria-current="page">Running Electron and Tauri apps inside the TempleOS desktop: research and route</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Running Electron and Tauri apps inside the TempleOS desktop: research and route</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/electron-tauri-support-research.md</span></div>
+        <div class="doc-body">
+
+<p>Date 2026-10-27. Research only: nothing was built, launched, installed or committed. The only commands run were read-only
+queries (<code>qemu-system-x86_64 -device help</code>, <code>-machine pc,help</code>, <code>-object ...,help</code>, <code>uname</code>, <code>sw_vers</code>, <code>sed</code>, <code>grep</code>).
+Paths are relative to <code>apps/templeos-holyc/</code> unless absolute. Web pages were accessed 2026-10-27.</p>
+<p>Evidence labels used on every claim: <strong>[V]</strong> verified here (read in a local file, or a command run on this Mac),
+<strong>[D]</strong> reported by documentation I fetched (URL given), <strong>[S]</strong> reported by a search result snippet only, <strong>[U]</strong> unverified
+(from general knowledge or inference; treat as a hypothesis to test).</p>
+<h2 id="0-summary">0. Summary<a class="headerlink" href="#0-summary" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>The previous plan's transport is dead on this machine.</strong> <code>ivshmem-plain</code> and <code>ivshmem-doorbell</code> do not exist in the
+   Homebrew QEMU 11.0.2 on this Apple Silicon Mac: <code>-device ivshmem-plain,help</code> answers "Device 'ivshmem-plain' not found" <strong>[V]</strong>. QEMU's own page
+   says "On Linux hosts, a shared memory device is available" and documents only Linux setups <strong>[D]</strong>
+   (https://www.qemu.org/docs/master/system/devices/ivshmem.html). The same QEMU does ship <code>memory-backend-file</code> with <code>share=</code> and <code>mem-path=</code>
+   and the <code>pc</code> machine accepts <code>memory-backend=</code> (use a file as the guest's main RAM) <strong>[V]</strong>. So the best candidate transport is
+   <strong>guest main RAM backed by a shared file that a host process also maps</strong> ("ramshm"). Whether that works on macOS under TCG is the first thing to
+   prove <strong>[U]</strong>; <code>memory-backend-file</code> has compiled on macOS since a 2018 patch <strong>[S]</strong>.</li>
+<li><strong>Source of pixels is replaceable; build the guest side once.</strong> Whatever captures the app (ScreenCaptureKit, Chromium DevTools screencast, an
+   Xpra client in a Linux container), the guest only needs "a surface in shared RAM, a list of changed rectangles, and an event channel back".
+   Build that guest contract first and keep capture behind a host "surface provider" interface.</li>
+<li><strong>Recommended route:</strong> a Swift host daemon captures real macOS app windows with ScreenCaptureKit (works for Electron and Tauri/WKWebView alike, no
+   app changes), writes BGRA surfaces plus dirty rectangles into shared RAM, and injects input back; Electron apps can later be upgraded to
+   CDP (no focus stealing, device-metric resizing) and risky or Linux-only apps moved into a Linux ARM64 container behind Xpra. Do not compile
+   Chromium, Node or Rust apps into TempleOS.</li>
+</ol>
+<h2 id="1-facts-about-our-guest-that-bound-every-design">1. Facts about our guest that bound every design<a class="headerlink" href="#1-facts-about-our-guest-that-bound-every-design" title="Link to this section">#</a></h2>
+<ul>
+<li>The desktop works in logical units at scale <code>ks_s</code> of 1 or 2 and owns the whole framebuffer; the card address comes from PCI BAR0 (<code>desk3/05-run.HC:58-66</code>,
+  <code>ks_fb=PCIReadU32(...,0x10)</code>) <strong>[V]</strong>. Windows are fixed size, held in arrays sized by <code>NA</code> (<code>#define NA 9</code>, <code>desk3/01-core.HC:26</code>; arrays <code>ks_aw/ks_ah/ks_wx/ks_open/ks_z</code>
+  in <code>desk3/02-ui.HC:5-15</code>) <strong>[V]</strong>. Apps are <code>AppXxx(a,x,y,w,h)</code> draw functions dispatched by an if-chain in <code>AppBody</code> (<code>desk3/03-apps.HC:584-597</code> (<code>AppBody</code> at :585)) and by <code>AppClick</code>
+  (<code>desk3/04-main.HC:148</code>) <strong>[V]</strong>.</li>
+<li>A frame is: for each dirty rectangle, set the clip (<code>ks_c0x..ks_c1y</code>), run <code>Draw</code> (wallpaper, every window frame with shadow, app body, menubar, dock), <code>Cursor</code>, then <code>MemCpy</code> each
+  row to the card (<code>desk3/05-run.HC:3-54</code>) <strong>[V]</strong>. So a dirty rectangle inside a video-like window still repaints the wallpaper, the shadow and the card under it unless a fast path is added.
+  <code>SpanCopy</code> (<code>desk3/01-core.HC:114</code>) and <code>RRTexN</code> (<code>:178</code>) already copy from a full-screen-sized source with a rounded mask, but assume the source has the screen stride <strong>[V]</strong>; a stride-aware variant is needed.</li>
+<li>Hit regions are rebuilt every drawn frame (<code>Hit</code>, <code>desk3/02-ui.HC:92</code>, max 500 <code>MAXH</code>) and the hit test is a linear scan (<code>HitAt</code>, <code>:101</code>) <strong>[V]</strong>.</li>
+<li>Input: mouse is relative, re-centred each loop (<code>MsSet(320,240)</code>), cursor moved by <code>dx*3*s</code> (<code>desk3/04-main.HC:364-373</code>); only <code>ms.lb</code> (left button) and wheel <code>ms.pos.z</code> are read (<code>:378</code>, <code>:367</code>) <strong>[V]</strong>.
+  Keys come from <code>ScanKey(&amp;ch,&amp;sc)</code> (<code>desk3/04-main.HC:315-318</code>), used with <code>sc&amp;0xFF</code> PS/2 scancodes in <code>NotesKey</code> (<code>:264-270</code>, for example 0x4B left, 0x4D right, 0x53 delete) <strong>[V]</strong>. <code>ScanKey</code> returns key-down only
+  as far as these uses show; whether key-up and modifier state are readable (<code>kbd</code> globals, <code>KeyDown()</code>) is <strong>[U]</strong>.</li>
+<li>Measured by earlier agents and the README: full 1280x800x4 copy to the card about 7 ms; 700k pixel redraw about 20 ms; 7 ms redraw at 1440x900 and about 25 ms at 2880x1800 for moving a window
+  (<code>README.md:7</code>, <code>:23-24</code>) <strong>[V as documented measurements, not re-run]</strong>. 1 GB RAM (<code>-m 1024M</code>, <code>scripts/boot-vm.sh:14</code>) <strong>[V]</strong>; at 2x the desktop already holds a back buffer, a <code>prev</code> buffer, low-res blur buffers and 5+5
+  wallpapers of 20.7 MB each (about 290 MB, my arithmetic from <code>desk3/01-core.HC:35</code>) so remote surfaces need a RAM increase.</li>
+<li>Serial: lockstep loader about 1.4 KB/s because it acks every 8 to 32 bytes (<code>docs/kosmos-app-port-research.md:37-40</code>) <strong>[V as reported by that file]</strong>; a streaming drain loop is unmeasured.</li>
+<li>Audio: PC speaker only (task statement). Network: none.</li>
+<li>The guest build is one concatenated file: <code>cat desk3/0*.HC</code> (<code>scripts/send-to-vm.sh:14</code>) <strong>[V]</strong>, so a new file named <code>desk3/03b-remote.HC</code> sorts between <code>03-apps.HC</code> and <code>04-main.HC</code> automatically.</li>
+</ul>
+<h2 id="2-q1-architectures-for-getting-electron-and-tauri-apps-into-a-window">2. Q1: architectures for getting Electron and Tauri apps into a window<a class="headerlink" href="#2-q1-architectures-for-getting-electron-and-tauri-apps-into-a-window" title="Link to this section">#</a></h2>
+<p>Common baseline numbers (my arithmetic): a 1000x700 logical window is 2.8 MB at 1x and 11.2 MB at 2x per full frame. All approaches below end in "BGRA surface plus changed rectangles", so
+Q2 and Q6 apply to all.</p>
+<h3 id="a-native-macos-app-screencapturekit-capture-cgevent-or-accessibility-input">(a) Native macOS app, ScreenCaptureKit capture, CGEvent or Accessibility input<a class="headerlink" href="#a-native-macos-app-screencapturekit-capture-cgevent-or-accessibility-input" title="Link to this section">#</a></h3>
+<ul>
+<li>What you see: the real app window, native fonts, native GPU, macOS menus. <code>SCContentFilter(desktopIndependentWindow:)</code> captures one window regardless of what covers it, <code>minimumFrameInterval</code> up
+  to 60 fps, frames arrive when content changes, BGRA output, optional app audio since macOS 13, Screen Recording permission required
+  <strong>[U: the Apple page https://developer.apple.com/documentation/screencapturekit/ returned no body to my fetch; the details come from the fetch tool's general-knowledge summary. Verify with an Apple sample before relying on them.]</strong></li>
+<li>Sunshine, a GPL-3.0 streaming server, uses ScreenCaptureKit as its only macOS capture backend and requires macOS 14.2 or later <strong>[D]</strong> (https://github.com/LizardByte/Sunshine), which is evidence that SCK capture is a mainstream route in 2026. It does not say whether it captures single windows <strong>[D]</strong>.</li>
+<li>Latency/FPS: capture is GPU-side and cheap; readback of 2.8 MB at 30 fps is about 84 MB/s of memcpy on the host <strong>[U]</strong>. The chain click to pixel is guest poll (up to 5 ms idle sleep, <code>desk3/05-run.HC</code> (the idle <code>Sleep(5)</code> in <code>Main</code>)) + serial/shm event +
+  host injection + app render + SCK frame (up to 16 ms at 60 fps) + shm write + guest blit (about 10 ms): estimate 60 to 120 ms <strong>[U]</strong>.</li>
+<li>Input: <code>CGEventPostToPid</code> for mouse and keys to a specific app, or Accessibility (<code>AXUIElement</code>) actions such as <code>AXPress</code> for robust button clicks. Needs the Accessibility permission <strong>[U]</strong>. Unicode and IME: host can set a Unicode string on a key event;
+  the guest cannot compose non-ASCII, so a host-side "paste or type text" path is needed <strong>[U]</strong>.</li>
+<li>Clipboard: <code>NSPasteboard</code> bridged by the daemon, gated by consent (Q5). Audio: the app plays through the Mac speakers (free); per-app mute only <strong>[U]</strong>. Cursors: SCK can hide the cursor; shape needs a query (<code>NSCursor.currentSystem</code>) or a guess from the AX element role <strong>[U]</strong>.</li>
+<li>Multi-window and popups: a per-window capture excludes the app's other windows. Menus, drop-downs, tooltips, dialogs and native context menus are separate windows. Handle by listing all windows of the same pid and exposing each as a child surface at an offset, or by capturing at application level and cropping the union rectangle <strong>[U]</strong>.</li>
+<li>HiDPI: ask SCK for width and height = window logical size x <code>ks_s</code> so the guest does 1:1 copies. Resize: set the real window size via Accessibility <code>AXSize</code> <strong>[U]</strong>.</li>
+<li>Drag and drop: not feasible except through a shared folder and the app's own open dialog (captured as another window).</li>
+<li>What breaks: windows must be on-screen to be captured (minimised and fully off-screen windows are a risk) <strong>[U]</strong>, so the user's real desktop gets cluttered unless windows live on a virtual display (private <code>CGVirtualDisplay</code> API, risky <strong>[U]</strong>) or another Space;
+  focus stealing when injecting keyboard events; the app runs in the user's own profile with the user's files (security, Q5); permission prompts that macOS re-confirms periodically <strong>[U]</strong>.</li>
+<li>Cost: S/M for a single-window prototype, L with popups and resize. Best compatibility: everything installed on the Mac, including Slack, Discord, Notion, 1Password, and Tauri apps (WKWebView).</li>
+</ul>
+<h3 id="b-linux-arm64-vm-or-container-on-the-mac-headless-compositor-pull-frames-over-a-remote-display-protocol">(b) Linux ARM64 VM or container on the Mac, headless compositor, pull frames over a remote-display protocol<a class="headerlink" href="#b-linux-arm64-vm-or-container-on-the-mac-headless-compositor-pull-frames-over-a-remote-display-protocol" title="Link to this section">#</a></h3>
+<ul>
+<li>Electron officially documents running under Xvfb with <code>DISPLAY</code> set for headless CI <strong>[D]</strong> (https://electronjs.org/docs/latest/tutorial/testing-on-headless-ci). A forum report says headless Obsidian needed <code>--disable-gpu --no-sandbox</code> besides Xvfb <strong>[S]</strong>
+  (https://forum.obsidian.md/t/one-solution-to-segmentation-fault-when-launching-headless-obsidian/117276). Tauri v2 on Linux needs WebKitGTK 4.1 and the docs give an arm64 install line (<code>libwebkit2gtk-4.1-dev:arm64</code>) <strong>[D]</strong> (https://v2.tauri.app/distribute/debian/).</li>
+<li>Software GL only (no GPU in a container on macOS) means Chromium uses SwiftShader or llvmpipe, so heavy pages burn host CPU <strong>[U]</strong>.</li>
+<li><strong>Xpra</strong> is the strongest tool here: seamless per-window forwarding of individual X11 apps, built-in HTML5 client, clipboard and audio forwarding, macOS arm64 client builds, GPL-2.0+ <strong>[D]</strong> (https://github.com/Xpra-org/xpra/). Older tickets show encodings rgb (zlib or lz4), png, jpeg, webp, h264, vp8, vp9
+  <strong>[S]</strong>; latest release notes seen mention 6.5.3 and AV1 decoders <strong>[S]</strong> (https://github.com/Xpra-org/xpra/releases). Per-window damage regions and window move/resize/title/icon/cursor events are the protocol's native vocabulary, which map one-to-one to our "remote window" contract <strong>[U]</strong>. The cost is writing a custom client (Python, speaking Xpra's protocol) that decodes window updates and copies them to shared RAM.</li>
+<li><strong>waypipe</strong>: a Wayland proxy with lz4/zstd/video compression and DMABUF transfer <strong>[S]</strong> (man pages, e.g. https://man.archlinux.org/man/waypipe.1.en); it needs a Wayland compositor at the receiving end, which we are not (our "compositor" is HolyC). Poor fit. Its project page returned an anti-bot "Access Denied" so licence and macOS status are <strong>[U]</strong>.</li>
+<li><strong>Weston</strong> RDP backend plus FreeRDP: RemoteApp-style RAIL/VAIL support was developed for WSLg; whether mainline Weston ships it is not confirmed <strong>[S]</strong> (https://www.mankier.com/1/weston). Weston and FreeRDP licences: FreeRDP is Apache-2.0 <strong>[D]</strong> (https://github.com/FreeRDP/FreeRDP); Weston is MIT <strong>[U]</strong>.</li>
+<li><strong>wayvnc</strong> with sway or another wlroots compositor: <code>WLR_BACKENDS=headless WLR_LIBINPUT_NO_DEVICES=1</code>, one display per wayvnc instance <strong>[S]</strong>; a wlroots issue reports a grey screen with the headless backend in some versions <strong>[S]</strong> (https://gitlab.freedesktop.org/wlroots/wlroots/-/issues/3712). One container per app under <code>cage</code> (single-app kiosk) plus wayvnc yields a per-app stream by construction <strong>[U]</strong>; popups and dialogs live inside that one output.</li>
+<li><strong>TigerVNC</strong> (GPL-2.0, Xvnc is an X server with a virtual framebuffer, Tight encoding with libjpeg-turbo) and <strong>noVNC</strong> (MPL-2.0, Raw, CopyRect, RRE, Hextile, Tight, TightPNG, ZRLE, JPEG, Zlib, H.264) are whole-desktop <strong>[D]</strong> (https://github.com/TigerVNC/tigervnc, https://github.com/novnc/noVNC). VNC rectangles include CopyRect, which is a natural dirty-rectangle source.</li>
+<li>Latency 50 to 150 ms typical on localhost <strong>[U]</strong>. Host CPU: one container with Xvfb, a window manager and a software-rendered Chromium can use one to two cores while active <strong>[U]</strong>.</li>
+<li>Input: X11 events through xdotool, XTest or the protocol (Xpra/VNC both carry keysyms and button masks); IME and clipboard are native to Xpra. Multi-window: native in Xpra, absent in VNC. Audio: PulseAudio over TCP to a Mac player <strong>[U]</strong>.</li>
+<li>What breaks: only apps with Linux ARM64 builds (Q4); app looks like a Linux app (fonts, no macOS menu bar, tray icons need a tray host); Rosetta for Linux in Apple's Virtualization framework or qemu-user could run x86_64 Electron apps, slowly <strong>[U]</strong>; keychain/biometric integrations differ.</li>
+<li>Benefit: real isolation (own filesystem, own network namespace, kill switch, cgroup limits), the right answer for untrusted or noisy apps.</li>
+</ul>
+<h3 id="c-electron-specific">(c) Electron specific<a class="headerlink" href="#c-electron-specific" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Offscreen rendering</strong> <code>webPreferences.offscreen</code>: delivers each frame through <code>webContents.on('paint')</code> with the dirty rect and image, windows are always frameless, <code>setFrameRate</code> up to 240 fps in software mode,
+  no frames while the page is idle, GPU mode supports WebGL with a copy cost, and a <code>useSharedTexture</code> mode needs a native Node module <strong>[D]</strong> (https://www.electronjs.org/docs/latest/tutorial/offscreen-rendering).
+  It must be set where the BrowserWindow is created, so it works for apps we own or can patch, not for closed apps like Slack (and ASAR integrity or <code>OnlyLoadAppFromAsar</code> fuses may block patching <strong>[U]</strong>).
+  <code>beginFrameSubscription</code> exists in <code>webContents</code> with an <code>onlyDirty</code> flag; the fetched page was truncated so callback details are <strong>[U]</strong>; the page also lists <code>capturePage(rect, {stayHidden, stayAwake})</code> and <code>isBeingCaptured()</code> <strong>[D]</strong> (https://www.electronjs.org/docs/latest/api/web-contents).</li>
+<li><strong>CDP <code>Page.startScreencast</code></strong> over <code>--remote-debugging-port</code>: frames are only emitted when the browser renders something new, every frame must be acked with <code>Page.screencastFrameAck</code>, the method is flagged experimental <strong>[S]</strong> (search results quoting Puppeteer recorder code and Chromium <code>page_handler.h</code>; the protocol viewer page fetch returned only a redirect notice).
+  Input via <code>Input.dispatchMouseEvent</code> / <code>dispatchKeyEvent</code> / <code>insertText</code>; resize via <code>Emulation.setDeviceMetricsOverride</code> without moving the real window; no native chrome, native menus, OS dialogs, <code>&lt;select&gt;</code> popup widgets or tray <strong>[U]</strong>.
+  Wins: no Screen Recording or Accessibility permission, no focus stealing, can run hidden <strong>[U: background throttling of hidden pages may stop frames]</strong>. JPEG frames are cheap to decode on the host but we want raw BGRA so decode costs host CPU only.</li>
+<li><strong>Playwright Electron</strong>: experimental, <code>_electron.launch()</code>, Electron v21 or later, <code>firstWindow()</code>, <code>electronApp.evaluate()</code> runs in the main process (so <code>Menu.getApplicationMenu()</code> could feed our menubar), native dialogs are not intercepted and must be stubbed through <code>evaluate()</code>, and the <code>EnableNodeCliInspectArguments</code> fuse set false breaks launch <strong>[D]</strong> (https://playwright.dev/docs/api/class-electron).
+  Apps built with that fuse off (hardened apps) cannot be driven this way; they would still accept <code>--remote-debugging-port</code> unless stripped <strong>[U]</strong>.</li>
+<li>Electron on Linux arm64 is a supported target for packagers <strong>[S]</strong> (https://www.electron.build/docs/architecture).</li>
+</ul>
+<h3 id="d-tauri-specific">(d) Tauri specific<a class="headerlink" href="#d-tauri-specific" title="Link to this section">#</a></h3>
+<ul>
+<li>wry is the webview layer: WKWebView on macOS ("WebKit is native on macOS"), WebView2 on Windows, WebKitGTK on Linux, child webviews on macOS, Windows and Linux (X11 only); dual MIT or Apache-2.0; the README says nothing about offscreen/headless rendering <strong>[D]</strong> (https://github.com/tauri-apps/wry). tao is its window crate <strong>[U]</strong>.</li>
+<li><strong>No CDP</strong>: the Tauri debugging page documents Safari's inspector on macOS (private API on macOS, blocks App Store), Edge DevTools on Windows, WebKitGTK WebInspector on Linux, and mentions no remote protocol <strong>[D]</strong> (https://v2.tauri.app/develop/debug/). Production builds disable devtools unless the <code>devtools</code> feature or a debug build is used <strong>[D]</strong> (same page).</li>
+<li><strong>WebDriver</strong>: <code>tauri-driver</code> supports Windows and Linux only; there is "no WKWebView driver tool" on macOS; CrabNebula sells a cross-platform fork needing a paid key on macOS; the docs recommend WebdriverIO with <code>@wdio/tauri-service</code> <strong>[D]</strong> (https://v2.tauri.app/develop/tests/webdriver/). Screenshots are not mentioned there; W3C WebDriver has a standard screenshot endpoint <strong>[U]</strong> but it is a poll, not a stream.</li>
+<li><strong>WebKitGTK remote inspector</strong>: <code>WEBKIT_INSPECTOR_SERVER=host:port</code> with <code>enable-developer-extras</code>, client is another WebKitGTK browser at <code>inspector://</code>; WebKitWebDriver uses the same remote protocol <strong>[S]</strong> (https://trac.webkit.org/wiki/RemoteInspectorGTKandWPE, https://blogs.igalia.com/carlosgc/?p=936, dated 2017). This is WebKit's protocol, not CDP.</li>
+<li>Linux aarch64 build: Tauri's docs give the arm64 dependency line <strong>[D]</strong>; whether a given third-party Tauri app publishes aarch64 Linux binaries is app-specific (many publish only x86_64 AppImages) <strong>[U]</strong>. Building from source in a container is possible for open-source Tauri apps <strong>[U]</strong>.</li>
+<li><strong>Idea: Tauri frontend as a plain page in headless Chromium, Rust backend on the host.</strong> The frontend talks through <code>window.__TAURI_INTERNALS__</code> and a custom IPC protocol <strong>[U]</strong>; Tauri ships <code>mockIPC</code> for tests and a <code>tauri::test</code> mock runtime <strong>[U]</strong>. In principle the backend's <code>#[tauri::command]</code> functions run in a process with a mock runtime and a shim forwards <code>invoke</code> over a WebSocket. This needs the app source (to build a headless backend) and per-app work; it also loses plugins that need a real window (dialogs, tray, window management). Feasible for a few open-source Tauri apps we choose, not a general route. Rate: a research spike, not a platform feature.</li>
+<li>For closed Tauri binaries on macOS: only (a) ScreenCaptureKit works. Cost the same as for Electron.</li>
+</ul>
+<h3 id="e-semantic-route-redraw-natively-from-accessibility-or-dom">(e) Semantic route: redraw natively from accessibility or DOM<a class="headerlink" href="#e-semantic-route-redraw-natively-from-accessibility-or-dom" title="Link to this section">#</a></h3>
+<ul>
+<li>Data sources: macOS <code>AXUIElement</code> trees of any app <strong>[U]</strong>; for Chromium <code>Accessibility.getFullAXTree</code>, <code>DOM.getDocument</code>, <code>DOMSnapshot.captureSnapshot</code> (nodes with bounding boxes and computed styles) <strong>[U]</strong>; our own egui precedent in <code>docs/kosmos-app-port-research.md:70-90</code> already shows the loss profile (no colours, fonts, icons, canvases, z-order) <strong>[V]</strong>.</li>
+<li>What is lost: everything custom drawn (VS Code editor canvas, Slack message virtualisation, images, video, fonts, shadows); web layout cannot be reproduced by walking rectangles at 15 ns per operation with a single font atlas.</li>
+<li>What it is good for as an adjunct: the app's menu bar items into our menubar (<code>desk3/02-ui.HC:238</code>), window titles, focus and caret rectangles for IME, cursor shape by element role, robust button activation (<code>AXPress</code>), and an agent/reader mode that sends styled text. Verdict: not a primary route.</li>
+</ul>
+<h3 id="f-better-ideas-found">(f) Better ideas found<a class="headerlink" href="#f-better-ideas-found" title="Link to this section">#</a></h3>
+<ol>
+<li><strong>Web-first apps in one host Chromium.</strong> Slack, Discord, Notion, Element and VS Code (through vscode.dev or code-server) all have web clients, so a single headless Chromium (Playwright) with one tab per app and CDP screencast covers many "apps" with no per-app install, no ScreenCaptureKit permission and a clean cookie jar per profile. The core-apps plan already contains this as spike 2 (<code>docs/core-apps-plan.md:117-119</code>) <strong>[V]</strong>. Loses Electron-only features and may breach some web-client terms (Q4).</li>
+<li><strong>Host-side overlay.</strong> Skip pixels in the guest entirely: the guest sends window rectangles over serial and a borderless host window sits over the QEMU window showing the real app. Zero guest cost and perfect speed; but z-order with guest windows, menus and shadows is wrong, screenshots of the VM miss it, and it is not "inside". Useful only as a stop-gap demo <strong>[U]</strong>.</li>
+<li><strong>Surface-provider abstraction</strong> (recommended): the host daemon exposes one contract (create surface, resize, dirty rects, title, cursor, close, child surfaces) and implements it with SCK, CDP or Xpra. The guest never learns which.</li>
+</ol>
+<h2 id="3-q2-the-transport">3. Q2: the transport<a class="headerlink" href="#3-q2-the-transport" title="Link to this section">#</a></h2>
+<h3 id="bandwidth-needs-my-arithmetic">Bandwidth needs (my arithmetic)<a class="headerlink" href="#bandwidth-needs-my-arithmetic" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Bytes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1440x900x4 full frame</td>
+<td>5.18 MB</td>
+</tr>
+<tr>
+<td>2880x1800x4 full frame</td>
+<td>20.7 MB</td>
+</tr>
+<tr>
+<td>1000x700 logical window, 1x / 2x</td>
+<td>2.8 MB / 11.2 MB</td>
+</tr>
+<tr>
+<td>Typical typing or cursor-blink update (a few percent of a window)</td>
+<td>20 to 200 KB at 1x</td>
+</tr>
+<tr>
+<td>30 fps of a full 1000x700 window at 1x</td>
+<td>84 MB/s</td>
+</tr>
+<tr>
+<td>30 fps at 2x</td>
+<td>336 MB/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Serial at an optimistic 100 KB/s moves one 2.8 MB window in 28 s, so serial can never carry pixels; with zlib/RLE on a mostly static UI it could carry small deltas (about 1 to 10 KB each) at a few fps <strong>[U]</strong>. LZ4 and RLE decoders are 30 to 60 lines of HolyC but cost about 10 to 30 ns per output byte under TCG so decoding a 1 MB delta costs 10 to 30 ms <strong>[U]</strong>; they only pay when the channel is the bottleneck, which shared RAM removes.</p>
+<h3 id="options">Options<a class="headerlink" href="#options" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Exists in our QEMU</th>
+<th>Guest code needed</th>
+<th>Bandwidth</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ivshmem-plain</code></td>
+<td><strong>No</strong> [V] (not found; docs say Linux hosts [D])</td>
+<td>PCI BAR map</td>
+<td>memory speed</td>
+<td>Dead on this build. Do not plan on it. A Linux QEMU build could add it, not a macOS one [U].</td>
+</tr>
+<tr>
+<td><strong>Main RAM as shared file</strong> (<code>-object memory-backend-file,id=ram,size=2G,mem-path=...,share=on -machine pc,memory-backend=ram</code>)</td>
+<td>Yes [V] (object and property exist)</td>
+<td>Allocate a buffer with <code>MAlloc</code>, write a magic header, tell the host the address over serial (or let the host scan for the magic)</td>
+<td>memory speed</td>
+<td><strong>Best candidate.</strong> TempleOS kernel memory is identity mapped (reported [U]), so a pointer is a physical address; the host mmaps the same file. No driver, no PCI. Unknowns [U]: TCG store visibility to the host process (use sequence numbers and a release store order; x86 TSO on an ARM host under TCG), RAM-file write-back to the SSD on macOS (mitigate with a RAM disk <code>hdiutil attach -nomount ram://...</code> or <code>memory-backend-shm</code>, which also exists [V]), and that the guest GC of the heap does not move the buffer (HolyC does not move memory).</td>
+</tr>
+<tr>
+<td><code>nvdimm</code> device backed by <code>memory-backend-file,share=on</code></td>
+<td>Device exists [V]</td>
+<td>Parse ACPI NFIT or probe the physical range; region sits above RAM so the guest must map it (TempleOS identity maps above 4 GB: unverified, <code>docs/kosmos-app-port-research.md:152</code>)</td>
+<td>memory speed</td>
+<td>Fallback if RAM-as-file misbehaves; more unknowns.</td>
+</tr>
+<tr>
+<td>Serial streaming (16550 COM1 or <code>pci-serial</code>, FIFO on, no acks)</td>
+<td>Yes [V]</td>
+<td>Existing <code>Rx</code> drain, <code>InU8(0x3F8)</code></td>
+<td>maybe 100 to 500 KB/s drain [U], 40 to 130 KB/s with a 4 ms/frame budget [U] (<code>docs/kosmos-app-port-research.md:39</code>)</td>
+<td>Keep for control, events, clipboard text, thumbnails. Measure with the spike in section 8.</td>
+</tr>
+<tr>
+<td>Monitor socket (<code>pmemsave</code>, <code>screendump</code>, <code>xp</code>)</td>
+<td>Yes [V] (used by <code>scripts/vmkeys.py</code>)</td>
+<td>None</td>
+<td>Host reads guest memory slowly; HMP has no memory write that I know of [U]</td>
+<td>Debug and screenshots only. <code>human-monitor-command</code> pmemsave could pull the guest's output, not push input [U].</td>
+</tr>
+<tr>
+<td>gdbstub <code>M</code> packets (<code>-gdb tcp::1234</code>)</td>
+<td>Yes (option) [U]</td>
+<td>None</td>
+<td>tens of MB/s at best, stops the CPU [U]</td>
+<td>Fallback only.</td>
+</tr>
+<tr>
+<td>Second IDE disk (<code>piix3-ide</code>, <code>ide-hd</code> exist [V]) with ATA PIO or bus-master DMA</td>
+<td>Yes [V]</td>
+<td>Raw ATA sector read/write from HolyC: PIO is <code>rep insw</code> (cheap under TCG [U]); bus-master DMA gives memory-speed copies straight into guest RAM [U]. The README notes mounting a second disc failed once (<code>README.md:115</code>, ISO9660 <code>ISOInit</code>) but that is a file system issue, raw sectors avoid it</td>
+<td>Host writes a raw file; QEMU re-reads it on each guest request when cache is <code>none</code>/<code>directsync</code> [U]</td>
+<td>Second-best transport. A real block device with bounded latency; no shared-mapping questions. Guest to host writes show up in the same file.</td>
+</tr>
+<tr>
+<td>virtio-vsock</td>
+<td><strong>No device in this QEMU</strong> [V] (<code>vsock</code> absent from <code>-device help</code>; the vhost backend is Linux only [U])</td>
+<td>virtio + vsock stack</td>
+<td>n/a</td>
+<td>Not available.</td>
+</tr>
+<tr>
+<td>virtio-serial / virtio-9p / virtio-blk / virtio-net (<code>virtio-*-pci</code> present [V])</td>
+<td>Yes [V]</td>
+<td>A legacy-virtio PCI driver in HolyC: scan PCI (<code>PCIClassFind</code>, <code>PCIReadU32</code> already used at <code>desk3/05-run.HC:58-66</code>), set feature bits via port I/O, allocate descriptor rings in identity-mapped RAM, kick through a port write, poll the used ring. Estimate 300 to 600 lines of HolyC and 3 to 5 days for one queue, polled, legacy mode [U]; modern/transitional devices need MMIO BAR parsing too</td>
+<td>virtio-serial/9p are limited by host QEMU copy, roughly 100s of MB/s [U]</td>
+<td>A reasonable Phase 3 upgrade: virtio-blk or virtio-serial gives a clean DMA channel with interrupts-free polling. Not first.</td>
+</tr>
+<tr>
+<td>virtio-gpu, <code>ramfb</code>, <code>VGA</code> read-back</td>
+<td>virtio-gpu-pci exists [V]</td>
+<td>Heavy driver; and it only draws to the QEMU display</td>
+<td>n/a</td>
+<td>Does not help moving pixels into the guest.</td>
+</tr>
+<tr>
+<td>USB (xhci, <code>usb-tablet</code>, <code>usb-storage</code> exist [V])</td>
+<td>Yes [V]</td>
+<td>TempleOS has no USB stack [U]</td>
+<td>n/a</td>
+<td>No.</td>
+</tr>
+<tr>
+<td>e1000, rtl8139, pcnet, ne2k_pci (NICs exist [V])</td>
+<td>Yes [V]</td>
+<td>A NIC driver plus TCP/IP stack</td>
+<td>n/a</td>
+<td>A bigger project than the shared RAM channel; revisit only if the guest should talk to the internet.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="frame-budget-in-our-guest-derived-from-readmemd7-23-24-and-arithmetic">Frame budget in our guest (derived from <code>README.md:7</code>, <code>:23-24</code> and arithmetic)<a class="headerlink" href="#frame-budget-in-our-guest-derived-from-readmemd7-23-24-and-arithmetic" title="Link to this section">#</a></h3>
+<ul>
+<li>Surface-in-shared-RAM to back buffer to card = two copies. Our measured raw copy is about 5.2 MB per 7 ms (about 0.75 GB/s). A 2.8 MB window costs about 4 ms per copy, so about 8 ms if both copies are needed; the back buffer copy can be skipped by a fast path that blits straight to the card when nothing overlaps the dirty rectangle.</li>
+<li>Full-window redraws: 1000x700 at 1x about 8 ms, so 30 fps is plausible (the frame cap <code>ks_fcap</code> defaults to 60, <code>desk3/01-core.HC:58</code>). At 2x the same window is 11.2 MB, about 15 ms per copy and about 30 ms for both, so 20 to 30 fps with the fast path, 15 to 20 without. Typical UI use updates 5 to 20% of a window, so 30+ fps is realistic for typing, scrolling a small region and hover effects. Video-like content (a scrolling web page) is the stress case.</li>
+<li>Never upscale in the guest: nearest 2x upsample of 700k source pixels in HolyC at about 15 ns per op is 30 ms or more <strong>[derived from <code>README.md</code> rates]</strong>. The host renders at the final physical size.</li>
+<li>Overlap cost: if another window or the dock overlaps a dirty rectangle, <code>Draw</code> must repaint those layers clipped to that rectangle; rounded corners and shadows use <code>RRTexN</code> style code. Expect 2 to 4x slower in that case.</li>
+</ul>
+<h2 id="4-q3-open-source-building-blocks-and-licences">4. Q3: open-source building blocks and licences<a class="headerlink" href="#4-q3-open-source-building-blocks-and-licences" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Licence</th>
+<th>Per-window (seamless) or whole desktop</th>
+<th>Use here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Xpra</td>
+<td>GPL-2.0+ [D]</td>
+<td><strong>Per window</strong> (seamless mode), desktop and shadow modes too, HTML5 client, clipboard, audio, macOS arm64 client [D]</td>
+<td>Linux-container provider: write a client that turns window updates into shared-RAM surfaces. Importing Xpra's Python makes our daemon GPL-bound if distributed [U]; speak its wire protocol or keep it internal.</td>
+</tr>
+<tr>
+<td>waypipe</td>
+<td>not confirmed (page blocked) [U]</td>
+<td>Per Wayland surface, but needs a compositor on the receiving side [S]</td>
+<td>No.</td>
+</tr>
+<tr>
+<td>FreeRDP</td>
+<td>Apache-2.0 [D]</td>
+<td>Protocol library; RemoteApp/RAIL support exists in the wider project [U] (not stated on the README fetched)</td>
+<td>Only if we adopt Weston RDP/RAIL; unproven.</td>
+</tr>
+<tr>
+<td>Weston (headless, RDP backends)</td>
+<td>MIT [U]</td>
+<td>Whole output, per-window only via RAIL work from WSLg [S]</td>
+<td>Unlikely.</td>
+</tr>
+<tr>
+<td>cage / sway with wayvnc</td>
+<td>MIT [U] / MIT / ISC [U]</td>
+<td>One app per compositor (cage) gives per-app streams [U]</td>
+<td>Linux provider alternative to Xpra.</td>
+</tr>
+<tr>
+<td>TigerVNC (Xvnc)</td>
+<td>GPL-2.0 [D]</td>
+<td>Whole desktop (virtual framebuffer)</td>
+<td>Fallback with CopyRect rectangles.</td>
+</tr>
+<tr>
+<td>noVNC</td>
+<td>MPL-2.0 [D]</td>
+<td>Client library (browser)</td>
+<td>Not needed; our client is HolyC plus the host.</td>
+</tr>
+<tr>
+<td>Sunshine / Moonlight</td>
+<td>GPL-3.0 [D] (Sunshine)</td>
+<td>Whole display</td>
+<td>Reference for SCK capture settings only; do not embed (GPL-3.0, whole display).</td>
+</tr>
+<tr>
+<td>Apple ScreenCaptureKit samples</td>
+<td>Apple sample licence [U]</td>
+<td><strong>Per window</strong> and per app [U]</td>
+<td>Primary provider.</td>
+</tr>
+<tr>
+<td>Chrome DevTools Protocol screencast</td>
+<td>BSD-style (Chromium) [U]</td>
+<td>Per page/tab</td>
+<td>Electron/web provider.</td>
+</tr>
+<tr>
+<td>Playwright</td>
+<td>Apache-2.0 [U]</td>
+<td>Per page; Electron mode experimental [D]</td>
+<td>Driving and testing harness.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-q4-realistic-first-targets">5. Q4: realistic first targets<a class="headerlink" href="#5-q4-realistic-first-targets" title="Link to this section">#</a></h2>
+<p>Target ranking criteria: needs only pixels and plain input, tolerant of being driven by a stranger's input device, has a Linux arm64 build or runs natively on the Mac, no anti-tamper.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>Stack</th>
+<th>Linux ARM64</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VS Code</strong></td>
+<td>Electron</td>
+<td><strong>Yes</strong>: the apt repository lists <code>amd64,arm64,armhf</code> [D] (https://code.visualstudio.com/docs/setup/linux)</td>
+<td>Best first Electron app: heavy but plain, text-dominant, supports the Marketplace (Microsoft's terms restrict use to the Microsoft product builds [U]). CPU heavy under software GL.</td>
+</tr>
+<tr>
+<td><strong>Obsidian</strong></td>
+<td>Electron (not stated on the page [D])</td>
+<td><strong>AppImage for AArch64 yes</strong> (v1.14.5 page); <code>.deb</code> is amd64 only [D] (https://obsidian.md/download)</td>
+<td>Good: local vault, no cloud. Proprietary. Headless needs <code>--disable-gpu --no-sandbox</code> [S].</td>
+</tr>
+<tr>
+<td><strong>Element Desktop</strong></td>
+<td>Electron</td>
+<td>apt repository lists "Debian / Ubuntu x86_64 / aarch64" [S] (https://element.io/sv/download)</td>
+<td>Good: Matrix, open source; fits the messenger goal; login tokens stay in the host profile.</td>
+</tr>
+<tr>
+<td><strong>Signal Desktop</strong></td>
+<td>Electron</td>
+<td>Official Linux ARM64 beta reported in 2026 (forum post dated "08-11-2026", ambiguous), older sources say none [S] (search result from forum.pine64.org; https://linuxphoneapps.org/apps/org.signal.signal/)</td>
+<td>Works on macOS natively anyway. Sends messages: approval gate (Q5). Linked-device model keeps the phone as master.</td>
+</tr>
+<tr>
+<td><strong>Slack</strong></td>
+<td>Electron</td>
+<td><strong>No</strong> official Linux ARM64; x86_64 only [S] (https://discourse.flathub.org/t/how-to-run-slack-on-arm/9992)</td>
+<td>Use macOS native or the web client. Workspace policies may prohibit unmanaged clients [U].</td>
+</tr>
+<tr>
+<td><strong>Discord</strong></td>
+<td>Electron</td>
+<td>No official Linux ARM64 [S] (ArmCord README snapshots, 2022-2023); third-party clients carry a ToS warning by their own authors [S]</td>
+<td>Native macOS app is fine; client mods are a ToS risk. Real-time voice/video through our path is out of scope (audio plays on the Mac).</td>
+</tr>
+<tr>
+<td><strong>Notion</strong></td>
+<td>Electron</td>
+<td>No official Linux desktop app [U]</td>
+<td>Use web client or macOS app.</td>
+</tr>
+<tr>
+<td><strong>1Password</strong></td>
+<td>Electron (desktop 8)</td>
+<td>Linux builds exist [U]</td>
+<td>Avoid: biometric/system unlock, browser-extension integration, the desktop app expects the OS keychain and system dialogs; showing secrets in a VM-captured surface is a policy question. Do not target.</td>
+</tr>
+<tr>
+<td>Tauri apps from GitHub (none verified by me)</td>
+<td>Tauri</td>
+<td>Depends per app; build from source with <code>libwebkit2gtk-4.1-dev:arm64</code> [D]</td>
+<td>Pick two or three simple open-source Tauri apps (GitHub topic <code>tauri</code>) for the second spike; I did not verify specific apps or their aarch64 releases. WKWebView on macOS is captured with SCK.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Problems to expect: anti-tamper and bot detection (Discord, some banking/crypto Electron wallets) <strong>[U]</strong>; auto-update replacing the binary mid-session (disable via config or run from a read-only copy); GPU requirements (Chromium software fallback is slow; WebGL pages and video calls are poor); macOS-only features (menu bar extras, Touch ID, Continuity, system sharing) are only available on the native route; Electron fuses may block CDP-based driving; app terms of service may forbid automation of user actions (read per app before shipping).</p>
+<h2 id="6-q5-security-and-permissions-design">6. Q5: security and permissions design<a class="headerlink" href="#6-q5-security-and-permissions-design" title="Link to this section">#</a></h2>
+<p>Principles: the guest is a display and input terminal with no network and no secrets; the host daemon is the only holder of credentials and the only place that can reach outward.</p>
+<ol>
+<li><strong>Credentials stay on the host.</strong> Each app runs with its own profile directory on the host (or in its container volume). Login happens inside the remote window by the user. The guest never receives cookies, tokens, keychain items, or app files; it receives pixels and sends events.</li>
+<li><strong>Sandboxing.</strong> macOS route: run each app under a dedicated profile (separate <code>--user-data-dir</code> for Electron, separate app-specific data dir) and, where practical, <code>sandbox-exec</code> with a deny-default profile (deprecated but present <strong>[U]</strong>) or a separate low-privilege macOS user account (but windows from another login session cannot be captured <strong>[U]</strong>). Linux route: one container per app, read-only root, a single writable volume, no host mounts except the share folder, dropped capabilities, CPU and memory limits, no network unless the manifest asks for it (allow-list by hostname through a proxy for apps that need only one service).</li>
+<li><strong>Per-app permission manifest.</strong> Fields: <code>network</code> (none, allow-list), <code>files</code> (none, share folder only), <code>clipboard</code> (none, ask, allow-paste-only), <code>notifications</code> (off, on), <code>camera/mic</code> (never in v1), <code>automation</code> (can agents drive it: default no). The launcher shows the manifest on first run and stores the approval on the host.</li>
+<li><strong>Outward-facing actions need a prompt in the desktop UI.</strong> Anything that sends a message, mail, post, purchase or file upload, or that is initiated by software rather than the human at the keyboard (an agent script, a clipboard paste, a scripted click) shows an approval sheet with the exact action and the target app. Human keystrokes and clicks in the focused remote window are the user acting directly and need no extra prompt. The agent API of the daemon (<code>click</code>, <code>type</code>, <code>drag</code>) must be a separate, opt-in, logged channel; the desktop shows an "agent is driving" banner. This matches the rule at the end of <code>docs/core-apps-plan.md:122</code>.</li>
+<li><strong>Clipboard.</strong> Guest to host: only on an explicit copy gesture in the desktop with the remote window focused. Host to guest: only when the user presses a "Paste from Mac" action; the daemon shows the first 80 characters in a toast first. Clipboard contents are never logged and are cleared from the daemon after 30 seconds. Never auto-sync (password managers copy secrets).</li>
+<li><strong>File share.</strong> One folder per app (<code>~/KosmosShare/&lt;app&gt;/</code>); guest Files app can list and drop files there through the daemon; no path outside the share is ever accepted; size and type caps; the remote app sees it through its normal open dialog.</li>
+<li><strong>Notifications.</strong> Forward only the title and first 120 characters of apps enabled in their manifest; never forward OTP-looking text when a manifest flag says so.</li>
+<li><strong>macOS permissions.</strong> The daemon needs Screen Recording and Accessibility; ask once, document in README, and show a banner if the OS revokes it <strong>[U]</strong>. Use the least capable path: CDP needs neither.</li>
+<li><strong>Audit log</strong> of every cross-boundary event (clipboard, file, agent action, launch, kill) on the host, viewable from a desktop app.</li>
+<li><strong>ToS and licences.</strong> Respect each vendor's terms before enabling agent driving; GPL components (Xpra, Sunshine, TigerVNC) stay out of any shipped binary unless the licence is accepted.</li>
+</ol>
+<h2 id="7-q6-infrastructure-list">7. Q6: infrastructure list<a class="headerlink" href="#7-q6-infrastructure-list" title="Link to this section">#</a></h2>
+<p>Sizes: S about a day, M about three days, L about a week (the scale in <code>docs/core-apps-plan.md:19</code>). Estimates are mine <strong>[U]</strong>.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Component</th>
+<th>Size</th>
+<th>Depends on</th>
+<th>What it is and where it plugs in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>QEMU launch with shared RAM file</td>
+<td>S</td>
+<td>none</td>
+<td><code>scripts/boot-vm.sh:13-16</code>: add <code>-object memory-backend-file,id=ram,size=2G,mem-path=&lt;ramdisk&gt;/ks.ram,share=on -machine pc,memory-backend=ram</code>, raise <code>-m</code>; RAM disk helper script. Prove first (spike S0).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Shared-memory ring and protocol ("ksshm")</td>
+<td>M</td>
+<td>1</td>
+<td>A header (magic, version, producer/consumer sequence numbers, offsets), a command ring each way (event ring guest to host, update ring host to guest), a surface table (id, w, h, stride, offset, generation). HolyC side in new <code>desk3/03b-remote.HC</code>: <code>ShmFind</code> (allocate buffer with <code>MAlloc</code>, write magic, print address to serial), <code>ShmPoll</code>, <code>ShmSend</code>. Memory-ordering rules documented.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Host bridge daemon (<code>kosmos-hostd</code>) core</td>
+<td>M</td>
+<td>1, 2</td>
+<td>Owns QEMU lifecycle, serial control channel (the existing duplex COM1, <code>docs/kosmos-app-port-research.md:114</code>), maps the RAM file, service registry, logging. This is the "Host bridge" of <code>docs/core-apps-plan.md:29</code> extended. Suggested language: Swift (needs SCK, AX, CGEvent) with small Rust or Python helpers.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Surface provider: ScreenCaptureKit</td>
+<td>M, L with popups</td>
+<td>3</td>
+<td>Enumerate windows by pid, capture one window or an app, BGRA to the surface, dirty rect detection by tile hash (16x16) on the host, child-surface support, resize via AX.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Surface provider: CDP (Electron and Chromium)</td>
+<td>M</td>
+<td>3</td>
+<td><code>--remote-debugging-port</code>, <code>Page.startScreencast</code> with ack, <code>Input.*</code>, <code>Emulation.setDeviceMetricsOverride</code>; Playwright Electron for menus.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Surface provider: Linux container + Xpra client</td>
+<td>L</td>
+<td>3</td>
+<td>Container image (Xvfb, WM, Xpra server, fonts), Xpra protocol client, window map, clipboard, notifications over D-Bus, tray host.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Remote-window app type in the desktop framework</td>
+<td>L</td>
+<td>Tier 0 "App framework" (<code>docs/core-apps-plan.md:25</code>)</td>
+<td>Replace fixed <code>NA</code> arrays with a window table that has local and remote slots (<code>desk3/01-core.HC:26</code>, <code>desk3/02-ui.HC:5-15</code>); <code>AppBody</code> (<code>desk3/03-apps.HC:585</code>) gets a <code>AppRemote</code> branch; <code>OpenApp/CloseApp</code> (<code>desk3/04-main.HC:43-62</code>) send lifecycle messages; dock (<code>desk3/02-ui.HC:297-374</code>) shows running remote apps from the registry.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Frame blitter and dirty-tile decoder (HolyC)</td>
+<td>M</td>
+<td>2, 7</td>
+<td><code>RemoteBlit(x,y,w,h,r,surf,stride,rects)</code>: stride-aware rounded-mask copy modelled on <code>SpanCopy</code>/<code>RRTexN</code> (<code>desk3/01-core.HC:114</code>, <code>:178</code>); <code>RemotePoll</code> in the main loop (the <code>Main</code> loop in <code>desk3/05-run.HC</code>) turns update records into <code>Dirty(...)</code> calls (<code>desk3/02-ui.HC:57</code>); fast path in <code>Render</code> (<code>desk3/05-run.HC:28</code>) that blits a dirty rectangle straight to the card when only the remote window and the cursor intersect it. Decoder for RLE or LZ4 is optional (serial only) and S.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Input mapper, guest side</td>
+<td>M</td>
+<td>2, 7</td>
+<td>Mouse: add right and middle buttons and wheel (reads at <code>desk3/04-main.HC:367-378</code>); press, move and release with coordinates in surface space (the window origin and <code>ks_s</code> division); send throttled move events (at most 60/s); keyboard: forward from <code>Keys</code> (<code>desk3/04-main.HC:315</code>, front-window branch like <code>f==6</code>) as key-down and (if readable) key-up with modifiers; scancode table PS/2 set 1 (as used in <code>NotesKey</code>, <code>desk3/04-main.HC:264</code>) to host key codes (macOS virtual key codes, CDP <code>code/key</code>, X11 keysyms) in a table the daemon owns. Unicode and IME: a "type text" input line that sends UTF-8. Reserve system shortcuts (Esc quits at <code>desk3/04-main.HC:319</code>) with a "release keyboard" chord.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Input injection, host side</td>
+<td>M</td>
+<td>3, 4/5/6</td>
+<td>CGEvent/AX, CDP <code>Input.*</code>, or X11 XTest; maps surface to screen coordinates; handles scroll, drag, modifiers, focus.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Clipboard</td>
+<td>S to M</td>
+<td>3, text-field widget (<code>docs/core-apps-plan.md:26</code>)</td>
+<td>Guest copy/paste actions through the text field widget; host consent and toast per Q5.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>File share</td>
+<td>S</td>
+<td>3</td>
+<td>Folder-per-app, list/put/get messages, Files app (<code>desk3/03-apps.HC</code>, <code>AppFiles</code>) gets a "Share" location.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Notification forwarding</td>
+<td>S</td>
+<td>3, Notifications widget (<code>docs/core-apps-plan.md:28</code>)</td>
+<td>CDP: wrap <code>Notification</code>; Linux: D-Bus <code>org.freedesktop.Notifications</code>; macOS: no clean API for other apps' notifications [U], so use window title badge or Dock badge via AX.</td>
+</tr>
+<tr>
+<td>14</td>
+<td>App registry and launcher manifest</td>
+<td>S</td>
+<td>3</td>
+<td><code>apps.json</code> (id, name, kind electron/tauri/web, provider, command or bundle id, profile dir, default size, icon, permissions) with a generator in <code>scripts/</code> that emits the same style of data file as <code>ProjectsData.HC</code> (<code>scripts/gen-projects.py</code> pattern, README line 87); icons: Lucide fallback (<code>desk3/01-core.HC:516-598</code>) or host-extracted PNG converted to raw.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Lifecycle and resource limits</td>
+<td>M</td>
+<td>3, 14</td>
+<td>Launch, suspend when hidden (<code>SIGSTOP</code> or screencast rate drop to 1 fps), kill, crash restart, per-app CPU/memory caps (cgroups in containers; <code>taskpolicy</code> / nice on macOS [U]), idle timeouts, a Monitor tab (<code>AppMonitor</code>) listing remote apps.</td>
+</tr>
+<tr>
+<td>16</td>
+<td>DPI scaling</td>
+<td>S</td>
+<td>4/5/6, 8</td>
+<td>Host renders at <code>ks_s</code> times logical size; renegotiate on <code>SetMode</code> (<code>desk3/04-main.HC:90</code>); Retina capture on macOS yields pixels at the right size.</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Window management for remote windows</td>
+<td>M</td>
+<td>7</td>
+<td>Edge and corner resize hit regions in <code>FrameHits</code> (<code>desk3/02-ui.HC:225</code>), new <code>ID_RESIZE</code> id range, minimum/maximum from the app, host resize round trip with a "stale" frame shown stretched or letterboxed until the new size arrives, maximise, title from the app, child windows (popups) as non-framed overlays, z-order with local windows.</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Permission broker and approval sheets</td>
+<td>M</td>
+<td>3, widget kit v2</td>
+<td>Modal sheets (<code>docs/core-apps-plan.md:26</code>), manifest approval store on the host, agent-driving banner, audit log.</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Cursor shape and hover feedback</td>
+<td>S</td>
+<td>9</td>
+<td>Provider reports cursor kind (arrow, ibeam, hand, resize); <code>Cursor</code> (<code>desk3/02-ui.HC:376</code>) draws it over the remote body.</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Test and measurement harness</td>
+<td>S</td>
+<td>2</td>
+<td>Frame counter, end-to-end latency probe (a window that flips colour on click), golden screenshots of the desktop through the monitor <code>screendump</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Critical path: 1, 2, 3, 7, 8, 9, 4 (spike), then 10, 17, 14, 15, 18, then 5 and 6. Rough total about 6 to 8 weeks of focused work for the SCK route
+with decent behaviour, plus 1 to 2 weeks per extra provider <strong>[U]</strong>.</p>
+<p>Concrete edits when this is built (none performed): <code>scripts/boot-vm.sh:13-16</code> (QEMU flags), <code>scripts/send-to-vm.sh:14</code> (already globs <code>desk3/0*.HC</code>), new <code>desk3/03b-remote.HC</code>, edits in <code>desk3/01-core.HC</code> (stride-aware blit, <code>NA</code>), <code>desk3/02-ui.HC</code> (window table, <code>FrameHits</code>, <code>Dock</code>), <code>desk3/03-apps.HC</code> (<code>AppBody</code>), <code>desk3/04-main.HC</code> (<code>Click</code>, <code>Input</code>, <code>Keys</code>, <code>OpenApp</code>, <code>SetMode</code>), <code>desk3/05-run.HC</code> (<code>Render</code> fast path, <code>Main</code> poll).</p>
+<h2 id="8-q7-recommended-route-phases-spike-risks">8. Q7: recommended route, phases, spike, risks<a class="headerlink" href="#8-q7-recommended-route-phases-spike-risks" title="Link to this section">#</a></h2>
+<h3 id="phases">Phases<a class="headerlink" href="#phases" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Phase 0 (spike, 4 days): prove shared RAM plus one live window.</strong> Details below.</li>
+<li><strong>Phase 1: guest contract and framework.</strong> Items 2, 7, 8, 9, 14 (minimal), 17 (basic resize), 19. Deliver: two remote windows (host test patterns), keyboard and mouse round trip, Monitor shows fps. Uses a fake provider that renders a test page so the guest work does not wait on capture work.</li>
+<li><strong>Phase 2: macOS native provider.</strong> Items 3, 4, 10, 16; run a Tauri hello-world, Obsidian, VS Code natively; child popups; clipboard and file share (11, 12).</li>
+<li><strong>Phase 3: safety and breadth.</strong> Items 15, 18, 13; the Chromium/CDP provider for Electron and web apps (5); then the Linux container provider with Xpra (6) for apps without macOS-native safety, isolation, or arm64 packaging.</li>
+<li><strong>Phase 4 (optional):</strong> virtio channel driver in HolyC to replace polling; audio routing; second-monitor and virtual display experiments.</li>
+</ul>
+<h3 id="smallest-spike-time-box-4-working-days">Smallest spike (time box 4 working days)<a class="headerlink" href="#smallest-spike-time-box-4-working-days" title="Link to this section">#</a></h3>
+<p>Goal: a live, interactive window of a real Tauri or Electron app inside a desktop window, over shared RAM, at usable speed.</p>
+<ul>
+<li>S0 (1 day): boot QEMU with the shared RAM file (flags in item 1). A host Python script mmaps the file. Guest HolyC <code>ShmFind</code> allocates a 64 KB buffer, writes the magic and its address; host finds it (scan or address from serial). <strong>Gate:</strong> host reads guest-written 4 KB blocks with sequence numbers 1,000,000 times with zero mismatches, and the guest reads host-written blocks the same way; sustained throughput at least 20 MB/s each way (the gate already set in <code>docs/core-apps-plan.md:116</code>); round trip under 5 ms. <strong>Fail</strong> (no visibility, corruption, or SSD write storms that a RAM disk does not cure) means switch to the second-IDE-disk transport (Section 3) for one more day or stop and use the serial thumbnail plus host-overlay stop-gap.</li>
+<li>S1 (1 day): host writes an 800x600 BGRA surface with a moving test pattern and dirty rectangles; guest <code>AppRemote</code> window blits it. <strong>Gate:</strong> at least 20 fps full-window at 1x with a Monitor-reported frame cost under 40 ms, and at least 12 fps at 2x.</li>
+<li>S2 (2 days): Swift CLI captures one window of a Tauri hello-world and Obsidian (or VS Code) with ScreenCaptureKit into the surface; guest click, wheel and key events return via the event ring (or serial) and are injected with CGEvent. <strong>Gate:</strong> typing and button clicks work; median input-to-pixel latency at most 150 ms at 800x600 1x; at least 15 fps while scrolling; no more than 5% frames with visible tearing.</li>
+<li>Overall pass: S0, S1 and S2 gates all met inside four days. Anything else means reporting the failure mode before building more.</li>
+</ul>
+<h3 id="main-risks-ranked">Main risks (ranked)<a class="headerlink" href="#main-risks-ranked" title="Link to this section">#</a></h3>
+<ol>
+<li><strong>Shared main RAM on macOS under TCG is unproven</strong> (visibility and ordering of stores between the TCG thread and a host process; write-back of a file-backed 1 GB mapping; TempleOS identity mapping assumption). Mitigation: S0 first; RAM disk or <code>memory-backend-shm</code>; fallback second IDE disk transport.</li>
+<li><strong>Guest-side cost and input fidelity.</strong> Retina surfaces are 11 MB per window; overlaps force slow repaints; there is no key-up or non-ASCII input path known to work, one pointer path with a hacked relative-delta scheme, and shortcuts like Esc already reserved (<code>desk3/04-main.HC:319</code>). Mitigation: fast-path blit, host-side scaling, 1x default for remote windows, a text-injection field, a keyboard-release chord.</li>
+<li><strong>Host capture permissions, focus and policy.</strong> Screen Recording and Accessibility permission, windows that must be on-screen to be captured, popups as separate windows, apps that block automation or forbid it in terms of service, secrets visible in pixels. Mitigation: CDP or container providers for sensitive or noisy apps, per-app manifests, explicit approval for outward actions.</li>
+<li>Lesser: Electron fuses blocking CDP; auto-update; memory (<code>-m 1024M</code> too small); sync of frame pacing between host capture rate and guest loop sleeps.</li>
+</ol>
+<h3 id="what-not-to-attempt">What not to attempt<a class="headerlink" href="#what-not-to-attempt" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Compiling or porting Chromium, Node, Electron, WebKit or a Rust/Tauri runtime into TempleOS.</strong> HolyC only, ring 0, no libc, no threads, no network stack, no GPU, 15 ns per simple operation; Chromium is tens of millions of lines of C++ that need all of those. There is no path that ends in a usable browser. The guest should stay a display and input terminal.</li>
+<li>Writing a NIC driver plus TCP/IP and TLS in HolyC to let the guest talk to services directly: large, and it moves secrets into the guest.</li>
+<li>Rendering web pages by reimplementing a layout engine from DOM or accessibility data (Section 2e).</li>
+<li>Streaming pixels over the serial port (Section 3).</li>
+<li>Relying on <code>ivshmem</code> (not in this QEMU build) or on a Linux-only QEMU build.</li>
+<li>Embedding GPL code (Xpra, Sunshine) in a product we would distribute without a licence decision.</li>
+<li>Controlling 1Password or other credential managers through the remote window.</li>
+</ul>
+<h2 id="9-sources-accessed-2026-10-27">9. Sources (accessed 2026-10-27)<a class="headerlink" href="#9-sources-accessed-2026-10-27" title="Link to this section">#</a></h2>
+<ul>
+<li>QEMU ivshmem page: https://www.qemu.org/docs/master/system/devices/ivshmem.html (doc for 11.1.50 snapshot) [D]</li>
+<li>Local QEMU 11.0.2: <code>qemu-system-x86_64 -device help</code>, <code>-device ivshmem-plain,help</code>, <code>-object memory-backend-file,help</code>, <code>-machine pc,help</code> [V]</li>
+<li>Electron offscreen rendering: https://www.electronjs.org/docs/latest/tutorial/offscreen-rendering [D]; webContents API: https://www.electronjs.org/docs/latest/api/web-contents [D, truncated]; headless CI: https://electronjs.org/docs/latest/tutorial/testing-on-headless-ci [S]</li>
+<li>Playwright Electron: https://playwright.dev/docs/api/class-electron [D]</li>
+<li>Tauri debug: https://v2.tauri.app/develop/debug/ [D]; WebDriver: https://v2.tauri.app/develop/tests/webdriver/ [D]; Debian/ARM64 deps: https://v2.tauri.app/distribute/debian/ [S]</li>
+<li>wry: https://github.com/tauri-apps/wry [D]</li>
+<li>WebKitGTK remote inspector: https://trac.webkit.org/wiki/RemoteInspectorGTKandWPE [S]; WebDriver in WebKitGTK 2.18: https://blogs.igalia.com/carlosgc/?p=936 [S]</li>
+<li>Chrome DevTools screencast behaviour: search results citing Chromium <code>content/browser/devtools/protocol/page_handler.h</code> and Puppeteer recorders [S]; the protocol page itself was a redirect stub.</li>
+<li>ScreenCaptureKit: https://developer.apple.com/documentation/screencapturekit/ (empty page body when fetched) [U]</li>
+<li>Xpra: http://github.com/Xpra-org/xpra/ [D], releases https://github.com/Xpra-org/xpra/releases [S]</li>
+<li>waypipe man pages: https://man.archlinux.org/man/waypipe.1.en [S]</li>
+<li>Weston man page and RAIL discussion: https://www.mankier.com/1/weston [S]</li>
+<li>FreeRDP: https://github.com/FreeRDP/FreeRDP [D]; Sunshine: https://github.com/LizardByte/Sunshine [D]; TigerVNC: https://github.com/TigerVNC/tigervnc [D]; noVNC: https://github.com/novnc/noVNC [D]</li>
+<li>wayvnc and headless sway: man pages via search (manpages.debian.org wayvnc) [S]; wlroots issue 3712 [S]</li>
+<li>VS Code Linux setup: https://code.visualstudio.com/docs/setup/linux [D]; Obsidian download: https://obsidian.md/download [D]; Element download: https://element.io/sv/download [S]; Slack ARM thread: https://discourse.flathub.org/t/how-to-run-slack-on-arm/9992 [S]; Signal ARM64: forum.pine64.org thread and https://linuxphoneapps.org/apps/org.signal.signal/ [S]; Discord/ArmCord README snapshots [S]</li>
+<li>Local files read: <code>README.md</code>, <code>docs/core-apps-plan.md</code>, <code>docs/kosmos-app-port-research.md</code>, <code>desk3/01-core.HC</code> to <code>desk3/05-run.HC</code>, <code>scripts/boot-vm.sh</code>, <code>scripts/send-to-vm.sh</code> [V]</li>
+</ul>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/kosmos-app-port-research/index.html" rel="prev"><span>Previous</span>Porting kosmos-app into the TempleOS desktop: feasibility report</a><a class="next" href="../../docs/apps/clock-launchpad-status/index.html" rel="next"><span>Next</span>Clock suite and Launchpad: status (2026-10-27)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#0-summary">0. Summary</a></li><li><a href="#1-facts-about-our-guest-that-bound-every-design">1. Facts about our guest that bound every design</a></li><li><a href="#2-q1-architectures-for-getting-electron-and-tauri-apps-into-a-window">2. Q1: architectures for getting Electron and Tauri apps into a window</a><ul><li><a href="#a-native-macos-app-screencapturekit-capture-cgevent-or-accessibility-input">(a) Native macOS app, ScreenCaptureKit capture, CGEvent or Accessibility input</a></li><li><a href="#b-linux-arm64-vm-or-container-on-the-mac-headless-compositor-pull-frames-over-a-remote-display-protocol">(b) Linux ARM64 VM or container on the Mac, headless compositor, pull frames over a remote-display protocol</a></li><li><a href="#c-electron-specific">(c) Electron specific</a></li><li><a href="#d-tauri-specific">(d) Tauri specific</a></li><li><a href="#e-semantic-route-redraw-natively-from-accessibility-or-dom">(e) Semantic route: redraw natively from accessibility or DOM</a></li><li><a href="#f-better-ideas-found">(f) Better ideas found</a></li></ul></li><li><a href="#3-q2-the-transport">3. Q2: the transport</a><ul><li><a href="#bandwidth-needs-my-arithmetic">Bandwidth needs (my arithmetic)</a></li><li><a href="#options">Options</a></li><li><a href="#frame-budget-in-our-guest-derived-from-readmemd7-23-24-and-arithmetic">Frame budget in our guest (derived from README.md:7, :23-24 and arithmetic)</a></li></ul></li><li><a href="#4-q3-open-source-building-blocks-and-licences">4. Q3: open-source building blocks and licences</a></li><li><a href="#5-q4-realistic-first-targets">5. Q4: realistic first targets</a></li><li><a href="#6-q5-security-and-permissions-design">6. Q5: security and permissions design</a></li><li><a href="#7-q6-infrastructure-list">7. Q6: infrastructure list</a></li><li><a href="#8-q7-recommended-route-phases-spike-risks">8. Q7: recommended route, phases, spike, risks</a><ul><li><a href="#phases">Phases</a></li><li><a href="#smallest-spike-time-box-4-working-days">Smallest spike (time box 4 working days)</a></li><li><a href="#main-risks-ranked">Main risks (ranked)</a></li><li><a href="#what-not-to-attempt">What not to attempt</a></li></ul></li><li><a href="#9-sources-accessed-2026-10-27">9. Sources (accessed 2026-10-27)</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

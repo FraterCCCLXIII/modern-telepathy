@@ -1,0 +1,323 @@
+/* Word-synced subtitle stack and word hover card, shared by the web app and the browser extension.
+   Uses --text, --muted and --accent from the host page (the extension's shadow root defines them). */
+/* ================= subtitles ================= */
+.ykd .subs{
+  position: absolute; left: 0; right: 0; bottom: 14px; z-index: 2; padding: 0 24px; text-align: center;
+  transition: transform .25s ease; pointer-events: none;
+}
+.ykd .subs > *{ pointer-events: auto; }
+.ykd .src{ position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 4px 2px; }
+/* relative: the bouncing ball */
+.ykd .subs{ --k: 1; --s-rd: 14; --s-og: 40; --s-ro: 14; --s-gl: 11; --s-gr: 11; --s-en: 22; }
+.ykd .tok{
+  --c: #fff; display: inline-flex; flex-direction: column; align-items: center;
+  padding: 6px 7px 7px; border-radius: 12px; cursor: pointer; position: relative;
+  opacity: .55; transition: opacity .18s, transform .18s, background .18s, box-shadow .18s;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+.ykd .tok:hover{ opacity: .9; }
+.ykd .tok .rd{ order: var(--o-rd, 0); font-size: calc(var(--s-rd) * var(--k) * 1px); line-height: 1.2; color: var(--c); min-height: 1.2em; letter-spacing: .02em; }
+.ykd .tok .og{ order: var(--o-og, 1); font-size: calc(var(--s-og) * var(--k) * 1px); line-height: 1.15; font-weight: 500; color: var(--c); }
+.ykd .tok .ro{ order: var(--o-ro, 2); font-size: calc(var(--s-ro) * var(--k) * 1px); line-height: 1.3; color: var(--c); font-style: italic; opacity: .9; }
+.ykd .tok .gl{ order: var(--o-gl, 3); font-size: calc(var(--s-gl) * var(--k) * 1px); line-height: 1.3; color: var(--c); opacity: .8; margin-top: 2px; max-width: 9em; }
+.ykd .tok .gr{ order: var(--o-gr, 4); font-size: calc(var(--s-gr) * var(--k) * 1px); line-height: 1.25; color: var(--muted); margin-top: 3px; max-width: 10em; display: flex; flex-direction: column; align-items: center; }
+.ykd .tok .gr b{ font-weight: 600; color: #b7bfce; letter-spacing: .03em; }
+.ykd .tok .gr i{ font-style: normal; font-size: .88em; opacity: .85; }
+/* a creator-chosen font for this line (Line.font): its own words, not the gloss or translation */
+.ykd .tok :is(.rd, .og, .ro){ font-family: var(--line-font, inherit); }
+.ykd .tok.p .og{ font-size: calc(var(--s-og) * var(--k) * .75px); }
+.ykd .tag{ display: inline-block; font-size: .78em; font-weight: 600; letter-spacing: .07em; line-height: 1.25; padding: 0 .4em; border: 1px solid currentColor; border-radius: .35em; font-style: normal; vertical-align: .08em; cursor: help; }
+.ykd .tok.spoken{ opacity: .8; }
+.ykd .tok.active{
+  opacity: 1; transform: translateY(-3px);
+  background: color-mix(in srgb, var(--c) 16%, rgba(0,0,0,.25));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 55%, transparent), 0 8px 30px -8px color-mix(in srgb, var(--c) 70%, transparent);
+}
+.ykd .tok.active .og{ text-shadow: 0 0 22px color-mix(in srgb, var(--c) 80%, transparent); }
+.ykd .tok.active .gl{ opacity: 1; }
+.ykd .tok.active .gr b{ color: var(--text); }
+/* speaking practice: how each word was said. Marked on the whole word (a ring, a corner badge with a symbol), not on one row, so it shows whichever rows the viewer has on, and never by colour alone */
+.ykd .tok.said,
+.ykd .tok.close,
+.ykd .tok.missed{ --r: #5ee7a0; opacity: 1; background: color-mix(in srgb, var(--r) 13%, rgba(0,0,0,.28)); box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--r) 70%, transparent); cursor: default; }
+.ykd .tok.close{ --r: #ffd24a; }
+.ykd .tok.missed{ --r: #ff6b6b; }
+.ykd .tok.said::after,
+.ykd .tok.close::after,
+.ykd .tok.missed::after{
+  position: absolute; top: -8px; right: -6px; width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--r); color: #0b0d12; font: 800 11px/1 system-ui, sans-serif; text-shadow: none; box-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+.ykd .tok.said::after{ content: "✓"; }
+.ykd .tok.close::after{ content: "~"; }
+.ykd .tok.missed::after{ content: "✕"; }
+.ykd .tok.missed :is(.rd, .og, .ro){ opacity: .85; }
+.ykd .en .w.said,
+.ykd .en .w.close,
+.ykd .en .w.missed{ opacity: 1; text-decoration: underline 2px; text-underline-offset: 4px; text-decoration-color: #5ee7a0; }
+.ykd .en .w.close{ text-decoration-color: #ffd24a; text-decoration-style: wavy; }
+.ykd .en .w.missed{ text-decoration-color: #ff6b6b; text-decoration-style: dotted; }
+.ykd .en{ margin-top: 12px; font-size: calc(var(--s-en) * var(--k) * 1px); line-height: 1.5; color: #d5dae4; text-shadow: 0 1px 3px rgba(0,0,0,.7); }
+.ykd .en .w{ --c: #fff; color: var(--c); opacity: .6; border-radius: 6px; padding: 0 2px; transition: opacity .18s, background .18s; cursor: pointer; }
+.ykd .en .w.spoken{ opacity: .85; }
+.ykd .en .w.active{ opacity: 1; background: color-mix(in srgb, var(--c) 18%, transparent); text-shadow: 0 0 16px color-mix(in srgb, var(--c) 70%, transparent); }
+.ykd .en .plain{ opacity: .7; }
+.ykd .hide-rd .rd,
+.ykd .hide-og .og,
+.ykd .hide-ro .ro,
+.ykd .hide-gl .gl,
+.ykd .hide-gr .gr,
+.ykd .hide-en .en{ display: none; }
+/* ---------- look options (from the viewer's subtitle profile) ---------- */
+/* the box: hosts draw it with rgba(0,0,0,var(--box-a)); .no-box also drops any blur behind it */
+.ykd .subs.no-box .src,
+.ykd .subs.no-box .en{ backdrop-filter: none; -webkit-backdrop-filter: none; }
+/* a strong drop shadow, for reading over the video without the box */
+.ykd .subs.shadow .tok,
+.ykd .subs.shadow .en{ text-shadow: 0 2px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.75); }
+.ykd .subs.shadow .tok.active .og{ text-shadow: 0 2px 3px rgba(0,0,0,.95), 0 0 22px color-mix(in srgb, var(--c) 80%, transparent); }
+/* no colours: every word white (the words set --c inline, hence !important) */
+.ykd .subs.mono .tok,
+.ykd .subs.mono .en .w,
+.ykd .subs.mono .ball{ --c: #fff !important; }
+/* no highlight box while playing: the spoken word still lifts, grows and glows; hovering a word shows the box */
+.ykd .subs.no-highlight .tok.active{ background: none; box-shadow: none; transform: translateY(-3px) scale(1.08); }
+.ykd .subs.no-highlight .tok.active :is(.rd, .og, .ro){ text-shadow: 0 0 4px color-mix(in srgb, var(--c) 60%, transparent), 0 0 20px color-mix(in srgb, var(--c) 85%, transparent); }
+.ykd .subs.no-highlight.shadow .tok.active :is(.rd, .og, .ro){ text-shadow: 0 2px 3px rgba(0,0,0,.95), 0 0 4px color-mix(in srgb, var(--c) 60%, transparent), 0 0 20px color-mix(in srgb, var(--c) 85%, transparent); }
+.ykd .subs.no-highlight .tok:hover{
+  opacity: 1; background: color-mix(in srgb, var(--c) 16%, rgba(0,0,0,.25));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 55%, transparent), 0 8px 30px -8px color-mix(in srgb, var(--c) 70%, transparent);
+}
+.ykd .subs.no-highlight .en .w.active{ background: none; }
+.ykd .subs.no-highlight .en .w:hover{ background: color-mix(in srgb, var(--c) 18%, transparent); }
+/* the bouncing ball: moved along its hops by the subtitle component (one hop per syllable of the spoken word) */
+.ykd .ball{ display: none; position: absolute; left: 0; top: 0; z-index: 3; width: 0; height: 0; pointer-events: none; will-change: transform; }
+.ykd .subs.ball-on .ball{ display: block; }
+.ykd .ball b{ position: absolute; left: 0; top: 0; display: block; will-change: transform; }
+/* the hop's height */
+.ykd .ball i{
+  transform-origin: 50% 100%; will-change: transform; /* squashes against the ground */
+  position: absolute; bottom: 3px; left: calc(-7px * var(--k)); width: calc(14px * var(--k)); height: calc(14px * var(--k)); border-radius: 50%;
+  background: var(--c, #fff); box-shadow: 0 0 10px color-mix(in srgb, var(--c, #fff) 70%, transparent), 0 2px 4px rgba(0,0,0,.5);
+}
+/* ---------- word hover card ---------- */
+.ykd .subs:has(.wcard){ z-index: 6; }
+.ykd .tok:focus-visible{ outline: 2px solid color-mix(in srgb, var(--c) 70%, transparent); outline-offset: 2px; }
+.ykd .wcard{
+  position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translate(calc(-50% + var(--shift, 0px)), var(--vshift, 0px));
+  z-index: 10; width: max-content; min-width: 220px; max-width: 300px; text-align: left; cursor: default;
+  padding: 12px 14px 10px; border-radius: 14px; font-style: normal; line-height: 1.35;
+  background: rgba(22, 25, 35, .96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, rgba(255,255,255,.12));
+  box-shadow: 0 18px 40px -12px rgba(0,0,0,.85), 0 0 0 4px color-mix(in srgb, var(--c) 10%, transparent);
+  animation: wc-in .14s ease-out; text-shadow: none;
+}
+.ykd .wcard::after{ content: ""; position: absolute; top: 100%; left: calc(50% - var(--shift, 0px)); margin-left: -7px; border: 7px solid transparent; border-top-color: rgba(22,25,35,.96); }
+.ykd .wcard::before{ content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 12px; }
+/* hover bridge to the word */
+@keyframes wc-in{ from { opacity: 0; } }
+.ykd .wcard.below{ bottom: auto; top: calc(100% + 10px); }
+.ykd .wcard.below::after{ top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: rgba(22,25,35,.96); }
+.ykd .wcard.below::before{ top: auto; bottom: 100%; }
+/* drawn in the host's layer (env.portal), placed on screen by WordCard: --x/--y its corner, --shift how far it slid from centred */
+.ykd .wcard.floating,
+.ykd .wcard.floating.below{ position: fixed; left: 0; top: 0; bottom: auto; transform: translate(var(--x, 0px), var(--y, 0px)); pointer-events: auto; }
+.ykd .wc-head{ display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.ykd .wc-word{ display: block; font-size: 26px; font-weight: 600; color: var(--c); line-height: 1.15; }
+.ykd .wc-sub{ display: block; color: #c9cfdb; font-size: 13px; margin-top: 2px; }
+.ykd .wc-sub i{ color: #e6e9f0; }
+.ykd .wc-play{ flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; color: #0b0d12; background: var(--c); transition: transform .12s; }
+.ykd .wc-play:hover{ transform: scale(1.08); }
+.ykd .wc-play svg{ width: 16px; height: 16px; margin-left: 2px; }
+.ykd .wc-meaning{ margin-top: 8px; font-size: 16px; font-weight: 600; color: #fff; }
+.ykd .wc-meaning .tag{ font-size: 11px; color: var(--c); }
+.ykd .wc-note{ margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+.ykd .wc-tags{ display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.ykd .wc-tags span{ font-size: 11px; padding: 2px 7px; border-radius: 999px; background: rgba(255,255,255,.07); color: #c9cfdb; }
+.ykd .wc-tags .wc-pos{ background: color-mix(in srgb, var(--c) 22%, transparent); color: #fff; }
+.ykd .wc-tags .wc-jlpt{ background: rgba(255,200,0,.16); color: #ffc800; }
+.ykd .wc-tags .wc-common{ background: rgba(88,204,2,.16); color: #7ee03a; }
+.ykd .wc-dict{ margin: 8px 0 0; font-size: 12px; color: #c9cfdb; }
+.ykd .wc-dict span,
+.ykd .wc-dim{ color: var(--muted); }
+.ykd .wc-dim{ margin: 8px 0 0; font-size: 12px; }
+.ykd .wc-foot{ display: flex; justify-content: space-between; margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(255,255,255,.08); font-size: 11px; color: var(--muted); }
+.ykd .wc-foot a{ color: var(--accent); text-decoration: none; }
+/* The subtitle player's chrome: the watch page's controls, scoped to .yk so it can sit over any host (the web stage, a game canvas).
+   Word rows and the word card are overlay.css. Colours come from the host's --text, --muted, --accent; the defaults below apply without one. */
+.ykd .yk{
+  --text: #e6e9f0; --text-2: #c3c9d6; --muted: #8a93a6; --accent: #ef3b2c; --glass: rgba(16, 19, 27, .94); --line: #232837; --panel: #12151d; --bg: #0b0d12; --particle: #9aa3b2;
+  position: absolute; inset: 0; outline: none; color: var(--text); font-family: var(--sans, "Inter", "Noto Sans JP", system-ui, sans-serif);
+  user-select: none; -webkit-user-select: none;
+}
+.ykd .yk *,
+.ykd .yk *::before,
+.ykd .yk *::after{ box-sizing: border-box; }
+.ykd .yk button{ font: inherit; }
+.ykd .yk.passthrough{ pointer-events: none; }
+.ykd .yk.passthrough .yk-chrome.bottom,
+.ykd .yk.passthrough .panel,
+.ykd .yk.passthrough .yk-subs > *,
+.ykd .yk.passthrough .yk-chrome.top{ pointer-events: auto; }
+.ykd .yk-catcher{ position: absolute; inset: 0; z-index: 1; cursor: pointer; }
+.ykd .yk.passthrough .yk-catcher{ display: none; }
+.ykd .yk.ui-hidden,
+.ykd .yk.ui-hidden .yk-catcher{ cursor: none; }
+/* subtitles sit above the controls while they show */
+.ykd .yk-subs{ position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; pointer-events: none; transition: transform .25s ease; }
+.ykd .yk-subs .subs{ position: relative; bottom: auto; padding-bottom: 14px; }
+.ykd .yk.ui .yk-subs{ transform: translateY(-64px); }
+/* practising: the card holds buttons, so the subtitles go above the controls (whose faded top edge would take the clicks) and a little higher */
+.ykd .yk.practising .yk-subs{ z-index: 4; }
+.ykd .yk.ui.practising .yk-subs{ transform: translateY(-78px); }
+/* a backing so the words stay readable over any frame */
+.ykd .yk .subs.yk-video .src{ width: fit-content; max-width: 100%; margin: 0 auto; padding: 4px 8px; border-radius: 14px; background: rgba(0,0,0,var(--box-a, .55)); }
+.ykd .yk .subs.yk-video .en{ width: fit-content; max-width: 100%; margin: 8px auto 0; padding: 2px 12px; border-radius: 10px; background: rgba(0,0,0,var(--box-a, .55)); }
+.ykd .yk .subs.yk-video .tok{ opacity: .7; }
+.ykd .yk .subs.yk-video .tok.spoken{ opacity: .88; }
+.ykd .yk .subs.yk-video .tok.active,
+.ykd .yk .subs.yk-video .tok:hover{ opacity: 1; }
+.ykd .yk .speaker{ display: table; margin: 0 auto 6px; padding: 2px 14px; border-radius: 999px; font: 800 .8em/1.6 var(--sans, system-ui); letter-spacing: .06em; text-transform: uppercase; background: var(--c, var(--accent)); color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.35); pointer-events: none; }
+/* chrome */
+.ykd .yk-chrome{ position: absolute; left: 0; right: 0; z-index: 3; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.ykd .yk.ui .yk-chrome{ opacity: 1; pointer-events: auto; }
+.ykd .yk-chrome.top{ top: 0; display: flex; align-items: center; gap: 12px; padding: 12px 14px 28px; background: linear-gradient(rgba(0,0,0,.65), transparent); }
+.ykd .yk-chrome.top .title{ flex: 1; min-width: 0; font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.ykd .yk-chrome.top .title small{ color: rgba(255,255,255,.65); font-weight: 400; margin-left: 8px; }
+.ykd .yk-chrome.bottom{ bottom: 0; padding: 28px 10px 6px; background: linear-gradient(transparent, rgba(0,0,0,.78)); }
+.ykd .yk .track{ position: relative; height: 16px; margin: 0 6px; cursor: pointer; display: flex; align-items: center; }
+.ykd .yk .track .track-rail{ position: absolute; left: 0; right: 0; height: 4px; border-radius: 4px; background: rgba(255,255,255,.22); transition: height .15s; overflow: hidden; }
+.ykd .yk .track:hover .track-rail{ height: 6px; }
+.ykd .yk .track .fill{ position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); width: 0; }
+.ykd .yk .track .ticks{ position: absolute; inset: 0; }
+.ykd .yk .track .ticks i{ position: absolute; top: 0; bottom: 0; width: 2px; background: rgba(0,0,0,.55); }
+.ykd .yk .track .knob{ position: absolute; width: 13px; height: 13px; margin-left: -6.5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(239,59,44,.25); transform: scale(0); transition: transform .15s; left: 0; }
+.ykd .yk .track:hover .knob{ transform: scale(1); }
+.ykd .yk .track .bubble{ position: absolute; bottom: 22px; transform: translateX(-50%); background: var(--glass); border: 1px solid var(--line); padding: 6px 10px; border-radius: 8px; font-size: 13px; white-space: nowrap; max-width: 340px; overflow: hidden; text-overflow: ellipsis; pointer-events: none; opacity: 0; transition: opacity .12s; }
+.ykd .yk .track .bubble small{ color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+.ykd .yk .track:hover .bubble{ opacity: 1; }
+.ykd .yk .cbar{ display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+.ykd .yk .cbtn{ width: 48px; height: 48px; display: grid; place-items: center; flex: none; background: none; border: 0; color: #fff; border-radius: 10px; cursor: pointer; position: relative; }
+.ykd .yk .cbtn:hover,
+.ykd .yk .cbtn[aria-expanded=true]{ background: rgba(255,255,255,.13); }
+.ykd .yk .cbtn:focus-visible{ outline: 2px solid var(--accent); outline-offset: -2px; }
+.ykd .yk .cbtn svg{ width: 28px; height: 28px; }
+.ykd .yk .pill{ display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.14); color: #fff; cursor: pointer; font-size: 15px; white-space: nowrap; }
+.ykd .yk .pill svg{ width: 14px; height: 14px; }
+.ykd .yk .pill:hover,
+.ykd .yk .pill[aria-expanded=true]{ background: rgba(255,255,255,.2); }
+.ykd .yk .time{ font-size: 15px; color: rgba(255,255,255,.85); margin-left: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ykd .yk .grow{ flex: 1; }
+/* panels: popovers over the picture, frosted glass */
+.ykd .yk .panel{
+  position: absolute; z-index: 4; right: 12px; bottom: 64px; width: min(560px, calc(100% - 24px)); max-height: calc(100% - 84px); overflow: auto; pointer-events: auto;
+  background: rgba(38, 42, 52, .72); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 14px 16px; box-shadow: 0 20px 50px -20px rgba(0,0,0,.8); font-size: 13px;
+  scrollbar-width: thin; scrollbar-color: rgba(200,205,215,.35) transparent;
+}
+.ykd .yk .panel.narrow{ width: min(320px, calc(100% - 24px)); overflow-x: hidden; }
+.ykd .yk .panel h3{ margin: 0 0 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.ykd .yk .panel h3:not(:first-child){ margin-top: 18px; }
+.ykd .yk .panel .hint{ color: var(--muted); font-size: 12px; line-height: 1.5; margin: 8px 0 0; }
+.ykd .yk kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; background: rgba(255,255,255,.08); padding: 1px 5px; border-radius: 4px; color: var(--text); min-width: 22px; text-align: center; }
+.ykd .yk .speeds{ display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; padding: 3px; border-radius: 10px; background: rgba(127,127,127,.14); }
+.ykd .yk .speeds button{ min-width: 0; padding: 7px 0; border: 0; border-radius: 7px; background: none; color: var(--muted); font-size: 12.5px; font-variant-numeric: tabular-nums; cursor: pointer; transition: background .15s, color .15s; }
+.ykd .yk .speeds button:hover{ color: var(--text); }
+.ykd .yk .speeds button.on{ background: rgba(255,255,255,.16); color: var(--text); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.ykd .yk .keys{ display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px 14px; margin: 0; }
+.ykd .yk .keys dt{ display: flex; align-items: center; gap: 3px; white-space: nowrap; color: var(--muted); }
+.ykd .yk .keys dd{ margin: 0; color: var(--text-2); }
+.ykd .yk .look .switch:first-child{ border-top: 0; }
+.ykd .yk .look-range{ display: grid; grid-template-columns: auto 1fr 40px; align-items: center; gap: 10px; padding: 2px 0 8px; color: var(--text-2); font-size: 12.5px; }
+.ykd .yk .look-range input{ width: 100%; accent-color: var(--text); }
+.ykd .yk .look-range .px{ text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ykd .yk .look-range.off{ opacity: .4; }
+.ykd .yk .btn{ background: rgba(255,255,255,.06); color: var(--text); border: 1px solid rgba(255,255,255,.12); border-radius: 9px; padding: 7px 12px; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.ykd .yk .btn:hover{ border-color: rgba(255,255,255,.3); }
+.ykd .yk .btn.sm{ padding: 5px 10px; font-size: 12px; }
+.ykd .yk select{ background: rgba(0,0,0,.28); color: var(--text); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 13px; min-width: 0; }
+.ykd .yk .shead{ display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.ykd .yk .shead .lbl{ color: var(--muted); }
+.ykd .yk .switch{ display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,.14); cursor: pointer; }
+.ykd .yk .switch input{ appearance: none; -webkit-appearance: none; width: 34px; height: 20px; border-radius: 999px; background: #2a3042; position: relative; cursor: pointer; transition: background .15s; flex: none; margin: 0; }
+.ykd .yk .switch input::after{ content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.ykd .yk .switch input:checked{ background: var(--text); }
+.ykd .yk .switch input:checked::after{ background: var(--bg); transform: translateX(14px); }
+.ykd .yk .switch small{ display: block; color: var(--muted); font-size: 12px; }
+/* layer rows */
+.ykd .yk .lrow{ display: grid; grid-template-columns: 28px 130px minmax(90px, 1fr) 40px 34px; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid rgba(255,255,255,.08); background: transparent; position: relative; }
+.ykd .yk .lrow.off .nm,
+.ykd .yk .lrow.off input[type=range],
+.ykd .yk .lrow.off .px{ opacity: .4; }
+.ykd .yk .lrow.na .nm,
+.ykd .yk .lrow.na .grip,
+.ykd .yk .lrow.na .eye{ opacity: .35; }
+.ykd .yk .lrow.na .eye{ cursor: not-allowed; }
+.ykd .yk .lrow .na-note{ grid-column: span 2; color: var(--muted); font-size: 13px; font-style: italic; }
+.ykd .yk .lrows{ position: relative; }
+.ykd .yk .lrow.dragging{ z-index: 2; scale: 1.02; border-radius: 10px; border-top-color: transparent; background: rgba(60, 66, 80, .95); box-shadow: 0 14px 34px -12px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.1); }
+.ykd .yk .lrow.dragging + .lrow{ border-top-color: transparent; }
+.ykd .yk .lrow .grip{ width: 28px; height: 28px; display: grid; place-items: center; color: var(--muted); border-radius: 6px; cursor: grab; touch-action: none; background: none; border: 0; padding: 0; transition: color .15s, background .15s, scale .15s; }
+.ykd .yk .lrow .grip:hover,
+.ykd .yk .lrow .grip:focus-visible{ color: var(--text); background: rgba(255,255,255,.08); outline: none; }
+.ykd .yk .lrow .grip:not(.fixed):active,
+.ykd .yk .lrow.dragging .grip{ color: var(--text); background: rgba(255,255,255,.16); scale: .92; cursor: grabbing; }
+.ykd .yk .lrow .grip.fixed{ cursor: default; opacity: .25; }
+.ykd .yk .eye{ width: 34px; height: 30px; display: grid; place-items: center; color: var(--text); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; cursor: pointer; padding: 0; }
+.ykd .yk .eye:hover{ border-color: rgba(255,255,255,.3); }
+.ykd .yk .eye[aria-pressed=false]{ color: var(--muted); }
+.ykd .yk .lrow input[type=range]{ width: 100%; accent-color: var(--accent); }
+.ykd .yk .lrow .px{ color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.ykd .yk .lrow .nm{ overflow-wrap: anywhere; }
+/* translation-language menu */
+.ykd .yk .menu{ display: flex; flex-direction: column; gap: 2px; }
+.ykd .yk .mitem{ display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 9px 10px; border-radius: 8px; background: none; border: 0; color: var(--text); cursor: pointer; text-align: left; font-size: 14px; }
+.ykd .yk .mitem small{ color: var(--muted); font-size: 12px; }
+.ykd .yk .mitem:hover{ background: rgba(255,255,255,.07); }
+.ykd .yk .mitem.on{ background: rgba(127,127,127,.2); }
+.ykd .yk .mitem.on span::before{ content: "✓"; color: var(--text); margin-right: 8px; }
+/* speaking practice: the mic button (its ring grows with the microphone level) and the card under the subtitles */
+.ykd .yk .cbtn.mic[aria-pressed=true]{ background: rgba(255,255,255,.13); color: #fff; }
+.ykd .yk .cbtn.mic:disabled{ opacity: .4; cursor: default; }
+.ykd .yk .cbtn.mic::after{ content: ""; position: absolute; inset: 7px; border-radius: 50%; pointer-events: none; box-shadow: 0 0 0 calc(var(--lvl, 0) * 9px) rgba(239,59,44,.55); transition: box-shadow .06s linear; }
+.ykd .yk .cbtn.mic.rec{ color: #ff6b6b; }
+.ykd .yk .practice{
+  width: fit-content; max-width: min(640px, calc(100% - 24px)); margin: 10px auto 0; padding: 12px 16px; border-radius: 16px; text-align: center; font-size: 14px; line-height: 1.45;
+  background: rgba(20, 23, 31, .82); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255,255,255,.12); box-shadow: 0 16px 40px -18px rgba(0,0,0,.85); pointer-events: auto; user-select: text; -webkit-user-select: text;
+}
+.ykd .yk .practice .msg{ margin: 0; color: var(--text-2); }
+.ykd .yk .practice .msg.err{ color: #ffb4a8; }
+.ykd .yk .practice .listen{ display: flex; align-items: center; justify-content: center; gap: 10px; }
+.ykd .yk .practice .rec-dot{ width: 10px; height: 10px; border-radius: 50%; background: #ff4d4d; animation: yk-rec 1.1s ease-in-out infinite; flex: none; }
+@keyframes yk-rec{ 50% { opacity: .35; } }
+.ykd .yk .practice .meter{ width: 120px; height: 6px; border-radius: 6px; background: rgba(255,255,255,.14); overflow: hidden; flex: none; }
+.ykd .yk .practice .meter i{ display: block; height: 100%; width: 100%; background: #5ee7a0; transform-origin: 0 50%; transition: transform .06s linear; }
+.ykd .yk .practice .verdict{ display: flex; align-items: center; justify-content: center; gap: 14px; text-align: left; }
+.ykd .yk .practice .score{ font: 800 34px/1 var(--sans, system-ui); font-variant-numeric: tabular-nums; color: #5ee7a0; flex: none; }
+.ykd .yk .practice .score small{ font-size: 16px; margin-left: 1px; }
+.ykd .yk .practice .score.good{ color: #ffd24a; }
+.ykd .yk .practice .score.again{ color: #ff6b6b; }
+.ykd .yk .practice .said-what{ display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ykd .yk .practice .said-what b{ font-weight: 600; }
+.ykd .yk .practice .heard{ color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.ykd .yk .practice .legend{ display: flex; gap: 12px; font-size: 12px; font-style: normal; }
+.ykd .yk .practice .legend i{ font-style: normal; }
+.ykd .yk .practice .legend .said{ color: #5ee7a0; }
+.ykd .yk .practice .legend .close{ color: #ffd24a; }
+.ykd .yk .practice .legend .missed{ color: #ff6b6b; }
+.ykd .yk .practice .acts{ display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px; }
+.ykd .yk .btn.primary{ background: var(--accent); border-color: transparent; color: #fff; font-weight: 600; }
+.ykd .yk .btn.primary:hover{ filter: brightness(1.1); border-color: transparent; }
+.ykd .yk .btn svg{ flex: none; }
+.ykd .yk .toast{ position: absolute; z-index: 5; top: 42%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,.6); padding: 10px 16px; border-radius: 999px; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.ykd .yk .toast.show{ opacity: 1; }
+.ykd .yk .tok:focus-visible{ outline: 2px solid color-mix(in srgb, var(--c) 70%, transparent); outline-offset: 2px; }
+@media (max-width: 720px){.ykd .yk .subs{ --k: .72; padding: 0 8px; }
+.ykd .yk .tok{ padding: 4px 4px 5px; }
+.ykd .yk .cbtn{ width: 42px; height: 42px; }
+.ykd .yk .cbtn svg{ width: 24px; height: 24px; }
+.ykd .yk .pill{ height: 36px; padding: 0 12px; font-size: 14px; }
+.ykd .yk .time{ font-size: 13px; }
+.ykd .yk .lrow{ grid-template-columns: 28px 110px minmax(70px, 1fr) 36px 34px; gap: 6px; }
+}

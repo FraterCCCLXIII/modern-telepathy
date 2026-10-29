@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos OS foundation: apps that run normally, no capture | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" open data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html" aria-current="page">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Overview</span></li><li aria-current="page">Kosmos OS foundation: apps that run normally, no capture</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kosmos OS foundation: apps that run normally, no capture</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/os-foundation-plan.md</span></div>
+        <div class="doc-body">
+
+<p>Written 2026-10-27 after the Electron and Tauri research. Facts marked (verify) are from memory or docs and have not been tried here.</p>
+<h2 id="the-principle">The principle<a class="headerlink" href="#the-principle" title="Link to this section">#</a></h2>
+<p>Electron and Tauri apps do not need pixels forwarded; they need an operating system that provides the contracts they were built for:
+a Linux kernel interface, a C library, a Wayland display server, D-Bus, an audio server, XDG portals, and a package and sandbox format.
+So the foundation is a real OS that provides those contracts, with <strong>our shell as its desktop environment</strong>. We implement the platform
+instead of imitating an app's output. TempleOS cannot provide these contracts (no libc, threads, network stack, GPU or audio), so it
+stops being the base. Everything we have built for look and feel carries over.</p>
+<h2 id="options-considered">Options considered<a class="headerlink" href="#options-considered" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Base</th>
+<th>Runs Electron and Tauri natively</th>
+<th>Cost of the contracts</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TempleOS plus our own drivers</td>
+<td>no</td>
+<td>years: TCP, TLS, USB, virtio, libc, threads, a browser engine</td>
+<td>rejected</td>
+</tr>
+<tr>
+<td>Redox OS (Rust)</td>
+<td>no, Chromium is not ported (verify)</td>
+<td>high</td>
+<td>rejected</td>
+</tr>
+<tr>
+<td>Android or Fuchsia</td>
+<td>not Electron or Tauri</td>
+<td>high, and a different app model</td>
+<td>rejected</td>
+</tr>
+<tr>
+<td>A shell app on macOS (Electron or Tauri itself)</td>
+<td>yes, but it is not an OS</td>
+<td>low</td>
+<td>a useful stepping stone for UI work, not the foundation</td>
+</tr>
+<tr>
+<td><strong>Linux with our own Wayland compositor and shell</strong></td>
+<td><strong>yes, unmodified apps</strong></td>
+<td><strong>low: the contracts already exist</strong></td>
+<td><strong>chosen</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Build on an existing distribution (Debian, Fedora, Arch or NixOS on arm64 and x86-64) and replace only the desktop layer. Do not build
+a distribution from scratch: security updates and hardware support are a full-time job.</p>
+<h2 id="layers">Layers<a class="headerlink" href="#layers" title="Link to this section">#</a></h2>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code> apps          Flatpak apps (Electron, Tauri, GTK, Qt), first-party Tauri apps with Kamiji components
+ portals       xdg-desktop-portal backend (file chooser, screenshot, notifications, settings, screencast)
+ shell         kosmos-shell: Wayland compositor, menubar, dock, launcher, settings, notifications, lock screen
+ services      systemd, D-Bus, PipeWire, NetworkManager, seatd or logind, greetd, polkit, Flatpak
+ base          Linux kernel and a standard userland (glibc), image built reproducibly (mkosi, Nix or Buildroot)
+ platform      virtio devices in a VM first; real hardware later</code></pre></figure>
+<h2 id="the-shell">The shell<a class="headerlink" href="#the-shell" title="Link to this section">#</a></h2>
+<p>Recommended: a compositor on <strong>Smithay</strong> (Rust, MIT (verify)), which matches the Rust stack in this repo. Alternatives: wlroots (C, MIT),
+forking COSMIC (Rust, GPL-3.0, so a licence decision (verify)), or a GNOME Shell or KDE plugin (least control).
+Rendering must work without a GPU, because VMs on this Mac have no usable GL (see below): use Smithay's software and GLES renderers
+over llvmpipe (verify), and keep the shell UI cheap.
+Our UI layer options: the engine's wgpu renderer, a Rust toolkit (iced or Slint), or HTML through a system web view. Pick by a small spike
+(the shell needs a menubar, dock, launcher, settings and notifications, not a general toolkit).</p>
+<p>Protocols the compositor must implement for apps to behave normally: xdg-shell (windows), xdg-decoration (our server-side titlebars),
+layer-shell (menubar and dock), wl-seat with pointer, keyboard, touch, relative-pointer and pointer-constraints, fractional-scale and
+viewporter (retina), linux-dmabuf and wp-presentation-time, data-device and primary-selection (clipboard, drag and drop),
+text-input-v3 and input-method (IME), xdg-activation, idle-inhibit, screencopy or image-capture for screenshots, XWayland for legacy apps.</p>
+<h2 id="the-app-platform">The app platform<a class="headerlink" href="#the-app-platform" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Flatpak plus portals.</strong> One sandboxed packaging format gives access to Flathub's Electron and Tauri apps (VS Code, Obsidian, Slack,
+  Discord, Signal, Element and more are published there (verify each)), with permissions that match our approval model.</li>
+<li><strong>Electron</strong> runs on Wayland through Ozone (verify the flags and version). <strong>Tauri</strong> uses WebKitGTK on Linux (verify Tauri 2 packages).</li>
+<li><strong>First-party apps</strong> are Tauri apps built with the Kamiji (Longformer) components and tokens, so system apps and the shell share one
+  design language. Settings, Files, Notes, Terminal and the store are the first ones.</li>
+<li><strong>Security:</strong> every app is sandboxed by default; credentials live in a system keyring; outward actions (sending mail or messages,
+  purchases) always need an explicit user prompt.</li>
+</ul>
+<h2 id="what-carries-over-from-the-holyc-desktop">What carries over from the HolyC desktop<a class="headerlink" href="#what-carries-over-from-the-holyc-desktop" title="Link to this section">#</a></h2>
+<p>Design tokens and the five styles, the Inter and Lucide assets, the window chrome kinds (traffic lights, caption buttons, glass),
+the dock and menubar behaviour, the Settings structure, the core-apps list, and the animation timings. The HolyC desktop stays as the
+"Temple" skin reference and as a TempleOS app (TempleOS runs in a QEMU window as one app, with HolyC available as a feature),
+not as the foundation.</p>
+<h2 id="this-mac-as-the-development-host">This Mac as the development host<a class="headerlink" href="#this-mac-as-the-development-host" title="Link to this section">#</a></h2>
+<p>Checked on 2026-10-27: Apple Silicon (arm64, macOS 27), Homebrew <code>qemu-system-aarch64</code> with HVF acceleration (guest runs at native speed),
+Lima and Docker present, 41 GB free. This QEMU build lists <code>virtio-gpu-pci</code> but no GL variant, so a Linux guest would render in software
+(llvmpipe), which is fine for a shell and for Electron and Tauri apps at normal speed (verify the frame rates in M0).
+Apple's Virtualization.framework through Lima is the quickest start; a QEMU HVF image is the more controllable one. The real target hardware
+(an Apple Silicon Mac with Asahi, a PC, a Pi, a VM product) is a decision for the user and affects GPU and driver work.</p>
+<h2 id="milestones-each-with-a-pass-or-fail-gate">Milestones, each with a pass or fail gate<a class="headerlink" href="#milestones-each-with-a-pass-or-fail-gate" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>M</th>
+<th>What</th>
+<th>Gate</th>
+<th>Time box</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>A Linux arm64 VM (Lima or QEMU HVF) running a stock Wayland compositor (sway or cage) with one Electron app and one Tauri app launched natively. Needs downloads: a distro image of a few hundred MB and the apps.</td>
+<td>both apps run as real windows, typing and scrolling feel normal, 30 fps or better scrolling in software rendering</td>
+<td>2 days</td>
+</tr>
+<tr>
+<td>M1</td>
+<td><code>kosmos-shell</code> v0: a Smithay compositor with xdg-shell, layer-shell menubar and dock placeholders, our server-side titlebars, pointer and keyboard, and the same two apps</td>
+<td>same apps, same gates, windows drag and resize, our chrome</td>
+<td>1 week</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>fractional-scale (retina), clipboard and drag and drop, IME, dmabuf, activation, XWayland</td>
+<td>copy and paste between apps, crisp text at 2x</td>
+<td>1 week</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>Portals backend (file chooser, notifications, screenshots), PipeWire audio, NetworkManager panel</td>
+<td>a Flatpak app opens files and plays sound</td>
+<td>1 to 2 weeks</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>Flatpak store UI, first-party Tauri apps with Kamiji (Settings, Files), launcher</td>
+<td>install and run an app from the store inside our shell</td>
+<td>2 weeks</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>Reproducible image build, installer, updates</td>
+<td>boots from a clean image; update works</td>
+<td>2 weeks</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="risks-and-decisions-for-the-user">Risks and decisions for the user<a class="headerlink" href="#risks-and-decisions-for-the-user" title="Link to this section">#</a></h2>
+<ol>
+<li>Target hardware and GPU: software rendering is acceptable in a VM, real hardware needs a driver story.</li>
+<li>Licence: COSMIC is GPL-3.0; Smithay and wlroots are MIT (verify). Decide before forking anything.</li>
+<li>Scope and ownership: a desktop environment is a long project; the repo rules (CLAUDE.md) and plan section 8.6 apply, and starting new
+   phase work needs the user's go.</li>
+<li>Maintenance: a distribution base means tracking its security updates.</li>
+<li>Where this lives in the repo: a new directory (for example <code>apps/kosmos-os/</code>) once approved.</li>
+</ol>
+<h2 id="what-we-stop-doing">What we stop doing<a class="headerlink" href="#what-we-stop-doing" title="Link to this section">#</a></h2>
+<p>No more screen capture or pixel streaming into TempleOS as the app route, no shared-RAM bridge spike, no further HolyC apps beyond the
+reference skin. The two research reports remain as the record of why.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../readme/index.html" rel="prev"><span>Previous</span>Desktop README</a><a class="next" href="../../docs/core-apps-plan/index.html" rel="next"><span>Next</span>Kosmos Temple Desktop: core apps and how to build them</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#the-principle">The principle</a></li><li><a href="#options-considered">Options considered</a></li><li><a href="#layers">Layers</a></li><li><a href="#the-shell">The shell</a></li><li><a href="#the-app-platform">The app platform</a></li><li><a href="#what-carries-over-from-the-holyc-desktop">What carries over from the HolyC desktop</a></li><li><a href="#this-mac-as-the-development-host">This Mac as the development host</a></li><li><a href="#milestones-each-with-a-pass-or-fail-gate">Milestones, each with a pass or fail gate</a></li><li><a href="#risks-and-decisions-for-the-user">Risks and decisions for the user</a></li><li><a href="#what-we-stop-doing">What we stop doing</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

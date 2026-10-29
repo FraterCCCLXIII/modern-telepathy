@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT · Copyright (c) 2026 Paul Bloch (Kosmos Engine)
+     Serve the repo root (python3 -m http.server) and open /assets/props/accessories/preview.html
+     Query: ?still (no sway) · ?yaw=40 (turn the heads, degrees) · ?only=top_hat,crown · ?slot=head · ?alone (no head) -->
+<meta charset="utf-8">
+<title>Kamiji props: accessories</title>
+<style>
+  body{margin:0;font:13px system-ui;background:#f1ece4;color:#333}
+  header{display:flex;gap:12px;align-items:center;padding:10px 16px;background:#fff;position:sticky;top:0;z-index:2;flex-wrap:wrap}
+  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;padding:12px}
+  .cell{background:#fff;border-radius:10px;padding:6px;text-align:center}
+  canvas{width:100%;aspect-ratio:1;display:block}
+  small{color:#888}
+</style>
+<header>
+  <b>Kamiji props: accessories</b>
+  <label>head <input type="color" id="head" value="#f4d36a"></label>
+  <label><input type="checkbox" id="useDefault" checked> per-item suggested tint</label>
+  <label><input type="checkbox" id="alone"> accessory alone</label>
+  <span id="count"></span>
+</header>
+<div id="grid"></div>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+const q = new URLSearchParams(location.search);
+let index = await (await fetch("index.json")).json();
+if (q.get("only")) index = index.filter((p) => q.get("only").split(",").includes(p.name));
+if (q.get("slot")) index = index.filter((p) => p.anchor.slot === q.get("slot"));
+document.getElementById("count").textContent = index.length + " accessories";
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xfff4de, 0xb59a8a, 1.5));
+const key = new THREE.DirectionalLight(0xffefd2, 1.8); key.position.set(-1.5, 2, 4); scene.add(key);
+const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 20);
+const [dx, dy, dz] = (q.get("cam") || "0,0.25,3.7").split(",").map(Number);
+cam.position.set(dx, dy, dz); cam.lookAt(0, q.has("cam") ? dy : 0.12, 0);
+const loader = new GLTFLoader();
+const headMat = new THREE.MeshStandardMaterial({ color: 0xf4d36a, roughness: 0.7 });
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0x2a2224, roughness: 0.3 });
+function makeHead() {   // a sphere of radius 0.5 with the Kamiji eyes (two pills at x = +-0.1)
+  const g = new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(0.5, 40, 28), headMat));
+  for (const s of [-1, 1]) {
+    const e = new THREE.Mesh(new THREE.CapsuleGeometry(0.054, 0.09, 6, 12), eyeMat);
+    e.position.set(s * 0.1, 0, 0.49); e.scale.set(1, 1, 0.5); g.add(e);
+  }
+  return g;
+}
+const items = [];
+const grid = document.getElementById("grid");
+const headC = document.getElementById("head"), useDef = document.getElementById("useDefault"), alone = document.getElementById("alone");
+alone.checked = q.has("alone");
+for (const p of index) {
+  const cell = document.createElement("div"); cell.className = "cell";
+  cell.innerHTML = `<canvas width=420 height=420></canvas><b>${p.name}</b><br><small>${p.anchor.slot} · ${p.triangles} tris · ${(p.bytes / 1024).toFixed(0)} KB</small>`;
+  grid.append(cell);
+  const gltf = await loader.loadAsync(p.file);
+  const mat = new THREE.MeshStandardMaterial({ roughness: 0.6 });
+  gltf.scene.traverse((o) => { if (o.isMesh && o.material.name === "Clay") o.material = mat; });
+  const rig = new THREE.Group();
+  const head = makeHead();
+  rig.add(head, gltf.scene);
+  items.push({ p, rig, head, mat, c: cell.querySelector("canvas").getContext("2d") });
+}
+const tmp = new THREE.Color();
+function frame(t) {
+  const sw = q.has("still");
+  for (const it of items) {
+    it.mat.color.set(useDef.checked ? it.p.tint : "#ffd23f");
+    headMat.color.set(headC.value);
+    it.head.visible = !alone.checked;
+    scene.add(it.rig);
+    const yaw = q.has("yaw") ? Number(q.get("yaw")) * Math.PI / 180 : 0.35;
+    it.rig.rotation.y = sw ? yaw : Math.sin(t / 1500 + items.indexOf(it)) * 0.6 + (q.has("yaw") ? yaw : 0);
+    const s = it.c.canvas.width; renderer.setSize(s, s, false); renderer.render(scene, cam);
+    it.c.clearRect(0, 0, s, s); it.c.drawImage(renderer.domElement, 0, 0, s, s);
+    scene.remove(it.rig);
+  }
+  if (!sw) requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+window.__ready = true;
+</script>

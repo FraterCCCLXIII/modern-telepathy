@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcast service (svcpodcast.py): protocol for the HolyC side | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" open data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html" aria-current="page">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Hub and host services</span></li><li aria-current="page">Podcast service (svcpodcast.py): protocol for the HolyC side</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Podcast service (svcpodcast.py): protocol for the HolyC side</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">apps-host/hub/PODCAST.md</span></div>
+        <div class="doc-body">
+
+<p>Service name <code>podcast</code>. Request <code>REQ id podcast token op arg...</code>; reply records are TAB separated (recs.py), all text ASCII. Ids: show <code>f</code> + 10 hex (from the feed URL), episode 10 hex. The guest never sends a feed URL except in <code>subscribe_url</code>. <code>?</code> = optional. Sizes measured by tests/test_podcast.py.</p>
+<h2 id="ops-and-replies">Ops and replies<a class="headerlink" href="#ops-and-replies" title="Link to this section">#</a></h2>
+<ul>
+<li><code>categories</code> -&gt; <code>K id label count</code> x12.</li>
+<li><code>directory CAT|all OFFSET LIMIT(max 40) ?QUERY</code> -&gt; <code>DH total offset count cat</code>, then <code>D fid title publisher cat tone subscribed desc</code>. 10 entries: 984 bytes (worst case about 1.9 KB). 108 shows, 12 categories (fixtures/podcasts/catalog.json).</li>
+<li><code>subs</code> -&gt; <code>S fid title publisher tone episodes unplayed fetched_epoch downloaded</code>. <code>subscribe FID</code>, <code>subscribe_url URL ?TITLE</code>, <code>unsubscribe FID</code> reply with one <code>S</code>. No network, no approval. <code>tone</code> 0..11 = rose orange amber lime green teal cyan blue indigo violet purple pink (the app's cover colour).</li>
+<li><code>refresh FID ?force</code> -&gt; <code>R fid result new total skipped title note</code>; result <code>new</code> <code>same</code> (304) <code>cache</code> (inside podcast_min_refresh_s) <code>offline</code> (saved list shown). Approval scope <code>podcast:refresh:FID</code>. No saved list and offline: <code>ERR offline: cannot reach HOST (...)</code>.</li>
+<li><code>episodes FID OFFSET LIMIT ?unplayed</code> -&gt; <code>EH fid total offset count show publisher</code>, then <code>E eid yyyymmdd dur_s size_kb played downloaded pos_s title</code>. Newest first, date 00000000 when unknown, title 72 chars. 10 episodes: 658 bytes (worst case about 1.4 KB). Needs a refresh first, else <code>ERR</code>.</li>
+<li><code>episode EID</code> -&gt; <code>X</code> (same fields as <code>E</code> plus <code>host</code>) and up to 4 <code>N text</code> lines of 88 chars (show notes, tags removed).</li>
+<li><code>mark EID played|unplayed</code> -&gt; <code>E</code>. <code>downloads OFFSET LIMIT</code> -&gt; <code>DLH total offset count</code>, then <code>DE</code> (same fields as <code>E</code>). <code>delete EID</code> -&gt; <code>E</code>.</li>
+<li><code>download EID</code> -&gt; <code>DL eid state done_kb total_kb error</code>; state <code>none run done err</code>. Approval <code>podcast:dl:EID</code> (text names the title, size and host). Runs in a thread: poll <code>dlstatus EID</code>; <code>dlcancel EID</code>. Limit podcast_max_mb. afplay cannot stream a URL (checked), so <code>play</code> of an episode that is not downloaded asks the same approval, downloads, then starts playing (the reply holds <code>DL</code> then <code>PS</code>).</li>
+<li>Playback (through the music service, afplay): <code>play EID ?START_S</code> (default: resume), <code>pause</code> <code>resume</code> <code>toggle</code> <code>stop</code> <code>seek S</code> <code>next</code> <code>prev</code> <code>volume 0..100</code> <code>speed 0.75|1|1.25|1.5|2</code> <code>sleep MINUTES|eoe|0</code> <code>autonext 0|1</code> <code>status</code>. All reply <code>PS state eid fid pos_s dur_s speed sleep_s autonext title</code>; state <code>playing paused stopped loading</code>; sleep_s is seconds left, -1 for end of episode, 0 off. Poll <code>status</code> about 4 times a second while the window is open (it also saves progress). Position is saved every 5 s, on pause, stop, seek and sleep; an episode within 3 s of its end is marked played, then the next downloaded unplayed one plays if autonext is 1 (default; it never starts a download by itself). Pause/stop/seek answer <code>ERR nothing from Podcasts is playing</code> when the music service plays something else.</li>
+<li><code>cover FID|EID SIZE ?p4|565</code>, SIZE 32 40 48 64 96 (565 only up to 64) -&gt; <code>V id fmt w h nlines palette note</code>, then <code>nlines</code> x <code>Z hex</code> (96 hex digits per line, last shorter). <code>V ... none</code> with a note when there is no image or no Pillow (the guest paints the tone block). Approval <code>podcast:img:HOST</code>. Cached on the host. Sizes: 40x40 1743 bytes, 48x48 2468, 96x96 9596 (the guest reply buffer is 12000).</li>
+<li><code>stats</code> -&gt; <code>STATS requests user_agent</code>.</li>
+</ul>
+<h2 id="cover-record-the-guest-has-no-image-decoder">Cover record (the guest has no image decoder)<a class="headerlink" href="#cover-record-the-guest-has-no-image-decoder" title="Link to this section">#</a></h2>
+<ul>
+<li><code>p4</code>: <code>palette</code> = 64 hex digits = 16 colours of 4 digits each, the number is RGB565 (r5 g6 b5, <code>F800</code> red). Data = rows top to bottom, left to right, two pixels per byte (left pixel = high nibble, index into the palette), 2 hex digits per byte, SIZE*SIZE/2 bytes. Concatenate the <code>Z</code> lines.</li>
+<li><code>565</code>: no palette (empty field); data = SIZE*SIZE pixels, 4 hex digits each, the RGB565 number.</li>
+<li>The image is centre-cropped to a square, resized to SIZE (Lanczos), p4 is a 16-colour median cut (no dithering).</li>
+</ul>
+<h2 id="config-hub-configjson-all-optional">Config (hub config.json; all optional)<a class="headerlink" href="#config-hub-configjson-all-optional" title="Link to this section">#</a></h2>
+<p><code>podcast_dir</code> (default ~/.cache/kosmos-hostd/podcast: state.json, feeds/, audio/, covers/; outside the repo), <code>podcast_max_mb</code> 200, <code>podcast_min_refresh_s</code> 600, <code>podcast_allow_loopback</code> false (tests only), <code>podcast_catalog</code> (path), <code>podcast_tick_s</code> 0.5, <code>contact</code> (goes into the User-Agent <code>KosmosTempleDesktop/0.1 podcast (contact)</code>). Registered in hostd.py build_hub (two lines).</p>
+<h2 id="security-notes">Security notes<a class="headerlink" href="#security-notes" title="Link to this section">#</a></h2>
+<ul>
+<li>Network only after a one-time approval token naming the host (and size). Subscribing, browsing the directory, episode lists, status and play of a downloaded file are local.</li>
+<li>Feeds: http and https only, no user name or password, at most 3 redirects (each checked again), no proxy, identity encoding, 2 MB cap, 15 s timeout. Hosts that are or resolve to this Mac or a private network are refused (a lookup happens only after the approval; DNS rebinding between check and connect is not covered).</li>
+<li>XML: any DOCTYPE or ENTITY declaration and UTF-16 are refused before parsing (defusedxml is also used if installed), 100 episodes kept, titles cut to 300 chars. <code>enclosure</code> URLs that are not http/https (file://) are skipped and counted in <code>skipped</code>.</li>
+<li>Files: names are made from the episode id plus an audio extension, never from the feed; reads re-check the name and the real path inside audio/ (symlinks out are refused); ids are matched against <code>^f[0-9a-f]{10}$</code> and <code>^[0-9a-f]{10}$</code>. Downloads stop at podcast_max_mb, text/html answers are refused, partial files are removed.</li>
+<li>Covers: 3 MB cap, JPEG PNG GIF WEBP only, Pillow decompression-bomb limit 25 million pixels.</li>
+<li>The approval is a consent record for the UI, not a defence against a hostile guest (same as the other services).</li>
+</ul>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../apps-host/readme/index.html" rel="prev"><span>Previous</span>apps-host: run Electron apps on the host, show them in the desktop</a><a class="next" href="../../../apps-host/hub/sheet/index.html" rel="next"><span>Next</span>sheet service (host half of Spreadsheets)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#ops-and-replies">Ops and replies</a></li><li><a href="#cover-record-the-guest-has-no-image-decoder">Cover record (the guest has no image decoder)</a></li><li><a href="#config-hub-configjson-all-optional">Config (hub config.json; all optional)</a></li><li><a href="#security-notes">Security notes</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

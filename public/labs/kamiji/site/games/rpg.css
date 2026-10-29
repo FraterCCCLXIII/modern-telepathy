@@ -1,0 +1,42 @@
+/* Adventure RPG: soft pixel-ish tiles, original palette. */
+.rp { background: #f4f1e4; }
+.rp-stats { flex: none; display: grid; grid-template-columns: auto auto 1fr auto 1fr; align-items: center; gap: 8px; padding: 8px 12px 6px 56px; font: 600 .72rem var(--mono); }
+.rp-port { position: absolute; left: 6px; top: 2px; width: 44px; height: 44px; }
+.rp-field { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; outline-offset: -3px; }
+.rp-grid, .rp-layer { grid-area: 1 / 1; width: min(100cqw, calc((100cqh - 96px) * 1.5714)); aspect-ratio: 11 / 7; }
+.rp-grid { display: grid; grid-template-columns: repeat(11, 1fr); grid-template-rows: repeat(7, 1fr); border-radius: 12px; overflow: hidden; box-shadow: 0 0 0 2px #1d1d1b; }
+.rp-layer { position: relative; pointer-events: none; }
+.rp-t { display: block; }
+.rp-floor.town { background: #bfe3a0; } .rp-floor.cave { background: #cfc8d8; }
+.rp-floor.town:nth-child(odd) { background: #b6dc96; }
+.rp-tree { background: radial-gradient(circle at 50% 42%, #4f9d63 0 52%, transparent 54%), #bfe3a0; }
+.rp-water { background: repeating-linear-gradient(0deg, #8fd0ec 0 6px, #a7dcf2 6px 9px); }
+.rp-house { background: linear-gradient(#d9694c 0 45%, #f6e6c4 45%); }
+.rp-wall { background: #6e6a80; box-shadow: inset 0 -4px rgba(0, 0, 0, .18); }
+.rp-door { background: #7a5a44; box-shadow: inset 0 0 0 3px #c9a67a; }
+.rp-e, .rp-hero { position: absolute; width: calc(100% / 11); height: calc(100% / 7); display: grid; place-items: center; transition: left .12s linear, top .12s linear; }
+.rp-e b, .rp-hero::before { content: ""; width: 72%; height: 72%; border-radius: 50% 50% 44% 44%; background: var(--c, #ffd23f); box-shadow: inset 0 -3px rgba(0, 0, 0, .15), 0 2px 0 rgba(0, 0, 0, .15); }
+.rp-hero { z-index: 3; --c: #ffd23f; } .rp-hero::before { background: #ffd23f; }
+.rp-hero::after { content: ""; position: absolute; left: 36%; top: 42%; width: 28%; height: 14%; background: radial-gradient(circle at 25% 50%, #2c2a33 0 2px, transparent 3px), radial-gradient(circle at 75% 50%, #2c2a33 0 2px, transparent 3px); }
+.rp-chest b { border-radius: 4px; height: 56%; } .rp-chest.open b { background: #8c6a44; }
+.rp-enemy b { background: #6f7a99; animation: rp-w 1.4s ease-in-out infinite alternate; }
+.rp-npc b::after { content: ""; display: block; margin: 20% auto 0; width: 40%; height: 14%; background: radial-gradient(circle at 25% 50%, #2c2a33 0 2px, transparent 3px), radial-gradient(circle at 75% 50%, #2c2a33 0 2px, transparent 3px); }
+@keyframes rp-w { to { transform: scale(1.1, .92); } }
+.rp-acc { position: absolute; left: 30%; top: 0; width: 40%; height: 30%; z-index: 2; }
+.rp-acc[data-acc="star"]::before { content: "\2605"; position: absolute; font-size: 12px; color: #e8a300; left: 60%; top: 10%; }
+.rp-acc[data-acc="wizard"] { background: #5b4bb5; clip-path: polygon(50% 0, 100% 100%, 0 100%); top: -6%; height: 36%; }
+.rp-acc[data-acc="bell"] { top: 66%; left: 38%; width: 24%; height: 24%; background: #f2b24d; border-radius: 50%; }
+.rp-dlg { position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 6; padding: 10px 12px; border-radius: 16px; background: rgba(29, 29, 27, .92); color: #fff; min-height: 72px; }
+.rp-dlg[hidden] { display: none; } .rp-dlg b { font-size: .75rem; color: #ffe27a; } .rp-dlg p { margin: 2px 0 6px; font-size: .88rem; min-height: 2.6em; line-height: 1.4; } .rp-dlg .g-btn { float: right; }
+.rp-bar { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 12px 8px; flex-wrap: wrap; }
+.rp-pad { display: flex; gap: 4px; } .rp-pad .g-btn { min-width: 44px; padding: 0 8px; }
+.rp-p { justify-content: flex-start; padding-top: 22px; overflow: auto; }
+.rp-ql, .rp-bl { text-align: left; width: min(100%, 360px); margin: 0; padding: 0 0 0 18px; display: grid; gap: 6px; font-size: .88rem; } .rp-bl { list-style: none; padding: 0; }
+.rp-ql .later { color: #8d9087; } .rp-ql .cur { font-weight: 700; } .rp-ql .done { color: #5f665a; text-decoration: line-through; }
+.rp-bl li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 14px; background: #fff; border: 1px solid rgba(31, 42, 34, .12); } .rp-bl span { display: block; font-size: .76rem; color: #5f665a; }
+.rp-bt { background: linear-gradient(#e9e6f3, #fffdf6); }
+.rp-foe { position: relative; width: 90px; height: 76px; border-radius: 50% 50% 40% 40%; background: #6f7a99; box-shadow: inset 0 -8px rgba(0, 0, 0, .15); animation: rp-w 1s ease-in-out infinite alternate; }
+.rp-foe i { position: absolute; top: 34%; width: 12px; height: 8px; border-radius: 0 0 8px 8px; background: #fff; } .rp-foe i:first-child { left: 26%; } .rp-foe i:nth-child(2) { right: 26%; } .rp-foe u { position: absolute; left: 40%; top: 62%; width: 20%; height: 8%; border-radius: 50%; background: #2c2a33; }
+.rp-bars { display: grid; gap: 4px; width: min(100%, 260px); font: 600 .72rem var(--mono); }
+.rp-blog { min-height: 2.6em; font-size: .84rem; }
+@media (prefers-reduced-motion: reduce) { .rp-enemy b, .rp-foe { animation: none; } .rp-e, .rp-hero { transition: none; } }

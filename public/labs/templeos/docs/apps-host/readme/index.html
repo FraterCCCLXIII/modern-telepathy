@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>apps-host: run Electron apps on the host, show them in the desktop | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" open data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html" aria-current="page">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Hub and host services</span></li><li aria-current="page">apps-host: run Electron apps on the host, show them in the desktop</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">apps-host: run Electron apps on the host, show them in the desktop</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">apps-host/README.md</span></div>
+        <div class="doc-body">
+
+<p>Prototype. Python 3 standard library (Pillow for tests only). Design and numbers: <code>../docs/electron-apps.md</code>.</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>export KS_APPD_HOME=/some/short/dir          # default ~/.kosmos-appd
+python3 appd.py install &lt;url-or-path&gt; --sha256 &lt;hex&gt; --allow-adhoc --perm host:files:rw
+python3 appd.py approve &lt;id&gt; --workspace /path/to/project
+python3 appd.py run &lt;id&gt;                     # supervisor owns the app and its CDP pipe
+python3 appd.py pages &lt;id&gt; | probe &lt;id&gt; | shot &lt;id&gt; out.png | dlist &lt;id&gt; outdir
+python3 appd.py bridge &lt;id&gt; --port 4566      # stream to the guest on QEMU serial port 4566
+python3 appd.py stop &lt;id&gt; | kill &lt;id&gt; | uninstall &lt;id&gt; [--purge]</code></pre></figure>
+<p>Files: <code>manifest.py</code> schema, <code>install.py</code> fetch/verify/extract/policy/registry, <code>perms.py</code> approvals and workspace rules,
+<code>launch.py</code> spawn with a CDP pipe, <code>attach.py</code> targets/display list/screenshot/input, <code>stream.py</code> tile bridge,
+<code>appd.py</code> CLI and supervisor, <code>tests/</code> (<code>python3 -m unittest discover -s tests</code>; <code>fidelity.py</code> and <code>stage3_fake_guest.py</code>
+need a running app). The guest end is <code>../desk3/03d-electronapp.HC</code> (off until <code>KS_ELECTRON</code> is defined, not yet run in a VM).</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../tests/browser/results/m1-summary/index.html" rel="prev"><span>Previous</span>Kosmos Browser M1: host engine site run</a><a class="next" href="../../apps-host/hub/podcast/index.html" rel="next"><span>Next</span>Podcast service (svcpodcast.py): protocol for the HolyC side</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

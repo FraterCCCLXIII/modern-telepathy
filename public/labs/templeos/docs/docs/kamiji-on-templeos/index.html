@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kamiji on the HolyC TempleOS desktop and on Aiwnios: study | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html" aria-current="page">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Engine and platform</span></li><li aria-current="page">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/kamiji-on-templeos.md</span></div>
+        <div class="doc-body">
+
+<p>Date 2026-10-27, branch <code>task/templeos-shell</code>. Research only. Nothing was built, installed, downloaded or pulled; no LFS command was used (sizes are file sizes on disk). The only code run was a 15-line Python script that reads GLB headers.</p>
+<p>Labels: <strong>[V]</strong> read in a file or measured today. <strong>[R]</strong> measured in our earlier notes. <strong>[E]</strong> my estimate from measured numbers. <strong>[I]</strong> inference or memory. Effort: S under a day, M a week, L a month.</p>
+<h2 id="1-what-kamiji-is">1. What Kamiji is<a class="headerlink" href="#1-what-kamiji-is" title="Link to this section">#</a></h2>
+<h3 id="11-answer">1.1 Answer<a class="headerlink" href="#11-answer" title="Link to this section">#</a></h3>
+<p>Kamiji is a <strong>family</strong>. I infer the Projects entry "Kamiji: Rigged 3D hand avatars and the characters around them" means <strong>the characters</strong>: a rigged cartoon hand with a morph-target face, the Kamikin "mochi" friends and the Rubbernose cast built with the same toolchain. Confidence about 85 percent. <strong>"Kamiji UI" is separate</strong>: the Longformer <code>lf-*</code> component kit that Kamiji's prototype folder carries (section 4). The game repos are ancestors, not the product.</p>
+<p>Why: <code>apps/os-styles/projects.json</code> has three character rows (Kamiji, Kamikin, Hands) and one game row (Kamae, prototype); no row is called "Kamiji UI" [V]. The kamiji README opens "A rigged, expressive 3D hand avatar for React, built on three.js" [V].</p>
+<h3 id="12-repo-map-under-userspaulblochdocumentsgithub">1.2 Repo map (under <code>/Users/paulbloch/Documents/github/</code>)<a class="headerlink" href="#12-repo-map-under-userspaulblochdocumentsgithub" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Repo</th>
+<th>What</th>
+<th>Stack</th>
+<th>Commits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kamiji</code></td>
+<td><strong>The product</strong>: <code>KamijiAvatar</code> React library, a framework-free <code>&lt;kamiji-avatar&gt;</code> element, a status/mood protocol, MCP/ACP/VS Code/JetBrains integrations, site, Blender build scripts, GLBs, <code>prototypes/ui-port</code></td>
+<td>TypeScript, three.js 0.186.1, Vite 8, vitest; Python for Blender</td>
+<td>90</td>
+</tr>
+<tr>
+<td><code>kamiji-demo</code>, <code>kamiji-game</code></td>
+<td>Tamagotchi pet device (Electron) and Lovable RPG, 2D ancestors</td>
+<td>TS, Vite</td>
+<td>0 and 5</td>
+</tr>
+<tr>
+<td><code>kamiji-rig</code></td>
+<td>Original 2D SVG face rig; merged into <code>kamiji/legacy/</code></td>
+<td>TS, Vite</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>kamae</code></td>
+<td>Browser fencing duel game with its own rules, server and 8x5x7 sprite sheets; <strong>not a character project</strong></td>
+<td>JS, drizzle/D1</td>
+<td>40</td>
+</tr>
+<tr>
+<td><code>kechimyaku-lineage-nexus</code></td>
+<td>Religious lineage database; <strong>unrelated</strong>, no <code>kamiji</code> string [V grep]</td>
+<td>React, Neo4j</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>kosmos-engine</code></td>
+<td>Holds a copy of the hand (<code>assets/models/kamiji/</code>, 2,359,916 bytes) and the Kamikin mochi source arrays (<code>assets/kamikin/mochi/</code>, 14 characters, 14 MB)</td>
+<td>Rust 2024, wgpu</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Grepping the engine for <code>kamiji</code> finds only docs, licences, <code>apps/os-styles</code> and our own docs. <strong>There is no Rust Kamiji runtime</strong>: poses, expressions and motion are TypeScript in the kamiji repo (<code>kamiji-pose-tween.ts</code>, <code>kamiji-expressions.ts</code>, <code>kamiji-motion.ts</code>) [V]. The engine's <code>kosmos-model/src/hands.rs</code> targets Mixamo-style bones (<code>mixamorig:LeftHandIndex1..4</code>); Kamiji's skeleton is <code>Root &gt; Palm &gt; {Thumb,Index,Middle,Ring,Pinky}_1..3</code> plus <code>Face</code> [V]. The engine does consume mochi data (<code>mochi_import.rs</code>, skinned body, face, baked motions) and any GLB (<code>gltf_import.rs</code>, <code>kosmos-app --glb</code>, with <code>--clip</code>, <code>--at</code>, <code>--screenshot</code> [V <code>main.rs:22</code>]). <code>docs/plans/kamikin-port.md</code> covers the Kamikin game and toon look in <code>kosmos-app</code>.</p>
+<h3 id="13-the-assets">1.3 The assets<a class="headerlink" href="#13-the-assets" title="Link to this section">#</a></h3>
+<p>From a script that reads the GLB JSON chunk (<code>.../scratchpad/kamiji/glbinfo.py</code>) [V]:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Size</th>
+<th>Verts</th>
+<th>Tris</th>
+<th>Joints</th>
+<th>Morphs</th>
+<th>Clips</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kamiji.glb</code> hand + face</td>
+<td>2.36 MB</td>
+<td>27,437 (hand 26,452)</td>
+<td>43,514 (hand 41,744)</td>
+<td>18</td>
+<td>face 22, hand 2 (<code>shapeSphere</code>, <code>shapeCube</code>)</td>
+<td>Idle, Wave, Think, Celebrate (2 to 3 s)</td>
+</tr>
+<tr>
+<td><code>mochi/kamikin-pip.glb</code></td>
+<td>634 KB</td>
+<td>5,526</td>
+<td>10,818</td>
+<td>15</td>
+<td>none</td>
+<td>idle, walk, run, hop, happy, wave, sad, sit, dance</td>
+</tr>
+<tr>
+<td><code>mochi/kamikin-chochin.glb</code></td>
+<td>1.39 MB</td>
+<td>16,069</td>
+<td>31,946</td>
+<td>8</td>
+<td>none</td>
+<td>same nine</td>
+</tr>
+<tr>
+<td><code>mochi/kamikin-hana.glb</code></td>
+<td>721 KB</td>
+<td>6,744</td>
+<td>12,402</td>
+<td>14</td>
+<td>none</td>
+<td>same nine</td>
+</tr>
+<tr>
+<td><code>rubbernose-rubby.glb</code></td>
+<td>1.54 MB</td>
+<td>8,985</td>
+<td>17,386</td>
+<td>46</td>
+<td>10</td>
+<td>idle, strut, run, wave, charleston, cheer, point, shrug, thumbs-up</td>
+</tr>
+</tbody>
+</table></div>
+<p>The kamiji repo holds 265 GLBs, 50 MB (rubbernose 25 MB for 16 characters, mochi 11 MB, props 11 MB). Mochi faces are six embedded PNGs mapped by <code>extras.kamiji.faceStates</code>. The 14 hand poses (<code>open fist point peace thumbsUp rock three one two four five ok thumbsDown callMe</code>) are <strong>curl tables in TypeScript, not in the GLB</strong>; so are the eight expressions, 15 emotes and three shapes [V]. Rendering is cel shading with an inverted-hull ink outline and flat bands [V <code>kamiji-toon.ts</code>]. That is flat colour in a few tones, a good match for a 16-colour palette and a small software rasteriser.</p>
+<h3 id="14-licences-v-kamijilicensemd-assetsprovenancemd">1.4 Licences [V <code>kamiji/LICENSE.md</code>, <code>assets/PROVENANCE.md</code>]<a class="headerlink" href="#14-licences-v-kamijilicensemd-assetsprovenancemd" title="Link to this section">#</a></h3>
+<p>Code: MIT. Characters and assets: <strong>CC BY-NC 4.0</strong> with credit "Kamiji by Paul Bloch"; for-profit use needs a paid Premium Licence. "Kamiji" and "Kamikin" are trademarks. The licence itself lists open items: the hand's base mesh came from Meshy AI and its terms "must permit the licences above before any public release"; Kamikin provenance rows say TODO; twelve mochi exports are git-ignored until cleared. <strong>Treat all of it as local use only until the owner clears provenance.</strong></p>
+<h3 id="15-how-it-connects-to-kosmos-and-agents">1.5 How it connects to Kosmos and agents<a class="headerlink" href="#15-how-it-connects-to-kosmos-and-agents" title="Link to this section">#</a></h3>
+<p>The GLB is copied into the engine; <code>kamiji/tools/mochi-export/export.mjs</code> turns engine mochi folders into GLBs. <strong>The control surface is small and suits us.</strong> Protocol v1 is one JSON object, <code>{"v":1,"agent":"hermes-1","status":"running","mood":"thinking","color":"#4aa8ff","emote":"sparkle","ttl":5000}</code>, with statuses <code>idle running paused waiting finished error stuck</code>, eight moods, 15 emotes, a JSON Schema and a mapping table. <code>integrations/mcp/server.js</code> exposes it over stdio to a loopback bridge; its README says it works end to end in headless Chrome with SwiftShader WebGL [V]. A desktop Characters app can take the same message over our hub in under 200 bytes. The engine's own MCP surface (<code>scene_load</code>, <code>sim_step</code>, <code>screenshot</code>, hashes) addresses scenes, not Kamiji state, and <code>agent-native.md</code> still lists headless <code>screenshot</code> as a gap [V].</p>
+<h2 id="2-the-characters-in-the-os">2. The characters in the OS<a class="headerlink" href="#2-the-characters-in-the-os" title="Link to this section">#</a></h2>
+<p>Goal: a window showing a skinned character or hand with clips, poses, expressions, pointer interaction and a screenshot, on x86 TempleOS under QEMU and on Aiwnios, from one HolyC source.</p>
+<h3 id="21-viewport-and-scene-today-v-desk303-appshc">2.1 Viewport and Scene today [V <code>desk3/03-apps.HC</code>]<a class="headerlink" href="#21-viewport-and-scene-today-v-desk303-appshc" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Viewport</strong> (app 1, lines 38 to 69): 8 cube vertices, 12 edges, F64 <code>Sin/Cos</code>, perspective divide, <code>Line()</code>. Two cubes and a label. No mesh loader, depth, fill or input.</li>
+<li><strong>Scene</strong> (app 3, lines 80 to 96): static text and a tick counter. No state link.</li>
+<li>Dispatch is <code>AppBody</code>; <code>NA</code> is 16 and ids 14 and 15 are Weather and Music, so a new app needs <code>NA</code> raised [V <code>01-core.HC:26</code>]. Other agents have uncommitted edits in <code>01-core.HC</code>, <code>02-ui.HC</code>, <code>03-apps.HC</code>, <code>04-main.HC</code>; follow the Clock-suite pattern: new files plus one-line hooks.</li>
+<li>Available: <code>Line</code>, <code>RRFill</code>, <code>Disk</code>, <code>Copy32</code>, clip rectangles, a 32-bit framebuffer, boot-image assets (<code>KSICONS.BIN</code>, <code>KSFONT2.BIN</code>), the style editors [V].</li>
+</ul>
+<h3 id="22-cost-model">2.2 Cost model<a class="headerlink" href="#22-cost-model" title="Link to this section">#</a></h3>
+<p>Measured numbers from <code>holyc-improvement-analysis.md</code> [R]: simple integer op 1 to 2 ns; call 9 to 12 ns; pixel by pointer walk 3 ns; <strong>F64 on x87 67 ns per multiply-add</strong>; 16.16 fixed point 2 ns. The brief's "30 ns per op" matches neither integers (1 to 3) nor F64 (67); I use measured values and show a 30 ns pessimistic case. Aiwnios: window drag costs 1.5 ms there against 5.7 ms on QEMU, about 4x [R <code>aiwnios/README.md</code>]. I found no repo evidence for 40 to 60x; I assume 4x to 10x for compute [E]. Aiwnios has no inline asm, U64 multiply truncates to 32 bits, F64 is IEEE not x87; <strong>only fixed-point integer maths gives identical pixels on both builds</strong> [R].</p>
+<p>Unit costs, x86 TCG, fixed point [E]: vertex (two-bone skin, project, 2 divides) 150 ns; triangle (cull, edge setup, 3 calls) 300 ns; pixel (flat span, z compare) 5 ns, 8 ns with three-band shade.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Scene</th>
+<th>Compute x1</th>
+<th>With 3x margin</th>
+<th>At 30 ns/op (about 15x)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hand decimated to 1,500 tris, 800 verts, 140x140 px</td>
+<td>0.7 ms</td>
+<td><strong>2 ms</strong></td>
+<td>30 ms (30 fps)</td>
+</tr>
+<tr>
+<td>Pip decimated to 3,000 tris, 192x192</td>
+<td>1.6 ms</td>
+<td>5 ms</td>
+<td>70 ms (14 fps)</td>
+</tr>
+<tr>
+<td>Pip as exported, 10,818 tris, 256x256</td>
+<td>4.5 ms</td>
+<td>14 ms (40 fps)</td>
+<td>200 ms</td>
+</tr>
+<tr>
+<td>Hand as exported, 41,744 tris</td>
+<td>17 ms</td>
+<td>50 ms (20 fps)</td>
+<td>seconds</td>
+</tr>
+</tbody>
+</table></div>
+<p>Reading: on x86 the compute of a decimated character is small beside the desktop's own present cost (5.6 ms for a window drag [R]). The un-decimated hand is out of reach on x86, so every guest-drawn route needs decimated rigs. On Aiwnios the same code should be 4x to 10x cheaper, so a 10k-triangle mochi at 60 fps is plausible [E]. Palette: toon shading needs 3 or 4 tones per material, so 8 to 16 entries per character; tint becomes a palette swap at no per-pixel cost.</p>
+<h3 id="23-routes">2.3 Routes<a class="headerlink" href="#23-routes" title="Link to this section">#</a></h3>
+<p><strong>R1. Host engine renders, guest shows tiles.</strong> <code>kosmos-app --glb kamiji.glb --clip Wave --at T --screenshot out.png</code> (<code>KOSMOS_SHOT_SIZE=WxH</code>) renders the real toon look [V]. The tile channel exists: <code>apps-host/stream.py</code> sends <code>EA_TILE</code> (x,y,w,h; enc 0 = 16-colour palette with RLE, two pixels a byte; enc 1 = RGB565 RLE) and takes <code>EA_INPUT</code> back, lockstep with an ACK per chunk [V].
+- Bandwidth at 16 KB/s: a raw 256x256 4-bpp frame is 32 KB, 2 s. Toon frames are flat; I guess 4 to 8 KB after RLE [E], so 2 to 4 fps full frame, about 8 fps for a 128x128 dirty rect (2 KB). Our notes quote 47 KB/s, unreproduced, which triples that. Input round trip 100 to 250 ms.
+- Aiwnios: each host call is a <code>KsExec</code> process spawn (<code>hostlink-aiw.HC</code>) [V]. Better: the host rewrites a frame file in <code>T:/kosmos</code> and the guest reads it per frame; 8 KB for a 128x128 tile, no serial limit [I].
+- Effort M (needs a <code>kosmos-app</code> build, a render daemon, glue). Fidelity highest. Not replay-hashed. Licence MIT OR Apache-2.0.</p>
+<p><strong>R2. Host bake to sprite sheets the guest plays.</strong> Render turntables and clips offline (Blender is installed at <code>/opt/homebrew/bin/blender</code>, or <code>kosmos-app --screenshot</code>), quantise to a 16-colour palette per sprite, pack <code>KSCHAR.BIN</code>, blit with palette-swap tint.
+- Sizes [E]: 96x96 at 4 bpp is 4.6 KB raw, about 1.5 KB RLE. Hand, 8 yaw x 14 poses = 112 sprites, about 170 KB, plus 8 expression decals. Pip, 3 clips x 12 frames x 8 yaw = 288 frames, about 430 KB. Boot image: free; channel at 16 KB/s: 10 s once.
+- Cost per frame: one blit. Interaction: choose state, rotate by sprite, play a clip; no free camera, no new pose mixes. Kamiji's own protocol is discrete states (mood, status, emote), which map one to one onto sprites.
+- <strong>Byte-identical on x86 and Aiwnios</strong>, trivially hashable. Effort S for the hand, M for a library. Derived art stays CC BY-NC.</p>
+<p><strong>R3. Native skinned-mesh rasteriser in HolyC.</strong> Decimated rigs (hand about 1,500 tris, Pip about 3,000) in a compact binary (section 5), 16.16 fixed point, linear blend skinning with at most two bones per vertex, 16-bit z-buffer (painter's sort fails on overlapping fingers and hull outlines), flat or three-band toon shading, outline by drawing back faces pushed along the normal in ink colour (the trick in <code>kamiji-toon.ts</code>), no texture mapping (face as vertex colour plus decal sprites).
+- Realistic: hand at 160x160, 30 to 60 fps on x86; Pip at 192x192, 25 to 40 fps on x86, 60 on Aiwnios [E]. Texturing about doubles the pixel term; skip it.
+- Free orbit camera, any pose blend, finger curls from the same tables as Kamiji, picking with an id buffer. Integer-only code is bit-identical on both builds and <code>aiwnios/golden.py</code>, <code>kernel-test.py</code> can check it [R].
+- Effort L: rasteriser about 400 lines (M), skin and clip player (M), decimation and converter (M). Risks: no <code>continue</code>, 10 ns calls, locals not zeroed on Aiwnios; use <code>kslint.py</code>.</p>
+<p><strong>R4. Engine sim/pose core as <code>no_std</code> in the guest.</strong> <code>engine-on-templeos.md</code> ran a Rust <code>.BIN</code> that matched host hashes at 25x slower [R], but for a hash and a float loop only; no engine crate was compiled for bare metal. Kamiji's pose logic is not in Rust, the engine hand rig is a different skeleton, and nothing here draws. Porting 14 curl tables to HolyC integers is cheaper. Aiwnios cannot load x86 <code>.BIN</code>s. Effort L, value low.</p>
+<p><strong>R5. Aiwnios in-process C rasteriser.</strong> Register one native through <code>PrsAddSymbol</code> in <code>aiwnios-sdl32.patch</code>, as <code>KsPresentRect</code> and <code>KsExec</code> are [V]. A 43k-triangle hand at 60 fps is easy, but Aiwnios only. Effort M. Add after R3, as an optional power viewer.</p>
+<p><strong>R6. Kamiji's web component in host Chromium, shown as tiles.</strong> <code>&lt;kamiji-avatar&gt;</code> needs only an import map for three.js, serves from loopback, and its MCP e2e already runs in headless Chrome with SwiftShader [V]. <code>docs/web-apps.md</code> routes WebGL through tiles and plans an <code>appd web run</code> runner (not built) [V]. The avatar is 64 to 128 px, so a dirty rect is about 1 to 2 KB [E]. Gives the real Kamiji (all expressions, emotes, poses, shapes, protocol) with no guest rendering. Latency 100 to 200 ms; serial limits motion on x86. Effort S to M once the runner exists. Three.js is MIT.</p>
+<h3 id="24-ranking">2.4 Ranking<a class="headerlink" href="#24-ranking" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Route</th>
+<th>Effort</th>
+<th>Perf</th>
+<th>Fidelity</th>
+<th>Interaction</th>
+<th>Parity</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>R2 bake</strong></td>
+<td>S to M</td>
+<td>trivial</td>
+<td>engine toon look, fixed views</td>
+<td>state, rotate</td>
+<td>identical bytes</td>
+<td>first, and the permanent fallback</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>R3 HolyC rasteriser</strong></td>
+<td>L</td>
+<td>30 to 60 fps small window (x86 est.), faster on Aiwnios</td>
+<td>flat toon, decimated</td>
+<td>free camera, any pose</td>
+<td>identical</td>
+<td>product path; MVP in a week</td>
+</tr>
+<tr>
+<td>3</td>
+<td>R6 web component</td>
+<td>S to M</td>
+<td>2 to 8 fps x86 serial</td>
+<td>the real Kamiji</td>
+<td>full, laggy</td>
+<td>same decoder</td>
+<td>best "real Kamiji" if the runner lands</td>
+</tr>
+<tr>
+<td>4</td>
+<td>R1 engine tiles</td>
+<td>M</td>
+<td>same limits</td>
+<td>highest</td>
+<td>full, laggy</td>
+<td>same decoder</td>
+<td>use as the baker; live later</td>
+</tr>
+<tr>
+<td>5</td>
+<td>R5 C ABI</td>
+<td>M</td>
+<td>native</td>
+<td>any</td>
+<td>full</td>
+<td>Aiwnios only</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>6</td>
+<td>R4 <code>no_std</code> core</td>
+<td>L</td>
+<td>25x slower</td>
+<td>none</td>
+<td>none</td>
+<td>x86 only</td>
+<td>skip</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-proposed-characters-app">3. Proposed "Characters" app<a class="headerlink" href="#3-proposed-characters-app" title="Link to this section">#</a></h2>
+<p>New file <code>desk3/03m-characters.HC</code>, id 16 (<code>NA</code> to 17).
+- Left list: Kamiji hand, Pip, Hana, Kumo, Rubby. Centre viewport. Right inspector.
+- Controls: drag for yaw and pitch; 14 pose buttons; 8 expression buttons; clip list (Idle, Wave, Think, Celebrate; Pip's nine); tint (the style's seven accents plus Kamiji yellow <code>#ffd23f</code>); emote chips; Screenshot writes a BMP to <code>B:/</code> for the host to copy; hover makes the hand wave.
+- Milestones: M0 sprite player (R2); M1 rasteriser (R3) with sprites as fallback and as the test oracle (silhouette comparison); M2 a <code>kamiji</code> hub service speaking protocol v1 so an agent sets mood/status/emote over MCP, also feeding the status bar.
+- Reuses Viewport's <code>Line</code> and projection for a wireframe toggle, Scene's tick as the clip clock, HostLink for protocol messages (reply cap <code>HL_MAXRX</code> 12,000 bytes) [V].</p>
+<h2 id="4-the-kamiji-ui-kit">4. The Kamiji UI kit<a class="headerlink" href="#4-the-kamiji-ui-kit" title="Link to this section">#</a></h2>
+<p>What exists [V]:
+- <code>kamiji/prototypes/ui-port</code> is a <strong>prototype pipeline</strong>: JSON-schema contracts, <code>--lf-*</code> tokens (light and dark), five Lit components (<code>lf-button</code>, <code>lf-badge</code>, <code>lf-card</code>, <code>lf-stat-card</code>, <code>lf-empty-state</code>) plus 39 icons, a conformance runner, a Rust adapter folder. Its README: "Not a release". The roadmap says licence "provisional MIT", IP clearance open.
+- <code>apps/os-styles/kamiji-ui/</code> is our vendored copy with three local token patches and the note "local prototyping only: do not publish". Our docs already say "do not ship until cleared".
+- The tokens are <strong>Longformer</strong>'s. Our desk already has "Longformer light" and "Longformer dark" (<code>ks_sn</code> in <code>01-core.HC</code>), and <code>apps/os-styles/styles.css</code> has nine styles. The values differ: styles.css accent <code>#234184</code>, ui-port accent <code>#3b6fe0</code>, desk3 slot 1 <code>0x1F4FD8</code>. "Kamiji UI" is a third blue, not the one we ship.</p>
+<p>Mapping to desk3's 16 slots (<code>ink accent ok teal bad purple warn surface muted accent2 card border shadow dock amber page</code>): <code>text-primary</code>/<code>secondary</code> to ink/muted; <code>accent</code>/<code>accent-hover</code> to accent/accent2; <code>success</code>/<code>danger</code>/<code>warning</code> to ok/bad/warn; <code>surface-1</code>/<code>2</code>/<code>canvas</code> to card/surface/page; <code>border-default</code> to border; radii 6/8/12/16 to <code>ks_rad</code> and WinStyle geometry.</p>
+<p>Missing: a <strong>toon "sticker" look</strong> (bold ink outline, <code>#ffd23f</code>, chubby corners) that the characters carry but the kit does not define [I: site CSS not audited]; hover, focus and dark states are not compared in the prototype; no table, tabs or dialog.</p>
+<p>Effort: <strong>S</strong> to add colours as a sixth row (<code>ks_pal</code>, <code>ks_sn</code>, <code>ks_kind</code>, <code>ks_rad</code>, <code>ks_glass</code>, and every table sized by <code>NS</code>; grep first, <code>ks_wallp[NS]</code> and icon defaults are among them). Cheaper and in line with the other agents' work: author it as data in the Window Style editor (geometry, title bar, nine colour schemes; Export writes a <code>ws1 ...</code> line and <code>B:/WINSTYLE.TXT</code>) and the Icon Style editor, imported as a theme with no HolyC change [V <code>window-style-editor.md</code>, <code>icon-style-editor.md</code>]. Components: <code>lf-badge</code>, <code>lf-stat-card</code>, <code>lf-empty-state</code> are about 40 lines each in HolyC [E]; the widget kit has button, toggle, radio, slider. Icons are Lucide (ISC) and Feather (MIT), already in <code>KSICONS.BIN</code>. Do not publish while the kit is "provisional".</p>
+<h2 id="5-asset-pipeline">5. Asset pipeline<a class="headerlink" href="#5-asset-pipeline" title="Link to this section">#</a></h2>
+<h3 id="51-conversion">5.1 Conversion<a class="headerlink" href="#51-conversion" title="Link to this section">#</a></h3>
+<p>Host tool <code>scripts/kamiji_pack.py</code> (Python 3, numpy and Pillow are present):
+1. Read GLB JSON and BIN chunks: positions, normals, joints, weights, indices, inverse binds, node tree, animation samplers.
+2. <strong>Decimate</strong> hand 41,744 to about 1,500 tris, Pip 10,818 to about 3,000, with Blender's Decimate modifier headless (<code>blender -b -P</code>) or quadric collapse; keep top two bone weights, renormalised to 8 bits.
+3. Quantise positions to I16 in the bounding box; vertex colour to a palette index; no UVs.
+4. Resample clips to 30 Hz; rotations as I16 quaternions; translation only for the root.
+5. Face: eight expressions become 2D decals instead of 22 morph targets; hand <code>shapeSphere/Cube</code> become two baked vertex sets.</p>
+<h3 id="52-format-kmsh-little-endian">5.2 Format <code>KMSH</code> (little endian)<a class="headerlink" href="#52-format-kmsh-little-endian" title="Link to this section">#</a></h3>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>u32 &#x27;KMSH&#x27;  u16 version  u16 flags
+u16 nVerts  u16 nTris  u8 nJoints  u8 nPal  u8 nClips  u8 nMorph
+i16 bbox[6]  u16 off_pal  u16 off_vert  u32 off_idx  u32 off_bind  u32 off_clips  u32 off_end
+pal:   nPal x (u8 r,g,b)
+vert:  i16 x,y,z | u8 bone0,bone1 | u8 w0 | u8 colour      (12 bytes padded)
+idx:   nTris x (u16 a,b,c)
+bind:  nJoints x (u8 parent, i16 t[3], i16 q[4])
+clip:  name[12] | u16 nFrames | u8 fps | nFrames x nJoints x i16 q[4] (+ root i16 t[3])</code></pre></figure>
+<p>Budgets [E]: hand (800 verts, 1,500 tris, 18 joints, 4 clips x 60 frames) about <strong>55 KB</strong>; Pip (1,700 verts, 3,000 tris, 15 joints, 9 clips) about <strong>70 KB</strong>; a 14-character roster about 1 MB. Heap is a non-issue (<code>-m 1024M</code>; the desktop's 2880x1800 buffers are about 20.7 MB each [R]). Pip's six face PNGs (3 to 4 KB) become 64x64 decals at 8 colours, about 500 bytes each.</p>
+<h3 id="53-getting-it-in">5.3 Getting it in<a class="headerlink" href="#53-getting-it-in" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Boot image</strong> (precedent <code>KSICONS.BIN</code>, <code>KSFONT2.BIN</code>, built by <code>gen-icons.py</code>, <code>gen-font2.py</code>): no channel cost; best for the default hand and Pip (about 130 KB).</li>
+<li><strong>Channel</strong> for the long tail: <code>scripts/send-to-vm.sh</code> file push; 70 KB takes about 5 s at 16 KB/s, 1.5 s at 47 KB/s. Hub replies cap at 12,000 bytes, so use the file push, not <code>HostCall</code>.</li>
+<li><strong>Aiwnios</strong>: read from <code>T:/kosmos/</code>, no channel.</li>
+<li>LFS: the engine tracks <code>*.glb</code> in LFS; <code>assets/models</code> is 252 MB, <code>assets/human</code> 612 MB, <code>assets/kamikin</code> 87 MB (mochi 14, planet 72). The kamiji repo's GLBs are plain files on disk. The packer reads from the kamiji repo and never touches LFS.</li>
+</ul>
+<h2 id="6-phased-plan-with-gates">6. Phased plan with gates<a class="headerlink" href="#6-phased-plan-with-gates" title="Link to this section">#</a></h2>
+<h3 id="day-1-prototype-r2-hand-turntable">Day 1 prototype: R2 hand turntable<a class="headerlink" href="#day-1-prototype-r2-hand-turntable" title="Link to this section">#</a></h3>
+<p><strong>Pick R2 over the Viewport wireframe</strong>, on evidence: (a) Viewport's F64 cubes already run, while wireframing a 41,744-triangle mesh needs decimation first, and that step pays off later in week 1 anyway; (b) a wireframe hand is not recognisably Kamiji, a tinted toon sprite is; (c) R2 has no frame-time risk and is byte-identical on both builds, which our golden tooling can check.</p>
+<ol>
+<li><code>scripts/kamiji_bake.py</code> plus a Blender helper: <code>blender -b -P ...</code> on <code>/Users/paulbloch/Documents/github/kamiji/assets/kamiji.glb</code>; 24 yaw views of Idle and 8 frames of Wave; 96x96, transparent, Workbench with flat light [I: untried; EEVEE may need a GPU].</li>
+<li>Quantise to 16 colours (Pillow), RLE-pack into <code>assets/KSCHAR.BIN</code> using <code>stream.py</code> enc 0.</li>
+<li><code>desk3/03m-characters.HC</code>: loader, <code>SpriteBlit(x,y,id,tint)</code>, drag-to-rotate, Idle/Wave buttons; hook as app 16.</li>
+<li>Test with <code>scripts/snap.sh</code> and screenshots to <code>shots/characters-*.png</code>; Aiwnios via <code>aiwnios/run-desk.sh</code>; hash both.</li>
+</ol>
+<p>Gate: smooth rotation by mouse on both builds, tint swap works, identical sprite decode, under 3 ms a frame. Approvals needed: running Blender (installed, no download), a new 120 KB binary, the <code>NA</code> raise and <code>AppBody</code> hook in shared files. No LFS, no cargo.</p>
+<h3 id="week-1-mvp-r3-on-hand-and-pip">Week 1 MVP: R3 on hand and Pip<a class="headerlink" href="#week-1-mvp-r3-on-hand-and-pip" title="Link to this section">#</a></h3>
+<p><code>scripts/kamiji_pack.py</code> and <code>KMSH</code> writer; <code>desk3/03n-raster.HC</code> (fixed-point rasteriser, z-buffer, skin, clip player); the app prefers the mesh and falls back to sprites; protocol v1 through the hub; screenshot button. Gate: hand at 30 fps or better and Pip at 25 fps or better on x86 QEMU in a 192x192 viewport; identical frame hash on x86 and Aiwnios for a scripted clip; <code>kslint.py</code> clean; silhouettes match the bake within tolerance.</p>
+<h3 id="three-months">Three months<a class="headerlink" href="#three-months" title="Link to this section">#</a></h3>
+<p>All 14 mochi and the rubbernose cast from a character folder (manifest shape of <code>applications-folder.md</code>), expression decals, emotes, the 14 poses as a data file ported from the TypeScript tables, hover reactions, the status-bar mood driven by agents over MCP, optional R6 or R1 live viewer on the web-app runner, a Kamiji theme imported through the style editors. Gate: owner sign-off on licences and provenance before anything leaves the machine.</p>
+<h3 id="risks">Risks<a class="headerlink" href="#risks" title="Link to this section">#</a></h3>
+<p>Licence and provenance (Meshy, mochi) block any release; shared-file collisions with other agents; speeds are modelled, the day-one blit is the first real number; decimating a 26k-vertex chubby hand may lose fingers; headless Blender on macOS may need a GPU, with <code>kosmos-app --screenshot</code> (a cargo build, so approval) as fallback; avoid F64 in the rasteriser.</p>
+<h2 id="7-verified-versus-inferred">7. Verified versus inferred<a class="headerlink" href="#7-verified-versus-inferred" title="Link to this section">#</a></h2>
+<p><strong>Verified:</strong> repo list, commit counts, stacks; GLB statistics; poses, expressions, emotes living in TypeScript; protocol v1 and MCP bridge as documented; licence texts and caveats; the vendored kit and its patches; desk3 style tables (<code>NS</code> 5, <code>NA</code> 16); Viewport and Scene source; <code>stream.py</code> encodings; the <code>PrsAddSymbol</code> pattern; Blender, numpy, Pillow present; <code>kosmos-app</code> flags; HolyC micro-benchmarks as cited.</p>
+<p><strong>Inferred or estimated:</strong> that Projects' "Kamiji" means the characters (85 percent); every rasteriser cost and frame rate; RLE sizes; Aiwnios 4x to 10x speed-up (the brief's 40 to 60x is in no repo doc); the Aiwnios frame-file route; headless Blender rendering; that the UI kit lacks a toon look (site CSS not read); 47 KB/s serial (reported) against the brief's 16 KB/s.</p>
+<p><strong>Not examined:</strong> <code>kamiji/site</code> CSS, <code>integrations/openclaw-os</code>, <code>longformer</code>, <code>core-design-library</code>, the Kamikin game, <code>prototypes/ui-port/rust</code>.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/artcraft-apps-on-templeos/index.html" rel="prev"><span>Previous</span>ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a><a class="next" href="../../docs/plan-review/index.html" rel="next"><span>Next</span>Review of the HolyC-native apps plan</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-what-kamiji-is">1. What Kamiji is</a><ul><li><a href="#11-answer">1.1 Answer</a></li><li><a href="#12-repo-map-under-userspaulblochdocumentsgithub">1.2 Repo map (under /Users/paulbloch/Documents/github/)</a></li><li><a href="#13-the-assets">1.3 The assets</a></li><li><a href="#14-licences-v-kamijilicensemd-assetsprovenancemd">1.4 Licences [V kamiji/LICENSE.md, assets/PROVENANCE.md]</a></li><li><a href="#15-how-it-connects-to-kosmos-and-agents">1.5 How it connects to Kosmos and agents</a></li></ul></li><li><a href="#2-the-characters-in-the-os">2. The characters in the OS</a><ul><li><a href="#21-viewport-and-scene-today-v-desk303-appshc">2.1 Viewport and Scene today [V desk3/03-apps.HC]</a></li><li><a href="#22-cost-model">2.2 Cost model</a></li><li><a href="#23-routes">2.3 Routes</a></li><li><a href="#24-ranking">2.4 Ranking</a></li></ul></li><li><a href="#3-proposed-characters-app">3. Proposed &quot;Characters&quot; app</a></li><li><a href="#4-the-kamiji-ui-kit">4. The Kamiji UI kit</a></li><li><a href="#5-asset-pipeline">5. Asset pipeline</a><ul><li><a href="#51-conversion">5.1 Conversion</a></li><li><a href="#52-format-kmsh-little-endian">5.2 Format KMSH (little endian)</a></li><li><a href="#53-getting-it-in">5.3 Getting it in</a></li></ul></li><li><a href="#6-phased-plan-with-gates">6. Phased plan with gates</a><ul><li><a href="#day-1-prototype-r2-hand-turntable">Day 1 prototype: R2 hand turntable</a></li><li><a href="#week-1-mvp-r3-on-hand-and-pip">Week 1 MVP: R3 on hand and Pip</a></li><li><a href="#three-months">Three months</a></li><li><a href="#risks">Risks</a></li></ul></li><li><a href="#7-verified-versus-inferred">7. Verified versus inferred</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

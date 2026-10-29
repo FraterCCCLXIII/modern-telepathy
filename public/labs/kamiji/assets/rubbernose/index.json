@@ -1,0 +1,3425 @@
+{
+ "format": 1,
+ "license": "CC BY-NC 4.0, see LICENSE.md",
+ "kit": "Rubbernose",
+ "characters": [
+  {
+   "id": "rubbernose-rubby",
+   "name": "Rubby",
+   "species": "eraser",
+   "persona": "A rubber eraser who rubs out mistakes, mostly other people's.",
+   "body": "box",
+   "tint": "#f4a3a8",
+   "height": 1.3,
+   "glb": "rubbernose-rubby.glb",
+   "facesDir": "rubbernose-rubby.faces",
+   "bytes": 1543988,
+   "vertices": 8868,
+   "triangles": 17386,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Accent",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-tick",
+   "name": "Tick",
+   "species": "alarm clock",
+   "persona": "An alarm clock who is never late and always early.",
+   "body": "clock",
+   "tint": "#2f63c9",
+   "height": 1.3,
+   "glb": "rubbernose-tick.glb",
+   "facesDir": "rubbernose-tick.faces",
+   "bytes": 1575476,
+   "vertices": 9236,
+   "triangles": 18082,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Accent",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-fizz",
+   "name": "Fizz",
+   "species": "soda can",
+   "persona": "A soda can full of bubbly ideas.",
+   "body": "can",
+   "tint": "#e8452c",
+   "height": 1.3,
+   "glb": "rubbernose-fizz.glb",
+   "facesDir": "rubbernose-fizz.faces",
+   "bytes": 1552220,
+   "vertices": 8796,
+   "triangles": 17226,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Accent",
+    "Trim",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-sunny",
+   "name": "Sunny",
+   "species": "sunflower",
+   "persona": "A sunflower who turns to face whoever is talking.",
+   "body": "flower",
+   "tint": "#f6b21b",
+   "height": 1.3,
+   "glb": "rubbernose-sunny.glb",
+   "facesDir": "rubbernose-sunny.faces",
+   "bytes": 1521072,
+   "vertices": 9508,
+   "triangles": 18554,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Accent",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-joe",
+   "name": "Joe",
+   "species": "coffee mug",
+   "persona": "A coffee mug, warm, a bit jittery.",
+   "body": "mug",
+   "tint": "#8a5a3c",
+   "height": 1.3,
+   "glb": "rubbernose-joe.glb",
+   "facesDir": "rubbernose-joe.faces",
+   "bytes": 1550512,
+   "vertices": 8868,
+   "triangles": 17370,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Accent",
+    "Trim",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-puddin",
+   "name": "Puddin",
+   "species": "pudding",
+   "persona": "A pudding who is sweet on everyone.",
+   "body": "blob",
+   "tint": "#c98b5a",
+   "height": 1.3,
+   "glb": "rubbernose-puddin.glb",
+   "facesDir": "rubbernose-puddin.faces",
+   "bytes": 1758560,
+   "vertices": 12420,
+   "triangles": 24490,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Accent",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-bulby",
+   "name": "Bulby",
+   "species": "light bulb",
+   "persona": "A light bulb with a bright idea about every ten seconds.",
+   "body": "prop",
+   "tint": "#fff0a0",
+   "height": 1.3,
+   "glb": "rubbernose-bulby.glb",
+   "facesDir": "rubbernose-bulby.faces",
+   "bytes": 1560416,
+   "vertices": 9108,
+   "triangles": 17770,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "point",
+    "cheer"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Metal",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-rocko",
+   "name": "Rocko",
+   "species": "rocket",
+   "persona": "A rocket who is always about to take off and never quite does.",
+   "body": "prop",
+   "tint": "#f1f4f8",
+   "height": 1.3,
+   "glb": "rubbernose-rocko.glb",
+   "facesDir": "rubbernose-rocko.faces",
+   "bytes": 1574424,
+   "vertices": 9402,
+   "triangles": 18312,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "run",
+    "cheer"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Glass",
+    "Red",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-dinger",
+   "name": "Dinger",
+   "species": "bell",
+   "persona": "A brass bell who rings in every news item twice.",
+   "body": "prop",
+   "tint": "#f5c542",
+   "height": 1.3,
+   "glb": "rubbernose-dinger.glb",
+   "facesDir": "rubbernose-dinger.faces",
+   "bytes": 1520508,
+   "vertices": 8360,
+   "triangles": 16354,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "charleston",
+    "wave"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Bronze",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-candi",
+   "name": "Candi",
+   "species": "birthday cake",
+   "persona": "A birthday cake who throws a party for every day of the week.",
+   "body": "prop",
+   "tint": "#f7b2c4",
+   "height": 1.3,
+   "glb": "rubbernose-candi.glb",
+   "facesDir": "rubbernose-candi.faces",
+   "bytes": 1603632,
+   "vertices": 9286,
+   "triangles": 18178,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "cheer",
+    "charleston"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Flame",
+    "Red",
+    "White",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-bowie",
+   "name": "Bowie",
+   "species": "gift box",
+   "persona": "A gift box who cannot keep what is inside a secret.",
+   "body": "prop",
+   "tint": "#ff5a8a",
+   "height": 1.3,
+   "glb": "rubbernose-bowie.glb",
+   "facesDir": "rubbernose-bowie.faces",
+   "bytes": 1588776,
+   "vertices": 9212,
+   "triangles": 18042,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "thumbs-up",
+    "wave"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Gold",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-binky",
+   "name": "Binky",
+   "species": "trash can",
+   "persona": "A trash can who takes everybody's rubbish and still smiles.",
+   "body": "prop",
+   "tint": "#9fb3c8",
+   "height": 1.3,
+   "glb": "rubbernose-binky.glb",
+   "facesDir": "rubbernose-binky.faces",
+   "bytes": 1510268,
+   "vertices": 8218,
+   "triangles": 16074,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "shrug",
+    "strut"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-lockie",
+   "name": "Lockie",
+   "species": "padlock",
+   "persona": "A padlock who keeps every secret and tells a few anyway.",
+   "body": "prop",
+   "tint": "#f2b93b",
+   "height": 1.3,
+   "glb": "rubbernose-lockie.glb",
+   "facesDir": "rubbernose-lockie.faces",
+   "bytes": 1549476,
+   "vertices": 8772,
+   "triangles": 17186,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "point",
+    "shrug"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-appy",
+   "name": "Appy",
+   "species": "apple",
+   "persona": "An apple a day, delivered by Appy in person.",
+   "body": "prop",
+   "tint": "#e8452c",
+   "height": 1.3,
+   "glb": "rubbernose-appy.glb",
+   "facesDir": "rubbernose-appy.faces",
+   "bytes": 1544576,
+   "vertices": 8718,
+   "triangles": 16986,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "wave",
+    "thumbs-up"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Leaf",
+    "Wood",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-puff",
+   "name": "Puff",
+   "species": "cloud",
+   "persona": "A cloud who drifts in, rains on nobody and waves bye.",
+   "body": "prop",
+   "tint": "#eaf4ff",
+   "height": 1.3,
+   "glb": "rubbernose-puff.glb",
+   "facesDir": "rubbernose-puff.faces",
+   "bytes": 1574136,
+   "vertices": 8964,
+   "triangles": 17578,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "idle",
+    "wave"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  },
+  {
+   "id": "rubbernose-champ",
+   "name": "Champ",
+   "species": "trophy",
+   "persona": "A trophy who has already won and mentions it constantly.",
+   "body": "prop",
+   "tint": "#f5c542",
+   "height": 1.3,
+   "glb": "rubbernose-champ.glb",
+   "facesDir": "rubbernose-champ.faces",
+   "bytes": 1557664,
+   "vertices": 8852,
+   "triangles": 17242,
+   "bones": [
+    "root",
+    "body",
+    "arm_L_0",
+    "arm_L_1",
+    "arm_L_2",
+    "arm_L_3",
+    "arm_L_4",
+    "arm_L_5",
+    "arm_L_6",
+    "arm_L_7",
+    "arm_L_8",
+    "arm_L_9",
+    "arm_R_0",
+    "arm_R_1",
+    "arm_R_2",
+    "arm_R_3",
+    "arm_R_4",
+    "arm_R_5",
+    "arm_R_6",
+    "arm_R_7",
+    "arm_R_8",
+    "arm_R_9",
+    "leg_L_0",
+    "leg_L_1",
+    "leg_L_2",
+    "leg_L_3",
+    "leg_L_4",
+    "leg_L_5",
+    "leg_L_6",
+    "leg_L_7",
+    "leg_L_8",
+    "leg_L_9",
+    "leg_R_0",
+    "leg_R_1",
+    "leg_R_2",
+    "leg_R_3",
+    "leg_R_4",
+    "leg_R_5",
+    "leg_R_6",
+    "leg_R_7",
+    "leg_R_8",
+    "leg_R_9",
+    "hand_L",
+    "hand_R",
+    "shoe_L",
+    "shoe_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "label": "Idle bounce",
+     "duration": 2.0,
+     "fps": 24,
+     "frames": 48,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "strut",
+     "label": "Strut",
+     "duration": 0.8125,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 1.6,
+     "hands": [
+      "relaxed",
+      "relaxed"
+     ]
+    },
+    {
+     "name": "run",
+     "label": "Run",
+     "duration": 0.376,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 4.84,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "wave",
+     "label": "Wave",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "open"
+     ]
+    },
+    {
+     "name": "charleston",
+     "label": "Charleston",
+     "duration": 0.8333,
+     "fps": 24,
+     "frames": 20,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "jazz",
+      "jazz"
+     ]
+    },
+    {
+     "name": "cheer",
+     "label": "Cheer",
+     "duration": 0.625,
+     "fps": 24,
+     "frames": 16,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "fist"
+     ]
+    },
+    {
+     "name": "point",
+     "label": "Point",
+     "duration": 2.0944,
+     "fps": 24,
+     "frames": 51,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "point"
+     ]
+    },
+    {
+     "name": "shrug",
+     "label": "Shrug",
+     "duration": 2.618,
+     "fps": 24,
+     "frames": 63,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "open",
+      "open"
+     ]
+    },
+    {
+     "name": "thumbs-up",
+     "label": "Thumbs up",
+     "duration": 1.5708,
+     "fps": 24,
+     "frames": 38,
+     "loop": true,
+     "speed": 0.0,
+     "hands": [
+      "fist",
+      "thumbsUp"
+     ]
+    }
+   ],
+   "likes": [
+    "cheer",
+    "thumbs-up"
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "materials": [
+    "Clay",
+    "Wood",
+    "Arm",
+    "Leg",
+    "Glove",
+    "Shoe",
+    "Ink",
+    "face"
+   ],
+   "gestures": [
+    "L_open",
+    "L_fist",
+    "L_point",
+    "L_thumbsUp",
+    "L_jazz",
+    "R_open",
+    "R_fist",
+    "R_point",
+    "R_thumbsUp",
+    "R_jazz"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+Built-with rail (site/index.html, .tech-* rules in style.css). Brand marks remain trademarks of their owners; shown only to name the technology, no endorsement implied.
+
+Marks: vite, typescript, javascript, threedotjs, godotengine, playcanvas .svg = simple-icons 16.35.0 (CC0 1.0), copied unmodified, drawn in one ink colour via CSS mask.
+kosmos.svg = copy of site/img/kosmos-logo.svg (the Kosmos mark already used for "Powered by Kosmos"; Paul Bloch's own).
+
+Evidence (paths relative to repo root):
+Vite        - package.json devDependencies "vite": "8.0.16"; vite.config.examples.ts runs the examples (README.md: npx vite --config vite.config.examples.ts). Dev/build tooling of the repo (not shipped in src/).
+TypeScript  - package.json "typescript": "6.0.3", script "typecheck": "tsc --noEmit"; the library in src/*.ts(x) (main = src/index.ts).
+JavaScript  - the website and its modules are plain JS: site/main.js, site/effects.js, site/rail.js, site/libraries.js etc.; tools/mochi-to-glb/convert.mjs.
+Three.js    - package.json dependencies "three": "0.186.1" (+ @types/three); packages/kamiji-avatar peerDependencies three 0.186.1; site/index.html importmap loads three@0.186.1.
+Godot       - LINEAGE: src/kamiji-toon.ts header: outline "Ported from ... yakopop/apps/godot/shaders/ink.gdshader"; docs/kamikin-context.md: Kamikin has a Godot 4 slice (yakopop/apps/godot) and the Kosmos port; docs/history.md "Godot port slice"; site/kamikin/index.html "Engines: Godot slice, Kosmos engine port". Godot is not a dependency of this repo.
+PlayCanvas  - LINEAGE: src/kamiji-toon.ts header: toon ramp ported from yakopop/apps/world/src/render/toon.ts celShade and inkMesh.ts (the PlayCanvas web client of yakopop); docs/shader-effects-found.md lists those PlayCanvas files as origin; site/kosmos/index.html: "Yakopop's web client runs on PlayCanvas 2.23.0". PlayCanvas is not a dependency of this repo. (site/kosmos/index.html says no PlayCanvas logo was found at the time; simple-icons does carry one, CC0 for the file, trademark of PlayCanvas Ltd.)
+Kosmos      - LICENSE.md "Paul Bloch (Kosmos Engine)"; README.md lists Kosmos Engine (assets/models/kamiji/); tools/mochi-to-glb/convert.mjs follows kosmos-engine mochi_import.rs; docs/kosmos-context.md; site/kosmos/index.html; Kamikin characters authored for Kosmos Engine (LICENSE.md).

@@ -1,0 +1,326 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kamikin: learn Japanese with small friends</title>
+<meta name="description" content="Kamikin is a themed language learning and education game: mochi friends teach Japanese words, with Yakopop word-synced subtitles.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='7' width='26' height='22' rx='11' fill='%231f2a1c'/%3E%3Cellipse cx='11' cy='19' rx='2' ry='3' fill='%23f0efe7'/%3E%3Cellipse cx='21' cy='19' rx='2' ry='3' fill='%23f0efe7'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="kamikin.css">
+<link rel="stylesheet" href="chat.css">
+<link rel="stylesheet" href="../voice-settings.css">
+<link rel="stylesheet" href="../subtitles/subtitles.css">
+<link rel="stylesheet" href="../plush.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-logo" href="#top" aria-label="Kamikin home"><img src="../img/kamikin-game-logo-light.svg" alt="Kamikin" width="112" height="40"></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#game">The game</a>
+      <a href="#world">The world</a>
+      <a href="#meet">Characters</a>
+      <a href="#made">How made</a>
+      <a href="#learn">Learn</a>
+      <a href="#episodes">Episodes</a>
+      <a href="#use">Use them</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="ws" data-ws-menu>
+      <button type="button" class="ws-btn" id="ws-btn" aria-expanded="false" aria-controls="ws-menu">Workshops <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="ws-menu" id="ws-menu" hidden></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Learn Japanese<br>with small friends.</h1>
+      <p class="lead">Kamikin is a themed language learning and education game for ages 5 to 9. Mochi friends on a round meadow teach you Japanese words, and every line comes with Yakopop subtitles that show how each word reads and what it means.<br>Pick a friend on the right.</p>
+      <a class="powered" href="https://kosmos.computer" aria-label="Powered by Kosmos">
+        <span>Powered by</span>
+        <img src="../img/kosmos-logo.svg" alt="Kosmos" height="14">
+      </a>
+    </div>
+    <div class="stage">
+      <div class="viewer hero-viewer" id="hero-model" role="img" aria-label="Live 3D Kamikin character">
+        <canvas></canvas>
+        <p class="fallback" hidden></p>
+      </div>
+      <div class="shadow" aria-hidden="true"></div>
+      <p class="hero-cap" id="hero-cap" aria-live="polite"></p>
+      <div class="card controls" data-selector="rail" id="hero-rail" role="group" aria-label="Character controls"></div>
+      <button type="button" class="kc-open kc-open-rail" data-kc-open aria-haspopup="dialog" aria-label="Chat with this character"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" fill="currentColor"/></svg><span>Chat</span></button>
+      <ul class="hero-roster" id="hero-roster" aria-label="All Kamikin characters"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="game" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>The game</h2>
+      <p class="sub">Kamikin is the cute mochi universe for young kids, the first game of the Kosmica line. It is also a way to meet Japanese words, one at a time. Ages 5 to 9 and families; no combat and no way to fail.</p>
+    </div>
+    <div>
+      <ul class="list">
+        <li><h3>Walk a round world <span class="badge ok">in the port</span></h3><p>Radial gravity: the horizon curves and a lap is short. A chase camera follows you; Space jumps.</p></li>
+        <li><h3>Wake grey patches with words <span class="badge ok">in the port</span></h3><p>Five patches start grey, still asleep. Say or pick a patch's word and colour comes back in a ring. A kamikin buds off whatever woke.</p></li>
+        <li><h3>Befriend, in four steps <span class="badge ok">in the port</span></h3><p>Hello, snack, play, nap. Then the friend follows you. Pip, the guide, walks with you from the start.</p></li>
+        <li><h3>Kamikin Book and decorating <span class="badge ok">in the port</span></h3><p>B opens the book of friends. Eight decor pieces (a cushion, a picnic mat, a little house and more) are gifts from woken patches. There is no shop and no money.</p></li>
+        <li><h3>Songs and the Lantern Festival <span class="badge plan">prototype</span></h3><p>Song night and the festival run as show stretches with sound, but the film's stages and cast are not drawn yet.</p></li>
+        <li><h3>Season 1: Lantern Village and seven episodes <span class="badge plan">planned</span></h3><p>A village hub with a station, cafe, bakery and grocery as blockout interiors, and seven short episodes. This is a design document, not a shipped season.</p></li>
+      </ul>
+      <dl class="facts" aria-label="Game facts">
+        <div><dt>Genre</dt><dd>Cozy friendship and word play</dd></div>
+        <div><dt>Audience</dt><dd>Ages 5 to 9, rated kids</dd></div>
+        <div><dt>Engines</dt><dd>Godot slice, Kosmos engine port</dd></div>
+        <div><dt>Status</dt><dd>Prototype, not public</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="wrap shots" aria-label="Screenshots of the game">
+    <figure><img src="img/game-hana-dialogue.webp" alt="The player bunny and Pip beside a fountain while Hana's greeting shows in a dialogue box" width="1280" height="720" loading="lazy"><figcaption>Hana says hello. Hearts and friends in the corner.</figcaption></figure>
+    <figure><img src="img/game-who-are-you.webp" alt="Who are you: six player species to pick from" width="1280" height="720" loading="lazy"><figcaption>Who are you? Bunny, cat, pup, panda, hamster or chick.</figcaption></figure>
+    <figure><img src="img/game-decorate.webp" alt="Placing a cushion in the meadow with E" width="1280" height="720" loading="lazy"><figcaption>Decorating: place a cushion, turn it, done.</figcaption></figure>
+  </div>
+  <p class="wrap shot-note">Captures of the Kosmos engine port, 2026-10-16. Scenery is the engine's placeholder kit.</p>
+</section>
+
+<section id="world" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>The world</h2>
+      <p class="sub">Pocket Meadow (はらっぱ, harappa) is one small jewel-world, sleepy and not sad. Grey means still asleep. Waking is gentle: a word, a song, a game.</p>
+    </div>
+    <div>
+      <ul class="list places">
+        <li><h3>The planet <span class="badge ok">in the port</span></h3><p>A ball 96 m in radius, painted ground, a sea and thousands of scenery pieces, with grass that moves in wind.</p></li>
+        <li><h3>Five patches <span class="badge ok">in the port</span></h3>
+          <ul class="patches" aria-label="The five patches">
+            <li><b>Pond</b><span>みず, mizu. Water and frogs.</span></li>
+            <li><b>Flower bank</b><span>はな, hana. Birdsong.</span></li>
+            <li><b>Stones</b><span>こけ, koke. A ring of stones, crickets.</span></li>
+            <li><b>Cloud hill</b><span>くも, kumo. Wind.</span></li>
+            <li><b>Lantern lane</b><span>ちょうちん, chōchin. Birds.</span></li>
+          </ul>
+          <p class="small">Each patch has its own ambience layer in the data. The words are from the design spec.</p>
+        </li>
+        <li><h3>Lantern Village <span class="badge plan">planned</span></h3><p>The Season 1 hub: a square, a market street, a station, cafe, bakery and grocery, homes and Obaachan Tsuki's house. Doors for five interiors exist in the planet data; the interiors are blockouts.</p></li>
+        <li><h3>The sky <span class="badge plan">prototype</span></h3><p>A sky with clouds is in the scene data. The engine port's sky and cloud shaders are not done yet.</p></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap shots shots-2" aria-label="Screenshots of the world">
+    <figure><img src="img/world-pond.webp" alt="The pond patch: Pip says the word water" width="1280" height="720" loading="lazy"><figcaption>The pond. Pip says みず, water.</figcaption></figure>
+    <figure><img src="img/world-flower-patch.webp" alt="The flower patch with Pip saying flower" width="1280" height="720" loading="lazy"><figcaption>The flower bank. はな, flower.</figcaption></figure>
+    <figure><img src="img/world-planet.webp" alt="The curved horizon of the planet with a path and a fountain" width="1280" height="720" loading="lazy"><figcaption>The curve of the planet.</figcaption></figure>
+  </div>
+</section>
+
+<section id="meet" class="section">
+  <div class="wrap">
+    <div class="meet-head">
+      <div>
+        <h2>Meet the Kamikin</h2>
+        <p class="sub">14 mochi, the cast of the game. Pick one to see it in the hero. Each line below is the persona text stored with the character.</p>
+        <p class="meet-status" id="meet-status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="car-nav">
+        <button type="button" class="car-btn" id="car-prev" aria-label="Scroll left" disabled><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="car-btn" id="car-next" aria-label="Scroll right"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap meet-wrap">
+    <ul class="k-track" id="k-track" aria-label="The 14 Kamikin"></ul>
+  </div>
+  <p class="wrap shot-note">Names inside persona lines come from the character data and do not always match the character's name. That is how the data is today.</p>
+</section>
+
+<section id="made" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>How they are made</h2>
+      <p class="sub">The characters were drawn in code in the game, baked in Rust in the engine, and converted to GLB files here.</p>
+    </div>
+    <div>
+      <ul class="stats" aria-label="The characters in numbers">
+        <li><b>14</b><span>characters</span></li>
+        <li><b>6</b><span>face states</span></li>
+        <li><b>9</b><span>clips</span></li>
+        <li><b>2</b><span>meshes each: body, face</span></li>
+      </ul>
+      <p class="made-note">Each GLB is a baked, skinned body with a small skeleton (8 to 15 bones, and 37 for one character). The face is a texture swapped between neutral, blink, happy, joy, surprised and sad. Clips: idle, walk, run, hop, happy, wave, sad, sit, dance. The whole set is about 11 MB.</p>
+      <ol class="timeline made-tl" aria-label="Where the characters came from">
+        <li><time datetime="2026-10-11">2026-10-11</time><p><b>Mochi kit.</b> Cute blobby characters built in code with a drawn dot and oval face, in the yakopop repository.</p></li>
+        <li><time datetime="2026-10-13">2026-10-13</time><p><b>Kamikin pack and the Godot slice.</b> The Pocket Meadow pilot, then Season 1 in the Godot shell on 2026-10-15.</p></li>
+        <li><time datetime="2026-10-16">2026-10-16</time><p><b>Kosmos port.</b> A mochi importer in Rust: skinned body, face and baked motions. The planet, grass and cast ran in the engine.</p></li>
+        <li><time datetime="2026-10-24">2026-10-24</time><p><b>Kamiji.</b> The 14 mochi became GLB files with face textures in this repository.</p></li>
+      </ol>
+      <p class="small">History source: <code>docs/history.md</code> and <code>docs/kamikin-context.md</code> in the repository.</p>
+    </div>
+  </div>
+</section>
+
+<section id="learn" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Learn languages with Kamikin</h2>
+      <p class="sub">Kamikin teaches Japanese words through play. The teaching comes from Yakopop, the language learning platform whose repository the game lives in.</p>
+      <div class="yk-block">
+        <img src="img/yakopop-logo.svg" alt="Yakopop" width="166" height="40">
+        <p class="small">Yakopop: word-synced subtitles for language learners.</p>
+        <p class="use-links"><a class="pill-link" href="https://yakopop.com" rel="noopener">yakopop.com</a></p>
+        <p class="small">Source code is a private repository, <code>Modern-Telepathy/yakopop</code>. No docs site or store page is documented yet.</p>
+      </div>
+    </div>
+    <div>
+      <ul class="list">
+        <li><h3>What Yakopop is <span class="badge ok">live</span></h3><p>Every word of a subtitle shows its script, reading, romanization, meaning and grammar, and lights up together with the matching part of the translation while the video plays. The repository says it is live at yakopop.com.</p></li>
+        <li><h3>Who it is for <span class="badge ok">live</span></h3><p>People learning a language from video: Japanese, Mandarin, Korean, Russian, Spanish, Hindi, Nepali, Thai and Tibetan, with 12 interface languages. Kamikin itself is aimed at ages 5 to 9.</p></li>
+        <li><h3>The method, as built <span class="badge ok">live</span></h3><p>Hover a word for its card, take a practice quiz, review flashcards on a spaced-repetition schedule, and follow a path of lessons with hearts, XP and daily quests. A browser extension overlays the subtitles on streaming sites. The repository lists no study results, so none are claimed here.</p></li>
+        <li><h3>How the game uses it <span class="badge plan">prototype</span></h3><p>Every new word comes first in Japanese, then in the player's language, in hiragana, with picture choices. The game screens already show lines like はな, flower. Waking a patch by its word is how the game teaches: names wake things.</p></li>
+        <li><h3>Season 1 course <span class="badge plan">planned</span></h3><p>A draft unit called Lantern Village: Hello Meadow, Pond Friends, Count the Stones, Snack Share and a review, then a song night and a festival, as one week. The lesson pointers exist in code; the course is a draft that still needs a native speaker's read.</p></li>
+        <li><h3>Your words in your deck <span class="badge plan">planned</span></h3><p>The design sends words you meet in the game to your Yakopop flashcard deck, and shows the deck as stickers. Nothing in the game calls the deck yet.</p></li>
+        <li><h3>Characters <span class="badge ok">available</span></h3><p>Pip guides, the kamikin are the friends you wake. Their voices are a specification, not recordings.</p></li>
+      </ul>
+      <p class="small">Yakopop is the learning layer the repositories plan for every Kosmos game, Kamikin included. It is not a "Powered by" claim about a shipped product.</p>
+    </div>
+  </div>
+</section>
+
+<section id="episodes" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Module 1: Lantern Village</h2>
+      <p class="sub">The first module follows six episodes. Each one teaches a handful of Japanese words through a short story, a picture quiz and one play stretch, with the Yakopop subtitle stack on every line.</p>
+      <p class="quiet" role="note"><strong>Plan.</strong> From the Season 1 design, unit <code>ja.kamikin-s1</code>. Not public yet. The plan also has a seventh episode, a festival finale that reviews everything.</p>
+    </div>
+    <div>
+      <ol class="eps">
+        <li class="ep">
+          <span class="ep-n" aria-hidden="true">1</span>
+          <div class="ep-body">
+            <h3>Hello Meadow</h3>
+            <p>Arrive in the grey meadow. Pip teaches you to say hello, you meet Luna at the porch, and you walk to the square to greet everyone.</p>
+            <ul class="words" aria-label="Words in episode 1"><li><b lang="ja">げんき</b><span>genki · well / fine</span></li><li><b lang="ja">ひろば</b><span>hiroba · square / plaza</span></li><li><b lang="ja">にほん</b><span>nihon · Japan</span></li></ul>
+            <p class="ep-meta"><span>Game</span> Walk to the square and greet. <span>Review</span> The hello phrases from the earlier Hello unit.</p>
+          </div>
+        </li>
+        <li class="ep">
+          <span class="ep-n" aria-hidden="true">2</span>
+          <div class="ep-body">
+            <h3>Pond Friends</h3>
+            <p>Pip is lost at the pond. Look around, find him, and wake Shizuku.</p>
+            <ul class="words" aria-label="Words in episode 2"><li><b lang="ja">みて</b><span>mite · look!</span></li><li><b lang="ja">きつね</b><span>kitsune · fox</span></li><li><b lang="ja">みず</b><span>mizu · water</span></li><li><b lang="ja">かわいい</b><span>kawaii · cute</span></li></ul>
+            <p class="ep-meta"><span>Game</span> Find Pip among the sparkles. <span>Review</span> The first Hello lesson.</p>
+          </div>
+        </li>
+        <li class="ep">
+          <span class="ep-n" aria-hidden="true">3</span>
+          <div class="ep-body">
+            <h3>Count the Stones</h3>
+            <p>The stones have fallen over. Kai asks for three, and you count them back into place.</p>
+            <ul class="words" aria-label="Words in episode 3"><li><b lang="ja">ふたつ</b><span>futatsu · two (things)</span></li><li><b lang="ja">みっつ</b><span>mittsu · three (things)</span></li><li><b lang="ja">いし</b><span>ishi · stone</span></li><li><b lang="ja">これ</b><span>kore · this</span></li><li><b lang="ja">それ</b><span>sore · that</span></li><li><b lang="ja">ちょうちん</b><span>chōchin · paper lantern</span></li></ul>
+            <p class="ep-meta"><span>Game</span> Collect and stack three stones. <span>Review</span> Pond Friends.</p>
+          </div>
+        </li>
+        <li class="ep">
+          <span class="ep-n" aria-hidden="true">4</span>
+          <div class="ep-body">
+            <h3>Snack Share</h3>
+            <p>Pix will not share. At the café you ask politely, taste something good and make up.</p>
+            <ul class="words" aria-label="Words in episode 4"><li><b lang="ja">ください</b><span>kudasai · please (give me)</span></li><li><b lang="ja">おいしい</b><span>oishii · delicious</span></li><li><b lang="ja">あか</b><span>aka · red</span></li><li><b lang="ja">あお</b><span>ao · blue</span></li><li><b lang="ja">しろ</b><span>shiro · white</span></li><li><b lang="ja">ごめんね</b><span>gomen ne · I'm sorry</span></li></ul>
+            <p class="ep-meta"><span>Game</span> Care for the snack, then a short chase. <span>Review</span> The Hello lesson.</p>
+          </div>
+        </li>
+        <li class="ep">
+          <span class="ep-n" aria-hidden="true">5</span>
+          <div class="ep-body">
+            <h3>Colour Walk</h3>
+            <p>A grocery full of colours and a picnic on the cloud hill. Point at things and name their colours.</p>
+            <p class="small words-none">No new words: a review episode.</p>
+            <p class="ep-meta"><span>Game</span> Sort things by this and that, and by colour. <span>Review</span> The whole unit, with no new words.</p>
+          </div>
+        </li>
+        <li class="ep">
+          <span class="ep-n" aria-hidden="true">6</span>
+          <div class="ep-body">
+            <h3>Song Night</h3>
+            <p>The friends rehearse a song while Ōakubi yawns. Sing along, then put the friends to bed.</p>
+            <ul class="words" aria-label="Words in episode 6"><li><b lang="ja">おやすみ</b><span>oyasumi · good night</span></li></ul>
+            <p class="ep-meta"><span>Game</span> Sing, then a nap for the friends. <span>Review</span> Sings おやすみ, learned earlier in the Hello unit.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="small">Words and readings come from the Yakopop Japanese course content. Which episodes ship in the Godot version is still in progress.</p>
+    </div>
+  </div>
+</section>
+<section id="use" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Use them</h2>
+      <p class="sub">The characters ship with the Kamiji repository. It is private, so there is no public download, npm package or CDN yet.</p>
+      <p class="quiet" role="note"><strong>Provenance.</strong> Who made each Kamikin character, with which tools and when, is still to be confirmed (<code>assets/PROVENANCE.md</code>). Do not rely on these for public release until that is recorded.</p>
+    </div>
+    <div>
+      <ul class="licence">
+        <li><strong>Characters and assets:</strong> free for non-commercial use under CC BY-NC 4.0, with credit.</li>
+        <li><strong>For-profit apps</strong> need the paid Premium Licence. It is a draft term sheet, not yet a contract. Contact <a href="mailto:openartist@gmail.com">openartist@gmail.com</a>.</li>
+        <li><strong>Code:</strong> MIT.</li>
+        <li>"Kamikin" and "Kamiji" are trademarks of Paul Bloch. Registration status: not yet filed.</li>
+      </ul>
+      <p>Credit line: "Kamikin by Paul Bloch", with a link to the licence and a note of any changes. Full text is in <code>LICENSE.md</code>, <code>LICENSE-COMMERCIAL.md</code> and <code>TRADEMARKS.md</code>.</p>
+      <p class="use-links"><a class="pill-link" href="../index.html">Back to Kamiji, the 3D hand</a> <a class="pill-link" href="../index.html#gallery">Live gallery of all models</a> <a class="pill-link" href="../workshop/kamikin.html">Kamikin studio</a></p>
+    </div>
+  </div>
+</section>
+<section id="plush" class="section" aria-labelledby="plush-h">
+  <div class="wrap split plush-split">
+    <div class="plush-copy">
+      <h2 id="plush-h">A Kamikin plush with a screen face</h2>
+      <p class="sub">Imagine a Kamikin mochi as a plush with a screen face. This is a concept, not a product you can buy.</p>
+      <ul class="list"><li><h3>The Kamikin faces</h3><p>The screen shows a Kamikin face with the same eyes, mouth and colour as the 3D characters here, and changes between happy, thinking, sleepy and surprised.</p></li><li><h3>Any species</h3><p>A bear, a bunny, a cat, any Kamikin species or a brand mascot, each with its own screen face in a hand-drawn crayon style.</p></li><li><h3>Draw and speak</h3><p>Colour dots choose the pen colour and a stylus draws the face. It could speak with the same voice setup as the site.</p></li></ul>
+      <p class="cta-row"><a class="cta" href="#contact">Contact us</a></p>
+    </div>
+    <figure class="plush-fig">
+      <div class="plush-frame"><picture><source type="image/webp" srcset="../img/plush/plush-bear-screen-800.webp 800w, ../img/plush/plush-bear-screen.webp 1312w" sizes="(max-width: 900px) calc(100vw - 32px), 560px"><img src="../img/plush/plush-bear-screen.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="Concept render of a cream teddy-bear plush with a glossy screen face showing a smiling drawn face and a row of colour dots"></picture></div>
+      <figcaption>Concept render</figcaption>
+    </figure>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="powered powered-foot" href="https://kosmos.computer" aria-label="Powered by Kosmos">
+      <span>Powered by</span>
+      <img src="../img/kosmos-logo.svg" alt="Kosmos" height="14">
+    </a>
+    <img class="foot-logo" src="../img/kamikin-game-logo-light.svg" alt="Kamikin" width="84" height="30">
+    <p>Kamikin and Kamiji by Paul Bloch. Code MIT, assets CC BY-NC 4.0.</p>
+    <p>Contact: <a href="mailto:openartist@gmail.com">openartist@gmail.com</a></p>
+  </div>
+</footer>
+
+<button type="button" class="kc-open kc-open-fab" data-kc-open aria-haspopup="dialog" aria-label="Chat with this character"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" fill="currentColor"/><circle cx="8.5" cy="11" r="1.2" fill="var(--sel)"/><circle cx="12" cy="11" r="1.2" fill="var(--sel)"/><circle cx="15.5" cy="11" r="1.2" fill="var(--sel)"/></svg></button>
+<script type="module" src="kamikin.js"></script>
+<script type="module" src="chat.js"></script>
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

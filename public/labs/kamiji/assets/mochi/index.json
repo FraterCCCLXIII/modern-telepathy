@@ -1,0 +1,1821 @@
+{
+ "format": 1,
+ "license": "CC BY-NC 4.0, see LICENSE.md",
+ "characters": [
+  {
+   "id": "kamikin-chochin",
+   "name": "chōchin",
+   "species": "slime",
+   "persona": "Poyuto is a slime: bouncy, and squishy.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-chochin.glb",
+   "facesDir": "kamikin-chochin.faces",
+   "bytes": 1298264,
+   "vertices": {
+    "body": 13781,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 27560,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-hana",
+   "name": "hana",
+   "species": "fawn",
+   "persona": "Furoki is a fawn: quiet as a leaf, and shy.",
+   "height": 0.55,
+   "stance": "quadruped",
+   "glb": "kamikin-hana.glb",
+   "facesDir": "kamikin-hana.faces",
+   "bytes": 700668,
+   "vertices": {
+    "body": 4456,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 8016,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_L1",
+    "ear_R0",
+    "ear_R1",
+    "tail0",
+    "tail1"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 8,
+     "period": 8,
+     "fps": 30,
+     "frames": 240,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.233333,
+     "period": 0.22727272415754202,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.266667,
+     "period": 0.2608695678909966,
+     "fps": 30,
+     "frames": 8,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.8,
+     "period": 0.7999999928731808,
+     "fps": 30,
+     "frames": 24,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 2,
+     "period": 2,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-koke",
+   "name": "koke",
+   "species": "slime",
+   "persona": "Sumiku is a slime: leaves a little shine wherever it goes, and squishy.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-koke.glb",
+   "facesDir": "kamikin-koke.faces",
+   "bytes": 1287056,
+   "vertices": {
+    "body": 13644,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 27284,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-kon",
+   "name": "kon",
+   "species": "kitsune",
+   "persona": "Kopu is a kitsune: keeps a shrine's secrets, and grows a tail for every hundred good deeds.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-kon.glb",
+   "facesDir": "kamikin-kon.faces",
+   "bytes": 1026832,
+   "vertices": {
+    "body": 4694,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 9312,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_R0",
+    "tail0",
+    "tail1",
+    "tail2",
+    "tail_1_0",
+    "tail_1_1",
+    "tail_1_2",
+    "tail_2_0",
+    "tail_2_1",
+    "tail_2_2",
+    "tail_3_0",
+    "tail_3_1",
+    "tail_3_2",
+    "tail_4_0",
+    "tail_4_1",
+    "tail_4_2",
+    "tail_5_0",
+    "tail_5_1",
+    "tail_5_2",
+    "tail_6_0",
+    "tail_6_1",
+    "tail_6_2",
+    "tail_7_0",
+    "tail_7_1",
+    "tail_7_2",
+    "tail_8_0",
+    "tail_8_1",
+    "tail_8_2"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-kumo",
+   "name": "kumo",
+   "species": "lamb",
+   "persona": "Boto is a lamb: dreamy, and soft-spoken.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-kumo.glb",
+   "facesDir": "kamikin-kumo.faces",
+   "bytes": 604252,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_L1",
+    "ear_R0",
+    "ear_R1",
+    "tail0"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-pip",
+   "name": "Pip",
+   "species": "fox",
+   "persona": "Riri is a fox: quick, and sly.",
+   "height": 0.62,
+   "stance": "biped",
+   "glb": "kamikin-pip.glb",
+   "facesDir": "kamikin-pip.faces",
+   "bytes": 627668,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_L1",
+    "ear_R0",
+    "ear_R1",
+    "tail0",
+    "tail1",
+    "tail2"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.364
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 3.1
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player",
+   "name": "Ren",
+   "species": "bunny",
+   "persona": "Kumo is a bunny: a little shy, and loves carrots and naps.",
+   "height": 1.25,
+   "stance": "biped",
+   "glb": "kamikin-player.glb",
+   "facesDir": "kamikin-player.faces",
+   "bytes": 627476,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_L1",
+    "ear_L2",
+    "ear_R0",
+    "ear_R1",
+    "ear_R2",
+    "tail0"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 6.25
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player-bunny-3",
+   "name": "Kumo",
+   "species": "bunny",
+   "persona": "Kumo is a bunny: a little shy, and loves carrots and naps.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-player-bunny-3.glb",
+   "facesDir": "kamikin-player-bunny-3.faces",
+   "bytes": 627512,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_L1",
+    "ear_L2",
+    "ear_R0",
+    "ear_R1",
+    "ear_R2",
+    "tail0"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player-cat-5",
+   "name": "Pipi",
+   "species": "cat",
+   "persona": "Pipi is a cat: collects shiny things, and secretly cuddly.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-player-cat-5.glb",
+   "facesDir": "kamikin-player-cat-5.faces",
+   "bytes": 623752,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_R0",
+    "tail0",
+    "tail1",
+    "tail2",
+    "tail3"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player-chick-6",
+   "name": "Hoho",
+   "species": "chick",
+   "persona": "Hoho is a chick: an early riser, and chirpy.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-player-chick-6.glb",
+   "facesDir": "kamikin-player-chick-6.faces",
+   "bytes": 514268,
+   "vertices": {
+    "body": 2814,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 5592,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "tuft0"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player-hamster-4",
+   "name": "Riri",
+   "species": "hamster",
+   "persona": "Riri is a hamster: hoards seeds, and chubby-cheeked.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-player-hamster-4.glb",
+   "facesDir": "kamikin-player-hamster-4.faces",
+   "bytes": 551380,
+   "vertices": {
+    "body": 3056,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6072,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_R0"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player-panda-2",
+   "name": "Kimi",
+   "species": "panda",
+   "persona": "Kimi is a panda: a bamboo connoisseur, and falls asleep anywhere.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-player-panda-2.glb",
+   "facesDir": "kamikin-player-panda-2.faces",
+   "bytes": 597584,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_R0",
+    "tail0"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-player-pup-8",
+   "name": "Mapu",
+   "species": "pup",
+   "persona": "Mapu is a pup: loyal, and bouncy.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-player-pup-8.glb",
+   "facesDir": "kamikin-player-pup-8.faces",
+   "bytes": 616604,
+   "vertices": {
+    "body": 3238,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 6432,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R",
+    "ear_L0",
+    "ear_L1",
+    "ear_R0",
+    "ear_R1",
+    "tail0",
+    "tail1"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  },
+  {
+   "id": "kamikin-shizuku",
+   "name": "shizuku",
+   "species": "slime",
+   "persona": "Sumo is a slime: squishy, and leaves a little shine wherever it goes.",
+   "height": 0.55,
+   "stance": "biped",
+   "glb": "kamikin-shizuku.glb",
+   "facesDir": "kamikin-shizuku.faces",
+   "bytes": 1290560,
+   "vertices": {
+    "body": 13690,
+    "face": 2288
+   },
+   "triangles": {
+    "body": 27376,
+    "face": 4386
+   },
+   "bones": [
+    "root",
+    "hips",
+    "chest",
+    "head",
+    "arm_L",
+    "arm_R",
+    "leg_L",
+    "leg_R"
+   ],
+   "clips": [
+    {
+     "name": "idle",
+     "duration": 6.4,
+     "period": 6.4,
+     "fps": 30,
+     "frames": 192,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "walk",
+     "duration": 0.333333,
+     "period": 0.3181818186326115,
+     "fps": 30,
+     "frames": 10,
+     "loop": true,
+     "speed": 1.2100000000000002
+    },
+    {
+     "name": "run",
+     "duration": 0.233333,
+     "period": 0.2200000043459126,
+     "fps": 30,
+     "frames": 7,
+     "loop": true,
+     "speed": 2.75
+    },
+    {
+     "name": "hop",
+     "duration": 0.733333,
+     "period": 0.749999992873181,
+     "fps": 30,
+     "frames": 22,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "happy",
+     "duration": 1,
+     "period": 1.0000000071268147,
+     "fps": 30,
+     "frames": 30,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "wave",
+     "duration": 2.4,
+     "period": 2.4,
+     "fps": 30,
+     "frames": 72,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sad",
+     "duration": 2.533333,
+     "period": 2.531592652428719,
+     "fps": 30,
+     "frames": 76,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "sit",
+     "duration": 6,
+     "period": 6,
+     "fps": 30,
+     "frames": 180,
+     "loop": true,
+     "speed": 0
+    },
+    {
+     "name": "dance",
+     "duration": 2,
+     "period": 2.000000007126812,
+     "fps": 30,
+     "frames": 60,
+     "loop": true,
+     "speed": 0
+    }
+   ],
+   "faceStates": [
+    "neutral",
+    "blink",
+    "happy",
+    "joy",
+    "surprised",
+    "sad"
+   ],
+   "faceTextureSize": [
+    512,
+    448
+   ]
+  }
+ ]
+}

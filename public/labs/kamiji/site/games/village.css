@@ -1,0 +1,25 @@
+/* Village builder: sunny cream palette. */
+.vb { background: #f5f2e4; }
+.vb-main { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; padding: 8px 10px 8px; }
+.vb-board { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; }
+.vb-grid { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(5, 1fr); gap: 3px; padding: 5px; border-radius: 16px; background: #bfe3a0; box-shadow: inset 0 0 0 2px rgba(29, 29, 27, .25);
+  width: min(100%, calc((100cqh - 150px) * 1.6)); aspect-ratio: 8 / 5; }
+.vb-t { position: relative; appearance: none; border: 0; padding: 0; border-radius: 8px; background: rgba(255, 255, 255, .28); cursor: pointer; display: grid; place-items: center; min-width: 0; min-height: 0; }
+.vb-t:hover { background: rgba(255, 255, 255, .5); }
+.vb-t.has { background: var(--c, #fff); box-shadow: inset 0 -3px rgba(0, 0, 0, .12); }
+.vb-t.pick { outline: 2px solid #1d1d1b; outline-offset: -1px; }
+.vb-t svg { width: 70%; height: 70%; }
+.vb-lv { position: absolute; right: 3px; top: 0; font-size: 12px; line-height: 1; font-style: normal; color: #1d1d1b; }
+.vb-cd { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font: 700 9px/1 var(--mono); padding: 2px 4px; border-radius: 6px; background: #1d1d1b; color: #fff; white-space: nowrap; font-style: normal; }
+.vb-cd:empty { display: none; } .vb-t.busy svg { opacity: .45; }
+.vb-side { flex: none; display: grid; gap: 6px; }
+.vb-adv { display: flex; align-items: center; gap: 8px; font-size: .76rem; color: #5f665a; } .vb-adv .tg-av { width: 40px; height: 40px; flex: none; }
+.vb-pal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; } .vb-pal .g-btn { display: grid; padding: 4px 4px; min-height: 40px; line-height: 1.15; } .vb-pal small { font-size: .62rem; font-weight: 500; opacity: .75; }
+.vb-info { margin: 0; display: grid; font-size: .8rem; min-height: 2.6em; } .vb-info span { color: #5f665a; }
+.vb-bl { margin: 0; font: 600 .7rem var(--mono); color: #5f665a; }
+.vb .g-row { justify-content: flex-start; }
+@container (min-width: 600px) {
+  .vb-main { flex-direction: row; padding: 10px 12px; gap: 12px; }
+  .vb-board { flex: 1; } .vb-grid { width: min(100%, calc(100cqh - 20px) * 1.6); }
+  .vb-side { width: 220px; align-content: start; } .vb-pal { grid-template-columns: repeat(2, 1fr); }
+}

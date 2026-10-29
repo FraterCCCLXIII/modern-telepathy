@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en" data-root="../../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos Browser M1: host engine site run | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../../readme/index.html">Desktop README</a></li><li><a href="../../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../../tests/browser/results/m1-summary/index.html" aria-current="page">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../../index.html">Home</a></li><li><span>Browser</span></li><li aria-current="page">Kosmos Browser M1: host engine site run</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kosmos Browser M1: host engine site run</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">tests/browser/results/m1-summary.md</span></div>
+        <div class="doc-body">
+
+<ul>
+<li>Run: 2026-10-27T15:38:35 on Pauls-MacBook-Pro-2.local</li>
+<li>Chrome: Chrome/156.0.8078.48 (<code>--remote-debugging-pipe</code>, no port flag, throwaway profile removed at exit: True)</li>
+<li>Viewport 1440x900, prefers-color-scheme light, incognito context per visit, downloads and dialogs denied or dismissed</li>
+<li>Gate: 22 of 25 sites report title and final URL within 8 s, in each pass</li>
+</ul>
+<h2 id="gate-per-pass">Gate per pass<a class="headerlink" href="#gate-per-pass" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>pass</th>
+<th>sites ok (title + URL in 8 s)</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>24 of 25</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>24 of 25</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>3</td>
+<td>24 of 25</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="per-site-pass-1-numbers-then-the-three-gate-times">Per site (pass 1 numbers, then the three gate times)<a class="headerlink" href="#per-site-pass-1-numbers-then-the-three-gate-times" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>site</th>
+<th>final URL</th>
+<th>title</th>
+<th>t_meta s (p1/p2/p3)</th>
+<th>load s</th>
+<th>settle s</th>
+<th>text</th>
+<th>img</th>
+<th>links</th>
+<th>ctl</th>
+<th>tiles</th>
+<th>nodes</th>
+<th>prompts</th>
+<th>ok</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>http://example.com/</td>
+<td>https://example.com/</td>
+<td>Example Domain</td>
+<td>0.12/0.28/0.12</td>
+<td>0.115</td>
+<td>0.542</td>
+<td>10</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>35</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>2</td>
+<td>https://info.cern.ch/</td>
+<td>https://info.cern.ch/</td>
+<td>http://info.cern.ch</td>
+<td>0.57/0.71/0.55</td>
+<td>0.571</td>
+<td>0.999</td>
+<td>7</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>39</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>3</td>
+<td>https://paulgraham.com/greatwork.html</td>
+<td>https://paulgraham.com/greatwork.html</td>
+<td>How to Do Great Work</td>
+<td>0.56/0.68/0.68</td>
+<td>0.56</td>
+<td>0.528</td>
+<td>423</td>
+<td>4</td>
+<td>30</td>
+<td>0</td>
+<td>0</td>
+<td>1264</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>4</td>
+<td>https://en.wikipedia.org/wiki/Oscilloscope</td>
+<td>https://en.wikipedia.org/wiki/Oscilloscope</td>
+<td>Oscilloscope - Wikipedia</td>
+<td>0.45/0.57/0.60</td>
+<td>0.45</td>
+<td>0.544</td>
+<td>1543</td>
+<td>36</td>
+<td>621</td>
+<td>38</td>
+<td>0</td>
+<td>6301</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>5</td>
+<td>https://ja.wikipedia.org/wiki/%E3%82%AA%E3%82%B7%E3%83%AD%E3%82%B9%E3%</td>
+<td>https://ja.wikipedia.org/wiki/%E3%82%AA%E3%82%B7%E3%83%AD%E3%82%B9%E3%82%B3%E3%83%BC%E3%83</td>
+<td>オシロスコープ - Wikipedia</td>
+<td>0.59/0.38/0.94</td>
+<td>0.588</td>
+<td>0.657</td>
+<td>896</td>
+<td>16</td>
+<td>401</td>
+<td>37</td>
+<td>0</td>
+<td>3751</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>6</td>
+<td>https://docs.python.org/3/tutorial/introduction.html</td>
+<td>https://docs.python.org/3/tutorial/introduction.html</td>
+<td>3. An Informal Introduction to Python — Python 3.15.2 docume</td>
+<td>0.23/0.16/0.27</td>
+<td>0.23</td>
+<td>0.546</td>
+<td>1489</td>
+<td>3</td>
+<td>86</td>
+<td>58</td>
+<td>0</td>
+<td>4246</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>7</td>
+<td>https://doc.rust-lang.org/book/ch01-00-getting-started.html</td>
+<td>https://doc.rust-lang.org/book/ch01-00-getting-started.html</td>
+<td>Getting Started - The Rust Programming Language</td>
+<td>0.28/0.28/0.51</td>
+<td>0.277</td>
+<td>0.567</td>
+<td>259</td>
+<td>0</td>
+<td>118</td>
+<td>10</td>
+<td>0</td>
+<td>1050</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>8</td>
+<td>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details</td>
+<td>https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details</td>
+<td><details> HTML details disclosure element - HTML / MDN</td>
+<td>0.22/0.25/0.47</td>
+<td>0.222</td>
+<td>0.907</td>
+<td>1237</td>
+<td>3</td>
+<td>470</td>
+<td>103</td>
+<td>0</td>
+<td>8519</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>9</td>
+<td>https://news.ycombinator.com/</td>
+<td>https://news.ycombinator.com/</td>
+<td>Hacker News</td>
+<td>0.25/0.21/0.23</td>
+<td>0.254</td>
+<td>0.556</td>
+<td>426</td>
+<td>2</td>
+<td>230</td>
+<td>1</td>
+<td>0</td>
+<td>1311</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>10</td>
+<td>https://lobste.rs/</td>
+<td>https://lobste.rs/</td>
+<td>Lobsters</td>
+<td>0.67/0.56/0.71</td>
+<td>0.673</td>
+<td>0.675</td>
+<td>380</td>
+<td>25</td>
+<td>278</td>
+<td>0</td>
+<td>0</td>
+<td>2262</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>11</td>
+<td>https://duckduckgo.com/html/?q=oscilloscope</td>
+<td>https://html.duckduckgo.com/html/?q=oscilloscope</td>
+<td>DuckDuckGo</td>
+<td>0.58/2.11/0.77</td>
+<td>0.58</td>
+<td>0.573</td>
+<td>10</td>
+<td>10</td>
+<td>1</td>
+<td>11</td>
+<td>0</td>
+<td>231</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>12</td>
+<td>https://www.bing.com/search?q=oscilloscope</td>
+<td>https://www.bing.com/search?q=oscilloscope</td>
+<td>oscilloscope - Search</td>
+<td>0.51/0.34/0.71</td>
+<td>0.513</td>
+<td>-</td>
+<td>159</td>
+<td>18</td>
+<td>52</td>
+<td>13</td>
+<td>1</td>
+<td>1086</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>13</td>
+<td>https://webscraper.io/test-sites/e-commerce/allinone</td>
+<td>https://webscraper.io/test-sites/e-commerce/allinone</td>
+<td>Allinone / Web Scraper Test Sites</td>
+<td>0.69/0.84/1.09</td>
+<td>0.688</td>
+<td>1.004</td>
+<td>104</td>
+<td>6</td>
+<td>53</td>
+<td>12</td>
+<td>0</td>
+<td>1031</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>14</td>
+<td>https://demo.opencart.com/</td>
+<td>https://demo.opencart.com/</td>
+<td>Just a moment...</td>
+<td>8.01/8.01/8.01</td>
+<td>-</td>
+<td>-</td>
+<td>14</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>64</td>
+<td>-</td>
+<td>NNN</td>
+</tr>
+<tr>
+<td>15</td>
+<td>https://www.ikea.com/us/en/</td>
+<td>https://www.ikea.com/us/en/</td>
+<td>Shop Affordable Home Furnishings &amp; Home Goods - IKEA</td>
+<td>2.73/3.34/3.88</td>
+<td>2.725</td>
+<td>-</td>
+<td>622</td>
+<td>153</td>
+<td>240</td>
+<td>152</td>
+<td>1</td>
+<td>5526</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>16</td>
+<td>https://react.dev/</td>
+<td>https://react.dev/</td>
+<td>React</td>
+<td>0.46/0.51/1.24</td>
+<td>0.457</td>
+<td>0.61</td>
+<td>577</td>
+<td>43</td>
+<td>98</td>
+<td>37</td>
+<td>0</td>
+<td>2620</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>17</td>
+<td>https://todomvc.com/examples/react/dist/</td>
+<td>https://todomvc.com/examples/react/dist/</td>
+<td>TodoMVC: React</td>
+<td>0.74/0.67/1.24</td>
+<td>0.743</td>
+<td>0.824</td>
+<td>31</td>
+<td>0</td>
+<td>14</td>
+<td>3</td>
+<td>0</td>
+<td>152</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>18</td>
+<td>https://www.typescriptlang.org/play</td>
+<td>https://www.typescriptlang.org/play/</td>
+<td>TypeScript: TS Playground - An online editor for exploring T</td>
+<td>0.55/0.36/0.72</td>
+<td>0.548</td>
+<td>-</td>
+<td>402</td>
+<td>1</td>
+<td>182</td>
+<td>79</td>
+<td>3</td>
+<td>1790</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>19</td>
+<td>https://www.openstreetmap.org/</td>
+<td>https://www.openstreetmap.org/#map=5/38.01/-95.84</td>
+<td>OpenStreetMap</td>
+<td>1.20/1.25/1.78</td>
+<td>1.194</td>
+<td>0.788</td>
+<td>76</td>
+<td>30</td>
+<td>43</td>
+<td>47</td>
+<td>0</td>
+<td>1183</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>20</td>
+<td>https://test-videos.co.uk/</td>
+<td>https://test-videos.co.uk/</td>
+<td>Home / Test Videos</td>
+<td>1.33/1.38/1.43</td>
+<td>1.329</td>
+<td>0.582</td>
+<td>120</td>
+<td>1</td>
+<td>68</td>
+<td>0</td>
+<td>0</td>
+<td>720</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>21</td>
+<td>https://www.w3schools.com/html/html5_video.asp</td>
+<td>https://www.w3schools.com/html/html5_video.asp</td>
+<td>HTML Video</td>
+<td>1.18/1.88/1.50</td>
+<td>1.181</td>
+<td>-</td>
+<td>1230</td>
+<td>29</td>
+<td>573</td>
+<td>25</td>
+<td>2</td>
+<td>6753</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>22</td>
+<td>https://www.w3schools.com/html/html5_audio.asp</td>
+<td>https://www.w3schools.com/html/html5_audio.asp</td>
+<td>HTML Audio</td>
+<td>1.13/1.24/1.28</td>
+<td>1.128</td>
+<td>-</td>
+<td>1201</td>
+<td>31</td>
+<td>569</td>
+<td>21</td>
+<td>1</td>
+<td>6750</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>23</td>
+<td>https://webglsamples.org/aquarium/aquarium.html</td>
+<td>https://webglsamples.org/aquarium/aquarium.html</td>
+<td>WebGL Aquarium</td>
+<td>3.86/1.97/3.95</td>
+<td>3.862</td>
+<td>0.559</td>
+<td>105</td>
+<td>0</td>
+<td>28</td>
+<td>0</td>
+<td>1</td>
+<td>433</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>24</td>
+<td>https://threejs.org/examples/</td>
+<td>https://threejs.org/examples/</td>
+<td>three.js examples</td>
+<td>0.95/0.42/0.48</td>
+<td>0.949</td>
+<td>0.598</td>
+<td>657</td>
+<td>609</td>
+<td>608</td>
+<td>1</td>
+<td>0</td>
+<td>8101</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+<tr>
+<td>25</td>
+<td>https://excalidraw.com/</td>
+<td>https://excalidraw.com/</td>
+<td>Excalidraw Whiteboard</td>
+<td>1.67/1.07/1.16</td>
+<td>1.668</td>
+<td>0.555</td>
+<td>46</td>
+<td>0</td>
+<td>3</td>
+<td>26</td>
+<td>2</td>
+<td>384</td>
+<td>-</td>
+<td>YYY</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="failures">Failures<a class="headerlink" href="#failures" title="Link to this section">#</a></h2>
+<ul>
+<li>site 14 pass 1 (https://demo.opencart.com/): load not reached within 8 s</li>
+<li>site 14 pass 2 (https://demo.opencart.com/): load not reached within 8 s</li>
+<li>site 14 pass 3 (https://demo.opencart.com/): load not reached within 8 s</li>
+</ul>
+<p>Times are host-side seconds from navigate to the title read (gate). Settle is load plus network idle, 2 s cap, not gated. Counts come from one DOMSnapshot per visit (engine only).</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../../browser/host/dlist-format/index.html" rel="prev"><span>Previous</span>DLIST binary format (guest reader spec)</a><a class="next" href="../../../../apps-host/readme/index.html" rel="next"><span>Next</span>apps-host: run Electron apps on the host, show them in the desktop</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#gate-per-pass">Gate per pass</a></li><li><a href="#per-site-pass-1-numbers-then-the-three-gate-times">Per site (pass 1 numbers, then the three gate times)</a></li><li><a href="#failures">Failures</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../../assets/search-index.js"></script>
+<script src="../../../../assets/app.js"></script>
+</body>
+</html>

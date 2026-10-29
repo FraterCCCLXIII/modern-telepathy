@@ -18,6 +18,45 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "kamiji",
+    name: "Kamiji",
+    tagline: "A rigged, expressive 3D hand avatar, plus the characters and tools around it.",
+    description: "A three.js hand avatar for React with faces, poses and motions, a character Studio and the Kamikin cast.",
+    logoSrc: "/projects/kamiji/logo.svg",
+    role: "Creator. Rig, characters, library and tools.",
+    about: [
+      "Kamiji gives each agent or character a tinted, animated hand with a morph-target face: expressions, poses, whole-hand motions, emotes and status icons. One shared WebGL renderer draws many avatars on a page, with a flat SVG fallback.",
+      "Around the hand sit the Studio character creator, the Kamikin and Rubbernose casts, a voice lab and a subtitles playground. All of them run here in the browser.",
+    ],
+    pitchHeadline: "Give your agent a hand",
+    pitchBody: "Open the Studio to build a character, or the workshop to try poses and expressions.",
+    links: [],
+    progress: [
+      { label: "Hand rig, poses and motions", note: "Done", status: "done" },
+      { label: "Studio character creator", note: "Prototype", status: "active" },
+      { label: "Embeddable JS library on this site", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "templeos",
+    name: "TempleOS desktop",
+    tagline: "A HolyC desktop with its own browser, apps and a host bridge.",
+    description: "Plans, specs and status for rebuilding a modern desktop and browser inside TempleOS.",
+    logoSrc: "/projects/templeos/logo.svg",
+    role: "Author. Architecture, HolyC apps and host services.",
+    about: [
+      "The TempleOS desktop project explores how far a HolyC system can go as a daily desktop: a browser, mail, contacts, a dev box and ports of existing apps, with a host hub that does the work TempleOS cannot.",
+      "The documentation site collects the plans, feasibility studies and specs in one place.",
+    ],
+    pitchHeadline: "A modern desktop in HolyC",
+    pitchBody: "Read the browser architecture, the app plans and the dev box study.",
+    links: [{ label: "GitHub", href: "https://github.com/Modern-Telepathy/templeos" }],
+    progress: [
+      { label: "Desktop shell and host hub", note: "Active", status: "active" },
+      { label: "Browser v0", note: "In progress", status: "active" },
+    ],
+  },
+  {
     slug: "keybox",
     name: "Keybox",
     tagline: "Seal a secret. The agent can spend it. The model never reads it.",

@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT · Copyright (c) 2026 Paul Bloch (Kosmos Engine)
+     Serve the repo root (python3 -m http.server) and open /assets/props/preview.html -->
+<meta charset="utf-8">
+<title>Kamiji props: symbols</title>
+<style>
+  body{margin:0;font:13px system-ui;background:#f1ece4;color:#333}
+  header{display:flex;gap:12px;align-items:center;padding:10px 16px;background:#fff;position:sticky;top:0;z-index:2}
+  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:12px}
+  .cell{background:#fff;border-radius:10px;padding:6px;text-align:center}
+  canvas{width:100%;height:150px;display:block}
+  .row{display:flex;justify-content:center;gap:8px;align-items:center}
+  .small{width:48px;height:48px}
+  small{color:#888}
+</style>
+<header>
+  <b>Kamiji props: symbols</b>
+  <label>tint <input type="color" id="tint" value="#ffd23f"></label>
+  <label><input type="checkbox" id="useDefault" checked> per-prop suggested tint</label>
+  <span id="count"></span>
+</header>
+<div id="grid"></div>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+const index = await (await fetch("index.json")).json();
+document.getElementById("count").textContent = index.length + " props";
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(2);
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8a890, 1.6));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(2, 3, 4); scene.add(key);
+const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 20); cam.position.set(0, 0, 3.6);
+const loader = new GLTFLoader();
+const items = [];
+const grid = document.getElementById("grid");
+const tint = document.getElementById("tint"), useDef = document.getElementById("useDefault");
+for (const p of index) {
+  const cell = document.createElement("div"); cell.className = "cell";
+  cell.innerHTML = `<canvas width=300 height=300></canvas><div class=row><canvas class=small width=96 height=96></canvas><div><b>${p.name}</b><br><small>${p.category} · ${p.triangles} tris · ${(p.bytes/1024).toFixed(0)} KB${p.materials?' · '+Object.keys(p.materials).join('+'):''}</small></div></div>`;
+  grid.append(cell);
+  const [big, small] = cell.querySelectorAll("canvas");
+  const gltf = await loader.loadAsync(p.file);
+  const mat = new THREE.MeshStandardMaterial({ roughness: 0.6 });
+  gltf.scene.traverse(o => { if (o.isMesh) if (o.material && o.material.name === 'Clay') o.material = mat; });
+  items.push({ p, root: gltf.scene, mat, c: [big.getContext("2d"), small.getContext("2d")] });
+}
+const tmp = new THREE.Color();
+function frame(t) {
+  const sw = location.search.includes("still");
+  for (const it of items) {
+    tmp.set(useDef.checked ? it.p.tint : tint.value); it.mat.color.copy(tmp);
+    scene.add(it.root);
+    it.root.rotation.y = sw ? 0.5 : Math.sin(t / 1500 + items.indexOf(it)) * 0.7;
+    for (const [i, c] of it.c.entries()) {
+      const s = c.canvas.width; renderer.setSize(s, s, false); renderer.render(scene, cam);
+      c.clearRect(0, 0, s, s); c.drawImage(renderer.domElement, 0, 0, s, s);
+    }
+    scene.remove(it.root);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clock suite and Launchpad: status (2026-10-27) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" open data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html" aria-current="page">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Status reports</span></li><li aria-current="page">Clock suite and Launchpad: status (2026-10-27)</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Clock suite and Launchpad: status (2026-10-27)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/clock-launchpad-status.md</span></div>
+        <div class="doc-body">
+
+<p>Files: <code>desk3/03f-clock.HC</code> (Clock app, notification toast), <code>desk3/03g-launchpad.HC</code> (Launchpad overlay, entry points
+<code>KsOverlays</code>, <code>KsOverlayClick</code>, <code>KsExtraTick</code>). Everything below was tested on x86 TempleOS (QEMU, 2x) on a private copy of
+commit 36f01472 plus my shared-file hunks, because the current tree stops earlier in <code>01-winstyle.HC</code> (see Known problems).</p>
+<h2 id="works-and-verified-shotsclock-png-shotslaunchpad-png">Works and verified (shots/clock-<em>.png, shots/launchpad-</em>.png)<a class="headerlink" href="#works-and-verified-shotsclock-png-shotslaunchpad-png" title="Link to this section">#</a></h2>
+<ul>
+<li>World Clock: analogue face (integer sine table, anti-aliased hands, big-disk coverage tile), digital readout, 11 cities with
+  fixed offsets, guest zone +/- buttons. The guest clock is the TempleOS <code>Now()</code>: it read 23:26 UTC while the host said 23:26 UTC.
+  QEMU starts the RTC at host UTC; TempleOS has no zone, so the guest shows UTC and nothing syncs it with the host.</li>
+<li>Stopwatch: start, stop, lap, reset; milliseconds from jiffies; lap table with best (green) and worst (red).</li>
+<li>Timer: runs, counts down in step with the host clock, ring and Pause/Start. Alert (flashing ring plus toast) is in the code;
+  the screenshot of the alert state was NOT taken. No sound (the guest has none; the PC speaker was not tried).</li>
+<li>Alarms: add, set time, toggle; a one-off alarm fired on the second, a toast appeared and the alarm switched itself off.</li>
+<li>Launchpad: grid of all apps from <code>ks_an</code>, hover scale, number badges, type-to-filter ("clo" leaves Clock), Backspace, Enter opens.</li>
+<li>Benchmark (b), ms avg: full redraw 15.0 base, 16.2 with these files; drag large 5.4 / 5.8; drag small 3.4 / 4.0; dock warm 2.9 / 3.1.
+  Idle QEMU CPU with the Monitor open: 52.7 percent base, 54.2 with the background tick (one run each, noisy).</li>
+</ul>
+<h2 id="untested">Untested<a class="headerlink" href="#untested" title="Link to this section">#</a></h2>
+<ul>
+<li>Arrow keys, Escape, number jump keys, click to open from the grid (only the key path L, text, Enter was driven).</li>
+<li>Kosmos menu entry (item 4, shown first) and the L key against the current tree.</li>
+<li>Timer alert, Timer presets after the preset id fix (ids 20 to 25 collided with city ids; cities are now 90 to 100).</li>
+<li>Aiwnios: <code>build.py</code> writes the current tree and <code>kslint.py</code> is clean on both files, but the Aiwnios run and screenshots were not done.</li>
+<li>Pause/Reset of the Timer, repeat day buttons, delete alarm.</li>
+</ul>
+<h2 id="known-problems">Known problems<a class="headerlink" href="#known-problems" title="Link to this section">#</a></h2>
+<ul>
+<li>Current tree does not compile on x86: <code>01-winstyle.HC</code> (Windows app) calls <code>WsScaleOf(a,ks_open[a],...)</code> before <code>ks_open</code> exists
+  (02-ui.HC). That error comes before 03g in load order; it is not in my files. HEAD also lacks the <code>WS_*</code> hooks (left uncommitted).</li>
+<li><code>OpenApp</code> is defined after my files and a forward call did not bind, so the Launchpad sets <code>lp_req</code> and Main (06-run.HC) opens it.</li>
+<li>The toast shadow leaves a faint band at the top right. Selection follows the mouse pointer over tiles.</li>
+<li>Launchpad has no Keep in Dock: the dock list (<code>ks_dord</code>) is fixed.</li>
+</ul>
+<h2 id="shared-file-hunks-uncommitted-in-the-working-tree-ids-by-name-not-number">Shared-file hunks (uncommitted, in the working tree; ids by name, not number)<a class="headerlink" href="#shared-file-hunks-uncommitted-in-the-working-tree-ids-by-name-not-number" title="Link to this section">#</a></h2>
+<ul>
+<li>01-core.HC: <code>NICON 32</code> (was 24) for <code>ks_icd</code>, <code>ks_icm</code>; <code>L_CLOCK</code>, <code>L_TIMER</code>, <code>L_ALARM</code> (icons appended to gen-icons.py NAMES);
+  NA +1. 04-main.HC and 06-run.HC: <code>NICON*260</code> in <code>SelfTest</code> and <code>BenchAll</code>.</li>
+<li>02-ui.HC: Clock appended to every app array and <code>ks_dord</code>; <code>ks_kmi[5]</code>, new <code>ks_kmo</code>, <code>KMenu</code> (5 rows).</li>
+<li>04-main.HC: <code>MenuAct</code> (item 4 opens Launchpad), <code>Click</code> (KsOverlayClick first, menu band MBAR+190), <code>AppClick</code> (Clock),
+  <code>Keys</code> (Launchpad key handler first, L key).</li>
+<li>06-run.HC: <code>BodyOf</code> (Clock), <code>Draw</code> (KsOverlays after KMenu), <code>Main</code> (KsExtraTick, <code>lp_req</code> open).</li>
+<li>assets/KSICONS.BIN and scripts/gen-icons.py: three icons appended.</li>
+</ul>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Link to this section">#</a></h2>
+<ol>
+<li>Fix or commit the Windows agent hooks so the tree builds; reload, then land my shared hunks in one commit.</li>
+<li>Drive Launchpad arrows, Escape, digits, click; screenshot the Kosmos menu row.</li>
+<li>Drive the Timer to zero and screenshot the alert; check the toast shadow band.</li>
+<li>Aiwnios run and screenshots of both apps (Date2Struct availability).</li>
+<li>README section (6 lines).</li>
+</ol>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/electron-tauri-support-research/index.html" rel="prev"><span>Previous</span>Running Electron and Tauri apps inside the TempleOS desktop: research and route</a><a class="next" href="../../../docs/apps/statusbar-status/index.html" rel="next"><span>Next</span>Menu bar status items: status (work stopped early, unfinished)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#works-and-verified-shotsclock-png-shotslaunchpad-png">Works and verified (shots/clock-.png, shots/launchpad-.png)</a></li><li><a href="#untested">Untested</a></li><li><a href="#known-problems">Known problems</a></li><li><a href="#shared-file-hunks-uncommitted-in-the-working-tree-ids-by-name-not-number">Shared-file hunks (uncommitted, in the working tree; ids by name, not number)</a></li><li><a href="#next-steps">Next steps</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

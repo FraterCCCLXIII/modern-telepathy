@@ -1,0 +1,14 @@
+/* Plush concept section, shared by the Kamiji home page and the Kamikin page. */
+.plush-fig { margin: 0; width: min(560px, 100%); justify-self: center; }
+.plush-fig .plush-frame { background: #fdfbf7; border-radius: 28px; overflow: hidden; box-shadow: 0 1px 0 var(--faint), 0 18px 40px -28px var(--shadow); }
+.plush-fig img { display: block; width: 100%; height: auto; transition: transform .5s ease; }
+.plush-fig .plush-frame:hover img { transform: scale(1.02); }
+.plush-fig figcaption { margin-top: 12px; font: .68rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); text-align: center; }
+.plush-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 900px) { .plush-split { grid-template-columns: minmax(0, 1fr); } }
+.plush-copy p { max-width: 36rem; }
+.plush-copy .list { margin: 1.2em 0 0; }
+.plush-copy .list li { padding: 16px 0; }
+@media (max-width: 900px) { .plush-fig { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .plush-fig img { transition: none; } .plush-fig .plush-frame:hover img { transform: none; } }
+.plush-copy h2 { margin-bottom: .5em; }

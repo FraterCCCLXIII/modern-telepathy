@@ -1,0 +1,187 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newsphere feed reader</title>
+<meta name="description" content="Newsphere is a Tauri 2 and React desktop feed reader: columns of feeds on a grid, a focused reader view and an optional assistant that uses your own API key. First beta, tested mainly on Apple Silicon.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/newsphere-icon-128.png" type="image/png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="newsphere.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-newsphere" href="#top" aria-label="Newsphere, top of page">
+      <img src="img/newsphere-icon-128.png" alt="" width="28" height="28">
+      <span>Newsphere</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#mock">Mock</a>
+      <a href="#ai">Assistant</a>
+      <a href="#status">Status</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Your feeds, in columns, on your desktop.</h1>
+      <p class="lead">Newsphere is a desktop feed reader that lays your sources out as a grid of columns, opens articles in a clean reader and keeps everything on your machine. An assistant is optional and uses your own key.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#how">How it works</a>
+        <a class="btn" href="#status">What runs today</a>
+      </p>
+      <p class="quiet">Version 1.0.0-beta.1. Day-to-day work has been on Apple Silicon Macs. Not meaningfully tested on Windows or Intel Macs.</p>
+    </div>
+
+    <figure class="hero-art">
+      <div class="nsw" role="img" aria-label="Illustrative mock, not a screenshot: a desktop window with a row of three feed columns, each with a few placeholder headlines.">
+        <div class="nsw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Newsphere</span><em>illustrative mock</em></div>
+        <div class="nsw-tabs" aria-hidden="true"><span class="on">Tech</span><span>News</span><span>Science</span></div>
+        <div class="nsw-grid" aria-hidden="true">
+          <div class="col"><h4>Feed A <small>3</small></h4><ul><li>Placeholder headline one<small>2h</small></li><li class="open">Placeholder headline two<small>3h</small></li><li>Placeholder headline three<small>5h</small></li></ul></div>
+          <div class="col"><h4>Feed B <small>3</small></h4><ul><li>Placeholder headline four<small>1h</small></li><li>Placeholder headline five<small>4h</small></li><li>Placeholder headline six<small>6h</small></li></ul></div>
+          <div class="col"><h4>Feed C <small>3</small></h4><ul><li>Placeholder headline seven<small>2h</small></li><li>Placeholder headline eight<small>3h</small></li><li>Placeholder headline nine<small>7h</small></li></ul></div>
+        </div>
+      </div>
+      <figcaption>Illustrative mock, not a screenshot. Drawn in CSS from the app's structure: pages, rows of feed columns, headlines with age.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap">
+    <h2>What it is and how it works</h2>
+    <p class="sub">The repository is the desktop application: Tauri 2 for the native shell and window, React with Vite for the interface. The README describes a reader built around a column grid of feeds on topic pages, in a frameless rounded window with native window controls.</p>
+    <ol class="steps-n">
+      <li><div>
+        <h3>Lay out your feeds <span class="badge ok">in the app</span></h3>
+        <p>The home view is a grid. Each page holds rows of feed columns that you can reorder by drag and drop, with section labels. A searchable catalog of sources ships with the app, and you can add your own feed URLs.</p>
+        <p class="from">Source: README.md "Features", src/components/grid, public/catalog-sources.json</p>
+      </div></li>
+      <li><div>
+        <h3>Read in a focused view <span class="badge ok">in the app</span></h3>
+        <p>Opening a headline loads the article into a reader that extracts the main content (a Mozilla Readability style pass) instead of sending you to a busy browser tab. The reader has previous and next article, share, bookmark, open in browser and close.</p>
+        <p class="from">Source: src/pages/reader-page.tsx, src/lib/article-extract.ts</p>
+      </div></li>
+      <li><div>
+        <h3>Keep it local <span class="badge ok">in the app</span></h3>
+        <p>Layout and settings are saved with the Tauri Store plugin on your device. History and bookmarks are searchable lists in the app. Running the interface in a plain browser through Vite uses <code>localStorage</code> instead.</p>
+        <p class="from">Source: README.md "Persistence", package.json</p>
+      </div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>Features</h2>
+    <ul class="grid-cards">
+      <li><h3>Column grid</h3><p>Pages of feed columns with drag-and-drop ordering and section labels.</p><p class="from">src/components/grid</p></li>
+      <li><h3>Source catalog</h3><p>A bundled list of 212 feeds across 16 categories, plus custom feed URLs. The count comes from the catalog file in the repository.</p><p class="from">public/catalog-sources.json</p></li>
+      <li><h3>Reader view</h3><p>Extracted article text, previous and next, share, bookmark, open in browser.</p><p class="from">src/pages/reader-page.tsx</p></li>
+      <li><h3>Latest stream</h3><p>One newest-first stream across the feeds on a page.</p><p class="from">src/pages/feed-stream-page.tsx</p></li>
+      <li><h3>History and bookmarks</h3><p>Searchable reading history and a bookmarks list with quick actions.</p><p class="from">src/pages/history-page.tsx, bookmarks-page.tsx</p></li>
+      <li><h3>Keyboard shortcuts</h3><p>Shortcuts for grid home, latest, bookmarks, history, settings, refresh, search and add source, listed in an in-app dialog.</p><p class="from">src/lib/keyboard-shortcut-help.ts</p></li>
+      <li><h3>Appearance</h3><p>Theme switch and a text-size slider, kept in settings.</p><p class="from">src/components/theme-provider.tsx, text-scale-provider.tsx</p></li>
+      <li><h3>Native window</h3><p>Frameless, rounded window. macOS traffic lights on the left, Windows controls on the right.</p><p class="from">README.md "Window chrome"</p></li>
+      <li><h3>Optional assistant</h3><p>Off by default. Bring your own key. See below.</p><p class="from">src/components/ai</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="mock" class="section">
+  <div class="wrap">
+    <h2>The reader and assistant, as a mock</h2>
+    <p class="sub">No screenshots exist in the repository. This is an illustrative mock, not a screenshot, drawn from the real component names: the reader page and the assistant drawer. Headlines and replies are placeholders.</p>
+    <div class="nsw" style="margin-top:2rem" role="img" aria-label="Illustrative mock, not a screenshot: a reader view on the left with placeholder lines of text, and an assistant drawer on the right with a short placeholder conversation.">
+      <div class="nsw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Newsphere</span><em>illustrative mock, not a screenshot</em></div>
+      <div class="nsw-read" aria-hidden="true">
+        <div class="rd-main">
+          <div class="rd-tools"><span>Previous</span><span>Next</span><span>Share</span><span>Bookmark</span><span>Open in browser</span></div>
+          <h4>Placeholder article title</h4>
+          <p>Feed A, placeholder date</p>
+          <div class="ln"></div><div class="ln" style="width:92%"></div><div class="ln" style="width:97%"></div><div class="ln" style="width:70%"></div>
+          <div class="ln" style="margin-top:8px"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:94%"></div>
+        </div>
+        <div class="ai-pane">
+          <div class="msg me">Placeholder question about this article</div>
+          <div class="msg"><small>Assistant, your provider</small>Placeholder reply that could link to an article in the reader.</div>
+          <div class="prompt">Ask about your feeds</div>
+        </div>
+      </div>
+    </div>
+    <p class="mockcap">Illustrative mock, not a screenshot.</p>
+    <div class="icons-row">
+      <img src="img/newsphere-icon-128.png" alt="The Newsphere app icon: four nested ellipses forming a sphere outline" width="64" height="64">
+      <p class="from">The app icon, copied from src-tauri/icons. Real asset.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ai" class="section">
+  <div class="wrap">
+    <h2>The assistant: optional, bring your own key</h2>
+    <p class="sub">The README says nothing is sent to a Newsphere-hosted backend. You switch it on under Settings, App, AI tools (beta), and supply your own credentials. It supports several hosted providers and any compatible endpoint, including local ones such as Ollama or LM Studio. Keys stay on the device.</p>
+    <ul class="inv">
+      <li><h4>Off by default <span class="badge ok">in the app</span></h4><div><p>When enabled, a control in the title bar opens a chat drawer with multiple sessions, and a floating prompt at the bottom starts a chat.</p></div></li>
+      <li><h4>Looks at your cache <span class="badge ok">in the app</span></h4><div><p>Each message adds a retrieval pass over locally cached headlines and excerpts, so the model sees relevant articles without you pasting them.</p></div></li>
+      <li><h4>Can use tools <span class="badge proto">beta</span></h4><div><p>A tool loop can read the open article, search the feed cache, list columns and pages, read bookmarks and history, fetch full article text from a URL, open an article or navigate. Web search is a separate switch, off by default. The README says tool calling can fail or misfire depending on the model.</p></div></li>
+      <li><h4>Limits stated by the repo <span class="badge unv">unverified</span></h4><div><p>Retrieval is snippet-based, streaming and citations are minimal, and cost controls are basic. Whether it works well with a given model was not tested here.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>Status</h2>
+    <ul class="legend" aria-label="Status key">
+      <li><span class="badge ok">runs</span> described in the README as working</li>
+      <li><span class="badge proto">beta</span> early, expect rough edges</li>
+      <li><span class="badge plan">planned</span> on the roadmap only</li>
+      <li><span class="badge unv">unverified</span> not checked for this page</li>
+    </ul>
+    <ul class="inv">
+      <li><h4>macOS, Apple Silicon <span class="badge proto">beta</span></h4><div><p>The main development target. It is the only setup the README says was exercised day to day.</p></div></li>
+      <li><h4>macOS, Intel <span class="badge unv">unverified</span></h4><div><p>A build is produced by the workflow, but the README says it has not been meaningfully tested.</p></div></li>
+      <li><h4>Windows <span class="badge unv">unverified</span></h4><div><p>The window chrome has a Windows layout, but the README says it has not been meaningfully tested and that a Windows build job is a future step.</p></div></li>
+      <li><h4>Installers <span class="badge unv">unverified</span></h4><div><p>The repository holds two <code>Newsphere.dmg</code> files, one per Mac architecture, each about 44 MB (44.5 MB measured here). They are not linked from this page and were not opened or run. The README does not say they are signed or notarized and lists that as a roadmap item.</p><p class="from">Source: public/downloads/macos-arm64 and macos-x64</p></div></li>
+      <li><h4>Not App Store compatible <span class="badge ok">stated</span></h4><div><p>The rounded window uses a macOS private API, which the README says rules out the App Store for that build.</p></div></li>
+      <li><h4>Roadmap <span class="badge plan">planned</span></h4><div><p>Sturdier feed fetching on large sets, better article extraction, signed builds, a Windows build, and maybe a light web build. The README makes no firm commitment on the web version.</p></div></li>
+      <li><h4>Licence <span class="badge unv">unverified</span></h4><div><p>The README gives the licence only as "Private / your choice". Check with the author before reusing the code.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap">
+    <h2>Links</h2>
+    <p class="sub">The README does not state a public URL for the app or the code, so none is claimed here. It mentions a separate marketing repository, <code>newsphere-site</code>, under the same GitHub owner; that was not checked.</p>
+    <ul class="inv">
+      <li><h4>Source repository</h4><div><p>Local folder <code>newsphere</code>. Entry points: <code>README.md</code>, <code>src/</code>, <code>src-tauri/</code>.</p></div></li>
+      <li><h4>Run it from source</h4><div><p>Needs the Tauri 2 prerequisites and Node 20 or newer, then <code>npm install</code> and <code>npm run tauri dev</code>. Not run for this page.</p></div></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Newsphere. A desktop feed reader. First beta.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html" aria-current="page">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/icon-style-editor.md</span></div>
+        <div class="doc-body">
+
+<p>Open it with the dock icon (paintbrush) or the <code>i</code> key. Left: every app icon at Large (56), Dock (the Settings icon size, at most 56) and Small (24) on a light and a dark backdrop. Right: presets, ten pages of controls, Reset, Export, Import. Every change reaches the preview and the real dock at once (one style, one <code>DrawIconTile</code>).</p>
+<h2 id="controls-page-what">Controls (page: what)<a class="headerlink" href="#controls-page-what" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Shape</strong>: corner radius (0 square to 100 circle), presets Square, Round, Squircle, Circle, squircle corners toggle (superellipse, exponent 4).</li>
+<li><strong>Fill</strong>: Solid, Linear (angle), Radial; 2 or 3 stops, each a swatch (lighter, tile colour, darker, 11 fixed colours); middle stop position.</li>
+<li><strong>Scheme</strong>: App accents, Mono, Duo, Pastel, Vivid, Sunset, Ocean, Gold, Desktop (follows the current desktop style), Custom; a 12 by 4 hue and lightness palette picks colour A and B; "one shared colour" uses A for every tile.</li>
+<li><strong>Tone</strong>: hue shift, saturation, brightness.</li>
+<li><strong>Depth</strong>: bevel strength and size, gloss band, inner shadow, "preview all pressed".</li>
+<li><strong>Shadow</strong>: drop shadow opacity, offset, blur; tilt (vertical squash) and reflection.</li>
+<li><strong>Glyph</strong>: stroke weight, filled shapes (0 is outline), size, offset x and y, colour (auto contrast, white, dark, tint).</li>
+<li><strong>Border</strong>: ring width, colour, opacity; glass tile (see-through, the dock pill and its blurred backdrop show through) and its opacity.</li>
+<li><strong>Extras</strong>: outer glow and radius, grain, fade when the app is closed, hover lift, glyph shadow, glyph glow.</li>
+<li><strong>Layout</strong>: dock tile size (Settings value), gap between tiles, name label on hover, "Time rebuild".</li>
+<li>Presets: Default, Flat, Glass, Soft (neumorphic), Pop (gradient), 3D (skeuomorphic), Mono (line), Temple. Reset returns style and layout to the defaults.</li>
+<li>Keyboard: Tab or Down next control, Up previous, Left and Right adjust (or choose), Space or Enter toggles and presses, Page Up and Down change page, <code>m</code> times a rebuild. Hover a preview tile for lift and its name; press on it for the pressed look.</li>
+</ul>
+<h2 id="style-string">Style string<a class="headerlink" href="#style-string" title="Link to this section">#</a></h2>
+<p><code>KSI1</code> followed by every parameter that differs from its default, as a two letter key and a number: <code>KSI1 rd50 sq1 fl2 sc7 bv40 gl25 sd40 so3 sb6 gc2 rw1 rk1 ra50 ow30 or5 gn15</code>. Export writes it into Notes (and opens Notes); Import finds the first <code>KSI1</code> in Notes, resets the style and applies the line. A preset is the same kind of line. Keys are in <code>is_k</code> (03c), ranges in <code>is_lo</code> and <code>is_hi</code>.</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Link to this section">#</a></h2>
+<ul>
+<li><code>is_v[]</code> (the IconStyle) holds every parameter as an I64; the dock size, gap and label live in <code>ks_dsize</code>, <code>ks_dgap</code>, <code>ks_ilabel</code>. <code>is_sig</code> hashes the tile parameters; <code>is_def</code> says all are default.</li>
+<li><code>DrawIconTile(x,y,size,app,state)</code> (state: 1 pressed, 2 inactive, 4 hover). Default style: the old direct draw (RRFill and LIcon), so the dock costs what it did. Otherwise: colour tile per (app, size, signature, state) in a 256 slot two-way cache; shared planes per size (shape alpha, bevel bands, gloss, inner shadow, ring, grain, shadow and glow with a margin, radial index, row spans) built once per shape; glyph masks cached per (icon, size, weight, fill).</li>
+<li>A tile is built from <code>Fill32</code>, a 64 entry ramp stepped in 16.16 fixed point (two pixels a store), and <code>KsBlendA2D</code> through the planes. A frame blits: shadow and glow planes, per row the soft edge pixels, then <code>Copy32</code> (or <code>LerpRow</code> for glass) of the opaque run. Nothing is rebuilt while the signature is unchanged.</li>
+<li>Sizes are quantised to multiples of 4 native pixels so a magnifying dock reuses tiles. The dock reaches <code>DrawIconTile</code> through the pointer <code>ks_ictile</code> (a call through a forward declaration does not reach a later definition on either HolyC).</li>
+<li>Aiwnios: same file, no asm, integer paths; see aiwnios/drive-icons.HC for the headless driver.</li>
+</ul>
+<h2 id="numbers">Numbers<a class="headerlink" href="#numbers" title="Link to this section">#</a></h2>
+<p>QEMU x86 at 2880x1800 (ms a frame, average, before with 11 apps and after with 12 apps and the Icons app, default style): dock sweep warm 3.2 and 3.7, cold 4.0 and 5.0, drag large 6.5 and 6.6, drag small 4.7 and 4.7, full redraw 17.8 and 19.0. The default style takes the old direct path, so the rise is the twelfth icon and the wider dock.
+Rebuilding the 12 dock tiles (Glass preset, 104 px tiles): 2.5 ms with the planes and glyph masks cached, 4.8 ms with every plane and mask rebuilt (Layout page, "Time rebuild", or key <code>m</code>; also a serial line <code>icons|rebuild|...</code>). Aiwnios on Apple Silicon: 0.1 to 0.9 ms and 0.2 to 1.6 ms depending on the preset. Nothing is built while the style is unchanged; a frame only blits.</p>
+<h2 id="limits">Limits<a class="headerlink" href="#limits" title="Link to this section">#</a></h2>
+<p>Tilt is a vertical squash with a reflection, not a perspective. Glass uses the dock pill, so it shows blur only where the dock is translucent. Import reads Notes, not a file. Colours of Desktop scheme and tiles follow the desktop style; the default style in a dark desktop style keeps the old dark glyph. Weights above 100 percent use a blurred dilation. The Quit button is not an app tile and is unchanged.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/fonts/index.html" rel="prev"><span>Previous</span>Font Manager: plan</a><a class="next" href="../../../docs/apps/maps/index.html" rel="next"><span>Next</span>Maps app: plan</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#controls-page-what">Controls (page: what)</a></li><li><a href="#style-string">Style string</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#limits">Limits</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos: the generative AI operating system</title>
+<meta name="description" content="kosmos.computer is a generative AI operating system: one shell for chat, code, files and generated apps, built with the Arco UI library. What exists, how far each part is, and where to start. Not the Kosmos 3D engine.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/kosmos-mark-dark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="kosmos-computer.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-kc" href="#top" aria-label="Kosmos, top of page">
+      <img src="img/kosmos-pixel-wordmark-dark.svg" alt="" width="128" height="15">
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#what">What it is</a>
+      <a href="#shell">Shell</a>
+      <a href="#apps">Apps</a>
+      <a href="#arco">Arco UI</a>
+      <a href="#sdk">SDK</a>
+      <a href="#status">Status</a>
+      <a href="#start">Get started</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <p class="mono-h">kosmos.computer</p>
+      <h1>The generative AI operating system.</h1>
+      <p class="lead">One shell for chat, code, files and generated apps, with agents that share context across every workspace. The interface is built with Arco, a generative UI library.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#start">Get started</a>
+        <a class="btn" href="https://docs.kosmos.computer" rel="noopener">Docs</a>
+        <a class="btn" href="https://github.com/Kosmos-computer/Kosmos" rel="noopener">GitHub</a>
+      </p>
+    </div>
+    <div class="hero-mock">
+      <div class="shell" role="img" aria-label="Illustration of the Kosmos shell: a menu bar, a navigation rail, a chat window with an agent reply and a dock. All content is made up.">
+        <div class="sh-menu" aria-hidden="true"><b>Kosmos</b><span>Chat</span><i></i><span>Tue 10:24</span></div>
+        <div class="sh-body" aria-hidden="true">
+          <ul class="sh-rail"><li class="on"></li><li></li><li></li><li></li><li></li></ul>
+          <div class="sh-win">
+            <div class="sh-top"><span class="dots"><i></i><i></i><i></i></span><span>Chat</span></div>
+            <div class="sh-chat">
+              <p class="me">Plan my week and draft the invite.</p>
+              <div class="ag"><p>Here is a plan and a draft.</p>
+                <div class="blk"><b>Week plan</b><span>Mon design review</span><span>Wed write-up</span><span>Fri demo</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="sh-dock" aria-hidden="true"><li></li><li></li><li class="on"></li><li></li><li></li><li></li></ul>
+      </div>
+      <p class="small-print">Illustration of the shell parts, with made-up content. Not a screenshot.</p>
+    </div>
+  </div>
+</section>
+
+<section id="night" class="night" aria-labelledby="night-h">
+  <canvas class="night-stars" id="night-stars" aria-hidden="true"></canvas>
+  <div class="night-in">
+    <p class="night-kicker">kosmos.computer</p>
+    <h2 id="night-h">A generative AI operating system for integrated work and life.</h2>
+    <p class="night-p">One shell for chat, code, files and generated apps, with agents that share context across every workspace. It owns the shell, the workspaces, the agent experience, the app platform and the APIs that clients and the SDK talk to.</p>
+    <p class="night-cta">
+      <a class="nbtn solid" href="#start">Get started</a>
+      <a class="nbtn ghost" href="../arco/index.html">Arco UI library</a>
+    </p>
+  </div>
+</section>
+
+<section id="sprite" class="section sprite-sec sprite-full" aria-label="Kosmos sprite mark">
+  <div class="wrap">
+    <div class="sprite-stage" id="sprite-host"><img src="img/kosmos-pixel-wordmark-dark.svg" alt="Kosmos" width="700" height="80"></div>
+    <div class="sprite-tools">
+      <button class="pill" type="button" id="sp-toggle" aria-expanded="false" aria-controls="sprite-panel" hidden>Show controls</button>
+    </div>
+    <div class="sprite-panel" id="sprite-panel" hidden>
+      <div class="sprite-bar" id="sprite-ui">
+        <div class="sprite-btns" role="group" aria-label="Sprite mark controls">
+          <button class="pill" type="button" id="sp-replay">Replay</button>
+          <button class="pill" type="button" id="sp-pause" aria-pressed="false">Pause</button>
+          <button class="pill" type="button" id="sp-png">Download PNG</button>
+        </div>
+        <label class="sprite-field"><span class="lbl">Animation</span>
+          <select id="sp-pattern"></select></label>
+        <label class="sprite-field"><span class="lbl">Your word</span>
+          <input id="sp-text" type="text" value="KOSMOS" maxlength="10" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="sp-hint"></label>
+      </div>
+      <p class="sprite-hint" id="sp-hint">Up to 10 characters: A to Z, 0 to 9, space, ! and . Anything else is skipped.</p>
+      <p class="src">The Kosmos sprite mark, ported from the archived kosmos.computer repo: a 7 by 5 grid of squares per letter, played with its boot animation strings. Letters the original lacks (K, M and others) are drawn in the same style.</p>
+    </div>
+  </div>
+</section>
+
+<section id="what" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <p class="mono-h">What it is</p>
+      <h2>An operating system that agents build apps in.</h2>
+      <p class="sub">Kosmos is not a chat sidebar bolted onto an IDE. It owns the shell, the workspaces, the agent experience, the app platform and the APIs that clients and the SDK talk to.</p>
+    </div>
+    <div>
+      <ul class="list">
+        <li><h3>Stable shell <span class="badge">prototype</span></h3><p>A navigation rail, windows and workspaces that stay consistent while agents and apps change underneath.</p></li>
+        <li><h3>Agent surface <span class="badge">prototype</span></h3><p>Chat and tools that share which workspace, window and entity are in focus.</p></li>
+        <li><h3>Generated apps <span class="badge">prototype</span></h3><p>Interfaces assembled from Arco tokens, components and blocks, rather than pasted as text.</p></li>
+        <li><h3>Hosted or self-run <span class="badge ok">available</span></h3><p>Kosmos Cloud for a private managed instance (beta), or run it locally or self-host with Docker.</p></li>
+      </ul>
+      <p class="src">Sources: docs guide <code>kosmos/what-is-kosmos</code>, <code>kosmos/run-locally</code>, <code>kosmos/self-host</code>. The app itself is a prototype repository; a running shell was not rendered for the archive.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shell" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <p class="mono-h">The shell</p>
+      <h2>Windows, a dock and a command palette.</h2>
+      <p class="sub">The shell is written in React. These are the real parts in the repository, from the archive of 24 Oct 2026.</p>
+    </div>
+    <ul class="cards">
+      <li><h3>Window frame</h3><p><code>WindowFrame</code> draws app windows with controls and a focused title.</p></li>
+      <li><h3>Dock and hover dock</h3><p><code>Dock</code>, <code>HoverDock</code> and <code>MobileDock</code> hold pinned apps; extra apps sit under "View all apps".</p></li>
+      <li><h3>Menu bar</h3><p><code>MenuBar</code>: left-nav toggle, search, focused window title, status tray, clock and settings.</p></li>
+      <li><h3>Navigation rail</h3><p><code>NavRail</code> switches workspaces without reshuffling the chrome.</p></li>
+      <li><h3>Command palette</h3><p><code>CommandPalette</code>: a Cmd+K overlay to jump to apps and settings sections, or switch shell modes.</p></li>
+      <li><h3>Native shells</h3><p>Electron (desktop), Capacitor (mobile), Tauri and a Swift menu bar tasks app live next to it.</p></li>
+    </ul>
+    <p class="src">Sources: <code>src/os/*.tsx</code> in the Kosmos repository (all <span class="badge">prototype</span>). The OS shell and app windows could not be rendered without the backend, so no screenshot of them exists.</p>
+    <div class="shots">
+      <figure><img src="img/www-index.jpg" alt="Archived screenshot of the public kosmos.computer splash: a dark page with the word Kosmos, one sentence and three buttons." width="1400" height="972"><figcaption>Archived screenshot. The public kosmos.computer splash.</figcaption></figure>
+      <figure><img src="img/docs-kosmos.jpg" alt="Archived screenshot of the docs page What is Kosmos, with its layer diagram." width="1400" height="972"><figcaption>Archived screenshot. The docs page "What is Kosmos?".</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="apps" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <p class="mono-h">Apps</p>
+      <h2>About forty app windows.</h2>
+      <p class="sub">The registry of system apps in the shell lists these names. They are code in a prototype repository: whether each one works is not verified here.</p>
+    </div>
+    <ul class="chips" aria-label="System apps in the shell">
+      <li>Chat</li><li>Studio</li><li>Apps</li><li>Skills</li><li>Agents</li><li>Memory</li><li>Key Wallet</li><li>APIs</li><li>Automations</li><li>Drive</li><li>Maps</li><li>Search</li><li>Longformer</li><li>Kamiji</li><li>Keyboard</li><li>Music</li><li>Video</li><li>Meet</li><li>Podcasts</li><li>Downloads</li><li>Pay</li><li>Notes</li><li>Email</li><li>Calendar</li><li>Tasks</li><li>Board</li><li>Contacts</li><li>Groups</li><li>Messenger</li><li>Social</li><li>Sheets</li><li>Generator</li><li>Image Gen</li><li>Terminal</li><li>Models</li><li>Settings</li>
+    </ul>
+    <p class="src">Source: <code>src/os/systemApps.tsx</code> (<span class="badge">prototype</span>). Static installable apps (calculator, calendar, game, timer, docs, slides) also exist as <span class="badge unv">unverified</span>. Kamiji is one of the apps; this is a different product from <a href="../index.html">Kamiji</a> the character library.</p>
+  </div>
+</section>
+
+<section id="arco" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <p class="mono-h">Arco UI</p>
+      <h2>The vocabulary agents draw with.</h2>
+      <p class="sub">Arco owns the tokens, components, blocks and registry contract. Kosmos owns the shell and the agent. The two have different names on purpose.</p>
+      <p class="cta-row"><a class="btn primary" href="../arco/index.html">Arco UI page</a></p>
+    </div>
+    <div>
+      <table class="tbl">
+        <thead><tr><th></th><th>Kosmos</th><th>Arco</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">What it is</th><td>Generative AI operating system</td><td>Generative UI library</td></tr>
+          <tr><th scope="row">Owns</th><td>Shell, workspaces, agent UX, app platform</td><td>Tokens, components, blocks, registry contract</td></tr>
+          <tr><th scope="row">Name used</th><td>"Kosmos" in product copy</td><td>"Arco" in docs and library APIs</td></tr>
+        </tbody>
+      </table>
+      <p class="small">When an agent generates UI, Kosmos provides the context (workspace, window, entity in focus), Arco provides the valid blocks and props, and a registry validates the output. The registry is <span class="badge plan">planned</span>; the tokens and primitives are <span class="badge">prototype</span>.</p>
+      <p class="src">Sources: docs guide <code>kosmos-vs-arco</code>, <code>what-is-arco</code>. Components, tokens and the live demo are on the <a href="../arco/index.html">Arco page</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="sdk" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <p class="mono-h">SDK</p>
+      <h2>Talk to a Kosmos environment from code.</h2>
+      <p class="sub">The Kosmos SDK is an HTTP and streaming client for one environment, local or hosted. It streams typed agent events and is published under the MIT licence. <span class="badge ok">available</span></p>
+    </div>
+    <div>
+      <pre><code>npm install @kosmos-computer/sdk</code></pre>
+      <pre><code>import { KosmosClient } from "@kosmos-computer/sdk";
+
+const kosmos = new KosmosClient({
+  baseUrl: process.env.KOSMOS_URL!,
+  token: process.env.KOSMOS_TOKEN!,
+});
+
+await kosmos.ping();
+
+for await (const event of kosmos.chat.stream({
+  message: "List my calendar events for today",
+  mode: "agent",
+})) {
+  if (event.type === "text_delta") process.stdout.write(event.delta);
+}</code></pre>
+      <p class="small">Packages: <code>@kosmos-computer/sdk</code> and <code>@kosmos-computer/types</code>. You need an external client token from Settings, External Access, and Node.js 22 or later.</p>
+      <p class="src">Sources: docs <code>sdk/overview</code>, <code>sdk/getting-started</code>; repository Kosmos-computer/kosmos-sdk (MIT).</p>
+    </div>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <p class="mono-h">Status</p>
+      <h2>What is live and what is not.</h2>
+      <p class="sub">Taken from the owner's archive of 24 Oct 2026. It may be out of date.</p>
+    </div>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Status table">
+      <table class="tbl wide">
+        <thead><tr><th>Part</th><th>Status</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Public splash, kosmos.computer</th><td><span class="badge ok">available</span></td><td>Redirects to www.kosmos.computer: the word Kosmos, one sentence, a Mac download, GitHub and Docs.</td></tr>
+          <tr><th scope="row">Other www pages (features, apps, platforms and more)</th><td><span class="badge unv">unverified</span></td><td>Live but behind a temporary passcode since 11 Jul 2026, so not public.</td></tr>
+          <tr><th scope="row">Docs, docs.kosmos.computer</th><td><span class="badge ok">available</span></td><td>Docusaurus site: Kosmos, Guide, Reference and SDK sections.</td></tr>
+          <tr><th scope="row">Desktop, Android APK, Chromebook, SteamOS, browser (PWA)</th><td><span class="badge ok">available</span></td><td>As listed in the site's own copy; not independently verified.</td></tr>
+          <tr><th scope="row">iOS</th><td><span class="badge plan">planned</span></td><td>"Coming": a Capacitor build path, no App Store release.</td></tr>
+          <tr><th scope="row">Kosmos Cloud (managed instance)</th><td><span class="badge">prototype</span></td><td>Called beta in the site copy. Sign-in needs an account.</td></tr>
+          <tr><th scope="row">OS shell and system apps</th><td><span class="badge">prototype</span></td><td>Source of 18 Oct 2026; needs its backend, not rendered here.</td></tr>
+          <tr><th scope="row">Arco block registry</th><td><span class="badge plan">planned</span></td><td>Described in the docs as planned.</td></tr>
+          <tr><th scope="row">SDK</th><td><span class="badge ok">available</span></td><td>MIT, source of 10 Jul 2026.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="start" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <p class="mono-h">Get started</p>
+      <h2>Run it yourself, or use the hosted beta.</h2>
+      <p class="sub">The shortest path from the docs. An LLM API key is optional for a first start: a mock provider works offline.</p>
+    </div>
+    <div>
+      <ol class="steps">
+        <li>Install Node.js 22 or later, then clone <a href="https://github.com/Kosmos-computer/Kosmos" rel="noopener">Kosmos-computer/Kosmos</a>.</li>
+        <li>From the repository root run:
+<pre><code>npm install
+npm run setup   # first run
+npm run dev     # shell :4610, API :4600</code></pre></li>
+        <li>Open <code>http://localhost:4610</code> and complete the install wizard (model mode, then owner account).</li>
+        <li>Want it managed? Sign up for <a href="https://docs.kosmos.computer/kosmos/cloud-get-instance" rel="noopener">Kosmos Cloud</a> (beta), or <a href="https://docs.kosmos.computer/kosmos/self-host" rel="noopener">self-host</a> with Docker.</li>
+      </ol>
+      <p class="src">Sources: docs <code>kosmos/run-locally</code>, <code>kosmos/self-host</code>. Commands are as published and were not run for this page.</p>
+    </div>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <p class="mono-h">Links</p>
+      <h2>Where the real product lives.</h2>
+    </div>
+    <ul class="list links">
+      <li><h3><a href="https://kosmos.computer" rel="noopener">kosmos.computer</a></h3><p>The public splash and download.</p></li>
+      <li><h3><a href="https://docs.kosmos.computer" rel="noopener">docs.kosmos.computer</a></h3><p>Guides, reference and the SDK.</p></li>
+      <li><h3><a href="https://github.com/Kosmos-computer/Kosmos" rel="noopener">github.com/Kosmos-computer/Kosmos</a></h3><p>The shell and system apps. <a href="https://github.com/Kosmos-computer/kosmos-sdk" rel="noopener">kosmos-sdk</a> holds the SDK.</p></li>
+      <li><h3><a href="../arco/index.html">Arco UI on this site</a></h3><p>Components, tokens and a scripted demo.</p></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>kosmos.computer, the generative AI operating system with the Arco UI library, is a different product from the <a href="../kosmos/index.html">Kosmos 3D engine</a> and from <a href="../index.html">Kamiji</a>. This page is a restyle built from the owner's archive; status labels may be out of date. The earlier dark version is at <a href="legacy/index.html">legacy</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="starfield.js"></script>
+<script type="module" src="sprite-section.js"></script>
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

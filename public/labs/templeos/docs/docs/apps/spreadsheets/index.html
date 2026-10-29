@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spreadsheets for the TempleOS desktop (HolyC) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html" aria-current="page">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Spreadsheets for the TempleOS desktop (HolyC)</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Spreadsheets for the TempleOS desktop (HolyC)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/spreadsheets.md</span></div>
+        <div class="doc-body">
+
+<p>Plan only, no code. Written 2026-10-27 on <code>task/templeos-shell</code>. Companion: <a href="../../../docs/apps/slides/index.html">slides.md</a>.
+Basis: <a href="../../../docs/holyc-native-apps-plan/index.html">holyc-native-apps-plan.md</a>, <a href="../../../docs/holyc-improvement-analysis/index.html">holyc-improvement-analysis.md</a>,
+<a href="../../../aiwnios/readme/index.html">aiwnios/README.md</a>, <code>desk3/01-core.HC</code>, <code>02-ui.HC</code>, <code>03-apps.HC</code>, and the Kosmos OS sources in section 5.
+Verification labels: <strong>(V)</strong> read or fetched today, <strong>(M)</strong> from memory, not checked.</p>
+<h2 id="1-purpose-and-users">1. Purpose and users<a class="headerlink" href="#1-purpose-and-users" title="Link to this section">#</a></h2>
+<p>A calculator-grade sheet for one user on the desktop: budgets, lists, small models, teaching examples, and quick checks of
+numbers that arrive from the host. It must run identically on the x86 guest (QEMU) and on Aiwnios (native arm64, see
+<code>aiwnios/README.md</code>), so the formula engine lives in HolyC, not on the host.</p>
+<p>Sizing target: 10,000 rows by 52 columns, sparse; about 5,000 populated cells and 2,000 formulas in a typical file.</p>
+<p>Out of scope: pivot tables, macros or scripts, real-time collaboration, data sets above one million cells, external data connections.</p>
+<h2 id="2-feature-inventory">2. Feature inventory<a class="headerlink" href="#2-feature-inventory" title="Link to this section">#</a></h2>
+<p>Sources: Microsoft's Excel function list (support.microsoft.com, about 514 entries, approximate); Google's Sheets function reference (support.google.com/docs/table/25273, about 520 functions in 17 categories, approximate); Apple's Numbers support page (support.apple.com/numbers: "hundreds of built-in functions", export to Excel, CSV and PDF); LibreOffice Calc (the Calc function list did not load; Calc details are from memory <strong>(M)</strong>). Effort: S under a day, M one to three days, L a week or more.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Seen in</th>
+<th>Priority</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grid, A1 references, selection, keyboard movement</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Cell values: number, text, boolean, error</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Formulas: arithmetic, comparison, <code>&amp;</code>, A1 refs, ranges</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Function set tier 1 (40 functions, section 4)</td>
+<td>all</td>
+<td>P0</td>
+<td>L</td>
+</tr>
+<tr>
+<td>Recalculation on edit with dependency tracking and cycle errors</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Number formats: General, fixed decimals, thousands, percent, ISO date</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Copy and fill with relative references</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Undo and redo (50 steps)</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Cut, copy and paste inside the app</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Several sheets: add, rename, delete; cross-sheet references</td>
+<td>all</td>
+<td>P1</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Column width, row height, freeze top row</td>
+<td>all</td>
+<td>P1</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Bold, italic, alignment, fill from the style palette</td>
+<td>all</td>
+<td>P1</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Charts: column, bar, line, pie</td>
+<td>all</td>
+<td>P1</td>
+<td>L</td>
+</tr>
+<tr>
+<td>Find and replace; sort a range by one column</td>
+<td>all</td>
+<td>P1</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Function set tier 2 (25 functions)</td>
+<td>all</td>
+<td>P1</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Named ranges</td>
+<td>Excel, Sheets, Calc</td>
+<td>P2</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Conditional formatting (one rule: value above or below a limit)</td>
+<td>all</td>
+<td>P2</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Data validation (list) and autofilter</td>
+<td>all</td>
+<td>P2</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Printing and PDF export</td>
+<td>all</td>
+<td>P2</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Function set tier 3 (15 functions)</td>
+<td>all</td>
+<td>P2</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Pivot tables, macros, scripts, comments, live collaboration</td>
+<td>Excel, Sheets, Numbers</td>
+<td>out</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-architecture-decision">3. Architecture decision<a class="headerlink" href="#3-architecture-decision" title="Link to this section">#</a></h2>
+<p>Options:</p>
+<ul>
+<li><strong>A. Native engine.</strong> Grid, editing, parser, dependency graph, recalculation, number formatting and chart drawing in HolyC.</li>
+<li><strong>B. Host engine.</strong> Every edit goes to a host service (IronCalc, HyperFormula, LibreOffice). Rejected for interactive use: each edit crosses
+  the serial channel, whose speed the native-apps plan gates at 50 KB/s but whose round-trip latency is unmeasured.</li>
+<li><strong>C. Hybrid.</strong> Native editing and recalculation; the host does file conversion, PDF output, and acts as the test oracle.</li>
+</ul>
+<p><strong>Recommendation: C.</strong> It is the only option that works offline, under QEMU and on Aiwnios with the same code.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Runs natively (HolyC)</th>
+<th>Runs on the host</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grid painting with dirty rectangles, scroll, selection, cell editing</td>
+<td>XLSX and ODS read and write</td>
+</tr>
+<tr>
+<td>Formula tokeniser, parser, evaluator, dependency graph</td>
+<td>PDF output</td>
+</tr>
+<tr>
+<td>Recalculation, error values, number formatting to text</td>
+<td>Large-file conversion and bulk checks</td>
+</tr>
+<tr>
+<td>Chart drawing (lines via <code>LineN</code>, pie via <code>DiskN</code>, rectangles, text)</td>
+<td>Golden oracle runs (LibreOffice headless, IronCalc)</td>
+</tr>
+<tr>
+<td>Undo stack, native <code>.KSS</code> file read and write, CSV and TSV</td>
+<td>Font work: none needed, the guest uses ASCII fonts</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-formula-engine">4. Formula engine<a class="headerlink" href="#4-formula-engine" title="Link to this section">#</a></h2>
+<p><strong>Parser.</strong> A tokeniser (numbers, strings in double quotes, references with <code>$</code>, ranges, names, function calls, operators) feeds a Pratt
+parser with Excel precedence. Excel binds unary minus tighter than <code>^</code>, so <code>-2^2</code> is 4; the test set checks this. Each formula compiles to a
+flat postfix array of opcodes stored with the cell. Evaluation walks that array with a pointer, with no recursion for ordinary formulas.</p>
+<p><strong>Values.</strong> One struct per value: type tag, an <code>F64</code> number, a string pointer into a small string pool, and an error code (<code>#DIV/0!</code>,
+<code>#VALUE!</code>, <code>#REF!</code>, <code>#NAME?</code>, <code>#N/A</code>, <code>#NUM!</code>, <code>#CYCLE!</code>).</p>
+<p><strong>Dependencies and recalculation.</strong> Each cell keeps its precedents. Ranges are stored as rectangles, and a reverse index maps a rectangle to the
+formulas that read it. An edit marks the forward closure dirty and evaluates it in topological order with a depth-first walk and an on-stack
+flag; a cell reached again while on the stack gives <code>#CYCLE!</code>. Budget: full recalculation of 2,000 formulas under 30 ms on Aiwnios; under QEMU
+the first measured figure sets the gate, with a fail threshold at 10 times the Aiwnios figure.</p>
+<p><strong>Numbers.</strong> Values are <code>F64</code> (IEEE double), as Excel and Google Sheets are. Reasons:
+- the goldens can match a Python reference computed in double;
+- the performance concern is per-frame float, which the grid avoids by caching formatted text; per-cell float work is cheap (the
+  benchmark set in the improvement analysis measures about 67 ns per float multiply-add under TCG, so 20,000 operations is about 1.3 ms);
+- an integer fast path handles <code>SUM</code> and <code>COUNT</code> when all operands are whole numbers.</p>
+<p>Decimal fixed point (I64 scaled by 10^6) was rejected for the main path: it overflows at about 9.2 trillion and cannot represent division.
+It is kept as a P2 option for a currency-only mode. Display rounds to 15 significant digits with integer digit extraction, not <code>PrintF</code>.</p>
+<p><strong>Known parity risk.</strong> TempleOS evaluates F64 in 80-bit x87; Aiwnios uses IEEE double. The aiwnios README records this as the reason some
+F64-derived pixels differ. Spreadsheet goldens therefore compare with a relative tolerance of 1e-12, and any value that differs at 1e-15 is
+reported, not failed.</p>
+<p><strong>Function tiers (80 in total).</strong></p>
+<ul>
+<li><strong>P0 (40):</strong> SUM AVERAGE MIN MAX COUNT COUNTA COUNTBLANK PRODUCT ROUND ROUNDUP ROUNDDOWN ABS INT MOD POWER SQRT IF IFERROR AND OR NOT
+  ISBLANK ISNUMBER ISTEXT ISERROR CONCAT LEN LEFT RIGHT MID UPPER LOWER TRIM TEXT VLOOKUP HLOOKUP INDEX MATCH SUMIF COUNTIF.</li>
+<li><strong>P1 (25):</strong> AVERAGEIF SUMIFS COUNTIFS IFS SWITCH TODAY NOW DATE YEAR MONTH DAY WEEKDAY EDATE PMT PV FV MEDIAN STDEV LN EXP LOG
+  SUBSTITUTE FIND VALUE SUMPRODUCT.</li>
+<li><strong>P2 (15):</strong> XLOOKUP FILTER SORT UNIQUE SEQUENCE RANDBETWEEN LET MAXIFS MINIFS TEXTJOIN CHOOSE OFFSET INDIRECT NETWORKDAYS REPT.</li>
+</ul>
+<p>Semantics to match: ROUND rounds halves away from zero; dates use Excel's 1900 serial system, including its false 29 February 1900
+(M, from Excel's documented behaviour); text comparison is case-insensitive. Excluded everywhere: <code>WEBSERVICE</code>, <code>IMPORTDATA</code>,
+<code>GOOGLEFINANCE</code>, and any function that reads a file or the network. <code>OFFSET</code> and <code>INDIRECT</code> are volatile and stay P2.</p>
+<p><strong>Charts.</strong> Column, bar, line, pie in P1; scatter and area in P2. They read a range and draw with the existing primitives: <code>Rect</code>, <code>RRFill</code>,
+<code>Line</code>/<code>LineN</code> for series lines, <code>DiskN</code> for pie slices (angles need trig, once per slice, acceptable). Labels use the 8-pixel and 16-pixel
+fonts already loaded (<code>F_SMALL</code>, <code>F_REG</code>).</p>
+<h2 id="5-data-model-and-file-format">5. Data model and file format<a class="headerlink" href="#5-data-model-and-file-format" title="Link to this section">#</a></h2>
+<p><strong>Reuse.</strong> Kosmos OS already defines a workbook: <code>packages/doc-interop/src/types.ts</code> (V) gives
+<code>WorkbookDoc { version, title, sheets: [{ id, name, cells: { "A1": { value, formula, format } } }] }</code>, with <code>format</code> covering bold, italic,
+strikethrough, alignment, a three-value number format (<code>plain</code>, <code>currency</code>, <code>percent</code>) and a fill. <code>shared/sheetFormula.ts</code> (V) is a small
+TypeScript evaluator covering SUM, AVERAGE, MIN, MAX, COUNT and IF; it is useful as a behavioural reference, not as the engine.</p>
+<p><strong>Gaps</strong> versus this plan: no column widths, row heights, merged cells, freeze panes, charts, named ranges, validation or conditional formats,
+and a number format too coarse for decimals or dates.</p>
+<p><strong>Proposal.</strong> Version 2 of <code>WorkbookDoc</code>, additive only: <code>cols</code>, <code>rows</code>, <code>freeze</code>, <code>charts</code>, <code>names</code>, and <code>numberFormat</code> accepting an Excel-style
+format code, with the old enum kept as an alias. Version 1 files keep loading in both apps. The Kosmos OS importers and the TempleOS app read
+the same JSON on the host side.</p>
+<p><strong>Guest file.</strong> <code>.KSS</code>, one record per line, ASCII only, written by the host converter from <code>WorkbookDoc</code>:</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>KSS 1
+SHEET Sheet1
+W A 14
+C A1 S Item
+C B1 S Amount
+C B2 N 1200
+C B3 F =SUM(B2:B2)*1.25
+FMT B2 #,##0.00</code></pre></figure>
+<p>Non-ASCII text is written as <code>\uXXXX</code> escapes and shown as <code>?</code> on the guest. CSV and TSV are read and written natively, but only the
+ASCII subset is round-tripped, and a leading <code>=</code> in imported text stays text.</p>
+<p><strong>Interop.</strong> The host converter reuses <code>packages/doc-interop</code> (V: CSV, TSV, ODS and XLSX, ESM TypeScript, runs under Node). The guest reaches it
+through the <code>KsExec</code> pattern in <code>03b-browser</code> (V: the bridge reads a request line and replies <code>OK n c</code>). Realistic subset: values, formulas as
+text, multiple sheets, bold, italic, alignment, column widths, common number formats. Dropped with a warning: charts, pivot caches,
+conditional formats, macros, external links (cached values kept). PDF: HTML rendered by LibreOffice headless (M) or Typst (M), in M7.</p>
+<h2 id="6-open-source-candidates">6. Open-source candidates<a class="headerlink" href="#6-open-source-candidates" title="Link to this section">#</a></h2>
+<p>Licences and versions checked today on GitHub, npm, crates.io and PyPI (V unless marked).</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Licence and version</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IronCalc</td>
+<td>MIT OR Apache-2.0; <code>ironcalc</code> 0.9.1 (crates.io, 2026-10-21); <code>@ironcalc/wasm</code> 0.9.1; README says "work in progress" and xlsx only</td>
+<td>Use as a host oracle for function results. Not in the guest. Young; do not depend on it for runtime.</td>
+</tr>
+<tr>
+<td>HyperFormula</td>
+<td>GPLv3 or a paid proprietary licence (README (V)); npm 3.5.0 is GPL-3.0-only (V)</td>
+<td>Semantics reference only. Do not link: GPL, or buy a licence. Blocked by default.</td>
+</tr>
+<tr>
+<td>formula.js (<code>@formulajs/formulajs</code>)</td>
+<td>MIT; 4.6.1 (V)</td>
+<td>Reference for each function's edge cases and test vectors. JavaScript, not portable to HolyC.</td>
+</tr>
+<tr>
+<td>calamine</td>
+<td>MIT; 0.37.0 (crates.io, 2026-10-18); reads xls, xlsx, xlsm, xlsb, ods; read-only (V)</td>
+<td>Host reader if the converter is Rust.</td>
+</tr>
+<tr>
+<td>SheetJS CE (<code>xlsx</code>)</td>
+<td>Apache-2.0 (README (V)); npm 0.18.5 (V). Newer versions are on sheetjs.com, not checked</td>
+<td>Second choice for a JavaScript host converter. Pro features are paid; CE is enough for this subset.</td>
+</tr>
+<tr>
+<td>openpyxl</td>
+<td>MIT; 3.1.5, uploaded 2024-06-28 (PyPI, V)</td>
+<td>Python host writer for XLSX if the converter is Python.</td>
+</tr>
+<tr>
+<td>LibreOffice Calc</td>
+<td>MPL-2.0 (M); help version 26.8 (V)</td>
+<td>Oracle for recalculation and PDF rendering, run as an external program, never linked.</td>
+</tr>
+<tr>
+<td>Typst</td>
+<td>Apache-2.0, Rust (V)</td>
+<td>PDF typesetting option for printed sheets. Optional.</td>
+</tr>
+<tr>
+<td><code>doc-interop</code> (Kosmos OS)</td>
+<td>Private package in this workspace; depends on exceljs, jszip, pptxgenjs (V)</td>
+<td>Reuse as the host converter. Its FIDELITY matrix is the spec.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7-security-and-privacy">7. Security and privacy<a class="headerlink" href="#7-security-and-privacy" title="Link to this section">#</a></h2>
+<ul>
+<li>No macros, scripts or plug-ins. The formula language cannot reach the network or the file system.</li>
+<li>Opening a file never fetches anything. External links are shown as text. Embedded objects and OLE data are skipped.</li>
+<li>Imports are capped: 5 MB of input, 1,000,000 cell records, a limit on zip entries and on uncompressed size (a zip-bomb guard before any
+  parsing).</li>
+<li>The converter reads and writes only the guest's <code>B:</code> directory and a folder the host picks; arguments are validated and never interpolated
+  into a shell line. It has no network access.</li>
+<li>Export to a path, share, or send each need an explicit prompt in the UI.</li>
+<li>CSV formula injection: a leading <code>=</code> in imported text is text. Export writes formulas as text and warns.</li>
+</ul>
+<h2 id="8-ui-specification">8. UI specification<a class="headerlink" href="#8-ui-specification" title="Link to this section">#</a></h2>
+<p>Layout follows the desk3 style: rounded window, toolbar strip with <code>RRFill</code> buttons, one line for the formula bar, a grid with a fixed header
+row and column, sheet tabs at the bottom, an inspector on the right that opens with a key.</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-----------------------------------------------------------------------+
+| Sheet  Edit  Insert  Format  Data  Help                   [Share] [X] |
+| [Save] [Undo] [Redo] | [B] [I] | [0.00] [%] [$] | [Chart] [fx]      |
++-----------------------------------------------------------------------+
+| B4  | =SUM(B2:B3)                                                     |
++-----+---------------+---------------+---------------+-----------------+
+|     |       A       |       B       |       C       |       D         |
+|  1  | Item          |        Amount |          Tax  | Total           |
+|  2  | Rent          |      1,200.00 |          0.00 | 1,200.00        |
+|  3  | Food          |        310.50 |          0.00 | 310.50          |
+|  4  |               |     [1,510.50]|               |                 |
++-----+---------------+---------------+---------------+-----------------+
+| [Sheet1] [Sheet2] [+]                  | Inspector: Format            |
+|                                        | Number:  0.00  (v)           |
+|                                        | Bold [x]  Fill: [16 swatches]|
++----------------------------------------------------------------------+</code></pre></figure>
+<p>Behaviour: arrows move the selection, Enter commits and moves down, Tab moves right, F2 edits in place, Esc cancels, a drag on the corner
+fills. Chart panel opens over the grid on request, and a chart is a movable object with a title.</p>
+<p>Text: two sizes plus bold, the ASCII fonts already loaded (<code>F_REG</code>, <code>F_BOLD</code>, <code>F_SMALL</code>, <code>F_BIG</code>). Colours: the 16-slot palette of the active style
+(<code>ks_pal</code>), not free colour, so the five styles stay consistent.</p>
+<h2 id="9-framework-needs-and-gaps">9. Framework needs and gaps<a class="headerlink" href="#9-framework-needs-and-gaps" title="Link to this section">#</a></h2>
+<p><strong>Present (V):</strong> <code>Button</code>, <code>Toggle</code>, <code>Radio</code>, <code>Slider</code>, <code>Check</code>, hit regions per window and the <code>Hit</code>/<code>HitAt</code> routing, per-window layers and
+dirty rectangles, <code>Txt</code>, <code>TxtR</code>, <code>Wrap</code> and <code>TW</code>, <code>RRFill</code>, <code>Line</code>, <code>Disk</code>, and <code>IconLoad</code>. The Notes app is a single text buffer with insert
+and delete (<code>NotesInsert</code>, <code>NotesDelete</code> in <code>03-apps.HC</code>): no selection, no caret movement, no undo.</p>
+<p><strong>Missing, in order of need:</strong></p>
+<ol>
+<li>A text field with a caret, selection, and home, end and word movement.</li>
+<li>A virtualised grid scroll view with a fixed header, drawing only visible cells.</li>
+<li>An undo stack built on commands, shared with slides.</li>
+<li>An internal clipboard (cells and text); the guest has no system clipboard. The host clipboard is a P2 service.</li>
+<li>Key-up and modifier state. Aiwnios reports these; the x86 path needs checking before relying on Shift-click range selection.</li>
+<li>A context menu. The desktop has only the Kosmos menu.</li>
+<li>A number input for the inspector.</li>
+<li>Unicode: none in the guest. Non-ASCII renders as <code>?</code>.</li>
+</ol>
+<h2 id="10-shared-infrastructure">10. Shared infrastructure<a class="headerlink" href="#10-shared-infrastructure" title="Link to this section">#</a></h2>
+<p>Shared with <a href="../../../docs/apps/slides/index.html">slides.md</a>, built once: a chart module (sheets use it for ranges, slides for chart objects); the cell model as the
+slide table model; <code>Wrap</code> and a width cache for text; a bounded undo queue; one <code>KsExec</code> converter protocol; the five styles' 16-slot palette
+(<code>ks_pal</code>); and a 32-bit image cache, with PNG and JPEG decoded on the host until a HolyC decoder exists.</p>
+<h2 id="11-milestones-and-gates">11. Milestones and gates<a class="headerlink" href="#11-milestones-and-gates" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Work</th>
+<th>Gate (pass)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>Grid paint, scroll, selection, cell store on both targets</td>
+<td>10,000-row sheet scrolls at 16 ms a frame on Aiwnios; QEMU figure recorded</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>Editing, tokeniser and parser for operators and refs</td>
+<td>40 parser cases pass; <code>-2^2</code> = 4</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>Dependency graph, recalculation, 40 P0 functions, cycles</td>
+<td>100 golden formula cases pass (below); recalc budget met</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>Native <code>.KSS</code>, CSV and TSV; host XLSX and ODS round trip</td>
+<td>10 sample workbooks round-trip with identical values</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>Charts (column, bar, line, pie)</td>
+<td>5 chart goldens match within the render tolerance</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>25 P1 functions, sheets, freeze panes, sort, find</td>
+<td>100 further cases pass</td>
+</tr>
+<tr>
+<td>M6</td>
+<td>Undo, paste, fill, number formats, column widths</td>
+<td>scripted drive of 200 edits leaves no residue</td>
+</tr>
+<tr>
+<td>M7</td>
+<td>PDF export, sharing and export prompts</td>
+<td>PDF of a 3-page workbook matches the grid; prompt tests pass</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Test plan.</strong></p>
+<ul>
+<li><strong>Golden workbooks:</strong> 20 small workbooks; expected values from a Python reference (<code>decimal</code> and <code>fractions</code> for exactness, <code>float</code> for
+  IEEE). LibreOffice headless recalculation is a second oracle, IronCalc a third where it implements the function. Tolerance 1e-12 relative.</li>
+<li><strong>100 formula cases</strong> as the M2 gate, a table of formula, inputs and expected value, generated and checked by the Python reference.</li>
+<li><strong>Differential fuzzing:</strong> 10,000 random expressions compared between the HolyC engine and the Python reference.</li>
+<li><strong>Render goldens:</strong> grid screenshots at 1440 by 900 with <code>golden.HC</code> and <code>pxdiff.py</code>, on both targets.</li>
+<li><strong>Performance:</strong> the benchmark set in the improvement analysis (section 11), reported as median of three runs.</li>
+</ul>
+<h2 id="12-risks">12. Risks<a class="headerlink" href="#12-risks" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>F64 cost under QEMU:</strong> a large recalculation may be slow. Mitigation: integer fast path, dirty-only recalculation, and a measured gate.</li>
+<li><strong>Excel compatibility:</strong> function edge cases (ROUND, the 1900 date bug, text comparison) are where spreadsheet tools disagree. Mitigation: the golden
+  cases encode the Excel answer and the LibreOffice answer is recorded separately.</li>
+<li><strong>Scope creep:</strong> pivots and charts of every kind. Mitigation: the P-levels in section 2 are the cut line.</li>
+<li><strong>ASCII only:</strong> non-English sheets display badly. Accept for version one; a Unicode font path is a separate project.</li>
+<li><strong>Converter drift:</strong> the Kosmos OS model changes. Mitigation: the version 2 proposal is additive, and the converter has golden round trips.</li>
+</ul>
+<h2 id="13-effort">13. Effort<a class="headerlink" href="#13-effort" title="Link to this section">#</a></h2>
+<p>Estimate, not measured: M0 to M2 about 6 to 8 weeks of focused HolyC work; M3 to M7 about 6 weeks; total about 3 to 4 months for one developer,
+with the framework items in section 9 counted in M0 to M2. Lower bound if charts are cut to column and pie only.</p>
+<h2 id="14-verified-and-from-memory">14. Verified and from memory<a class="headerlink" href="#14-verified-and-from-memory" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Verified (V):</strong> the Kosmos OS sources in sections 5 and 6, the desk3 names, the aiwnios notes, the benchmark figures, the licences and
+  versions in section 6, the Numbers summary, and the approximate Excel and Sheets counts.</li>
+<li><strong>From memory (M):</strong> LibreOffice's licence and function list, Excel's 1900 date rule, ROUND's mode, Excel's unary-minus precedence,
+  <code>exceljs</code> and <code>pptxgenjs</code> licences.</li>
+<li><strong>Not checked:</strong> IronCalc's function coverage, calamine's Python bindings, SheetJS versions after 0.18.5.</li>
+</ul>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/slides/index.html" rel="prev"><span>Previous</span>Slides for the TempleOS desktop (HolyC)</a><a class="next" href="../../../docs/apps/weather-music-prototype/index.html" rel="next"><span>Next</span>Weather and Music prototype: design notes</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-purpose-and-users">1. Purpose and users</a></li><li><a href="#2-feature-inventory">2. Feature inventory</a></li><li><a href="#3-architecture-decision">3. Architecture decision</a></li><li><a href="#4-formula-engine">4. Formula engine</a></li><li><a href="#5-data-model-and-file-format">5. Data model and file format</a></li><li><a href="#6-open-source-candidates">6. Open-source candidates</a></li><li><a href="#7-security-and-privacy">7. Security and privacy</a></li><li><a href="#8-ui-specification">8. UI specification</a></li><li><a href="#9-framework-needs-and-gaps">9. Framework needs and gaps</a></li><li><a href="#10-shared-infrastructure">10. Shared infrastructure</a></li><li><a href="#11-milestones-and-gates">11. Milestones and gates</a></li><li><a href="#12-risks">12. Risks</a></li><li><a href="#13-effort">13. Effort</a></li><li><a href="#14-verified-and-from-memory">14. Verified and from memory</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

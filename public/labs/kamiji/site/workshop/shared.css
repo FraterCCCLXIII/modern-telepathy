@@ -1,0 +1,123 @@
+/* Workshop editors. Builds on ../style.css tokens (light theme only). */
+.ws-page { overflow: hidden; }
+.ws-loading { margin: 0; padding: 40px var(--gutter); font: .72rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+
+.ws-top { height: 64px; display: flex; align-items: center; gap: 12px 24px; padding: 0 var(--gutter); position: relative; z-index: 20; }
+.ws-top .brand { font-size: 1.3rem; }
+.ws-crumb { margin: 0; font: .68rem/1.3 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.ws-crumb span { color: var(--fg); }
+.ws-top .ws { margin-left: auto; }
+
+.ws-app { display: grid; grid-template-columns: minmax(320px, 400px) minmax(0, 1fr); height: calc(100vh - 64px); height: calc(100svh - 64px); }
+
+/* layers panel */
+.ws-panel { overflow-y: auto; overflow-x: hidden; padding: 4px 20px 56px var(--gutter); border-right: 1px solid var(--faint); scrollbar-width: thin; }
+.ws-panel-head h1 { font-size: 1.7rem; }
+.ws-blurb { margin: .3em 0 0; color: var(--muted); font-size: .95rem; line-height: 1.45; }
+.ws-approx { margin: 28px 0 0; font: .64rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.ws-layer { margin: 18px 0 0; padding-bottom: 14px; border-bottom: 1px solid var(--faint); min-width: 0; }
+.ws-layer[hidden] { display: none; }
+.ws-layer.off .ws-rail { opacity: .45; }
+.ws-layer-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; min-height: 24px; }
+.ws-layer-t { font: .68rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 500; }
+.ws-layer-n { margin: 0 0 8px; font-size: .8rem; line-height: 1.4; color: var(--muted); }
+.ws-scrolls { display: none; gap: 4px; }
+.ws-layer-h.scrollable .ws-scrolls { display: inline-flex; }
+.ws-scroll { width: 24px; height: 24px; display: grid; place-items: center; border: 0; border-radius: 8px; background: var(--pill); color: var(--fg); font-size: 1rem; line-height: 1; padding: 0; cursor: pointer; }
+.ws-scroll:disabled { opacity: .3; cursor: default; }
+@media (pointer: coarse) { .ws-scrolls { display: none !important; } }
+
+.ws-rail { --fl: 0px; --fr: 0px; display: flex; flex-wrap: nowrap; gap: 6px; align-items: center; overflow-x: auto; padding: 4px 2px; margin: 0 -2px; scrollbar-width: none; overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%); }
+.ws-rail::-webkit-scrollbar { display: none; }
+.ws-rail > * { flex: none; }
+.ws-rail .pill { white-space: nowrap; display: inline-flex; align-items: center; gap: .5em; }
+.ws-rail .swatch { margin: 4px 6px 4px 2px; }
+.ws-rail-sub { margin-bottom: 2px; }
+.pill-s { min-height: 30px; padding: 3px 11px; font-size: .8rem; background: transparent; box-shadow: inset 0 0 0 1px var(--faint); }
+.pill-s[aria-pressed="true"] { box-shadow: none; }
+.dot-sw { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18); flex: none; }
+.pill[aria-pressed="true"] .dot-sw { box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .8); }
+.swatch.custom { position: relative; display: inline-block; background: conic-gradient(#ff6b6b, #ffd23f, #6bd66b, #4f9dff, #a77bff, #ff6b6b); cursor: pointer; }
+.swatch.custom.on { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--sel); }
+.swatch.custom input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; padding: 0; border: 0; }
+.swatch.custom:focus-within { outline: 3px solid var(--focus); outline-offset: 3px; }
+.ws-picked { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; min-height: 30px; align-items: center; }
+.chip { font: inherit; font-size: .8rem; padding: 4px 10px; border-radius: 999px; border: 0; background: var(--sel); color: var(--sel-fg); cursor: pointer; text-transform: capitalize; }
+.ws-none { font-size: .8rem; color: var(--muted); }
+
+/* stage */
+.ws-stage { position: relative; min-height: 0; background: radial-gradient(120% 90% at 50% 38%, #fff7e8 0%, #f7ead4 55%, #efdfc4 100%); overflow: hidden; }
+.ws-viewer { position: absolute; inset: 0 0 76px 0; }
+.ws-viewer canvas { width: 100%; height: 100%; }
+.ws-bar { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 6px; padding: 8px; max-width: calc(100% - 24px); border-radius: 999px; background: var(--card); box-shadow: 0 1px 0 var(--faint), 0 18px 40px -22px var(--shadow); overflow-x: auto; scrollbar-width: none; }
+.ws-bar::-webkit-scrollbar { display: none; }
+.ws-act { flex: none; font: .7rem/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; padding: 11px 15px; min-height: 40px; border-radius: 999px; border: 0; background: var(--pill); color: var(--fg); cursor: pointer; white-space: nowrap; }
+.ws-act:hover { filter: brightness(.96); }
+.ws-primary { background: var(--sel); color: var(--sel-fg); }
+.ws-toast { position: absolute; top: 14px; left: 50%; transform: translate(-50%, -8px); margin: 0; padding: 8px 16px; border-radius: 999px; background: var(--fg); color: var(--bg); font: .7rem/1.3 var(--mono); text-transform: uppercase; letter-spacing: .08em; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 24px); text-align: center; }
+.ws-toast.on { opacity: 1; transform: translate(-50%, 0); }
+#snap { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; }
+#snap[hidden] { display: none; }
+
+/* code dialog */
+.ws-dialog { border: 0; padding: 0; border-radius: 24px; background: var(--card); color: var(--fg); width: min(720px, calc(100vw - 24px)); max-height: calc(100svh - 32px); box-shadow: 0 30px 80px -20px rgba(31, 42, 34, .5); }
+.ws-dialog::backdrop { background: rgba(31, 42, 34, .35); }
+.ws-dialog-in { padding: 22px 22px 18px; display: grid; gap: 12px; }
+.ws-dialog h2 { font-size: 1.2rem; }
+.ws-tabs { display: flex; gap: 6px; }
+.ws-code { margin: 0; max-height: 46svh; overflow: auto; font-size: .8rem; }
+.ws-code-note { margin: 0; font-size: .82rem; color: var(--muted); }
+.ws-dialog-act { display: flex; gap: 8px; justify-content: flex-end; }
+
+/* phones and narrow windows: preview on top, layers below */
+@media (max-width: 900px) {
+  .ws-page { overflow: auto; }
+  .ws-top { height: 56px; }
+  .ws-crumb { display: none; }
+  .ws-app { display: flex; flex-direction: column; height: auto; }
+  .ws-stage { order: -1; flex: none; position: sticky; top: 0; z-index: 10; height: 56svh; min-height: 340px; border-bottom: 1px solid var(--faint); }
+  .ws-viewer { inset: 0 0 104px 0; }
+  .ws-bar { bottom: 8px; left: 10px; right: 10px; transform: none; max-width: none; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 6px; border-radius: 24px; overflow: visible; }
+  .ws-act { padding: 10px 12px; font-size: .64rem; }
+  .ws-panel { overflow: visible; border-right: 0; padding: 4px var(--gutter) 64px; }
+  .ws-panel-head h1 { font-size: 1.4rem; }
+  .ws-top .ws-menu { top: 52px; }
+}
+
+/* ground shadow overlay and range sliders */
+.ws-shadow { position: absolute; transform: translateX(-50%); border-radius: 50%; pointer-events: none; }
+.ws-shadow[hidden] { display: none; }
+.ws-rail-range { gap: 12px; mask-image: none; -webkit-mask-image: none; }
+.ws-range { flex: 1 1 auto; min-width: 140px; accent-color: var(--sel); height: 28px; }
+.ws-range-v { flex: none; font: .7rem/1 var(--mono); color: var(--muted); min-width: 3em; text-align: right; }
+.ws-viewer canvas { position: relative; z-index: 1; }
+
+/* Custom scroll bars: slim rounded thumb in the page green, quiet track. */
+.ws-panel, .ws-code, .ws-page, .ws-stage-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--sel, #1d1d1b) 55%, transparent) transparent;
+}
+.ws-panel::-webkit-scrollbar, .ws-code::-webkit-scrollbar, .ws-page::-webkit-scrollbar { width: 10px; height: 10px; }
+.ws-panel::-webkit-scrollbar-track, .ws-code::-webkit-scrollbar-track, .ws-page::-webkit-scrollbar-track { background: transparent; margin: 8px 0; }
+.ws-panel::-webkit-scrollbar-thumb, .ws-code::-webkit-scrollbar-thumb, .ws-page::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--sel, #1d1d1b) 45%, transparent);
+  border: 3px solid transparent; background-clip: content-box; border-radius: 999px;
+}
+.ws-panel::-webkit-scrollbar-thumb:hover, .ws-code::-webkit-scrollbar-thumb:hover, .ws-page::-webkit-scrollbar-thumb:hover,
+.ws-panel::-webkit-scrollbar-thumb:active, .ws-code::-webkit-scrollbar-thumb:active, .ws-page::-webkit-scrollbar-thumb:active {
+  background: var(--sel, #1d1d1b); border: 3px solid transparent; background-clip: content-box;
+}
+.ws-panel::-webkit-scrollbar-corner, .ws-code::-webkit-scrollbar-corner { background: transparent; }
+
+/* Desktop: the preview is a rounded card with a tight margin on the right and bottom. */
+@media (min-width: 901px) {
+  .ws-stage { margin: 0 10px 10px 0; border-radius: 28px; box-shadow: inset 0 0 0 1px rgba(31, 42, 34, .06); }
+}
+
+/* Desktop: no divider line beside the preview, and a tighter corner radius. */
+@media (min-width: 901px) {
+  .ws-panel { border-right: 0; }
+  .ws-stage { border-radius: 16px; }
+}

@@ -1,0 +1,150 @@
+[
+  {
+    "name": "thumbs_up",
+    "category": "reaction",
+    "tint": "#ffd23f",
+    "triangles": 1780,
+    "bytes": 33704,
+    "file": "thumbs_up.glb",
+    "keywords": [
+      "thumb",
+      "like",
+      "approve",
+      "yes",
+      "good",
+      "ok",
+      "+1"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "thumbs_down",
+    "category": "reaction",
+    "tint": "#ff9f7a",
+    "triangles": 1780,
+    "bytes": 33708,
+    "file": "thumbs_down.glb",
+    "keywords": [
+      "thumb",
+      "dislike",
+      "disapprove",
+      "no",
+      "bad",
+      "-1"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "wave_hand",
+    "category": "reaction",
+    "tint": "#ffd23f",
+    "triangles": 1508,
+    "bytes": 28644,
+    "file": "wave_hand.glb",
+    "keywords": [
+      "hello",
+      "hi",
+      "bye",
+      "greeting",
+      "wave"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "raised_hand",
+    "category": "reaction",
+    "tint": "#ffe680",
+    "triangles": 1156,
+    "bytes": 22220,
+    "file": "raised_hand.glb",
+    "keywords": [
+      "stop",
+      "high five",
+      "palm",
+      "halt",
+      "hand"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "ok_hand",
+    "category": "reaction",
+    "tint": "#ffd23f",
+    "triangles": 1620,
+    "bytes": 30564,
+    "file": "ok_hand.glb",
+    "keywords": [
+      "ok",
+      "okay",
+      "perfect",
+      "fine",
+      "circle"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "victory",
+    "category": "reaction",
+    "tint": "#ffd23f",
+    "triangles": 1116,
+    "bytes": 21488,
+    "file": "victory.glb",
+    "keywords": [
+      "peace",
+      "v sign",
+      "win",
+      "two fingers",
+      "scissors"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "fist_bump",
+    "category": "reaction",
+    "tint": "#ffd23f",
+    "triangles": 2608,
+    "bytes": 49124,
+    "file": "fist_bump.glb",
+    "keywords": [
+      "fist",
+      "bump",
+      "respect",
+      "cooperate",
+      "punch"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "pray",
+    "category": "reaction",
+    "tint": "#ffd23f",
+    "triangles": 1280,
+    "bytes": 24388,
+    "file": "pray.glb",
+    "keywords": [
+      "pray",
+      "please",
+      "thanks",
+      "namaste",
+      "hope",
+      "high five"
+    ],
+    "archivedFrom": "shapes"
+  },
+  {
+    "name": "muscle_arm",
+    "category": "reaction",
+    "tint": "#ffb089",
+    "triangles": 1320,
+    "bytes": 25184,
+    "file": "muscle_arm.glb",
+    "keywords": [
+      "strong",
+      "flex",
+      "bicep",
+      "power",
+      "workout"
+    ],
+    "archivedFrom": "shapes"
+  }
+]

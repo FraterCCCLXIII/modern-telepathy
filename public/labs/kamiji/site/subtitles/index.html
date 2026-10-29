@@ -1,0 +1,118 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subtitles: a playground for talking characters</title>
+<meta name="description" content="A reusable subtitle module for characters that talk: speaker labels, word timing, six styles, SRT and WebVTT import and export, reading-speed checks, RTL and CJK.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='5' width='20' height='14' rx='3' fill='none' stroke='%231d1d1b' stroke-width='2'/%3E%3Cpath d='M6 14h7M6 10h12' stroke='%231d1d1b' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="subtitles.css">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body class="sb">
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+<div class="wrap sb-wrap">
+  <h1 class="sb-h1">Subtitles</h1>
+  <p class="sb-lead">One module for every place a character talks. Try the six styles, move the playhead, load or export a subtitle file, and watch the reading speed.</p>
+
+  <section class="sb-stage-wrap" aria-label="Preview">
+    <div class="sb-stage" id="stage">
+      <div class="sb-backdrop" aria-hidden="true">
+        <div class="sb-sun"></div><div class="sb-hill sb-hill-a"></div><div class="sb-hill sb-hill-b"></div><div class="sb-floor"></div>
+      </div>
+      <div class="sb-figure" id="fig-kami" style="left:27%" aria-hidden="true">
+        <svg viewBox="0 0 100 120"><path d="M14 112c0-36 8-84 36-84s36 48 36 84z" fill="#fff" stroke="#111" stroke-width="4" stroke-linejoin="round"/><circle cx="38" cy="66" r="4.2" fill="#111"/><circle cx="62" cy="66" r="4.2" fill="#111"/><ellipse class="sb-mouth" cx="50" cy="84" rx="9" ry="1.2" fill="#111"/></svg>
+      </div>
+      <div class="sb-figure" id="fig-mochi" style="left:68%" aria-hidden="true">
+        <svg viewBox="0 0 100 120"><rect x="18" y="38" width="64" height="74" rx="30" fill="#e9e6da" stroke="#111" stroke-width="4"/><circle cx="39" cy="68" r="4" fill="#111"/><circle cx="61" cy="68" r="4" fill="#111"/><ellipse class="sb-mouth" cx="50" cy="85" rx="8" ry="1.2" fill="#111"/></svg>
+      </div>
+      <div class="sb-badge" aria-hidden="true">Stand-in figures (SVG), not the 3D avatar</div>
+    </div>
+  </section>
+
+  <section class="sb-transport card" aria-label="Playback">
+    <div class="sb-tr-row">
+      <button class="pill" id="b-play" type="button">Play</button>
+      <button class="pill" id="b-voice" type="button" title="Speaks the scene with your browser's system voice. Nothing leaves your device.">Play with voice</button>
+      <span class="sb-time" id="time" aria-live="off">0:00.0 / 0:00.0</span>
+      <label class="sb-inline"><span class="lbl">Speed</span>
+        <select id="rate"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option></select></label>
+    </div>
+    <div class="sb-scrub">
+      <canvas id="lane" aria-hidden="true"></canvas>
+      <input id="scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Timeline position">
+    </div>
+    <p class="sb-hint" id="lane-note">Bars show each line by speaker (shape marks). Red-outlined bars read too fast.</p>
+  </section>
+
+  <section class="sb-controls card" aria-label="Style and settings">
+    <div class="row"><span class="lbl">Style</span><div class="pills" id="styles" role="group" aria-label="Style"></div></div>
+    <div class="row"><span class="lbl">Language</span><div class="pills" id="langs" role="group" aria-label="Sample language"></div></div>
+    <div class="row"><span class="lbl">Place</span><div class="pills" id="place" role="group" aria-label="Vertical placement"></div></div>
+    <div class="row"><span class="lbl">Labels</span><div class="pills" id="labels" role="group" aria-label="Speaker labels"></div></div>
+    <div class="row"><label class="lbl" for="size">Size</label><div class="sb-range"><input id="size" type="range" min="0.6" max="2" step="0.05" value="1"><output id="size-o">100%</output></div></div>
+    <div class="row"><label class="lbl" for="bg">Background</label><div class="sb-range"><input id="bg" type="range" min="0" max="1" step="0.05" value="0.7"><output id="bg-o">default</output></div></div>
+    <div class="row"><span class="lbl">Captions</span><div class="pills"><button class="pill" id="cap" type="button" aria-pressed="true">On</button><button class="pill" id="reset" type="button">Reset settings</button><button class="pill" id="rm" type="button" aria-pressed="false" title="Forces the reduced-motion behaviour for testing: no typing, no bounce, instant lines">Reduced motion</button></div></div>
+    <p class="sb-hint">Size, background and captions on/off are saved in this browser only (localStorage). Your system "reduce motion" setting is honoured automatically.</p>
+  </section>
+
+  <section class="sb-read card" aria-label="Reading speed">
+    <div class="sb-cps">
+      <div><span class="lbl">Now showing</span><div class="sb-cps-big" id="cps-now" aria-live="off">-</div></div>
+      <div><span class="lbl">Scene check</span><div class="sb-cps-big" id="cps-scene">-</div></div>
+      <button class="pill" id="b-extend" type="button">Auto-extend slow lines</button>
+    </div>
+    <ul class="sb-warns" id="warns" aria-label="Warnings"></ul>
+  </section>
+
+  <section class="sb-add card" aria-label="Add a line">
+    <h2 class="sb-h2">Add a line</h2>
+    <form id="add" class="sb-form">
+      <label>Speaker <select id="a-who"></select></label>
+      <label class="sb-grow">Text <input id="a-text" type="text" value="I can add *this* line at the playhead." autocomplete="off"></label>
+      <label>Seconds <input id="a-dur" type="number" min="0.3" max="12" step="0.1" value="2.5"></label>
+      <label>As <select id="a-pres"><option value="on">on screen</option><option value="vo">(V.O.)</option><option value="os">(O.S.)</option></select></label>
+      <button class="pill" type="submit">Add at playhead</button>
+    </form>
+  </section>
+
+  <section class="sb-files card" aria-label="Import and export">
+    <h2 class="sb-h2">Import and export</h2>
+    <div class="pills">
+      <label class="pill sb-file">Load file<input id="file" type="file" accept=".srt,.vtt,.json,text/vtt,application/json,text/plain" hidden></label>
+      <button class="pill" data-exp="srt" type="button">Export SRT</button>
+      <button class="pill" data-exp="vtt" type="button">Export WebVTT</button>
+      <button class="pill" data-exp="vttw" type="button">WebVTT + word times</button>
+      <button class="pill" data-exp="json" type="button">Export JSON</button>
+      <button class="pill" id="b-load-text" type="button">Load from the box</button>
+    </div>
+    <textarea id="io" rows="6" spellcheck="false" aria-label="Subtitle file text" placeholder="Export fills this box. Paste SRT, WebVTT or JSON here and press Load from the box."></textarea>
+    <p class="sb-status" id="io-status" role="status"></p>
+  </section>
+
+  <section class="sb-thumbs card" aria-label="Storyboard thumbnails">
+    <h2 class="sb-h2">Storyboard thumbnails</h2>
+    <p class="sb-hint">The same lines drawn on 2D canvases with <code>drawSubtitleToCanvas</code>, no DOM: what the Previs storyboard strip would use.</p>
+    <div class="sb-thumb-row" id="thumbs"></div>
+  </section>
+
+  <section class="sb-honest card" aria-label="What is simulated">
+    <h2 class="sb-h2">What is real and what is simulated</h2>
+    <ul>
+      <li><strong>Real:</strong> line splitting, timing, the styles, reading-speed checks, SRT/WebVTT/JSON import and export, the accessibility transcript, saved settings, canvas drawing.</li>
+      <li><strong>Simulated:</strong> there is no recorded audio. Word times are estimated from text length (syllable-like weights), except for lines you load from a WebVTT file that carries its own word stamps. The two faces are plain SVG stand-ins whose mouths follow the <code>talking</code> event; they are not the 3D avatar.</li>
+      <li><strong>Play with voice</strong> uses your browser's built-in system voice only (<code>speechSynthesis</code>, no network). If the voice sends word boundary events the highlight follows them; if it does not, the module falls back to the estimated timing.</li>
+      <li><strong>Not done:</strong> translation (the Japanese and Arabic lines are hand-written samples), speech recognition, and wiring into Previs, the chat widget or the avatar. See the README for the integration plan.</li>
+    </ul>
+  </section>
+</div>
+</main>
+
+<script type="module" src="demo.js"></script>
+<script type="module" src="../shared-header.js"></script>
+</body>
+</html>

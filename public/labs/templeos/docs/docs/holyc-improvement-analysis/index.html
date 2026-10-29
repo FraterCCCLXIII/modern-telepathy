@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Improving HolyC on all of its deficits: analysis and ranked plan | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" open data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html" aria-current="page">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Research and reviews</span></li><li aria-current="page">Improving HolyC on all of its deficits: analysis and ranked plan</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Improving HolyC on all of its deficits: analysis and ranked plan</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/holyc-improvement-analysis.md</span></div>
+        <div class="doc-body">
+
+<p>Written 2026-10-27. Evidence labels: <strong>[V]</strong> verified today (file and line in the TempleOS V5.03 source mirror, a measurement in a scratch VM, or a page opened today), <strong>[D]</strong> reported by documentation or a README, <strong>[U]</strong> unverified. Source paths are relative to the TempleOS mirror (<code>Compiler/</code>, <code>Kernel/</code>, <code>Adam/</code>, <code>Doc/</code>); line numbers are from the <code>cia-foundation/TempleOS</code> archive branch checked out in the scratchpad. Measurements were taken in a headless scratch QEMU (TCG, Apple Silicon, <code>-m 1024M</code>, TempleOS V5.03 live CD, no display); the raw outputs are in <code>/tmp/tvm-lang/E1.out</code> to <code>E4.out</code> and the test programs in the scratchpad (<code>lang-vm/files/E1.HC</code> to <code>E4.HC</code>).</p>
+<h2 id="verdict">Verdict<a class="headerlink" href="#verdict" title="Link to this section">#</a></h2>
+<p>The compiler is not the 30x problem. Measured in the same VM, the blend loop costs <strong>11 ns a pixel written the way the spike wrote it, 3 ns as a pointer walk, and 0.8 ns a pixel as two-pixels-a-pass HolyC with <code>reg</code> variables, against under 1 ns for the hand assembly</strong>. The TempleOS compiler already keeps locals in registers (RSI, RDI, R10 to R15, chosen by use count, <code>Compiler/OptPass3.HC:512-560</code> [V]); the 30x figure came from a loop in a large function with more live locals than register slots, an index loop instead of a pointer walk, one pixel a pass instead of two, and (probably) a visible QEMU window. The real, measured deficits are elsewhere: <strong>x87 floating point under TCG is 11x slower than SSE2 (67 ns versus 6 ns per multiply-add)</strong>, a call costs 9 to 12 ns, there is no <code>continue</code>, the precedence table differs from C, faults are uncatchable, and tooling is a single in-OS compiler.</p>
+<p>Two things make the compiler far more fixable than expected, both verified today:</p>
+<ol>
+<li><strong>The compiler rebuilds and hot-loads on the live CD in under three seconds</strong>: copy <code>::/Compiler</code> and <code>::/Kernel</code> to the RAM drive (157 ms), <code>Cmp("B:/Compiler/Compiler")</code> (2.36 s, 0 errors, 179 KB of code), <code>Load(...)</code> (51 ms), then re-resolve the kernel's 19 import sites with a 30-line HolyC relinker. The prompt then compiles with the patched compiler (a changed warning string proved it). No install, no ISO rebuild, no snapshot change. So family A (modify the in-OS compiler) is a daily-loop activity, not a project.</li>
+<li><strong>The precedence table is runtime data</strong> (<code>cmp.binary_ops</code>, <code>Compiler/CInit.HC:286-310</code>, <code>public extern CCmpGlbls cmp</code> in <code>Compiler/CompilerB.HH:13</code> [V]). Sixteen assignments switch the live compiler to C precedence, verified with <code>a*b&gt;&gt;1</code>, <code>a&amp;b+c</code>, <code>a+b&lt;&lt;1</code>, <code>a==b|1</code>; sixteen more restore it. No rebuild.</li>
+</ol>
+<p>Recommended direction: keep HolyC as the language of the desktop, fix the compiler in place for the handful of things that matter (SSE2 for F64, <code>continue</code>, C precedence as an option, cheaper calls, a few peepholes), move only floating-point kernels and two or three blit loops to assembly (hand-written or NASM-assembled on the Mac and embedded as bytes), and build the tooling (lint, format, test, profiler) on the host against the compiler's own tables. Do not build an LLVM front end or a transpiler for this project: the measured gain over fixed HolyC is 2 to 4x on integer loops and the cost is the loss of the in-OS edit-and-run loop that the whole workflow is built on.</p>
+<h2 id="summary-table">Summary table<a class="headerlink" href="#summary-table" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Deficit</th>
+<th>Best fix</th>
+<th>Effort</th>
+<th>Expected gain</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Slow generated code</td>
+<td>(a) Write hot loops as pointer walks, two pixels a pass, in small functions; (b) add SSE2 scalar F64 to the backend and enable CR4.OSFXSR; (c) three peepholes in <code>OptPass789A</code>/<code>BackLib</code> (drop the <code>MOV R8,RAX</code> echo, LEA-fold <code>[RSI+R11*4]</code>, keep F64 locals in XMM)</td>
+<td>S / L / M</td>
+<td>3 to 14x on the blend from (a) alone, measured; 8 to 11x on F64 from (b), measured; about 1.5x more from (c), estimated</td>
+<td>E1, E2</td>
+</tr>
+<tr>
+<td>2 Operator precedence</td>
+<td>Runtime switch of <code>cmp.binary_ops</code> to C precedence around our compile, plus a host lint that flags mixed <code>&amp; ^ \| &lt;&lt; &gt;&gt;</code> with <code>+ - *</code> without parentheses</td>
+<td>S</td>
+<td>removes the bug class</td>
+<td>E2, <code>CInit.HC</code></td>
+</tr>
+<tr>
+<td>3 Missing features</td>
+<td>Add <code>continue</code> to <code>PrsStmt.HC</code> (loop parsers already carry <code>lb_break</code>; add <code>lb_continue</code>); host preprocessor for function-like macros; keep the rest as lint rules</td>
+<td>S (continue), M (macros)</td>
+<td>fewer gotos, fewer bugs</td>
+<td><code>PrsStmt.HC:1133</code></td>
+</tr>
+<tr>
+<td>4 No memory safety</td>
+<td>Fault policy: replace <code>Fault2</code> for the desktop task so a page fault throws into the desktop's <code>try</code> and the frame is dropped; guard pages are available (<code>MemPagAlloc</code> plus the 4K lowest-2 MB mapping is the only 4K region, so true guard pages need a page-table edit); host-side bounds-check mode via a lint-inserted <code>KsChk</code> macro for debug builds</td>
+<td>M</td>
+<td>survives the common crash; does not protect the OS</td>
+<td>E4, <code>KInts.HC:61-93</code>, <code>KDbg.HC Fault2</code></td>
+</tr>
+<tr>
+<td>5 Tiny ecosystem</td>
+<td>A host-built blob format (TempleOS <code>.BIN</code> with the <code>IET_</code> patch table, <code>Kernel/KLoad.HC</code>) and a 200-line libc shim; port <code>stb_image</code> and <code>stb_truetype</code> through C to HolyC by a transpiler is more work than writing them in HolyC-with-asm-kernels</td>
+<td>L</td>
+<td>PNG, JPEG, TrueType in the guest</td>
+<td><code>KLoad.HC</code>, ABI section</td>
+</tr>
+<tr>
+<td>6 Weak tooling</td>
+<td>Host lint and formatter driven by a HolyC parser written in Python (the lexer is simple, <code>Compiler/Lex.HC</code>), a test runner that boots the snapshot and reads results over serial (already done for this report), a sampling profiler from a timer IRQ (<code>IntEntrySet</code>) writing <code>Fs-&gt;rip</code> histograms</td>
+<td>M</td>
+<td>catches the two bug classes that have bitten; measurable changes</td>
+<td>this report's harness</td>
+</tr>
+<tr>
+<td>7 Portability</td>
+<td>Stay on x86 emulation for the showcase; Aiwnios is the only native aarch64 HolyC (JIT, Apple W^X handled) but it is 640x480 8-bit, no asm blocks on arm, no <code>continue</code>; a port of desk3 is L to XL and loses the OS</td>
+<td>none now</td>
+<td>n/a</td>
+<td>Aiwnios source</td>
+</tr>
+<tr>
+<td>8 Community</td>
+<td>Treat V5.03 as frozen upstream, keep our compiler patches as a small series against the mirror, borrow ZealOS's SSE enable (<code>KStart64.ZC:6-8</code>), ignore the rest</td>
+<td>S</td>
+<td>low risk</td>
+<td>ZealOS</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="1-the-compiler-as-it-is-what-the-source-says">1. The compiler as it is (what the source says)<a class="headerlink" href="#1-the-compiler-as-it-is-what-the-source-says" title="Link to this section">#</a></h2>
+<p><strong>Pipeline</strong> (<code>Compiler/Compiler.PRJ</code> [V]): <code>Lex</code> to <code>PrsExp</code>/<code>PrsStmt</code>/<code>PrsVar</code> producing a reverse-Polish intermediate code (IC) list, then <code>OptPass012</code> (constant folding, address-mode merging, the <code>CALL,FS/GS,...</code> patterns), <code>OptPass3</code> (register-variable scoring and assignment), <code>OptPass4</code>, <code>OptPass5</code>, <code>OptPass6</code>, then <code>OptPass789A</code> which emits x86-64 bytes through <code>BackLib</code>/<code>BackA</code>/<code>BackB</code>/<code>BackC</code> (integer) and <code>BackFA</code>/<code>BackFB</code> (x87). Terry's own description: "The compiler's parser makes RISC code which it optimizes to CISC" (<code>Doc/Charter.DD:75</code> [V]); the IC is "rev polish stack machine in nature" (<code>Doc/Glossary.DD:183</code> [V]).</p>
+<p><strong>Register model</strong> (<code>OptPass3.HC:512-525</code> comment, <code>Kernel/KernelA.HH:1801-1805</code> [V]): RAX, RBX, RCX, RDX, R8 are clobber scratch; RAX and R8 link IC nodes; R9 is the stack-machine temporary; RBP the frame; RSI, RDI, R10, R11, R14, R15 hold register variables; R12, R13 hold non-pointer register variables only. Variables are chosen by a use-count score with the address-taken ones excluded (<code>OptPass3.HC:535-560</code>); <code>reg</code>/<code>noreg</code> only force or forbid (<code>REG_ALLOC</code>, <code>REG_NONE</code>, <code>KernelA.HH:1797-1798</code>). Eight slots total; a function with more hot locals spills the rest to <code>[RBP]</code>. Functions containing <code>try</code> get no register variables at all (<code>PrsStmt.HC:852</code>, "TODO: Currently no reg vars in funs with try/catch" [V]).</p>
+<p><strong>Options</strong> (<code>KernelA.HH:1546-1558</code> [V]): the only codegen options are <code>OPTf_NO_REG_VAR</code>, <code>OPTf_GLBLS_ON_DATA_HEAP</code>, <code>OPTf_NO_BUILTIN_CONST</code> and the half-implemented <code>OPTf_USE_IMM64</code>. There is no optimisation level, no inlining, no loop pass, no CSE. <code>PassTrace</code> shows the IC per pass (<code>Doc/DbgOverview.DD:35</code>).</p>
+<p><strong>Floating point</strong>: all F64 goes through x87 (<code>BackFA.HC</code>, <code>BackFB.HC</code>); <code>OpCodes.DD</code> has <code>FXSAVE</code>, <code>MOV_CR4_RAX</code> and friends but no SSE arithmetic (plan-review already verified no <code>MOVAPS</code>, <code>PADDB</code> and so on). The kernel never sets CR4.OSFXSR (<code>Kernel/KStart64.HC:45-47</code> sets <code>OR EAX,0xB0</code>: PAE, PSE, PGE only [V]), so SSE instructions fault with #UD until a program sets bit 9. The scheduler already does <code>FXSAVE</code>/<code>FXRSTOR</code> per task (<code>Kernel/Sched.HC:87,119</code> [V]), so XMM state survives task switches once SSE is on. ZealOS turns it on at boot (<code>BTS RAX,CR4f_OSFXSR</code>, <code>src/Kernel/KStart64.ZC:6-8</code> [V]).</p>
+<p><strong>Calling convention</strong> (<code>PrsExp.HC:545-583</code>, <code>OptPass789A.HC:323-330,398-416,698-704</code>, <code>PrsStmt.HC:116-121</code>, <code>KernelA.HH:577-586</code> [V]): every argument is a 64-bit <code>PUSH</code>, pushed so that argument 1 is at <code>16[RBP]</code> (<code>SF_ARG1</code>), <code>CALL rel32</code> (or <code>MOV RBX,imm64; CALL RBX</code> for far targets), result in RAX (F64 as raw bits in RAX), callee pops with <code>RET imm16</code> when <code>Ff_RET1</code> is set (default for any non-variadic function with arguments; variadic functions use caller <code>ADD RSP</code>). The prologue is <code>PUSH RBP; MOV RBP,RSP; SUB RSP,n; PUSH &lt;used reg vars&gt;</code> and the epilogue pops them, <code>LEAVE</code>, <code>RET1</code>. Callee must preserve RBP, RSI, RDI, R10 to R15 (<code>Doc/GuideLines.DD:117</code>). There is no stack alignment requirement and no red zone. Measured cost: 9 to 12 ns per call under TCG (E1/E2), five instructions (<code>PUSH; CALL; ...; LEAVE; RET1</code>).</p>
+<p><strong>Linking and loading</strong> (<code>Kernel/KLoad.HC</code> [V]): a <code>.BIN</code> is a <code>CBinFile</code> header (<code>jmp</code>, <code>module_align_bits</code>, <code>'TOSB'</code>, <code>org</code>, <code>patch_table_offset</code>, <code>file_size</code>; <code>KernelA.HH:384-394</code>), code, and a patch table of records <code>{U8 type; U32 rip; U8 name[]; ...}</code> with types <code>IET_REL_I32</code>/<code>IET_IMM_I64</code> imports, <code>IET_*_EXPORT</code> exports, <code>IET_ABS_ADDR</code> (add module base at each listed offset), <code>IET_DATA_HEAP</code> (allocate and add), <code>IET_MAIN</code> (call). <code>Load()</code> reads the file, allocates in the code heap (below 2 GB so <code>CALL rel32</code> works, <code>Doc/Glossary.DD:169</code>), runs <code>LoadPass1</code> (exports into <code>Fs-&gt;hash_table</code>, imports resolved by <code>HashFind</code>, which returns the newest entry because <code>HashAdd</code> inserts at the bucket head, <code>KHashA.HC:169-189</code> [V]) and <code>LoadPass2</code> (<code>IET_MAIN</code>). Unresolved imports are parked as <code>HTT_IMPORT_SYS_SYM</code> and fixed when a later module exports the name (<code>SysSymImportsResolve</code>). The kernel loads <code>/Compiler/Compiler.BIN.Z</code> the same way at boot (<code>KMain.HC:208-211</code>); <code>Compiler.PRJ</code> and <code>Kernel.PRJ</code> are built by <code>Cmp()</code> from <code>BootHDIns</code>/<code>BootDVDIns</code> (<code>Adam/Opt/Boot/BootHDIns.HC:10-15</code>).</p>
+<p><strong>Lexer limits</strong> (<code>Compiler/Lex.HC</code> [V]): character constants up to 8 bytes (<code>:638-682</code>, "Char const limited to 8 chars"); <code>$</code> opens a DolDoc command anywhere in the token stream including comments, <code>$$</code> is a literal (<code>:1088-1112</code>); bytes 128 to 255 are a token class of their own (<code>:470</code>), so non-ASCII identifiers do not lex as letters. <code>Doc/HolyC.DD</code> states: no <code>continue</code> ("Use goto"), no <code>#define</code> functions, no typedef, no type checking, no <code>?:</code>, no F32, postfix casts.</p>
+<h2 id="2-measurements-e1-e2-scratch-vm-headless-1000000-pixels-or-iterations-20-repetitions-cntsjiffies-at-1000-hz">2. Measurements (E1, E2: scratch VM, headless, 1,000,000 pixels or iterations, 20 repetitions, <code>cnts.jiffies</code> at 1000 Hz)<a class="headerlink" href="#2-measurements-e1-e2-scratch-vm-headless-1000000-pixels-or-iterations-20-repetitions-cntsjiffies-at-1000-hz" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Kernel</th>
+<th>ns per element</th>
+<th>Loop body (instructions)</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blend, exact copy of the spike's loop (<code>for (i..) big[i]=...</code> inside a function with 17 locals)</td>
+<td><strong>11</strong> (3 runs: 226, 225, 226 ms)</td>
+<td>not disassembled</td>
+<td>the README's 31 ns was measured with the Cocoa window open; headless it is 11</td>
+</tr>
+<tr>
+<td>Blend, index loop, 8 locals (<code>BlendA</code>)</td>
+<td>6</td>
+<td></td>
+<td>fewer live locals, all in registers</td>
+</tr>
+<tr>
+<td>Blend, pointer walk, small function (<code>BlendB</code>)</td>
+<td><strong>3</strong> (64, 64, 65 ms)</td>
+<td>27</td>
+<td>all six variables in RSI, RDI, R10 to R14 with no <code>reg</code> keyword</td>
+</tr>
+<tr>
+<td>Same with <code>reg</code> on every variable (<code>BlendC</code>, named or unnamed registers)</td>
+<td>3</td>
+<td>27</td>
+<td>identical code; <code>reg</code> changes nothing here</td>
+</tr>
+<tr>
+<td>Same with <code>noreg</code> (<code>BlendE</code>)</td>
+<td>10</td>
+<td>about 40</td>
+<td>every operand through <code>[RBP]</code></td>
+</tr>
+<tr>
+<td>Two pixels a pass on U64, masks in registers, <code>reg</code> (<code>BlendD</code>)</td>
+<td><strong>0.8</strong> (16 ms)</td>
+<td>26</td>
+<td>equal to the hand assembly (README: under 1 ns)</td>
+</tr>
+<tr>
+<td>Two pixels a pass, no <code>reg</code>, masks as immediates (<code>BlendD2</code>)</td>
+<td>1.7 (34 ms)</td>
+<td>about 30</td>
+<td><code>MOV R..,imm64</code> reloaded per use</td>
+</tr>
+<tr>
+<td><code>big[i]+=0x010101</code> index loop (<code>AddA</code>)</td>
+<td>4</td>
+<td></td>
+<td>the spike's "64000 px loop 1 ms" is 15 ns because of the window too</td>
+</tr>
+<tr>
+<td>same as pointer walk (<code>AddB</code>, <code>AddC</code>)</td>
+<td>3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Function call <code>s=Add1(s)</code></td>
+<td><strong>9 to 12 per call</strong></td>
+<td>5 call-side plus 8 callee</td>
+<td><code>PUSH RSI; CALL; MOV RSI,RAX</code> and <code>PUSH RBP; MOV RBP,RSP; PUSH RSI; MOV RSI,10[RBP]; LEA RAX,1[RSI]; POP RSI; POP RBP; RET1 8</code></td>
+</tr>
+<tr>
+<td>Inline <code>s=s+1</code></td>
+<td>1 to 2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>F64 <code>a=a*b+0.5</code> compiled HolyC (x87)</td>
+<td><strong>67</strong></td>
+<td><code>FLD; FMUL; SUB RSP,8; FADD [const]; FSTP [RSP]; POP [RBP-8]</code></td>
+<td>F64 locals never live in ST(i) or XMM</td>
+</tr>
+<tr>
+<td>Same, hand x87 (<code>FMUL ST0,[mem]; FADD ST0,[mem]</code>)</td>
+<td>48</td>
+<td>4</td>
+<td>TCG emulates x87 in 80-bit softfloat</td>
+</tr>
+<tr>
+<td>Same, hand SSE2 scalar (<code>MULSD; ADDSD</code>, bytes emitted with <code>DU8</code> after <code>CR4 |= 0x600</code>)</td>
+<td><strong>6</strong></td>
+<td>4</td>
+<td>SSE works once OSFXSR is set; nothing else in the OS objects</td>
+</tr>
+<tr>
+<td>Fixed point 16.16 integer version</td>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>A one-off anomaly: the first run of <code>BlendC</code> in E1 took 531 ms; every later run (E2, three repetitions) took 64 to 65 ms. Treat single measurements under TCG as noise until repeated.</p>
+<p>Reading of the <code>BlendB</code> body (E1 disassembly): the IC-to-CISC emitter produces the pattern <code>MOV RAX,R13; IMUL R8; MOV R8,RAX; ADD RAX,R14; MOV R8,RAX; SAR R8,8</code> for <code>(x*ia+srb)&gt;&gt;8</code>, that is two redundant <code>MOV R8,RAX</code> per subexpression and a one-operand <code>IMUL</code> that clobbers RDX; the mask constants are re-materialised each use (<code>MOV R8u32,0x00FF00FF</code> twice per pixel). A hand version needs 14 instructions; the compiler emits 27. Under TCG, instruction count is roughly the cost, so the per-instruction codegen gap is about 2x, not 30x.</p>
+<p><strong>Where the 30x came from</strong> (decomposition from the table): window open versus headless, about 3x [U, inferred from 31 versus 11]; 17 live locals forcing spills and an index loop, 11 to 3 (3.7x) [V]; one pixel a pass versus two with 64-bit loads, 3 to 0.8 (3.7x) [V]; residual codegen quality, about 1.0 to 1.3x on the final form [V]. Conclusion: <strong>rewrite the hot loops, do not rewrite the compiler, to get 90 percent of the gain</strong>; the last 2x in integer code and the 10x in floating point are compiler work.</p>
+<h2 id="3-family-a-modify-the-in-os-compiler">3. Family A: modify the in-OS compiler<a class="headerlink" href="#3-family-a-modify-the-in-os-compiler" title="Link to this section">#</a></h2>
+<h3 id="a1-how-to-build-and-test-a-patched-compiler-verified-today-e3">A.1 How to build and test a patched compiler (verified today, E3)<a class="headerlink" href="#a1-how-to-build-and-test-a-patched-compiler-verified-today-e3" title="Link to this section">#</a></h3>
+<ol>
+<li>On the running live CD: <code>CopyTree("::/Compiler","B:/Compiler"); CopyTree("::/Kernel","B:/Kernel");</code> (117 files, 157 ms). The <code>.PRJ</code> includes <code>/Kernel/KernelA.HH</code> by drive-relative path, which resolves on B: after <code>Cmp</code> does <code>Cd(__DIR__)</code>.</li>
+<li>Patch the source on B: (our serial loader can write any file; the test replaced a warning string in <code>PrsStmt.HC</code> in place and deleted the stale <code>.HC.Z</code> copy, which otherwise wins the include).</li>
+<li><code>Cmp("B:/Compiler/Compiler")</code>: 2.36 s, "Errs:0 Warns:0 Code:2BB9F Size:2F500".</li>
+<li><code>Load("B:/Compiler/Compiler")</code>: 51 ms; exports shadow the old module's.</li>
+<li>Relink the kernel: walk <code>sys_boot_patch_table_base</code> with <code>mem_boot_base</code> (both <code>_extern</code> in <code>Kernel/KernelB.HH:37-39</code>) and rewrite each <code>IET_REL_I32</code>/<code>IET_IMM_*</code> import through <code>HashFind</code> (the code is <code>Relink()</code> in <code>E3.HC</code>, 30 lines; <code>LoadPass1</code> itself is not visible to user code). 19 sites patched in under 1 ms. The command line then used the new compiler (the <code>#include</code> of a file with an unused variable printed the patched text "Unused VAR").</li>
+<li>Hazard found the hard way: loading a <code>.BIN</code> from a build with errors and relinking to it leaves the kernel pointing into a half-built module and <code>Cmp</code> itself disappears; always gate the <code>Load</code> on <code>Cmp()==0</code>. Recovery is a VM reset (60 s).</li>
+</ol>
+<p>This fits the existing <code>snap.sh</code>/<code>send-to-vm.sh</code> workflow: a <code>KS_MODE=compiler</code> branch that ships a patched <code>Compiler/*.HC</code> set, runs steps 1 to 5 and saves a snapshot would make a patched compiler part of the image <code>build-image.sh</code> already produces. For a permanent change, <code>BootDVDIns</code> plus <code>DskISORedSea</code> builds a new ISO from inside the VM (<code>Adam/Opt/Boot/BootDVDIns.HC</code>, <code>Misc/DoDistro.HC</code>), which is the long-term route, but it is not needed for development.</p>
+<p>Time for a patched compiler to be in use: about 5 s after the source is on B:. That is cheaper than any host-side toolchain's edit loop.</p>
+<h3 id="a2-what-an-optimising-backend-would-need-and-what-each-piece-buys">A.2 What an optimising backend would need and what each piece buys<a class="headerlink" href="#a2-what-an-optimising-backend-would-need-and-what-each-piece-buys" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Where</th>
+<th>Size</th>
+<th>Gain (estimate unless marked)</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSE2 scalar F64: emit <code>MOVSD/ADDSD/SUBSD/MULSD/DIVSD/SQRTSD/CVTSI2SD/CVTTSD2SI/COMISD</code> instead of x87, keep F64 temporaries in XMM0 to XMM5 and F64 reg vars in XMM6 to XMM15; set CR4.OSFXSR on every core at boot (one line per core, ZealOS does it)</td>
+<td><code>BackFA.HC</code>, <code>BackFB.HC</code> (1238 lines total), opcode table <code>OpCodes.DD</code>, <code>Kernel/KStart64.HC</code> and <code>MultiProc.HC</code> for cores</td>
+<td>L (a week)</td>
+<td><strong>8 to 11x on F64 loops, measured for the instruction mix</strong>; also removes the <code>SUB RSP,8 / FSTP [RSP] / POP</code> dance</td>
+<td>the x87 code is one of the hairier parts (<code>CmpSetFloatOpPushPop</code>); <code>F64</code> in the kernel (<code>KMathA</code>) uses x87 asm and must keep working; the 80-bit intermediate semantics change (TempleOS computes in 80-bit)</td>
+</tr>
+<tr>
+<td>Peephole: remove <code>MOV R8,RAX</code> when R8 is dead before the next write; fold <code>LEA</code> for <code>[base+index*4]</code>; keep immediates that are used twice in a scratch register</td>
+<td><code>OptPass789A.HC</code>, <code>BackLib.HC ICMov</code></td>
+<td>M</td>
+<td>1.3 to 1.5x on integer loops (27 to about 18 instructions in <code>BlendB</code>)</td>
+<td>low; peephole on the final byte stream is checkable by diffing <code>Uf</code> output</td>
+</tr>
+<tr>
+<td>Cheaper calls: pass the first four integer arguments in RCX, RDX, R8, R9 for functions marked with a new flag (<code>fastcall</code>), callee loads them to <code>[RBP]</code> slots only when address-taken; <code>Ff_RET1</code> unchanged</td>
+<td><code>PrsExp.HC:545-583</code>, <code>OptPass789A.HC:698</code> (<code>IC_ENTER</code>), <code>PrsStmt.HC:116</code></td>
+<td>M</td>
+<td>call cost 12 to about 6 ns; the per-pixel-callback pattern the renderer used was 46 ms a frame, now avoided anyway</td>
+<td>asm callers (<code>SF_ARG1[RBP]</code>) break for flagged functions only; keep the default convention</td>
+</tr>
+<tr>
+<td>Inlining of small leaf functions (<code>Add1</code>-sized)</td>
+<td>new pass on the IC list before <code>OptPass3</code></td>
+<td>L</td>
+<td>removes the call entirely in the places that matter</td>
+<td>the IC is a stack machine with <code>IC_CALL_START/END</code> and <code>ICF_PUSH_RES</code> bookkeeping; argument IC must be re-spliced</td>
+</tr>
+<tr>
+<td>More register-variable slots: RBX and RCX are only clobber scratch; the emitter uses RAX, R8, R9 and sometimes RBX, RCX, RDX (<code>BackA.HC:398</code> "dangerous might clobber RBX in Mov, but it doesn't")</td>
+<td><code>OptPass3.HC</code>, <code>KernelA.HH:1801</code> masks, audit of every <code>Back*</code> use of RBX/RCX</td>
+<td>M</td>
+<td>functions with 9 to 10 hot locals stop spilling (the spike's 11 ns case to 3 ns without rewriting)</td>
+<td>every asm routine that assumes RBX/RCX are free (ours do: <code>KsBlend.HC</code> uses RBX, RDX) must save them; pick RBX only after an audit</td>
+</tr>
+<tr>
+<td>Loop optimisations (strength reduction, invariant hoisting)</td>
+<td>new</td>
+<td>XL</td>
+<td>1.2 to 1.5x on index loops; pointer walks already get it by hand</td>
+<td>the IC has no loop structure; it is labels and jumps</td>
+</tr>
+<tr>
+<td>Full rewrite as a graph-colouring allocator on an SSA IR</td>
+<td>new</td>
+<td>XL+</td>
+<td>the remaining 2x</td>
+<td>this is a new compiler; see family B instead</td>
+</tr>
+</tbody>
+</table></div>
+<p>Payoff order: SSE2 (largest measured gain, isolated code), peepholes (cheap, safe, visible), <code>continue</code> (not speed, but it is in the same file set), <code>fastcall</code> for callbacks, then stop. Together they close the integer gap to about 1.3x and the float gap to about 1.2x of hand assembly on the kernels we have, by the measured numbers.</p>
+<p>First experiment (S): patch <code>BackLib.HC ICMov</code> to skip a <code>MOV reg,reg</code> whose destination is overwritten by the next IC node before being read, rebuild with A.1, diff <code>Uf("BlendB")</code> and re-time with E2. Expected: 27 to 24 instructions, 64 to about 56 ms.</p>
+<h3 id="a3-continue-and-precedence-inside-the-compiler">A.3 <code>continue</code> and precedence inside the compiler<a class="headerlink" href="#a3-continue-and-precedence-inside-the-compiler" title="Link to this section">#</a></h3>
+<ul>
+<li><code>continue</code>: <code>PrsStmt.HC</code> already threads <code>lb_break</code> through loop parsing and <code>case KW_BREAK</code> is five lines (<code>:1133-1138</code>). Add <code>KW_CONTINUE</code> to the keyword list (<code>CompilerA.HH:258</code> area and the keyword registration in <code>CInit.HC</code>), carry an <code>lb_continue</code> label placed before the <code>for</code> increment / <code>while</code> test, emit <code>IC_JMP</code> to it. S.</li>
+<li>C precedence as a compiler option (<code>OPTf_C_PREC</code>) that swaps the table in <code>CmpFillTables</code> (<code>CInit.HC:286-310</code>); default off so TempleOS's own code still compiles. S. Note that the runtime table patch (section 5) gives the same effect today without a rebuild.</li>
+</ul>
+<h2 id="4-family-b-a-host-side-toolchain">4. Family B: a host-side toolchain<a class="headerlink" href="#4-family-b-a-host-side-toolchain" title="Link to this section">#</a></h2>
+<h3 id="b1-abi-facts-a-host-compiler-must-match-all-v-section-1">B.1 ABI facts a host compiler must match (all [V], section 1)<a class="headerlink" href="#b1-abi-facts-a-host-compiler-must-match-all-v-section-1" title="Link to this section">#</a></h3>
+<p>Stack-passed 64-bit arguments, argument 1 at <code>16[RBP]</code>, callee pops (<code>RET imm16</code>) for fixed-arity functions, RAX result, RBP frame, callee-saved RBP/RSI/RDI/R10-R15, caller-saved RAX/RBX/RCX/RDX/R8/R9, no alignment, code below 2 GB, globals reached by <code>RIP</code>-relative or absolute 32-bit addressing. This is not System V, so <code>clang</code>/<code>rustc</code> output cannot be called directly; a shim is needed in one of two forms:</p>
+<ol>
+<li><strong>Per-function trampolines</strong> written as HolyC <code>asm</code> blocks: load <code>SF_ARGn[RBP]</code> into RDI, RSI, RDX, RCX, R8, R9, align RSP to 16, <code>CALL</code> the SysV symbol, restore. About 12 instructions per entry point, generated by a script from the C prototypes. The callee must be built <code>-ffreestanding -fno-builtin -mno-red-zone -fno-stack-protector -mcmodel=small -fPIC</code> (or <code>-mcmodel=kernel</code>) with no libc, no TLS, no unwinding, no SSE unless CR4.OSFXSR is set (set it; see A.2) and no x87 state assumptions. <code>-mno-red-zone</code> is required because TempleOS interrupts run on the current stack (<code>KInts.HC</code> <code>INT_FAULT</code> and the timer handler save context in place).</li>
+<li><strong>A HolyC-ABI target</strong>: patch the host compiler's calling convention. holyc-lang (section 8) emits text assembly and uses SysV; changing its backend to push-and-<code>RET1</code> is a day of work in its emitter [U]. For LLVM there is no HolyC CC; adding one is XL and not worth it.</li>
+</ol>
+<p><strong>Loading a host-built blob</strong>: emit a <code>.BIN</code> (header plus code plus patch table) from the host: the format is 40 bytes of header, raw code, and the <code>IET_</code> records; imports of TempleOS functions become <code>IET_REL_I32</code> records naming <code>MAlloc</code>, <code>Free</code>, <code>MemCpy</code> and so on; exports become <code>IET_REL32_EXPORT</code>; relocations become <code>IET_ABS_ADDR</code> lists. Then <code>Load("B:/KSBLOB")</code> resolves and the functions are callable by name from HolyC after an <code>extern</code> declaration (or by <code>_extern</code> to an exported label). A Python writer for this is S. Simpler still for kernels with no relocations: send the raw bytes over serial, <code>MAlloc</code> from <code>Fs-&gt;code_heap</code>, copy, and call through a function pointer; that works today with no format at all.</p>
+<h3 id="b2-options-compared">B.2 Options compared<a class="headerlink" href="#b2-options-compared" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Speed gain versus fixed HolyC (measured basis)</th>
+<th>Developer-experience cost</th>
+<th>Effort</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NASM on the Mac for assembly kernels, bytes embedded as <code>DU8</code> or sent as a blob</td>
+<td>same as hand asm (0.8 ns blend, 6 ns F64 op); lets us use SSE2/AVX syntax instead of hand-encoding</td>
+<td>asm only; stays in the existing loop</td>
+<td>S</td>
+<td><strong>do this now</strong> for the float and blit kernels</td>
+</tr>
+<tr>
+<td>C (clang, freestanding) kernels through trampolines</td>
+<td>integer loops: clang -O2 on the two-pixel blend would be about 10 to 14 instructions a pass against the fixed HolyC 18 to 26, so about 1.5x; F64: SSE2 for free, 10x versus today's x87, 1x versus the SSE2 backend</td>
+<td>a cross-build step and a blob load per change; no <code>Uf</code>, no in-OS debugging of that code</td>
+<td>M for the shim and build, then per kernel S</td>
+<td>worth it only for ported C libraries (stb_image, stb_truetype, miniz), not for our own loops</td>
+</tr>
+<tr>
+<td>Rust <code>no_std</code> kernels</td>
+<td>as C, with the same ABI shim; <code>panic=abort</code>, no alloc unless we provide <code>GlobalAlloc</code> over <code>MAlloc</code></td>
+<td>as C plus Rust toolchain targets (<code>x86_64-unknown-none</code>)</td>
+<td>M</td>
+<td>only if the team prefers Rust for the decoders; no speed argument over C</td>
+</tr>
+<tr>
+<td>HolyC front end on LLVM or Cranelift</td>
+<td>the full 2x integer, 10x float; but all of that is also available from A.2 plus asm kernels</td>
+<td>loses instant in-OS compile; HolyC's reflection (<code>cmp</code>, hash tables, <code>#exe</code>, DolDoc in source) has no LLVM equivalent; two dialects drift</td>
+<td>XL (Ma11ock/holyc after 82 commits has no structs, enums, unions or preprocessor [V, README])</td>
+<td>no</td>
+</tr>
+<tr>
+<td>HolyC to C transpiler</td>
+<td>as above for code it can translate; HolyC's <code>switch</code> sub-switches, <code>#exe</code>, char-constant strings, default-argument-in-the-middle calls, <code>argc/argv</code> variadics, class metadata all need special cases</td>
+<td>as above</td>
+<td>L to XL (holycc has only a lexer tested; HolyC-Translator drops <code>noreg</code>, preprocessor, sub-switch [V, READMEs])</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Hybrid: HolyC for glue, REPL and UI; precompiled kernels for blend, blit, layout, decode</td>
+<td>gets the 0.8 ns blend and 6 ns float ops where they matter; keeps 8,000 lines of desktop code as they are</td>
+<td>one build step for a dozen kernels</td>
+<td>S to start</td>
+<td><strong>this is the architecture</strong>; "precompiled" should mean NASM first, clang only for ported libraries</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="b3-first-experiment-for-b-s">B.3 First experiment for B (S)<a class="headerlink" href="#b3-first-experiment-for-b-s" title="Link to this section">#</a></h3>
+<p>Assemble <code>KsBlendRow</code> with NASM on the Mac (<code>nasm -f bin</code>), send the bytes over serial, load into the code heap, compare against the <code>asm{}</code> version for identical output and time. Then do the same with a <code>clang -O2 -ffreestanding -mno-red-zone -mcmodel=small</code> build of the two-pixel blend wrapped in a 12-instruction trampoline. Gate: both match the HolyC formula on 1,000 random pixels and the clang version is within 1.3x of the NASM one.</p>
+<h2 id="5-family-c-dialect-and-tooling-on-the-host-no-os-change">5. Family C: dialect and tooling on the host (no OS change)<a class="headerlink" href="#5-family-c-dialect-and-tooling-on-the-host-no-os-change" title="Link to this section">#</a></h2>
+<p>What the host can do with the compiler's own tables:</p>
+<ul>
+<li><strong>Precedence lint (S)</strong>: a token-level checker (lex rules from <code>Lex.HC</code>: identifiers, numbers, 8-char char constants, <code>$...$</code> commands, strings with <code>\</code> escapes) that flags any expression mixing <code>&amp; ^ | &lt;&lt; &gt;&gt;</code> with <code>+ - *</code> or a comparison without parentheses. False positives are cheap to silence with parentheses, which is what we want anyway. Also run the runtime precedence switch (section 2) around our own compile so that HolyC-written code is parsed as C: <code>CPrec; ExeFile("B:/KSDESK3.HC"); HPrec;</code>. Caveat: the switch is global to the compiler, so it must be restored before any TempleOS program is compiled (the Files app runs them); do it in the loader, not the desktop.</li>
+<li><strong>Preprocessor (M)</strong>: a Python pass that adds function-like macros, <code>continue</code> (rewrite to <code>goto</code> to a generated label before the increment, which is what the compiler would do), <code>?:</code> to <code>if</code>, and <code>#include &lt;...&gt;</code>; keep line numbers with <code>#line</code>-like comments so compiler errors still point to the source (the compiler reports <code>file,line</code> via <code>LexExcept</code>). Output is plain HolyC, so nothing in the OS changes.</li>
+<li><strong>ASCII and dollar check (S)</strong>: reject bytes above 127 and unescaped <code>$</code> in source and comments before sending (we already have the rule in every file header; make it a check).</li>
+<li><strong>Formatter (M)</strong>: clang-format cannot parse HolyC (postfix casts, <code>switch []</code>, char-constant statements); write a token-based indenter instead.</li>
+<li><strong>Test framework (S)</strong>: this report's harness is the prototype: boot or restore the snapshot, send a test file, read <code>TxP</code> lines over serial (<code>InU8(0x3FD)</code>/<code>OutU8(0x3F8)</code> polling, no driver), assert on them from Python. Add <code>KS_MODE=test</code> to <code>send-to-vm.sh</code> and a <code>tests/</code> directory. Goldens via <code>screendump</code> as plan-review suggested.</li>
+<li><strong>Profiler (M)</strong>: a sampling profiler in the guest: <code>IntEntrySet(0x20+n,...)</code> or better a HolyC task that reads <code>Fs-&gt;rip</code> of the desktop task from a 1 kHz timer (<code>cnts.jiffies</code> tick hook via <code>TimerIntHndlr</code>? Not public; use a second core's spin loop reading <code>desk_task-&gt;rip</code>, which the scheduler updates on every switch only) is unreliable; the dependable form is manual <code>GetTSC</code> spans around phases, as the renderer pass already did. A symbolised histogram of <code>Caller()</code> addresses sampled from a timer IRQ is possible: install an <code>interrupt</code> function on an unused vector driven by the PIT or HPET at 1 kHz (<code>Kernel/KTimer</code>-equivalent <code>TimersInit</code> sets the PIT); M, and the payoff is high because every speed claim so far was from manual spans.</li>
+<li><strong>Doc generator (S)</strong>: the DolDoc <code>$LK$</code> syntax is machine-readable; a script that strips <code>$...$</code> from <code>Doc/*.DD</code> (as done for this report) and our file headers produces Markdown.</li>
+<li><strong>Language server (L)</strong>: holyc-lang ships <code>hcc -lsp</code> (BSD-2) [V, README]; it understands a superset of the language with some differences (F32, <code>auto</code>, range <code>for</code>). Using it on our sources for navigation is free; for diagnostics it will disagree with TempleOS on precedence unless its table is checked (not verified today).</li>
+</ul>
+<h2 id="6-family-d-safety">6. Family D: safety<a class="headerlink" href="#6-family-d-safety" title="Link to this section">#</a></h2>
+<p>Facts [V]: everything is ring 0 in one identity-mapped address space with 2 MB or 1 GB pages (<code>Doc/MemOverview.DD:3</code>, <code>Kernel/Mem/PageTables.HC</code>); only the lowest 2 MB is 4 KB pages (<code>MemOverview.DD:56</code>); page 0 is mapped, so <code>*(0)</code> reads BIOS memory (E4: reads <code>F000FF53F000FF53</code>, no fault); <code>mem_mapped_space</code> was <code>0x10100000000</code> with 1 GB of RAM, so addresses above it page-fault. A CPU fault goes <code>INT_FAULT</code> (<code>KInts.HC:61-93</code>) to <code>Fault2</code> (<code>KDbg.HC</code>) which enters the debugger in the faulting task; <strong><code>try/catch</code> does not see it</strong> (E4: the page fault inside <code>try</code> dropped to "TempleOS Debugger", <code>Fault:0x0E Page Fault</code>, and the task stayed there). <code>throw</code> is a software unwind through <code>Fs-&gt;next_except</code> (<code>KExcept.HC:84-114</code>).</p>
+<p>Options:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>How</th>
+<th>Cost</th>
+<th>Benefit</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Catchable faults for the desktop task (M, recommended)</strong></td>
+<td>Patch the first bytes of <code>Fault2</code> with a <code>JMP</code> to a HolyC <code>KsFault2</code> (code heap is writable), or better <code>IntEntrySet(I_PAGE_FAULT/I_GP, &amp;KsIntFault)</code> with a copy of the <code>INT_FAULT</code> stub; in the handler, if <code>Fs</code> is the desktop task and <code>Fs-&gt;next_except</code> is non-empty, <code>SetRFlags</code> to re-enable interrupts and <code>throw('Fault')</code>; otherwise fall through to the original <code>Fault2</code>. The desktop's frame loop wraps each app callback in <code>try</code>, logs the fault address and RIP, closes the window.</td>
+<td>M</td>
+<td>the common "bad pointer kills the demo" becomes a closed window and a log line</td>
+<td>a fault inside the renderer leaves the back buffer inconsistent (redraw all); a fault while holding a <code>lock{}</code> or inside the heap allocator corrupts state, so the policy must also mark the task for restart after N faults; interrupt state after a fault must be restored by hand</td>
+</tr>
+<tr>
+<td>Guard pages</td>
+<td><code>MemPagAlloc</code> gives 4 KB-granular pages only in the lowest 2 MB; elsewhere pages are 2 MB, so a guard page costs 2 MB and needs a page-table edit (<code>PageTables.HC</code> sets up the tables once; there is no runtime API to unmap)</td>
+<td>L</td>
+<td>catches overruns at allocation boundaries</td>
+<td>page-table edits are new kernel code; not worth it before the fault policy exists</td>
+</tr>
+<tr>
+<td>Debug allocator with canaries</td>
+<td>wrap <code>MAlloc</code>/<code>Free</code> for our code (<code>KsAlloc</code>): 16-byte canaries both ends, size and caller recorded, checked on free and on demand</td>
+<td>S</td>
+<td>finds the overruns we have actually had (sculpt-style buffer bugs)</td>
+<td>none; debug builds only</td>
+</tr>
+<tr>
+<td>Bounds checks</td>
+<td>a host preprocessor rewrites <code>a[i]</code> for arrays with known <code>dim</code> into <code>a[KsChk(i,n)]</code> in debug builds; the compiler has <code>CArrayDim</code> on members (<code>KernelA.HH</code> class <code>CHashGlblVar</code>, <code>CMemberLst dim</code>), so the host can read dimensions from declarations</td>
+<td>M</td>
+<td>catches index bugs before they become faults</td>
+<td>only static arrays; pointers stay unchecked</td>
+</tr>
+<tr>
+<td>Crash recovery policy for a desktop</td>
+<td>snapshot restore is the backstop (<code>run.sh</code> already reloads the image on <code>R</code>); add: autosave Notes to B: every minute, fault counter, a "safe mode" that skips the app that faulted twice</td>
+<td>S</td>
+<td>the user never sees the debugger</td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+<p>First experiment (S): <code>IntEntrySet(0x0E, ...)</code> with a handler that <code>throw</code>s when <code>Fs-&gt;next_except</code> is non-empty, and the E4 test rerun; expected "fault caught as exception".</p>
+<h2 id="7-family-e-ecosystem">7. Family E: ecosystem<a class="headerlink" href="#7-family-e-ecosystem" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>libc shim (S)</strong>: the functions C libraries actually need are <code>memcpy/memset/memmove/strlen/malloc/free/realloc/abs/sqrt/pow/floor</code> plus <code>assert</code>; all exist in TempleOS under other names (<code>MemCpy</code>, <code>MemSet</code>, <code>MAlloc</code>, <code>Free</code>, <code>Sqrt</code>, <code>Pow</code>, <code>Floor</code>). A 200-line HolyC file of <code>_extern</code>-style aliases plus a generated header lets ported C code (via family B trampolines) link. <code>realloc</code> must copy because <code>MSize</code> gives the rounded size.</li>
+<li><strong>Porting candidates</strong>: <code>stb_image</code> (PNG, JPEG; about 7,000 lines of C) and <code>stb_truetype</code> (5,000) compile freestanding with <code>-DSTBI_NO_STDIO</code> and user allocators; through clang plus trampolines they are M each, mostly ABI shim and testing under TCG for speed (JPEG decode of a 1 MB image will be seconds under TCG; measure). <code>miniz</code> for PNG inflate is L in HolyC by hand (plan-review's estimate) or S through clang. <code>minimp3</code> is pointless without audio in the guest. <code>lua</code> (20,000 lines, needs <code>setjmp/longjmp</code>, <code>stdio</code>, <code>strtod</code>) is L and the value is an in-guest scripting language that HolyC already is; skip. <code>mujs</code> is L to XL and only matters for the browser's JavaScript, which the apps plan deferred. <code>kilo</code> is a 1,000-line editor that assumes POSIX termios; the Notes app already exists.</li>
+<li><strong>What HolyC cannot express and how to cope</strong>: C varargs (HolyC's <code>argc/argv</code> is different, write the shim per function), bit fields (<code>Doc/HolyC.DD</code>: none; use masks), <code>float</code> (none; decoders that use <code>float</code> must be built on the host), <code>switch</code> with sparse cases (jump table only; rewrite as <code>if</code> chains), string literals used as statements (HolyC prints them; never paste C into HolyC), <code>static</code> function-local arrays on the data heap (static vars stay on the code heap).</li>
+<li><strong>Package convention (S)</strong>: one directory per package under <code>B:/Pkg/&lt;name&gt;/</code> with <code>&lt;name&gt;.HC</code> as entry, <code>&lt;name&gt;.BIN</code> for host-built code, and a <code>MANIFEST</code> listing exports; the loader sends them over serial. Shrine's <code>Pkg</code> and <code>PACKAGES.md</code> format (ISO.C images, no dependency resolution) is the only prior art and is archived since 2020-11-13 [V, GitHub API].</li>
+</ul>
+<h2 id="8-family-f-and-g-portability-and-prior-art">8. Family F and G: portability and prior art<a class="headerlink" href="#8-family-f-and-g-portability-and-prior-art" title="Link to this section">#</a></h2>
+<p>Pages opened 2026-10-27 unless stated; the survey of the first pass was done through a fetch-and-summarise tool (marked [D]), the Aiwnios, ZealOS and holyc-lang facts below are from raw source files downloaded and read [V].</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>What it is</th>
+<th>Backend, platforms</th>
+<th>Precedence</th>
+<th><code>continue</code></th>
+<th>Status</th>
+<th>Licence</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aiwnios</strong></td>
+<td>HolyC compiler and runtime, runs the TempleOS user land (DolDoc, Adam, Gr, Win, Snd, sockets) as an SDL2 app</td>
+<td>native JIT: <code>c/arm_backend.c</code> (191 KB) emits AArch64 machine code, <code>c/x86_64_backend.c</code>, <code>c/riscv_backend.c</code>; WASM only via the bytecode build (<code>USE_BYTECODE</code>, <code>c/w_bytecode.c</code>); macOS W^X handled with <code>MAP_JIT</code> (<code>c/mem.c:681-683</code>) and <code>pthread_jit_write_protect_np</code> (<code>c/mem.c:457-466</code>), <code>sys_icache_invalidate</code> after emit (<code>c/arm_backend.c:5309</code>)</td>
+<td>TempleOS table unchanged (<code>Src/CInit.HC:313-335</code>)</td>
+<td>none (0 hits in <code>Src/PrsStmt.HC</code>, <code>c/parser.c</code>)</td>
+<td>pushed 2026-10-21, release v0.9.0 2024-11-24, 164 stars</td>
+<td>BSD-3-Clause</td>
+<td>https://github.com/aiwnios/Aiwnios (the <code>nrootconauto/Aiwnios</code> URL now 404s at raw.githubusercontent.com; the API reports <code>full_name: aiwnios/Aiwnios</code>)</td>
+</tr>
+<tr>
+<td>holyc-lang (Jamesbarford)</td>
+<td>HolyC compiler in C with JIT, REPL, LSP</td>
+<td>"lowering to an SSA based IR and emitting x86_64/AArch64 assembly code as text", "tested on amd linux and an intel mac. An M1 mac and fedora linux on an M4 using QEMU" (README lines 39, 81-82 [V]); SysV ABI, calls C libraries</td>
+<td>not checked in source</td>
+<td>yes [D]</td>
+<td>pushed 2026-09-06, 1.2k stars [D]</td>
+<td>BSD-2</td>
+<td>https://github.com/Jamesbarford/holyc-lang</td>
+</tr>
+<tr>
+<td>ZealOS</td>
+<td>TempleOS fork</td>
+<td>TempleOS compiler renamed; <code>src/Kernel/KStart64.ZC:6-8</code> enables CR4.OSFXSR [V]; no SSE in the compiler; variable-resolution 32-bit VBE, AHCI, RTL8139 driver (Oct 2025) [D]</td>
+<td>unchanged (<code>src/Compiler/CInit.ZC:510-527</code> [V])</td>
+<td>none (<code>ParseStatement.ZC</code> [V])</td>
+<td>pushed 2026-09-14 [D]</td>
+<td>Unlicense</td>
+<td>https://github.com/Zeal-Operating-System/ZealOS</td>
+</tr>
+<tr>
+<td>TinkerOS</td>
+<td>TempleOS fork (AHCI, widescreen, live USB)</td>
+<td>unchanged</td>
+<td>unchanged</td>
+<td>n/a</td>
+<td>309 stars [D]</td>
+<td>Unlicense</td>
+<td>https://github.com/tinkeros/TinkerOS</td>
+</tr>
+<tr>
+<td>Shrine</td>
+<td>TempleOS fork with TCP/IP, <code>Pkg</code>, <code>Wget</code></td>
+<td>unchanged</td>
+<td>unchanged</td>
+<td>n/a</td>
+<td>archived, last push 2020-11-13 [D]</td>
+<td>NOASSERTION</td>
+<td>https://github.com/minexew/Shrine</td>
+</tr>
+<tr>
+<td>templeos-loader</td>
+<td>runs TempleOS binaries on Linux user space, can build Kernel and Compiler outside a VM [D]</td>
+<td>maps the TempleOS convention to SysV [D]</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>active [D]</td>
+<td>not shown</td>
+<td>https://github.com/minexew/templeos-loader</td>
+</tr>
+<tr>
+<td>Ma11ock/holyc (hclang)</td>
+<td>LLVM 14+ AOT</td>
+<td>no structs, enums, unions, preprocessor; floats partial [D]</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>46 stars [D]</td>
+<td>AGPL-3.0</td>
+<td>https://github.com/Ma11ock/holyc</td>
+</tr>
+<tr>
+<td>Voctl/holycc</td>
+<td>HolyC to C17</td>
+<td>lexer tested only [D]</td>
+<td>n/a</td>
+<td>not listed [D]</td>
+<td>4 stars [D]</td>
+<td>GPL-3.0</td>
+<td>https://github.com/Voctl/holycc</td>
+</tr>
+<tr>
+<td>IridescentRose/HolyC-Translator</td>
+<td>HolyC to C text translation</td>
+<td>lossy: ignores <code>noreg</code>, preprocessor, sub-switch [D]</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>30 stars [D]</td>
+<td>MIT</td>
+<td>https://github.com/IridescentRose/HolyC-Translator</td>
+</tr>
+<tr>
+<td>tinkeros/RiscvLinuxTOS</td>
+<td>RISC-V emulator running Linux inside TinkerOS, a demo [D]</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>6 stars</td>
+<td>not shown</td>
+<td>https://github.com/tinkeros/RiscvLinuxTOS</td>
+</tr>
+</tbody>
+</table></div>
+<p>Not found: a tree-sitter grammar, a VS Code extension, a HolyC linter or formatter, a TempleOS kernel port to ARM or RISC-V, a HolyC-to-LLVM project with structs.</p>
+<h3 id="aiwnios-in-detail-answers-to-the-questions-asked-source-read-today-not-built">Aiwnios in detail (answers to the questions asked; source read today, not built)<a class="headerlink" href="#aiwnios-in-detail-answers-to-the-questions-asked-source-read-today-not-built" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Native or bytecode on macOS arm64</strong>: native JIT. The arm backend emits instructions through an assembler (<code>c/arm64_asm.c</code>, Xbyak-derived encodings per the README credits) into code-heap pages mapped <code>PROT_EXEC|PROT_READ|PROT_WRITE</code> with <code>MAP_JIT</code> on Apple (<code>c/mem.c:681-683</code>), toggles <code>pthread_jit_write_protect_np</code> around writes (<code>SetWriteNP</code>, <code>c/mem.c:457-466</code>) and flushes the instruction cache per compiled function (<code>c/arm_backend.c:5309-5311</code>). Bytecode is only the <code>USE_BYTECODE</code> build used for WASM [V].</li>
+<li><strong>Backend quality</strong>: reverse-Polish IR ("THIS COMPILER USES REVERSE POLISH NOTATION", README [V]); <code>c/optpass.c</code> has <code>OptPassConstFold</code>, <code>OptPassMergeCommunitives</code>, <code>OptPassRemoveUselessArith</code>, <code>OptPassMergeAddressOffsets</code> and <code>OptPassRegAlloc</code>, whose comment says "AIWNIOS will not do fancy register allocation shenanigins. We will get a score for REG_MAYBE|REG_ALLOC" (<code>c/optpass.c:1066-1073</code> [V]); the developer manual's "Sexy Register Allocator: Live Variable Analysis, Graph Coloring" sections exist (<code>DEVMAN.MD:910-920</code>) but are headings in a WIP manual, so treat graph colouring as [U]. Temporaries are spilled depth-first (<code>PushTmpDepthFirst</code>, <code>c/arm_backend.c:4757</code>). Expect code quality in the TempleOS class, that is use-count register variables, not LLVM class. No benchmark published.</li>
+<li><strong>Inline asm on aarch64</strong>: no. <code>KW_ASM</code> in <code>Src/PrsStmt.HC:1042-1056</code> is wrapped in <code>#ifdef TARGET_RISCV</code> with the comment "TODO gutted by nrootconauto in favor of his own assembler"; on aarch64 and x86-64 an <code>asm{}</code> block is not compiled [V]. Our <code>asm{}</code> routines (one block in <code>desk3/01-core.HC</code> with 11 <code>_extern</code> entry points, plus the spike files) would have to become C or HolyC. <code>Src/AsmARM64.HC</code> and <code>Src/UAsmARM64.HC</code> exist (an ARM assembler and disassembler in HolyC, 36 KB and 28 KB) and the README says "I plan on adding something lit like an arm assembler from HolyC", so the pieces exist but are not wired to <code>asm{}</code>.</li>
+<li><strong>Graphics, mouse, keyboard</strong>: SDL2 window created at 640x480 with a 4:3 letterboxed viewport (<code>c/windows.c:82-116</code>); the screen is an 8-bit paletted <code>SDL_CreateRGBSurface(0,640,480,8,...)</code> (<code>:95</code>) and <code>UpdateScreen(px,w,h,w_internal)</code> memcpys <code>w</code> bytes per row into it and presents via <code>SDL_CreateTextureFromSurface</code> (<code>:170-192</code>); <code>GrPaletteColorSet</code> sets the 16 colours (<code>:195</code>). Mouse events are scaled to 640x480 and delivered through <code>FFI_CALL_TOS_4(ms_cb, x, y, z, state)</code> with a relative mode available (<code>:623-636</code>, <code>SDL_SetRelativeMouseMode</code> <code>:709</code>). <strong>There is no 32-bit framebuffer path and no resolution other than 640x480</strong>; adding one is a change to <code>windows.c</code> (new surface format and size, a HolyC-visible <code>UpdateScreen32</code>) plus the HolyC side; M.</li>
+<li><strong>Native C functions</strong>: registered at start-up with <code>PrsAddSymbol(name, int64_t (*)(int64_t *stk), arity)</code> which binds a C function taking an array of 64-bit arguments (<code>c/main.c:122-127</code>, hundreds of uses such as <code>PrsAddSymbol("PrintI", STK_PrintI, 2)</code> <code>:202</code>), and <code>PrsAddSymbolNaked</code> for functions called with the native convention; the README's "Extending Aiwnios" shows the same mechanism plus how to add IR nodes. No <code>dlopen</code> (0 hits in <code>c/*.c</code>), so adding a NEON blend means editing <code>main.c</code> and rebuilding the runtime; S per function. The trampoline for calling HolyC from C is <code>asm/ffi_call_tos_aarch64.s</code> (<code>FFI_CALL_TOS_n</code>) [V].</li>
+<li><strong>Completeness</strong>: <code>Src/</code> carries the TempleOS user land file by file (DolDoc <code>Doc*.HC</code>, <code>Gr*.HC</code>, <code>Win.HC</code>, <code>WinMgr.HC</code>, <code>KTask.HC</code>, <code>Sched.HC</code>, <code>KExcept.HC</code>, <code>Menu.HC</code>, <code>Mouse.HC</code>, <code>Keyboard.HC</code>, <code>Sprite*.HC</code>, <code>God*.HC</code>, file systems FAT/RedSea/virtual, sockets) with its own <code>KernelA.HH</code> (224 KB), <code>AIWNIOS_CodeGen.HC</code>, <code>AIWNIOS_PrsExp.HC</code>, a profiler (<code>Profiler.HC</code>) and <code>ScrnCast.HC</code>; there is no <code>PCIBIOS</code>, no port I/O, no <code>KStart*</code>, so anything that touches hardware (our Bochs VBE driver, <code>OutU16</code>, <code>PCIReadU32</code>) has no equivalent [V, directory listing]. <code>try/catch</code>, <code>Spawn</code>, <code>MAlloc</code>, <code>Fs-&gt;</code> are provided (<code>except.c</code>, <code>multic.c</code>, <code>mem.c</code>, <code>Src/KTask.HC</code>).</li>
+<li><strong>Language</strong>: TempleOS precedence; no <code>continue</code>; <code>reg</code>/<code>noreg</code> honoured as scores; 8-char char constants (lexer is a port); F64 through NEON scalar (<code>ARM_fmulReg</code> in the README's example; <code>AArch64_ops.csv</code> 448 KB opcode table).</li>
+<li><strong>Build and benchmark</strong>: not done. The build was going to run in the scratchpad through a sub-agent; the request was refused by the session's permission classifier ("Code from External"). Dependencies per README: a C compiler, SDL2 development headers (Homebrew on macOS: "Your on your own"), cmake; then <code>./aiwnios -b</code> to bootstrap <code>HCRT2.BIN</code>, <code>./aiwnios</code> to run, <code>--tui</code> for a terminal mode, <code>-c</code> for a command. So the ns-per-pixel number for a HolyC blend loop on Aiwnios is <strong>not measured</strong>; the expectation from its allocator design is the same instruction mix as TempleOS's compiler executed natively, that is about 0.5 to 1 ns a pixel for the pointer-walk form (TCG costs roughly 5 to 10x on this loop, [U]).</li>
+<li><strong>Porting desk3 to Aiwnios</strong>: (1) a 32-bit, arbitrary-size framebuffer path in <code>windows.c</code> and a HolyC <code>UpdateScreen32</code> binding, M; (2) replace the Bochs VBE and PCI code (<code>desk3/01-core.HC</code>, <code>04-main.HC</code>, <code>05-splash.HC</code>, <code>06-run.HC</code>: 8 port-I/O sites) with the new binding, S; (3) rewrite <code>KsBlendRow/Col/A/A2D</code>, <code>KsMix3</code>, <code>Copy32</code>, <code>Fill32</code> and the other 11 <code>_extern</code> asm entry points as C registered through <code>PrsAddSymbol</code> (NEON optional), M; (4) input: relative mouse already exists, keyboard key-up and modifiers are better than TempleOS's, S; (5) the splash, serial go-byte, <code>savevm</code> boot image and the TempleOS mirror window (<code>gr.dc2</code>) have no meaning there, rework the boot story, M; (6) timing and the Monitor app use <code>cnts.jiffies</code>, available; (7) persistence becomes real files, S; (8) the Files app browsing <code>::/</code> becomes the host directory, S. Total L to XL, and the result is a macOS app, not an OS, which plan-review section 3.12 already lists as "the embedding option: months; useful as the development vehicle and demo, not the goal".</li>
+</ul>
+<p><strong>Off x86 emulation for the OS itself</strong>: an ARM64 or RISC-V backend for the TempleOS compiler is XL and the kernel (<code>KStart16/32/64</code>, <code>KInts</code>, paging, PIT, PS/2, ATA, VGA) is x86 through and through; no fork has tried. KVM on an x86 host removes the TCG penalty entirely (plan-review condition 2). WebAssembly: Aiwnios's bytecode build, "slow" by its own README. Nothing here changes the recommendation to stay on QEMU for the showcase.</p>
+<h2 id="9-ranked-list-of-improvements-by-payoff-per-effort">9. Ranked list of improvements by payoff per effort<a class="headerlink" href="#9-ranked-list-of-improvements-by-payoff-per-effort" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Improvement</th>
+<th>Effort</th>
+<th>Payoff</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Rewrite remaining hot HolyC loops as pointer walks in small functions, two pixels a pass where the maths allows; add <code>reg</code> only where the disassembly shows a spill</td>
+<td>S</td>
+<td>3.7x to 14x on those loops, measured</td>
+<td>E1, E2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Set CR4.OSFXSR and move F64 kernels (<code>LineN</code>, anti-aliasing, blur, layout maths) to SSE2 assembly assembled by NASM on the Mac and embedded as bytes; or to 16.16 fixed point where exact</td>
+<td>S</td>
+<td>11x on float loops (67 to 6 ns), 30x to fixed point, measured</td>
+<td>E2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Test harness over serial plus benchmark set (section 11) in <code>send-to-vm.sh</code></td>
+<td>S</td>
+<td>every later claim becomes a number; this report's harness is the prototype</td>
+<td>E1 to E4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Precedence: C table switched in around our compile, restored after; host lint for mixed operators</td>
+<td>S</td>
+<td>removes the bug class that has bitten twice</td>
+<td>E2</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>continue</code> and <code>OPTf_C_PREC</code> in the compiler, built and hot-loaded with the A.1 loop</td>
+<td>S</td>
+<td>language quality; proves the compiler-patch loop</td>
+<td>E3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Catchable faults for the desktop task plus a crash policy</td>
+<td>M</td>
+<td>the demo survives a bad pointer</td>
+<td>E4</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Peepholes in <code>OptPass789A</code>/<code>BackLib</code> (dead <code>MOV R8,RAX</code>, LEA folding, constant reuse)</td>
+<td>M</td>
+<td>about 1.4x on integer loops</td>
+<td>E1 disassembly</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Sampling profiler (timer IRQ, RIP histogram, symbolised with <code>Fs-&gt;hash_table</code>)</td>
+<td>M</td>
+<td>finds the next 46-ms-a-frame surprise without guessing</td>
+<td>renderer pass history</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SSE2 F64 in the compiler backend</td>
+<td>L</td>
+<td>8 to 11x on all F64 code without asm</td>
+<td>E2</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>fastcall</code> register arguments for flagged functions</td>
+<td>M</td>
+<td>2x on call-heavy paths (callbacks, widgets)</td>
+<td>E1 call cost</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>.BIN</code> writer on the host plus clang freestanding trampolines; port <code>stb_image</code>, <code>stb_truetype</code></td>
+<td>L</td>
+<td>images and fonts in the guest</td>
+<td>section 7</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Debug allocator with canaries, lint-inserted bounds checks</td>
+<td>S + M</td>
+<td>fewer faults to catch</td>
+<td>section 6</td>
+</tr>
+<tr>
+<td>13</td>
+<td>More register-variable slots (RBX after audit)</td>
+<td>M</td>
+<td>fixes the "17 locals" case without rewriting</td>
+<td>E1</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Inlining of leaf functions</td>
+<td>L</td>
+<td>removes calls where <code>fastcall</code> is not enough</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Aiwnios port of desk3</td>
+<td>L to XL</td>
+<td>a native Mac demo, not an OS</td>
+<td>section 8</td>
+</tr>
+<tr>
+<td>not</td>
+<td>LLVM/Cranelift front end, HolyC-to-C transpiler, ARM kernel</td>
+<td>XL</td>
+<td>the measured gain is already available from 1, 2, 7, 9</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-recommended-architecture-for-the-next-six-months">10. Recommended architecture for the next six months<a class="headerlink" href="#10-recommended-architecture-for-the-next-six-months" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Language</strong>: HolyC, compiled by a lightly patched TempleOS compiler (<code>continue</code>, <code>OPTf_C_PREC</code>, peepholes, later SSE2), carried as a small patch series applied to <code>::/Compiler</code> on the RAM drive during image build (<code>build-image.sh</code> step: copy, patch, <code>Cmp</code>, <code>Load</code>, relink, <code>savevm</code>). The desktop is compiled with C precedence; the loader restores TempleOS precedence before handing the prompt back so <code>Demo/</code> and user programs keep their semantics.</li>
+<li><strong>Hot code</strong>: assembly kernels assembled on the Mac by NASM (SSE2 allowed after the one-line CR4 enable at desktop start, per core if <code>-smp</code> is used), embedded as <code>DU8</code> byte strings with the source kept alongside; the existing hand <code>asm{}</code> routines stay. Rule: anything that runs per pixel or per glyph is a kernel; HolyC does per-span, per-widget and per-frame work.</li>
+<li><strong>Host-built C only for ported libraries</strong> (image decoders, TrueType), through the <code>.BIN</code> writer and trampolines, after the fetch channel exists.</li>
+<li><strong>Tooling on the host</strong>: <code>kslint</code> (precedence, ASCII, <code>$</code>, unused <code>reg</code>, functions over the register budget), <code>ksfmt</code>, <code>kstest</code> (serial harness), <code>ksbench</code> (section 11), a profiler in the guest reporting over serial. All Python, none touching the OS.</li>
+<li><strong>Safety</strong>: fault policy and debug allocator in the desktop; snapshot restore as the backstop; no attempt at memory protection.</li>
+<li><strong>Stop doing in HolyC</strong>: per-pixel loops with more than eight live variables; F64 arithmetic in anything that runs per frame (use fixed point or an SSE2 kernel); per-pixel function calls; <code>goto</code>-based <code>continue</code> once the keyword exists; expressions mixing <code>&amp;</code>, <code>|</code>, <code>^</code>, shifts with arithmetic without parentheses (lint).</li>
+<li><strong>First week</strong>: items 1 to 5 of the ranked list; they are all S and each is checkable with the benchmark set.</li>
+</ul>
+<h2 id="11-benchmark-set-measured-now-rerun-after-every-change">11. Benchmark set (measured now; rerun after every change)<a class="headerlink" href="#11-benchmark-set-measured-now-rerun-after-every-change" title="Link to this section">#</a></h2>
+<p>All in the headless scratch VM, 1,000,000 elements, 20 repetitions, <code>cnts.jiffies</code>; report ns per element and the <code>Uf</code> instruction count of the loop body. The E1/E2 programs are the reference implementations.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Kernel</th>
+<th>HolyC today (ns)</th>
+<th>HolyC best form today (ns)</th>
+<th>Assembly (ns)</th>
+<th>What it measures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constant-alpha blend (spike/KsBlend.HC formula)</td>
+<td>11 (spike form)</td>
+<td>0.8 (two pixels, <code>reg</code>)</td>
+<td>under 1 (README)</td>
+<td>integer codegen, register pressure</td>
+</tr>
+<tr>
+<td>memcpy 4 MB</td>
+<td>2392 ms per 168 MB <code>MemCpy</code> (README)</td>
+<td>HolyC I64 loop: in <code>KsBench</code></td>
+<td><code>REP MOVSQ</code> 7.5x, unrolled faster (README)</td>
+<td>string ops under TCG</td>
+</tr>
+<tr>
+<td>Per-pixel alpha blend (<code>KsBlendA</code> form, alpha from a mask)</td>
+<td>to measure</td>
+<td></td>
+<td></td>
+<td>branchy per-pixel</td>
+</tr>
+<tr>
+<td>Glyph blit (8-bit coverage into 32-bit, <code>KsBlendA2D</code>)</td>
+<td>to measure</td>
+<td></td>
+<td></td>
+<td>2D loops, strides</td>
+</tr>
+<tr>
+<td>Box blur (separable, three passes)</td>
+<td>to measure</td>
+<td></td>
+<td></td>
+<td>accumulator loops, division or shift</td>
+</tr>
+<tr>
+<td>Text layout (measure 10,000 glyph advances with kerning lookups)</td>
+<td>to measure</td>
+<td></td>
+<td></td>
+<td>pointer chasing, small calls</td>
+</tr>
+<tr>
+<td>Function call <code>s=Add1(s)</code></td>
+<td>9 to 12 per call</td>
+<td></td>
+<td>5 instructions</td>
+<td>call convention</td>
+</tr>
+<tr>
+<td>F64 multiply-add loop</td>
+<td>67</td>
+<td>2 (16.16 fixed)</td>
+<td>48 (x87), 6 (SSE2)</td>
+<td>floating point under TCG</td>
+</tr>
+<tr>
+<td>Index loop <code>big[i]+=k</code></td>
+<td>4</td>
+<td>3 (pointer)</td>
+<td></td>
+<td>loop overhead</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rules: repeat three times and report the median (E1's 531 ms outlier); headless only, the Cocoa window changes the numbers by about 3x; same ISO, same <code>-m</code>, same QEMU version (11.0.2 on this Mac per plan-review).</p>
+<h2 id="12-risks-and-the-conditions-for-leaving-holyc-in-an-area">12. Risks and the conditions for leaving HolyC in an area<a class="headerlink" href="#12-risks-and-the-conditions-for-leaving-holyc-in-an-area" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Compiler patches diverge from upstream</strong>: TempleOS is frozen; ZealOS has not touched the compiler either. Keep patches under 500 lines total and rebuild-tested by the harness; if a patch breaks <code>Cmp</code> of the kernel (the Charter's own metric), revert it.</li>
+<li><strong>A patched compiler can be loaded half-built</strong> (E3 hazard): gate on <code>Cmp()==0</code> and keep <code>HolyCPrec</code>-style restore paths; the image build must fail loudly, not snapshot a broken compiler.</li>
+<li><strong>SSE in a kernel that never used it</strong>: FXSAVE/FXRSTOR are already in the scheduler; interrupt handlers do not touch XMM; the only unknown is <code>-smp</code> (each core must set CR4). Test with the Monitor app running on a second core before relying on it.</li>
+<li><strong>Precedence switch is global</strong>: any TempleOS program compiled while it is on misparses; restore in the loader, add a lint that refuses to send a file compiled under the wrong table.</li>
+<li><strong>Fault catching hides bugs</strong>: log every caught fault with RIP and address over serial; a fault counter that restarts the desktop after three.</li>
+<li><strong>TCG numbers are not hardware numbers</strong>: a 2x change in instruction count can be 1.2x on KVM or metal; the only user-facing target is the frame time in QEMU on this Mac, so measure that.</li>
+</ul>
+<p>Leave HolyC for an area when: (a) the kernel is floating-point heavy and the SSE2 backend is not done, use NASM; (b) the code is a port of more than 2,000 lines of C (decoders, fonts), use clang plus trampolines; (c) the loop needs more than eight live registers and the RBX audit is not done, use assembly; (d) a crash in that code would corrupt heap or lock state (allocator, scheduler hooks), keep it tiny and in assembly with no allocation. Stay in HolyC for everything else: the in-OS loop (edit, send, run, <code>Uf</code>, <code>PassTrace</code>) is the asset this project has that no host toolchain offers.</p>
+<h2 id="13-what-could-not-be-verified">13. What could not be verified<a class="headerlink" href="#13-what-could-not-be-verified" title="Link to this section">#</a></h2>
+<ul>
+<li>Aiwnios was not built or run; its blend speed on this Mac is an estimate.</li>
+<li>The 31 ns figure's exact cause (window versus other conditions) was inferred from headless re-measurement of the same loop (11 ns), not re-measured with the window open.</li>
+<li>holyc-lang's precedence table and the LSP's behaviour on our sources.</li>
+<li>Whether a custom fault handler can <code>throw</code> out of <code>Fault2</code> cleanly (interrupt flag, stack state): designed from <code>KInts.HC</code> and <code>KExcept.HC</code>, not tested.</li>
+<li><code>-smp</code> plus CR4.OSFXSR on every core; the single-core case was tested.</li>
+<li>The compile time of the full <code>desk3</code> (8,000 lines) under the patched compiler; the serial transfer dominates the measured 20 s today.</li>
+<li>QEMU TCG's x87 implementation being 80-bit softfloat is the standard explanation for 48 to 67 ns per op [U]; the SSE2 number (6 ns) is measured.</li>
+</ul>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/plan-review/index.html" rel="prev"><span>Previous</span>Review of the HolyC-native apps plan</a><a class="next" href="../../docs/kosmos-app-port-research/index.html" rel="next"><span>Next</span>Porting kosmos-app into the TempleOS desktop: feasibility report</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#verdict">Verdict</a></li><li><a href="#summary-table">Summary table</a></li><li><a href="#1-the-compiler-as-it-is-what-the-source-says">1. The compiler as it is (what the source says)</a></li><li><a href="#2-measurements-e1-e2-scratch-vm-headless-1000000-pixels-or-iterations-20-repetitions-cntsjiffies-at-1000-hz">2. Measurements (E1, E2: scratch VM, headless, 1,000,000 pixels or iterations, 20 repetitions, cnts.jiffies at 1000 Hz)</a></li><li><a href="#3-family-a-modify-the-in-os-compiler">3. Family A: modify the in-OS compiler</a><ul><li><a href="#a1-how-to-build-and-test-a-patched-compiler-verified-today-e3">A.1 How to build and test a patched compiler (verified today, E3)</a></li><li><a href="#a2-what-an-optimising-backend-would-need-and-what-each-piece-buys">A.2 What an optimising backend would need and what each piece buys</a></li><li><a href="#a3-continue-and-precedence-inside-the-compiler">A.3 continue and precedence inside the compiler</a></li></ul></li><li><a href="#4-family-b-a-host-side-toolchain">4. Family B: a host-side toolchain</a><ul><li><a href="#b1-abi-facts-a-host-compiler-must-match-all-v-section-1">B.1 ABI facts a host compiler must match (all [V], section 1)</a></li><li><a href="#b2-options-compared">B.2 Options compared</a></li><li><a href="#b3-first-experiment-for-b-s">B.3 First experiment for B (S)</a></li></ul></li><li><a href="#5-family-c-dialect-and-tooling-on-the-host-no-os-change">5. Family C: dialect and tooling on the host (no OS change)</a></li><li><a href="#6-family-d-safety">6. Family D: safety</a></li><li><a href="#7-family-e-ecosystem">7. Family E: ecosystem</a></li><li><a href="#8-family-f-and-g-portability-and-prior-art">8. Family F and G: portability and prior art</a><ul><li><a href="#aiwnios-in-detail-answers-to-the-questions-asked-source-read-today-not-built">Aiwnios in detail (answers to the questions asked; source read today, not built)</a></li></ul></li><li><a href="#9-ranked-list-of-improvements-by-payoff-per-effort">9. Ranked list of improvements by payoff per effort</a></li><li><a href="#10-recommended-architecture-for-the-next-six-months">10. Recommended architecture for the next six months</a></li><li><a href="#11-benchmark-set-measured-now-rerun-after-every-change">11. Benchmark set (measured now; rerun after every change)</a></li><li><a href="#12-risks-and-the-conditions-for-leaving-holyc-in-an-area">12. Risks and the conditions for leaving HolyC in an area</a></li><li><a href="#13-what-could-not-be-verified">13. What could not be verified</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
