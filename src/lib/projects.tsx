@@ -31,6 +31,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "creatures",
+    href: "/creatures",
+    group: "creative",
+    name: "Creatures",
+    tagline: "Wisps, Fluxes, Pixlings and the rest of the cast.",
+    description: "The library of characters made for Agent Canvas, with names, families and the code behind each.",
+    logoSrc: "/creatures/wisp.svg",
+    role: "Creator.",
+    about: ["Creatures catalogues every character made for Hangout and Team chat and ships the drawing code in the Kamiji package."],
+    pitchHeadline: "Meet the cast",
+    pitchBody: "Open the library to see each family live.",
+    links: [],
+    progress: [{ label: "Library page and Kamiji package code", note: "Done", status: "done" }],
+  },
+  {
     slug: "glyphlings",
     href: "/glyphlings",
     group: "creative",

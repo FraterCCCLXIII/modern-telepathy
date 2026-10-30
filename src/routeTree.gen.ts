@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CreaturesRouteImport } from './routes/creatures'
 import { Route as GlyphlingsRouteImport } from './routes/glyphlings'
 import { Route as LabsRouteImport } from './routes/labs'
 import { Route as TempleosRouteImport } from './routes/templeos'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreaturesRoute = CreaturesRouteImport.update({
+  id: '/creatures',
+  path: '/creatures',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GlyphlingsRoute = GlyphlingsRouteImport.update({
@@ -56,6 +62,7 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/creatures': typeof CreaturesRoute
   '/glyphlings': typeof GlyphlingsRoute
   '/labs': typeof LabsRoute
   '/templeos': typeof TempleosRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/creatures': typeof CreaturesRoute
   '/glyphlings': typeof GlyphlingsRoute
   '/labs': typeof LabsRoute
   '/templeos': typeof TempleosRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/creatures': typeof CreaturesRoute
   '/glyphlings': typeof GlyphlingsRoute
   '/labs': typeof LabsRoute
   '/templeos': typeof TempleosRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contact'
+    | '/creatures'
     | '/glyphlings'
     | '/labs'
     | '/templeos'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/contact'
+    | '/creatures'
     | '/glyphlings'
     | '/labs'
     | '/templeos'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/contact'
+    | '/creatures'
     | '/glyphlings'
     | '/labs'
     | '/templeos'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  CreaturesRoute: typeof CreaturesRoute
   GlyphlingsRoute: typeof GlyphlingsRoute
   LabsRoute: typeof LabsRoute
   TempleosRoute: typeof TempleosRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creatures': {
+      id: '/creatures'
+      path: '/creatures'
+      fullPath: '/creatures'
+      preLoaderRoute: typeof CreaturesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/glyphlings': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  CreaturesRoute: CreaturesRoute,
   GlyphlingsRoute: GlyphlingsRoute,
   LabsRoute: LabsRoute,
   TempleosRoute: TempleosRoute,
