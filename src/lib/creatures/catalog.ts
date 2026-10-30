@@ -23,6 +23,8 @@ export interface CreatureFamily {
   source: string;
   /** Present in this package as code. */
   exported: boolean;
+  /** Not shown on the site. */
+  hidden?: boolean;
   kinds: CreatureKind[];
 }
 
@@ -138,6 +140,7 @@ export const CREATURE_FAMILIES: CreatureFamily[] = [
   },
   {
     id: "mitts",
+    hidden: true,
     name: "Mitts",
     singular: "Mitt",
     tagline: "Hands made of cubes.",
@@ -150,6 +153,7 @@ export const CREATURE_FAMILIES: CreatureFamily[] = [
   },
   {
     id: "spooklets",
+    hidden: true,
     name: "Spooklets",
     singular: "Spooklet",
     tagline: "Ghosts made of cubes.",

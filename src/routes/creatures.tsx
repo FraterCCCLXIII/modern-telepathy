@@ -8,7 +8,7 @@ export const Route = createFileRoute("/creatures")({
   head: () => ({
     meta: [
       { title: "Creatures — Modern Telepathy" },
-      { name: "description", content: "The library of characters made for Agent Canvas: Wisps, Fluxes, Motes, Cubits, Mitts, Spooklets, Pixlings and Handlings." },
+      { name: "description", content: "The library of characters made for Agent Canvas: Wisps, Fluxes, Motes, Cubits, Pixlings and Handlings." },
     ],
   }),
   component: Creatures,
@@ -85,17 +85,17 @@ function Creatures() {
           <p className={`${mono} text-zinc-500 mb-6`}>Characters</p>
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-balance leading-[1.0]">Creatures</h1>
           <p className="mt-8 text-xl text-zinc-500 max-w-[52ch] text-pretty leading-relaxed">
-            Every character made for Agent Canvas, by family: the colourful Wisps, the living Fluxes and the Motes they shed, cubes, pixel crews and hands. The drawing code ships in the Kamiji package as <span className="font-mono text-base">src/creatures</span>.
+            Every character made for Agent Canvas, by family: the colourful Wisps, the living Fluxes and the Motes they shed, Cubits, pixel crews and hands. The drawing code ships in the Kamiji package as <span className="font-mono text-base">src/creatures</span>.
           </p>
           <nav className="mt-8 flex flex-wrap gap-2" aria-label="Families">
-            {CREATURE_FAMILIES.map((f) => (
+            {CREATURE_FAMILIES.filter((f) => !f.hidden).map((f) => (
               <a key={f.id} href={`#${f.id}`} className={`${mono} rounded-full bg-secondary px-4 py-2 hover:bg-primary hover:text-primary-foreground`}>{f.name}</a>
             ))}
           </nav>
         </div>
       </header>
 
-      {CREATURE_FAMILIES.map((f, i) => (
+      {CREATURE_FAMILIES.filter((f) => !f.hidden).map((f, i) => (
         <section key={f.id} id={f.id} className={`py-16 ${i % 2 ? "bg-zinc-100" : "bg-canvas"}`}>
           <div className="max-w-screen-xl mx-auto px-6">
             <p className={`${mono} text-zinc-500 mb-3`}>{f.tagline}</p>
