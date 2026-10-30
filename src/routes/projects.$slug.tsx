@@ -109,6 +109,20 @@ function ProjectDetail() {
               </div>
             </section>
 
+            {project.features && project.features.length > 0 && (
+              <section>
+                <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">What it does</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {project.features.map((f) => (
+                    <div key={f.title} className="rounded-2xl bg-card p-5 ring-1 ring-black/5">
+                      <h3 className="font-medium mb-2">{f.title}</h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed text-pretty">{f.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <section>
               <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
                 The Pitch
@@ -146,6 +160,28 @@ function ProjectDetail() {
                 <p className="text-zinc-600 leading-relaxed text-pretty">{project.pitchBody}</p>
               </div>
             </section>
+
+            {project.gallery && project.gallery.length > 0 && (
+              <section>
+                <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">Gallery</h2>
+                <div className="grid gap-6">
+                  {project.gallery.map((g) => (
+                    <figure key={g.src}>
+                      <img
+                        src={g.src}
+                        alt={g.alt}
+                        loading="lazy"
+                        className="w-full h-auto rounded-2xl ring-1 ring-black/10"
+                      />
+                      <figcaption className="mt-3 text-sm text-zinc-500">
+                        {g.alt}
+                        {g.caption && <span className="block font-mono text-[.65rem] uppercase tracking-[.14em] text-zinc-400 mt-1">{g.caption}</span>}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <section>
               <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
@@ -209,6 +245,19 @@ function ProjectDetail() {
                   ))}
                 </ul>
               </div>
+              {project.facts && project.facts.length > 0 && (
+                <div>
+                  <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">At a glance</h2>
+                  <dl className="space-y-3">
+                    {project.facts.map((f) => (
+                      <div key={f.label} className="flex justify-between gap-4 border-b border-zinc-950/5 pb-3 text-sm">
+                        <dt className="text-zinc-400 flex-none">{f.label}</dt>
+                        <dd className="text-right text-zinc-700">{f.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
               <div className="p-6 rounded-2xl bg-zinc-50 ring-1 ring-black/5">
                 <h3 className="text-sm font-medium mb-2">Role</h3>
                 <p className="text-sm text-zinc-500">{project.role}</p>
