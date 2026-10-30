@@ -63,6 +63,14 @@ const PROJECTS = [
 // Modern Telepathy projects (src/lib/projects.tsx), generated; each opens its page on the parent site.
 const MT_PROJECTS = [
  {
+  "group": "mt-knowledge",
+  "name": "Sutraya",
+  "note": "A search-first library and layered reader where the original, its translation and notes sit side by side, and answers come with checkable quotes.",
+  "status": "link",
+  "href": "/projects/sutraya",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
   "group": "mt-language",
   "name": "Yakopop",
   "note": "Every word shows its script, reading, meaning and grammar, and lights up with its translation while the video plays.",

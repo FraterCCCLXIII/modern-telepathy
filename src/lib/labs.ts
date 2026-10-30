@@ -39,7 +39,7 @@ export const labs: Lab[] = [
 
   { id: "kamikin", title: "Kamikin", blurb: "Learn Japanese with small friends.", href: `${K}/kamikin/`, group: "language" },
   { id: "yakopop", title: "Yakopop", blurb: "Learn languages from the words on screen.", href: `${K}/yakopop/`, group: "language", project: "yakopop" },
-  { id: "sutraya", title: "Sutraya", blurb: "Ancient text library.", href: `${K}/sutraya/`, group: "language" },
+  { id: "sutraya", title: "Sutraya", blurb: "Ancient text library.", href: `${K}/sutraya/`, group: "language", project: "sutraya" },
   { id: "longformer", title: "Longformer", blurb: "From long-form audio to a book plan.", href: `${K}/longformer/`, group: "language", project: "longformer" },
   { id: "newsphere", title: "Newsphere", blurb: "Feed reader.", href: `${K}/newsphere/`, group: "language", project: "newsphere" },
 

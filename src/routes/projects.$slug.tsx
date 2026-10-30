@@ -223,6 +223,7 @@ function ProjectDetail() {
                   </ul>
                 </div>
               )}
+              {project.links.length > 0 && (
               <div>
                 <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
                   Resources
@@ -245,6 +246,7 @@ function ProjectDetail() {
                   ))}
                 </ul>
               </div>
+              )}
               {project.facts && project.facts.length > 0 && (
                 <div>
                   <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">At a glance</h2>

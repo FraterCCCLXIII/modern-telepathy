@@ -31,6 +31,47 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "sutraya",
+    group: "knowledge",
+    name: "Sutraya",
+    tagline: "Search ancient texts, then read them in layers.",
+    description: "A search-first library and layered reader where the original, its translation and notes sit side by side, and answers come with checkable quotes.",
+    logoSrc: "/projects/sutraya/logo.svg",
+    imageSrc: "/projects/sutraya/preview.webp",
+    role: "Creator.",
+    about: [
+      "Sutraya is a library for ancient texts. You search first, then open a work in a reader that shows the original text, a transliteration and a translation in aligned layers, with commentary, parallels and footnotes beside them.",
+      "Ask answers questions from the library with citations you can follow back to the passage, and checks its own quotes before it shows them. The first corpus is a curated set of Pali root texts from SuttaCentral with Bhikkhu Sujato's English translations, both recorded as CC0. Every text keeps its source and licence on record.",
+    ],
+    pitchHeadline: "Read the text, not just the answer",
+    pitchBody: "Open the demo page to see how the layered reader is organised. The app runs today as a working prototype.",
+    links: [],
+    features: [
+      { title: "Search first", body: "Search runs on PostgreSQL with diacritic-insensitive matching, so results work whether or not you type the marks." },
+      { title: "A layered reader", body: "Read the original, a transliteration and a translation together, stacked or in parallel, with notes, parallels and footnote panels." },
+      { title: "Ask, with checks", body: "Ask a question and get an answer with citations that link to the passage. Quotes are checked against the text and citations against what was retrieved, then shown with a trust badge." },
+      { title: "Provenance for every text", body: "Each text records its source, licence, attribution and import date. The layers of a passage share segment IDs, so they stay aligned." },
+      { title: "Translate and OCR", body: "A translation helper with an AI drafting dialog, and an OCR page that sends PDFs or images to Dharmamitra's MITRA OCR." },
+      { title: "An MCP server", body: "Tools to search the corpus, read a passage, fetch parallels and resolve a stable sutraya: URN, so other agents can use the library." },
+    ],
+    gallery: [
+      { src: "/projects/sutraya/g1.webp", alt: "What the prototype includes: library, reader, parallels, Ask, translate and OCR", caption: "The Sutraya page" },
+      { src: "/projects/sutraya/g2.webp", alt: "The layered reader", caption: "Illustrative mock, not a screenshot" },
+    ],
+    facts: [
+      { label: "Status", value: "Working prototype" },
+      { label: "Runs", value: "On a laptop with Docker, or hosted" },
+      { label: "First corpus", value: "SuttaCentral Pali and English (CC0)" },
+      { label: "Stack", value: "Next.js, TypeScript, PostgreSQL, Drizzle" },
+      { label: "Source", value: "Private repository" },
+    ],
+    progress: [
+      { label: "Library, layered reader and search", note: "Prototype", status: "active" },
+      { label: "Ask with citation checks", note: "Prototype", status: "active" },
+      { label: "Public launch", note: "Planned", status: "planned" },
+    ],
+  },
+  {
     slug: "yakopop",
     group: "language",
     name: "Yakopop",
