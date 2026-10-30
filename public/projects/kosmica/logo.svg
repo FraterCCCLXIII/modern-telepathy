@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><radialGradient id="g" cx="40%" cy="35%"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#7fe3ff"/><stop offset="1" stop-color="#6b3fd6"/></radialGradient></defs><rect width="64" height="64" rx="14" fill="#07061a"/><path d="M32 8 52 32 32 56 12 32Z" fill="url(#g)"/><path d="M32 8v48M12 32h40" stroke="#07061a" stroke-opacity=".35" stroke-width="1.5"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Kosmica">
+  <defs><radialGradient id="g" cx="40%" cy="35%"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#7fe3ff"/><stop offset="1" stop-color="#6b3fd6"/></radialGradient></defs>
+  <rect width="512" height="512" fill="#07061a"/>
+  <path d="M256 36 476 256 256 476 36 256Z" fill="url(#g)"/>
+  <g fill="#07061a" transform="translate(259 255) scale(2.35) translate(-100 -41.4)">
+    <path d="M79.81,54.47c-2.27-3.14-3.59-7.14-3.59-11.73,0-11.39,8.05-19.17,18.75-19.17,5.44,0,10.18,2.02,13.54,5.49,2.77-3.32,28.03-25.97,31.05-29.06-24.12,19.01-35.79,11.75-44.59,11.75-18.92,0-32.79,13.18-32.79,30.99,0,8.04,2.84,15.14,7.69,20.51"/>
+    <path d="M111.85,33.96c1.19,2.57,1.86,5.52,1.86,8.77,0,11.38-8.05,19.17-18.75,19.17-4.03,0-7.67-1.1-10.66-3.09-3.54,2.54-21.13,20.86-24.29,23.89,18.2-10.53,26.87-8.99,34.95-8.99,18.83,0,32.79-13.1,32.79-30.99,0-6.58-2.16-12.99-5.7-18.17l-10.2,9.4Z"/>
+  </g>
+</svg>
