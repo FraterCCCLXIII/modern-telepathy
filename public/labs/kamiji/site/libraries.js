@@ -139,6 +139,116 @@ function propLibrary(o) {
   };
 }
 
+// Glyphlings: Greek letters from Courier New Regular, extruded with rounded edges, with eyes floating in their empty spaces.
+// The outlines and eye positions come from assets/glyphlings/index.json (written by scripts/make-glyphlings.py).
+// Every letter is a SkinnedMesh on a seven-bone spine running up its height, so it can bend like a rubber-hose character.
+// The eyes are parented to the spine bone nearest them and ride along with the bend.
+const GLYPH_BONES = 7;
+function glyphlingContent(api, v, item, color, opts = {}) {
+  const { THREE } = api;
+  const c = { disposed: false, eyeSet: "dots", skeleton: null };
+  const mats = [], geos = [];
+  let pivot = null, bones = [], eyes = [];
+  const DEPTH = 130;
+  const dark = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.25, metalness: 0 });
+  const white = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3, metalness: 0 });
+  const body = new THREE.MeshStandardMaterial({ color: color || item.colour, roughness: 0.55, metalness: 0 });
+  mats.push(dark, white, body);
+  let minY = Infinity, maxY = -Infinity;
+  item.polys.forEach((r) => r[0].forEach(([, y]) => { minY = Math.min(minY, y); maxY = Math.max(maxY, y); }));
+  const spacing = (maxY - minY) / (GLYPH_BONES - 1);
+
+  function buildEyes() {
+    eyes.forEach((e) => { e.parent?.remove(e); });
+    eyes = [];
+    const set = c.eyeSet === "pills" ? item.pills : item.dots;
+    set.forEach(([x, y, r]) => {
+      const eye = new THREE.Group();
+      if (c.eyeSet === "pills") {
+        const w = r * 1.2, h = r * 2.7;
+        const g = new THREE.CapsuleGeometry(w / 2, Math.max(h - w, 1), 8, 16); geos.push(g);
+        const m = new THREE.Mesh(g, dark); m.scale.set(1, 1, 0.55); eye.add(m);
+      } else {
+        const g = new THREE.SphereGeometry(r, 24, 16); geos.push(g);
+        const m = new THREE.Mesh(g, dark); m.scale.set(1, 1, 0.65); eye.add(m);
+        const hg = new THREE.SphereGeometry(r * 0.3, 16, 12); geos.push(hg);
+        const hl = new THREE.Mesh(hg, white); hl.position.set(r * 0.32, r * 0.34, r * 0.55); eye.add(hl);
+      }
+      const i = Math.max(0, Math.min(GLYPH_BONES - 1, Math.round((y - minY) / spacing)));   // nearest spine bone
+      eye.position.set(x, y - (minY + i * spacing), 0);
+      bones[i].add(eye); eyes.push(eye);
+    });
+    v.dirty = true;
+  }
+  c.setColor = (col) => { color = col; body.color.set(col || item.colour); v.dirty = true; };
+  c.setEyes = (name) => { c.eyeSet = name; if (pivot) buildEyes(); };
+  c.attach = async () => {
+    try { await attachInner(); } catch (e) { console.error("Glyphlings attach failed", e); throw e; }
+  };
+  const attachInner = async () => {
+    if (c.disposed) return;
+    pivot = new THREE.Group();
+    // the spine: a chain of bones, root at the letter's foot, each one a step higher than the last
+    bones = [];
+    for (let i = 0; i < GLYPH_BONES; i++) {
+      const b = new THREE.Bone(); b.name = `spine${i}`;
+      b.position.set(0, i === 0 ? minY : spacing, 0);
+      if (i) bones[i - 1].add(b); else pivot.add(b);
+      bones.push(b);
+    }
+    c.skeleton = new THREE.Skeleton(bones);
+    pivot.updateMatrixWorld(true);
+    item.polys.forEach((rings) => {
+      const shape = new THREE.Shape(rings[0].map(([x, y]) => new THREE.Vector2(x, y)));
+      rings.slice(1).forEach((h) => shape.holes.push(new THREE.Path(h.map(([x, y]) => new THREE.Vector2(x, y)))));
+      const g = new THREE.ExtrudeGeometry(shape, { depth: DEPTH, bevelEnabled: true, bevelThickness: 18, bevelSize: 12, bevelSegments: 4, curveSegments: 6 });
+      g.translate(0, 0, -DEPTH / 2); geos.push(g);
+      // skin weights: each vertex blends the two spine bones either side of its height
+      const pos = g.attributes.position, idx = new Uint16Array(pos.count * 4), wt = new Float32Array(pos.count * 4);
+      for (let k = 0; k < pos.count; k++) {
+        const t = Math.max(0, Math.min(GLYPH_BONES - 1.0001, (pos.getY(k) - minY) / spacing)), i0 = Math.floor(t), f = t - i0;
+        idx[k * 4] = i0; idx[k * 4 + 1] = i0 + 1; wt[k * 4] = 1 - f; wt[k * 4 + 1] = f;
+      }
+      g.setAttribute("skinIndex", new THREE.Uint16BufferAttribute(idx, 4));
+      g.setAttribute("skinWeight", new THREE.Float32BufferAttribute(wt, 4));
+      const mesh = new THREE.SkinnedMesh(g, body);
+      mesh.frustumCulled = false;
+      pivot.add(mesh);
+      mesh.bind(c.skeleton);
+    });
+    v.scene.add(pivot); v.root = pivot;
+    buildEyes();
+    pivot.scale.setScalar(0.0022);   // the outlines are in font units (about 1000 wide); the viewers expect props about 2 units across
+    pivot.rotation.y = 0.3;
+    api.fit(v, pivot, 0, true);
+    let t = 0.7, nextBlink = 2;
+    const rest = () => bones.forEach((b, i) => { b.rotation.z = 0; b.scale.set(1, 1, 1); });
+    v.tick = (dt) => {
+      if (!(opts.live || v.hover) || dt <= 0) { if (bones.some((b) => b.rotation.z)) { rest(); return true; } return false; }
+      t += dt;
+      // rubber-hose idle: a bend that travels up the spine, a small squash and stretch at the foot, and a slow turn
+      bones.forEach((b, i) => { b.rotation.z = Math.sin(t * 2.6 - i * 0.6) * 0.1 * (0.35 + i / GLYPH_BONES); });
+      bones[0].scale.y = 1 + Math.sin(t * 5.2) * 0.035;
+      bones[0].scale.x = 1 - Math.sin(t * 5.2) * 0.02;
+      pivot.rotation.y = Math.sin(t * 0.9) * 0.5;
+      nextBlink -= dt;
+      const k = nextBlink < 0 && nextBlink > -0.14 ? 0.1 : 1;
+      if (nextBlink < -0.14) nextBlink = 3 + Math.random() * 3;
+      eyes.forEach((e) => { e.scale.y = k; });
+      return true;
+    };
+    v.dirty = true;
+  };
+  c.dispose = () => {
+    c.disposed = true;
+    if (pivot) v.scene.remove(pivot);
+    c.skeleton?.dispose?.();
+    geos.forEach((g) => g.dispose()); mats.forEach((m) => m.dispose());
+    v.tick = null; v.root = null;
+  };
+  return c;
+}
+
 // ---- the libraries ---------------------------------------------------------
 export const LIBRARIES = [
   {
@@ -176,6 +286,24 @@ export const LIBRARIES = [
       tile.btn.setAttribute("aria-label", `${tile.item.name}: change face, now ${c.face}`);
     },
     initTile: (api, tile) => tile.btn.setAttribute("aria-label", `${tile.item.name}: change face, now ${tile.content.face}`),
+  },
+  {
+    id: "glyphlings", label: "Glyphlings", group: "Characters", count: 18, tintable: true,
+    description: "Nine Greek letters, capitals and lowercase, from Courier New Regular, extruded with rounded edges, given eyes in their empty spaces, and rigged on a seven-bone spine so they bend like rubber-hose characters. Hover a tile to see it move. Click to switch between round and pill eyes.",
+    note: "The eyes float in the letter's counters and follow the spine bone nearest them. Set the tint to colour the letters.",
+    async load() {
+      const data = await getJson(`${ASSETS}glyphlings/index.json`);
+      return data.map((d) => ({ ...d, keywords: [d.letter, d.lower ? "lowercase" : "capital", "greek", "letter"] }));
+    },
+    tile: (item) => ({ name: item.name, sub: `${item.lower ? "lowercase" : "capital"} ${item.letter}`, aria: `${item.name} ${item.letter}: switch eyes` }),
+    make: (api, item, v, color, opts) => glyphlingContent(api, v, item, color, opts),
+    noHero: true,
+    onClick(api, tile) {
+      const c = tile.content;
+      c.setEyes(c.eyeSet === "dots" ? "pills" : "dots");
+      tile.btn.setAttribute("aria-label", `${tile.item.name} ${tile.item.letter}: ${c.eyeSet} eyes, switch`);
+    },
+    initTile: (api, tile) => tile.btn.setAttribute("aria-label", `${tile.item.name} ${tile.item.letter}: switch eyes`),
   },
   {
     id: "hands", label: "Hand poses", group: "Hands", count: HAND_EMOJI.length, tintable: true,
