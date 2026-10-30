@@ -69,6 +69,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+/** Google Analytics 4. Loads only on the live domain, so localhost and preview deployments do not count as visits. */
+const GA_ID = "G-TNW89MKZKG";
+const GA_SNIPPET = `(function(){var h=location.hostname;if(h!=="moderntelepathy.com"&&h!=="www.moderntelepathy.com")return;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}";document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments)};gtag("js",new Date());gtag("config","${GA_ID}")})();`;
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -90,6 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [{ children: GA_SNIPPET }],
     links: [
       {
         rel: "stylesheet",

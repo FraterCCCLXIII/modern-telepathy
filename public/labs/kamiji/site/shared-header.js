@@ -1,5 +1,20 @@
 // Shared top header for the main pages: Kamiji, Kamikin, Hands and Kosmos. One file, one list, so a new page is one entry.
 // Pages load it with <script type="module" src="shared-header.js"> (or ../shared-header.js from a subfolder).
+// Google Analytics 4 (same property as the main site). Live domain only, so localhost and previews do not count.
+(function () {
+  const h = location.hostname;
+  if (h !== "moderntelepathy.com" && h !== "www.moderntelepathy.com") return;
+  if (window.gtag) return;
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=G-TNW89MKZKG";
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag("js", new Date());
+  window.gtag("config", "G-TNW89MKZKG");
+})();
+
 const base = new URL(".", import.meta.url).href; // .../site/
 const PAGES = [
   { id: "kamiji", label: "Kamiji", href: "index.html", match: /\/site\/(index\.html)?$/ },
@@ -292,7 +307,7 @@ const css = `
 .sx-face:nth-child(2) { transform: rotateX(90deg) translateZ(10px); }
 .sx-face:nth-child(3) { transform: rotateX(180deg) translateZ(10px); }
 .sx-face:nth-child(4) { transform: rotateX(270deg) translateZ(10px); }
-.sx .sx-brand { color: var(--fg, #1f2a22); font-weight: 600; margin-right: 10px; }
+.sx .sx-brand { display: flex; align-items: center; margin-right: 10px; }
 .sx-lead, .sx-end { display: flex; align-items: center; gap: 6px 22px; flex: none; }
 .sx-mt { display: flex; align-items: center; gap: 6px 22px; }
 .sx-dark .sx-turn img { filter: invert(1); }
