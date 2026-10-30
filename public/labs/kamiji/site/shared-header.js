@@ -48,6 +48,94 @@ const PROJECTS = [
 // Modern Telepathy projects (src/lib/projects.tsx), generated; each opens its page on the parent site.
 const MT_PROJECTS = [
  {
+  "group": "mt-language",
+  "name": "Yakopop",
+  "note": "Every word shows its script, reading, meaning and grammar, and lights up with its translation while the video plays.",
+  "status": "link",
+  "href": "/projects/yakopop",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-systems",
+  "name": "Arco",
+  "note": "The generative UI library inside Kosmos, with a component library and public documentation.",
+  "status": "link",
+  "href": "/projects/arco",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-systems",
+  "name": "Kosmos engine",
+  "note": "The 3D and simulation engine behind the Kosmos family, plus the official TypeScript client for Kosmos servers.",
+  "status": "link",
+  "href": "/projects/kosmos-engine",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-knowledge",
+  "name": "Relay and MESH",
+  "note": "Relay is a stack spec of signed, content-addressed facts and deterministic views. MESH combines ideas from Nostr, ActivityPub, SSB and AT Protocol.",
+  "status": "link",
+  "href": "/projects/relay",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-tools",
+  "name": "Pressmark",
+  "note": "A label editor for NIIMBOT printers over Bluetooth or USB. Offline by default; your labels stay in your browser.",
+  "status": "link",
+  "href": "/projects/pressmark",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-tools",
+  "name": "Page",
+  "note": "Replaces the home screen with a quiet list of actions and one search field. No network permission, no ads, no tracking.",
+  "status": "link",
+  "href": "/projects/page",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-games",
+  "name": "Kosmica",
+  "note": "Sign up for news and early access, with parent sign-up for younger players and referral ranks for invites.",
+  "status": "link",
+  "href": "/projects/kosmica",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-business",
+  "name": "Formscaler",
+  "note": "An open-core, AI-ready CMS for dynamic data: collections and permissions as data, published pages, and agents bound by the same rules as editors.",
+  "status": "link",
+  "href": "/projects/formscaler",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-language",
+  "name": "Longformer",
+  "note": "Add podcast episodes, video, text and documents as sources, get a chapter plan, and edit it.",
+  "status": "link",
+  "href": "/projects/longformer",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-language",
+  "name": "Podbook",
+  "note": "AI-powered conversion of feeds and podcasts into books for offline reading and curation.",
+  "status": "link",
+  "href": "/projects/podbook",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
+  "group": "mt-creative",
+  "name": "Caret",
+  "note": "Rich text editing for .md and .rtf files, with inline AI, footnotes and review comments.",
+  "status": "link",
+  "href": "/projects/caret",
+  "g": "M5 12h14M13 6l6 6-6 6"
+ },
+ {
   "group": "mt-systems",
   "name": "TempleOS desktop",
   "note": "Plans, specs and status for rebuilding a modern desktop and browser inside TempleOS.",
@@ -184,6 +272,8 @@ const GROUPS = [
   { id: "mt-creative", label: "Characters & creative" },
   { id: "mt-language", label: "Language, audio & reading" },
   { id: "mt-knowledge", label: "Knowledge & community" },
+  { id: "mt-games", label: "Games" },
+  { id: "mt-tools", label: "Everyday tools" },
   { id: "mt-business", label: "Business & web tools" },
 ];
 

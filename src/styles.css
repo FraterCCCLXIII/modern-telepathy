@@ -63,7 +63,7 @@
   --font-serif: ui-serif, Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --color-zinc-50: oklch(0.969 0.011 101);
-  --color-zinc-100: oklch(0.924 0.007 97);
+  --color-zinc-100: oklch(0.918 0.0125 101);
   --color-zinc-200: oklch(0.890 0.011 101);
   --color-zinc-300: oklch(0.810 0.014 111);
   --color-zinc-400: oklch(0.645 0.019 129);
@@ -89,11 +89,11 @@
   --popover-foreground: var(--ink);
   --primary: oklch(0.230 0.004 107);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.924 0.007 97);
+  --secondary: oklch(0.918 0.0125 101);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.924 0.007 97);
+  --muted: oklch(0.918 0.0125 101);
   --muted-foreground: oklch(0.500 0.021 132);
-  --accent: oklch(0.924 0.007 97);
+  --accent: oklch(0.918 0.0125 101);
   --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);

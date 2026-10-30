@@ -27,20 +27,20 @@ export const labs: Lab[] = [
   { id: "subtitles", title: "Subtitles", blurb: "A playground for talking characters.", href: `${K}/subtitles/`, group: "language", project: "kamiji" },
   { id: "voice-lab", title: "Voice Lab", blurb: "Try the Kamiji voices.", href: `${K}/voice-lab/`, group: "language", project: "kamiji" },
   { id: "previs", title: "Previs", blurb: "A story map, timeline and storyboard with live 3D scenes.", href: `${K}/previs/`, group: "creative", project: "kamiji" },
-  { id: "arco", title: "Arco", blurb: "Generative UI for agents.", href: `${K}/arco/`, group: "systems", project: "kosmos" },
+  { id: "arco", title: "Arco", blurb: "Generative UI for agents.", href: `${K}/arco/`, group: "systems", project: "arco" },
   { id: "ui-experiments", title: "UI Experiments", blurb: "A gallery of interface experiments.", href: `${K}/ui-experiments/`, group: "systems" },
   { id: "sidekicks", title: "Sidekicks", blurb: "Control plane for agent sidekicks.", href: `${K}/sidekicks/`, group: "systems" },
 
-  { id: "kosmos", title: "Reality Kosmos Engine", blurb: "The engine page: what runs and how.", href: `${K}/kosmos/`, group: "systems", project: "kosmos" },
+  { id: "kosmos", title: "Reality Kosmos Engine", blurb: "The engine page: what runs and how.", href: `${K}/kosmos/`, group: "systems", project: "kosmos-engine" },
   { id: "kosmos-computer", title: "Kosmos computer", blurb: "The generative AI operating system, as first sketched.", href: `${K}/kosmos-computer/`, group: "systems", project: "kosmos" },
   { id: "kosmographica", title: "Kosmographica", blurb: "Knowledge graph.", href: `${K}/kosmographica/`, group: "knowledge", project: "kosmographica" },
 
   { id: "templeos-docs", title: "TempleOS desktop docs", blurb: "Plans and specs for the HolyC desktop, its browser and its host apps.", href: "/labs/templeos/docs/", group: "systems", project: "templeos" },
 
   { id: "kamikin", title: "Kamikin", blurb: "Learn Japanese with small friends.", href: `${K}/kamikin/`, group: "language" },
-  { id: "yakopop", title: "Yakopop", blurb: "Learn languages from the words on screen.", href: `${K}/yakopop/`, group: "language" },
+  { id: "yakopop", title: "Yakopop", blurb: "Learn languages from the words on screen.", href: `${K}/yakopop/`, group: "language", project: "yakopop" },
   { id: "sutraya", title: "Sutraya", blurb: "Ancient text library.", href: `${K}/sutraya/`, group: "language" },
-  { id: "longformer", title: "Longformer", blurb: "From long-form audio to a book plan.", href: `${K}/longformer/`, group: "language" },
+  { id: "longformer", title: "Longformer", blurb: "From long-form audio to a book plan.", href: `${K}/longformer/`, group: "language", project: "longformer" },
   { id: "newsphere", title: "Newsphere", blurb: "Feed reader.", href: `${K}/newsphere/`, group: "language", project: "newsphere" },
 
   { id: "kamae", title: "Kamae Blade Duels", blurb: "A small duelling game.", href: `${K}/kamae/`, group: "games" },
