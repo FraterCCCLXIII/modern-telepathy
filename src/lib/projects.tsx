@@ -31,6 +31,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "glyphlings",
+    href: "/glyphlings",
+    group: "creative",
+    name: "Glyphlings",
+    tagline: "Nine Greek letters with eyes in their empty spaces.",
+    description: "A character set made from Courier New Regular capitals, each given eyes in its counters.",
+    logoSrc: "/glyphlings/omega-tile.svg",
+    role: "Creator.",
+    about: ["Glyphlings turn the Greek capitals into small characters by setting eyes into the empty spaces of each letter."],
+    pitchHeadline: "Letters that look back",
+    pitchBody: "Open the character page to meet all nine.",
+    links: [],
+    progress: [{ label: "Nine characters as SVG", note: "Done", status: "done" }],
+  },
+  {
     slug: "sutraya",
     group: "knowledge",
     name: "Sutraya",

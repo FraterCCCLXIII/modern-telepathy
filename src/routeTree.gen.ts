@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GlyphlingsRouteImport } from './routes/glyphlings'
 import { Route as LabsRouteImport } from './routes/labs'
 import { Route as TempleosRouteImport } from './routes/templeos'
 import { Route as ThesisRouteImport } from './routes/thesis'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlyphlingsRoute = GlyphlingsRouteImport.update({
+  id: '/glyphlings',
+  path: '/glyphlings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabsRoute = LabsRouteImport.update({
@@ -50,6 +56,7 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/glyphlings': typeof GlyphlingsRoute
   '/labs': typeof LabsRoute
   '/templeos': typeof TempleosRoute
   '/thesis': typeof ThesisRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/glyphlings': typeof GlyphlingsRoute
   '/labs': typeof LabsRoute
   '/templeos': typeof TempleosRoute
   '/thesis': typeof ThesisRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/glyphlings': typeof GlyphlingsRoute
   '/labs': typeof LabsRoute
   '/templeos': typeof TempleosRoute
   '/thesis': typeof ThesisRoute
@@ -75,13 +84,27 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/contact' | '/labs' | '/templeos' | '/thesis' | '/projects/$slug'
+    | '/'
+    | '/contact'
+    | '/glyphlings'
+    | '/labs'
+    | '/templeos'
+    | '/thesis'
+    | '/projects/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/labs' | '/templeos' | '/thesis' | '/projects/$slug'
+  to:
+    | '/'
+    | '/contact'
+    | '/glyphlings'
+    | '/labs'
+    | '/templeos'
+    | '/thesis'
+    | '/projects/$slug'
   id:
     | '__root__'
     | '/'
     | '/contact'
+    | '/glyphlings'
     | '/labs'
     | '/templeos'
     | '/thesis'
@@ -91,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  GlyphlingsRoute: typeof GlyphlingsRoute
   LabsRoute: typeof LabsRoute
   TempleosRoute: typeof TempleosRoute
   ThesisRoute: typeof ThesisRoute
@@ -111,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glyphlings': {
+      id: '/glyphlings'
+      path: '/glyphlings'
+      fullPath: '/glyphlings'
+      preLoaderRoute: typeof GlyphlingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/labs': {
@@ -147,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  GlyphlingsRoute: GlyphlingsRoute,
   LabsRoute: LabsRoute,
   TempleosRoute: TempleosRoute,
   ThesisRoute: ThesisRoute,
