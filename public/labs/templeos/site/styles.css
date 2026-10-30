@@ -875,3 +875,8 @@ a.g-label:hover { background: var(--alt); }
 .tk-meta dd { margin: 2px 0 0; font-size: .9rem; word-break: break-word; }
 .tk:target { border-color: var(--accent); }
 @media (max-width: 720px) { .tk summary { flex-wrap: wrap; } }
+
+/* Temple logo in the header (added by sync-templeos-site.py) */
+.brand { gap: 10px; }
+.brand .mark { display: inline-block; width: 24px; height: 26px; flex: none; background: currentColor;
+  -webkit-mask: url(/brand/temple/temple-mark.svg) center / contain no-repeat; mask: url(/brand/temple/temple-mark.svg) center / contain no-repeat; }

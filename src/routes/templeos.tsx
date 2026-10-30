@@ -127,6 +127,7 @@ function TempleOSPage() {
       {/* Hero */}
       <header className="pt-24 pb-16 bg-canvas text-center">
         <div className="max-w-screen-xl mx-auto px-6">
+          <img src="/brand/temple/temple-logo.svg" alt="Temple" width={120} height={150} className="mx-auto mb-10 h-32 w-auto" />
           <h1 className="text-5xl md:text-8xl font-medium tracking-tight text-balance leading-[0.98]">
             TempleOS,
             <br />

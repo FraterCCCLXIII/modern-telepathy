@@ -35,4 +35,18 @@ for f in DST.rglob("*"):
     else:
         s = jsstr.sub(lambda m: m.group(1) + PREFIX + "/" + m.group(2) + m.group(1), s)
     f.write_text(s, encoding="utf-8")
+# Temple logo: swap the placeholder circle in the header brand for the real mark, and use the tile as the favicon.
+BRAND_CSS = """
+/* Temple logo in the header (added by sync-templeos-site.py) */
+.brand { gap: 10px; }
+.brand .mark { display: inline-block; width: 24px; height: 26px; flex: none; background: currentColor;
+  -webkit-mask: url(/brand/temple/temple-mark.svg) center / contain no-repeat; mask: url(/brand/temple/temple-mark.svg) center / contain no-repeat; }
+"""
+mark = re.compile(r'<svg class="mark"[^>]*>.*?</svg>', re.S)
+for f in DST.rglob("*.html"):
+    t = f.read_text(encoding="utf-8")
+    f.write_text(mark.sub('<span class="mark" aria-hidden="true"></span>', t), encoding="utf-8")
+css = DST / "styles.css"
+css.write_text(css.read_text(encoding="utf-8") + BRAND_CSS, encoding="utf-8")
+shutil.copy(DST.parent.parent.parent / "brand/temple/temple-tile.svg", DST / "favicon.svg")
 print("copied", sum(1 for _ in DST.rglob("*.html")), "pages to", DST)
