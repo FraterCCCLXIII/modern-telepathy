@@ -12,6 +12,7 @@ const NAV = [
   { to: "/", label: "Products", exact: true },
   { to: "/labs", label: "Labs" },
   { to: "/thesis", label: "Thesis" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 // Wheel faces: [src, width, height]. Four sides, 90 degrees apart, apothem = 20px / 2.
@@ -218,6 +219,9 @@ export function SiteFooter() {
       <div className="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
         <p className="text-xs text-zinc-400">© {new Date().getFullYear()} Modern Telepathy</p>
         <div className="flex gap-6">
+          <Link to="/contact" className="text-xs text-zinc-400 hover:text-ink transition-colors">
+            Contact
+          </Link>
           <a href="#" className="text-xs text-zinc-400 hover:text-ink transition-colors">
             Twitter
           </a>

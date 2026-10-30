@@ -31,3 +31,8 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Secrets (RESEND_API_KEY, CONTACT_FROM)
+.env
+.env.*
+!.env.example

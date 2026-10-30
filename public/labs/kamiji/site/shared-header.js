@@ -17,6 +17,7 @@ const MT = [
   { label: "Products", href: "/" },
   { label: "Labs", href: "/labs" },
   { label: "Thesis", href: "/thesis" },
+  { label: "Contact", href: "/contact" },
 ];
 const ELSEWHERE = [
   { label: "yakopop.com", href: "https://yakopop.com" },

@@ -39,3 +39,7 @@ A project page shows a "Try it" list built from labs whose `project` equals its 
 - **Header:** `SiteHeader` (`src/components/site-chrome.tsx`) and `public/labs/kamiji/site/shared-header.js` draw the same bar: 40px, mono uppercase labels, and a logo wheel that turns through the Modern Telepathy mark, Artec and the two Kosmos logos. The link lists are duplicated, so change both; re-run the project list into `MT_PROJECTS` when `projects.tsx` changes.
 - **Theme:** Kamiji is the base. `src/styles.css` holds Kamiji's palette (`site/style.css`: bg `#f0efe7`, fg `#1f2a22`, card `#fafaf3`, selection `#1d1d1b`) in oklch, remaps the Tailwind `zinc-*` scale to its warm neutrals, and uses its system-ui and mono font stacks. The Google Fonts links (Instrument Sans and Serif) are gone.
 - The `.dark` block in `styles.css` is unused and still has the old blue-grey values. Kamiji has no site-wide dark theme (only per-page `sx-dark`).
+
+## Contact form
+
+`/contact` posts to a server function (`src/lib/contact.ts`) that sends the message to openartist@gmail.com through Resend. It needs `RESEND_API_KEY` in the server environment (Vercel > Settings > Environment Variables, or a local `.env`); `.env.example` lists the variables. Without a key the form tells the visitor to email directly. Spam handling is a hidden honeypot field plus one message per address per minute per server instance.
