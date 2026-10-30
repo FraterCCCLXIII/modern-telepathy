@@ -1,0 +1,194 @@
+[
+  {
+    "name": "heart",
+    "category": "emote",
+    "tint": "#ff5a7a",
+    "triangles": 1390,
+    "bytes": 28072,
+    "file": "heart.glb"
+  },
+  {
+    "name": "star",
+    "category": "emote",
+    "tint": "#ffd23f",
+    "triangles": 1222,
+    "bytes": 24752,
+    "file": "star.glb"
+  },
+  {
+    "name": "sparkle",
+    "category": "emote",
+    "tint": "#ffe680",
+    "triangles": 1832,
+    "bytes": 37144,
+    "file": "sparkle.glb"
+  },
+  {
+    "name": "zzz",
+    "category": "status",
+    "tint": "#8fb4ff",
+    "triangles": 1080,
+    "bytes": 20640,
+    "file": "zzz.glb"
+  },
+  {
+    "name": "lightbulb",
+    "category": "emote",
+    "tint": "#ffd23f",
+    "triangles": 1632,
+    "bytes": 30748,
+    "file": "lightbulb.glb"
+  },
+  {
+    "name": "anger",
+    "category": "emote",
+    "tint": "#ff4d4d",
+    "triangles": 2176,
+    "bytes": 43608,
+    "file": "anger.glb"
+  },
+  {
+    "name": "sweat",
+    "category": "status",
+    "tint": "#7fd4ff",
+    "triangles": 720,
+    "bytes": 14060,
+    "file": "sweat.glb"
+  },
+  {
+    "name": "tear",
+    "category": "status",
+    "tint": "#5ab8ff",
+    "triangles": 720,
+    "bytes": 14080,
+    "file": "tear.glb"
+  },
+  {
+    "name": "question",
+    "category": "symbol",
+    "tint": "#8f7bff",
+    "triangles": 2268,
+    "bytes": 41968,
+    "file": "question.glb"
+  },
+  {
+    "name": "exclamation",
+    "category": "symbol",
+    "tint": "#ff9f1c",
+    "triangles": 492,
+    "bytes": 10056,
+    "file": "exclamation.glb"
+  },
+  {
+    "name": "double_exclamation",
+    "category": "symbol",
+    "tint": "#ff9f1c",
+    "triangles": 984,
+    "bytes": 19024,
+    "file": "double_exclamation.glb"
+  },
+  {
+    "name": "music_note",
+    "category": "symbol",
+    "tint": "#b07bff",
+    "triangles": 936,
+    "bytes": 18156,
+    "file": "music_note.glb"
+  },
+  {
+    "name": "fire",
+    "category": "status",
+    "tint": "#ff7a1a",
+    "triangles": 2798,
+    "bytes": 54708,
+    "file": "fire.glb"
+  },
+  {
+    "name": "check",
+    "category": "symbol",
+    "tint": "#4cd964",
+    "triangles": 240,
+    "bytes": 5456,
+    "file": "check.glb"
+  },
+  {
+    "name": "cross",
+    "category": "symbol",
+    "tint": "#ff4d4d",
+    "triangles": 240,
+    "bytes": 5440,
+    "file": "cross.glb"
+  },
+  {
+    "name": "plus",
+    "category": "symbol",
+    "tint": "#4cd964",
+    "triangles": 240,
+    "bytes": 5440,
+    "file": "plus.glb"
+  },
+  {
+    "name": "warning",
+    "category": "status",
+    "tint": "#ffc400",
+    "triangles": 2832,
+    "bytes": 53692,
+    "file": "warning.glb"
+  },
+  {
+    "name": "clock",
+    "category": "status",
+    "tint": "#7a8cff",
+    "triangles": 1276,
+    "bytes": 24380,
+    "file": "clock.glb"
+  },
+  {
+    "name": "gear",
+    "category": "tool",
+    "tint": "#9aa4b2",
+    "triangles": 2680,
+    "bytes": 53292,
+    "file": "gear.glb"
+  },
+  {
+    "name": "magnifier",
+    "category": "tool",
+    "tint": "#5ac8fa",
+    "triangles": 1288,
+    "bytes": 24428,
+    "file": "magnifier.glb"
+  },
+  {
+    "name": "wrench",
+    "category": "tool",
+    "tint": "#9aa4b2",
+    "triangles": 2226,
+    "bytes": 43512,
+    "file": "wrench.glb"
+  },
+  {
+    "name": "branch",
+    "category": "dev",
+    "tint": "#7ee787",
+    "triangles": 1976,
+    "bytes": 36732,
+    "file": "branch.glb"
+  },
+  {
+    "name": "pull_request",
+    "category": "dev",
+    "tint": "#a371f7",
+    "triangles": 1632,
+    "bytes": 30596,
+    "file": "pull_request.glb"
+  },
+  {
+    "name": "merge",
+    "category": "dev",
+    "tint": "#ba8cff",
+    "triangles": 1716,
+    "bytes": 32112,
+    "file": "merge.glb"
+  }
+]

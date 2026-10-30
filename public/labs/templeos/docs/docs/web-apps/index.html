@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web-technology apps on the HolyC desktop: design study | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html" aria-current="page">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Engine and platform</span></li><li aria-current="page">Web-technology apps on the HolyC desktop: design study</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Web-technology apps on the HolyC desktop: design study</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/web-apps.md</span></div>
+        <div class="doc-body">
+
+<p>Written 2026-10-27, branch task/templeos-shell. Study, not an implementation: the only code run is scratch (listed in section 13).
+Tags: <strong>[R]</strong> run or measured this session, <strong>[S]</strong> read in a file (named), <strong>[M]</strong> memory or inference, to be checked before it is relied on.
+Kosmos OS (<code>/Users/paulbloch/kosmos-os-frame</code>) has no licence file: its shapes are cited as spec, nothing is copied.</p>
+<h2 id="1-answer">1. Answer<a class="headerlink" href="#1-answer" title="Link to this section">#</a></h2>
+<p>Build <strong>one app contract and three renderers behind it</strong>.</p>
+<ol>
+<li><strong>Contract (build first, shared):</strong> a <code>kind: "web"</code> manifest, a default-deny <code>window.kosmos</code> API, theme tokens, one permission store on the host. This is almost the Kosmos OS "Tier 3 code app" (sandboxed iframe, postMessage SDK, <code>--os-*</code> tokens) [S: app-platform-plan.md, AppHost.tsx, packages/app-sdk], so web apps written for Kosmos OS port with a thin shim.</li>
+<li><strong>A, host Chromium (first, for compatibility):</strong> the existing browser/appd route. Any framework works. Content apps get display-list bands, creative apps and games get tiles.</li>
+<li><strong>C, host-side JS plus declarative tree (second, for system apps):</strong> JS runs in Node or a worker on the host; the guest interprets an indented-record tree. This is the native-feeling, cheap-in-memory track, and the right target for OpenUI Lang apps.</li>
+<li><strong>B, JS in the guest, Aiwnios only, last, and narrowed:</strong> link QuickJS to run the <em>reconciler for C</em> in-process. Do <strong>not</strong> build a native HTML/CSS engine. The evidence below overturns that half of B.</li>
+<li><strong>D (compile to HolyC):</strong> rejected, except "D-lite": JSX compiled to static tree literals.</li>
+</ol>
+<p>Caveat: <code>os-foundation-plan.md</code> [S] proposes Linux with our own compositor as the base. If that wins, A's host pieces (runner, manifest, permissions, kit) carry over and the guest-painting parts fall away.</p>
+<h2 id="2-what-exists-today-read-not-assumed">2. What exists today (read, not assumed)<a class="headerlink" href="#2-what-exists-today-read-not-assumed" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>State</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host Chrome 156 over <code>--remote-debugging-pipe</code>, throwaway profile, contexts, tabs, input, snapshots</td>
+<td>built, M1 passed 24/25 sites</td>
+<td>browser/host/engine.py, tests/browser/results/m1-summary.md [S]</td>
+</tr>
+<tr>
+<td>DLIST encoder (DOMSnapshot to 256-px bands), reference painter, format spec</td>
+<td>built (host); guest painter <code>desk3/browser/paint.HC</code> partial</td>
+<td>browser/host/dlist.py, dlist-format.md [S]</td>
+</tr>
+<tr>
+<td>Electron runner (install, sha256, supervisor, CDP, approvals, optional sandbox-exec, tile stream), manifest kind <code>electron</code>, host hub with <code>REQ/RES/APPROVE</code></td>
+<td>built; tiles are the labelled "fallback path"</td>
+<td>apps-host/appd.py, perms.py, stream.py, manifest.py, hub/hostd.py [S]</td>
+</tr>
+<tr>
+<td>Applications folder: manifest and registry plan, kinds <code>holyc</code>, <code>templeos</code>, <code>host</code></td>
+<td>plan</td>
+<td>docs/apps/applications-folder.md [S]</td>
+</tr>
+<tr>
+<td>Retained tree interpreter (<code>desk3/ui/tree.HC</code>, 512-node pool)</td>
+<td><strong>not built</strong>; spec only</td>
+<td>docs/apps/01-porting-method.md 4.1-4.3 [S]</td>
+</tr>
+<tr>
+<td>Aiwnios: natives registered with <code>PrsBindCSymbol("Name", fn(int64_t *stk), arity)</code>; set today: KsOpen, KsPresent(Rect), KsPoll, KsInject, KsExec. No sockets.</td>
+<td>built</td>
+<td>aiwnios/aiwnios-sdl32.patch, platform.HC [S]</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-the-shared-contract">3. The shared contract<a class="headerlink" href="#3-the-shared-contract" title="Link to this section">#</a></h2>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code> app bundle (HTML/CSS/JS + manifest) --install--&gt; host appd (grants, signature, hash)
+                                                    |
+        window.kosmos  &lt;--CDP binding--&gt;  appd/hostd  --records--&gt;  guest (windows, prompts, notifications)</code></pre></figure>
+<h3 id="31-manifest-kind-web">3.1 Manifest, <code>kind: "web"</code><a class="headerlink" href="#31-manifest-kind-web" title="Link to this section">#</a></h3>
+<figure class="code"><figcaption><span class="lang">json</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code><span class="tk-p">{</span><span class="tk-w"> </span><span class="tk-nt">&quot;schema&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-mi">1</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;id&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;user.todo&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;name&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;Todo&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;version&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;1.2.0&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;icon&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;list-checks&quot;</span><span class="tk-p">,</span>
+<span class="tk-w">  </span><span class="tk-nt">&quot;entry&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-p">{</span><span class="tk-w"> </span><span class="tk-nt">&quot;kind&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;web&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;root&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;dist/&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;start&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;index.html&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;spa&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-kc">true</span><span class="tk-w"> </span><span class="tk-p">},</span>
+<span class="tk-w">  </span><span class="tk-nt">&quot;render&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;auto&quot;</span><span class="tk-p">,</span><span class="tk-w">                       </span><span class="tk-c1">// auto | dlist | tiles | tree</span>
+<span class="tk-w">  </span><span class="tk-nt">&quot;window&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-p">{</span><span class="tk-w"> </span><span class="tk-nt">&quot;w&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-mi">900</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;h&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-mi">600</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;min_w&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-mi">480</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;min_h&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-mi">320</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;resizable&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-kc">true</span><span class="tk-w"> </span><span class="tk-p">},</span>
+<span class="tk-w">  </span><span class="tk-nt">&quot;theme&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-p">{</span><span class="tk-w"> </span><span class="tk-nt">&quot;kit&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;kosmos-ui@1&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;follow&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-kc">true</span><span class="tk-w"> </span><span class="tk-p">},</span>
+<span class="tk-w">  </span><span class="tk-nt">&quot;permissions&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-p">[</span><span class="tk-s2">&quot;storage:own&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-s2">&quot;shell:notify&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-s2">&quot;net:https://api.example.com&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-s2">&quot;host:files:r&quot;</span><span class="tk-p">],</span>
+<span class="tk-w">  </span><span class="tk-nt">&quot;tools&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-p">[],</span><span class="tk-w"> </span><span class="tk-nt">&quot;update&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-p">{</span><span class="tk-w"> </span><span class="tk-nt">&quot;channel&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;stable&quot;</span><span class="tk-p">,</span><span class="tk-w"> </span><span class="tk-nt">&quot;url&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;https://...&quot;</span><span class="tk-w"> </span><span class="tk-p">},</span><span class="tk-w"> </span><span class="tk-nt">&quot;signature&quot;</span><span class="tk-p">:</span><span class="tk-w"> </span><span class="tk-s2">&quot;ed25519:...&quot;</span><span class="tk-w"> </span><span class="tk-p">}</span>
+</code></pre></figure>
+<p>It extends <code>applications-folder.md</code> section 4 (a new <code>entry.kind</code> next to <code>holyc</code>/<code>templeos</code>/<code>host</code>) and <code>manifest.py</code> (<code>electron</code>). Nothing in the guest parses JSON; <code>gen-apps.py</code> writes the table.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Kosmos OS manifest [S: shared/manifest.ts]</th>
+<th>PWA manifest [M]</th>
+<th>Tauri [M]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id, name, version, icon</td>
+<td>same; Lucide icon name</td>
+<td>name, short_name, icons[]</td>
+<td><code>identifier</code>, <code>productName</code>, <code>version</code></td>
+</tr>
+<tr>
+<td>entry</td>
+<td><code>url</code> / <code>bundle</code> / <code>openui</code></td>
+<td><code>start_url</code>, <code>scope</code></td>
+<td><code>build.frontendDist</code>, <code>devUrl</code></td>
+</tr>
+<tr>
+<td>window</td>
+<td>not in manifest (<code>setWindowGeometry</code> aspect only)</td>
+<td><code>display</code></td>
+<td><code>app.windows[] {title,width,height,resizable}</code></td>
+</tr>
+<tr>
+<td>permissions</td>
+<td><code>intent</code>, <code>contract</code>, <code>storage own</code>, <code>shell notify/windows/clipboard/agent</code></td>
+<td>none (browser prompts)</td>
+<td><code>capabilities/*.json</code> with <code>core:*</code>, <code>fs:allow-read</code></td>
+</tr>
+<tr>
+<td>theme</td>
+<td><code>--os-*</code> tokens pushed by the host</td>
+<td><code>theme_color</code>, <code>background_color</code></td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rule for importing: a PWA manifest becomes <code>entry.start</code>/<code>window</code>/<code>icon</code>; a Tauri <code>tauri.conf.json</code> becomes <code>window</code> and a <em>proposed</em> permission list that the user must still approve. Permissions are never inferred silently.</p>
+<h3 id="32-windowkosmos">3.2 <code>window.kosmos</code><a class="headerlink" href="#32-windowkosmos" title="Link to this section">#</a></h3>
+<p>Shape mirrors the Kosmos OS SDK [S: index.d.ts] so those apps run with a shim: <code>intents.invoke</code>, <code>storage.query/execute</code>, <code>shell.notify/askAgent/setWindowGeometry/toolbar</code>, <code>events.on</code>, <code>theme.current/onChange</code>. Additions for the desk: <code>files.pick()</code> (host dialog, returns a handle), <code>clipboard.read/write</code>, <code>window.setTitle/close/requestAttention</code>, <code>agent.registerTool</code>.</p>
+<p>Transport: <code>Runtime.addBinding("__ks_send")</code> plus a script on <code>Page.addScriptToEvaluateOnNewDocument</code> that defines a frozen <code>window.kosmos</code>. The host replies by <code>Runtime.evaluate("kosmos._done(id,ok,value)")</code>. Identity comes from the CDP session id that carried the call, never from a field the page sets. <strong>[R]</strong> I ran this: a denied <code>kosmos.call('fs.read')</code> rejected with "denied: needs host:files:r", an allowed <code>notify</code> resolved, 51 calls were audited, in-page round trip p50 <strong>0.1 ms</strong> (Python handler, local pipe), and assigning <code>kosmos.call = 1</code> did not override it.</p>
+<p>Default deny: every method maps to one permission key (same vocabulary as <code>applications-folder.md</code> section 7); an ungranted key returns a rejection and writes an audit line; "ask" keys open a guest prompt (Allow once / Allow / Deny) whose answer is stored only on the host. The guest never stores a grant and never sees a token.</p>
+<h3 id="33-theme">3.3 Theme<a class="headerlink" href="#33-theme" title="Link to this section">#</a></h3>
+<p>The desk has five styles and 16 palette slots (<code>ks_pal</code>) [S: 01-porting-method.md 4.5]. Three channels, all host-driven:</p>
+<ol>
+<li>CSS custom properties injected at document start: <code>--ks-bg --ks-ink --ks-accent --ks-rad --ks-pad --ks-font-scale</code>, and <code>&lt;html data-ks-style="macos|win11|kosmica|longformer-light|longformer-dark"&gt;</code>. <strong>[R]</strong> injection worked (body computed to the injected colour).</li>
+<li><code>Emulation.setEmulatedMedia(prefers-color-scheme)</code> follows the desk's light/dark. <strong>[R]</strong> flipping it changed all 3 bands of the test page (checked by band hash, not by eye).</li>
+<li><code>kosmos-ui.css</code> plus web components (<code>&lt;ks-button&gt;</code>, <code>&lt;ks-tabs&gt;</code>...) that read only those variables, so the same markup looks right in all five styles. The apps may ignore the kit; they then look foreign (the Kosmos OS plan accepts the same trade).</li>
+</ol>
+<p>Fidelity limit [S: browser-architecture.md c4]: in the DLIST route glyphs are the desk's bitmap faces, not the app's font. The kit should therefore set <code>font-family</code> to a face whose metrics the host knows, or line breaks may differ by a pixel or two.</p>
+<h2 id="4-architecture-a-host-chromium-renders-guest-paints">4. Architecture A: host Chromium renders, guest paints<a class="headerlink" href="#4-architecture-a-host-chromium-renders-guest-paints" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code> guest window (our chrome, prompts)      host
+  +--------------------------+   input    +--------------------------------------+
+  | DLIST bands / tiles      | ---------&gt; | appd: Chrome target per app          |
+  | painter, scroll, hit     | &lt;--------- |  CDP: Input.*, DOMSnapshot, Fetch    |
+  +--------------------------+  bands     |  window.kosmos binding, perms, audit |</code></pre></figure>
+<p>Fidelity: layout is Chrome's (flex, grid, tables exact); glyphs, shadows, gradients and rotation are approximate or tiles [S]. React, Svelte, Preact, web components all work because Chrome runs them.</p>
+<p><strong>Measured here [R]</strong> (Chrome 156, Python encoder, 900x600 viewport, loopback server, throwaway profile, M-series Mac):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Vanilla todo</th>
+<th>React 19 todo (195 KB min, 61 KB gzip)</th>
+<th>React + 200-row table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Navigate to settled</td>
+<td>0.59 s</td>
+<td>0.60 s</td>
+<td>0.54 s</td>
+</tr>
+<tr>
+<td>DLIST items / ops</td>
+<td>22</td>
+<td>22</td>
+<td>822 (808 TEXT)</td>
+</tr>
+<tr>
+<td>DLIST bytes, all bands</td>
+<td>931 B</td>
+<td>745 B</td>
+<td>27.3 KB (20 bands)</td>
+</tr>
+<tr>
+<td>First-paint bytes (visible bands)</td>
+<td>931 B</td>
+<td>745 B</td>
+<td>3.6 KB</td>
+</tr>
+<tr>
+<td>Capture + encode, steady p50</td>
+<td>0.7 + 0.5 ms</td>
+<td>0.7 + 0.5 ms</td>
+<td>18.6 + 21.4 ms</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Type text and click Add, host side, to a new DLIST: p50 <strong>17 ms</strong>, p95 21.5 ms; changed bands cost p50 <strong>1.4 KB</strong>. At the reported 47 KB/s serial [S, unreproduced] that is about 30 ms more; on an Aiwnios socket it is negligible. The guest half (paint) is not measured.</li>
+<li>Resize 900x600 to 600x400 to a new DLIST: 3.9 ms host-side.</li>
+<li>Pixels instead: screenshot 600x400 PNG 18.9 KB (35 ms), 900x600 JPEG q60 18.8 KB (28 ms) for this near-empty page; raw RGB565 900x600 is 1.08 MB, 23 s at 47 KB/s. The guest has no JPEG decoder, so tiles use the palette/RLE encodings already in <code>stream.py</code>, dirty rectangles only.</li>
+<li>Memory: physical footprint (macOS <code>footprint</code>) of the Chrome tree rose <strong>647 MB for 5 extra app tabs, each in its own incognito context</strong> (about 129 MB each, 16 extra processes), on top of an 810 MB tree with no app open. One shared context was not measured; it should cost less but weakens isolation.</li>
+<li><strong>Trap found:</strong> the second tab I opened ignored input for about 5 s per click (p50 5069 ms) because it was not the front target. Calling <code>Page.bringToFront</code> and <code>Emulation.setFocusEmulationEnabled</code> fixed it (17 ms). The runner must front the focused app's target and emulate focus on every window focus change.</li>
+</ul>
+<p>How the awkward cases behave (mechanisms from <code>browser-architecture.md</code> and CDP, <strong>[M]</strong> for the CDP method names unless noted):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resize, DPI</td>
+<td>guest RESIZE (100 ms debounce) to <code>Emulation.setDeviceMetricsOverride</code>; <code>stream.py</code> uses DSF 1 so surface px equal CSS px [S]</td>
+</tr>
+<tr>
+<td>Scrolling</td>
+<td>root scroll local; nested containers cost a round trip [S]</td>
+</tr>
+<tr>
+<td>Text, IME</td>
+<td>key/char events to Chrome; committed IME text via <code>Input.insertText</code>; inline composition preview is a gap</td>
+</tr>
+<tr>
+<td>Clipboard</td>
+<td><code>kosmos.clipboard</code> with a prompt, through the channel</td>
+</tr>
+<tr>
+<td>Drag and drop</td>
+<td>in-page drag via <code>Input.dispatchDragEvent</code>; dropping a desk file needs a granted host path</td>
+</tr>
+<tr>
+<td>File pickers</td>
+<td>intercept the chooser, show the desk's picker, answer with <code>DOM.setFileInputFiles</code></td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td><code>Notification</code> overridden to <code>kosmos.shell.notify</code>; Chrome's permission stays denied [S: engine.py]</td>
+</tr>
+<tr>
+<td>Audio, video, canvas</td>
+<td>no guest audio; video and canvas as tiles (video 2-5 fps, canvas on change, ~100-200 ms, estimate)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cost: the engine is installed on the host, not bundled (licensing and size) [S]. Memory scales with Chrome, not with the guest. Idle apps should be frozen (<code>Page.setWebLifecycleState</code> [M]) and their processes discarded after a timeout.</p>
+<h2 id="5-architecture-b-javascript-engine-inside-the-desktop">5. Architecture B: JavaScript engine inside the desktop<a class="headerlink" href="#5-architecture-b-javascript-engine-inside-the-desktop" title="Link to this section">#</a></h2>
+<p><strong>x86 TempleOS.</strong> Not impossible, but not worth it. <code>engine-on-templeos.md</code> [S] proved a freestanding Rust blob loads as a <code>.BIN</code> and matches host hashes, so a C engine behind a libc shim (memcpy/malloc/math, the shim listed in <code>holyc-improvement-analysis.md</code>) is conceivable [M]. QuickJS has no JIT, runs on TCG emulation, and is about 6x slower than V8 even natively (below); I estimate 20-100x slower than the host under TCG [M, unmeasured]. What survives on x86 is therefore: the tree interpreter (C), host-side JS, and display-list/tile rendering (A). No JS in the guest.</p>
+<p><strong>Aiwnios.</strong> Feasible and cheap to start. Natives are registered by <code>PrsBindCSymbol</code> [S]. QuickJS: MIT licence [S: <code>brew info quickjs</code>], version 2026-06-04 is installed here, <code>libquickjs.a</code> is 1.0 MB with symbols [R]. quickjs-ng, Duktape, Hermes and Boa are alternatives, also permissively licensed [M].</p>
+<p><strong>Speed [R], same reconciler script</strong> (render + diff, one list row changed): Node 22 0.04 / 0.55 / 2.9 ms; QuickJS 0.11 / 3.4 / 17.4 ms for 5 / 200 / 1000 rows. QuickJS is about 6x slower than V8 but is fine at 200 rows and poor at 1000. Not measured: React itself under QuickJS (needs a DOM).</p>
+<p><strong>Native HTML/CSS subset.</strong> What a todo app needs: DOM (createElement, appendChild, attributes, classList, events with bubbling, <code>innerHTML</code>), a CSS cascade (selectors, specificity, custom properties, <code>calc</code>), block/inline/flex layout, text wrapping, borders/radius, images, form controls, timers, <code>fetch</code>. Real frameworks add MutationObserver, <code>getBoundingClientRect</code>, <code>requestAnimationFrame</code>. Ideas to borrow, not code: litehtml (BSD-3 [M]; CSS 2.1 centric, flex partial [M]), Taffy (MIT [M], Rust, flexbox/grid, layout only), Yoga (MIT [M]). Estimate [M]: 3-6 person-months to run a Preact todo app acceptably, then permanent compatibility debt. Chrome gives all of it for 0 lines; the only gain is independence from the host, which hostd already forgoes (secrets and services live there).</p>
+<p>Verdict: <strong>B-lite</strong>: QuickJS in Aiwnios running the C reconciler, so a tree app can run without the host's Node. Defer until C exists.</p>
+<h2 id="6-architecture-c-host-js-declarative-tree">6. Architecture C: host JS, declarative tree<a class="headerlink" href="#6-architecture-c-host-js-declarative-tree" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code> JS (React/Preact/Svelte-like custom renderer, or OpenUI Lang)  [host Node worker]
+   |  state -&gt; component tree (virtual)  -&gt; keyed diff
+   v  TREE / INS / SET / DEL records                       &lt;---- EV id kind value
+ guest: tree interpreter (512-node pool) -&gt; Txt, Button, Toggle, RRFill... with our theme</code></pre></figure>
+<p>This is Elm's loop (model, view, messages) with React Native's split (JS thread builds a shadow tree, the native side renders and sends events) [M]. It differs from Flutter, which owns every pixel; our guest renders with its own widgets, so theme and accessibility come free. The wire format already exists on paper: <code>TREE</code>, <code>SET</code>, <code>EV</code>, <code>NOTIFY</code> over the hostd frame [S: 01-porting-method.md 3.3, 4.1, 4.6].</p>
+<p><strong>Measured [R]</strong> (scratch reconciler, one tree vocabulary row/col/text/button/check/list):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Rows</th>
+<th>Nodes</th>
+<th>Full tree</th>
+<th>Patch: toggle one check</th>
+<th>Patch: append a row</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>38</td>
+<td>564 B</td>
+<td>20 B</td>
+<td>95 B</td>
+</tr>
+<tr>
+<td>200</td>
+<td>1208</td>
+<td>20.1 KB</td>
+<td>20 B</td>
+<td>107 B</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>6008</td>
+<td>102.5 KB</td>
+<td>20 B</td>
+<td>113 B</td>
+</tr>
+</tbody>
+</table></div>
+<p>Compare the same todo in A: 745 B to 27 KB per first paint and about 1.4 KB per change. C wins on bytes by 10-70x for updates, and needs no Chrome process for rendering (memory per app: a Node worker, tens of MB [M]). The limits: the pool is 512 nodes, so lists need a <strong>virtual list node</strong> (host sends only the visible window); layout is the row/col/gap/pad/fill subset, no wrap, grid or absolute positioning [S].</p>
+<p><strong>Relation to Kosmos OS OpenUI Lang</strong> [S: src/apps/generator, appview, node_modules/@openuidev]. Generative apps are text programs of assignments (<code>root = Card([hdr])</code>, <code>hdr = CardHeader("Title","Sub")</code>) with positional component calls and actions such as <code>@ToAssistant("Submit")</code>. The library (react-ui <code>genui-lib</code>, about 40 components) includes Accordion, Button, Callout, Card, Carousel, Charts, CodeBlock, DatePicker, Form, Image, Input, Modal, Select, Slider, Stack, Steps, Table, Tabs, Tag, TextArea, TextContent. Persisted apps add <code>$state</code>, SQL-backed Query bindings and declared action intents (tier 1-2 in app-platform-plan.md). The packages are MIT [S]. Mapping: OpenUI is a <em>front end</em> that compiles to the same tree (Card to card, Stack to row/col, TextContent to text, Button to button, Form to form, Table to list/table, Charts to chart, Modal to dialog). So C has two front ends over one IR: a React-style renderer for hand-written apps and an OpenUI Lang parser for agent-made ones. Actions become <code>EV</code> messages, then intents through the same grant table.</p>
+<p><strong><code>kosmos-ui</code> contents</strong> (one vocabulary, two renderers: tree node in C, web component in A):
+layout (row, col, card, split, scroll, tabs, sidebar, grid-lite); controls (button, toggle, check, radio, slider, select, input, textarea, date); display (text, markdown-lite, image, icon, tag, progress, metric, table, virtual list, line/bar chart, code block); overlays (dialog, menu, toast, tooltip); system (menu-bar items, toolbar, file dialog, notification).</p>
+<p>Costs [M]: interpreter v0 M, v1 M (text field, scroll list), React-style custom renderer S-M (react-reconciler is MIT [M]; I did not try it), OpenUI front end M. Text fields and the font service (P2, P5 in the porting plan) gate real apps.</p>
+<h2 id="7-architecture-d-compile-time-to-holyc">7. Architecture D: compile-time to HolyC<a class="headerlink" href="#7-architecture-d-compile-time-to-holyc" title="Link to this section">#</a></h2>
+<p>Compile web components or restricted TSX to HolyC at build time. <strong>Too ambitious</strong> for general code: HolyC has no closures, no managed strings or arrays, <code>F64</code> is x87 on x86 and IEEE on Aiwnios (parity differs) [S: aiwnios README], and the Aiwnios dialect has six documented traps. What is worth keeping is <strong>D-lite</strong>: JSX with static structure compiles to tree literals plus a handler table, so a purely declarative app needs no JS at runtime. That falls out of C almost free, and runs on x86 with no host JS (it still needs the host for services).</p>
+<h2 id="8-comparison">8. Comparison<a class="headerlink" href="#8-comparison" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th></th>
+<th>A Chromium</th>
+<th>B native subset</th>
+<th>C host JS + tree</th>
+<th>D compile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compatibility with web apps</td>
+<td>highest (any framework, PWA, Tauri frontends)</td>
+<td>low</td>
+<td>none for DOM code; own components only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Looks like the desk</td>
+<td>via kit and tokens, glyphs approximate</td>
+<td>yes</td>
+<td>yes, by construction</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Update cost (todo)</td>
+<td>~1.4 KB, 17 ms host</td>
+<td>local</td>
+<td>20-110 B</td>
+<td>local</td>
+</tr>
+<tr>
+<td>Memory per app [R]/[M]</td>
+<td>~130 MB footprint</td>
+<td>few MB</td>
+<td>tens of MB (Node)</td>
+<td>few MB</td>
+</tr>
+<tr>
+<td>Works on x86 guest</td>
+<td>yes (host does the work)</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Works on Aiwnios</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes (QuickJS later)</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Build cost</td>
+<td>low, mostly done</td>
+<td>3-6 months [M]</td>
+<td>2-3 months [M]</td>
+<td>years [M]</td>
+</tr>
+<tr>
+<td>Games, canvas, video</td>
+<td>tiles, 100+ ms</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-hybrid-by-app-type-section-e">9. Hybrid by app type (section E)<a class="headerlink" href="#9-hybrid-by-app-type-section-e" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>App type</th>
+<th>Route</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content: docs, mail, news</td>
+<td>A with DLIST; C for first-party mail and contacts</td>
+<td>text-heavy, bands are small (3.6 KB first paint for a 200-row table), selection and find work on DLIST</td>
+</tr>
+<tr>
+<td>Dashboards, widgets</td>
+<td>C (metric, chart, list)</td>
+<td>small trees, frequent patches, low memory; maps to OpenUI Charts, Table</td>
+</tr>
+<tr>
+<td>Creative tools</td>
+<td>A with tiles; native HolyC for tight loops</td>
+<td>canvas/WebGL needs pixels; input latency is a round trip, so brushes should be local</td>
+</tr>
+<tr>
+<td>Games</td>
+<td>A tiles on Aiwnios socket, or native HolyC</td>
+<td>100-200 ms tile latency rules out action games over serial; state it plainly</td>
+</tr>
+<tr>
+<td>IDEs</td>
+<td>A via Electron/appd tiles for existing editors (VS Code), C for our own IDE</td>
+<td>the editor surface is canvas-like text; <code>stream.py</code> already exists for it</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-security">10. Security<a class="headerlink" href="#10-security" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Origin and storage.</strong> One Chrome context per app, a distinct origin per app id, disposed on close. Memory cost above.</li>
+<li><strong>No ports for assets.</strong> Prefer serving the bundle through <code>Fetch.enable</code>/<code>Fetch.fulfillRequest</code> under <code>https://&lt;appid&gt;.kosmos.invalid/</code> [M]: no listening socket, and the same hook is the network allowlist for <code>net:</code> permissions (everything else fails). If a loopback server is used (the day-one prototype does), bind <code>127.0.0.1</code> on an ephemeral port, serve only the bundle, check <code>Host</code>, reject <code>..</code>. The browser design already forbids <code>--remote-debugging-port</code> [S].</li>
+<li><strong>CSP</strong> injected by the host: <code>default-src 'self'; script-src 'self'; connect-src</code> limited to the manifest's <code>net:</code> list; no inline script unless the manifest asks and the user approves.</li>
+<li><strong>Guest holds nothing.</strong> No tokens, cookies, keys, passwords [S: browser-architecture.md e2]. Grants live in <code>approvals.json</code> on the host [S: perms.py]; the guest only draws prompts. A hostile guest can ask for a token and replay it; the hub says so itself [S: hostd.py], so hostd, not the prompt, is the boundary.</li>
+<li><strong>Process.</strong> appd already strips the environment, fixes profile and download dirs, and offers a <code>sandbox-exec</code> profile [S]. Chrome's renderer sandbox stays on (<code>--no-sandbox</code> never used).</li>
+<li><strong>Supply chain.</strong> <code>kosmos-app pack</code> takes a built <code>dist/</code>, refuses install scripts, records SHA-256 of every file, and signs (Ed25519, per applications-folder section 8). No remote script at runtime (CSP). Lockfile and SBOM are packaged, not trusted. Unsigned apps need an explicit prompt.</li>
+<li><strong>Agent tools</strong> bind to intents or fixed queries, never app code [S: shared/manifest.ts].</li>
+</ul>
+<h2 id="11-packaging-distribution-developer-experience">11. Packaging, distribution, developer experience<a class="headerlink" href="#11-packaging-distribution-developer-experience" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Package:</strong> a folder or <code>.ksapp</code> zip: <code>manifest.json</code>, <code>dist/</code>, icons, optional <code>sw.js</code>. <strong>Offline:</strong> the bundle is local, so a service worker is only needed for the app's own data caching. Do not register service workers by default (they add a background process); allow <code>offline: "sw"</code> explicitly. <strong>Updates:</strong> compare semver, re-prompt only for new permission keys [S: applications-folder 8]. <strong>Remote start URL:</strong> allowed as <code>entry.url</code>, flagged "not packaged", needs <code>net:</code> for its origin.</li>
+<li><strong>CLI <code>kosmos-app</code>:</strong> <code>init</code> (template for vanilla, Preact, Svelte; kosmos-ui preinstalled), <code>dev</code> (runs the user's Vite on loopback and opens it in a desk window with HMR; the dev server is the only time a loopback port serves app code), <code>check</code> (manifest and permission lint), <code>pack</code>, <code>install</code>, <code>run</code>.</li>
+<li><strong>DevTools:</strong> the host already owns each app's CDP pipe. The guest DevTools app (DEVT messages, panels to CDP domains: Elements, Console, Network, Application) [S: browser-architecture.md f] attaches to the <em>app's</em> target, with Cookie/Authorization redacted. Developers can also use real DevTools in dev mode through a token-guarded loopback socket, off by default.</li>
+</ul>
+<h2 id="12-phased-plan-with-gates">12. Phased plan with gates<a class="headerlink" href="#12-phased-plan-with-gates" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Scope</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Day 1 prototype</strong></td>
+<td><code>appd web run ./dir</code>: loopback server, <code>Engine</code> plus the binding and token script from <code>scratchpad/webapps/run.py</code>, front-target fix, tiles through <code>stream.py</code> into one desk window on Aiwnios</td>
+<td>Todo app shows in a window; clicking Add in the guest adds a row; <code>kosmos.shell.notify</code> raises a desk notification; <code>fs.read</code> is refused and logged; closing the window ends the Chrome target</td>
+</tr>
+<tr>
+<td><strong>Week 1 MVP</strong></td>
+<td><code>kind: "web"</code> in <code>manifest.py</code> and <code>gen-apps.py</code>; install with hash and approval sheet; permissions store; <code>storage</code>, <code>notify</code>, <code>clipboard</code>, <code>files.pick</code>; tokens and prefers-color-scheme; resize and DPI; text input; DLIST route if <code>paint.HC</code> is ready</td>
+<td>Three sample apps (vanilla, Preact, Svelte) pass a scripted drive: click, type, resize, scroll; a denied key blocks and writes an audit line; golden screenshots on Aiwnios and x86</td>
+</tr>
+<tr>
+<td><strong>Month 3 target</strong></td>
+<td><code>kosmos-ui</code> kit (CSS plus components); tree interpreter v1 and the C track with a React-style renderer and an OpenUI Lang compiler; signing and update channel; DevTools attach; idle freeze and per-app memory cap; QuickJS spike on Aiwnios running the reconciler; 10 apps</td>
+<td>A <code>kind: "tree"</code> app runs with no Chrome process; an OpenUI app from Kosmos OS renders in the desk; memory budget (e.g. 8 web apps open) met; a tampered file is refused</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="13-risks">13. Risks<a class="headerlink" href="#13-risks" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Likelihood / impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host Chrome RAM (about 130 MB per app) on small Macs</td>
+<td>high / medium</td>
+<td>freeze idle apps; share contexts for first-party apps; prefer C for system apps</td>
+</tr>
+<tr>
+<td>Guest painter not finished (<code>paint.HC</code> partial)</td>
+<td>medium / high</td>
+<td>day one uses tiles, which exist</td>
+</tr>
+<tr>
+<td>Serial throughput (47 KB/s, unreproduced)</td>
+<td>medium / high</td>
+<td>socket on Aiwnios; deltas; band caches</td>
+</tr>
+<tr>
+<td>Scope drift toward a native browser engine (B)</td>
+<td>medium / high</td>
+<td>the decision in section 1</td>
+</tr>
+<tr>
+<td>Kosmos OS licence</td>
+<td>certain / medium</td>
+<td>spec only; owner permission before reuse</td>
+</tr>
+<tr>
+<td>Input stall on unfronted targets (found here)</td>
+<td>certain / medium</td>
+<td>front target and focus emulation on every focus change</td>
+</tr>
+<tr>
+<td><code>os-foundation</code> pivot to Linux</td>
+<td>medium / medium</td>
+<td>keep runner and kit host-side and portable</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="14-what-was-verified-and-what-was-not">14. What was verified and what was not<a class="headerlink" href="#14-what-was-verified-and-what-was-not" title="Link to this section">#</a></h2>
+<p><strong>Run or measured here [R]:</strong> all numbers in section 4 and 6 (scratch scripts in <code>/private/tmp/claude-501/-Users-paulbloch-Documents-github-kosmos-engine/bd9ff4b2-26c1-4838-a4e9-f39251b3e23b/scratchpad/webapps/</code>: <code>run.py</code>, <code>probe.py</code>, <code>recon.js</code>, apps in <code>vanilla/</code>, <code>react/</code>, results in <code>out/results.json</code>). React 19.2.7 bundled with the esbuild 0.28.1 found in kosmos-os-frame's node_modules (output only in the scratchpad). The binding/permission/token experiment. QuickJS 2026-06-04 and Node 22 timings. Chrome 156 via the existing <code>browser/host</code> engine and DLIST encoder.</p>
+<p><strong>Read [S]:</strong> the docs and files cited in the tags (Kosmos OS manifest types, app-sdk typings, AppHost, genui-lib directory, appd, stream.py, perms.py, hostd.py, aiwnios patch).</p>
+<p><strong>From memory or inference [M], not checked:</strong> CDP method names marked [M] (file chooser, drag, IME, lifecycle freeze, Fetch.fulfillRequest); PWA and Tauri field names; licences of litehtml, Taffy, Yoga, Duktape, Hermes, Boa, react-reconciler; all effort estimates; React Native, Flutter and Elm characterisations; QuickJS-on-TCG speed; Node memory per worker; React under QuickJS; shared-context footprint; guest paint cost; <code>docs/electron-apps.md</code> (cited by <code>perms.py</code>) did not exist when read.</p>
+<p><strong>Not run:</strong> anything on the guest (x86 or Aiwnios), the DLIST painter, <code>stream.py</code>, <code>appd</code>, Electron, a real service worker, Tauri.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/dev-box/index.html" rel="prev"><span>Previous</span>Dev Box: complete software development from the HolyC desktop</a><a class="next" href="../../docs/electron-apps/index.html" rel="next"><span>Next</span>Electron apps in the HolyC desktop (prototype)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-answer">1. Answer</a></li><li><a href="#2-what-exists-today-read-not-assumed">2. What exists today (read, not assumed)</a></li><li><a href="#3-the-shared-contract">3. The shared contract</a><ul><li><a href="#31-manifest-kind-web">3.1 Manifest, kind: &quot;web&quot;</a></li><li><a href="#32-windowkosmos">3.2 window.kosmos</a></li><li><a href="#33-theme">3.3 Theme</a></li></ul></li><li><a href="#4-architecture-a-host-chromium-renders-guest-paints">4. Architecture A: host Chromium renders, guest paints</a></li><li><a href="#5-architecture-b-javascript-engine-inside-the-desktop">5. Architecture B: JavaScript engine inside the desktop</a></li><li><a href="#6-architecture-c-host-js-declarative-tree">6. Architecture C: host JS, declarative tree</a></li><li><a href="#7-architecture-d-compile-time-to-holyc">7. Architecture D: compile-time to HolyC</a></li><li><a href="#8-comparison">8. Comparison</a></li><li><a href="#9-hybrid-by-app-type-section-e">9. Hybrid by app type (section E)</a></li><li><a href="#10-security">10. Security</a></li><li><a href="#11-packaging-distribution-developer-experience">11. Packaging, distribution, developer experience</a></li><li><a href="#12-phased-plan-with-gates">12. Phased plan with gates</a></li><li><a href="#13-risks">13. Risks</a></li><li><a href="#14-what-was-verified-and-what-was-not">14. What was verified and what was not</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

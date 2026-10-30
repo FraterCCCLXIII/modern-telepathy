@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weather app: plan | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html" aria-current="page">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Weather app: plan</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Weather app: plan</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/weather.md</span></div>
+        <div class="doc-body">
+
+<p>Status: plan only, no code. Written 2026-10-27 on <code>task/templeos-shell</code>. Read with <code>docs/holyc-native-apps-plan.md</code> and <code>docs/apps/maps.md</code> (same host-service pattern and renderer gaps).</p>
+<p>Evidence tags: <strong>[verified]</strong> opened or run in this pass; <strong>[reported]</strong> from a search snippet or secondary source; <strong>[memory]</strong> unchecked; <strong>[estimate]</strong> our arithmetic, for the gates to confirm.</p>
+<h2 id="1-purpose-and-users">1. Purpose and users<a class="headerlink" href="#1-purpose-and-users" title="Link to this section">#</a></h2>
+<p>A forecast app for the TempleOS desk: current conditions, the next 48 hours, 10 days, rain timing, alerts, and later radar. It works from a cache with no network. Users: the desk owner with a few saved places. Not in v1: air quality, pollen, history, notifications.</p>
+<h2 id="2-platform-facts">2. Platform facts<a class="headerlink" href="#2-platform-facts" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>No network in the guest</strong> [verified, holyc-native-apps-plan]. A host service fetches, caches and normalises; the guest reads a compact record.</li>
+<li><strong>ASCII text only</strong> [verified, <code>Txt</code> and <code>TW</code>, <code>desk3/01-core.HC</code>]. <strong>No glyph for <code>°</code>.</strong> Write <code>C</code> or <code>F</code> after the number; draw a ring with <code>RRRing</code> if a symbol is needed. Place names are folded to ASCII on the host.</li>
+<li><strong>Renderer</strong> [verified]: rounded rectangles, one-pixel lines (<code>LineN</code>), discs, shadows, Lucide icons (<code>LIcon</code>). A temperature curve needs strokes wider than one pixel, which do not exist (same gap as maps, section 7 there).</li>
+<li><strong>Icons</strong>: Lucide is ISC [verified, <code>assets/LUCIDE-LICENSE.txt</code>].</li>
+<li><strong>Host</strong> [verified locally]: Python 3 with PIL, <code>rsvg-convert</code>, ImageMagick.</li>
+<li><strong>Kosmos OS</strong> [verified, <code>/Users/paulbloch/kosmos-os-frame</code>]: <code>src/os/bento/BentoWeatherWidget.tsx</code> calls <code>api.open-meteo.com</code> from the browser for a fixed city list. No weather app or design exists there. We avoid the direct client call: our data goes through the host with caching, rounding and rate rules.</li>
+<li><strong>Desk</strong>: no weather or Contacts app exists yet [verified].</li>
+</ul>
+<h2 id="3-feature-inventory">3. Feature inventory<a class="headerlink" href="#3-feature-inventory" title="Link to this section">#</a></h2>
+<p>P0 first usable version; P1 next; P2 later. Effort S (days), M (one to two weeks), L (several weeks).</p>
+<p>Competitors: Carrot Weather (apps.apple.com/DE/app/id961390574) and Windy (apps.apple.com/it/app/windy-com-weather-radar/id1161387262) [reported, search]; Apple Weather (apple.com/weather) and Weather Underground (wunderground.com) [memory]. Features listed are what reports say each app does.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>P</th>
+<th>Effort</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Current conditions: temperature, feels-like, condition, wind</td>
+<td>P0</td>
+<td>S</td>
+<td></td>
+</tr>
+<tr>
+<td>Next 48 hours: temperature curve and rain chance</td>
+<td>P0</td>
+<td>M</td>
+<td>Needs strokes (section 7)</td>
+</tr>
+<tr>
+<td>10-day list: high, low, condition, rain chance</td>
+<td>P0</td>
+<td>S</td>
+<td></td>
+</tr>
+<tr>
+<td>Sunrise and sunset</td>
+<td>P0</td>
+<td>S</td>
+<td>Provider daily data [memory]</td>
+</tr>
+<tr>
+<td>Rain timing: "rain starts in 25 min"</td>
+<td>P0</td>
+<td>S</td>
+<td>Carrot does precipitation alerts [reported]</td>
+</tr>
+<tr>
+<td>Units: C or F, km/h, mph, hPa, 12 or 24 h</td>
+<td>P0</td>
+<td>S</td>
+<td>Unit change never refetches</td>
+</tr>
+<tr>
+<td>Up to five saved places; typed city search</td>
+<td>P0</td>
+<td>M</td>
+<td>Geocoder (section 5)</td>
+</tr>
+<tr>
+<td>Provider attribution</td>
+<td>P0</td>
+<td>S</td>
+<td>Required (section 4)</td>
+</tr>
+<tr>
+<td>Background refresh and offline cache</td>
+<td>P0</td>
+<td>M</td>
+<td>Host service (section 6)</td>
+</tr>
+<tr>
+<td>Alerts (severe weather)</td>
+<td>P1</td>
+<td>M</td>
+<td>NWS for the US; MET MetAlerts elsewhere [reported]</td>
+</tr>
+<tr>
+<td>Radar, one-hour animation</td>
+<td>P1</td>
+<td>L</td>
+<td>Windy and WU have it [reported]; sources in section 4</td>
+</tr>
+<tr>
+<td>Desk widget: temperature and condition</td>
+<td>P1</td>
+<td>M</td>
+<td>Reads cache only</td>
+</tr>
+<tr>
+<td>Current location from the Mac, with approval</td>
+<td>P1</td>
+<td>M</td>
+<td>Section 8</td>
+</tr>
+<tr>
+<td>Pressure, humidity, UV charts</td>
+<td>P1</td>
+<td>M</td>
+<td>Depends on provider</td>
+</tr>
+<tr>
+<td>Lightning, storm cells</td>
+<td>P2</td>
+<td>L</td>
+<td>Windy has it [reported]; data licence unknown</td>
+</tr>
+<tr>
+<td>Rain notifications</td>
+<td>P2</td>
+<td>M</td>
+<td>No notification path on the desk</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-data-sources-and-terms">4. Data sources and terms<a class="headerlink" href="#4-data-sources-and-terms" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Verified terms</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MET Norway</strong> (api.met.no)</td>
+<td>Open data under <strong>CC BY 4.0</strong>, attribution required [verified]. An identifying <strong>User-Agent</strong> with app name and contact; generic library strings are blocked [verified]. <strong>Cache</strong> responses and honour <code>Expires</code>; use <code>If-Modified-Since</code> [verified]. Coordinates <strong>at most 4 decimals</strong> [verified]. Poll no more than every 10 minutes [verified]. Above 20 requests per second total needs an agreement [verified]. No SLA [verified]. Do not use "Yr", "NRK" or the logo in a service name [verified]. Large animations should be hosted by the site itself [verified]</td>
+<td><strong>Default global provider.</strong> The page we read has no non-commercial clause</td>
+</tr>
+<tr>
+<td><strong>Open-Meteo</strong></td>
+<td>Data CC BY 4.0 [reported]. Free API <strong>non-commercial only</strong>; under 10,000 calls a day, 5,000 an hour, 600 a minute [reported, official terms, not opened]</td>
+<td><strong>Personal builds</strong>, and the <strong>geocoder</strong>. Commercial use needs a paid plan or self-hosting</td>
+</tr>
+<tr>
+<td><strong>NWS</strong> (api.weather.gov)</td>
+<td><strong>User-Agent</strong> required [reported, official page]; an API key is planned to replace it [reported]. Public-domain status <strong>not verified</strong></td>
+<td><strong>US alerts</strong> and US detail. Contact value comes from owner settings</td>
+</tr>
+<tr>
+<td><strong>Apple WeatherKit</strong></td>
+<td>500,000 calls a month per developer membership; paid tiers from US$49.99 for 1 million [reported, developer.apple.com/weatherkit/get-started]. Attribution rules <strong>not retrieved</strong></td>
+<td><strong>Opt-in</strong>, for an owner with a membership. Key stays on the host</td>
+</tr>
+<tr>
+<td><strong>RainViewer</strong></td>
+<td>Free API for <strong>personal and educational use</strong> [reported, rainviewer.com/api.html]. Zoom and rate limits reported inconsistently</td>
+<td><strong>Personal dev test only</strong></td>
+</tr>
+<tr>
+<td><strong>NOAA radar</strong> (MRMS, NOWCOAST)</td>
+<td>Public US data [memory]; terms <strong>not checked</strong></td>
+<td><strong>Radar candidate</strong> (P1); check terms at W6</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recommendation: MET Norway as the default, NWS for US alerts and detail, Open-Meteo for the geocoder and personal fallback, WeatherKit opt-in. Each provider is a host adapter with its own rules. The host applies the strictest rule of each: lowest rate, longest cache, and rounding.</p>
+<p>Coordinates sent to a provider are <strong>rounded to 2 decimals</strong> (about 1 km), inside MET's 4-decimal limit. The cache key is the rounded point. Attribution appears in the footer; full credit text goes in the about box.</p>
+<h2 id="5-location-and-places">5. Location and places<a class="headerlink" href="#5-location-and-places" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Typed city</strong> (P0): the host geocodes the text (Open-Meteo's geocoder [memory, check at W4]; Photon from the maps plan offline). The result is a rounded point and an ASCII name.</li>
+<li><strong>Saved places</strong> (P0): up to five, in the host store.</li>
+<li><strong>Current location</strong> (P1): read on the Mac with CoreLocation, after the Mac's prompt and an in-app approval. A plain Python process may not get the prompt [memory]; test with a signed helper at W7.</li>
+<li><strong>IP location is not used</strong>: it is inaccurate and sends the address to a third party.</li>
+</ul>
+<h2 id="6-architecture">6. Architecture<a class="headerlink" href="#6-architecture" title="Link to this section">#</a></h2>
+<p>Options: (1) the guest fetches directly, impossible without a network; (2) <strong>host service with cache, guest reads a compact record (recommended)</strong>; (3) host pushes on a timer, which wastes channel time on data nobody asked for. Rejected.</p>
+<p>Compact record [estimate, to measure at W1]: current about 16 bytes; 48 hourly entries at about 8 bytes (about 380 bytes); 10 daily entries at about 14 bytes (about 140 bytes); strings about 80 bytes. Total about 0.6 KB, about 13 ms on the 47 KB/s channel [reported figure]. The forecast is cheap; radar is not.</p>
+<p>Condition codes map on the host to 12 conditions (clear, mostly clear, cloud, fog, drizzle, rain, sleet, snow, thunder, wind, hail, unknown). Providers differ: Open-Meteo uses WMO codes, MET uses symbol names, NWS uses icon URLs [memory]. The mapping table is tested against fixtures.</p>
+<p>Radar: a 128 x 128 mosaic of intensity at 4 bits per cell, 12 frames, run-length coded per row: about 2 to 4 KB per frame, 25 to 50 KB an hour [estimate]. Frames are built on the host from the source, never fetched per user.</p>
+<p>Refresh and cache:
+- Foreground open: cache is used while younger than the provider's <code>Expires</code> (MET) or 15 minutes (others, to check per provider).
+- Background: the host refreshes saved places at most every 60 minutes while the Mac is awake, within each provider's rules.
+- Offline: the last record shows with its age ("updated 3 h ago").
+- The host counts requests per provider and stops at 80 percent of the lowest documented cap.</p>
+<h2 id="7-renderer-and-framework-needs">7. Renderer and framework needs<a class="headerlink" href="#7-renderer-and-framework-needs" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Today</th>
+<th>Plan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stroke 2 to 3 px for the temperature curve</td>
+<td><code>LineN</code> is one pixel</td>
+<td>Discs or quads along the path (as maps)</td>
+</tr>
+<tr>
+<td>Filled area under the curve</td>
+<td>No</td>
+<td>Column fills with the rectangle primitive</td>
+</tr>
+<tr>
+<td>Condition icons</td>
+<td><code>LIcon</code> (Lucide)</td>
+<td>Lucide static icons; a few animated (falling drops, drifting cloud) by frame counter</td>
+</tr>
+<tr>
+<td>Degree and unit</td>
+<td>No <code>°</code></td>
+<td><code>C</code>, <code>F</code>, ring from <code>RRRing</code></td>
+</tr>
+<tr>
+<td>Text sizes</td>
+<td>Four faces, two scales</td>
+<td>Large face for current temperature</td>
+</tr>
+<tr>
+<td>Scrollable 10-day list, tabs</td>
+<td>Not built</td>
+<td>Widget kit v2</td>
+</tr>
+</tbody>
+</table></div>
+<p>Units are stored as tokens and converted in the guest, so a switch never refetches. Dates use English day names, ASCII only, dot as decimal separator.</p>
+<h2 id="8-security-and-privacy">8. Security and privacy<a class="headerlink" href="#8-security-and-privacy" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Location is sensitive.</strong> The host asks macOS first; the owner approves in the app second. Nothing is stored before approval.</li>
+<li><strong>What goes where</strong>: settings list, for each provider, the exact rounded coordinates and request type it gets ("MET Norway: 51.51, -0.13, forecast"). Shown before a provider is enabled.</li>
+<li><strong>Never more precision</strong> than the provider allows; never to a provider not enabled.</li>
+<li><strong>Keys</strong> (WeatherKit, any future key) live in a host file with owner-only permissions; the guest never gets them.</li>
+<li><strong>User-Agent contact</strong> comes from owner settings, not hard-coded personal data.</li>
+<li><strong>Logs</strong> hold provider, status and timing; never coordinates unless debug logging is on.</li>
+<li>Sharing a forecast or forwarding an alert needs a UI prompt.</li>
+</ul>
+<h2 id="9-ui-specification">9. UI specification<a class="headerlink" href="#9-ui-specification" title="Link to this section">#</a></h2>
+<p>Tokens from browser h1: <code>C_INK</code>, <code>C_MUT</code>, <code>C_CARD</code>, <code>C_BRD</code>, <code>C_ACC</code> for the current value, <code>C_TEAL</code> for rain, <code>C_AMB</code> for sun, <code>C_BAD</code> for alerts. Kosmos OS tokens are not used (primitives file absent).</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-------------------------------------------------------------------------------+
+| Weather                                                              _ [] x   |  &lt;- title bar 44
++-------------------------------------------------------------------------------+
+| [Now] [Hour] [Week] [Radar P1]          Places: [London v]    [+]   C | F      |  &lt;- tabs 32
++-------------------------------------------------------------------------------+
+|  London                                                  updated 12 min ago   |
+|  14 C   feels 12 C                                 (cloud)  Mostly cloudy    |
+|  Wind 18 km/h SW     Humidity 72%     Pressure 1012 hPa                       |
+|                                                                               |
+|  Rain starts in 40 min, light, 2 mm                                           |  &lt;- C_TEAL
+|                                                                               |
+|   temperature curve across 48 hours, rain bars along the bottom               |
+|   .--.                                                                        |
+|  /    \__.--.  .-.                                                           |
+|  --------------------------------------------------------------- 14 16 17 16   |
++-------------------------------------------------------------------------------+
+| Forecast: MET Norway (CC BY 4.0)     Alerts: none              cache 12 min   |  &lt;- footer 22
++-------------------------------------------------------------------------------+
+
+Week tab:
+| Mon 27 Oct   cloud     14 / 9 C   rain 20 %   sun 06:58 / 17:22 |
+| Tue 28 Oct   rain      12 / 8 C   rain 80 %                    |</code></pre></figure>
+<p>Rules: keys 1 to 4 switch tabs; C and F switch units. Enter or click a day to show its hours. Alerts sit in a red bar (<code>C_BAD</code>) with event name, end time and "Details" (scrollable full text). Cache older than 6 hours shows its age and a Refresh button, which asks the host and obeys rate rules. Nothing appears that the owner did not ask for.</p>
+<h2 id="10-milestones-gates-and-tests">10. Milestones, gates and tests<a class="headerlink" href="#10-milestones-gates-and-tests" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Work</th>
+<th>Gate (pass or fail)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W0 Fixtures</td>
+<td>Record JSON from MET, Open-Meteo and NWS for five places (London, Oslo, Miami, a US place with an alert, a clear-sky place) with headers and times; store under <code>tests/fixtures/weather/</code></td>
+<td>Pass: replay reproduces normalised records byte for byte</td>
+</tr>
+<tr>
+<td>W1 Host service</td>
+<td>Fetch, normalise, cache, rate counter, <code>Expires</code>, condition mapping</td>
+<td>Pass: three providers normalised; a simulated day stays under each documented cap; 0 network calls in tests</td>
+</tr>
+<tr>
+<td>W2 Current card</td>
+<td>Guest parses record, draws current card</td>
+<td>Pass: five places render; no non-ASCII byte in output; golden matches</td>
+</tr>
+<tr>
+<td>W3 Hourly and daily</td>
+<td>Stroked curve, rain bars, 10-day list</td>
+<td>Pass: within 2 percent of host reference; 48-hour view first paint under 1 s on QEMU (target; if missed, ship the list only)</td>
+</tr>
+<tr>
+<td>W4 Places and units</td>
+<td>Typed city, five saved places, unit switch</td>
+<td>Pass: 10 typed queries resolve from fixture; unit switch sends 0 requests</td>
+</tr>
+<tr>
+<td>W5 Alerts</td>
+<td>NWS and MET alert fixtures</td>
+<td>Pass: alert shown with severity colour; clear fixture shows none; text fits</td>
+</tr>
+<tr>
+<td>W6 Radar (P1)</td>
+<td>12 host-built frames; guest animates; attribution</td>
+<td>Pass: under 60 KB per hour; frame step under 100 ms; terms checked first</td>
+</tr>
+<tr>
+<td>W7 Widget and location (P1)</td>
+<td>Desk widget from cache; location via signed helper</td>
+<td>Pass: widget updates after fixture change; 24-hour simulation respects rules; a test fails if location is sent without approval</td>
+</tr>
+</tbody>
+</table></div>
+<p>Test plan: offline by default (a socket open fails the test). Provider contract tests: a changed field in recorded JSON fails the parser. Rate and cache tests with a simulated clock. Privacy test: outbound coordinates must not exceed the allowed decimals. Golden screenshots from QEMU via <code>scripts/snap.sh</code> at W2, W3 and W5, compared with host renders. Mutation check: change one condition mapping and confirm an icon golden fails.</p>
+<h2 id="11-risks">11. Risks<a class="headerlink" href="#11-risks" title="Link to this section">#</a></h2>
+<ol>
+<li>Terms conflict: Open-Meteo is non-commercial, RainViewer personal, WeatherKit attribution unread. Mitigation: per-provider rules and separate personal and shipped defaults.</li>
+<li>Quality varies by region (MET strong in Europe, NWS in the US). Mitigation: provider shown per place; owner chooses.</li>
+<li>QEMU speed on the curve. Mitigation: fewer points; 24-hour default.</li>
+<li>ASCII limits (no <code>°</code>, no accents). Mitigation: <code>C</code>, <code>F</code>, folded names.</li>
+<li>macOS location may need a signed helper. Mitigation: P1, tested at W7.</li>
+<li>Radar terms unchecked. Mitigation: no radar until W6 review.</li>
+<li>Stale data shown as current. Mitigation: age always visible.</li>
+</ol>
+<h2 id="12-effort">12. Effort<a class="headerlink" href="#12-effort" title="Link to this section">#</a></h2>
+<p>P0 (W0 to W4, host daemon, stroke renderer work): about M to L, 5 to 7 weeks for one developer. P1 (radar, alerts polish, widget, location) adds 4 to 6 weeks. The host daemon can start before the renderer work and be tested alone.</p>
+<h2 id="13-verified-versus-memory">13. Verified versus memory<a class="headerlink" href="#13-verified-versus-memory" title="Link to this section">#</a></h2>
+<p><strong>Verified</strong>: desk renderer and font code; Kosmos OS bento widget's direct Open-Meteo call; MET Norway terms (fetched); Photon, Lucide, CoMaps and earcut licence files (used in the maps plan); the Mac's tools.</p>
+<p><strong>Reported</strong> (search snippets): Open-Meteo's caps and CC BY licence; NWS User-Agent rule; WeatherKit prices and call counts; RainViewer's personal-use limit; Carrot and Windy feature descriptions; Apple Weather paid features.</p>
+<p><strong>Memory, unchecked</strong>: Apple Weather and WU features; OpenWeather; NOAA feeds and terms; Lucide weather icon names; Open-Meteo's geocoder endpoint; MET coverage outside Europe; CoreLocation prompt behaviour.</p>
+<p>Sources:
+- https://api.met.no/doc/TermsOfService (opened)
+- https://open-meteo.com/en/terms and https://open-meteo.com/en/pricing (search)
+- https://weather.gov/documentation/services-web-api (search)
+- https://developer.apple.com/weatherkit/get-started/ (search)
+- https://www.rainviewer.com/api.html (search)
+- https://apps.apple.com/DE/app/id961390574 (Carrot, search)
+- https://apps.apple.com/it/app/windy-com-weather-radar/id1161387262 (Windy, search)
+- https://www.macrumors.com/2025/01/16/carrot-weather-carplay (search)</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/weather-music-prototype/index.html" rel="prev"><span>Previous</span>Weather and Music prototype: design notes</a><a class="next" href="../../../docs/apps/window-style-editor/index.html" rel="next"><span>Next</span>Window Style Editor (app 12, &quot;Windows&quot;)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-purpose-and-users">1. Purpose and users</a></li><li><a href="#2-platform-facts">2. Platform facts</a></li><li><a href="#3-feature-inventory">3. Feature inventory</a></li><li><a href="#4-data-sources-and-terms">4. Data sources and terms</a></li><li><a href="#5-location-and-places">5. Location and places</a></li><li><a href="#6-architecture">6. Architecture</a></li><li><a href="#7-renderer-and-framework-needs">7. Renderer and framework needs</a></li><li><a href="#8-security-and-privacy">8. Security and privacy</a></li><li><a href="#9-ui-specification">9. UI specification</a></li><li><a href="#10-milestones-gates-and-tests">10. Milestones, gates and tests</a></li><li><a href="#11-risks">11. Risks</a></li><li><a href="#12-effort">12. Effort</a></li><li><a href="#13-verified-versus-memory">13. Verified versus memory</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

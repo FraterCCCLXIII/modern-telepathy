@@ -1,0 +1,2077 @@
+[
+  {
+    "name": "party_hat",
+    "category": "hat",
+    "tint": "#ff7eb6",
+    "tints": [
+      "#ff7eb6",
+      "#4aa8ff",
+      "#ffd23f",
+      "#5ec27a",
+      "#b583ff",
+      "#ff7a59"
+    ],
+    "triangles": 1900,
+    "bytes": 36948,
+    "file": "party_hat.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Pink": "#ff9bb5"
+    },
+    "keywords": [
+      "party",
+      "birthday",
+      "celebrate",
+      "cone",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "sits on top, leaning right",
+      "bounds": {
+        "min": [
+          -0.191,
+          0.268,
+          -0.339
+        ],
+        "max": [
+          0.389,
+          1.045,
+          0.258
+        ]
+      }
+    }
+  },
+  {
+    "name": "top_hat",
+    "category": "hat",
+    "tint": "#2f3340",
+    "tints": [
+      "#2f3340",
+      "#8a5a3c",
+      "#b53c3c",
+      "#4aa8ff",
+      "#f7f3ea",
+      "#5ec27a"
+    ],
+    "triangles": 2752,
+    "bytes": 51460,
+    "file": "top_hat.glb",
+    "materials": {
+      "Red": "#e5534b"
+    },
+    "keywords": [
+      "top hat",
+      "formal",
+      "gentleman",
+      "magic",
+      "tall hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "perched on top, tilted back a little",
+      "bounds": {
+        "min": [
+          -0.531,
+          0.255,
+          -0.564
+        ],
+        "max": [
+          0.506,
+          0.935,
+          0.466
+        ]
+      }
+    }
+  },
+  {
+    "name": "beanie",
+    "category": "hat",
+    "tint": "#5ec27a",
+    "tints": [
+      "#5ec27a",
+      "#ff7a59",
+      "#4aa8ff",
+      "#ffd23f",
+      "#b583ff",
+      "#ff7eb6"
+    ],
+    "triangles": 2504,
+    "bytes": 47048,
+    "file": "beanie.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "beanie",
+      "winter",
+      "knit",
+      "cap",
+      "pom"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "covers the top, cuff clear of the eyes",
+      "bounds": {
+        "min": [
+          -0.568,
+          0.084,
+          -0.591
+        ],
+        "max": [
+          0.568,
+          0.676,
+          0.546
+        ]
+      }
+    }
+  },
+  {
+    "name": "baseball_cap",
+    "category": "hat",
+    "tint": "#4aa8ff",
+    "tints": [
+      "#4aa8ff",
+      "#ff7a59",
+      "#5ec27a",
+      "#ffd23f",
+      "#2f3340",
+      "#ff7eb6"
+    ],
+    "triangles": 2606,
+    "bytes": 49820,
+    "file": "baseball_cap.glb",
+    "materials": {
+      "Ink": "#454a5c",
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "cap",
+      "baseball",
+      "sport",
+      "visor",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "dome on top, peak over the forehead",
+      "bounds": {
+        "min": [
+          -0.545,
+          0.113,
+          -0.553
+        ],
+        "max": [
+          0.545,
+          0.589,
+          0.912
+        ]
+      }
+    }
+  },
+  {
+    "name": "wizard_hat",
+    "category": "hat",
+    "tint": "#7a5cff",
+    "tints": [
+      "#7a5cff",
+      "#2f3340",
+      "#4aa8ff",
+      "#b53c3c",
+      "#5ec27a",
+      "#ff7eb6"
+    ],
+    "triangles": 2882,
+    "bytes": 53984,
+    "file": "wizard_hat.glb",
+    "materials": {
+      "Gold": "#f2b84b"
+    },
+    "keywords": [
+      "wizard",
+      "witch",
+      "magic",
+      "pointy",
+      "hat",
+      "fantasy"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "tall bent cone with a wide drooping brim",
+      "bounds": {
+        "min": [
+          -0.622,
+          0.04,
+          -0.664
+        ],
+        "max": [
+          0.66,
+          1.289,
+          0.616
+        ]
+      }
+    }
+  },
+  {
+    "name": "royal_crown",
+    "category": "hat",
+    "tint": "#ffd23f",
+    "tints": [
+      "#ffd23f",
+      "#d9d9e3",
+      "#ff7a59",
+      "#b583ff",
+      "#4aa8ff",
+      "#ff7eb6"
+    ],
+    "triangles": 2600,
+    "bytes": 50872,
+    "file": "royal_crown.glb",
+    "materials": {
+      "Red": "#e5534b",
+      "Blue": "#4aa8ff",
+      "Green": "#3fb261"
+    },
+    "keywords": [
+      "crown",
+      "king",
+      "queen",
+      "royal",
+      "gold",
+      "winner"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "five points, gems on the band",
+      "bounds": {
+        "min": [
+          -0.327,
+          0.321,
+          -0.439
+        ],
+        "max": [
+          0.492,
+          0.925,
+          0.344
+        ]
+      }
+    }
+  },
+  {
+    "name": "cowboy_hat",
+    "category": "hat",
+    "tint": "#d9a066",
+    "tints": [
+      "#d9a066",
+      "#8a5a3c",
+      "#2f3340",
+      "#f7f3ea",
+      "#b53c3c",
+      "#9aa4b2"
+    ],
+    "triangles": 2952,
+    "bytes": 55072,
+    "file": "cowboy_hat.glb",
+    "materials": {
+      "Brown": "#8a5a3c"
+    },
+    "keywords": [
+      "cowboy",
+      "western",
+      "ranch",
+      "hat",
+      "sheriff"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "wide brim curled up at the sides",
+      "bounds": {
+        "min": [
+          -0.685,
+          0.09,
+          -0.761
+        ],
+        "max": [
+          0.79,
+          0.837,
+          0.704
+        ]
+      }
+    }
+  },
+  {
+    "name": "chef_hat",
+    "category": "hat",
+    "tint": "#f7f3ea",
+    "tints": [
+      "#f7f3ea",
+      "#ffd23f",
+      "#ff7a59",
+      "#4aa8ff",
+      "#5ec27a",
+      "#ff7eb6"
+    ],
+    "triangles": 2736,
+    "bytes": 50688,
+    "file": "chef_hat.glb",
+    "keywords": [
+      "chef",
+      "cook",
+      "toque",
+      "kitchen",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "tall puffy toque",
+      "bounds": {
+        "min": [
+          -0.407,
+          0.316,
+          -0.495
+        ],
+        "max": [
+          0.407,
+          1.093,
+          0.373
+        ]
+      }
+    }
+  },
+  {
+    "name": "santa_hat",
+    "category": "hat",
+    "tint": "#e5534b",
+    "tints": [
+      "#e5534b",
+      "#4aa8ff",
+      "#5ec27a",
+      "#b583ff",
+      "#ffd23f",
+      "#ff7eb6"
+    ],
+    "triangles": 1996,
+    "bytes": 37904,
+    "file": "santa_hat.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "santa",
+      "christmas",
+      "winter",
+      "holiday",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "red cone with a fur cuff, pom falls to the left",
+      "bounds": {
+        "min": [
+          -0.593,
+          -0.147,
+          -0.578
+        ],
+        "max": [
+          0.519,
+          1.128,
+          0.481
+        ]
+      }
+    }
+  },
+  {
+    "name": "bunny_ears",
+    "category": "hat",
+    "tint": "#f7f3ea",
+    "tints": [
+      "#f7f3ea",
+      "#ffd23f",
+      "#ff7eb6",
+      "#b583ff",
+      "#9aa4b2",
+      "#4aa8ff"
+    ],
+    "triangles": 1760,
+    "bytes": 33792,
+    "file": "bunny_ears.glb",
+    "materials": {
+      "Pink": "#ff9bb5"
+    },
+    "keywords": [
+      "bunny",
+      "rabbit",
+      "ears",
+      "headband",
+      "easter"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "headband over the top, two tall ears",
+      "bounds": {
+        "min": [
+          -0.53,
+          0.046,
+          -0.115
+        ],
+        "max": [
+          0.55,
+          1.111,
+          0.009
+        ]
+      }
+    }
+  },
+  {
+    "name": "cat_ears",
+    "category": "hat",
+    "tint": "#ffd23f",
+    "tints": [
+      "#ffd23f",
+      "#2f3340",
+      "#f7f3ea",
+      "#ff7a59",
+      "#9aa4b2",
+      "#b583ff"
+    ],
+    "triangles": 2520,
+    "bytes": 48620,
+    "file": "cat_ears.glb",
+    "materials": {
+      "Pink": "#ff9bb5"
+    },
+    "keywords": [
+      "cat",
+      "kitten",
+      "ears",
+      "headband",
+      "neko"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "headband with two pointed ears",
+      "bounds": {
+        "min": [
+          -0.547,
+          0.065,
+          -0.146
+        ],
+        "max": [
+          0.547,
+          0.634,
+          0.045
+        ]
+      }
+    }
+  },
+  {
+    "name": "halo",
+    "category": "hat",
+    "tint": "#ffd23f",
+    "tints": [
+      "#ffd23f",
+      "#f7f3ea",
+      "#ff7eb6",
+      "#4aa8ff",
+      "#5ec27a",
+      "#b583ff"
+    ],
+    "triangles": 680,
+    "bytes": 13328,
+    "file": "halo.glb",
+    "keywords": [
+      "halo",
+      "angel",
+      "holy",
+      "ring",
+      "saint"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "floats above the head, tilted a little",
+      "bounds": {
+        "min": [
+          -0.233,
+          0.702,
+          -0.463
+        ],
+        "max": [
+          0.404,
+          0.902,
+          0.168
+        ]
+      }
+    }
+  },
+  {
+    "name": "flower_crown",
+    "category": "hat",
+    "tint": "#ff7eb6",
+    "tints": [
+      "#ff7eb6",
+      "#ffffff",
+      "#ffd23f",
+      "#b583ff",
+      "#ff7a59",
+      "#4aa8ff"
+    ],
+    "triangles": 3136,
+    "bytes": 61528,
+    "file": "flower_crown.glb",
+    "materials": {
+      "Leaf": "#4fb36b",
+      "Gold": "#f2b84b"
+    },
+    "keywords": [
+      "flower",
+      "crown",
+      "wreath",
+      "spring",
+      "garden",
+      "floral"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "ring of blossoms resting on the forehead",
+      "bounds": {
+        "min": [
+          -0.466,
+          0.189,
+          -0.491
+        ],
+        "max": [
+          0.469,
+          0.499,
+          0.417
+        ]
+      }
+    }
+  },
+  {
+    "name": "hard_hat",
+    "category": "hat",
+    "tint": "#ffc400",
+    "tints": [
+      "#ffc400",
+      "#ff7a59",
+      "#f7f3ea",
+      "#4aa8ff",
+      "#5ec27a",
+      "#9aa4b2"
+    ],
+    "triangles": 3412,
+    "bytes": 63588,
+    "file": "hard_hat.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "hard hat",
+      "helmet",
+      "construction",
+      "safety",
+      "builder",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "dome with ridges and a front peak",
+      "bounds": {
+        "min": [
+          -0.58,
+          0.115,
+          -0.591
+        ],
+        "max": [
+          0.58,
+          0.601,
+          0.734
+        ]
+      }
+    }
+  },
+  {
+    "name": "graduation_cap",
+    "category": "hat",
+    "tint": "#2f3340",
+    "tints": [
+      "#2f3340",
+      "#b53c3c",
+      "#4aa8ff",
+      "#5ec27a",
+      "#f7f3ea",
+      "#b583ff"
+    ],
+    "triangles": 2404,
+    "bytes": 45408,
+    "file": "graduation_cap.glb",
+    "materials": {
+      "Gold": "#f2b84b"
+    },
+    "keywords": [
+      "graduation",
+      "cap",
+      "mortarboard",
+      "school",
+      "student",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "flat square board with a tassel",
+      "bounds": {
+        "min": [
+          -0.585,
+          0.183,
+          -0.637
+        ],
+        "max": [
+          0.585,
+          0.612,
+          0.526
+        ]
+      }
+    }
+  },
+  {
+    "name": "pirate_hat",
+    "category": "hat",
+    "tint": "#2b2d3a",
+    "tints": [
+      "#2b2d3a",
+      "#8a5a3c",
+      "#b53c3c",
+      "#4aa8ff",
+      "#5ec27a",
+      "#9aa4b2"
+    ],
+    "triangles": 2184,
+    "bytes": 42268,
+    "file": "pirate_hat.glb",
+    "materials": {
+      "White": "#f7f3ea",
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "pirate",
+      "captain",
+      "skull",
+      "bicorne",
+      "hat"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "bicorne with a skull badge",
+      "bounds": {
+        "min": [
+          -0.715,
+          0.315,
+          -0.756
+        ],
+        "max": [
+          0.715,
+          0.727,
+          0.668
+        ]
+      }
+    }
+  },
+  {
+    "name": "propeller_beanie",
+    "category": "hat",
+    "tint": "#4aa8ff",
+    "tints": [
+      "#4aa8ff",
+      "#ff7a59",
+      "#5ec27a",
+      "#ffd23f",
+      "#b583ff",
+      "#ff7eb6"
+    ],
+    "triangles": 3530,
+    "bytes": 68148,
+    "file": "propeller_beanie.glb",
+    "materials": {
+      "Ink": "#454a5c",
+      "Gold": "#f2b84b",
+      "Red": "#e5534b",
+      "Blue": "#4aa8ff"
+    },
+    "keywords": [
+      "propeller",
+      "beanie",
+      "fun",
+      "silly",
+      "hat",
+      "kid"
+    ],
+    "anchor": {
+      "slot": "head",
+      "zone": "head",
+      "conflicts": [
+        "hair"
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "small cap with a propeller on top",
+      "bounds": {
+        "min": [
+          -0.535,
+          0.145,
+          -0.549
+        ],
+        "max": [
+          0.535,
+          0.718,
+          0.519
+        ]
+      }
+    }
+  },
+  {
+    "name": "round_glasses",
+    "category": "face",
+    "tint": "#2f3340",
+    "tints": [
+      "#2f3340",
+      "#8a5a3c",
+      "#ff7a59",
+      "#4aa8ff",
+      "#ff7eb6",
+      "#ffd23f"
+    ],
+    "triangles": 2144,
+    "bytes": 40732,
+    "file": "round_glasses.glb",
+    "materials": {
+      "Glass": "#bfe0f2"
+    },
+    "keywords": [
+      "glasses",
+      "round",
+      "nerd",
+      "reading",
+      "specs",
+      "eyewear"
+    ],
+    "anchor": {
+      "slot": "face",
+      "zone": "eyes",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "wire frames around the eyes",
+      "bounds": {
+        "min": [
+          -0.522,
+          -0.139,
+          0.046
+        ],
+        "max": [
+          0.522,
+          0.139,
+          0.54
+        ]
+      }
+    }
+  },
+  {
+    "name": "sunglasses",
+    "category": "face",
+    "tint": "#2f3340",
+    "tints": [
+      "#2f3340",
+      "#ff7a59",
+      "#ffd23f",
+      "#4aa8ff",
+      "#ff7eb6",
+      "#f7f3ea"
+    ],
+    "triangles": 2480,
+    "bytes": 47740,
+    "file": "sunglasses.glb",
+    "materials": {
+      "Lens": "#262a38",
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "sunglasses",
+      "shades",
+      "cool",
+      "sun",
+      "summer",
+      "eyewear"
+    ],
+    "anchor": {
+      "slot": "face",
+      "zone": "eyes",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "dark lenses over the eyes",
+      "bounds": {
+        "min": [
+          -0.526,
+          -0.112,
+          0.041
+        ],
+        "max": [
+          0.526,
+          0.112,
+          0.559
+        ]
+      }
+    }
+  },
+  {
+    "name": "heart_glasses",
+    "category": "face",
+    "tint": "#ff5a7a",
+    "tints": [
+      "#ff5a7a",
+      "#ff7eb6",
+      "#e5534b",
+      "#b583ff",
+      "#f7f3ea",
+      "#2f3340"
+    ],
+    "triangles": 3096,
+    "bytes": 57900,
+    "file": "heart_glasses.glb",
+    "materials": {
+      "Glass": "#bfe0f2"
+    },
+    "keywords": [
+      "heart",
+      "glasses",
+      "love",
+      "cute",
+      "party",
+      "eyewear"
+    ],
+    "anchor": {
+      "slot": "face",
+      "zone": "eyes",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "heart frames with clear pink lenses",
+      "bounds": {
+        "min": [
+          -0.517,
+          -0.13,
+          0.047
+        ],
+        "max": [
+          0.517,
+          0.174,
+          0.547
+        ]
+      }
+    }
+  },
+  {
+    "name": "monocle",
+    "category": "face",
+    "tint": "#f2b84b",
+    "tints": [
+      "#f2b84b",
+      "#d9d9e3",
+      "#8a5a3c",
+      "#2f3340",
+      "#b53c3c",
+      "#4aa8ff"
+    ],
+    "triangles": 1172,
+    "bytes": 24088,
+    "file": "monocle.glb",
+    "materials": {
+      "Glass": "#bfe0f2",
+      "Gold": "#f2b84b"
+    },
+    "keywords": [
+      "monocle",
+      "fancy",
+      "gentleman",
+      "detective",
+      "eyewear"
+    ],
+    "anchor": {
+      "slot": "face",
+      "zone": "eyes",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "one lens with a hanging chain",
+      "bounds": {
+        "min": [
+          0.002,
+          -0.296,
+          0.237
+        ],
+        "max": [
+          0.353,
+          0.164,
+          0.553
+        ]
+      }
+    }
+  },
+  {
+    "name": "eye_patch",
+    "category": "face",
+    "tint": "#2f3340",
+    "tints": [
+      "#2f3340",
+      "#8a5a3c",
+      "#b53c3c",
+      "#4aa8ff",
+      "#f7f3ea",
+      "#5ec27a"
+    ],
+    "triangles": 732,
+    "bytes": 15204,
+    "file": "eye_patch.glb",
+    "materials": {
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "pirate",
+      "patch",
+      "eye patch",
+      "captain",
+      "injured"
+    ],
+    "anchor": {
+      "slot": "face",
+      "zone": "eyes",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "over the left eye, strap round the head",
+      "bounds": {
+        "min": [
+          -0.517,
+          -0.078,
+          0.039
+        ],
+        "max": [
+          0.375,
+          0.303,
+          0.544
+        ]
+      }
+    }
+  },
+  {
+    "name": "mustache",
+    "category": "face",
+    "tint": "#2f3340",
+    "tints": [
+      "#2f3340",
+      "#8a5a3c",
+      "#9aa4b2",
+      "#d9a066",
+      "#f7f3ea",
+      "#b53c3c"
+    ],
+    "triangles": 1160,
+    "bytes": 22024,
+    "file": "mustache.glb",
+    "keywords": [
+      "mustache",
+      "moustache",
+      "handlebar",
+      "gentleman",
+      "beard"
+    ],
+    "anchor": {
+      "slot": "face",
+      "zone": "mouth",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "handlebar mustache under the nose",
+      "bounds": {
+        "min": [
+          -0.285,
+          -0.174,
+          0.451
+        ],
+        "max": [
+          0.285,
+          0.005,
+          0.543
+        ]
+      }
+    }
+  },
+  {
+    "name": "headphones",
+    "category": "ears",
+    "tint": "#ff7a59",
+    "tints": [
+      "#ff7a59",
+      "#4aa8ff",
+      "#5ec27a",
+      "#ffd23f",
+      "#b583ff",
+      "#f7f3ea"
+    ],
+    "triangles": 3092,
+    "bytes": 59372,
+    "file": "headphones.glb",
+    "materials": {
+      "Cushion": "#3a3e4f",
+      "White": "#f7f3ea",
+      "Band": "#454a5c"
+    },
+    "keywords": [
+      "headphones",
+      "music",
+      "listen",
+      "audio",
+      "headset",
+      "gaming"
+    ],
+    "anchor": {
+      "slot": "ears",
+      "zone": "ears",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "cups on the ears, band over the top",
+      "bounds": {
+        "min": [
+          -0.653,
+          -0.19,
+          -0.21
+        ],
+        "max": [
+          0.653,
+          0.714,
+          0.21
+        ]
+      },
+      "hideRoles": {
+        "Band": [
+          "head"
+        ]
+      }
+    }
+  },
+  {
+    "name": "earmuffs",
+    "category": "ears",
+    "tint": "#ff7eb6",
+    "tints": [
+      "#ff7eb6",
+      "#f7f3ea",
+      "#4aa8ff",
+      "#b583ff",
+      "#ffd23f",
+      "#5ec27a"
+    ],
+    "triangles": 2360,
+    "bytes": 45480,
+    "file": "earmuffs.glb",
+    "materials": {
+      "Band": "#454a5c"
+    },
+    "keywords": [
+      "earmuffs",
+      "winter",
+      "warm",
+      "fluffy",
+      "ears",
+      "cold"
+    ],
+    "anchor": {
+      "slot": "ears",
+      "zone": "ears",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "fluffy muffs on the ears, band over the top",
+      "bounds": {
+        "min": [
+          -0.676,
+          -0.24,
+          -0.247
+        ],
+        "max": [
+          0.676,
+          0.71,
+          0.247
+        ]
+      },
+      "hideRoles": {
+        "Band": [
+          "head"
+        ]
+      }
+    }
+  },
+  {
+    "name": "big_bow",
+    "category": "hair",
+    "tint": "#ff5a7a",
+    "tints": [
+      "#ff5a7a",
+      "#ffd23f",
+      "#4aa8ff",
+      "#b583ff",
+      "#5ec27a",
+      "#f7f3ea"
+    ],
+    "triangles": 1884,
+    "bytes": 36812,
+    "file": "big_bow.glb",
+    "keywords": [
+      "bow",
+      "ribbon",
+      "big bow",
+      "gift",
+      "cute",
+      "hair"
+    ],
+    "anchor": {
+      "slot": "bow",
+      "zone": "hair",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "large bow on top of the head, tilted forward",
+      "bounds": {
+        "min": [
+          -0.413,
+          0.173,
+          0.124
+        ],
+        "max": [
+          0.413,
+          0.575,
+          0.649
+        ]
+      }
+    }
+  },
+  {
+    "name": "hair_bow",
+    "category": "hair",
+    "tint": "#ff7eb6",
+    "tints": [
+      "#ff7eb6",
+      "#e5534b",
+      "#4aa8ff",
+      "#ffd23f",
+      "#b583ff",
+      "#f7f3ea"
+    ],
+    "triangles": 1884,
+    "bytes": 36816,
+    "file": "hair_bow.glb",
+    "keywords": [
+      "bow",
+      "hair bow",
+      "ribbon",
+      "girl",
+      "cute",
+      "hair"
+    ],
+    "anchor": {
+      "slot": "bow",
+      "zone": "hair",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "small bow above the right side of the head",
+      "bounds": {
+        "min": [
+          -0.016,
+          0.051,
+          0.167
+        ],
+        "max": [
+          0.493,
+          0.481,
+          0.577
+        ]
+      }
+    }
+  },
+  {
+    "name": "flower_pin",
+    "category": "hair",
+    "tint": "#ff7eb6",
+    "tints": [
+      "#ff7eb6",
+      "#f7f3ea",
+      "#ffd23f",
+      "#b583ff",
+      "#ff7a59",
+      "#4aa8ff"
+    ],
+    "triangles": 900,
+    "bytes": 18508,
+    "file": "flower_pin.glb",
+    "materials": {
+      "Gold": "#f2b84b",
+      "Leaf": "#4fb36b"
+    },
+    "keywords": [
+      "flower",
+      "pin",
+      "clip",
+      "hair",
+      "blossom",
+      "spring"
+    ],
+    "anchor": {
+      "slot": "bow",
+      "zone": "hair",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "blossom with two leaves, above the left side",
+      "bounds": {
+        "min": [
+          -0.539,
+          0.124,
+          0.154
+        ],
+        "max": [
+          -0.186,
+          0.428,
+          0.518
+        ]
+      }
+    }
+  },
+  {
+    "name": "star_clip",
+    "category": "hair",
+    "tint": "#ffd23f",
+    "tints": [
+      "#ffd23f",
+      "#ff7eb6",
+      "#4aa8ff",
+      "#f7f3ea",
+      "#b583ff",
+      "#5ec27a"
+    ],
+    "triangles": 688,
+    "bytes": 14928,
+    "file": "star_clip.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "star",
+      "clip",
+      "hair clip",
+      "barrette",
+      "hair",
+      "sparkle"
+    ],
+    "anchor": {
+      "slot": "bow",
+      "zone": "hair",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": false,
+      "notes": "star barrette above the right side",
+      "bounds": {
+        "min": [
+          0.045,
+          0.164,
+          0.213
+        ],
+        "max": [
+          0.377,
+          0.464,
+          0.493
+        ]
+      }
+    }
+  },
+  {
+    "name": "scarf",
+    "category": "neck",
+    "tint": "#e5534b",
+    "tints": [
+      "#e5534b",
+      "#4aa8ff",
+      "#ffd23f",
+      "#5ec27a",
+      "#b583ff",
+      "#f7f3ea"
+    ],
+    "triangles": 2790,
+    "bytes": 52848,
+    "file": "scarf.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "scarf",
+      "winter",
+      "warm",
+      "knit",
+      "neck"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "chunky ring round the lower head, one tail hangs down",
+      "bounds": {
+        "min": [
+          -0.465,
+          -0.966,
+          -0.465
+        ],
+        "max": [
+          0.465,
+          -0.265,
+          0.581
+        ]
+      }
+    }
+  },
+  {
+    "name": "necklace",
+    "category": "neck",
+    "tint": "#ff7eb6",
+    "tints": [
+      "#ff7eb6",
+      "#f2b84b",
+      "#4aa8ff",
+      "#f7f3ea",
+      "#b583ff",
+      "#5ec27a"
+    ],
+    "triangles": 2630,
+    "bytes": 51192,
+    "file": "necklace.glb",
+    "materials": {
+      "Gold": "#f2b84b",
+      "Red": "#e5534b"
+    },
+    "keywords": [
+      "necklace",
+      "beads",
+      "pendant",
+      "jewel",
+      "neck",
+      "pearls"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "bead chain with a heart pendant",
+      "bounds": {
+        "min": [
+          -0.465,
+          -0.612,
+          -0.457
+        ],
+        "max": [
+          0.465,
+          -0.274,
+          0.413
+        ]
+      }
+    }
+  },
+  {
+    "name": "bandana",
+    "category": "neck",
+    "tint": "#e5534b",
+    "tints": [
+      "#e5534b",
+      "#4aa8ff",
+      "#2f3340",
+      "#ffd23f",
+      "#5ec27a",
+      "#b583ff"
+    ],
+    "triangles": 2342,
+    "bytes": 44720,
+    "file": "bandana.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "bandana",
+      "cowboy",
+      "neckerchief",
+      "scarf",
+      "neck"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "knotted band with a triangle that hangs on the chest",
+      "bounds": {
+        "min": [
+          -0.48,
+          -0.537,
+          -0.48
+        ],
+        "max": [
+          0.48,
+          -0.268,
+          0.48
+        ]
+      }
+    }
+  },
+  {
+    "name": "bell_collar",
+    "category": "neck",
+    "tint": "#e5534b",
+    "tints": [
+      "#e5534b",
+      "#4aa8ff",
+      "#5ec27a",
+      "#ff7eb6",
+      "#b583ff",
+      "#2f3340"
+    ],
+    "triangles": 1600,
+    "bytes": 31668,
+    "file": "bell_collar.glb",
+    "materials": {
+      "Gold": "#f2b84b",
+      "Ink": "#454a5c"
+    },
+    "keywords": [
+      "collar",
+      "bell",
+      "cat",
+      "pet",
+      "kitten",
+      "neck"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "band round the lower head with a golden bell",
+      "bounds": {
+        "min": [
+          -0.481,
+          -0.493,
+          -0.481
+        ],
+        "max": [
+          0.481,
+          -0.26,
+          0.541
+        ]
+      }
+    }
+  },
+  {
+    "name": "tie",
+    "category": "neck",
+    "tint": "#4aa8ff",
+    "tints": [
+      "#4aa8ff",
+      "#e5534b",
+      "#2f3340",
+      "#5ec27a",
+      "#ffd23f",
+      "#b583ff"
+    ],
+    "triangles": 2228,
+    "bytes": 42752,
+    "file": "tie.glb",
+    "materials": {
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "tie",
+      "necktie",
+      "office",
+      "formal",
+      "business",
+      "neck"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "collar and a hanging tie",
+      "bounds": {
+        "min": [
+          -0.487,
+          -0.569,
+          -0.487
+        ],
+        "max": [
+          0.487,
+          -0.252,
+          0.487
+        ]
+      }
+    }
+  },
+  {
+    "name": "medal",
+    "category": "neck",
+    "tint": "#e5534b",
+    "tints": [
+      "#e5534b",
+      "#4aa8ff",
+      "#5ec27a",
+      "#b583ff",
+      "#2f3340",
+      "#f7f3ea"
+    ],
+    "triangles": 2090,
+    "bytes": 40476,
+    "file": "medal.glb",
+    "materials": {
+      "Gold": "#f2b84b",
+      "White": "#f7f3ea"
+    },
+    "keywords": [
+      "medal",
+      "winner",
+      "award",
+      "prize",
+      "champion",
+      "gold"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "ribbon round the lower head, gold medal in front",
+      "bounds": {
+        "min": [
+          -0.472,
+          -0.558,
+          -0.472
+        ],
+        "max": [
+          0.472,
+          -0.264,
+          0.472
+        ]
+      }
+    }
+  },
+  {
+    "name": "bow_tie",
+    "category": "neck",
+    "tint": "#e5534b",
+    "tints": [
+      "#e5534b",
+      "#2f3340",
+      "#4aa8ff",
+      "#ffd23f",
+      "#b583ff",
+      "#5ec27a"
+    ],
+    "triangles": 720,
+    "bytes": 14824,
+    "file": "bow_tie.glb",
+    "keywords": [
+      "bow tie",
+      "bowtie",
+      "formal",
+      "dapper",
+      "party",
+      "neck"
+    ],
+    "anchor": {
+      "slot": "neck",
+      "zone": "neck",
+      "conflicts": [],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.0,
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "overBody": true,
+      "notes": "bow tie under the chin",
+      "bounds": {
+        "min": [
+          -0.376,
+          -0.387,
+          0.352
+        ],
+        "max": [
+          0.377,
+          -0.151,
+          0.573
+        ]
+      }
+    }
+  }
+]

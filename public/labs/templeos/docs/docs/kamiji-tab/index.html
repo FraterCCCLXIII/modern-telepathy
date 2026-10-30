@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings &gt; Kamiji: characters, creator, host service | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" open data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html" aria-current="page">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Desktop and renderer</span></li><li aria-current="page">Settings &gt; Kamiji: characters, creator, host service</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Settings &gt; Kamiji: characters, creator, host service</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/kamiji-tab.md</span></div>
+        <div class="doc-body">
+
+<p>Phase A (host side) done 2026-10-27; phase B (HolyC) is the plan at the end. Follows <code>kamiji-on-templeos.md</code> (route R2, host-baked sprites; it is the permanent fallback there). Differences from that study: it did not find the creator (below); sprites are RGB565 with keyed transparency, not 16-colour <code>KSCHAR.BIN</code>; they are rendered with the browser engine and three.js from the kamiji repo, not Blender; they cross the hub in base64 chunks instead of a file push (thumbnails are small). Licence: characters are CC BY-NC 4.0 with unresolved provenance rows, so this stays local use.</p>
+<h2 id="what-the-kamiji-are-all-under-userspaulblochdocumentsgithubkamiji">What the Kamiji are (all under <code>/Users/paulbloch/Documents/github/kamiji</code>)<a class="headerlink" href="#what-the-kamiji-are-all-under-userspaulblochdocumentsgithubkamiji" title="Link to this section">#</a></h2>
+<p>31 characters, GLB only: the Kamiji hand <code>assets/kamiji.glb</code>, 14 Kamikin <code>assets/mochi/*.glb</code> (index.json: id, name, species, persona, clips; six face PNGs each in <code>*.faces/</code>), 16 Rubbernose <code>assets/rubbernose/*.glb</code>. No standing portrait, turntable or thumbnail image exists for any of them (checked kamiji, kamae art-source, <code>kosmos-engine/assets/kamikin</code> = baked source folders, not images). <code>kamiji-demo</code>, <code>kamiji-game</code>, <code>kamiji-rig</code>, <code>kechimyaku-lineage-nexus</code> hold no creator and no character files of this family. No LFS: the GLBs are real files on disk; nothing was pulled.</p>
+<h2 id="the-creator-tool">The creator tool<a class="headerlink" href="#the-creator-tool" title="Link to this section">#</a></h2>
+<p>The <strong>Studio</strong>, <code>kamiji/site/studio/</code> (README there): a no-build static page, prototype status. Parts, 35 morph sliders, colours, accessories, expressions, poses, roster, JSON and GLB export, all 31 bases. It needs three.js 0.186.1, which its import map takes from jsdelivr; <code>kamiji/node_modules/three</code> (same version) is on disk, so no download is needed. It has no URL parameter for a character and no host save: it keeps the current character in <code>localStorage</code> key <code>kamiji.studio.current.v1</code> and its roster in <code>...roster.v1</code>, and exports by download.</p>
+<p>The hub makes it work without editing the kamiji repo: <code>svc_kamiji.py</code> runs a read-only loopback server (thread, 127.0.0.1, free port; serves only <code>site/</code>, <code>assets/</code>, <code>node_modules/three/</code>), rewrites the import map to the local copy, injects a script that seeds the chosen character and posts every change to <code>/__kamiji/save</code> (per-start token, Host check, 256 KB cap), which writes <code>&lt;work&gt;/chars/&lt;id&gt;.json</code>. Verified in headless Chrome: Pip opens in the Studio with its 3D view, offline (<code>shots/kamiji-creator-1.png</code>; first paint is slow under software WebGL). Saving does not re-bake the sprite in v1 (a card keeps its template sprite until <code>kamiji_bake.py</code> runs again; the creator JSON is kept).</p>
+<p>Launch: the guest shows the URL in its own Browser app (<code>edit</code> reply, mode <code>browser</code>). Fallback <code>edit ID window</code>: the hub runs <code>open URL</code> after a second approval. No child process is started for the server; Chrome is started only by <code>bake</code>, through <code>browser/host/engine.py</code> (throwaway profile, pipe, no debugging port, stopped by its own pid). Gate if three.js is missing: <code>cd /Users/paulbloch/Documents/github/kamiji &amp;&amp; npm ci</code> (about 228 MB, downloads from npm; never run by the service, it answers ERR with that text).</p>
+<h2 id="files">Files<a class="headerlink" href="#files" title="Link to this section">#</a></h2>
+<p><code>apps-host/hub/svc_kamiji.py</code> (service, one edit in <code>hostd.py build_hub</code>: <code>import svc_kamiji</code> and <code>hub.reg.add(svc_kamiji.Kamiji(cfg))</code>), <code>kamiji_bake.py</code>, <code>tests/test_kamiji.py</code> (20 tests, <code>python3 -I apps-host/hub/tests/test_kamiji.py</code>). Config (all optional): <code>kamiji_repo</code>, <code>kamiji_work</code> (default <code>~/.cache/kosmos-hostd/kamiji</code>: <code>sprites/</code>, <code>chars/</code>, <code>user.json</code>; git-ignored by location). Bake: <code>python3 -I apps-host/hub/kamiji_bake.py [--sheet shots/kamiji-grid-1.png]</code> (about 3 s for 31).</p>
+<h2 id="protocol-hub-wire-req-id-kamiji-token-op-args-records-tab-text-ascii">Protocol (hub wire: <code>REQ id kamiji token op args</code>; records TAB text, ASCII)<a class="headerlink" href="#protocol-hub-wire-req-id-kamiji-token-op-args-records-tab-text-ascii" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>op</th>
+<th>args</th>
+<th>reply</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>[offset [count&lt;=24]]</code></td>
+<td><code>KH total offset n creator_ready baked</code>, then <code>K id name species family pose kind baked edited persona</code> (kind builtin or user)</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>id</td>
+<td><code>KI id name species family persona pose kind baked edited</code></td>
+</tr>
+<tr>
+<td><code>thumb</code></td>
+<td>id <code>S\|M\|L</code> <code>[offset] [fmt]</code></td>
+<td><code>SPR id size fmt w h total crc offset n base64</code> (6000 raw bytes per reply; ask offset += n until total)</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>id size</td>
+<td><code>PATH id size abs_path bytes</code> (Aiwnios reads the file, no chunks)</td>
+</tr>
+<tr>
+<td><code>edit</code></td>
+<td>id <code>[window]</code></td>
+<td><code>EDIT id mode url port</code>, or APPROVE</td>
+</tr>
+<tr>
+<td><code>new</code></td>
+<td>name <code>[template] [window]</code></td>
+<td><code>NEW id name template</code> then <code>EDIT ...</code>; the id is <code>u-&lt;slug&gt;</code>; APPROVE comes before anything is created</td>
+</tr>
+<tr>
+<td><code>status</code>, <code>bake</code>, <code>studio_stop</code></td>
+<td></td>
+<td><code>STAT repo creator n baked port saves bake_running done/total note</code>; <code>BAKE started 0/31</code> (APPROVE first); <code>STOPPED</code></td>
+</tr>
+<tr>
+<td>No delete in v1. Approval scopes (token goes in the retry): <code>exec:kamiji-studio:&lt;repo&gt;</code> (server start, kept for the session), <code>exec:open:&lt;url&gt;</code> (window, used once), <code>exec:kamiji-bake:&lt;repo&gt;</code> (used once). The sentence in the APPROVE record names exactly what starts. <code>hello</code> stops the server and clears grants. The server also stops after 30 minutes idle.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Sprite record KSPR v1, little endian, 16-byte header: <code>"KSPR"</code>, u8 ver 1, u8 fmt, u16 w, u16 h, u16 flags 0, u32 crc32 of payload. fmt 2 (default, all sizes): u16 words, row-major; <code>0xF81F</code> is followed by a u16 count of transparent pixels, any other word is an RGB565 pixel (alpha cut at 128). fmt 1 (on request): alpha plane (4 bits, even pixel in the low nibble) then w*h RGB565, 115 KB at L. Sizes S 64x80, M 128x160, L 192x240 (hero). Standing pose: the <code>idle</code> clip at t=0, front, 14 degree turn, transparent canvas. Guest decode: loop over words, <code>ks_fb</code> write per pixel or skip the run.</p>
+<h2 id="pipeline-numbers-31-characters-measured">Pipeline numbers (31 characters, measured)<a class="headerlink" href="#pipeline-numbers-31-characters-measured" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>size</th>
+<th>min / avg / max bytes</th>
+<th>all 31</th>
+<th>avg on the wire (base64)</th>
+<th>at 16 KB/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td>2,490 / 3,810 / 4,944</td>
+<td>118 KB</td>
+<td>5.1 KB</td>
+<td>0.31 s each, 9.6 s all</td>
+</tr>
+<tr>
+<td>M</td>
+<td>9,100 / 14,346 / 19,090</td>
+<td>445 KB</td>
+<td>19.1 KB</td>
+<td>1.2 s each, 36 s all</td>
+</tr>
+<tr>
+<td>L</td>
+<td>20,000 / 31,587 / 42,476</td>
+<td>979 KB</td>
+<td>42.1 KB</td>
+<td>2.6 s each (detail only)</td>
+</tr>
+<tr>
+<td>Native Aiwnios: <code>path</code> plus a file read, under 1 ms each. Use S for the grid cards (lazy, visible ones first, about 10 s for a full grid), M for 2x screens and the selected card, L for a detail view. Contact sheet: <code>shots/kamiji-grid-1.png</code>.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="phase-b-plan-applied-after-the-merge-shared-files">PHASE B plan (applied after the merge; shared files)<a class="headerlink" href="#phase-b-plan-applied-after-the-merge-shared-files" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>Page and tab.</strong> <code>AppSettings</code> (<code>desk3/03-apps.HC</code>, tab names <code>ks_sp_name[5]</code> at line 96, now Appearance, Display, Dock, About, Menu bar): add <code>"Kamiji"</code> as page 5 and raise the count; add <code>KamijiPage(x,y,w,h)</code> in a new <code>desk3/03q-kamiji.HC</code> (loaded before the apps) so 03-apps changes stay at three lines (name, count, dispatch).</li>
+<li><strong>Header and cards.</strong> Title, a New button (plus icon) at the right. Grid of cards (S sprite, 64x80 at 1x, doubled at 2x): name label under the sprite, hover lift (2 px, shadow), selection ring in the accent, an Edit button (pencil icon) on the card's lower right. Scroll with the page; 24 per page of <code>list</code>.</li>
+<li><strong>Icons.</strong> Add <code>pencil</code> and <code>plus</code> (and <code>user-plus</code> optional) to <code>scripts/gen-icons.py</code>, regenerate <code>KSICONS.BIN</code>, add ids to the icon enum; follow the Icon Style editor rules.</li>
+<li><strong>Hub calls</strong> through <code>HostCall("kamiji",op,args,owner,tok)</code> (<code>03h-hostlink.HC</code>), results read in the owner's tick via <code>HlDeliver</code>. <strong>One reader rule:</strong> <code>HostPoll</code> reads the port only while a call is pending and the v1 browser reads whenever it is open: open the Browser tab first, then Kamiji calls and the Browser must not poll at once; keep one call in flight, thumbnail chunks queued from the page's Tick. The reply is capped at <code>HL_MAXRX</code> 12000: chunks of 6000 raw bytes fit.</li>
+<li><strong>Lazy load.</strong> On page open: <code>list</code>; queue <code>thumb id S 0</code> for visible cards; assemble chunks into a malloc'd buffer per card (CRC check, KSPR decode into a 64x80 U16 plus a key); cache in memory for the session; progress ring on a card until it is decoded. Placeholder: a grey silhouette.</li>
+<li><strong>Edit and New.</strong> Edit sends <code>edit id</code>; New opens a one-field name prompt, then <code>new name template</code> (template = the selected card, else <code>kamikin-kon</code>). On APPROVE show the guest prompt with the hub's sentence and Allow/Cancel, retry with the token. On <code>EDIT</code> open the URL in the Browser app (new tab, <code>docs/web-apps.md</code>); if it fails offer "Open in a window" (<code>edit id window</code>, second approval).</li>
+<li><strong>States.</strong> Empty (no sprites): "No sprites yet" and a Bake button (<code>bake</code>, approval, progress from <code>status</code> every 2 s). Error: <code>creator_ready</code> 0 or ERR text: "Creator not available: see docs/kamiji-tab.md" with the ERR note below. Hub down: the existing hub-offline state.</li>
+<li><strong>Aiwnios parity.</strong> <code>hostlink-aiw.HC</code> runs the request through <code>hostd.py --call --rec</code>, so the page code is shared; for <code>thumb</code> use <code>path</code> and read the file with the platform file read instead of chunks. The decoder is integer only (RGB565), identical on both builds.</li>
+<li><strong>Gates.</strong> <code>kslint.py</code> clean; x86 and Aiwnios first-frame shots of the Settings Kamiji page with 31 cards (<code>shots/kamiji-settings-x86.png</code>, <code>...-aiw.png</code>); hash equal for the grid with fixture sprites; Edit opens the Studio in the Browser with the right character; New creates <code>u-...</code> and shows a card; approval prompts shown and refused cleanly; full grid loads in under 15 s on serial; no frame stalls while thumbnails stream.</li>
+</ol>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/font-format-v2/index.html" rel="prev"><span>Previous</span>KSFONT2.BIN, font file format v2 (2026-10-27)</a><a class="next" href="../../docs/wallpapers/index.html" rel="next"><span>Next</span>Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#what-the-kamiji-are-all-under-userspaulblochdocumentsgithubkamiji">What the Kamiji are (all under /Users/paulbloch/Documents/github/kamiji)</a></li><li><a href="#the-creator-tool">The creator tool</a></li><li><a href="#files">Files</a></li><li><a href="#protocol-hub-wire-req-id-kamiji-token-op-args-records-tab-text-ascii">Protocol (hub wire: REQ id kamiji token op args; records TAB text, ASCII)</a></li><li><a href="#pipeline-numbers-31-characters-measured">Pipeline numbers (31 characters, measured)</a></li><li><a href="#phase-b-plan-applied-after-the-merge-shared-files">PHASE B plan (applied after the merge; shared files)</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

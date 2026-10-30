@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { labsForProject } from "@/lib/labs";
 import { getProject, type Milestone, type ProjectLink } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/projects/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Project not found" },
+          { title: "Product not found" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -31,9 +32,9 @@ export const Route = createFileRoute("/projects/$slug")({
   notFoundComponent: () => (
     <div className="max-w-screen-xl mx-auto px-6 py-32">
       <p className="text-sm uppercase tracking-widest text-zinc-400 mb-4">404</p>
-      <h1 className="text-4xl font-medium tracking-tight mb-6">Project not found</h1>
+      <h1 className="text-4xl font-medium tracking-tight mb-6">Product not found</h1>
       <Link to="/" className="text-sm font-medium underline">
-        Back to projects
+        Back to products
       </Link>
     </div>
   ),
@@ -56,16 +57,16 @@ function ProjectDetail() {
           to="/"
           className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-ink transition-colors mb-16"
         >
-          <span className="text-zinc-400">←</span> All projects
+          <span className="text-zinc-400">←</span> All products
         </Link>
 
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-24">
           <div className="flex-1">
-            <div className="size-16 bg-zinc-100 text-ink rounded-2xl flex items-center justify-center mb-8 shadow-sm outline-1 -outline-offset-1 outline-black/5 overflow-hidden p-3">
+            <div className={`size-16 bg-zinc-100 text-ink rounded-2xl flex items-center justify-center mb-8 shadow-sm outline-1 -outline-offset-1 outline-black/5 overflow-hidden ${project.logoPad ? "p-3" : ""}`}>
               <img
                 src={project.logoSrc}
                 alt=""
-                className="max-h-full max-w-full object-contain"
+                className={project.logoPad ? "max-h-full max-w-full object-contain" : "size-full object-cover"}
               />
             </div>
             <h1 className="text-5xl font-medium tracking-tight mb-4">{project.name}</h1>
@@ -108,6 +109,20 @@ function ProjectDetail() {
               </div>
             </section>
 
+            {project.features && project.features.length > 0 && (
+              <section>
+                <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">What it does</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {project.features.map((f) => (
+                    <div key={f.title} className="rounded-2xl bg-card p-5 ring-1 ring-black/5">
+                      <h3 className="font-medium mb-2">{f.title}</h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed text-pretty">{f.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <section>
               <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
                 The Pitch
@@ -146,6 +161,28 @@ function ProjectDetail() {
               </div>
             </section>
 
+            {project.gallery && project.gallery.length > 0 && (
+              <section>
+                <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">Gallery</h2>
+                <div className="grid gap-6">
+                  {project.gallery.map((g) => (
+                    <figure key={g.src}>
+                      <img
+                        src={g.src}
+                        alt={g.alt}
+                        loading="lazy"
+                        className="w-full h-auto rounded-2xl ring-1 ring-black/10"
+                      />
+                      <figcaption className="mt-3 text-sm text-zinc-500">
+                        {g.alt}
+                        {g.caption && <span className="block font-mono text-[.65rem] uppercase tracking-[.14em] text-zinc-400 mt-1">{g.caption}</span>}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <section>
               <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
                 Progress
@@ -166,6 +203,26 @@ function ProjectDetail() {
 
           <div className="md:col-span-4">
             <div className="sticky top-24 space-y-12">
+              {labsForProject(project.slug).length > 0 && (
+                <div>
+                  <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
+                    Try it
+                  </h2>
+                  <ul className="space-y-4">
+                    {labsForProject(project.slug).map((lab) => (
+                      <li key={lab.id}>
+                        <a
+                          href={lab.href}
+                          className="group flex items-center justify-between py-2 text-zinc-600 hover:text-ink transition-colors"
+                        >
+                          <span className="text-sm font-medium">{lab.title}</span>
+                          <span className="text-zinc-300 group-hover:translate-x-1 transition-transform">→</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div>
                 <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">
                   Resources
@@ -188,6 +245,19 @@ function ProjectDetail() {
                   ))}
                 </ul>
               </div>
+              {project.facts && project.facts.length > 0 && (
+                <div>
+                  <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">At a glance</h2>
+                  <dl className="space-y-3">
+                    {project.facts.map((f) => (
+                      <div key={f.label} className="flex justify-between gap-4 border-b border-zinc-950/5 pb-3 text-sm">
+                        <dt className="text-zinc-400 flex-none">{f.label}</dt>
+                        <dd className="text-right text-zinc-700">{f.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
               <div className="p-6 rounded-2xl bg-zinc-50 ring-1 ring-black/5">
                 <h3 className="text-sm font-medium mb-2">Role</h3>
                 <p className="text-sm text-zinc-500">{project.role}</p>

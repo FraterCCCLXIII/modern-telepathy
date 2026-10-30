@@ -1,0 +1,675 @@
+[
+  {
+    "name": "rocket",
+    "category": "celebrate",
+    "tint": "#ff6b4a",
+    "triangles": 2714,
+    "bytes": 53572,
+    "file": "rocket.glb",
+    "keywords": [
+      "launch",
+      "ship",
+      "deploy",
+      "startup",
+      "space",
+      "fast"
+    ],
+    "materials": {
+      "Red": "#e0564f",
+      "Glass": "#bfe6ff",
+      "Flame": "#ffb23d"
+    }
+  },
+  {
+    "name": "trophy",
+    "category": "celebrate",
+    "tint": "#ffc83d",
+    "triangles": 2004,
+    "bytes": 40060,
+    "file": "trophy.glb",
+    "keywords": [
+      "win",
+      "champion",
+      "award",
+      "success",
+      "first"
+    ],
+    "materials": {
+      "Wood": "#9a6a44",
+      "Red": "#e0564f"
+    }
+  },
+  {
+    "name": "crown",
+    "category": "celebrate",
+    "tint": "#ffcf4a",
+    "triangles": 2410,
+    "bytes": 45948,
+    "file": "crown.glb",
+    "keywords": [
+      "king",
+      "queen",
+      "royal",
+      "top",
+      "winner",
+      "premium"
+    ],
+    "materials": {
+      "Blue": "#5b8def",
+      "Red": "#e0564f",
+      "Green": "#5bbf7a"
+    }
+  },
+  {
+    "name": "gem",
+    "category": "celebrate",
+    "tint": "#4fd1ff",
+    "triangles": 96,
+    "bytes": 6228,
+    "file": "gem.glb",
+    "keywords": [
+      "diamond",
+      "jewel",
+      "crystal",
+      "premium",
+      "precious"
+    ],
+    "materials": {}
+  },
+  {
+    "name": "gift",
+    "category": "celebrate",
+    "tint": "#ff5a8a",
+    "triangles": 1768,
+    "bytes": 33876,
+    "file": "gift.glb",
+    "keywords": [
+      "present",
+      "box",
+      "surprise",
+      "birthday",
+      "reward"
+    ],
+    "materials": {
+      "Gold": "#f2b93b"
+    }
+  },
+  {
+    "name": "balloon",
+    "category": "celebrate",
+    "tint": "#ff4f6d",
+    "triangles": 960,
+    "bytes": 20716,
+    "file": "balloon.glb",
+    "keywords": [
+      "party",
+      "birthday",
+      "float",
+      "celebrate"
+    ],
+    "materials": {
+      "Ink": "#3b3d4a",
+      "White": "#fbf7ee"
+    }
+  },
+  {
+    "name": "party_popper",
+    "category": "celebrate",
+    "tint": "#ffb02e",
+    "triangles": 1808,
+    "bytes": 35188,
+    "file": "party_popper.glb",
+    "keywords": [
+      "confetti",
+      "celebrate",
+      "tada",
+      "congrats",
+      "hooray"
+    ],
+    "materials": {
+      "Red": "#e0564f",
+      "Blue": "#5b8def",
+      "Green": "#5bbf7a",
+      "Gold": "#f2b93b"
+    }
+  },
+  {
+    "name": "bug",
+    "category": "dev",
+    "tint": "#ff5448",
+    "triangles": 2292,
+    "bytes": 44896,
+    "file": "bug.glb",
+    "keywords": [
+      "insect",
+      "error",
+      "defect",
+      "ladybug",
+      "debug",
+      "issue"
+    ],
+    "materials": {
+      "Ink": "#3b3d4a",
+      "White": "#fbf7ee"
+    }
+  },
+  {
+    "name": "robot_head",
+    "category": "dev",
+    "tint": "#8fa8ff",
+    "triangles": 1724,
+    "bytes": 35728,
+    "file": "robot_head.glb",
+    "keywords": [
+      "bot",
+      "ai",
+      "assistant",
+      "agent",
+      "machine"
+    ],
+    "materials": {
+      "Metal": "#aab2c0",
+      "Red": "#e0564f",
+      "Eye": "#2f3140",
+      "Glass": "#bfe6ff"
+    }
+  },
+  {
+    "name": "brain",
+    "category": "idea",
+    "tint": "#ff9fc0",
+    "triangles": 2448,
+    "bytes": 46832,
+    "file": "brain.glb",
+    "keywords": [
+      "mind",
+      "think",
+      "smart",
+      "memory",
+      "intelligence",
+      "ai"
+    ],
+    "materials": {
+      "Fold": "#c96a8a"
+    }
+  },
+  {
+    "name": "puzzle",
+    "category": "idea",
+    "tint": "#6ecb63",
+    "triangles": 1882,
+    "bytes": 36988,
+    "file": "puzzle.glb",
+    "keywords": [
+      "piece",
+      "plugin",
+      "extension",
+      "solve",
+      "game",
+      "fit"
+    ],
+    "materials": {}
+  },
+  {
+    "name": "key_obj",
+    "category": "idea",
+    "tint": "#ffc83d",
+    "triangles": 1138,
+    "bytes": 22572,
+    "file": "key_obj.glb",
+    "keywords": [
+      "lock",
+      "unlock",
+      "secret",
+      "password",
+      "access",
+      "api"
+    ],
+    "materials": {
+      "Red": "#e0564f"
+    }
+  },
+  {
+    "name": "folder",
+    "category": "office",
+    "tint": "#ffb84a",
+    "triangles": 2080,
+    "bytes": 41464,
+    "file": "folder.glb",
+    "keywords": [
+      "directory",
+      "files",
+      "project",
+      "open",
+      "storage"
+    ],
+    "materials": {
+      "Cream": "#fff0cf",
+      "Wood": "#9a6a44"
+    }
+  },
+  {
+    "name": "file_code",
+    "category": "dev",
+    "tint": "#8ec5ff",
+    "triangles": 2138,
+    "bytes": 42924,
+    "file": "file_code.glb",
+    "keywords": [
+      "document",
+      "source",
+      "script",
+      "page",
+      "snippet"
+    ],
+    "materials": {
+      "White": "#fbf7ee",
+      "Ink": "#3b3d4a",
+      "Red": "#e0564f"
+    }
+  },
+  {
+    "name": "terminal_window",
+    "category": "dev",
+    "tint": "#5f6b86",
+    "triangles": 2702,
+    "bytes": 54252,
+    "file": "terminal_window.glb",
+    "keywords": [
+      "console",
+      "shell",
+      "cli",
+      "command",
+      "prompt",
+      "bash"
+    ],
+    "materials": {
+      "Screen": "#2b3350",
+      "Red": "#e0564f",
+      "Gold": "#f2b93b",
+      "Green": "#5bbf7a"
+    }
+  },
+  {
+    "name": "browser_window",
+    "category": "dev",
+    "tint": "#64a8ff",
+    "triangles": 1972,
+    "bytes": 39748,
+    "file": "browser_window.glb",
+    "keywords": [
+      "web",
+      "page",
+      "site",
+      "www",
+      "internet",
+      "app"
+    ],
+    "materials": {
+      "Red": "#e0564f",
+      "Gold": "#f2b93b",
+      "Green": "#5bbf7a",
+      "White": "#fbf7ee"
+    }
+  },
+  {
+    "name": "database",
+    "category": "dev",
+    "tint": "#6ea8fe",
+    "triangles": 2480,
+    "bytes": 47620,
+    "file": "database.glb",
+    "keywords": [
+      "data",
+      "storage",
+      "sql",
+      "db",
+      "records"
+    ],
+    "materials": {
+      "Metal": "#aab2c0",
+      "Green": "#5bbf7a"
+    }
+  },
+  {
+    "name": "cloud",
+    "category": "dev",
+    "tint": "#a9d4ff",
+    "triangles": 1224,
+    "bytes": 23280,
+    "file": "cloud.glb",
+    "keywords": [
+      "weather",
+      "sky",
+      "cloud",
+      "hosting",
+      "storage",
+      "sync"
+    ],
+    "materials": {}
+  },
+  {
+    "name": "cloud_upload",
+    "category": "dev",
+    "tint": "#8fc7ff",
+    "triangles": 1909,
+    "bytes": 37220,
+    "file": "cloud_upload.glb",
+    "keywords": [
+      "upload",
+      "deploy",
+      "sync",
+      "push",
+      "backup",
+      "cloud"
+    ],
+    "materials": {
+      "White": "#fbf7ee"
+    }
+  },
+  {
+    "name": "server",
+    "category": "dev",
+    "tint": "#7a8aa8",
+    "triangles": 1608,
+    "bytes": 31356,
+    "file": "server.glb",
+    "keywords": [
+      "rack",
+      "host",
+      "backend",
+      "machine",
+      "datacenter"
+    ],
+    "materials": {
+      "Green": "#5bbf7a",
+      "Gold": "#f2b93b",
+      "Ink": "#3b3d4a"
+    }
+  },
+  {
+    "name": "chip",
+    "category": "dev",
+    "tint": "#5a6f8c",
+    "triangles": 1708,
+    "bytes": 34020,
+    "file": "chip.glb",
+    "keywords": [
+      "cpu",
+      "processor",
+      "hardware",
+      "silicon",
+      "gpu",
+      "ic"
+    ],
+    "materials": {
+      "Gold": "#f2b93b",
+      "Ink": "#3b3d4a"
+    }
+  },
+  {
+    "name": "battery_full",
+    "category": "dev",
+    "tint": "#c9ced8",
+    "triangles": 2266,
+    "bytes": 45956,
+    "file": "battery_full.glb",
+    "keywords": [
+      "power",
+      "charge",
+      "energy",
+      "full",
+      "level"
+    ],
+    "materials": {
+      "Metal": "#aab2c0",
+      "Green": "#5bbf7a"
+    }
+  },
+  {
+    "name": "lightbulb_on",
+    "category": "idea",
+    "tint": "#ffd94a",
+    "triangles": 2268,
+    "bytes": 44488,
+    "file": "lightbulb_on.glb",
+    "keywords": [
+      "idea",
+      "light",
+      "bright",
+      "tip",
+      "inspiration",
+      "glow"
+    ],
+    "materials": {
+      "Metal": "#aab2c0",
+      "Orange": "#f59a3b"
+    }
+  },
+  {
+    "name": "coffee",
+    "category": "food",
+    "tint": "#c98a5a",
+    "triangles": 1176,
+    "bytes": 24040,
+    "file": "coffee.glb",
+    "keywords": [
+      "cup",
+      "tea",
+      "drink",
+      "break",
+      "mug",
+      "caffeine",
+      "cafe"
+    ],
+    "materials": {
+      "Liquid": "#5a3a26",
+      "White": "#fbf7ee"
+    }
+  },
+  {
+    "name": "pizza",
+    "category": "food",
+    "tint": "#ffcc55",
+    "triangles": 2346,
+    "bytes": 47092,
+    "file": "pizza.glb",
+    "keywords": [
+      "slice",
+      "food",
+      "lunch",
+      "party",
+      "cheese"
+    ],
+    "materials": {
+      "Crust": "#d9a05b",
+      "Red": "#e0564f",
+      "Leaf": "#6fbf5e"
+    }
+  },
+  {
+    "name": "cake",
+    "category": "food",
+    "tint": "#ffb3c7",
+    "triangles": 2296,
+    "bytes": 45048,
+    "file": "cake.glb",
+    "keywords": [
+      "birthday",
+      "dessert",
+      "party",
+      "sweet",
+      "candle"
+    ],
+    "materials": {
+      "White": "#fbf7ee",
+      "Red": "#e0564f",
+      "Flame": "#ffb23d"
+    }
+  },
+  {
+    "name": "apple",
+    "category": "food",
+    "tint": "#ff4d4d",
+    "triangles": 1240,
+    "bytes": 25628,
+    "file": "apple.glb",
+    "keywords": [
+      "fruit",
+      "red",
+      "healthy",
+      "teacher",
+      "mac"
+    ],
+    "materials": {
+      "Wood": "#9a6a44",
+      "Leaf": "#6fbf5e"
+    }
+  },
+  {
+    "name": "book",
+    "category": "office",
+    "tint": "#7a8cff",
+    "triangles": 2498,
+    "bytes": 50060,
+    "file": "book.glb",
+    "keywords": [
+      "read",
+      "docs",
+      "manual",
+      "library",
+      "learn",
+      "open"
+    ],
+    "materials": {
+      "Cream": "#fff0cf",
+      "Metal": "#aab2c0"
+    }
+  },
+  {
+    "name": "pencil_obj",
+    "category": "office",
+    "tint": "#ffc83d",
+    "triangles": 1096,
+    "bytes": 20432,
+    "file": "pencil_obj.glb",
+    "keywords": [
+      "write",
+      "edit",
+      "draw",
+      "pen",
+      "note",
+      "compose"
+    ],
+    "materials": {
+      "Pink": "#f4a3b8",
+      "Metal": "#aab2c0",
+      "Wood": "#9a6a44",
+      "Ink": "#3b3d4a"
+    }
+  },
+  {
+    "name": "palette",
+    "category": "office",
+    "tint": "#ffcf8a",
+    "triangles": 2510,
+    "bytes": 49056,
+    "file": "palette.glb",
+    "keywords": [
+      "paint",
+      "art",
+      "color",
+      "design",
+      "theme",
+      "creative"
+    ],
+    "materials": {
+      "Red": "#e0564f",
+      "Gold": "#f2b93b",
+      "Green": "#5bbf7a",
+      "Blue": "#5b8def"
+    }
+  },
+  {
+    "name": "camera",
+    "category": "office",
+    "tint": "#8e9bb5",
+    "triangles": 1520,
+    "bytes": 30964,
+    "file": "camera.glb",
+    "keywords": [
+      "photo",
+      "picture",
+      "snap",
+      "capture",
+      "screenshot",
+      "lens"
+    ],
+    "materials": {
+      "Red": "#e0564f",
+      "Screen": "#2b3350",
+      "Glass": "#bfe6ff",
+      "White": "#fbf7ee"
+    }
+  },
+  {
+    "name": "globe",
+    "category": "world",
+    "tint": "#6ec0ff",
+    "triangles": 2152,
+    "bytes": 41752,
+    "file": "globe.glb",
+    "keywords": [
+      "earth",
+      "world",
+      "web",
+      "language",
+      "international",
+      "planet"
+    ],
+    "materials": {
+      "Gold": "#f2b93b",
+      "Leaf": "#6fbf5e"
+    }
+  },
+  {
+    "name": "map_pin",
+    "category": "world",
+    "tint": "#ff5a5a",
+    "triangles": 1140,
+    "bytes": 23300,
+    "file": "map_pin.glb",
+    "keywords": [
+      "location",
+      "place",
+      "gps",
+      "marker",
+      "where",
+      "address"
+    ],
+    "materials": {
+      "White": "#fbf7ee",
+      "Ink": "#3b3d4a"
+    }
+  },
+  {
+    "name": "envelope",
+    "category": "office",
+    "tint": "#8ec5ff",
+    "triangles": 1943,
+    "bytes": 39180,
+    "file": "envelope.glb",
+    "keywords": [
+      "mail",
+      "email",
+      "message",
+      "letter",
+      "inbox",
+      "send"
+    ],
+    "materials": {
+      "Cream": "#fff0cf",
+      "Red": "#e0564f"
+    }
+  }
+]

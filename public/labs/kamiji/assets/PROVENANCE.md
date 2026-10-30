@@ -1,0 +1,9 @@
+# Asset provenance
+
+Required before any public release. One row per asset: author, tool, source files, date, third-party material (none unless listed with its licence).
+
+| Asset | Author | Tool / source | Date | Third-party material |
+|---|---|---|---|---|
+| kamiji.glb (hand) | Paul Bloch | Meshy AI base mesh, rebuilt in Blender via `model/build_hand_rig.py` | 2026-10-24 | Meshy output; confirm Meshy plan terms |
+| Kamikin mochi (14 characters) | Paul Bloch (to confirm) | kosmos-engine `assets/kamikin/mochi/`, authored with: TODO | TODO | TODO |
+| Rubbernose (16 non-human characters: Rubby, Tick, Fizz, Sunny, Joe, Puddin, plus Bulby, Rocko, Dinger, Candi, Bowie, Binky, Lockie, Appy, Puff, Champ) | Paul Bloch (FraterCCCLXIII) | Ported from the owner's own yakopop `apps/world/src/hose/` kit (bodies, hose limbs, shoes, motions, face painter) by `model/rubbernose_*.py`, built with Blender 5.2 via `model/build_rubbernose.sh` | 2026-10-25 | Hands: the Kamiji hand (`assets/kamiji.glb`) without its face, decimated and baked into finger gestures by `model/rubbernose_hand.py`, under the same licence as the Kamiji hand model (Kamiji Community Licence, CC BY-NC 4.0, with the Premium Licence for commercial use; see `LICENSE.md`) and with the same Meshy base mesh caveat as that row. Face textures are painted by the kit's own `face.ts` (transpiled to `model/rubbernose_face.js`). The noodle `person` kind (Penny, Milo) is not imported. Bodies of the ten newer characters are Kamiji prop objects from this repo (`assets/props/objects/`, `symbols/`, `shapes/`: lightbulb_on, rocket, bell, cake, gift, trash, lock, apple, shape_cloud_body, trophy), read by `model/rubbernose_prop.py` and re-materialled (Clay tintable, other prop colours baked); same licence as the Kamiji prop library, no new terms |

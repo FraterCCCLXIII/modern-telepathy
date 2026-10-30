@@ -1,0 +1,110 @@
+/* Kamikin chat modal (prototype). Uses the page tokens from ../style.css. Light theme only. */
+
+.kc-open { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; cursor: pointer; background: var(--sel); color: var(--sel-fg); font: 600 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.kc-open:hover { background: var(--fg); }
+.kc-open-fab { position: fixed; z-index: 25; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); width: 56px; height: 56px; border-radius: 50%; box-shadow: 0 1px 0 var(--faint), 0 14px 30px -12px var(--shadow); transition: transform .15s ease; }
+.kc-open-fab:hover { transform: translateY(-2px); }
+.kc-open-rail { display: none; min-height: 44px; padding: 10px 20px; border-radius: 999px; margin-top: 12px; }
+
+dialog.kc-dialog { border: 0; padding: 0; background: transparent; color: var(--fg); max-width: none; max-height: none; width: min(420px, calc(100vw - 32px)); height: min(680px, calc(100dvh - 32px)); margin: auto 16px 16px auto; overflow: visible; font-family: var(--sans); }
+dialog.kc-dialog::backdrop { background: rgba(31, 42, 34, .32); }
+dialog.kc-dialog[open] { animation: kc-in .2s ease-out; }
+@keyframes kc-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+html.kc-lock { overflow: hidden; }
+
+.kc-sheet { display: flex; flex-direction: column; height: 100%; min-height: 0; background: var(--card); border-radius: 24px; box-shadow: 0 1px 0 var(--faint), 0 30px 70px -24px var(--shadow); overflow: hidden; }
+
+.kc-head { display: flex; align-items: center; gap: 12px; padding: 14px 14px 12px 16px; border-bottom: 1px solid var(--faint); }
+.kc-avatar { flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--pill) center 58% / 280% no-repeat; box-shadow: 0 0 0 2px var(--card), 0 0 0 3px var(--faint); transition: box-shadow .15s ease; }
+.kc-speaking .kc-avatar { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--sel); }
+.kc-who { min-width: 0; flex: 1; }
+.kc-who h2 { margin: 0; font-size: 1.15rem; line-height: 1.2; letter-spacing: -.01em; }
+.kc-sub { margin: 2px 0 0; font: .6rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kc-badge { flex: none; font: 600 .58rem/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; padding: 6px 9px; border-radius: 999px; background: var(--pill); color: var(--fg); }
+.kc-x { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; background: transparent; color: var(--fg); cursor: pointer; display: grid; place-items: center; }
+.kc-x:hover { background: var(--pill); }
+
+.kc-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--faint); }
+.kc-tools-l { font: .6rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-right: 2px; }
+.kc-tog { min-height: 32px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--faint); background: transparent; color: var(--muted); font: .64rem/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+.kc-tog[aria-pressed="true"], .kc-tog[aria-checked="true"] { background: var(--sel); border-color: var(--sel); color: var(--sel-fg); }
+.kc-tog:hover { border-color: var(--fg); }
+.kc-auto { margin-left: auto; }
+
+.kc-list { list-style: none; margin: 0; padding: 14px 14px 6px; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 10px; }
+.kc-msg { max-width: 92%; }
+.kc-bot { align-self: flex-start; }
+.kc-me { align-self: flex-end; }
+.kc-text { margin: 0; padding: 10px 14px; border-radius: 18px 18px 18px 6px; background: var(--bg); line-height: 1.45; font-size: .95rem; overflow-wrap: anywhere; }
+.kc-me .kc-text { background: var(--sel); color: var(--sel-fg); border-radius: 18px 18px 6px 18px; }
+.kc-typing { display: flex; gap: 5px; padding: 12px 14px; border-radius: 18px 18px 18px 6px; background: var(--bg); }
+.kc-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: .5; animation: kc-dot 1s infinite ease-in-out; }
+.kc-typing i:nth-child(2) { animation-delay: .15s; } .kc-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes kc-dot { 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* subtitle stack: one column per word, kana over romaji over meaning, the translation under the row */
+.kc-line { padding: 12px 14px 8px; border-radius: 18px 18px 18px 6px; background: var(--bg); }
+.kc-words { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px 2px; }
+.kc-tok { appearance: none; border: 0; background: transparent; font: inherit; color: var(--fg); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 3px 6px; border-radius: 10px; min-width: 0; }
+.kc-tok:hover, .kc-tok:focus-visible { background: var(--pill); }
+.kc-s { font-size: 1.45rem; line-height: 1.25; font-weight: 600; }
+.kc-r { font: .64rem/1.3 var(--mono); color: var(--accent); letter-spacing: .02em; }
+.kc-g { font-size: .66rem; line-height: 1.25; color: var(--muted); max-width: 6.2em; text-align: center; }
+.kc-part .kc-s, .kc-part .kc-r, .kc-part .kc-g { color: var(--muted); font-weight: 500; }
+.kc-punct { font-size: 1.45rem; line-height: 1.25; font-weight: 600; padding: 3px 0; margin-left: -7px; margin-right: 2px; }
+.kc-linefoot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 6px; }
+.kc-en { margin: 0; font-size: .86rem; line-height: 1.4; color: var(--muted); font-style: italic; }
+.kc-play { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--sel); color: var(--sel-fg); cursor: pointer; display: grid; place-items: center; }
+.kc-play:hover { background: var(--fg); }
+.kc-list[data-kana="0"] .kc-s, .kc-list[data-kana="0"] .kc-punct { display: none; }
+.kc-list[data-romaji="0"] .kc-r { display: none; }
+.kc-list[data-meaning="0"] .kc-g, .kc-list[data-meaning="0"] .kc-en { display: none; }
+.kc-list[data-kana="0"] .kc-r { font-size: .95rem; color: var(--fg); }
+
+.kc-card { position: fixed; z-index: 2; display: grid; gap: 2px; justify-items: start; padding: 10px 14px; border-radius: 16px; background: var(--fg); color: var(--bg); box-shadow: 0 14px 30px -12px var(--shadow); max-width: min(260px, calc(100vw - 32px)); pointer-events: none; }
+.kc-card[hidden] { display: none; }
+.kc-card-s { font-size: 1.3rem; line-height: 1.2; }
+.kc-card-r { font: .7rem/1.3 var(--mono); letter-spacing: .04em; opacity: .85; }
+.kc-card-g { font-size: .95rem; font-weight: 600; }
+.kc-card-m { font: .58rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .1em; opacity: .7; margin-top: 4px; }
+
+.kc-note { margin: 0 14px 6px; padding: 7px 12px; border-radius: 12px; background: var(--bg); font-size: .74rem; line-height: 1.4; color: var(--muted); }
+.kc-note[hidden] { display: none; }
+.kc-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 14px 4px; min-height: 8px; }
+.kc-chip { min-height: 36px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--faint); background: var(--card); color: var(--fg); font: inherit; font-size: .88rem; cursor: pointer; }
+.kc-chip:hover, .kc-chip:focus-visible { background: var(--sel); border-color: var(--sel); color: var(--sel-fg); }
+.kc-form { display: flex; gap: 8px; padding: 8px 14px 6px; }
+.kc-input { flex: 1; min-width: 0; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--faint); background: var(--bg); color: var(--fg); font: inherit; font-size: 16px; }
+.kc-input:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; }
+.kc-send { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--sel); color: var(--sel-fg); cursor: pointer; display: grid; place-items: center; }
+.kc-send:hover { background: var(--fg); }
+.kc-foot { margin: 0; padding: 4px 16px 12px; font: .56rem/1.5 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+
+@media (max-width: 700px) {
+  .kc-open-rail { display: inline-flex; }
+  dialog.kc-dialog { width: 100vw; height: calc(100dvh - 12px); margin: auto 0 0; }
+  .kc-sheet { border-radius: 24px 24px 0 0; }
+  .kc-sheet { padding-bottom: env(safe-area-inset-bottom); }
+  .kc-msg { max-width: 96%; }
+  .kc-tools { gap: 5px; padding: 8px 12px; }
+  .kc-tools-l { display: none; }
+  .kc-tog { padding: 6px 9px; font-size: .58rem; letter-spacing: .05em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.kc-dialog[open], .kc-typing i, .kc-open-fab, .kc-avatar { animation: none; transition: none; }
+}
+
+.kc-one .kc-en { display: none; }
+.kc-one .kc-linefoot { justify-content: flex-end; margin-top: 0; }
+
+/* voice settings button (voice-settings.js) in the toolbar; the popover is fixed so the sheet's rounded clip does not cut it */
+.kc-voiceslot { display: inline-block; margin-left: auto; }
+.kc-voiceslot .kv-btn { min-height: 32px; padding: 6px 12px; gap: 6px; font-size: .64rem; letter-spacing: .08em; }
+.kc-voiceslot .kv-btn svg { width: 15px; height: 15px; }
+.kc-voiceslot .kv-wrap:not(.kv-inline) .kv-panel { position: fixed; top: auto; bottom: 24px; right: 24px; left: auto; z-index: 80; }
+@media (max-width: 480px) { .kc-voiceslot .kv-wrap:not(.kv-inline) .kv-panel { left: 16px; right: 16px; bottom: 16px; } }
+
+/* captions: a transparent stage over the conversation list; takes no space and shows nothing unless the character is speaking with captions on */
+.kc-listwrap { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.kc-listwrap .kc-list { flex: 1; }
+.kc-caps { position: absolute; inset: 0; pointer-events: none; }

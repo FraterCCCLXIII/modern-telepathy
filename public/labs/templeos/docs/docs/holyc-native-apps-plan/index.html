@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HolyC-native apps, including a web browser | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" open data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html" aria-current="page">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Overview</span></li><li aria-current="page">HolyC-native apps, including a web browser</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">HolyC-native apps, including a web browser</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/holyc-native-apps-plan.md</span></div>
+        <div class="doc-body">
+
+<p>Written 2026-10-27, after choosing TempleOS as the base. This replaces the screen-capture route in the earlier research and supersedes
+<code>os-foundation-plan.md</code> for this direction. Facts marked (verify) are from memory and untested here.</p>
+<h2 id="what-native-means-here">What "native" means here<a class="headerlink" href="#what-native-means-here" title="Link to this section">#</a></h2>
+<p>An app is HolyC code that draws with our renderer (<code>desk3/</code>), receives our input, and gets anything the guest cannot do (network, TLS, audio,
+persistence, an AI model) from a small number of well-defined services. No pixels are captured from another program. The honest limit is that
+the guest has no network stack, no TLS, no image or font libraries and no JavaScript engine; each is either built in HolyC or provided by a
+host service behind a clean protocol. Anything that needs a modern JavaScript web platform (Gmail, YouTube, Slack, VS Code) is out of reach
+for a native browser, whatever we do. The browser targets the <strong>document web</strong>: articles, docs, wikis, blogs, search results, forums, repos, feeds.</p>
+<h2 id="foundation-before-the-browser">Foundation before the browser<a class="headerlink" href="#foundation-before-the-browser" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Why</th>
+<th>Options</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A fast channel</strong></td>
+<td>A page is tens to hundreds of KB; the lockstep serial loader moves about 1.4 to 2.7 KB/s, so one page would take a minute</td>
+<td>(a) streaming serial with the 16550 FIFO and no per-chunk acknowledgement: unmeasured, gate 50 KB/s; (b) a second IDE disk used as a mailbox the host and guest both read and write (TempleOS has an ATA driver; verify raw block access to an unformatted drive); (c) a native NIC driver (see below)</td>
+<td>spike, 1 to 2 days</td>
+</tr>
+<tr>
+<td><strong>App framework</strong></td>
+<td>Remove the fixed app arrays; one file per app; shared keyboard and focus rules</td>
+<td>app table with draw, click, key, close; resizable windows</td>
+<td>M</td>
+</tr>
+<tr>
+<td><strong>Widget kit v2</strong></td>
+<td>Browser chrome, forms and editors need text fields, lists, tabs, menus, dialogs, scroll views</td>
+<td>extend <code>02-ui.HC</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><strong>Font and glyph service</strong></td>
+<td>A browser needs many sizes, bold, italic, monospace and non-Latin text</td>
+<td>rasterise TrueType in HolyC (a port of stb_truetype, about 5k lines of C) with a glyph cache; or keep atlases built on the host for a fixed set of sizes</td>
+<td>M to L</td>
+</tr>
+<tr>
+<td><strong>Image decoding</strong></td>
+<td>Pages contain images</td>
+<td>a PNG and JPEG decoder in HolyC (stb_image style), or a host service that returns resized raw pixels</td>
+<td>M</td>
+</tr>
+<tr>
+<td><strong>Persistence</strong></td>
+<td>History, bookmarks, settings and notes must survive the live CD</td>
+<td>host file service over the channel</td>
+<td>S</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="two-ways-to-get-bytes-from-the-web">Two ways to get bytes from the web<a class="headerlink" href="#two-ways-to-get-bytes-from-the-web" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>Host fetch service (first).</strong> The Mac fetches the page (HTTP, TLS, redirects, cookies, compression), and the guest asks for it by URL.
+   Small, fast to build, and TLS and certificate handling stay on the host. The guest never sees credentials or TLS keys.</li>
+<li><strong>Native network stack (long term, optional).</strong> A driver for a QEMU NIC (RTL8139 or E1000, a few hundred to a thousand lines), then ARP, IP,
+   UDP, DHCP, DNS, TCP, and TLS 1.3 (X25519, AES-GCM or ChaCha20, SHA-256, certificate chain checks with a bundled root store). TempleOS has
+   none of it, and its original charter rejects networking, so this is new ground; plain HTTP is the achievable first milestone, TLS is
+   several weeks on its own (verify speed under emulation: a handshake is millions of 64-bit multiplications). It would make the OS genuinely
+   self-contained and give every app sockets.</li>
+</ol>
+<p>Recommendation: build the host fetch service first so the browser exists soon, with the browser written against an internal "fetch(url)" interface
+so the native stack can replace the host later without touching the engine.</p>
+<h2 id="the-browser-in-layers">The browser, in layers<a class="headerlink" href="#the-browser-in-layers" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it does</th>
+<th>Notes</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chrome</td>
+<td>tabs, URL and search bar, back and forward, reload, bookmarks, history, find in page, downloads, reader mode toggle</td>
+<td>uses widget kit v2</td>
+<td>M</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>tokenizer and a simplified tree builder, entities, a decent subset of elements, forgiving of bad markup</td>
+<td>no need for the full HTML5 error-recovery tables at first</td>
+<td>M</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>parser, selectors (type, class, id, descendant, child, attribute, common pseudo-classes), cascade and specificity, inheritance, the common properties (display, color, background, font, margin, padding, border, width, height, text-align, line-height, overflow, position basics, list-style)</td>
+<td>the most work per feature</td>
+<td>L</td>
+</tr>
+<tr>
+<td>Layout</td>
+<td>block and inline formatting, line breaking, lists, tables, floats, simple flexbox, images, forms</td>
+<td>a faithful box model</td>
+<td>L</td>
+</tr>
+<tr>
+<td>Paint</td>
+<td>our renderer: anti-aliased rounded borders, backgrounds, shadows, text with the glyph service, images, links with hover</td>
+<td>already largely exists</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Interaction</td>
+<td>links, scrolling, text selection and copy, find, form fields and submit</td>
+<td>needs the text field widget</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Reader mode</td>
+<td>extract the main content (Readability-like heuristics, in HolyC or on the host), render with our typography</td>
+<td>gives the best result on article pages with the least code, so build it first</td>
+<td>S to M</td>
+</tr>
+<tr>
+<td>Other protocols</td>
+<td>Gemini, Gopher, RSS and Atom, Markdown and our own docs, TempleOS DolDoc</td>
+<td>small, native, fit the OS</td>
+<td>S each</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>none at first; later a small ES5-class interpreter (port mujs-sized code, about 20k lines of C, or write one) with a minimal DOM</td>
+<td>even then, most modern sites break; decide only after the document web works</td>
+<td>L to XL</td>
+</tr>
+</tbody>
+</table></div>
+<p>Expected coverage with no JavaScript: Wikipedia, documentation sites, blogs, news articles (often via reader mode), Hacker News, most forums'
+HTML versions, GitHub README pages, search engines' lightweight pages, feeds. Not covered: web apps and anything that renders client side.
+If broader coverage is ever required, the clean fallback is a host-side headless browser that sends a <strong>display list</strong> (positioned text runs,
+boxes and images) for the guest to paint natively and crisply, with events sent back. That is rendering, not screen capture, but it
+reintroduces a host dependency, so treat it as an optional mode.</p>
+<h2 id="the-other-apps-in-the-same-style">The other apps, in the same style<a class="headerlink" href="#the-other-apps-in-the-same-style" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>Native part</th>
+<th>Service part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text editor and code editor</td>
+<td>gap buffer, selection, undo, syntax colouring, run HolyC with errors, find and replace</td>
+<td>file service for saves</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td>HolyC REPL, history, completion</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>list, reader, compose, HTML-to-text</td>
+<td>host IMAP and SMTP service (Himalaya or similar), tokens kept on the host</td>
+</tr>
+<tr>
+<td>Messenger</td>
+<td>conversation list, bubbles, composer, toasts</td>
+<td>host Matrix or Signal bridge</td>
+</tr>
+<tr>
+<td>Music player</td>
+<td>library, queue, art, visualiser</td>
+<td>host playback (mpd or mpv); TempleOS cannot play real audio without a sound driver</td>
+</tr>
+<tr>
+<td>AI IDE</td>
+<td>native editor, diff, chat and approval panels</td>
+<td>host agent with explicit approval for every write and command</td>
+</tr>
+<tr>
+<td>Files, Notes, Calculator, Monitor, Settings, Paint, Image viewer, Docs viewer, Calendar</td>
+<td>all native</td>
+<td>file service for persistence</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rule for every service-backed app: nothing is sent, deleted or purchased without an explicit prompt in the UI.</p>
+<h2 id="order-of-work-and-gates">Order of work and gates<a class="headerlink" href="#order-of-work-and-gates" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>Channel spike</strong> (2 days). Gate: at least 50 KB/s sustained from host to guest and 20 KB/s back, no corruption over 10 MB.</li>
+<li><strong>Framework and widget kit v2</strong> (about 2 weeks). Gate: a text field, list and tab strip used by at least two apps.</li>
+<li><strong>Host services v0</strong>: file, fetch. (3 days). Gate: the guest saves a note and fetches a page.</li>
+<li><strong>Browser B0</strong>: chrome plus reader mode on the fetch service. (1 week). Gate: five chosen article URLs render legibly at 2x.</li>
+<li><strong>Browser B1</strong>: native HTML and CSS subset, images, fonts. (3 to 5 weeks). Gate: a fixed set of 20 pages (Wikipedia, MDN, a blog, HN, a GitHub README) lay out without overlap and with correct links.</li>
+<li><strong>Editor, terminal, code editor</strong> in parallel with B1, then Files completion, Paint, image viewer, docs viewer.</li>
+<li><strong>Email and messenger</strong> on the host services, after a review of accounts and approval flows with the user.</li>
+<li><strong>Native network stack</strong> track (RTL8139 or E1000, IP, TCP, then TLS), only if self-containment is wanted; swap in behind <code>fetch</code>.</li>
+</ol>
+<h2 id="risks">Risks<a class="headerlink" href="#risks" title="Link to this section">#</a></h2>
+<ul>
+<li>HolyC speed under emulation: layout and CSS cascade on large pages can be slow; budget parse and layout per page and stream results in.</li>
+<li>CSS volume: scope by a fixed conformance page set, not by the spec.</li>
+<li>No JavaScript is a hard ceiling on coverage; say so in the UI (a reader-mode and "open on the host" escape).</li>
+<li>The mouse, keyboard and clipboard paths are still hacks in the guest (relative-mouse workaround, no key-up, no non-ASCII); fix them in the framework step.</li>
+<li>Persistence depends on the channel spike.</li>
+</ul>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/core-apps-plan/index.html" rel="prev"><span>Previous</span>Kosmos Temple Desktop: core apps and how to build them</a><a class="next" href="../../docs/font-format-v2/index.html" rel="next"><span>Next</span>KSFONT2.BIN, font file format v2 (2026-10-27)</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#what-native-means-here">What &quot;native&quot; means here</a></li><li><a href="#foundation-before-the-browser">Foundation before the browser</a></li><li><a href="#two-ways-to-get-bytes-from-the-web">Two ways to get bytes from the web</a></li><li><a href="#the-browser-in-layers">The browser, in layers</a></li><li><a href="#the-other-apps-in-the-same-style">The other apps, in the same style</a></li><li><a href="#order-of-work-and-gates">Order of work and gates</a></li><li><a href="#risks">Risks</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

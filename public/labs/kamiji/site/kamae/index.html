@@ -1,0 +1,173 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kamae Blade Duels</title>
+<meta name="description" content="Kamae: Path of the Blade is a browser fencing duel game built on Cloudflare Workers and D1: five stances on a pentacle, versioned rules, multiplayer, replays and an AI opponent called Ronin. Prototype.">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="kamae.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-p" href="#top" aria-label="Kamae, top of page"><span>Kamae</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#pentacle">Pentacle</a>
+      <a href="#features">Features</a>
+      <a href="#art">Art</a>
+      <a href="#status">Status</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <p class="mono-h">Browser duel game <span class="badge proto">prototype</span></p>
+      <h1>Kamae:<br>Path of the Blade</h1>
+      <p class="lead">A fencing duel played on a five-stance pentacle, in the browser, against a friend or an AI swordsman called Ronin.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#how">How a duel works</a>
+        <a class="btn" href="#status">What runs today</a>
+      </p>
+    </div>
+    <figure class="hero-art">
+      <img src="img/home-valley.webp" width="1400" height="876" alt="Pixel-art valley with a waterfall, cherry blossom and mountains: the title-screen background of the game.">
+      <figcaption>Title-screen landscape from the repository. AI-generated art (ImageGen).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap split">
+    <h2>What it is</h2>
+    <div>
+      <p class="sub">Kamae is a two-player duel. Each fighter holds one of five stances, named for the five elements: Wood, Fire, Earth, Metal and Water. Each round you spend <em>qi</em> to shift stance, hold to gather more, then commit to an attack, a defence or a flowing move. How much damage lands depends on where your stance sits against your opponent's on the pentacle.</p>
+      <p class="sub">The repository is a Cloudflare Workers app with a D1 database. The browser client draws the arena on a canvas, with sprite sheets and layered landscapes, and the same engine file also runs under Node for tests. Duels can be played alone against Ronin, against another player online, or in a Journey mode with eight guardian fights on an animated map of Japan.</p>
+      <div class="note-card">
+        <p class="mono-h">An honest note on origin</p>
+        <p>The repository describes itself as an independent fork of another site's source, taken at a fixed commit. Its database is independent and no original account records were copied. We are confirming rights with the original author, so treat the project as a prototype and not as something to redistribute until that is settled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pentacle" class="section">
+  <div class="wrap split">
+    <h2>The pentacle and the rules</h2>
+    <div>
+      <figure class="fig" style="max-width:440px">
+        <svg class="pent" viewBox="0 0 400 380" role="img" aria-label="Pentacle diagram. Five element nodes in a ring, Wood, Fire, Earth, Metal, Water. Solid ring lines show generation, dashed star lines show control.">
+          <polygon class="ring gen" points="200,60 333.1,156.7 282.3,313.3 117.7,313.3 66.9,156.7"/>
+          <polygon class="ctl" points="200,60 282.3,313.3 66.9,156.7 333.1,156.7 117.7,313.3"/>
+          <g aria-hidden="true">
+            <circle class="n" cx="200" cy="60" r="26"/><text x="200" y="65" text-anchor="middle">WOOD</text>
+            <circle class="n" cx="333.1" cy="156.7" r="26"/><text x="333.1" y="161.7" text-anchor="middle">FIRE</text>
+            <circle class="n" cx="282.3" cy="313.3" r="26"/><text x="282.3" y="318.3" text-anchor="middle">EARTH</text>
+            <circle class="n" cx="117.7" cy="313.3" r="26"/><text x="117.7" y="318.3" text-anchor="middle">METAL</text>
+            <circle class="n" cx="66.9" cy="156.7" r="26"/><text x="66.9" y="161.7" text-anchor="middle">WATER</text>
+          </g>
+        </svg>
+        <figcaption>Solid: generation (next element). Dashed: control (two steps on). Drawn here from the engine's element order, not a game screenshot.</figcaption>
+      </figure>
+      <p class="sub" style="margin-top:1.6rem">Rules below are read from <code>client/engine.js</code>, using the settings of rules version 6, the version the README says the fork preserves. The engine in the repository supports versions 1 to 9 and defaults to 9, so the numbers differ in newer versions. We have read this code; we have not played a full duel to check each figure.</p>
+      <table class="tbl">
+        <thead><tr><th>Idea</th><th>What the code does (v6)</th></tr></thead>
+        <tbody>
+          <tr><td>Stances</td><td>Five, each guarding an area: Wood shoulders, Fire head, Earth legs, Metal sides, Water chest.</td></tr>
+          <tr><td>Qi and health</td><td>Qi is capped at 9 and health is 20 in v6. (v7 raises qi to 10; v9 sets health to 100.)</td></tr>
+          <tr><td>Shifting</td><td>A shift costs 1 qi, or 2 when moving to the element that counters you. Shifting to the next element in the ring gives back 3 qi; two steps on gives back 1.</td></tr>
+          <tr><td>Hold and rest</td><td>Holding in place gains 1 qi; resting also gains 1.</td></tr>
+          <tr><td>Strike</td><td>The attacker spends all their qi as raw damage. The defender can absorb it with their own qi, if their stance covers the attacking line.</td></tr>
+          <tr><td>Defence</td><td>Matching guard adds 2 to the defence, and defending from a stance that controls the attacker adds 4 and can counter.</td></tr>
+        </tbody>
+      </table>
+      <p class="from">Source: client/engine.js (kind, shiftCost, shiftRefund, maxQi, maxHp, guardPower, coverage)</p>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>What is in the repository</h2>
+    <p class="sub">Each card says how far the feature goes, from the README and the code that backs it.</p>
+    <ul class="legend" aria-label="Badge key"><li><span class="badge ok">in code</span> present and described in the README</li><li><span class="badge proto">prototype</span> works, not fully checked</li><li><span class="badge unv">unverified</span> claimed, not tested by us</li></ul>
+    <ul class="grid-cards">
+      <li><h3>Versioned rules <span class="badge ok">in code</span></h3><p>The engine carries rules versions 1 to 9, and each recorded duel stores the version it was played under, so old replays still resolve the way they did.</p><p class="from">Source: client/engine.js (setRules, withRules)</p></li>
+      <li><h3>Multiplayer <span class="badge unv">unverified</span></h3><p>Accounts, challenges, friends, messages, a leaderboard and profiles are in the client and the Worker API, with D1 migrations. We did not run a live two-player match.</p><p class="from">Source: README; server/api.mjs; drizzle/</p></li>
+      <li><h3>Replays and history <span class="badge ok">in code</span></h3><p>Every exchange is stored as a snapshot and can be replayed in a cinema view with a speed control, plus a written battle history.</p><p class="from">Source: client/app.js (fightHistory, playFight)</p></li>
+      <li><h3>Pentacle UI <span class="badge proto">prototype</span></h3><p>You pick stances by moving around the pentacle. Phone layouts use a bottom stack of scrolls; the README says phone visual QA is still pending.</p><p class="from">Source: README (mobile scroll-shell sections)</p></li>
+      <li><h3>Ronin, the AI opponent <span class="badge ok">in code</span></h3><p>Three difficulties (novice, adept, veteran) and five personalities, one per element. It scores every option against every reply the opponent has, and thinks for a few seconds so it feels like a person.</p><p class="from">Source: client/ronin.js</p></li>
+      <li><h3>Sensei guidance <span class="badge proto">prototype</span></h3><p>An in-duel advisor and a paginated rules guide, with a training mode. The advisor is described in the README; we did not read its advice for correctness.</p><p class="from">Source: README; client/field-guide.js</p></li>
+      <li><h3>Journey mode <span class="badge proto">prototype</span></h3><p>An animated map of Japan with eight sequential trials. Each opens with an imagined conversation (the README says these are not historical quotations) before the duel. Progress syncs for account holders.</p><p class="from">Source: README (The swordsman's journey); client/journey-data.js</p></li>
+      <li><h3>Animated pixel arenas <span class="badge ok">in code</span></h3><p>Sprite-sheet fighters, layered landscapes and weather on a canvas. The README says ambient motion can be set to follow the device, on or off, and reduced motion is respected.</p><p class="from">Source: README (Graphics); client/pixel-renderer.js</p></li>
+      <li><h3>Music and sound <span class="badge unv">unverified</span></h3><p>The README lists menu, battle and victory tracks as user-supplied. We have not checked who holds the rights to them, so none are copied to this page.</p><p class="from">Source: README (Main-menu music)</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="art" class="section">
+  <div class="wrap">
+    <h2>Art from the repository</h2>
+    <p class="sub">All of this art was generated with an AI image tool (the README names ImageGen) and then processed by scripts in the repository. The sheets below are source files; the game cuts them into animation frames.</p>
+    <div class="figs">
+      <figure class="fig"><img src="img/battle-shrine.webp" width="1400" height="788" alt="Pixel-art shrine courtyard with a waterfall and cherry trees, the battle background."><figcaption>Battle shrine backdrop. Character-free by design.</figcaption></figure>
+      <figure class="fig"><img src="img/journey-japan.webp" width="1200" height="800" alt="Illustrated map of Japan used for the Journey mode."><figcaption>Journey map of Japan.</figcaption></figure>
+      <figure class="fig sheet"><img src="img/fighter-strikes.webp" width="1400" height="933" alt="Sprite sheet of a red-robed swordsman in thirty strike and guard poses."><figcaption>Fighter strike sheet (art-source/fighter-strikes.png), resized.</figcaption></figure>
+      <figure class="fig sheet"><img src="img/overworld-walk.webp" width="1400" height="700" alt="Eight-frame walk cycle of a young swordsman with a pack, seen from the side."><figcaption>Overworld walk cycle, version 89 (art-source/overworld-walk-v89.png), resized.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>Status</h2>
+    <p class="sub">What we know, and what we do not. This page is built from reading the repository and its docs; we did not deploy it.</p>
+    <ul class="grid-cards">
+      <li><h3>Runs, per the README <span class="badge ok">in code</span></h3><p>Engine with versioned rules, Ronin, replays, the pentacle UI, Journey, Worker API and D1 migrations. The README reports engine, journey, encounter and renderer checks passing for the changes it describes.</p></li>
+      <li><h3>Prototype <span class="badge proto">prototype</span></h3><p>Phone layouts. The README repeats, section after section, that phone and browser visual QA is pending. We could not confirm any of it.</p></li>
+      <li><h3>Known failing tests <span class="badge unv">unverified</span></h3><p>A notes file in <code>docs/next-steps.md</code> records 115 tests passing and 86 failing, the same 86 failing on unmodified code. It is a working note, not a current run; we did not run the suite.</p></li>
+      <li><h3>Not finished <span class="badge plan">planned</span></h3><p>The notes list a pentacle navigation conversion, proper walk and jump stills, and real move and jump physics, which the engine does not have yet.</p></li>
+      <li><h3>Rights <span class="badge unv">unverified</span></h3><p>Independent fork; rights being confirmed with the original author. Art is AI-generated. Music is described as user-supplied. No licence file was found at the top of the repository.</p></li>
+      <li><h3>Live site <span class="badge unv">unverified</span></h3><p>The README gives no public address for this fork, and we make no claim that one exists.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap">
+    <h2>Links</h2>
+    <div class="cols">
+      <article class="panel">
+        <h3>The repository</h3>
+        <p>A local checkout named <code>kamae</code>, not published from this page. Start with <code>README.md</code>, then <code>docs/visual-identity.md</code> and <code>docs/next-steps.md</code>.</p>
+        <p>Build command in the README: <code>node scripts/build-online.mjs</code>, which embeds client code and WebP assets into the Worker.</p>
+      </article>
+      <article class="panel">
+        <h3>Where to read the rules</h3>
+        <p>The engine is <code>client/engine.js</code>, the AI is <code>client/ronin.js</code>, and the in-game guide is <code>client/field-guide.js</code>.</p>
+        <p class="src">No public repository URL is stated in the README.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Kamae: Path of the Blade. Prototype; independent fork, rights being confirmed.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

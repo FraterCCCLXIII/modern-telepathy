@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos desktop on Aiwnios (native Apple Silicon HolyC JIT) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html" aria-current="page">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Engine and platform</span></li><li aria-current="page">Aiwnios desktop</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kosmos desktop on Aiwnios (native Apple Silicon HolyC JIT)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">aiwnios/README.md</span></div>
+        <div class="doc-body">
+
+<p>The whole desk3 desktop runs natively on arm64, no QEMU. desk3/0*.HC stays the single source and the x86 build is untouched:
+<code>build.py</code> generates the Aiwnios source from the current desk3 plus overlay files here, so desk3 changes flow through.</p>
+<h2 id="build-and-run">Build and run<a class="headerlink" href="#build-and-run" title="Link to this section">#</a></h2>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>git clone https://github.com/nrootconauto/Aiwnios Aiwnios &amp;&amp; cd Aiwnios      # the spike used 3cbe5e1
+git apply &lt;repo&gt;/apps/templeos-holyc/aiwnios/aiwnios-sdl32.patch
+mkdir build &amp;&amp; cd build &amp;&amp; cmake -DCMAKE_C_FLAGS=&quot;-D_DARWIN_C_SOURCE&quot; .. &amp;&amp; make -j8 &amp;&amp; cd ../..
+apps/templeos-holyc/aiwnios/run-desk.sh Aiwnios [--s 2] [--w 1440 --h 900]   # generate, map T:/kosmos, run; Esc quits</code></pre></figure>
+<p><code>run-desk.sh</code> makes the <code>T:/kosmos</code> mapping itself (a symlink in the clone). Other tools: <code>build.py OUT.HC [--desk DIR]
+[--no-main] [--append FILE]</code>, <code>drive.HC</code> / <code>drive-bench.HC</code> / <code>drive-browser.HC</code> (scripted runs, <code>--append</code>), <code>rgb2png.py</code>,
+<code>kslint.py FILE...</code> (U64 multiplies, <code>continue</code>, zero-assumed locals, <code>$</code>), <code>say.HC</code> (Say for any argument count).
+Pointer, wheel, keys: SDL events through the runtime key pipeline (shift, F-keys, Esc, Tab, arrows give TempleOS codes).</p>
+<h2 id="what-is-shared-what-is-overridden">What is shared, what is overridden<a class="headerlink" href="#what-is-shared-what-is-overridden" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>desk3 part</th>
+<th>on Aiwnios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-core renderer, fonts, icons, wallpaper</td>
+<td>shared; only the asm block is replaced by <code>kernels.HC</code></td>
+</tr>
+<tr>
+<td>02-ui, 03-apps, 05-splash, 04/06 logic, the ten apps and the Browser</td>
+<td>shared, unchanged</td>
+</tr>
+<tr>
+<td>03b-browser serial protocol</td>
+<td>shared; COM1 is emulated in <code>platform.HC</code> (GET line, KsExec of browser-bridge.py --convert, OK n c reply)</td>
+</tr>
+<tr>
+<td>SerStr, BgaSet, Classic* (TempleOS screen app), RunApp, SplashRestart, SplashWait</td>
+<td><code>overrides.HC</code> (named list in build.py)</td>
+</tr>
+<tr>
+<td>14 one-line edits (FontLoad len=0, Input pointer, Render dirty rect, Main without PCI, loop pump and upload, splash show)</td>
+<td><code>PATCHES</code> in build.py; the build stops with the text if desk3 moved under one</td>
+</tr>
+<tr>
+<td>frame buffer</td>
+<td>host buffer, partial <code>KsPresentRect</code> of the union of dirty rectangles per frame</td>
+</tr>
+<tr>
+<td>Not on Aiwnios: app 9 (the real TempleOS screen, stays black), Files starts empty (T:/Home), F11/F12 codes differ from x86.</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="parity-gate-goldenpy-iso-clone-aiwnios-desk3-at-head-1440x900-hashes-below-the-menu-bar">Parity gate (golden.py ISO --clone Aiwnios): desk3 at HEAD, 1440x900, hashes below the menu bar<a class="headerlink" href="#parity-gate-goldenpy-iso-clone-aiwnios-desk3-at-head-1440x900-hashes-below-the-menu-bar" title="Link to this section">#</a></h2>
+<p>Kernels: all 17 kernel cases (aiwnios/kernel-test.py) give the same FNV hash for x86 asm, x86 plain HolyC and Aiwnios plain HolyC.
+Scenes (13 of them, in golden.HC):
+| scene | result | note |
+|---|---|---|
+| Settings pages 0, 1, 2 (window, text, controls) | identical | |
+| all 20 Lucide icons at 20, 32, 48 px | identical | same IconLoad and stroke code |
+| wallpaper and dock, dock hover (magnified icons), window with shadow, Notes and Calculator | differ in wallpaper pixels only | 0.36 percent of sampled wallpaper pixels, each by one level in one channel |
+| Monitor with fixed data | wallpaper plus 14 of 38800 sampled graph pixels | anti-aliased graph line moves one pixel at a few points |
+| window in styles 2 to 5 | differ in a few tiles (wallpaper areas; not sampled) | same cause, assumed |
+Cause: x86 TempleOS evaluates F64 in 80-bit x87 and Aiwnios in IEEE double, so truncations such as the blob falloff in BuildWall and
+the line position in LineN land one step apart at rare points. Only F64-derived pixels differ. Not fixable without changing desk3
+arithmetic (integer or rounded forms would make both builds identical but would change the x86 pixels); left as is.
+(pxdiff.py on golden-px.HC samples; hashes in out/golden-aiw.txt and out/golden-x86.txt.)</p>
+<h2 id="dialect-differences-aiwnios-vs-templeos-holyc">Dialect differences (Aiwnios vs TempleOS HolyC)<a class="headerlink" href="#dialect-differences-aiwnios-vs-templeos-holyc" title="Link to this section">#</a></h2>
+<ol>
+<li>No inline asm: kernels are plain HolyC. 2. U64 multiply truncates to 32 bits on arm64: use I64 (lint rule U64MUL).</li>
+<li>Locals are not zeroed: initialise (lint ZEROLOC; FontLoad needs <code>len=0</code>, patched). 4. Natives need <code>extern</code>: one place, platform.HC.</li>
+<li>Boot paths are under T: only. 6. PrintF with several arguments fails: Say or StrPrint. 7. StrPrint returns the buffer, not a length.</li>
+<li>StrCat does not exist; <code>continue</code> does not exist in either. 9. F64 is IEEE double, x86 TempleOS uses 80-bit x87 (see parity).</li>
+<li>Aiwnios hangs at 100 percent CPU on a compile error in -k mode (REPL on closed stdin): run with timeout -s KILL.</li>
+</ol>
+<h2 id="numbers-m-series-2880x1800-in-engine-scripted-drivehc-and-the-b-benchmark-ms-a-frame">Numbers (M-series, 2880x1800, in-engine; scripted drive.HC and the b benchmark, ms a frame)<a class="headerlink" href="#numbers-m-series-2880x1800-in-engine-scripted-drivehc-and-the-b-benchmark-ms-a-frame" title="Link to this section">#</a></h2>
+<p>Drag the large window: 1.5 ms avg (2.6 worst), small window 1.3, full redraw 3.9 (4.2 worst), open or close a window 1.7, focus change 2.3,
+dock sweep 0.7, style crossfade 5.2, first style switch 28 ms (wallpaper build), Notes typing 4.0. QEMU x86 drag: 5.7 ms.
+Boot to desktop (KS-READY): 0.5 to 0.7 s. Partial upload to the Metal texture: about 1.1 ms average a frame (full-frame upload
+8 ms, display paced). Whole desktop with ten apps open: 35 frames a second while the scripted drive redraws, idle frames cost nothing.</p>
+<h2 id="remaining-gaps">Remaining gaps<a class="headerlink" href="#remaining-gaps" title="Link to this section">#</a></h2>
+<p>App 9 and RunApp need a TempleOS screen (none here). The Browser fetch blocks the frame while the host converter runs.
+F-key codes above F10 differ from x86 in the runtime mapping. desk3 FontLoad should initialise len (lint finds it).</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/engine-on-templeos/index.html" rel="prev"><span>Previous</span>Can the kosmos engine run on TempleOS, and what is the best way</a><a class="next" href="../../docs/dev-box/index.html" rel="next"><span>Next</span>Dev Box: complete software development from the HolyC desktop</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#build-and-run">Build and run</a></li><li><a href="#what-is-shared-what-is-overridden">What is shared, what is overridden</a></li><li><a href="#parity-gate-goldenpy-iso-clone-aiwnios-desk3-at-head-1440x900-hashes-below-the-menu-bar">Parity gate (golden.py ISO --clone Aiwnios): desk3 at HEAD, 1440x900, hashes below the menu bar</a></li><li><a href="#dialect-differences-aiwnios-vs-templeos-holyc">Dialect differences (Aiwnios vs TempleOS HolyC)</a></li><li><a href="#numbers-m-series-2880x1800-in-engine-scripted-drivehc-and-the-b-benchmark-ms-a-frame">Numbers (M-series, 2880x1800, in-engine; scripted drive.HC and the b benchmark, ms a frame)</a></li><li><a href="#remaining-gaps">Remaining gaps</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

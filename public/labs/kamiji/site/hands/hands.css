@@ -1,0 +1,144 @@
+/* Differences from ../style.css only. */
+.kamiji-link { text-decoration: none; }
+.kamiji-link:hover { background: var(--sel); color: var(--sel-fg); }
+.bar > .kamiji-link { flex: none; }
+@media (max-width: 1180px) { .bar > .kamiji-link { margin-left: auto; } }
+
+.hero-copy { max-width: max(28rem, min(48vw, 70rem)); }
+.hero-copy h1 { font-size: clamp(2.8rem, 5.2vw, 8.5rem); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 1.4em; }
+.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 20px; border-radius: 999px; border: 1px solid var(--faint); background: var(--card); color: var(--fg); text-decoration: none; font: .72rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; }
+.btn:hover { border-color: var(--fg); }
+.btn.primary { background: var(--sel); border-color: var(--sel); color: var(--sel-fg); }
+.btn.primary:hover { filter: brightness(1.1); }
+.hero-copy .quiet { max-width: 26rem; }
+.hero-copy .quiet a { color: var(--fg); }
+
+.prose p { color: var(--muted); max-width: 40rem; }
+.src { font: .66rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted) !important; max-width: 40rem; }
+.section > .wrap > .src { margin-top: 2rem; }
+.panel code, .src code { text-transform: none; letter-spacing: 0; }
+
+.grid-cards { list-style: none; margin: 3rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.grid-cards li { background: var(--card); border-radius: 28px; padding: 24px; box-shadow: 0 1px 0 var(--faint), 0 18px 40px -28px var(--shadow); }
+.grid-cards h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: .6em; }
+.grid-cards p { margin: 0; color: var(--muted); font-size: .96rem; }
+@media (max-width: 1000px) { .grid-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .grid-cards { grid-template-columns: minmax(0, 1fr); } .grid-cards li { padding: 20px; } }
+
+.links a { font-weight: 600; }
+
+.agent-grid { list-style: none; margin: 3rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.agent { text-align: center; }
+.agent .viewer { display: block; aspect-ratio: 1; width: min(100%, 180px); margin: 0 auto 8px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 0 var(--faint), 0 18px 40px -28px var(--shadow); }
+.agent b { display: block; font: 600 .74rem/1.3 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
+.agent > span:last-child { display: block; font: .62rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+@media (max-width: 640px) { .agent-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.site-footer a { color: inherit; }
+.hint-note { color: var(--muted); }
+
+/* Seven section links plus Kamiji: the nav drops to its own scrolling row sooner than on the Kamiji page. */
+@media (max-width: 1280px) {
+  .top-nav { order: 3; flex-basis: 100%; margin-left: 0; overflow-x: auto; gap: 18px; padding-bottom: 2px; }
+  .bar > .tag { display: none; }
+}
+
+/* Wordmark with a little floating hand, and a "from OpenHands" line under it. */
+.brand-stack { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-hand { width: 52px; height: 52px; flex: none; animation: brand-float 3.6s ease-in-out infinite; }
+.brand-text { display: grid; gap: 3px; line-height: 1; }
+.brand-word { font-weight: 800; font-size: 1.5rem; letter-spacing: -.02em; color: var(--fg); }
+.brand-from { display: inline-flex; align-items: center; gap: 6px; font: .6rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.brand-from img { display: block; height: 14px; width: auto; }
+.brand-from b { font-weight: 600; color: var(--fg); letter-spacing: .1em; }
+@keyframes brand-float { 0%, 100% { transform: translateY(2px) rotate(-3deg); } 50% { transform: translateY(-4px) rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) { .brand-hand { animation: none; } }
+@media (max-width: 700px) { .brand-hand { width: 42px; height: 42px; } .brand-word { font-size: 1.3rem; } }
+
+/* Smaller brand block; the "from OpenHands" line is set in Inter. */
+.brand-stack { gap: 8px; }
+.brand-hand { width: 38px; height: 38px; }
+.brand-text { gap: 2px; }
+.brand-word { font-size: 1.2rem; }
+.brand-from { gap: 4px; font: 500 .62rem/1 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted); }
+.brand-from img { height: 10px; }
+.brand-from b { font-weight: 600; letter-spacing: 0; color: var(--fg); }
+@media (max-width: 700px) { .brand-hand { width: 32px; height: 32px; } .brand-word { font-size: 1.1rem; } }
+
+/* The logo hand sits right against the wordmark and jumps now and then. */
+.brand-stack { gap: 0; }
+.brand-hand { margin-right: -7px; }
+.brand-hand.jump { animation: brand-jump 1.1s cubic-bezier(.3, .7, .4, 1) 1; }
+@keyframes brand-jump {
+  0% { transform: translateY(2px) scale(1.06, .92); }
+  22% { transform: translateY(-14px) scale(.94, 1.08) rotate(-4deg); }
+  45% { transform: translateY(-16px) rotate(3deg); }
+  70% { transform: translateY(2px) scale(1.08, .9); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* A narrower subline so it stays clear of the hero hand. */
+.hero-copy .lead { max-width: min(30rem, 100%); }
+
+/* The tribe: one wide 3D plane under the section heading. */
+.tribe-viewer { width: 100%; height: clamp(320px, 52vw, 640px); margin-top: 28px; border-radius: 28px; background: var(--card); box-shadow: 0 1px 0 var(--faint), 0 24px 50px -34px var(--shadow); }
+.tribe-note { margin-top: 14px; }
+
+/* Logo hand: a roomier canvas so it never clips, tucked back toward the wordmark. */
+.brand-hand { width: 54px; height: 54px; margin: -8px -3px -8px -8px; overflow: visible; }
+@media (max-width: 700px) { .brand-hand { width: 46px; height: 46px; margin: -7px -2px -7px -7px; } }
+
+/* The tribe has no card behind it: the globe arc and the hands sit straight on the page. */
+.tribe-viewer { background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+/* Full-bleed canvas so hands hopping at the sides are never cut off by the content column. */
+.tribe-viewer { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); }
+
+/* Header: only the OpenHands logo. */
+.brand-openhands { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); font: 600 1.15rem/1 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: -.01em; }
+.brand-openhands img { display: block; height: 28px; width: auto; }
+
+/* Introducing Hands: a row of avatars with no background. */
+.intro-sub { margin: 0 0 .6em; font-size: clamp(1.2rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -.01em; color: var(--fg); }
+.intro-avatars { list-style: none; margin: 2.4rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.intro-avatars .agent .viewer { width: min(100%, 200px); border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+@media (max-width: 900px) { .intro-avatars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Powered by Kosmos + Kamiji */
+.powered-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.powered-row .powered { margin-top: 0; }
+.powered-plus { font: 400 1.3rem/1 var(--mono); color: var(--muted); }
+.kamiji-mark { padding: 4px 16px; }
+.kamiji-word { font: 800 1.2rem/1 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: -.02em; color: var(--fg); text-transform: none; }
+.kamiji-word i { font-style: normal; color: var(--accent); }
+
+/* Compatible Kamiji libraries */
+.compat-grid { list-style: none; margin: 2.4rem 0 1.6rem; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.compat-card { background: var(--card); border-radius: 24px; padding: 22px 22px 20px; box-shadow: 0 1px 0 var(--faint), 0 18px 40px -30px var(--shadow); min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.compat-card h3 { margin: 0; font-size: 1.1rem; }
+.compat-card p { margin: 0; color: var(--muted); font-size: .94rem; line-height: 1.5; }
+.compat-card .compat-count { font: .66rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--accent); }
+.compat-card a { margin-top: auto; padding-top: 10px; font: .66rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; }
+@media (max-width: 1000px) { .compat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .compat-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* Git, in 3D: a second row of hands, each with a steady 3D git icon. */
+.intro-row-label { margin: 3rem 0 0; font: .66rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.intro-git { margin-top: .8rem; }
+.intro-git .agent > span:last-child { text-transform: none; letter-spacing: .04em; font-size: .68rem; }
+
+/* Hands page only: the hero content sits lower under the header. */
+.hero { padding-top: 168px; }
+@media (max-width: 700px) { .hero { padding-top: 136px; } }
+
+/* Hands page only: the hero ends with its content instead of filling the screen, so the next section follows closely. */
+.hero { min-height: 0; }
+.hero .hero-main { padding-bottom: 24px; }
+.hero + .section { padding-top: 4rem; }
+
+/* Hands page only: centre the hero hand in the right half, clear of the headline. */
+@media (min-width: 900px) {
+  .stage { --hw: clamp(260px, 48svh, 560px); }
+  .stage .hero-viewer,
+  .stage .shadow { margin-right: calc(25% - var(--hw) / 2); }
+}

@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev Box: complete software development from the HolyC desktop | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html" aria-current="page">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Engine and platform</span></li><li aria-current="page">Dev Box: complete software development from the HolyC desktop</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Dev Box: complete software development from the HolyC desktop</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/dev-box.md</span></div>
+        <div class="doc-body">
+
+<p>Status: study, no code. Branch task/templeos-shell. Written 2026-10-27. Read with <code>docs/os-foundation-plan.md</code>, <code>docs/apps/ai-ide.md</code> (2.4 workspace and sandbox), <code>docs/apps/fonts.md</code>, <code>docs/browser-architecture.md</code> (b4 throughput, h5a fonts), <code>apps-host/hub/hostd.py</code>.</p>
+<p>Tags: <strong>[V]</strong> verified on this Mac or in this repo this session. <strong>[W]</strong> from a web page fetched this session (URL given). <strong>[M]</strong> from memory or estimate, to verify. Section 11 lists them.</p>
+<h2 id="1-the-idea-in-one-paragraph">1. The idea in one paragraph<a class="headerlink" href="#1-the-idea-in-one-paragraph" title="Link to this section">#</a></h2>
+<p>TempleOS cannot run containers: no Linux kernel, no network stack, no libc. So the desktop is the front end and the work runs in a Linux environment next to it. The guest talks to the host hub (<code>hostd.py</code>), the hub talks to a Linux box, and the box holds the compiler, the language servers, Docker and the repo. The desktop shows a terminal, a file tree, an editor, a containers panel and a preview. The same shape is what VS Code Remote, Zed remote and Codespaces use: the UI is local, the server, the language servers and the terminals are remote [W: code.visualstudio.com/docs/remote/remote-overview; zed.dev/docs/remote-development]. Our "remote" is a VM on the same Mac.</p>
+<h2 id="2-what-is-installed-read-only-checks-2026-10-27">2. What is installed (read-only checks, 2026-10-27)<a class="headerlink" href="#2-what-is-installed-read-only-checks-2026-10-27" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Result [V]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mac</td>
+<td>macOS 27.0 (build 26A428), arm64, 14 CPUs, 36 GiB RAM (<code>hw.memsize</code> 38,654,705,664)</td>
+</tr>
+<tr>
+<td>Disk</td>
+<td>926 GiB volume, <strong>24 GiB free</strong> (the earlier plan said 41 GB). <code>~/Library/Containers/com.docker.docker</code> alone is 24 GB</td>
+</tr>
+<tr>
+<td>Lima</td>
+<td><code>/opt/homebrew/bin/limactl</code> 2.1.4. <code>~/.lima</code> does not exist: <strong>no Lima instances</strong>. Templates present (docker, docker-rootful, debian-13, alpine, buildkit, apptainer...)</td>
+</tr>
+<tr>
+<td>Colima</td>
+<td><code>/opt/homebrew/bin/colima</code> 0.10.3. One profile <code>default</code>, <strong>Stopped</strong>: aarch64, 6 CPU, 8 GiB, 20 GiB disk, runtime docker. Config: <code>vmType: vz</code>, <code>mountType: virtiofs</code>, <code>rosetta: true</code>, <strong><code>mounts: []</code> which means $HOME writable</strong> by Colima's documented default</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>client 29.1.5 at <code>/usr/local/bin/docker</code>; <code>Docker.app</code> in /Applications. <code>docker context ls</code>: <code>default</code> (/var/run/docker.sock) and <code>desktop-linux</code>. <strong>No daemon is running</strong> (both <code>docker ps</code> and <code>docker info</code> fail to connect). Nothing was started</td>
+</tr>
+<tr>
+<td>QEMU</td>
+<td><code>/opt/homebrew/bin/qemu-system-aarch64</code> 11.0.2, <code>-accel help</code> lists <strong>hvf and tcg</strong></td>
+</tr>
+<tr>
+<td>Not present</td>
+<td>Apple <code>container</code> CLI, OrbStack (<code>orb</code>, <code>orbctl</code>), Podman, nerdctl, <code>devcontainer</code>, <code>code-server</code></td>
+</tr>
+<tr>
+<td>Also present</td>
+<td>kubectl, tmux, Homebrew, ssh, Python 3 (conda)</td>
+</tr>
+<tr>
+<td>Running now</td>
+<td>two x86_64 TempleOS QEMU processes under <strong>tcg</strong> (other agents' test VMs); not touched</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two facts shape everything. Disk is tight: a Docker Desktop install already holds 24 GB, so a second container runtime must share, not duplicate, its images. And the TempleOS guest is x86_64 under TCG on this arm Mac, so the guest CPU is software-emulated, while a Linux box on the same Mac can be arm64 with hardware acceleration (HVF) at near native speed. That asymmetry is the reason to put the work in the box and keep the guest thin.</p>
+<h2 id="3-the-four-routes">3. The four routes<a class="headerlink" href="#3-the-four-routes" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>  TempleOS desktop (HolyC, QEMU x86 TCG  |  Aiwnios arm native)
+        |  serial frames (16 KB/s)  |  socket / native I/O (Aiwnios)
+        v
+  hostd.py  --- services: term, files, git, docker, ports, lsp, ... --- approvals
+        |
+        +-- R1  Lima/QEMU/VZ VM (arm64, HVF) --- docker/podman inside --- /work (virtiofs)
+        +-- R2  Docker Desktop / Colima / OrbStack on the Mac (a hidden VM of the same kind)
+        +-- R3  ssh to another machine (keys stay in the host agent)
+        +-- R4  in-OS HolyC loop (editor, hot-load, Aiwnios)</code></pre></figure>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th></th>
+<th>R1 own VM</th>
+<th>R2 container runtime on host</th>
+<th>R3 remote SSH</th>
+<th>R4 in-OS HolyC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Runs Docker/compose</td>
+<td>yes (rootless or rootful in the VM)</td>
+<td>yes</td>
+<td>if the remote has it</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Isolation from the Mac</td>
+<td>strong: VM boundary, only mounted folders visible</td>
+<td>medium: depends on the runtime's mounts (Colima mounts $HOME writable by default [V])</td>
+<td>strong (other machine)</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Install cost here</td>
+<td><code>limactl create</code> + image download (hundreds of MB, needs approval [M])</td>
+<td>already installed (Docker Desktop, Colima profile)</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Disk on this Mac</td>
+<td>new qcow2/raw disk, sparse; 24 GiB free is the limit</td>
+<td>reuses the 24 GB Docker Desktop store</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Licence</td>
+<td>Lima Apache-2.0 [M]</td>
+<td>Docker Desktop: free Personal, Pro $9 to $11 per user per month [W: docker.com/pricing]; Colima MIT [W: github.com/abiosoft/colima]; OrbStack free for non-commercial use, Pro $8 per user per month [W: orbstack.dev/pricing]</td>
+<td>free</td>
+<td>free</td>
+</tr>
+<tr>
+<td>Terminal/LSP/DAP</td>
+<td>full Linux</td>
+<td>full, through <code>docker exec</code></td>
+<td>full</td>
+<td>HolyC only</td>
+</tr>
+<tr>
+<td>Verdict</td>
+<td><strong>recommended</strong></td>
+<td>acceptable second backend for containers</td>
+<td>add as a target, same code</td>
+<td>keep, it is the HolyC product</td>
+</tr>
+</tbody>
+</table></div>
+<p>Notes on the choices:</p>
+<ul>
+<li><strong>Apple <code>container</code></strong> (Apache-2.0, "supported on macOS 26", Apple silicon, each container its own lightweight VM [W: github.com/apple/container]) fits this Mac's OS but is not installed and is a v0.x tool [W]. It gives the strongest per-container isolation and no daemon. Treat it as a later backend behind the same <code>docker</code> service interface, not the first.</li>
+<li><strong>Lima</strong> supports mount types reverse-sshfs, 9p and virtiofs; from Lima 1.0 the default is 9p for QEMU and virtiofs for the VZ driver; virtiofs needs macOS 13+ and a guest kernel with <code>CONFIG_VIRTIO_FS</code> [W: lima-vm.io/docs/config/mount]. This Lima's <code>default.yaml</code> ships <code>mounts: []</code> [V], so a fresh instance exposes no host folder until we list one. That is the right default for us.</li>
+<li><strong>Colima</strong> is Lima with a Docker front; its own default mounts $HOME writable [V colima.yaml comment]. If we use R2 through Colima we must write an explicit <code>mounts:</code> list (workspace only), otherwise a container can read and write the whole home directory including secrets.</li>
+<li><strong>Podman machine</strong> is a Lima-like VM on Apple's hypervisor [M], not installed. Skip.</li>
+<li>Not rated for the first prototype: a QEMU HVF VM with a hand-built image. It is more controllable but costs a day of image work; Lima gives the same QEMU or VZ with cloud-init for free.</li>
+</ul>
+<h2 id="4-terminal-question-1">4. Terminal (question 1)<a class="headerlink" href="#4-terminal-question-1" title="Link to this section">#</a></h2>
+<h3 id="41-spec-from-kosmos-os">4.1 Spec from Kosmos OS<a class="headerlink" href="#41-spec-from-kosmos-os" title="Link to this section">#</a></h3>
+<p><code>/Users/paulbloch/kosmos-os-frame/src/apps/terminal/TerminalApp.tsx</code> (108 lines [V]) is explicitly "one-shot commands, not a pty": it POSTs a command to <code>/api/exec</code> and lists stdout, stderr and exit code, with arrow-key history. That is the floor for us (a run-a-command panel) and proves the workspace exec path exists. It is not enough for vim, htop or ssh, so the Dev Box needs a real pty.</p>
+<h3 id="42-hub-service-term">4.2 Hub service <code>term</code><a class="headerlink" href="#42-hub-service-term" title="Link to this section">#</a></h3>
+<p>The hub is request/reply, not streaming: one <code>REQ</code> record, one <code>RES</code> record set, the reply chunked at 256 bytes with a one-byte ack per chunk, and a <code>PENDING</code> frame once a second while a slow call runs [V hostd.py docstring]. Records are TAB separated, and <code>esc()</code> drops <code>\r</code> and escapes <code>\t \n \\</code> [V recs.py], so raw terminal bytes cannot ride in a record. Two consequences:</p>
+<ol>
+<li>Output is <strong>polled</strong> with a long poll: <code>term read id max_bytes wait_ms</code> returns what the pty produced (immediately, or after at most <code>wait_ms</code>), or an empty reply. The hub already sends <code>PENDING</code> for slow calls, so a 200 ms wait costs nothing extra. The guest keeps one read outstanding while a terminal window is focused.</li>
+<li>Binary data must be encoded: hex doubles it, base64 adds 33 percent [M]. Section 4.3 avoids the problem.</li>
+</ol>
+<p>Ops:</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>term open  cwd cols rows [cmd...]   -&gt; TERM id          (first open per session needs approval token: scope &quot;term:shell&quot;)
+term write id &lt;b64 or hex bytes&gt;    -&gt; OK n
+term read  id max wait_ms           -&gt; DATA seq n ... | EOF code
+term resize id cols rows            -&gt; OK             (ioctl TIOCSWINSZ, then the child gets SIGWINCH)
+term close id                       -&gt; OK</code></pre></figure>
+<p>Host side is stdlib Python: <code>pty.fork()</code> or <code>os.openpty()</code> plus <code>subprocess.Popen(..., start_new_session=True)</code>, a reader thread feeding a bounded ring buffer (flow control: stop reading the master when the ring holds 64 KB, so the child blocks in write, which is exactly what a real terminal does), <code>fcntl.ioctl(fd, termios.TIOCSWINSZ, struct.pack("HHHH", rows, cols, 0, 0))</code> for resize, <code>TERM=xterm-256color</code>. Smoke test run here with <code>/bin/echo</code> and <code>/bin/ls</code> in a throwaway directory [V, scratchpad <code>devbox/pty_smoke.py</code>]: <code>echo</code> returned <code>b'hello devbox\r\n'</code>, <code>ls -la</code> returned four lines with <code>\r\n</code> line ends (the pty's tty layer adds the CR), and the winsize ioctl succeeded.</p>
+<p>The command that <code>open</code> runs is the <strong>target</strong>: <code>limactl shell devbox</code> (R1), <code>ssh -tt box</code> (R3), <code>docker exec -it c sh</code> (R2), or <code>/bin/echo</code> in the smoke test. One service serves all routes. The hub, not the guest, owns credentials and the allowed target list.</p>
+<h3 id="43-where-the-vt-emulation-lives">4.3 Where the VT emulation lives<a class="headerlink" href="#43-where-the-vt-emulation-lives" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th></th>
+<th>A. Emulator in HolyC (parse bytes in the guest)</th>
+<th>B. Emulator in the host (hub keeps the screen model)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Guest code</td>
+<td>a VT parser plus a cell grid plus a renderer</td>
+<td>a cell renderer only</td>
+</tr>
+<tr>
+<td>Link traffic</td>
+<td>raw pty bytes (any program, any volume)</td>
+<td>dirty rows only: text plus attribute runs</td>
+</tr>
+<tr>
+<td>Full-screen app (top, vim)</td>
+<td>every escape sequence crosses the link</td>
+<td>only the changed rows cross</td>
+</tr>
+<tr>
+<td>Aiwnios native pty</td>
+<td>natural fit</td>
+<td>not needed</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>a hostile or noisy program can flood the guest</td>
+<td>host Python parser must be right; pyte (MIT [M]) exists, but stdlib-only would be about 400 lines [M]</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recommendation: <strong>B first</strong>, A later. The hub runs a small VT100/xterm model and sends, per poll, a list of changed rows: <code>ROW y text</code> plus <code>ATTR y x0 x1 fg bg flags</code> runs, plus <code>CUR x y visible</code>, plus <code>ALT 0/1</code>. The HolyC side is then a grid renderer that never parses an escape. Scrollback also lives on the host (the guest asks <code>term scroll id offset count</code>). Keys go the other way as bytes: arrows <code>ESC [ A</code>..<code>D</code> (application mode <code>ESC O A</code> when the host model says DECCKM is set), ctrl-letter as 1..26, F1..F4 as <code>ESC O P</code>..<code>S</code>, F5.. as <code>ESC [ 15 ~</code> etc., bracketed paste as <code>ESC [ 200 ~ ... ESC [ 201 ~</code> when the program enabled mode 2004. The host model also answers queries (cursor position <code>ESC [ 6 n</code>, device attributes) so vim and htop do not hang waiting for a reply.</p>
+<p>Sequences needed for bash, vim, htop, git, ssh [M, to confirm with a recorded session]: C0 controls (BS, HT, LF, CR, BEL), CSI cursor moves (A B C D H f G d), erase (J K), insert/delete lines and chars (L M @ P), scroll region (r), SGR (0 1 3 4 7 22 27 30..37 38;5;n 38;2;r;g;b 39 40..47 48;5;n 49 90..97 100..107), save/restore cursor (7 8), modes (?1 application cursor, ?7 autowrap, ?25 cursor visible, ?1049 alternate screen, ?2004 bracketed paste, ?1000/1006 mouse optional), <code>ESC c</code> reset, titles (OSC 0, ignored), UTF-8 box drawing (needs glyphs, see 4.4). Acceptance is a recorded corpus: record <code>vim</code>, <code>top</code>, <code>htop</code>, <code>git log --graph</code>, <code>ssh</code> sessions with <code>script</code>, replay into the model, compare the final grid with a known-good emulator such as tmux's <code>capture-pane</code> [M].</p>
+<h3 id="44-monospace-face-and-rendering-cost">4.4 Monospace face and rendering cost<a class="headerlink" href="#44-monospace-face-and-rendering-cost" title="Link to this section">#</a></h3>
+<p>Our faces are Inter ASCII, proportional, at four sizes [V fonts.md]; browser plan h5a stage A+ already names a monospace bitmap face for <code>pre</code> and <code>code</code> (candidates Iosevka or JetBrains Mono, OFL, to check [V browser-architecture.md line 555]). The terminal needs the same asset plus box-drawing and block characters (U+2500..257F, 2580..259F, about 128 glyphs [M]); those can be drawn as lines and rectangles in code, not stored. Use one face at 8x16 and a 2x variant. Cell size 8x16 makes 120x40 equal to 960x640 pixels. Fonts are a host job (fonts.md rule 1), so the face is produced by <code>gen-font.py</code> style tooling and ships as a bitmap atlas; the font manager plan covers licences.</p>
+<p>Rendering estimates [M, to measure at gate G4]:</p>
+<ul>
+<li>Full grid: 4,800 cells x 128 pixels = 614,000 pixels per full repaint. At 60 Hz that is 37 million pixel writes per second. In HolyC under QEMU TCG (x86 emulated on arm, roughly 5 to 20 times slower than native [M]) a full 60 Hz repaint is not realistic.</li>
+<li>Dirty rows only: a typical keystroke or a <code>top</code> refresh changes 1 to 40 rows. At 40 rows it is the same 614k pixels once per refresh, 1 to 2 per second for top; under 10 repaints per second is fine. Draw only the cells in rows the hub reports; keep the previous frame in the window buffer.</li>
+<li>Therefore: the terminal is <strong>event driven, not 60 Hz</strong>. The target is under 50 ms from reply to pixels for a one-row change.</li>
+<li>Aiwnios (native arm, per the build in <code>aiwnios/</code>) removes the emulation penalty; full repaint at 60 Hz of 614k pixels is a normal blit there [M]. It can also call a registered native function for a pty (KsExec exists [V README]) and skip the hub for the terminal entirely; that is the better Aiwnios path, with the same approval prompt.</li>
+</ul>
+<h3 id="45-bandwidth">4.5 Bandwidth<a class="headerlink" href="#45-bandwidth" title="Link to this section">#</a></h3>
+<p>Link: about 17 KB/s measured end to end on QEMU serial (20,000-byte bench, 1,167 ms at chunk 128 and 1,236 ms at chunk 512, checksum ok [V browser-painter-status.md line 11]). The earlier 47 KB/s figure was not reproduced [V browser-architecture.md b4]. Use 16 KB/s.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Traffic</th>
+<th>Bytes</th>
+<th>Time at 16 KB/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One typed key and its echo (B)</td>
+<td>request about 60 bytes with framing and CRC [M], reply about 60</td>
+<td>about 8 ms plus host latency [M]</td>
+</tr>
+<tr>
+<td><code>ls</code> of 40 lines, 80 bytes each</td>
+<td>about 3.2 KB</td>
+<td>0.2 s</td>
+</tr>
+<tr>
+<td><code>top</code> refresh, 40 rows of text, 4,800 bytes plus attributes about 1 KB</td>
+<td>about 6 KB</td>
+<td>0.4 s every 3 s: 12 percent of the link</td>
+</tr>
+<tr>
+<td>vim scroll one page (full 120x40 redraw)</td>
+<td>about 6 KB</td>
+<td>0.4 s</td>
+</tr>
+<tr>
+<td><code>cat</code> of a 1 MB file</td>
+<td>raw 1 MB</td>
+<td>65 s (B drops what scrolls past; keep a cap)</td>
+</tr>
+<tr>
+<td><code>docker build</code> log flood</td>
+<td>MB</td>
+<td>cap the stream: send the last screen only, keep the log host-side, fetch on demand</td>
+</tr>
+</tbody>
+</table></div>
+<p>Conclusion: interactive typing and full-screen programs fit comfortably; bulk output must be throttled in the hub (coalesce to at most 10 screen updates per second, drop intermediate frames). The channel is the limit only for output floods, not for editing.</p>
+<h2 id="5-files-workspace-and-git-question-2">5. Files, workspace and git (question 2)<a class="headerlink" href="#5-files-workspace-and-git-question-2" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Workspace model.</strong> One host folder, e.g. <code>~/devbox/work/&lt;project&gt;</code>, is the single shared directory. Lima mounts it into the box as <code>/work</code> over virtiofs (VZ) or 9p (QEMU); nothing else is mounted [W lima mount doc; V default <code>mounts: []</code>]. This is the <code>ai-ide.md</code> 2.4 rule ("the bridge mounts it as the only writable root") with a VM boundary added.</li>
+<li><strong>File tree and search.</strong> Services <code>files list/stat/read/write</code> run on the host against the shared folder (fast, no VM round trip) with the <code>ai-ide.md</code> rule that paths resolving outside the root are refused; <code>grep</code> runs inside the box (<code>rg</code>) so it sees the same view the compiler sees.</li>
+<li><strong>Git.</strong> Status and diff run on the host (<code>git -C</code>) for speed; commits and anything that needs hooks or the toolchain run in the box. Push is never done by the desktop (ai-ide.md policy). Credentials stay on the host (section 9).</li>
+<li><strong>File watching.</strong> The hub watches with polling on the host side (<code>os.scandir</code> mtimes every second [M]) or <code>fswatch</code> if installed; virtiofs does not propagate inotify from host edits to the guest on all kernels [M], so tools that watch inside the box (webpack, cargo-watch) may need polling mode; flag it in templates.</li>
+<li><strong>AI IDE reuse.</strong> The agent's tools in <code>ai-ide.md</code> (read, edit, grep, shell, tests) map to <code>files</code>, <code>git</code>, <code>term</code>/<code>exec</code>. The agent shell runs <strong>in the box</strong>, never on the Mac, unless the user approves; this implements the "Docker or Lima sandbox" setting already in the plan and makes it the default instead of an option.</li>
+</ul>
+<h2 id="6-containers-panel-question-3">6. Containers panel (question 3)<a class="headerlink" href="#6-containers-panel-question-3" title="Link to this section">#</a></h2>
+<p>Source of truth is the Docker Engine API on the box's socket, not parsing <code>docker ps</code> text. Inside Lima/Colima the socket is forwarded to the host (Colima writes <code>~/.colima/&lt;profile&gt;/docker.sock</code> [M]); the hub speaks HTTP over a unix socket with <code>http.client</code> (stdlib). Read-only endpoints: <code>GET /containers/json?all=1</code>, <code>/images/json</code>, <code>/volumes</code>, <code>/containers/{id}/logs?tail=200</code>, <code>/networks</code>, <code>/containers/{id}/stats?stream=false</code>.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Approval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list containers, images, volumes, ports, logs, stats</td>
+<td>none (read-only default)</td>
+</tr>
+<tr>
+<td>start, stop, restart a container the Dev Box created</td>
+<td>one approval per session per scope <code>docker:control</code></td>
+</tr>
+<tr>
+<td>exec shell (<code>term open</code> with <code>docker exec -it</code>)</td>
+<td>scope <code>term:shell</code></td>
+</tr>
+<tr>
+<td>compose up/down in the workspace</td>
+<td>scope <code>docker:compose:&lt;project&gt;</code>; shows the compose file's images, ports and volumes in the prompt</td>
+</tr>
+<tr>
+<td>image pull, build with network</td>
+<td>each pull: prompt names the image, tag and digest if pinned; pulls are the supply-chain gate (section 9)</td>
+</tr>
+<tr>
+<td>run with <code>--privileged</code>, host network, docker.sock mount, or bind mount outside <code>/work</code></td>
+<td><strong>denied</strong>, no override in v1</td>
+</tr>
+<tr>
+<td>rm, prune, volume delete</td>
+<td>per-action prompt with the object name</td>
+</tr>
+</tbody>
+</table></div>
+<p>The hub must not hand the guest a raw socket: the Engine API is root in the box. The <code>docker</code> service exposes only the whitelisted operations above and validates the JSON body for creates (reject <code>HostConfig.Binds</code> outside <code>/work</code>, <code>Privileged</code>, <code>NetworkMode: host</code>, <code>CapAdd</code>, <code>Devices</code>).</p>
+<p>The panel is a HolyC table (Name, Image, State, Ports, CPU/Mem) refreshed by <code>docker list</code> every 3 s while visible, plus a log tail view reusing the terminal grid renderer in read-only mode.</p>
+<h2 id="7-ports-and-preview-question-4">7. Ports and preview (question 4)<a class="headerlink" href="#7-ports-and-preview-question-4" title="Link to this section">#</a></h2>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code> container :3000  --docker publish 127.0.0.1:3000--&gt;  box :3000  --lima forward--&gt;  Mac 127.0.0.1:3000
+                                                                   |
+                       Browser app (host Chromium engine route) &lt;--+  http://localhost:3000</code></pre></figure>
+<ul>
+<li>Publish with <code>-p 127.0.0.1:HOST:CONT</code> in the box and let Lima forward guest loopback ports to host loopback (Lima forwards listening ports automatically [M]); never bind 0.0.0.0, so nothing is reachable from the LAN. The hub's <code>ports</code> service lists forwards (from <code>docker ps</code> ports and <code>ss -ltn</code> in the box) and only the user-approved ones are opened in the Browser app.</li>
+<li>The Browser app already renders a host Chromium route (browser-architecture); a <code>http://localhost:PORT</code> URL is allowed only for ports in the Dev Box's forward list, and the browser's usual rule (no localhost from arbitrary pages) stays. A page loaded from a dev server must not be able to reach other local services: use a separate browser profile with the loopback allow-list.</li>
+<li><strong>HMR / WebSocket.</strong> Vite, webpack and Next dev servers use a WebSocket back to the page's origin. Chromium on the host handles it natively since the dev server is on the same loopback; the guest only sees painted bands. The costly part is repainting over a 16 KB/s link, so preview is a screenshot/band stream, not a live pixel mirror: a hot reload that changes a region sends only that region.</li>
+<li><strong>Security.</strong> Loopback only; dev servers often disable auth and expose source maps, so the origin must never carry a cookie or token of the user's real sessions (separate profile); <code>Host</code> header checks in dev servers (Vite's allowed hosts [M]) mean we use <code>localhost</code>, not an IP.</li>
+</ul>
+<h2 id="8-language-tooling-question-5">8. Language tooling (question 5)<a class="headerlink" href="#8-language-tooling-question-5" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>LSP</strong> is JSON-RPC over stdio with <code>Content-Length</code> framing [M]; <strong>DAP</strong> has the same base framing, with single-session (stdio) and multi-session (port) modes, and requests <code>initialize, launch/attach, setBreakpoints, continue/next/stepIn/stepOut, threads, stackTrace, scopes, variables</code> [W: microsoft.github.io/debug-adapter-protocol/overview]. Both servers run in the box (rust-analyzer, gopls, pyright, typescript-language-server, lldb-dap or debugpy, delve).</li>
+<li><strong>Our editor is the client.</strong> The host service <code>lsp</code> starts a server in the box through <code>term</code>-like exec (no pty, plain pipes), owns the JSON framing, and gives the guest a reduced set: <code>didOpen/didChange</code> (full text or ranges), diagnostics (<code>publishDiagnostics</code> flattened to <code>DIAG file line col sev msg</code>), hover text, completion list (top 20), go-to-definition (file and position), symbols. Semantic tokens and code actions come later. That keeps JSON parsing out of HolyC.</li>
+<li><strong>DAP</strong> is the same pattern: <code>dap start</code>, breakpoints set from the editor gutter, <code>stopped</code> events become a status line plus stack and variables lists. A terminal debugger (gdb, lldb, pdb) in the Dev Box terminal is the day-one fallback.</li>
+<li><strong>Test and build panels.</strong> <code>exec</code> (no pty) with line-parsed output (<code>path:line:col: message</code>) produces a clickable problems list; <code>cargo test</code>, <code>go test</code>, <code>pytest</code>, <code>npm test</code> all fit.</li>
+<li><strong>devcontainer.json.</strong> The spec's main properties: <code>image</code> or <code>build.dockerfile</code>, <code>features</code> (ids like <code>ghcr.io/devcontainers/features/node:1</code>), <code>forwardPorts</code>, <code>postCreateCommand</code> (string, array or object of parallel commands), <code>mounts</code>, and tool-specific <code>customizations</code> [W: containers.dev/implementors/spec]. Support a subset: <code>image</code>, <code>build</code>, <code>features</code> (from an allow-list of pinned ids), <code>forwardPorts</code>, <code>postCreateCommand</code>, <code>remoteUser</code>, <code>containerEnv</code>. <code>mounts</code> entries outside <code>/work</code> are rejected. Implementation is the reference CLI (<code>@devcontainers/cli</code> [M], Node) run in the box, not our own parser.</li>
+<li><strong>Not planned:</strong> running VS Code extensions or code-server inside our window. code-server in a host browser stays an escape hatch the user can open in the Browser app (it is a web page; not installed here [V]).</li>
+</ul>
+<h2 id="9-resources-and-security-question-6">9. Resources and security (question 6)<a class="headerlink" href="#9-resources-and-security-question-6" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU and memory</td>
+<td>box defaults 4 CPUs, 6 GiB (of 14 CPUs, 36 GiB) [proposal]; hard caps in the Lima yaml (<code>cpus</code>, <code>memory</code>); containers inside get cgroup limits by template (<code>--memory</code>, <code>--cpus</code>)</td>
+</tr>
+<tr>
+<td>Disk</td>
+<td>image at <code>~/.devbox/&lt;name&gt;/</code> as a sparse disk (<code>disk: 40GiB</code> is virtual; real use grows). <strong>Only 24 GiB is free now [V]</strong>, so default disk quota 16 GiB with a visible meter, <code>docker system prune</code> offered when 80 percent full. Reuse Docker Desktop's store is not possible across runtimes; do not run both</td>
+</tr>
+<tr>
+<td>Snapshots and reset</td>
+<td>disk images are copy-on-write files: <code>cp -c</code> (APFS clone) of the instance disk is a near-free snapshot [M]; <code>devbox reset</code> re-creates from the template, keeping <code>/work</code> (which is a host folder and untouched)</td>
+</tr>
+<tr>
+<td>Network egress</td>
+<td>default <strong>deny except an allow-list</strong> (package registries: crates.io, pypi.org, registry.npmjs.org, proxy.golang.org, ghcr.io, docker.io, github.com). Implement with a host-side forward proxy that the box is configured to use (<code>HTTP_PROXY</code>), logging every host; unknown host raises an approval prompt in the desktop. Not airtight against raw sockets; add a firewall rule in the box (nftables: only the proxy address) [M]</td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td>never inside the box. SSH keys and tokens stay in the host agent/Keychain; git over ssh uses agent forwarding limited to a per-session approval, or a host-side <code>git push</code> the user triggers. Env vars with secrets are not passed to the guest</td>
+</tr>
+<tr>
+<td>Agent actions</td>
+<td>run in the box; touching the Mac host (write outside <code>/work</code>, run on host, push) is a prompt, per the permission table in <code>ai-ide.md</code></td>
+</tr>
+<tr>
+<td>Supply chain</td>
+<td>pulls are prompts naming image and digest; prefer pinned digests and official images; scan with <code>docker scout</code>/trivy on demand [M]; templates reference only pinned images; no <code>curl | sh</code> without a prompt showing the URL</td>
+</tr>
+<tr>
+<td>Link to the sandbox work</td>
+<td><code>electron-apps.md</code>: <code>sandbox-exec</code> denies $HOME reads and network for plain binaries and for Electron in node mode, but full Chromium fails ("Chromium cannot nest its sandbox") [V electron-apps.md lines 68 to 69]. The VM replaces <code>sandbox-exec</code> for anything Linux; <code>sandbox-exec</code> stays for the <strong>hub's own helpers</strong> that run on the Mac (git, the file indexer, a Docker API client). Chromium for the preview stays outside the VM with its own sandbox</td>
+</tr>
+<tr>
+<td>The approval token</td>
+<td><code>hostd.py</code> says it is "a consent record for the UI, not a defence against a hostile guest, which could ask for the token and send it back" [V]. A hostile guest could spawn a shell on the box. The VM boundary is what bounds that damage, so the Dev Box's real security is the box, the mount list and the egress policy, not the token</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-developer-experience-question-7">10. Developer experience (question 7)<a class="headerlink" href="#10-developer-experience-question-7" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>One command.</strong> <code>tools/devbox up [template]</code> (new shell script in <code>apps-host/</code>, or <code>hostd.py --call devbox up</code>): creates the Lima instance from a template yaml, mounts the workspace, waits for ssh, installs nothing beyond the template, prints the status. <code>devbox down</code>, <code>reset</code>, <code>shell</code>, <code>ps</code>, <code>snapshot name</code>.</li>
+<li><strong>Templates</strong> (each a Lima yaml plus a provision script, all versions pinned): <code>rust</code> (rustup stable, rust-analyzer, lldb-dap), <code>node</code> (node LTS, pnpm, typescript-language-server), <code>python</code> (uv, pyright, debugpy), <code>go</code> (go, gopls, delve), <code>holyc</code> (a box that holds the HolyC cross-compile and the Aiwnios arm build tools plus our own regression scripts, so the desktop's own source builds from inside the Dev Box), and <code>docker</code> (the Lima <code>docker.yaml</code> template [V present]).</li>
+<li><strong>Persistence.</strong> Instance disk persists across <code>devbox down</code>; <code>/work</code> is on the host and survives <code>reset</code>.</li>
+<li><strong>Performance numbers I can justify.</strong> I did not run a benchmark here (no VM may be started without approval). From sources: HVF and the VZ driver give near-native CPU in the guest [M]; QEMU with TCG is software emulation and is slow (the TempleOS processes above run on TCG [V]). Colima's own config says virtiofs "is the fastest of the options" for <code>vz</code> and 9p is recommended for <code>qemu</code> [V colima.yaml comments]. Lima 1.0 made 9p the QEMU default, virtiofs the VZ default [W]. The ratio virtiofs versus 9p versus sshfs is therefore <strong>to be measured</strong>: gate G7 runs <code>git status</code> and <code>npm install</code> on a fixed repo under each mount type and records seconds. Do not quote a multiplier until then.</li>
+<li><strong>Cost on this Mac.</strong> RAM: default 6 GiB reserved while running, none when stopped (16 percent of 36 GiB). Disk: base Debian image about 0.3 to 0.5 GB plus tools 1 to 3 GB [M]; with 24 GiB free, a 16 GiB cap is the sane limit. Docker Desktop's 24 GB already held would be freed only if the user removes it, which is the user's choice.</li>
+</ul>
+<h2 id="11-what-holyc-land-would-still-lack-question-8">11. What HolyC land would still lack (question 8)<a class="headerlink" href="#11-what-holyc-land-would-still-lack-question-8" title="Link to this section">#</a></h2>
+<ul>
+<li>GUI debugging and visual tools: a Linux GUI app inside the box cannot be shown (no X/Wayland path to the 16 KB/s link) beyond screenshots; browser devtools for a web app run in the host Chromium, not in the desktop (browser plan DevTools mapping).</li>
+<li>Mobile emulators: the Android emulator and iOS Simulator are macOS-host programs with their own windows; not in a HolyC window. Command-line control (<code>xcrun simctl</code>) is possible through <code>exec</code> with approval; display is not.</li>
+<li>GPU work (CUDA, Metal, WebGPU): the VM sees at most a virtio GPU in software [V os-foundation-plan.md line 71 says the QEMU build has no GL]; run GPU jobs on the host.</li>
+<li>Rich editor features (refactors, extension marketplace, notebooks) need work in HolyC or are out of scope.</li>
+<li>Large-output tools (full <code>docker build</code> logs, huge test runs) are bound by 16 KB/s unless summarised on the host.</li>
+<li>Latency: every keystroke is a hub round trip; fine for typing, felt in vim at 20 ms [M].</li>
+</ul>
+<h2 id="12-linux-as-the-base-os-instead-question-9">12. Linux as the base OS instead (question 9)<a class="headerlink" href="#12-linux-as-the-base-os-instead-question-9" title="Link to this section">#</a></h2>
+<p><code>os-foundation-plan.md</code> weighs a Linux base for the whole desktop (Wayland compositor, Electron and Tauri apps). If Linux were the base, containers, ptys, LSP and the GUI toolchain are all native, the serial bottleneck disappears and 16 KB/s stops mattering. The cost is the HolyC desktop's identity: TempleOS would become one app. The Dev Box gets about 80 percent of that value for the apps that matter to developers (terminal, files, git, containers, LSP) and keeps the HolyC desktop as the product. It does not give a GPU, a real browser engine in the guest, or a high-bandwidth display.</p>
+<p><strong>Recommendation.</strong> Take R1 as the product: a Lima arm64 VM (VZ driver, virtiofs, workspace-only mount, Docker or Podman inside), the Docker panel reading the Engine API from it. Use R2 only as a fallback backend when the user already runs Docker Desktop or OrbStack (read-only by default, explicit mounts), R3 as the same <code>term</code> service with an ssh target, and R4 unchanged for HolyC projects. Do not make Linux the base OS for this goal: decide that on the other merits in <code>os-foundation-plan.md</code>. If the Aiwnios build becomes the main path, add the native pty route (KsExec) for the terminal and keep the hub for everything else.</p>
+<h2 id="13-one-day-prototype">13. One-day prototype<a class="headerlink" href="#13-one-day-prototype" title="Link to this section">#</a></h2>
+<p>Goal: a shell of a Dev Box in a HolyC window, with a containers stub. No installs. Starting a VM or container needs the user's approval; steps that need it are marked <strong>(approval)</strong>.</p>
+<p>Pieces:</p>
+<ol>
+<li><code>apps-host/hub/svc_term.py</code> (new, ~200 lines, stdlib): registers <code>term</code>; ops <code>open/write/read/resize/close</code>; the first <code>open</code> raises <code>NeedApproval("term:shell", "Open a shell in the Dev Box: &lt;cmd&gt;")</code> using the existing token flow; allowed targets come from <code>config.json</code> (<code>devbox_shell</code>: a list like <code>["limactl","shell","devbox"]</code>); default for tests <code>["/bin/sh"]</code> restricted to a temp dir in tests. A host-side VT model (<code>vt.py</code>, ~300 lines) turning bytes into dirty rows (option B).</li>
+<li><code>apps-host/hub/svc_docker.py</code> (new stub): <code>list</code> reading <code>GET /containers/json?all=1</code> over the unix socket from <code>config.json</code> <code>docker_sock</code>; read-only; returns <code>CTR id name image state ports</code>.</li>
+<li><code>desk3/12-term.HC</code> (new): a window with an 8x16 grid, long-poll read loop, key mapping, resize on window size change; and a containers table window from <code>docker list</code>.</li>
+</ol>
+<p>Gates (each with a command):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Check</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G0</td>
+<td><code>python3 -I apps-host/hub/tests/test_term.py</code> (host only; the pty runs <code>/bin/echo</code> and <code>/bin/ls</code> in a temp dir, like the smoke test)</td>
+<td>echo and ls output returned; resize ioctl accepted; <code>close</code> kills the child</td>
+</tr>
+<tr>
+<td>G1</td>
+<td><code>hostd.py --call term open /tmp/x 120 40 /bin/echo hi</code>, repeat with the token</td>
+<td>first call APPROVE, second TERM; no shell without token</td>
+</tr>
+<tr>
+<td>G2</td>
+<td><strong>(approval)</strong> <code>limactl create --name devbox template://docker</code> then <code>limactl start devbox</code> (the user may instead choose the existing Colima <code>default</code> profile, <code>colima start</code>, after we set an explicit <code>mounts:</code> list)</td>
+<td><code>limactl shell devbox uname -m</code> prints <code>aarch64</code></td>
+</tr>
+<tr>
+<td>G3</td>
+<td>guest types <code>echo hi</code> in the window</td>
+<td>"hi" shows within 100 ms of Enter on the bench channel</td>
+</tr>
+<tr>
+<td>G4</td>
+<td>guest runs <code>ls /work</code></td>
+<td>listing correct, scripted compare with <code>ls</code> on the host</td>
+</tr>
+<tr>
+<td>G5</td>
+<td><code>top -b -n 1</code> (batch mode) then <code>top</code> and <code>vim -u NONE</code></td>
+<td><code>vim</code>: type text, <code>:wq</code>, the file has the text; <code>top</code> rows align under an 8x16 grid; screenshots in <code>shots/</code>; a recorded-session replay test compares the host model to <code>tmux capture-pane</code> for 5 recordings</td>
+</tr>
+<tr>
+<td>G6</td>
+<td>resize the window from 80x24 to 120x40</td>
+<td><code>stty size</code> in the shell prints <code>40 120</code> and vim relayouts</td>
+</tr>
+<tr>
+<td>G7</td>
+<td><code>docker list</code> against the box's socket</td>
+<td>containers panel shows the same rows as <code>docker ps -a</code> in the box; no write op reachable</td>
+</tr>
+<tr>
+<td>G8</td>
+<td>the mount list check: <code>limactl shell devbox ls /Users/paulbloch</code></td>
+<td>fails: only <code>/work</code> is mounted</td>
+</tr>
+</tbody>
+</table></div>
+<p>Timing: G0 and G1 two hours, VT model three, HolyC window three, gates the rest. Risk: the VT model and the key mapping, not the pty.</p>
+<h2 id="14-one-week-mvp">14. One-week MVP<a class="headerlink" href="#14-one-week-mvp" title="Link to this section">#</a></h2>
+<p>Terminal with scrollback and 256 colours, files service and tree, git status/diff, <code>devbox up/down/reset</code> with the rust and node templates, containers panel with start/stop/logs/exec and approvals, ports list and one forwarded preview in the Browser app, LSP for one language with diagnostics shown in the editor, egress proxy with the allow-list and prompts, resource meter (RAM, disk), the mount-type benchmark (G7 of section 10) recorded.</p>
+<h2 id="15-three-month-target">15. Three-month target<a class="headerlink" href="#15-three-month-target" title="Link to this section">#</a></h2>
+<p>All five templates; DAP for two languages; devcontainer.json subset with features allow-list; compose panel with the spec-validating create filter; snapshots in the UI; Apple <code>container</code> backend behind the same <code>docker</code> service if it is mature by then; Aiwnios native pty path; agent actions running only in the box with the audit log; a Dev Box for the HolyC project itself (build the desktop from inside the box, run its test suite there).</p>
+<h2 id="16-risks">16. Risks<a class="headerlink" href="#16-risks" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Likelihood</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16 KB/s link makes output floods unusable</td>
+<td>high</td>
+<td>medium</td>
+<td>host-side emulator, 10 Hz coalescing, host-side logs, native pty on Aiwnios</td>
+</tr>
+<tr>
+<td>Rendering 120x40 too slow under TCG</td>
+<td>medium</td>
+<td>medium</td>
+<td>dirty rows only, event-driven, smaller default 100x30</td>
+</tr>
+<tr>
+<td>Disk fills (24 GiB free)</td>
+<td>high</td>
+<td>high</td>
+<td>16 GiB cap, meter, prune prompt, do not keep two runtimes</td>
+</tr>
+<tr>
+<td>Container escapes or malicious image</td>
+<td>low</td>
+<td>high</td>
+<td>VM boundary, workspace-only mount, create-spec filter, pinned digests, prompts on pulls</td>
+</tr>
+<tr>
+<td>Colima/Docker Desktop mounts $HOME writable</td>
+<td>certain on default</td>
+<td>high</td>
+<td>never use defaults; own Lima instance or explicit <code>mounts:</code></td>
+</tr>
+<tr>
+<td>Hostile guest asks for approval token</td>
+<td>design</td>
+<td>medium</td>
+<td>the VM is the boundary; token is consent UI only</td>
+</tr>
+<tr>
+<td>Lima or Apple tool changes (v0.x <code>container</code>)</td>
+<td>medium</td>
+<td>low</td>
+<td>thin <code>docker</code> service interface, backend per route</td>
+</tr>
+<tr>
+<td>Licence cost (Docker Desktop Pro, OrbStack Pro for commercial use)</td>
+<td>depends on use</td>
+<td>low</td>
+<td>R1 uses Apache/MIT tools only</td>
+</tr>
+<tr>
+<td>virtiofs inotify gaps</td>
+<td>medium</td>
+<td>low</td>
+<td>polling watchers in templates</td>
+</tr>
+<tr>
+<td>Keymap/escape-sequence gaps</td>
+<td>high</td>
+<td>low</td>
+<td>recorded-session corpus test</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="17-verified-versus-memory">17. Verified versus memory<a class="headerlink" href="#17-verified-versus-memory" title="Link to this section">#</a></h2>
+<p><strong>Verified here:</strong> macOS 27.0 arm64, 14 CPUs, 36 GiB, 24 GiB free; Lima 2.1.4 with no instances and <code>mounts: []</code> in <code>default.yaml</code>; Colima 0.10.3 profile stopped (vz, virtiofs, rosetta, $HOME writable comment); Docker client 29.1.5 and Docker.app with no daemon running; QEMU 11.0.2 listing hvf and tcg; absence of container, OrbStack, Podman, nerdctl, devcontainer, code-server; Docker Desktop data 24 GB; two TempleOS TCG QEMU processes; hub protocol (request/reply, 256-byte chunks with acks, PENDING, record escaping, approval tokens); Kosmos OS Terminal is one-shot exec; measured 17 KB/s serial bench in the repo; pty smoke test (echo, ls, TIOCSWINSZ).</p>
+<p><strong>From the web this session:</strong> Docker plan prices; OrbStack free personal and $8 Pro; Apple <code>container</code> requirements and Apache-2.0; Lima mount types and defaults; Colima MIT and vz options; devcontainer properties; DAP overview; VS Code Remote and Zed remote architecture.</p>
+<p><strong>Memory or estimate (verify before relying on it):</strong> Lima and Podman licences, Podman machine internals, Colima socket path, Lima auto port forwarding, APFS clone snapshots, pyte, escape-sequence list, TCG slowdown factor, render timings, request sizes and key latency, VM image and tool sizes, nftables egress, <code>@devcontainers/cli</code>, virtiofs inotify behaviour, LSP framing, font candidates, and every other figure tagged [M] above.</p>
+<p><strong>Not attempted:</strong> starting any VM or container, pulling images, any benchmark of mounts or HVF versus TCG. WebSearch was not used; only the fetched pages above.</p>
+<h2 id="18-approvals-needed-from-the-user">18. Approvals needed from the user<a class="headerlink" href="#18-approvals-needed-from-the-user" title="Link to this section">#</a></h2>
+<ol>
+<li>Permission to create and start a Lima instance (<code>limactl create</code>, <code>limactl start</code>): downloads an arm64 image of a few hundred MB and writes up to 16 GiB under <code>~/.devbox</code>.</li>
+<li>Or permission to start the existing Colima <code>default</code> profile after we write an explicit <code>mounts:</code> list (the default would expose $HOME writable).</li>
+<li>Disk: confirm a 16 GiB budget with 24 GiB free, or free space (Docker Desktop holds 24 GB).</li>
+<li>New files <code>svc_term.py</code>, <code>svc_docker.py</code>, <code>vt.py</code>, <code>desk3/12-term.HC</code> in the shared tree (other agents are editing it), and a <code>devbox_shell</code> entry in <code>config.json</code>.</li>
+<li>A monospace font licence choice (OFL candidates) for the terminal face.</li>
+<li>Go-ahead before any image pull or compose run in gates.</li>
+</ol>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../aiwnios/readme/index.html" rel="prev"><span>Previous</span>Aiwnios desktop</a><a class="next" href="../../docs/web-apps/index.html" rel="next"><span>Next</span>Web-technology apps on the HolyC desktop: design study</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-the-idea-in-one-paragraph">1. The idea in one paragraph</a></li><li><a href="#2-what-is-installed-read-only-checks-2026-10-27">2. What is installed (read-only checks, 2026-10-27)</a></li><li><a href="#3-the-four-routes">3. The four routes</a></li><li><a href="#4-terminal-question-1">4. Terminal (question 1)</a><ul><li><a href="#41-spec-from-kosmos-os">4.1 Spec from Kosmos OS</a></li><li><a href="#42-hub-service-term">4.2 Hub service term</a></li><li><a href="#43-where-the-vt-emulation-lives">4.3 Where the VT emulation lives</a></li><li><a href="#44-monospace-face-and-rendering-cost">4.4 Monospace face and rendering cost</a></li><li><a href="#45-bandwidth">4.5 Bandwidth</a></li></ul></li><li><a href="#5-files-workspace-and-git-question-2">5. Files, workspace and git (question 2)</a></li><li><a href="#6-containers-panel-question-3">6. Containers panel (question 3)</a></li><li><a href="#7-ports-and-preview-question-4">7. Ports and preview (question 4)</a></li><li><a href="#8-language-tooling-question-5">8. Language tooling (question 5)</a></li><li><a href="#9-resources-and-security-question-6">9. Resources and security (question 6)</a></li><li><a href="#10-developer-experience-question-7">10. Developer experience (question 7)</a></li><li><a href="#11-what-holyc-land-would-still-lack-question-8">11. What HolyC land would still lack (question 8)</a></li><li><a href="#12-linux-as-the-base-os-instead-question-9">12. Linux as the base OS instead (question 9)</a></li><li><a href="#13-one-day-prototype">13. One-day prototype</a></li><li><a href="#14-one-week-mvp">14. One-week MVP</a></li><li><a href="#15-three-month-target">15. Three-month target</a></li><li><a href="#16-risks">16. Risks</a></li><li><a href="#17-verified-versus-memory">17. Verified versus memory</a></li><li><a href="#18-approvals-needed-from-the-user">18. Approvals needed from the user</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

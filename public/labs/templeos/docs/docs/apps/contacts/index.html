@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacts app for the Kosmos HolyC desktop: plan | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html" aria-current="page">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Contacts app for the Kosmos HolyC desktop: plan</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Contacts app for the Kosmos HolyC desktop: plan</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/contacts.md</span></div>
+        <div class="doc-body">
+
+<p>Status: plan only, no code. Branch task/templeos-shell. Written 2026-10-27. Read with <code>docs/holyc-native-apps-plan.md</code> (rule: nothing sent, deleted or purchased without a UI prompt), <code>docs/browser-architecture.md</code> sections a, b and e, and <code>aiwnios/README.md</code>. Companion: <code>docs/apps/email.md</code>, which uses this app for completion and sender cards.</p>
+<p>Tags: <strong>[verified]</strong> = checked in this pass (GitHub API, LICENSE file, Apple or vendor page, IETF listing); <strong>[memory]</strong> = not re-checked.</p>
+<h2 id="1-purpose-and-users">1. Purpose and users<a class="headerlink" href="#1-purpose-and-users" title="Link to this section">#</a></h2>
+<p>A native address book: people with cards (names, emails, phones, addresses, organisation, birthday, notes), groups, search, and vCard import and export. The guest draws everything; the Mac host holds the stores, syncs remote books (CardDAV first) and does macOS Contacts access. Users: people whose contacts live on a Mac, iCloud, Fastmail or Nextcloud who want a keyboard-friendly list on the desktop, and mail users who need completion. Out of scope: LDAP write, social profile sync, bulk photo management.</p>
+<h2 id="2-feature-inventory">2. Feature inventory<a class="headerlink" href="#2-feature-inventory" title="Link to this section">#</a></h2>
+<p>References: Apple Contacts (support.apple.com/guide/contacts) [memory]; Google Contacts (contacts.google.com, People API at developers.google.com/people) [memory]; Thunderbird address book (support.mozilla.org) [memory]; Fastmail CardDAV setup (fastmail.help/hc/en-us/articles/360058753054) [verified as a search result, contents from the snippet].</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Ref</th>
+<th>Pri</th>
+<th>Effort</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List of all contacts, sorted by family or given name, letter index</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>virtual list</td>
+</tr>
+<tr>
+<td>Instant search (name, email, phone, organisation)</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>host FTS5 index</td>
+</tr>
+<tr>
+<td>Card view (read-only)</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>name, emails, phones, addresses, org, title, note, birthday</td>
+</tr>
+<tr>
+<td>Create, edit, delete (delete prompts)</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>writes only after a prompt</td>
+</tr>
+<tr>
+<td>Labelled emails and phones (home, work, mobile)</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>vCard TYPE parameters</td>
+</tr>
+<tr>
+<td>vCard import with preview and duplicate report</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>prompt before any write</td>
+</tr>
+<tr>
+<td>vCard export (all, group, selection)</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>host save sheet and prompt</td>
+</tr>
+<tr>
+<td>Address completion for other apps</td>
+<td>Apple Mail, Thunderbird</td>
+<td>P0</td>
+<td>S</td>
+<td>section 9</td>
+</tr>
+<tr>
+<td>Local address book, no sync</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>default for a new user</td>
+</tr>
+<tr>
+<td>Groups (static membership)</td>
+<td>Apple, Google, Thunderbird</td>
+<td>P1</td>
+<td>M</td>
+<td>vCard 4.0 KIND:group, RFC 6350 [memory]</td>
+</tr>
+<tr>
+<td>Duplicate detection and merge (prompted)</td>
+<td>all</td>
+<td>P1</td>
+<td>M</td>
+<td>match on email, or name plus organisation</td>
+</tr>
+<tr>
+<td>CardDAV two-way sync with conflict prompt</td>
+<td>Apple, Thunderbird</td>
+<td>P1</td>
+<td>L</td>
+<td>RFC 6352 [memory]; section 4</td>
+</tr>
+<tr>
+<td>Photos scaled to 64 px</td>
+<td>all</td>
+<td>P2</td>
+<td>M</td>
+<td>host scales; URL photos never fetched</td>
+</tr>
+<tr>
+<td>Birthdays list</td>
+<td>Apple, Google</td>
+<td>P2</td>
+<td>S</td>
+<td>list view, no calendar</td>
+</tr>
+<tr>
+<td>"Recently contacted" from mail</td>
+<td>Gmail</td>
+<td>P2</td>
+<td>S</td>
+<td>local only</td>
+</tr>
+<tr>
+<td>Google Contacts sync</td>
+<td>Google</td>
+<td>P2</td>
+<td>L</td>
+<td>People API, OAuth 2 on host</td>
+</tr>
+<tr>
+<td>macOS Contacts sync</td>
+<td>Apple</td>
+<td>P1</td>
+<td>M</td>
+<td>signed helper and TCC; section 4</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-architecture">3. Architecture<a class="headerlink" href="#3-architecture" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>TempleOS guest (HolyC, desk3)                      Mac host (Python services bridge)
+ Contacts app (apps/contacts/*.HC)                 contacts-service (scripts/contacts-bridge.py)
+  groups | list with letter index | card           +-- local store (sqlite3, raw vCard kept)
+  search field, import and export dialogs          +-- vCard 3.0/4.0 parser and writer (own code)
+  bounded disk cache (300 rows, 50 cards)          +-- CardDAV client (http.client), later
+        |  framed messages (browser-architecture b1)+-- macOS bridge (CNContactStore), later
+        +-----------------------------------------+-- FTS5 search index, sync state, conflict queue</code></pre></figure>
+<p><strong>Guest:</strong> layout, letter index, list paging, card and editor painting, keyboard, prompts, small cache. No sockets.</p>
+<p><strong>Host:</strong> all stores, vCard parse and write, search, sync, conflicts, duplicates, the macOS permission request, and keychain access for CardDAV credentials.</p>
+<p><strong>Protocol (same frame; request id and account id on each message).</strong></p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Dir</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CON_ACCOUNTS</code></td>
+<td>H to G</td>
+<td>account id, name, kind (local, carddav, macos), state</td>
+</tr>
+<tr>
+<td><code>CON_GROUPS</code></td>
+<td>H to G</td>
+<td>account id; groups with counts</td>
+</tr>
+<tr>
+<td><code>CON_LIST</code></td>
+<td>G to H</td>
+<td>group or all, sort key, offset, count; reply: id, display name, first email, first phone, letter</td>
+</tr>
+<tr>
+<td><code>CON_GET</code></td>
+<td>G to H</td>
+<td>contact id; reply: typed fields (name parts, emails, phones, addresses, org, title, note, birthday, photo ref)</td>
+</tr>
+<tr>
+<td><code>CON_SEARCH</code></td>
+<td>G to H</td>
+<td>text, limit, field filter; reply: id and display row (mail uses this)</td>
+</tr>
+<tr>
+<td><code>CON_SAVE</code></td>
+<td>G to H</td>
+<td>contact id or new, fields; a change to a remote card needs a prompt first</td>
+</tr>
+<tr>
+<td><code>CON_DELETE</code></td>
+<td>G to H</td>
+<td>ids; runs only with the prompt's token</td>
+</tr>
+<tr>
+<td><code>CON_IMPORT</code></td>
+<td>G to H</td>
+<td>file chosen in a host sheet; reply: preview</td>
+</tr>
+<tr>
+<td><code>CON_IMPORT_ANS</code></td>
+<td>G to H</td>
+<td>preview id; import all new, skip duplicates, keep duplicates, or cancel</td>
+</tr>
+<tr>
+<td><code>CON_EXPORT</code></td>
+<td>G to H</td>
+<td>scope, format (3.0 or 4.0); host writes after prompt</td>
+</tr>
+<tr>
+<td><code>CON_PROMPT</code> / <code>CON_PROMPT_ANS</code></td>
+<td>both</td>
+<td>prompt id, kind, text; answer carries the token</td>
+</tr>
+<tr>
+<td><code>CON_ERR</code></td>
+<td>H to G</td>
+<td>request id, class, scrubbed text</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tokens work as in the mail plan: a random nonce per prompt, and a write runs only when the answer repeats it. Timeout is No.</p>
+<p><strong>Caching and offline.</strong> The local book needs no network. Remote books keep a local copy with an ETag per card and a sync-token (WebDAV sync-collection, RFC 6578 [memory]). Offline edits queue as "pending" and push after a conflict check. The guest caches 300 list rows and 50 cards under <code>T:/Contacts/cache</code>.</p>
+<p><strong>Host data model (sqlite3).</strong> <code>contact</code> (uid, account, etag, updated, raw vCard, normalised name), <code>field</code> (contact, kind, label, value, normalised value), <code>grp</code> and <code>grp_member</code>, <code>sync_state</code>, <code>prompt_log</code>. The raw vCard is kept so unknown properties survive a round trip.</p>
+<h2 id="4-data-formats-and-protocols">4. Data formats and protocols<a class="headerlink" href="#4-data-formats-and-protocols" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Format or protocol</th>
+<th>Use</th>
+<th>First?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vCard 3.0, RFC 2426 [memory]</td>
+<td>import and export; common export from Apple, Google, Thunderbird</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>vCard 4.0, RFC 6350 [memory]</td>
+<td>import and export; KIND:group, PREF, TEL URIs</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>CardDAV, RFC 6352 [memory] over HTTPS</td>
+<td>iCloud, Fastmail, Nextcloud sync</td>
+<td>M5</td>
+</tr>
+<tr>
+<td>WebDAV sync-collection, RFC 6578 [memory]</td>
+<td>incremental sync</td>
+<td>M5</td>
+</tr>
+<tr>
+<td>macOS Contacts framework (CNContactStore) [verified: developer.apple.com/documentation/contacts]</td>
+<td>local Mac contacts with user permission</td>
+<td>M7</td>
+</tr>
+<tr>
+<td>Google People API with OAuth 2 [memory]</td>
+<td>Google Contacts</td>
+<td>later</td>
+</tr>
+<tr>
+<td>JMAP contacts (IETF draft-ietf-jmap-contacts) [verified: draft-10 listed on the IETF site]</td>
+<td>Fastmail-native</td>
+<td>not planned</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Start with vCard and CardDAV.</strong> vCard is the portable format and the import path for every source. CardDAV covers iCloud, Fastmail and Nextcloud with one protocol; Fastmail's CardDAV endpoint is documented [verified via Fastmail help].</p>
+<p><strong>macOS Contacts and TCC.</strong> Apple's guidance [verified: developer.apple.com accessing-the-contact-store and CNContactStore pages]: check <code>CNContactStore.authorizationStatus(for: .contacts)</code>, then call <code>requestAccess(for:)</code>. The system remembers the answer, so repeat calls do not prompt. Since June 2024 the system can also grant limited access [verified: developer.apple.com/documentation/updates/contactsui]. Two constraints: the requesting process needs an <code>NSContactsUsageDescription</code> string, so the macOS bridge must be a small signed helper app, not a bare Python script; and reading or writing <code>note</code> needs the <code>com.apple.developer.contacts.notes</code> entitlement, which Apple approves for distribution [verified only from a third-party skill guide; confirm with Apple]. Plan: ship the helper at M7 without notes access until the entitlement is granted.</p>
+<p><strong>vCard parsing rules.</strong> Unfold continuation lines; decode quoted-printable and base64 PHOTO; keep unknown and X- properties raw; accept 3.0 and 4.0; write 4.0 by default. The parser is in-house (about 400 lines of Python), tested on RFC examples, because the available libraries are GPL or unclear (section 5).</p>
+<h2 id="5-open-source-reuse">5. Open-source reuse<a class="headerlink" href="#5-open-source-reuse" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Lang</th>
+<th>Licence</th>
+<th>Latest</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vdirsyncer (pimutils/vdirsyncer)</td>
+<td>Python</td>
+<td>GitHub reports NOASSERTION; the LICENSE file header is a copyright line (Markus Unterwaditzer, 2014 to 2020), wording not confirmed as MIT [verified]</td>
+<td>0.16.8, 2020-06-09; repo pushed 2026-09-04 [verified]</td>
+<td>Best reference for CardDAV sync and conflicts. Not embedded (dependency weight, licence wording). Test-time cross-check only.</td>
+</tr>
+<tr>
+<td>khard (lucc/khard)</td>
+<td>Python</td>
+<td>GPL-3.0 [verified]</td>
+<td>no release tag; pushed 2026-10-17 [verified]</td>
+<td>Ideas only; no code.</td>
+</tr>
+<tr>
+<td>Radicale (Kozea/Radicale)</td>
+<td>Python</td>
+<td>GPL-3.0 [verified]</td>
+<td>v3.9.0, 2026-10-25 [verified]</td>
+<td>Local CardDAV test server, run from its package, never linked or shipped. Confirm with the user before any bundling.</td>
+</tr>
+<tr>
+<td>io-addressbook (pimalaya)</td>
+<td>Rust</td>
+<td>Apache-2.0 [verified]</td>
+<td>active 2026-06-15; 4 stars [verified]</td>
+<td>Sans-I/O contact coroutines. Watch; candidate host core.</td>
+</tr>
+<tr>
+<td>io-imap, io-smtp (pimalaya)</td>
+<td>Rust</td>
+<td>Apache-2.0 [verified]</td>
+<td>active 2026-10 [verified]</td>
+<td>Shared with the mail plan.</td>
+</tr>
+<tr>
+<td>Thunderbird address book</td>
+<td>C++/JS</td>
+<td>MPL-2.0 [memory]</td>
+<td>active [verified]</td>
+<td>UX and CardDAV reference only.</td>
+</tr>
+<tr>
+<td>Python stdlib (http.client, base64, quopri, sqlite3, email)</td>
+<td>Python</td>
+<td>PSF [memory]</td>
+<td>stdlib</td>
+<td>Adopt for the host service.</td>
+</tr>
+<tr>
+<td>Apple Contacts framework</td>
+<td>Swift, macOS</td>
+<td>system framework</td>
+<td>n/a</td>
+<td>Adopt through a signed helper at M7.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recommendation: vCard and CardDAV in Python stdlib with RFC test vectors; vdirsyncer and khard only as cross-checks in tests; Radicale only as a fixture. No GPL code in our tree.</p>
+<h2 id="6-security-and-privacy">6. Security and privacy<a class="headerlink" href="#6-security-and-privacy" title="Link to this section">#</a></h2>
+<p><strong>Prompts (timeout is No).</strong> Delete (names and count); a save that changes a remote card (changed fields); merge; import (file, count, duplicate policy); export (destination, count); sync conflict (both versions); add CardDAV account (host sheet for URL and password); first macOS Contacts read (the system prompt also appears).</p>
+<p><strong>Exposure.</strong> Contact data goes only to a guest that asks for it and to a remote account the user connected, for a write the user confirmed. Completion returns name and address only. Search returns the minimum fields; the full card needs <code>CON_GET</code>.</p>
+<p><strong>Photos and notes.</strong> Photos are scaled to 64 px on the host. A <code>PHOTO</code> URI is shown as a placeholder and never fetched, so an address book cannot trigger tracking requests. Notes are plain text, never HTML.</p>
+<p><strong>Tokens.</strong> CardDAV passwords and OAuth tokens in the macOS keychain, service <code>kosmos-contacts</code>. No secret fields in the guest protocol. Logs redact Authorization and URL userinfo.</p>
+<p><strong>Storage.</strong> Host store under <code>~/Library/Application Support/KosmosContacts/</code>, mode 0600. Guest cache under <code>T:/Contacts/</code> is unencrypted (a local disk image); stated to the user.</p>
+<p><strong>Import caps.</strong> 5 MB per file, 5,000 cards per import, 1 MB per card. URLs stored as text and never opened. Photo bytes are re-encoded on the host.</p>
+<p><strong>Duplicates are never silent.</strong> A name match with a different email is flagged, not merged.</p>
+<h2 id="7-ui-spec-desk-style-ascii-mockups">7. UI spec (desk style, ASCII mockups)<a class="headerlink" href="#7-ui-spec-desk-style-ascii-mockups" title="Link to this section">#</a></h2>
+<p>Tokens as in the mail plan. <code>docs/apps/00-kosmos-os-primitives.md</code> does not exist in this repo [verified], so no other tokens are taken.</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-- Contacts ------------------------------------------------------------------+
+| [New] [Edit] [Delete] [Import...] [Export...]               [ Search      ] |
++----------------+-------------------------------+----------------------------+
+| GROUPS         | A                             | Alice Kim                  |
+| &gt; All     412  | Alice Kim       alice@...     | Sales lead, Acme           |
+|   Family    9  | Alan Ray        alan@...      | -------------------------- |
+|   Work    120  | B                             | email  alice@example.com   |
+|   Clubs    14  | Ben Ortiz       ben@...       |        (work)              |
+| ACCOUNTS       | ...                           | email  alice@home.example  |
+|   Local        | M                             | mobile +44 7700 900123     |
+|   Fastmail     | Maria Shaw      maria@...     | home   12 Bell St, Leeds   |
+|   iCloud  off  | ...                           | birthday  3 Mar            |
++----------------+-------------------------------+----------------------------+
+| 412 contacts   Fastmail synced 10:15   2 pending                  Esc      |
++-----------------------------------------------------------------------------+</code></pre></figure>
+<p>Card editor, single-line fields and a multi-line note:</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-- Edit: Alice Kim --------------------------------+
+| First:  [Alice                      ]            |
+| Last:   [Kim                        ]            |
+| Org:    [Acme                       ]            |
+| Email:  [alice@example.com ] [work v] [x]        |
+|         [alice@home.example] [home v] [x]        |
+|         [+ add email]                            |
+| Phone:  [+44 7700 900123  ] [mobile v] [x]       |
+| Notes:  [Met at the June fair.               ]   |
+|         [                                    ]   |
+|           [ Cancel ]     [ Save ]               |
++--------------------------------------------------+</code></pre></figure>
+<p>Import preview (no write before the choice):</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-- Import vCard -----------------------------------+
+| contacts-export.vcf: 2,140 cards, 1.2 MB          |
+| 2,103 new, 37 possible duplicates                 |
+|  (o) import new, skip duplicates                  |
+|  ( ) import all, keep duplicates separate         |
+|           [ Cancel ]     [ Import ]               |
++---------------------------------------------------+</code></pre></figure>
+<p>Export: scope (all, group, selection), format (vCard 4.0 default, 3.0 option), host save sheet, then a prompt with the count. Groups are managed from a row menu (Add to group, Remove); drag is P2.</p>
+<p>Keys: j and k move, Enter opens, e edits, n new, Del deletes (prompted), / searches, Tab moves between fields, Esc backs out.</p>
+<h2 id="8-what-the-guest-needs-from-the-framework">8. What the guest needs from the framework<a class="headerlink" href="#8-what-the-guest-needs-from-the-framework" title="Link to this section">#</a></h2>
+<p>Present in <code>desk3/02-ui.HC</code> [verified]: Button, Toggle, Radio, Slider, Check, Icon, Frame, Menubar, KMenu, Dock, hit regions, damage tracking.</p>
+<p>Missing (shared with mail):
+- <strong>Single-line text field</strong>: search and every card field. Blocking for C2.
+- <strong>Multi-line text field</strong>: notes and the editor. Blocking for C3.
+- <strong>List view</strong> with letter headers, virtualisation, keyboard focus, multi-select. Blocking for C2.
+- <strong>Split view</strong> with a draggable splitter. C2.
+- <strong>Form layout helper</strong> (label, field, add and remove rows). C3.
+- <strong>Dialogs</strong> with modal focus, for prompts and import preview. C3.
+- <strong>Row menus</strong> and context menus. C2.
+- <strong>Unicode.</strong> Names are the most visible non-ASCII text (accents, Cyrillic, CJK), and the guest font is ASCII only. Plan: show a transliterated name, keep the original UTF-8 on the host, and show a marker when the font cannot draw it. The real fix is the glyph service.
+- <strong>Drag and drop.</strong> P2.</p>
+<h2 id="9-shared-data-with-mail">9. Shared data with Mail<a class="headerlink" href="#9-shared-data-with-mail" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Completion.</strong> <code>CON_SEARCH</code> with limit 8 and field filter name and email, from the mail compose field.</li>
+<li><strong>Sender card.</strong> <code>CON_GET</code> on the exact normalised address. Adding a sender is a prompt that opens the editor pre-filled.</li>
+<li><strong>Contracts.</strong> The Kosmos OS repo says OS-owned PIM data is reached through typed intents and never direct store access (<code>docs/app-platform-plan.md</code>, principle 4). It lists <code>os.contacts@1</code> first and <code>os.mail@1</code> after it in Phase 4. Contacts exposes <code>os.contacts@1</code> (search, get, save with prompt, groups); Mail calls the contract. Until an intent bus exists in the HolyC desktop, the same message shapes run over the channel, so adopting the contract later does not change the guest.</li>
+<li><strong>Only shared key:</strong> the lower-cased, trimmed email address.</li>
+</ul>
+<h2 id="10-optional-features-host">10. Optional features (host)<a class="headerlink" href="#10-optional-features-host" title="Link to this section">#</a></h2>
+<p>Duplicate suggestions and sender-to-contact matching are host heuristics, off by default. No external people-search or lookup service. No model-generated contact summaries.</p>
+<h2 id="11-milestones-and-gates">11. Milestones and gates<a class="headerlink" href="#11-milestones-and-gates" title="Link to this section">#</a></h2>
+<p>Test setup, no real account: <strong>Radicale</strong> as a local CardDAV server on 127.0.0.1, seeded with 2,000 synthetic cards (accents, CJK names, duplicates, groups, a PHOTO URI, one malformed card); <strong>RFC example vectors</strong> plus synthetic 3.0 and 4.0 files modelled on the Apple, Google and Thunderbird exporters (no personal data).</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scope</th>
+<th>Gate (pass or fail)</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C0</td>
+<td>Host skeleton, framing, fixtures, CI job</td>
+<td>Pass: 100 round trips of <code>CON_ACCOUNTS</code> and <code>CON_LIST</code> with injected CRC errors, zero corruption; fixtures start with one command</td>
+<td>S</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>Local store, vCard 3.0 and 4.0 parser and writer</td>
+<td>Pass: RFC vectors round trip with unknown properties kept; 2,000-card file imports in under 3 s on host</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Guest list, card view, letter index, search</td>
+<td>Pass: 2,000 contacts searched in under 300 ms on host; first 50 rows painted within the frame budget; scripted keyboard drive passes</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Editor, save, delete, import and export with preview</td>
+<td>Pass: every write runs only with its token (forged token refused); preview counts match the five fixture files; export re-imports to the same count</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Completion for mail and sender card</td>
+<td>Pass: top-8 completions match a local query for 100 prefixes; a test asserts only name and address leave the host for completion</td>
+<td>S</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>CardDAV sync (Radicale), ETags, sync-token, conflict prompt</td>
+<td>Pass: 200 remote changes and 50 local edits reconcile with zero lost writes under fault injection; a forced conflict prompts and keeps both versions</td>
+<td>L</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Groups, duplicates, merge with prompt</td>
+<td>Pass: 37 planted duplicates detected, none merged without a prompt; groups survive a sync round trip</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>macOS Contacts (signed helper, TCC), user-run</td>
+<td>Pass: one system prompt on first run; limited access handled; one approved read and one approved write to a test card; no notes access without the entitlement</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Caps and redaction</td>
+<td>Pass: 5 MB and 1 MB caps enforced by test files; log grep finds no password, token or userinfo</td>
+<td>S</td>
+</tr>
+</tbody>
+</table></div>
+<p>Plan of record: C0 to C6 and C8 on fixtures; C7 needs the user's approval and a signed helper. Each gate runs on x86 (QEMU) and Apple Silicon (Aiwnios).</p>
+<h2 id="12-risks">12. Risks<a class="headerlink" href="#12-risks" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Font and Unicode.</strong> Names are the first casualty of ASCII fonts. Mitigation: transliteration now, glyph service later.</li>
+<li><strong>Sync correctness.</strong> Two-way CardDAV can lose edits. Mitigation: ETags, conflict prompt, no silent overwrite; C5 uses fault injection.</li>
+<li><strong>macOS entitlements.</strong> Notes need Apple approval. Mitigation: ship without notes until granted.</li>
+<li><strong>vCard variety.</strong> Real exports break parsers. Mitigation: raw kept; corpus from three exporters.</li>
+<li><strong>Licences.</strong> vdirsyncer's licence is unclear on GitHub; khard and Radicale are GPL-3.0. Mitigation: no code reuse; test-only use.</li>
+<li><strong>HolyC scale.</strong> 2,000 cards on an emulated CPU. Mitigation: index on host; guest asks for pages.</li>
+</ul>
+<h2 id="13-effort">13. Effort<a class="headerlink" href="#13-effort" title="Link to this section">#</a></h2>
+<p>C0 to C4 about 4 to 5 engineer-weeks after the framework text field, list view and split view land (shared with mail); C5 about 3 weeks; C6 one week; C7 1 to 2 weeks including signing; C8 three days. C5 is the largest risk.</p>
+<h2 id="14-verified-versus-memory">14. Verified versus memory<a class="headerlink" href="#14-verified-versus-memory" title="Link to this section">#</a></h2>
+<p>Verified in this pass: Apple CNContactStore authorisation flow and one-time prompt, and the June 2024 limited-access update (developer.apple.com, via search); the notes entitlement requirement (third-party guide only); licences and latest tags for vdirsyncer, khard, Radicale and io-addressbook (GitHub API; vdirsyncer's LICENSE header read); Fastmail CardDAV at carddav.fastmail.com (Fastmail help snippet); the JMAP contacts draft exists (IETF listing).</p>
+<p>From memory, not re-checked: RFC 2426, 6350, 6352 and 6578 numbers and content; Apple and Google Contacts feature details; Thunderbird's MPL-2.0 licence; Google People API scopes; the iCloud CardDAV endpoint.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/applications-folder/index.html" rel="prev"><span>Previous</span>Applications folder: plan</a><a class="next" href="../../../docs/apps/email/index.html" rel="next"><span>Next</span>Email client for the Kosmos HolyC desktop: plan</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-purpose-and-users">1. Purpose and users</a></li><li><a href="#2-feature-inventory">2. Feature inventory</a></li><li><a href="#3-architecture">3. Architecture</a></li><li><a href="#4-data-formats-and-protocols">4. Data formats and protocols</a></li><li><a href="#5-open-source-reuse">5. Open-source reuse</a></li><li><a href="#6-security-and-privacy">6. Security and privacy</a></li><li><a href="#7-ui-spec-desk-style-ascii-mockups">7. UI spec (desk style, ASCII mockups)</a></li><li><a href="#8-what-the-guest-needs-from-the-framework">8. What the guest needs from the framework</a></li><li><a href="#9-shared-data-with-mail">9. Shared data with Mail</a></li><li><a href="#10-optional-features-host">10. Optional features (host)</a></li><li><a href="#11-milestones-and-gates">11. Milestones and gates</a></li><li><a href="#12-risks">12. Risks</a></li><li><a href="#13-effort">13. Effort</a></li><li><a href="#14-verified-versus-memory">14. Verified versus memory</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

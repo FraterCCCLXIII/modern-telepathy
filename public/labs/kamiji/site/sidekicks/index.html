@@ -1,0 +1,245 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidekicks control plane</title>
+<meta name="description" content="Sidekicks is a prototype control plane that deploys and manages agent runtimes like apps: a Next.js dashboard, Postgres, a BullMQ queue and a Docker deployer. No automated tests yet.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/sidekicks-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="sidekicks.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-sk" href="#top" aria-label="Sidekicks, top of page">
+      <img src="img/sidekicks-logo.svg" alt="" width="28" height="28">
+      <span>Sidekicks</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#mock">Dashboard mock</a>
+      <a href="#model">Data model</a>
+      <a href="#status">Status</a>
+      <a href="#start">Get started</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Agent runtimes,<br>deployed like apps.</h1>
+      <p class="lead">A control plane for starting, watching and stopping agent runtimes such as nanobot and nanoclaw. A working prototype, not a finished product.</p>
+      <p><span class="badge proto">Prototype</span> <span class="badge unv">Zero automated tests</span></p>
+      <p class="cta-row">
+        <a class="btn primary" href="#how">See how it works</a>
+        <a class="btn" href="#status">Honest status</a>
+      </p>
+    </div>
+
+    <div class="mock">
+      <div class="mock-win" role="img" aria-label="Illustrative mock of the Sidekicks dashboard: three made-up runtimes with status badges, and a deployment progress list. Not a screenshot.">
+        <div aria-hidden="true">
+          <div class="mock-top"><i></i><i></i><i></i><span>Sidekicks</span><b>Agents</b><b class="off">Runs</b></div>
+          <div class="mock-body">
+            <div class="stat-row">
+              <div class="stat"><b>3</b><small>Runtimes</small></div>
+              <div class="stat"><b>1</b><small>Deploying</small></div>
+              <div class="stat"><b>1</b><small>Needs care</small></div>
+            </div>
+            <div>
+              <p class="mock-h">Runtimes</p>
+              <ul class="rt">
+                <li><b>research-bot</b><small>nanobot</small><span class="badge ok">Healthy</span></li>
+                <li><b>inbox-helper</b><small>nanoclaw</small><span class="badge unv">Provisioning</span></li>
+                <li><b>notes-agent</b><small>nanobot</small><span class="badge warn">Degraded</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="mock-note">Illustrative mock. Names and numbers are made up; it shows the kinds of things the real pages list.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap">
+    <h2>What it is, and how it works</h2>
+    <p class="sub">Sidekicks treats an agent runtime the way a platform treats an app. You pick a template, give it a name, a model and some settings, and press deploy. The web app records that request and puts a job on a queue. A separate deployer process picks it up, starts a Docker container from the template&rsquo;s image and waits until it answers a health check. The dashboard then shows the status and logs.</p>
+
+    <figure class="arch" role="group" aria-labelledby="arch-cap">
+      <svg viewBox="0 0 880 250" role="img" aria-label="Diagram: the Next.js web app and API writes to Postgres and puts jobs on Redis with BullMQ; the deployer and run worker read the queues; the deployer starts runtime containers through the Docker socket; the worker stores artifacts in S3-compatible storage.">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1d1d1b"/></marker></defs>
+        <g fill="none" stroke="#1d1d1b" stroke-width="1.6">
+          <rect x="10" y="85" width="170" height="80" rx="18" fill="#fafaf3"/>
+          <rect x="250" y="20" width="150" height="62" rx="16" fill="#fafaf3"/>
+          <rect x="250" y="168" width="150" height="62" rx="16" fill="#fafaf3"/>
+          <rect x="470" y="20" width="150" height="62" rx="16" fill="#fafaf3"/>
+          <rect x="470" y="168" width="150" height="62" rx="16" fill="#fafaf3"/>
+          <rect x="690" y="20" width="180" height="62" rx="16" fill="#fafaf3"/>
+          <rect x="690" y="100" width="180" height="50" rx="16" stroke-dasharray="5 4" fill="#fafaf3"/>
+          <rect x="690" y="168" width="180" height="62" rx="16" fill="#fafaf3"/>
+          <path d="M180 112L250 58" marker-end="url(#ah)"/>
+          <path d="M180 138L250 198" marker-end="url(#ah)"/>
+          <path d="M400 51L470 51" marker-end="url(#ah)"/>
+          <path d="M620 51L690 51" marker-end="url(#ah)"/>
+          <path d="M400 199L470 199" marker-end="url(#ah)"/>
+          <path d="M620 199L690 199" marker-end="url(#ah)"/>
+        </g>
+        <g font-size="13" text-anchor="middle">
+          <text x="95" y="120" font-weight="700">Web app + API</text><text class="mut" x="95" y="140" font-size="11">Next.js, Auth.js</text>
+          <text x="325" y="48" font-weight="700">Redis</text><text class="mut" x="325" y="66" font-size="11">BullMQ deploy queue</text>
+          <text x="325" y="196" font-weight="700">Postgres</text><text class="mut" x="325" y="214" font-size="11">state, logs, settings</text>
+          <text x="545" y="48" font-weight="700">Deployer</text><text class="mut" x="545" y="66" font-size="11">node, dockerode</text>
+          <text x="545" y="196" font-weight="700">Run worker</text><text class="mut" x="545" y="214" font-size="11">BullMQ consumer</text>
+          <text x="780" y="48" font-weight="700">Runtime container</text><text class="mut" x="780" y="66" font-size="11">nanobot, nanoclaw, ...</text>
+          <text x="780" y="130" class="mut" font-size="11">Docker socket</text>
+          <text x="780" y="196" font-weight="700">Artifact storage</text><text class="mut" x="780" y="214" font-size="11">S3-compatible (MinIO)</text>
+        </g>
+      </svg>
+      <figcaption id="arch-cap">Simplified from the repository README and docker-compose.yml. The arrows show control flow, not every call.</figcaption>
+    </figure>
+
+    <ol class="arch-steps">
+      <li><strong>Request.</strong> The dashboard sends a deploy request: template, agent name, model, tools, memory type and environment variables.</li>
+      <li><strong>Queue.</strong> The API stores it in Postgres and enqueues a job on the <code>sidekicks-deployments</code> queue.</li>
+      <li><strong>Provision.</strong> The deployer creates a container on the same Docker network, writes deployment log lines to Postgres as it goes, and probes <code>/health</code> until the runtime answers.</li>
+      <li><strong>Run.</strong> Later jobs go to the run worker, which calls the runtime and uploads any artifacts to S3-compatible storage.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>What is in the repository</h2>
+    <ul class="grid-cards">
+      <li><h3>Runtime templates</h3><p>The seed data defines templates for OpenClaw upstream, nanobot, NanoClaw and NemoClaw, each with an image, default model, supported tools and required environment keys.</p></li>
+      <li><h3>Deploy and watch</h3><p>A deploy dialog, an agents list with detail pages, and deployment statuses: provisioning, healthy, degraded, stopped, failed.</p></li>
+      <li><h3>Runs and artifacts</h3><p>Jobs become runs with steps, logs and output, and files they produce are stored as artifacts you can open from a storage page.</p></li>
+      <li><h3>LLM profiles</h3><p>Provider keys are kept as workspace profiles. The README says they are encrypted at rest in Postgres with a key you supply.</p></li>
+      <li><h3>Accounts</h3><p>Auth.js sessions backed by Postgres, with email and password sign-up and optional GitHub sign-in. Data is scoped to a workspace.</p></li>
+      <li><h3>Two node layout</h3><p>The repo includes notes for a Hetzner-style split: a control node for web, Postgres and Redis, and a worker node with Docker for the runtimes.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="mock" class="section">
+  <div class="wrap">
+    <h2>A look at the dashboard</h2>
+    <p class="sub"><span class="badge plan">Illustrative mock</span> Built from the repository&rsquo;s real statuses, deployment fields and page list. Every name, number and log line below is invented. It is not a screenshot and shows no real data.</p>
+
+    <div class="mock-two" style="margin-top:2rem">
+      <div class="mock-win" role="img" aria-label="Illustrative mock of an agents list with made-up runtimes, templates, regions and status badges.">
+        <div aria-hidden="true">
+          <div class="mock-top"><i></i><i></i><i></i><span>Agents</span><b>List</b></div>
+          <div class="mock-body">
+            <ul class="rt">
+              <li><b>research-bot</b><small>nanobot &middot; eu-1</small><span class="badge ok">Healthy</span></li>
+              <li><b>inbox-helper</b><small>nanoclaw &middot; eu-1</small><span class="badge unv">Provisioning</span></li>
+              <li><b>notes-agent</b><small>nanobot &middot; eu-2</small><span class="badge warn">Degraded</span></li>
+              <li><b>old-demo</b><small>nanobot &middot; eu-1</small><span class="badge off">Stopped</span></li>
+              <li><b>try-claw</b><small>nanoclaw &middot; eu-2</small><span class="badge proto">Failed</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mock-win" role="img" aria-label="Illustrative mock of a deployment detail: progress steps and a few made-up log lines.">
+        <div aria-hidden="true">
+          <div class="mock-top"><i></i><i></i><i></i><span>inbox-helper</span><b>Deployment</b></div>
+          <div class="mock-body">
+            <ul class="steps">
+              <li class="done"><span class="d"></span>Request accepted</li>
+              <li class="done"><span class="d"></span>Job queued</li>
+              <li class="act"><span class="d"></span>Container starting</li>
+              <li class="todo"><span class="d"></span>Health check passes</li>
+            </ul>
+            <pre class="logbox">info  image pulled
+info  container created
+info  waiting for health (3/300)</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mock-note">Statuses (provisioning, healthy, degraded, stopped, failed) are the real ones from the code; everything else is made up.</p>
+  </div>
+</section>
+
+<section id="model" class="section">
+  <div class="wrap split">
+    <h2>The data model</h2>
+    <div>
+      <p class="sub">The domain types in <code>lib/domain/types.ts</code> are a good map of the product. Its main nouns:</p>
+      <div class="types">
+        <div><p class="mono-h">Agent instance</p><p class="sub">name, template, model, tools, memory, region, and a status of idle, running, paused or error.</p></div>
+        <div><p class="mono-h">Deployment</p><p class="sub">image, container id, endpoint, runtime adapter, status and last health time.</p></div>
+        <div><p class="mono-h">Job and run</p><p class="sub">queued, running, completed or failed, with steps, logs, output and artifacts.</p></div>
+      </div>
+      <p class="sub" style="margin-top:1.4em">Runtime adapters named in the code are <code>sidekicks-native</code>, <code>openclaw-upstream</code> and <code>nemoclaw</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>Status, honestly</h2>
+    <p class="sub">Last commit is dated 22 March 2026. There are no automated tests in the repository, and we have not started the stack for this page.</p>
+    <ul class="status">
+      <li><span class="badge ok">In the code</span><p>Dashboard pages, API route handlers, a Postgres store, queues, the run worker, the Docker deployer, seed templates and a Compose file for the whole stack.</p></li>
+      <li><span class="badge proto">Prototype</span><p>Version 0.1.0, private package. Treat it as a design you can run, not a hardened service. The README says production templates should use real upstream images and configured provider keys.</p></li>
+      <li><span class="badge proto">Thin runtimes</span><p>The bundled nanoclaw runtime is a small stand-in that replies that Claude Code setup is needed before automated runs work. The nanobot runtime is a small wrapper that writes its config from environment keys.</p></li>
+      <li><span class="badge unv">Zero tests</span><p>No unit, integration or end-to-end tests exist. The only automated check mentioned is a build flag for CI that skips environment validation.</p></li>
+      <li><span class="badge unv">Unverified</span><p>We did not run Compose, deploy a runtime or test sign-in. Everything on this page comes from reading the source and docs.</p></li>
+      <li><span class="badge plan">Needs you</span><p>You must supply a database, Redis, an auth secret, an encryption key and storage settings before it does anything real. The deployer needs access to a Docker socket, which is powerful; read the code before exposing it.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="start" class="section">
+  <div class="wrap">
+    <h2>Get started</h2>
+    <div class="cols">
+      <article class="panel">
+        <h3>Run it locally</h3>
+        <p>Docker Compose builds and starts the web app, worker, deployer, Postgres, Redis and MinIO. Copy the example env file first and set the secrets it lists.</p>
+<pre><code>docker compose up --build</code></pre>
+        <p class="src">The app is then on port 3000. Not run by us for this page.</p>
+      </article>
+      <article class="panel">
+        <h3>Signing in</h3>
+        <p>Create an account from the Sign up page. The Compose file can also seed a development account for local use; its details are in the README and can be overridden in your own <code>.env</code>. Change them for anything beyond your own machine.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap split">
+    <h2>Where to look</h2>
+    <ul class="list">
+      <li><h3>Repository</h3><p>A local project folder named <code>sidekicks</code>. No public address is stated in its README.</p></li>
+      <li><h3>README</h3><p>Stack, Compose steps, environment variables and the two-node layout.</p></li>
+      <li><h3>Ops notes</h3><p><code>docs/ops-hetzner.md</code> covers TLS, backups and monitoring ideas.</p></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Sidekicks. A prototype control plane for agent runtimes.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

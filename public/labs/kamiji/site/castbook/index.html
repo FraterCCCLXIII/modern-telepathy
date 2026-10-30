@@ -1,0 +1,173 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CastBook: casting, kept simple</title>
+<meta name="description" content="CastBook is a self-hosted casting manager: an actor database, projects with roles, a public sign-up link for actors and public project pages you can share with your team.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/castbook-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="castbook.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-castbook" href="#top" aria-label="CastBook, top of page">
+      <img src="img/castbook-logo.svg" alt="" width="58" height="25">
+      <span>CastBook</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#actors">Actors</a>
+      <a href="#projects">Projects</a>
+      <a href="#signup">Sign-up link</a>
+      <a href="#share">Sharing</a>
+      <a href="#private">Private</a>
+      <a href="#languages">Languages</a>
+      <a href="#start">Get started</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Casting,<br>kept simple.</h1>
+      <p class="lead">Keep every actor, every project and every role in one calm place that you host yourself.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#start">Get started</a>
+        <a class="btn" href="#actors">See how it works</a>
+      </p>
+    </div>
+
+    <div class="mock" role="img" aria-label="Illustration of CastBook: a grid of actor cards on the left and a project board with roles on the right. All names are made up.">
+      <div class="mock-win" aria-hidden="true">
+        <div class="mock-top"><i></i><i></i><i></i><span>CastBook</span><b>Actors</b><b class="off">Projects</b></div>
+        <div class="mock-body">
+          <div class="mock-actors">
+            <p class="mock-h">Actors</p>
+            <ul>
+              <li><span class="av a1">MR</span><b>Mara Redfern</b><small>34 &middot; 1.68 m</small><em>EN FR</em></li>
+              <li><span class="av a2">TO</span><b>Tomas Oakley</b><small>41 &middot; 1.82 m</small><em>EN DE</em></li>
+              <li><span class="av a3">IV</span><b>Ines Valmont</b><small>27 &middot; 1.71 m</small><em>FR</em></li>
+              <li><span class="av a4">KB</span><b>Kofi Brandt</b><small>52 &middot; 1.77 m</small><em>EN DE FR</em></li>
+              <li><span class="av a5">LS</span><b>Lena Sorel</b><small>19 &middot; 1.63 m</small><em>DE</em></li>
+              <li><span class="av a6">PN</span><b>Piet Nowak</b><small>63 &middot; 1.74 m</small><em>EN</em></li>
+            </ul>
+          </div>
+          <div class="mock-board">
+            <p class="mock-h">The Lantern Keeper</p>
+            <div class="role"><b>The Keeper</b><span class="chip"><span class="av a4">KB</span>Kofi Brandt</span></div>
+            <div class="role"><b>The Daughter</b><span class="chip"><span class="av a3">IV</span>Ines Valmont</span></div>
+            <div class="role"><b>Harbour Master</b><span class="chip"><span class="av a2">TO</span>Tomas Oakley</span></div>
+            <div class="role open"><b>The Stranger</b><span class="chip empty">Open</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="actors" class="section">
+  <div class="wrap split">
+    <h2>An actor database that stays tidy</h2>
+    <div>
+      <p class="sub">Every actor is a profile you can search, edit and come back to. Keep the details you need when a role comes up, in one record.</p>
+      <ul class="tags" aria-label="Fields on an actor profile">
+        <li>Image</li><li>Gender</li><li>Race / ethnicity</li><li>Date of birth and age</li><li>Height</li><li>Weight</li><li>Languages spoken</li><li>Phone</li><li>Email</li><li>Availability notes</li>
+      </ul>
+      <p class="sub">Age is calculated from the date of birth, so it is never out of date.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <div class="wrap split">
+    <h2>Projects, roles and who plays them</h2>
+    <ul class="list">
+      <li><h3>Projects</h3><p>Create a project for each production, with a title and a description.</p></li>
+      <li><h3>Roles</h3><p>Add the roles a project needs, each with its own description.</p></li>
+      <li><h3>Assignments</h3><p>Put actors from your database on roles, and take them off again when plans change.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="signup" class="section">
+  <div class="wrap split">
+    <h2>Let actors apply themselves</h2>
+    <div>
+      <p class="sub">CastBook has a public sign-up page titled &ldquo;Create your actor profile&rdquo;. Copy the application link from the user menu and send it to anyone you want to hear from. They fill in their own details and add a photo, and the profile is ready for your team to review.</p>
+      <div class="note-card">
+        <p class="mono-h">The form asks for</p>
+        <p>Name, gender, race or ethnicity, date of birth, height, weight, email, phone, languages spoken and availability notes. Admins can switch on optional extras such as pronouns, union status, travel availability, a reel link and a CV.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="share" class="section">
+  <div class="wrap split">
+    <h2>Share a project with your team</h2>
+    <div>
+      <p class="sub">Every project has a Share button that copies a public link. The page it opens shows the project, its roles and the actors assigned to them, with photo, age and height, so directors and producers can look without needing an account.</p>
+      <p class="sub">Individual actors have a public page too.</p>
+    </div>
+  </div>
+</section>
+
+<section id="private" class="section">
+  <div class="wrap">
+    <h2>Self-hosted and private</h2>
+    <ul class="grid-cards">
+      <li><h3>Your server</h3><p>CastBook runs where you put it. A single Docker container serves both the app and its API, and the repository includes a Dockerfile.</p></li>
+      <li><h3>One SQLite file</h3><p>Actors, projects, roles, assignments and user accounts live in a local SQLite database at <code>data/castbook.db</code>. Back it up like any file.</p></li>
+      <li><h3>Admins and users</h3><p>Admins have full access, including user management in Settings. Users get the app without those controls.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="languages" class="section">
+  <div class="wrap split">
+    <h2>In English, French and German</h2>
+    <div>
+      <p class="sub">The interface comes in three languages, with a language switcher, including on the public sign-up page, so actors can apply in the language they are most comfortable with.</p>
+      <p class="lang-row" aria-hidden="true"><span>English</span><span>Fran&ccedil;ais</span><span>Deutsch</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="start" class="section">
+  <div class="wrap">
+    <h2>Get started</h2>
+    <div class="cols">
+      <article class="panel">
+        <h3>Run it locally</h3>
+        <p>You need Node.js and npm. The last command starts the app and its auth API together.</p>
+<pre><code>npm i
+cp .env.example .env
+npm run dev</code></pre>
+        <p class="src">Set <code>JWT_SECRET</code> in <code>.env</code> to a long random value before you use it for real. The auth API listens on port 3001.</p>
+      </article>
+      <article class="panel">
+        <h3>Your first account</h3>
+        <p>There is no seeded login. The first time you open CastBook, the sign-in screen asks you to create the first admin account. From Settings, that admin can add more users.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>CastBook. Self-hosted casting management.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

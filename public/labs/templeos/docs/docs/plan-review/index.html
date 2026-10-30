@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review of the HolyC-native apps plan | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" open data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html" aria-current="page">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Research and reviews</span></li><li aria-current="page">Review of the HolyC-native apps plan</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Review of the HolyC-native apps plan</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/plan-review.md</span></div>
+        <div class="doc-body">
+
+<p>Date 2026-10-27. Read-only review of <code>docs/holyc-native-apps-plan.md</code> (the plan), <code>docs/core-apps-plan.md</code>, <code>docs/os-foundation-plan.md</code>, the two research reports, <code>desk3/01-core.HC</code> to <code>desk3/05-run.HC</code>, <code>spike/KsSpike.HC</code> and <code>scripts/</code>. Nothing was built or run. Line numbers are of the files as of today.</p>
+<p>Evidence labels: <strong>[V]</strong> verified by reading a local file or a primary source fetched today (URL given), <strong>[D]</strong> reported by documentation or a project README fetched today, <strong>[U]</strong> unverified (reasoning, memory or arithmetic; treat as a hypothesis). Every speed estimate is <strong>[U]</strong> unless it cites a measurement.</p>
+<h2 id="0-verdict">0. Verdict<a class="headerlink" href="#0-verdict" title="Link to this section">#</a></h2>
+<p>The plan is a good list of <em>apps</em> and an honest list of <em>gaps</em>, but it is sequenced as an application project when the real risks are in the platform underneath it. Four things are wrong or missing at the root:</p>
+<ol>
+<li><strong>It solves persistence and file exchange with a bridge that does not need to exist.</strong> TempleOS installs itself to a hard drive (<code>scripts/boot-vm.sh:17</code> answers "n" to "Install onto hard drive?" [V]). Attach a disk and say yes: notes, settings, bookmarks and the whole dev loop survive reboots, with no channel, no daemon and no protocol. The channel is still wanted for fetch and host services, but it drops from "gate 1, everything depends on it" to "one service among several".</li>
+<li><strong>It builds the app framework and widget kit before fixing the renderer's cost structure</strong>, and the renderer is where every later gate ("render legibly at 2x", editors, a browser page) will hit the wall. The measured 23 to 25 ms per dragged window at 2880x1800 is not the emulator's floor; it is the sum of four fixable things inside <code>01-core.HC</code> (a bytewise <code>MemCpy</code>, a per-pixel shadow, per-pixel function calls, x87 maths in pixel loops). The cheapest single win in the whole project is replacing TempleOS's <code>MemCpy</code>, which is <code>REP_MOVSB</code> [V], with an 8 or 16 byte per iteration copy: under TCG every <code>rep movsb</code> iteration is one byte.</li>
+<li><strong>It writes "native" apps against a shell that is a demo, not a framework</strong>: fixed <code>NA=9</code> windows, one window per app, <code>if (a==...)</code> chains in three places, a 500-entry hit list that silently drops entries, no clip stack, no key-up or modifier handling, Esc reboots the desktop, and every dirty rectangle re-executes every app's draw code. The plan knows some of this ("App framework", "Widget kit v2") but underestimates it as M and does not list the event model, clipping, Unicode, threading or memory items at all.</li>
+<li><strong>It does not say what "a complete operating system that runs and looks like a modern OS" means for TempleOS V5.03, which cannot display this desktop on real hardware at all</strong> (the mode set uses QEMU's Bochs VBE ports <code>0x1CE/0x1CF</code>, <code>desk3/04-main.HC:9-13</code>, <code>spike/KsSpike.HC:9-13</code> [V]; V5.03 itself is 640x480 16-colour VGA). If the Temple family stays the base, the base should be ZealOS (variable-resolution 32-bit VBE, AHCI, a networking stack in development, UEFI via Limine, public domain [D]), not V5.03.</li>
+</ol>
+<p>Recommendation on the base: keep the HolyC desktop as the <strong>showpiece and personality</strong>, do the renderer pass and the five native apps that TempleOS does well (editor, code editor with Run, terminal, notes, reader-mode browser over a host fetch service), and treat the "complete modern OS" goal as the Linux-plus-own-Wayland-shell track already written up in <code>os-foundation-plan.md</code>, with the HolyC desktop running inside it as one window. The conditions that would change that are in section 3.12.</p>
+<h2 id="1-critique-of-the-plan">1. Critique of the plan<a class="headerlink" href="#1-critique-of-the-plan" title="Link to this section">#</a></h2>
+<h3 id="11-wrong-or-shaky-assumptions">1.1 Wrong or shaky assumptions<a class="headerlink" href="#11-wrong-or-shaky-assumptions" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Plan statement</th>
+<th>What the evidence says</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>"Persistence: host file service over the channel" (plan line 23); README: "the live CD has no writable disk"</td>
+<td>The ISO offers an install to disk at boot and the script declines it (<code>scripts/boot-vm.sh:17</code> [V]). TempleOS has an ATA driver and the RedSea file system; an installed system keeps <code>C:</code>/<code>D:</code> across reboots.</td>
+<td>Persistence is a QEMU flag (<code>-drive file=temple.qcow2,if=ide</code>) and a "y", not a channel gate. A host-side RedSea reader (the format is flat: a free bitmap and 64-byte directory entries, <code>Kernel/BlkDev/FileSysRedSea.HC</code> [U, from memory of the source]) also gives file exchange both ways without a protocol.</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>"the lockstep serial loader moves about 1.4 to 2.7 KB/s" is treated as a property of serial</td>
+<td>The loader acks every 32 bytes over a TCP round trip and sleeps 3 to 4 s per file (<code>scripts/serial-send.py:13-18</code>, <code>scripts/send-to-vm.sh:27</code> [V]). It is a protocol artifact.</td>
+<td>The 50 KB/s gate is probably easy; it is still the wrong channel for anything but control text (section 3.2).</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>Channel option (b) "a second IDE disk used as a mailbox ... verify raw block access"</td>
+<td>Right instinct, under-weighted. TempleOS already drives ATA (<code>Kernel/BlkDev/</code> listing [V]: it exists; raw <code>BlkRead</code>/<code>BlkWrite</code> on a mounted drive [U]). Both QEMU and a host writer go through the same macOS page cache, so host writes are visible to the next guest read without special cache modes [U].</td>
+<td>This is the best zero-driver bulk channel on this QEMU: a few MB/s with PIO, no shared-memory unknowns. Put it ahead of serial streaming for bulk data.</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>"TempleOS has none of it [networking]"</td>
+<td>True for V5.03. But Shrine has a native TCP/IP stack with a PCnet-PCI II driver, <code>Wget</code> and a package manager (experimental) [D]; ZealOS lists "network card drivers and a networking stack" as in development [D]. All public domain.</td>
+<td>The "native network stack" track (plan step 8) should start from that code, not from zero. TLS remains nowhere.</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>"the mouse, keyboard and clipboard paths are still hacks ... no key-up, no non-ASCII"</td>
+<td>The code masks the scan code to 8 bits (<code>04-main.HC:267</code>), discarding the flag bits TempleOS puts above bit 8 (<code>SCF_SHIFT</code>, <code>SCF_CTRL</code>, <code>SCF_ALT</code>; key-up is <code>SCF_KEY_UP</code>, and <code>kbd.down_bitmap</code> holds held keys) [U, from memory of <code>Kernel/KeyDev.HC</code> and <code>KernelA.HH</code>; verify in the VM].</td>
+<td>Modifiers and key-up are probably available today without a kernel change; add them to the framework spike. Non-ASCII stays a real gap (8-bit kernel, <code>Txt</code> handles 32 to 126 only, <code>01-core.HC:399,420</code> [V]).</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>"Paint: already largely exists" (browser table)</td>
+<td>Paint exists for ASCII text in four sizes of one face at two scales, with no clipping other than the dirty rectangle, no scrolling and no images.</td>
+<td>Paint for a browser is M to L, not "exists": clip stack, scroll offset, image blit with scaling, underline, selection highlight, many fonts.</td>
+</tr>
+<tr>
+<td>A7</td>
+<td>Browser B1 "3 to 5 weeks ... Wikipedia, MDN, a blog, HN, a GitHub README lay out without overlap"</td>
+<td>MDN and GitHub use CSS grid and flexbox throughout, web fonts, SVG icons and Unicode; Wikipedia needs Unicode and tables. The plan's CSS list has "simple flexbox" only and the font plan is ASCII.</td>
+<td>B1 is 2 to 3 times the estimate for one person, and the 20-page gate will drive weeks of CSS. Keep the gate but choose pages by what the engine will support (HN, plain blogs, docs sites, our own docs) and make MDN/GitHub stretch goals.</td>
+</tr>
+<tr>
+<td>A8</td>
+<td>"JavaScript: later a small ES5-class interpreter"</td>
+<td>Even ES5 plus a DOM would not render modern sites; the plan says so.</td>
+<td>Say "no JavaScript, ever, in the guest" and keep the "display list from a host browser" as the only escape. It avoids an XL item nobody will finish.</td>
+</tr>
+<tr>
+<td>A9</td>
+<td>"A full-screen copy is about 7 ms" is read as the bus limit</td>
+<td><code>MemCpy</code> is <code>REP_MOVSB</code> (<code>Kernel/KUtils.HC</code> [V], fetched today); QEMU's TCG translates a <code>rep movs</code> as one element per loop iteration [U]. 0.5 to 0.75 GB/s is what a byte-at-a-time loop costs under TCG, not what the emulated memory can do.</td>
+<td>Expect 3 to 8x on every copy from a 30-line assembly routine (section 2).</td>
+</tr>
+<tr>
+<td>A10</td>
+<td>Frame cap 60 (<code>ks_fcap=60</code>, <code>01-core.HC:58</code>)</td>
+<td>QEMU's GUI refresh interval is 30 ms by default (<code>GUI_REFRESH_INTERVAL_DEFAULT 30</code>, <code>include/ui/console.h</code> [V]).</td>
+<td>Nothing above about 33 fps is visible in the QEMU window. Cap at 30 and spend the budget on quality, or on sleeping.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="12-missing-work">1.2 Missing work<a class="headerlink" href="#12-missing-work" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Unicode and text.</strong> The kernel is 8-bit, the atlas is ASCII, <code>TW</code> and <code>Txt</code> skip anything outside 32 to 126. A browser, an email client and a messenger are mostly non-ASCII text in practice (names, quotes, dashes, accents, emoji). The plan's font row says "non-Latin" once and gives no path. See 3.3.</li>
+<li><strong>Clipping and scrolling.</strong> The only clip is the dirty rectangle (<code>ks_c0x..ks_c1y</code>, <code>01-core.HC:36</code>). Apps keep content inside windows by arithmetic (<code>rows</code> in Notes, <code>FROWS</code> in Files). A scroll view, a text field, a list and a browser viewport all need a push/pop clip stack intersected with the dirty rectangle. Not listed.</li>
+<li><strong>Event model.</strong> Clicks are dispatched by numeric id ranges (<code>04-main.HC:148-204,218-261</code>), keys by <code>FrontOpen</code> index (<code>:315-361</code>), hover by a global <code>ks_hot</code>. There is no event struct, no capture/bubble, no focus object, no double-click, no right button (only <code>ms.lb</code> is read, <code>:378</code>), no key repeat policy. The plan's "app table with draw, click, key, close" is the right shape but is listed as M; with text fields, drag and drop, menus and modal sheets it is L.</li>
+<li><strong>Threading.</strong> Everything runs in one task; <code>Draw</code> blocks input; the idle loop sleeps 5 ms (<code>05-run.HC:123</code>). A fetch, a page parse or a file copy will freeze the desktop. TempleOS <code>Spawn</code> takes a <code>target_cpu</code> (<code>Kernel/KTask.HC</code> [V]) and tasks share one address space, so a worker per core is cheap. Not mentioned anywhere in the plan.</li>
+<li><strong>Memory.</strong> At 2x the desktop holds ten wallpapers of 20.7 MB plus <code>bb</code> and <code>prev</code> (about 250 MB of the 1 GB in <code>boot-vm.sh:14</code>) [V, arithmetic from <code>01-core.HC:35,655-656</code> and <code>04-main.HC:103-104</code>], icon masks cached per size forever (<code>ks_icm</code>, <code>01-core.HC:514,571</code>), and no budget for window layers, glyph caches, images or page DOMs. No <code>-m</code> increase, no eviction policy.</li>
+<li><strong>Failure.</strong> TempleOS is ring 0 with one address space: a stray pointer in any app takes the desktop and the OS with it. HolyC has <code>try</code>/<code>catch</code> (used in <code>03-apps.HC:271-275</code>), which is the only tool. The plan has no crash policy (auto-restart the desktop task? reboot to a snapshot?). For an OS that runs an AI agent and a browser against untrusted input this is the first security fact, and it is absent.</li>
+<li><strong>Testing.</strong> <code>scripts/snap.sh</code> and the monitor socket exist [V]; there is no golden-screenshot test, no frame-time regression check, no per-commit boot. The browser gate ("20 pages lay out") needs exactly this harness.</li>
+<li><strong>Real hardware.</strong> Nothing in the plan says where the OS eventually runs. V5.03 plus this desktop cannot display outside QEMU (A4, verdict point 4).</li>
+</ul>
+<h3 id="13-sequencing">1.3 Sequencing<a class="headerlink" href="#13-sequencing" title="Link to this section">#</a></h3>
+<p>The plan's order is channel, framework, services, browser B0, B1, editors, mail, network. Better:</p>
+<ol>
+<li>Install to disk (hours). Removes the persistence gate.</li>
+<li>Measurement harness and renderer performance pass (1 week, section 2). Every later item is cheaper to build against a renderer whose costs are known and whose primitives will not change under it.</li>
+<li>Framework, event model, clip stack, input fix (modifiers, key-up, Esc no longer quits), widget kit v2 (3 weeks, not 2).</li>
+<li>Text: host-built atlases for more ranges, sizes and weights; glyph cache by (face, size, codepoint); UTF-8 strings throughout (1 week). This is the first thing that makes the editor, the browser and mail possible.</li>
+<li>Channel: raw-disk mailbox for bulk, serial for control (3 days), host service v0 (file exchange, fetch).</li>
+<li>Browser B0 (reader mode) and the editor family.</li>
+<li>B1 only after a B0 user test, with the page set chosen to fit.</li>
+</ol>
+<h3 id="14-is-desk3-a-sound-base-code-audit">1.4 Is desk3 a sound base? Code audit<a class="headerlink" href="#14-is-desk3-a-sound-base-code-audit" title="Link to this section">#</a></h3>
+<p>Keep: the logical/native unit split (<code>01-core.HC:31-36,331-367</code>), clipped spans and the corner coverage table (<code>:130-176</code>), the dirty-rectangle loop (<code>02-ui.HC:24-71</code>, <code>05-run.HC:28-54</code>), immediate-mode widgets with hit registration (<code>02-ui.HC:117-177</code>), the Lucide stroke rasteriser with a per-size cache (<code>01-core.HC:530-597</code>), the per-phase timers for Monitor (<code>05-run.HC:5-25</code>). These are good ideas done simply.</p>
+<p>Redesign now (cheaper now than after six apps are written against them):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Where</th>
+<th>Problem</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App = window = array slot</td>
+<td><code>02-ui.HC:4-15</code>, <code>NA</code> at <code>01-core.HC:26</code></td>
+<td>One window per app, fixed size, nine of them; <code>ToFront</code> copies arrays (<code>04-main.HC:28-41</code>)</td>
+<td>A window table (id, app, rect, z, flags, layer bitmap) and an app table of function pointers; HolyC has function pointers (<code>Spawn</code> takes one).</td>
+</tr>
+<tr>
+<td>Dispatch by if-chain</td>
+<td><code>03-apps.HC:585-597</code>, <code>04-main.HC:148-204</code>, <code>:315-361</code></td>
+<td>Three places to edit per app; keyboard rules differ per app</td>
+<td><code>app-&gt;draw/click/key/wheel/close</code> through the table; one focus rule.</td>
+</tr>
+<tr>
+<td>Draw re-runs per dirty rect</td>
+<td><code>05-run.HC:33-36</code></td>
+<td>Ten rects means ten full passes over every window's draw code; text and icon loops run and get clipped per glyph</td>
+<td>Per-window retained layers (section 2.4): a dirty rect becomes a composite of overlapping layers, and only the window whose content changed re-executes its draw.</td>
+</tr>
+<tr>
+<td>Hit list</td>
+<td><code>02-ui.HC:74,94</code></td>
+<td><code>MAXH 500</code>, silently dropped when full; linear scan per hover; rebuilt only inside the first dirty rect's draw (<code>ks_reg</code> set at <code>05-run.HC:32</code>, cleared at <code>:50</code>) by accident of ordering</td>
+<td>Per-window hit lists owned by the layer, invalidated with the layer; <code>Hit</code> reports overflow in Monitor.</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td><code>01-core.HC:36</code></td>
+<td>One rectangle, equals the dirty rect</td>
+<td><code>ClipPush(x,y,w,h)</code>/<code>ClipPop</code> intersecting with the current clip; scroll offset in the window's draw context.</td>
+</tr>
+<tr>
+<td>Text</td>
+<td><code>01-core.HC:369-489</code></td>
+<td>ASCII only; <code>Wrap</code> is O(n^2) (calls <code>TW</code> on the growing buffer per character, <code>:475</code>) with a 200-byte buffer; Notes re-lays out the whole buffer every frame (<code>03-apps.HC:422-449</code>) and every 500 ms for the caret blink (<code>05-run.HC:109-113</code>)</td>
+<td>UTF-8 decode; glyph cache keyed by face, size, codepoint; a line-layout cache per paragraph; the caret blink dirties a 2 by 17 rectangle, not the body.</td>
+</tr>
+<tr>
+<td>Keyboard</td>
+<td><code>04-main.HC:319-321,267</code></td>
+<td>Esc and Shift-Esc reboot; flag bits masked off; no key-up; no repeat policy</td>
+<td>Esc is an app key; a system chord (Ctrl-Alt-Q) quits; keep <code>sc</code> whole and expose modifiers; read <code>kbd.down_bitmap</code> for key-up if it exists [U].</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td><code>04-main.HC:367-378</code></td>
+<td>Relative deltas times 3 times scale, re-centred with <code>MsSet</code>; no right or middle button; wheel from <code>ms.pos.z</code></td>
+<td>Keep the relative scheme (it works) but add acceleration curves and read <code>ms.rb</code>/<code>ms.mb</code> [U, field names from memory]. Absolute positioning needs a tablet device, which needs USB, which TempleOS lacks.</td>
+</tr>
+<tr>
+<td>Shadow</td>
+<td><code>01-core.HC:287-329</code></td>
+<td>Per-pixel <code>Px</code> call with a table lookup over the whole blur band, per window, per dirty rect</td>
+<td>9-slice cache keyed by (w,h,r,blur) and span blends with constant alpha on the straight edges (section 2.3).</td>
+</tr>
+<tr>
+<td>Blend</td>
+<td><code>01-core.HC:60-65,85-92</code></td>
+<td><code>Mix</code> is a function call per pixel from <code>Px</code>, <code>RRTexN</code>, <code>Txt</code>, <code>LIcon</code>, <code>Up4</code>, <code>BuildWall</code></td>
+<td>Inline the two-multiply blend; precompute <code>src*a</code> per span; a 16-entry table per glyph colour for the 4-bit alpha.</td>
+</tr>
+<tr>
+<td>Floating point in pixel loops</td>
+<td><code>DiskN :235-246</code> (a <code>Sqrt</code> per pixel), <code>LineN :248-272</code>, <code>SegMask :530-552</code></td>
+<td>HolyC F64 is x87 (<code>Compiler/OpCodes.DD</code> has FLD/FADD/FSQRT and no SSE [V]); TCG emulates x87 in software</td>
+<td>Integer coverage tables for disks (like <code>CornerTab</code>), DDA in fixed point for lines; icons are already cached so <code>SegMask</code> only pays once per size.</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td><code>01-core.HC:649-717</code>, <code>04-main.HC:90-121</code></td>
+<td>Wallpapers never evicted; no budget</td>
+<td>Keep one style's wallpaper, rebuild on switch (0.3 s today, less after the pass); raise <code>-m</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The verdict on the base: the primitives are fine, the shell structure is a demo. Do the redesign in the framework step, before the editor, because the editor is the first app that needs clipping, focus, modifiers, UTF-8 and a line cache, and it will otherwise be written around the demo's limits and then rewritten.</p>
+<h2 id="2-performance">2. Performance<a class="headerlink" href="#2-performance" title="Link to this section">#</a></h2>
+<h3 id="21-where-the-time-goes-today-reasoning-from-the-code-and-the-measured-numbers">2.1 Where the time goes today (reasoning from the code and the measured numbers)<a class="headerlink" href="#21-where-the-time-goes-today-reasoning-from-the-code-and-the-measured-numbers" title="Link to this section">#</a></h3>
+<ul>
+<li>64000 pixel loop in 1 ms (<code>spike/KsSpike.HC:67-71</code>, README) is 15.6 ns per <code>back[j]=back[j]+0x010101</code>. HolyC keeps <code>j</code> in memory and emits about ten instructions for that statement [U]; TCG on Apple Silicon runs a translated guest instruction in roughly 1 to 2 ns [U]. So the cost is HolyC's code generation times TCG, not TCG alone: a register-resident assembly loop should do the same in 3 to 5 ns per pixel, and a 16-byte SSE2 move in about 1 ns per pixel if the assembler had SSE (it does not [V]; 64-bit <code>MOV</code> pairs then, two pixels per instruction).</li>
+<li>A full 1280x800x4 copy in 7 ms is 0.59 GB/s, consistent with one translated loop iteration per byte (<code>REP_MOVSB</code> [V]).</li>
+<li>A dragged window at 2x (23 ms): per dirty rect (two per move, each about the window plus 88x90 logical of shadow margin, <code>02-ui.HC:68-71</code>), <code>Draw</code> copies the wallpaper span by span (<code>05-run.HC:7-8</code>, <code>MemCpy</code> per row), then for every open window draws the shadow band (a 560x400 window at 2x with blur 68 native is about 280k <code>Px</code> calls [U, arithmetic]), the rounded fill, the ring, the app body, then the menubar backdrop and the dock. Estimate for one window: shadow 8 to 12 ms, body and fill 4 to 6 ms, copies 4 to 6 ms, the rest 2 ms. The shadow and the byte copies are the two biggest items.</li>
+</ul>
+<h3 id="22-ranked-wins">2.2 Ranked wins<a class="headerlink" href="#22-ranked-wins" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Change</th>
+<th>Estimated gain</th>
+<th>Reasoning</th>
+<th>Cheapest experiment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Run on x86 with hardware virtualisation</strong> (a Linux PC or server with KVM, an Intel Mac with HVF, or a bare-metal cloud instance). Apple Silicon cannot accelerate an x86 guest (HVF is same-architecture only; Rosetta does not apply to system emulation).</td>
+<td>10 to 20x on HolyC code, 10 to 30x on copies; a 2x frame drag from 23 ms to 1 to 2 ms; the 20.7 MB full-frame copy from about 35 ms [U, extrapolated from 0.59 GB/s] to 2 ms</td>
+<td>TCG costs 10 to 30 host instructions per guest instruction and software MMU on every load and store; KVM runs the guest natively</td>
+<td>Copy <code>spike/KsSpike.HC</code> to any x86 Linux box, <code>qemu-system-x86_64 -accel kvm</code>, read the three numbers. One hour plus access to a machine. A cheap mini PC or a used Intel Mac is the development-host answer if the HolyC route continues.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Replace <code>MemCpy</code>/<code>MemSetU32</code> with 64-bit, unrolled assembly</strong> (<code>REP_MOVSQ</code> at least; an 8-way unrolled <code>MOV</code> loop better). <code>Kernel/KUtils.HC</code> uses <code>REP_MOVSB</code> and <code>REP_STOSD</code> [V].</td>
+<td>3 to 8x on every copy and fill: card copy, wallpaper spans, layer composites, <code>prev</code> snapshot in <code>SetStyle</code></td>
+<td>TCG executes string instructions one element per iteration [U]; 8 bytes per iteration is 8x fewer iterations; an unrolled plain loop avoids the per-iteration flag and counter work</td>
+<td>30 lines of HolyC <code>asm</code> in the spike; time 100 copies of 4 MB with each variant. Half a day. Caveat: QEMU may have grown a bulk fast path for <code>rep movs</code> in recent versions [U]; the measurement settles it.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>9-slice shadow cache.</strong> Alpha of the shadow depends only on (w,h,r,blur), so cache four corner tiles and two edge profiles; blend straight edges with a per-row or per-column constant alpha span.</td>
+<td>Shadow cost from about 10 ms to 2 ms per 2x window</td>
+<td>Replaces 280k <code>Px</code> calls (bounds check, function call, <code>Mix</code> call) with table reads and span loops</td>
+<td>Set <code>ks_focus</code> shadow strength to 0 and <code>Shadow</code> to a no-op, read <code>ks_pt[1]</code> in Monitor before and after; that is the upper bound. Then implement. One day.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Retained window layers and tile damage.</strong> Each window draws into its own bitmap (stride-aware), re-executed only when its content changes; a frame is composite-by-copy of the layers that touch each dirty tile (32x32 tiles with per-tile dirty bits instead of 10 merged rects, <code>02-ui.HC:25-55</code>).</td>
+<td>Drag, raise, focus animation and overlaps become copies: with win 2, about 3 to 5 ms for a 2x window; text-heavy windows stop re-rasterising their text on every neighbour's change</td>
+<td>Separates "content changed" from "position changed"; the browser's scroll becomes a <code>memmove</code> plus one strip</td>
+<td>Prototype on one window (Notes): draw it to a side bitmap, composite with a stride-aware <code>SpanCopy</code>. Two days.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>No function calls or x87 in pixel loops.</strong> Inline blend in <code>Px</code>-callers, premultiplied source per span, 16-entry alpha tables for glyph blending, integer disks and lines.</td>
+<td>1.5 to 2x on corners, glyphs, icons, disks; the dock's disks and radios lose their per-pixel <code>Sqrt</code></td>
+<td>HolyC function calls push a frame and pass arguments on the stack; x87 under TCG is software floating point</td>
+<td>Time <code>DiskN</code> with r=20 at 2x 1000 times, then with a coverage table. Half a day.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Multicore rasterisation.</strong> <code>-smp 4</code>; <code>Spawn(fn,data,name,core)</code> three workers; split the dirty tiles by row bands; the main task composites. MTTCG is supported and on by default for the i386 target in current QEMU (<code>target/i386/tcg/tcg-cpu.c</code>: <code>.mttcg_supported = true</code>; <code>accel/tcg/tcg-all.c</code> enables it when supported and not icount [V, master source; assume the same in 11.0.2 [U]]).</td>
+<td>2 to 3x on the draw phase on a 4-core slice of this Mac; nothing on the single card copy unless split too</td>
+<td>Pixels are embarrassingly parallel; TempleOS tasks share memory so no marshalling</td>
+<td><code>-smp 4</code>, spawn three tasks that each fill a quarter of <code>bb</code>, time against one task. Half a day. Risk: TempleOS's own SMP code paths under MTTCG are lightly tested; a wrong result means stay single-core.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Frame pacing.</strong> Cap at 30 (QEMU refreshes the window every 30 ms [V]); only sleep when nothing is dirty; measure input-to-pixel latency not frame time.</td>
+<td>No speedup; removes wasted frames and makes animations even</td>
+<td>Frames that the display never shows cost CPU and heat</td>
+<td>Set <code>ks_fcap=30</code>, watch Monitor. Minutes.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Cursor and drag latency.</strong> With layers, the two cursor rectangles are composites, not draws; keep the cursor in its own tiny layer; read the mouse at the top of the loop and composite last.</td>
+<td>Hover and drag feel: from "one full Draw of everything under 16x21 px" to two tile copies</td>
+<td>Latency is dominated by the frame, which win 4 shrinks</td>
+<td>Comes with win 4.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Memory bandwidth.</strong> 2x doubles pixel count and quadruples bytes per logical area; keep blurred backdrops at quarter resolution (already), evict unused wallpapers, keep layers only for open windows, and consider 1.5x logical scales for large displays.</td>
+<td>Frees about 200 MB; avoids swapping to a bigger <code>-m</code> for layers</td>
+<td>Arithmetic from <code>01-core.HC:655-656</code></td>
+<td><code>-m 2048M</code> and one wallpaper at a time. Minutes.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>GPU path.</strong> This QEMU has <code>virtio-gpu-pci</code> without GL [V, task statement]. A virtio-gpu 2D driver in HolyC (virtqueue setup, <code>RESOURCE_CREATE_2D</code>, <code>TRANSFER_TO_HOST_2D</code>, <code>SET_SCANOUT</code>, <code>RESOURCE_FLUSH</code>) is 500 to 1000 lines and gives a second way to put a guest-rasterised frame on screen, with explicit flush rectangles instead of dirty-page scanning. No drawing acceleration. virgl would require emitting a Gallium command stream from HolyC: not a project.</td>
+<td>About zero for rendering; maybe saves the host some dirty-page scanning</td>
+<td>All the cost is in the guest's rasterisation, which no 2D scanout device helps</td>
+<td>Do not do it. If the display path ever matters, measure the host-side cost of <code>vga_update_display</code> with <code>perf</code> on Linux first.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Combined, wins 2 to 5 should bring a 2x window drag on this Mac from 23 ms to roughly 4 to 6 ms and a full-screen style crossfade from about 60 ms to about 15 ms [U]; win 1 makes the whole question go away and is the only one that gives headroom for a browser layout engine in HolyC. Win 6 is a multiplier on whatever remains.</p>
+<h3 id="23-emulator-configuration-briefly">2.3 Emulator configuration, briefly<a class="headerlink" href="#23-emulator-configuration-briefly" title="Link to this section">#</a></h3>
+<ul>
+<li><code>-accel tcg,thread=multi</code> is the default when supported; no flag needed. <code>-accel tcg,tb-size=</code> larger translation cache helps only if the working set thrashes (unlikely at this code size) [U].</li>
+<li><code>-cpu</code> choice: keep a plain x86-64 model; AVX emulation exists but is slow and the assembler cannot emit it anyway.</li>
+<li><code>-display cocoa,zoom-to-fit=on</code> scales 2880x1800 on the host each refresh; that is host time, not guest time. For measurement use <code>-display none</code> and <code>screendump</code>.</li>
+<li>QEMU 7.2 and later show TCG regressions for some x86 guests on Apple Silicon (a Windows 3.11 hang report, QEMU issue 2996 [D]); not our symptom, but pin the QEMU version used for measurements.</li>
+</ul>
+<h2 id="3-better-solutions-by-component">3. Better solutions by component<a class="headerlink" href="#3-better-solutions-by-component" title="Link to this section">#</a></h2>
+<h3 id="31-display-and-input-path">3.1 Display and input path<a class="headerlink" href="#31-display-and-input-path" title="Link to this section">#</a></h3>
+<p>Plan: keep the Bochs VBE framebuffer, fix input "in the framework step". Right for QEMU. Add: the layer compositor (2.2 win 4), a clip stack, a proper cursor layer, modifiers and key-up from the scan code flags and <code>kbd.down_bitmap</code> [U], right and middle buttons, and a system chord instead of Esc. For real hardware the display path must be a boot-time VBE mode set in the boot loader, which is what ZealOS did [D]; V5.03 cannot do it.</p>
+<h3 id="32-host-channel">3.2 Host channel<a class="headerlink" href="#32-host-channel" title="Link to this section">#</a></h3>
+<p>Plan: serial streaming spike, else an IDE mailbox, else a NIC. Better order:</p>
+<ol>
+<li><strong>Installed disk</strong> for persistence (not a channel at all).</li>
+<li><strong>Raw second disk as a mailbox</strong> for bulk bytes both ways: guest <code>BlkRead</code>/<code>BlkWrite</code> through the existing ATA driver on a <code>-drive if=ide,format=raw</code> file the host also opens. A 4 KB header with sequence numbers, then a ring of blocks. Expected several MB/s with PIO under TCG [U]; no driver, no shared-memory ordering questions, works on any QEMU and on real hardware with a USB-free ATA disk. Cheapest experiment: write 1 MB from the host, read it in the guest, compare hashes, time it. One day.</li>
+<li><strong>Serial</strong> for control lines and events (it is duplex and already wired): stream with the FIFO, no acks, measure drops.</li>
+<li><strong>Shared RAM</strong> (<code>memory-backend-file</code>, <code>share=on</code>) only if latency below 1 ms matters (a live viewport). Unproven under TCG on macOS, as the earlier report says.</li>
+<li><strong>A virtio driver</strong> (serial or blk) later for interrupts and DMA; not first.</li>
+</ol>
+<h3 id="33-fonts-and-text-shaping">3.3 Fonts and text shaping<a class="headerlink" href="#33-fonts-and-text-shaping" title="Link to this section">#</a></h3>
+<p>Plan: port stb_truetype (about 5k lines) or keep host-built atlases. Better: <strong>host-built atlases now, a small rasteriser later, shaping never in the guest.</strong></p>
+<ul>
+<li>Now: extend <code>scripts/gen-font.py</code> to emit a glyph index keyed by codepoint and more ranges (Latin-1, Latin Extended, Greek, Cyrillic, general punctuation, arrows, a monospace face, bold and italic), at the sizes a browser and editor use, plus a Noto Sans CJK subset if CJK is wanted (about 20k glyphs at two sizes is a few MB in 4-bit alpha). Add the <code>kern</code> pairs for the main face. This is days, not weeks, and covers email, chat and most of the document web.</li>
+<li>Later: a quadratic-outline scanline rasteriser in HolyC (TrueType <code>glyf</code> only, nonzero winding, 4x vertical oversampling, about 1500 lines) with an LRU glyph cache, for arbitrary sizes and web fonts. Under TCG a 24 px glyph rasterises in well under a millisecond [U]; cached, it does not matter.</li>
+<li>Shaping (ligatures, Arabic joining, Indic reordering), bidi and IME: do not write these in HolyC. If the OS ever needs them, the host service returns positioned glyph runs for a string (a "shape" request), which the guest paints with its cache. That keeps the guest honest about what it can do and matches the plan's own service model.</li>
+</ul>
+<h3 id="34-web-browser-engine-scope">3.4 Web browser engine scope<a class="headerlink" href="#34-web-browser-engine-scope" title="Link to this section">#</a></h3>
+<p>Plan: reader mode first, then HTML/CSS subset, then maybe JavaScript. Agree with reader mode first and with "document web" as the ceiling. Changes:</p>
+<ul>
+<li>Make B0 the product: reader mode plus a <strong>host-side HTML-to-display-list</strong> service for pages that reader mode mangles. A display list (text runs with font and colour, boxes, images, links with rectangles) painted natively is not screen capture; it is what the plan already names as the "clean fallback". With it, B1's layout engine becomes an optimisation, not a prerequisite for usefulness.</li>
+<li>B1 native layout: scope it as "block, inline, lists, tables, images, simple flex", with a conformance set chosen from pages that use only that. Drop "position basics" and "simple flexbox" from the first cut; add them after the page set passes.</li>
+<li>JavaScript: never in the guest (A8).</li>
+<li>Images: a host decode-and-resize service (the plan's option two) is right; PNG and JPEG decoders in HolyC are a later nicety.</li>
+</ul>
+<h3 id="35-network-and-tls">3.5 Network and TLS<a class="headerlink" href="#35-network-and-tls" title="Link to this section">#</a></h3>
+<p>Plan: host fetch service first, native stack optional. Right. For the native track, start from Shrine's stack (PCnet driver, TCP/IP, <code>Wget</code> [D]) or ZealOS's work, both public domain; write an E1000 or virtio-net driver against QEMU. TLS in HolyC (X25519, AES-GCM, SHA-256, certificate parsing, a root store) is months and will be slow under TCG; it is justified only on real hardware or KVM, and only if the OS is meant to be self-contained. Keep credentials on the host regardless.</p>
+<h3 id="36-persistence-and-file-systems">3.6 Persistence and file systems<a class="headerlink" href="#36-persistence-and-file-systems" title="Link to this section">#</a></h3>
+<p>Plan: host file service. Better: installed RedSea disk (3.2.1), plus a host RedSea tool to read and write the image when the VM is stopped and a mailbox file for live exchange. RedSea has no journaling, no permissions and no long-name hashing; fine for a single-user OS, not for a "complete OS" (section 4).</p>
+<h3 id="37-audio">3.7 Audio<a class="headerlink" href="#37-audio" title="Link to this section">#</a></h3>
+<p>Plan: host plays, guest controls (mpd/mpv). Right. A guest HDA or AC97 driver for QEMU (<code>-device intel-hda</code> plus <code>hda-duplex</code>, or <code>AC97</code>) is a few hundred lines of ring-buffer DMA and would let the music player be genuinely native for decoded PCM; decoding MP3 or AAC in HolyC under TCG is too slow to be worth it (an MP3 frame decoder is around 10 million operations per second of audio [U]). Order: host playback now, an AC97 driver as a weekend spike later, decoding on the host always.</p>
+<h3 id="38-apps-sdk">3.8 Apps SDK<a class="headerlink" href="#38-apps-sdk" title="Link to this section">#</a></h3>
+<p>Plan: app table and widget kit. Add: a written contract (draw context with clip and scroll, event struct, focus, invalidation API, timers, a worker-task helper), a component gallery that doubles as the golden test, UTF-8 everywhere, and a size limit per app file so the single concatenated build (<code>scripts/send-to-vm.sh:14</code> [V]) stays fast to compile. HolyC's <code>#include</code> at run time already gives hot reload; use it: each app a file, reloadable without a desktop restart.</p>
+<h3 id="39-packaging-and-updates">3.9 Packaging and updates<a class="headerlink" href="#39-packaging-and-updates" title="Link to this section">#</a></h3>
+<p>Not in the plan. For the HolyC desktop: a manifest per app (name, icon, files, version), apps stored on the installed disk under one directory, an updater that pulls a package through the fetch service and verifies a hash. Shrine's <code>Pkg</code> is a public-domain reference [D]. Signatures need a hash and a signature verifier in HolyC (Ed25519 is about 1000 lines of C and runs fast enough once per package [U]).</p>
+<h3 id="310-ai-agent-integration">3.10 AI agent integration<a class="headerlink" href="#310-ai-agent-integration" title="Link to this section">#</a></h3>
+<p>Plan: host agent, approval for every write and command, native chat and diff panels. Right, and the only safe shape given ring 0. Add: the agent must never drive guest input directly without the "agent is driving" banner the earlier report proposed; all tool calls and their approvals logged on the host; the guest shows the exact command before approval. The engine's <code>editor.*</code> protocol and <code>kosmos-mcp</code> are the obvious transport once the channel exists.</p>
+<h3 id="311-security-and-permissions">3.11 Security and permissions<a class="headerlink" href="#311-security-and-permissions" title="Link to this section">#</a></h3>
+<p>In TempleOS there are none: no user separation, no memory protection, no sandbox, any app can read all memory and the whole disk. The plan's rule (nothing sent, deleted or purchased without a UI prompt) is therefore only as strong as the host daemon's enforcement of it. Write the permission broker on the host with per-app manifests, make the guest unable to reach the network or credentials by construction (it cannot), and treat anything the guest sends as untrusted input. Say this in the plan, because "security" for this OS is a host property.</p>
+<h3 id="312-the-base-os-question">3.12 The base OS question<a class="headerlink" href="#312-the-base-os-question" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Can look modern</th>
+<th>Can run a modern browser, TLS, drivers, GPU</th>
+<th>Keeps the HolyC work</th>
+<th>Runs on real hardware</th>
+<th>Years to "complete OS"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TempleOS V5.03 (today)</strong></td>
+<td>yes, in QEMU</td>
+<td>no, by design (ring 0, no libc, no network, 8-bit text, BIOS only)</td>
+<td>all of it</td>
+<td>no (VGA only)</td>
+<td>not reachable</td>
+</tr>
+<tr>
+<td><strong>ZealOS</strong> (fork; variable-resolution 32-bit VBE, AHCI, networking in development, UEFI via Limine, public domain [D])</td>
+<td>yes, with a port of the renderer to its VBE path</td>
+<td>partly: network yes (later), TLS no, GPU no, protection no</td>
+<td>most (HolyC dialect is close [U])</td>
+<td>yes [D]</td>
+<td>the "hobby OS" end state: a modern-looking single-address-space OS with native apps and a document web browser; 2 to 3 person-years for that, never a daily driver for web apps</td>
+</tr>
+<tr>
+<td><strong>Linux base plus own Wayland shell</strong> (<code>os-foundation-plan.md</code>)</td>
+<td>yes</td>
+<td>yes, all of it exists</td>
+<td>the design, tokens, assets, app list; the HolyC desktop as a VM window or personality</td>
+<td>yes</td>
+<td>1 to 2 person-years to a usable shell and store on an existing distribution; the OS underneath is already complete</td>
+</tr>
+<tr>
+<td><strong>Modern host app embedding a HolyC runtime</strong> (a Rust or Swift app that runs TempleOS in QEMU or a HolyC interpreter as a "personality" with our shell around it)</td>
+<td>yes</td>
+<td>yes (host)</td>
+<td>all, as content</td>
+<td>it is an app, not an OS</td>
+<td>months; useful as the development vehicle and demo, not the goal</td>
+</tr>
+<tr>
+<td><strong>Bare-metal Rust unikernel reusing the renderer design</strong></td>
+<td>yes</td>
+<td>no, you write drivers, a network stack, TLS, a browser, a GPU stack from scratch (or pull in Rust crates like smoltcp, rustls, embedded-graphics)</td>
+<td>the design</td>
+<td>yes</td>
+<td>3 to 5 person-years for parity with the ZealOS end state plus TLS; still no web platform</td>
+</tr>
+<tr>
+<td><strong>Hybrid: Linux base, our shell, TempleOS VM as a first-class app with shared channel</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>all</td>
+<td>yes</td>
+<td>as Linux base; the HolyC desktop keeps its showcase role</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recommendation: <strong>hybrid</strong>. Keep the HolyC desktop as the showpiece on the Temple family (move to ZealOS when the showpiece should leave QEMU), finish the renderer pass and the native apps that fit (editor, code editor, terminal, notes, reader browser, calculator, files, settings, music control), and put the "complete OS" ambition on the Linux-base track, where the same shell design becomes a Wayland compositor and the HolyC desktop runs inside it as one window, with the host services the plan already needs. That gives the user the two things they asked for without pretending one base can do both.</p>
+<p>Conditions that change it:</p>
+<ul>
+<li>If the goal is really "a TempleOS that looks modern and runs on a PC" (an art and hobby OS, accepting no web apps, no TLS in the guest and no protection): go ZealOS, develop on x86 with KVM, skip the Linux track.</li>
+<li>If the user gets an x86 development host with KVM: the TCG penalty disappears and the HolyC native-app scope (including B1 layout) becomes comfortable; the base question is unchanged.</li>
+<li>If the user will accept a host app as the "OS" (a kiosk-style shell on macOS or Linux running the HolyC desktop and web apps side by side): the embedding option is the fastest path to a daily-driver feel, at the cost of not being an OS.</li>
+</ul>
+<h2 id="4-long-term-roadmap-to-a-complete-operating-system">4. Long-term roadmap to a complete operating system<a class="headerlink" href="#4-long-term-roadmap-to-a-complete-operating-system" title="Link to this section">#</a></h2>
+<h3 id="41-capability-map">4.1 Capability map<a class="headerlink" href="#41-capability-map" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>TempleOS V5.03</th>
+<th>Built here</th>
+<th>Plan covers</th>
+<th>Missing</th>
+<th>Viable on TempleOS?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel, memory protection</td>
+<td>ring 0 only, identity-mapped single address space, no protection by design</td>
+<td>n/a</td>
+<td>no</td>
+<td>everything</td>
+<td><strong>No.</strong> Adding paging-based isolation to TempleOS is a different kernel.</td>
+</tr>
+<tr>
+<td>Processes, permissions, users</td>
+<td>preemptive tasks, no users, no permissions</td>
+<td>one task</td>
+<td>no</td>
+<td>all</td>
+<td>No.</td>
+</tr>
+<tr>
+<td>File systems, storage</td>
+<td>RedSea, ISO9660 read, ATA; no journaling, no USB, no NVMe, no AHCI (ZealOS adds AHCI [D])</td>
+<td>RAM drive use</td>
+<td>host file service</td>
+<td>install to disk; FAT or exFAT for exchange; integrity</td>
+<td>Partly (ZealOS).</td>
+</tr>
+<tr>
+<td>Drivers, hardware</td>
+<td>PS/2, ATA, VGA, PC speaker, PIT/HPET, APIC; no USB, no ACPI power, no PCIe MSI</td>
+<td>PCI scan, Bochs VBE</td>
+<td>NIC "later"</td>
+<td>USB (keyboards and mice on modern PCs are USB), VBE boot mode set, audio, power</td>
+<td>Partly (VBE and AHCI in ZealOS); USB stack is months.</td>
+</tr>
+<tr>
+<td>Networking</td>
+<td>none (Shrine and ZealOS: experimental stacks [D])</td>
+<td>none</td>
+<td>host fetch; native optional</td>
+<td>driver, stack, TLS, DNS over anything, proxies</td>
+<td>Stack yes (borrow); TLS costly; keep on host.</td>
+</tr>
+<tr>
+<td>Graphics, compositor</td>
+<td>640x480x16</td>
+<td>software renderer, dirty rects, AA shapes, blur, shadows, 2x</td>
+<td>layers implied</td>
+<td>layer compositor, clip stack, images, GPU never</td>
+<td>Yes for software 2D; no GPU ever.</td>
+</tr>
+<tr>
+<td>Text: Unicode, bidi, IME, accessibility</td>
+<td>8-bit, one bitmap font</td>
+<td>Inter ASCII atlases</td>
+<td>"non-Latin" one line</td>
+<td>UTF-8 strings, multi-range atlases, kerning, shaping (host), bidi (host), IME (host), screen reader hooks (the hit list is a start)</td>
+<td>Rendering yes; shaping and IME via host.</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td>PC speaker</td>
+<td>none</td>
+<td>host playback</td>
+<td>AC97 or HDA driver, mixer, decoding (host)</td>
+<td>Driver yes; decoding no.</td>
+</tr>
+<tr>
+<td>Power</td>
+<td>none</td>
+<td>none</td>
+<td>no</td>
+<td>ACPI, suspend, battery</td>
+<td>No.</td>
+</tr>
+<tr>
+<td>Installer, updates</td>
+<td>ISO installer to disk</td>
+<td>scripts</td>
+<td>no</td>
+<td>image build, update channel, rollback</td>
+<td>Partly.</td>
+</tr>
+<tr>
+<td>App model, SDK</td>
+<td>HolyC <code>#include</code>, tasks, DolDoc</td>
+<td>immediate-mode widgets</td>
+<td>app table, widget kit</td>
+<td>contract, events, UTF-8, worker tasks, gallery tests</td>
+<td>Yes.</td>
+</tr>
+<tr>
+<td>Store, package manager</td>
+<td>none (Shrine <code>Pkg</code> [D])</td>
+<td>none</td>
+<td>no</td>
+<td>manifests, hashes, signatures, fetch</td>
+<td>Yes (borrow).</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>none</td>
+<td>none</td>
+<td>UI prompts</td>
+<td>host broker, manifests, audit log; guest isolation impossible</td>
+<td>Host only.</td>
+</tr>
+<tr>
+<td>Localisation</td>
+<td>English, 8-bit</td>
+<td>English</td>
+<td>no</td>
+<td>UTF-8, string tables, locale formats</td>
+<td>Rendering yes.</td>
+</tr>
+<tr>
+<td>Developer tools</td>
+<td>the compiler, debugger, DolDoc, grep</td>
+<td>send-to-vm, snapshot</td>
+<td>code editor with Run</td>
+<td>goldens, frame-time CI, crash capture</td>
+<td>Yes.</td>
+</tr>
+<tr>
+<td>Testing and CI</td>
+<td>none</td>
+<td><code>snap.sh</code>, monitor <code>screendump</code></td>
+<td>no</td>
+<td>per-commit boot, goldens, latency probe</td>
+<td>Yes.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="42-phases">4.2 Phases<a class="headerlink" href="#42-phases" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Content</th>
+<th>Exit criteria</th>
+<th>Effort [U]</th>
+<th>Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 Foundation</td>
+<td>install to disk; measurement harness (goldens, per-phase timers, latency probe); renderer pass (copy routine, shadow cache, inline blend, integer disks); <code>-m</code> and wallpaper eviction</td>
+<td>2x window drag at or under 8 ms on this Mac; goldens for every style; no change to the look</td>
+<td>1.5 weeks</td>
+<td>TempleOS in QEMU</td>
+</tr>
+<tr>
+<td>P1 Platform</td>
+<td>window and app tables, event struct, focus, clip stack, modifiers and key-up, system chord, widget kit v2 (text field, list, tabs, scroll view, menu, dialog), UTF-8 strings, multi-range atlases, glyph cache, worker tasks, component gallery</td>
+<td>gallery passes goldens in five styles at 1x and 2x; a text field with selection, clipboard (guest-local) and UTF-8 used by two apps; Esc no longer reboots</td>
+<td>4 weeks</td>
+<td>same</td>
+</tr>
+<tr>
+<td>P2 Services</td>
+<td>raw-disk mailbox and serial control; host daemon (file exchange, fetch with cache, image decode and resize, shape, clipboard); permission broker and audit log on the host</td>
+<td>guest fetches a 500 KB page in under a second and shows a decoded image; every host action is logged</td>
+<td>2 weeks</td>
+<td>same</td>
+</tr>
+<tr>
+<td>P3 Apps A</td>
+<td>editor (line cache, undo, find), code editor with Run and error panel, terminal, notes, files completion, settings saved to disk</td>
+<td>each app at 2x stays under 10 ms per keystroke frame</td>
+<td>3 weeks</td>
+<td>same</td>
+</tr>
+<tr>
+<td>P4 Browser B0</td>
+<td>chrome, history, bookmarks, reader mode, host display-list fallback</td>
+<td>20 chosen pages legible at 2x; links, scroll, find, selection work</td>
+<td>2 weeks</td>
+<td>same</td>
+</tr>
+<tr>
+<td>P5 Apps B</td>
+<td>email and messenger over host services with approvals; music control; AI IDE panels</td>
+<td>account review with the user first; nothing outbound without a prompt</td>
+<td>3 weeks</td>
+<td>same</td>
+</tr>
+<tr>
+<td>P6 Browser B1</td>
+<td>native HTML and CSS subset, tables, images, forms</td>
+<td>the conformance set lays out without overlap; MDN and GitHub as stretch</td>
+<td>6 to 10 weeks</td>
+<td>same</td>
+</tr>
+<tr>
+<td>P7 Hardware (optional)</td>
+<td>move the desktop to ZealOS: port the renderer to its VBE framebuffer, AHCI disk, its network stack; boot on a PC or under KVM</td>
+<td>boots on one real PC at native resolution; same goldens</td>
+<td>4 to 6 weeks</td>
+<td>ZealOS</td>
+</tr>
+<tr>
+<td>P8 Modern OS track</td>
+<td><code>os-foundation-plan.md</code> M0 to M5: Linux base, Smithay shell with our chrome, portals, PipeWire, Flatpak store; the HolyC desktop as a VM window</td>
+<td>an Electron and a Tauri app run unmodified under our shell; the HolyC desktop opens as a window with shared clipboard and files</td>
+<td>3 to 6 months to M4</td>
+<td>Linux</td>
+</tr>
+</tbody>
+</table></div>
+<p>Where TempleOS stops being viable: at memory protection, users and processes (never), USB and modern hardware (P7 at best with months of driver work), TLS and a web platform (never in the guest), audio decoding and video (never), IME and complex text (host only). Everything from P0 to P6 is viable and worth doing as the showcase; P7 is the decision point about real hardware; P8 is the only route to the stated long-term goal.</p>
+<h2 id="5-ten-changes-to-the-plan-in-priority-order">5. Ten changes to the plan, in priority order<a class="headerlink" href="#5-ten-changes-to-the-plan-in-priority-order" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Change</th>
+<th>Reason</th>
+<th>Cheapest first step</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Install TempleOS to a disk image; delete the persistence gate.</strong></td>
+<td>The installer exists (<code>boot-vm.sh:17</code> declines it [V]); a file service for notes and settings is a detour.</td>
+<td><code>qemu-img create -f qcow2 temple.qcow2 2G</code>, add <code>-drive file=temple.qcow2,if=ide,index=0</code>, answer "y" once, snapshot. One hour.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Replace <code>MemCpy</code> and <code>MemSetU32</code> with 64-bit unrolled assembly for the desktop's copies.</strong></td>
+<td><code>REP_MOVSB</code> [V] is one byte per TCG iteration; copies are in every frame.</td>
+<td>Time three variants in <code>spike/KsSpike.HC</code>. Half a day.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Insert a renderer performance phase (P0) before the framework.</strong></td>
+<td>The 23 ms drag is four fixable costs (2.2 wins 2 to 5); fixing them after apps exist means touching every app.</td>
+<td>Disable <code>Shadow</code> and read <code>ks_pt[1]</code> to measure the shadow's share. One hour.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Grow the framework item into a platform phase: window table, event struct, clip stack, modifiers and key-up, UTF-8.</strong></td>
+<td>The demo's structure (fixed <code>NA</code>, if-chains, 500 hits, dirty-rect-only clip, Esc reboots) will be baked into six apps otherwise.</td>
+<td>Write the one-page SDK contract (draw context, event struct, invalidation) and convert Notes to it. Two days.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Host-built multi-range atlases with kerning now; a HolyC TrueType rasteriser later; shaping, bidi and IME on the host.</strong></td>
+<td>ASCII-only text (<code>01-core.HC:399,420</code>) blocks email, chat and the browser more than any missing CSS property.</td>
+<td>Extend <code>scripts/gen-font.py</code> to Latin-1 plus Greek and Cyrillic and a monospace face; codepoint-indexed glyph table. Two days.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Make the raw-disk mailbox the bulk channel and serial the control channel; shared RAM only for a live viewport.</strong></td>
+<td>No driver, no memory-ordering unknowns, works on real hardware; serial's number was a protocol artifact.</td>
+<td>Host writes 1 MB to a raw image; guest <code>BlkRead</code>s and hashes it. One day.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Ship the browser as reader mode plus a host display-list fallback; defer native layout (B1) and drop JavaScript for good.</strong></td>
+<td>Coverage comes from the fallback, crispness from native paint; B1 at 3 to 5 weeks is optimistic by 2 to 3x.</td>
+<td>Pick the 20 pages and classify each as reader-mode, display-list or native-subset. One hour.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Use the cores: <code>-smp 4</code>, worker tasks for parse, fetch and tile rasterisation.</strong></td>
+<td>MTTCG is on by default for x86 guests in current QEMU [V]; the desktop blocks on every long operation.</td>
+<td>Spawn three fill tasks and time them. Half a day.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Decide the base for real hardware: ZealOS for the Temple showcase, Linux plus our shell for the modern OS; write both into the plan with the hybrid as the stated end state.</strong></td>
+<td>V5.03 cannot display this desktop outside QEMU; the user's long-term goal needs a kernel TempleOS will never be.</td>
+<td>Boot the ZealOS ISO in QEMU, check its VBE mode and that <code>Spawn</code>, <code>MAlloc</code> and port I/O match. Half a day.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Add a test and crash policy: goldens per style and scale, a frame-time budget check, a latency probe, and a documented recovery (snapshot restore) for the ring-0 crash case.</strong></td>
+<td>Every gate in the plan is a visual or timing claim with no harness; one bad pointer takes the OS.</td>
+<td>A script that boots the snapshot, opens each app, runs <code>screendump</code>, compares hashes. One day.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-evidence-index">6. Evidence index<a class="headerlink" href="#6-evidence-index" title="Link to this section">#</a></h2>
+<p>Local files read today (all [V]): <code>README.md</code>; <code>docs/holyc-native-apps-plan.md</code>; <code>docs/core-apps-plan.md</code>; <code>docs/os-foundation-plan.md</code>; <code>docs/kosmos-app-port-research.md</code>; <code>docs/electron-tauri-support-research.md</code>; <code>desk3/01-core.HC</code> to <code>05-run.HC</code>; <code>spike/KsSpike.HC</code>; <code>scripts/boot-vm.sh</code>, <code>send-to-vm.sh</code>, <code>serial-send.py</code>, <code>snap.sh</code>, <code>run.sh</code>.</p>
+<p>Web sources, accessed 2026-10-27:</p>
+<ul>
+<li>TempleOS <code>Kernel/KUtils.HC</code> (archive branch): <code>MemCpy</code> uses <code>REP_MOVSB</code>, <code>MemSetU32</code> uses <code>REP_STOSD</code>, no SSE or MMX in the file. https://raw.githubusercontent.com/cia-foundation/TempleOS/archive/Kernel/KUtils.HC [V]</li>
+<li>TempleOS <code>Compiler/OpCodes.DD</code>: no SSE or SSE2 opcodes (no MOVDQU, MOVAPS, PADDB, PXOR and so on); XMM registers declared but unused; F64 is x87 (FLD, FADD, FMUL, FSQRT). https://raw.githubusercontent.com/cia-foundation/TempleOS/archive/Compiler/OpCodes.DD [V]</li>
+<li>TempleOS <code>Kernel/KTask.HC</code>: <code>Spawn(..., I64 target_cpu=-1 ...)</code>, "-1 for current CPU", <code>SpawnQue</code> for other cores; <code>mp_cnt</code>. https://raw.githubusercontent.com/cia-foundation/TempleOS/archive/Kernel/KTask.HC [V]</li>
+<li>TempleOS <code>Kernel/</code> directory listing (BlkDev, SerialDev, MultiProc.HC, PCIBIOS.HC present). https://api.github.com/repos/cia-foundation/TempleOS/contents/Kernel?ref=archive [V]</li>
+<li>QEMU <code>include/ui/console.h</code>: <code>GUI_REFRESH_INTERVAL_DEFAULT 30</code>, <code>GUI_REFRESH_INTERVAL_IDLE 3000</code>. https://raw.githubusercontent.com/qemu/qemu/master/include/ui/console.h [V]</li>
+<li>QEMU <code>accel/tcg/tcg-all.c</code>: MTTCG enabled by default when <code>cc-&gt;tcg_ops-&gt;mttcg_supported</code> and not icount; <code>thread=multi</code> forces it with a warning if unsupported. https://raw.githubusercontent.com/qemu/qemu/master/accel/tcg/tcg-all.c [V]</li>
+<li>QEMU <code>target/i386/tcg/tcg-cpu.c</code>: <code>.mttcg_supported = true</code>, <code>.guest_default_memory_order = TCG_MO_ALL &amp; ~TCG_MO_ST_LD</code>. https://raw.githubusercontent.com/qemu/qemu/master/target/i386/tcg/tcg-cpu.c [V] (master; the 11.0.2 build on this Mac assumed the same [U])</li>
+<li>QEMU MTTCG design document. https://www.qemu.org/docs/master/devel/multi-thread-tcg.html [D]</li>
+<li>QEMU issue 2996 (x86 TCG regression on Apple M1 from 7.2 onward for one guest). https://gitlab.com/qemu-project/qemu/-/issues/2996 [D]</li>
+<li>ZealOS README: 32-bit colour VBE with variable resolutions, AHCI, network drivers and stack in development, Limine UEFI boot, public domain. https://raw.githubusercontent.com/Zeal-Operating-System/ZealOS/master/README.md [D]</li>
+<li>Shrine README: native TCP/IP stack (experimental) with PCnet-PCI II, serial tunnel, <code>Wget</code>, <code>Pkg</code> package manager, <code>Mfa</code> file transfer. https://raw.githubusercontent.com/minexew/Shrine/master/README.md [D]</li>
+<li>Search results on TCG x86 performance on Apple Silicon: qualitative only ("too slow to be usable" for full x86 VMs), no measured factor. https://www.cl.cam.ac.uk/teaching/2425/ECAD+Arch/aarch64-vm.html [D]</li>
+</ul>
+<p>Unverified claims that matter most, in the order they should be tested: the TCG cost of <code>rep movsb</code> versus an unrolled loop (one measurement decides change 2); that TempleOS exposes modifier flags and key-up in <code>ScanKey</code>'s scan code and <code>kbd.down_bitmap</code>; raw <code>BlkRead</code>/<code>BlkWrite</code> on a second unformatted ATA drive; that <code>-smp 4</code> under MTTCG runs TempleOS's SMP code correctly on this QEMU; the RedSea on-disk layout for a host tool; ZealOS API compatibility with this desktop's HolyC.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/kamiji-on-templeos/index.html" rel="prev"><span>Previous</span>Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a><a class="next" href="../../docs/holyc-improvement-analysis/index.html" rel="next"><span>Next</span>Improving HolyC on all of its deficits: analysis and ranked plan</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#0-verdict">0. Verdict</a></li><li><a href="#1-critique-of-the-plan">1. Critique of the plan</a><ul><li><a href="#11-wrong-or-shaky-assumptions">1.1 Wrong or shaky assumptions</a></li><li><a href="#12-missing-work">1.2 Missing work</a></li><li><a href="#13-sequencing">1.3 Sequencing</a></li><li><a href="#14-is-desk3-a-sound-base-code-audit">1.4 Is desk3 a sound base? Code audit</a></li></ul></li><li><a href="#2-performance">2. Performance</a><ul><li><a href="#21-where-the-time-goes-today-reasoning-from-the-code-and-the-measured-numbers">2.1 Where the time goes today (reasoning from the code and the measured numbers)</a></li><li><a href="#22-ranked-wins">2.2 Ranked wins</a></li><li><a href="#23-emulator-configuration-briefly">2.3 Emulator configuration, briefly</a></li></ul></li><li><a href="#3-better-solutions-by-component">3. Better solutions by component</a><ul><li><a href="#31-display-and-input-path">3.1 Display and input path</a></li><li><a href="#32-host-channel">3.2 Host channel</a></li><li><a href="#33-fonts-and-text-shaping">3.3 Fonts and text shaping</a></li><li><a href="#34-web-browser-engine-scope">3.4 Web browser engine scope</a></li><li><a href="#35-network-and-tls">3.5 Network and TLS</a></li><li><a href="#36-persistence-and-file-systems">3.6 Persistence and file systems</a></li><li><a href="#37-audio">3.7 Audio</a></li><li><a href="#38-apps-sdk">3.8 Apps SDK</a></li><li><a href="#39-packaging-and-updates">3.9 Packaging and updates</a></li><li><a href="#310-ai-agent-integration">3.10 AI agent integration</a></li><li><a href="#311-security-and-permissions">3.11 Security and permissions</a></li><li><a href="#312-the-base-os-question">3.12 The base OS question</a></li></ul></li><li><a href="#4-long-term-roadmap-to-a-complete-operating-system">4. Long-term roadmap to a complete operating system</a><ul><li><a href="#41-capability-map">4.1 Capability map</a></li><li><a href="#42-phases">4.2 Phases</a></li></ul></li><li><a href="#5-ten-changes-to-the-plan-in-priority-order">5. Ten changes to the plan, in priority order</a></li><li><a href="#6-evidence-index">6. Evidence index</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

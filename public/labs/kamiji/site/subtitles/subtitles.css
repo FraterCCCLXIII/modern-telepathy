@@ -1,0 +1,100 @@
+/* Kamiji subtitles. Monochrome by design: identity is shape + initial + underline style, never hue alone.
+   Everything is scoped under .kmj-root. Font size comes from --kmj-fs (set by the module from the container size and the user's size setting).
+   --kmj-bg (0..1) is the user's background opacity; when unset each preset uses its own default. */
+.kmj-root { position: absolute; inset: 0; pointer-events: none; overflow: hidden; container-type: normal; z-index: 5;
+  font: 600 var(--kmj-fs, 18px)/1.28 system-ui, -apple-system, "Segoe UI", Helvetica, Arial, "Noto Sans", "Noto Sans CJK JP", sans-serif;
+  color: #fff; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+.kmj-root *, .kmj-root *::before, .kmj-root *::after { box-sizing: border-box; }
+.kmj-vis { position: absolute; inset: 0; }
+.kmj-vis[hidden] { display: none; }
+.kmj-safe { position: absolute; }
+.kmj-stack { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: .3em; }
+.kmj-stack[data-pos="bottom"] { bottom: 0; }
+.kmj-stack[data-pos="top"] { top: 0; }
+.kmj-stack[data-pos="middle"] { top: 50%; transform: translateY(-50%); }
+.kmj-bubbles { position: absolute; inset: 0; }
+.kmj-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+.kmj-cue { max-width: 100%; text-align: center; will-change: opacity; }
+.kmj-root[data-motion="full"] .kmj-cue { animation: kmj-in .14s ease-out both; transition: opacity .16s; }
+.kmj-cue.kmj-out { opacity: 0; }
+@keyframes kmj-in { from { opacity: 0; transform: translateY(.25em); } to { opacity: 1; transform: none; } }
+.kmj-root[data-style="bubble"][data-motion="full"] .kmj-cue { animation: kmj-pop .16s ease-out both; }
+@keyframes kmj-pop { from { opacity: 0; scale: .92; } to { opacity: 1; scale: 1; } }
+
+.kmj-l { display: block; width: max-content; max-width: 100%; margin-inline: auto; white-space: normal; }
+.kmj-w { white-space: pre-wrap; }
+.kmj-w em { font-style: italic; }
+.kmj-cue[data-kind="narration"] .kmj-text, .kmj-cue[data-presence="vo"] .kmj-text { font-style: italic; }
+.kmj-cue[data-kind="sfx"] .kmj-text, .kmj-cue[data-kind="music"] .kmj-text { font-style: italic; font-size: .88em; letter-spacing: .02em; }
+.kmj-cue[data-presence="os"] .kmj-text { text-decoration: underline dotted; text-decoration-thickness: .06em; text-underline-offset: .22em; }
+
+/* speaker label: marker (shape + initial), name with an underline style per character, optional (V.O.) / (O.S.) / parenthetical tag */
+.kmj-who { display: inline-flex; align-items: center; gap: .4em; font-size: .62em; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: .15em; line-height: 1.2; }
+.kmj-av img { display: block; width: 1.9em; height: 1.9em; border-radius: 50%; object-fit: cover; border: .12em solid #fff; background: #333; }
+.kmj-mark { display: inline-grid; place-items: center; width: 1.7em; height: 1.7em; background: #fff; color: #000; font-weight: 800; font-size: 1em; line-height: 1; letter-spacing: 0; flex: none; text-shadow: none; }
+.kmj-mark i { font-style: normal; font-size: .82em; }
+.kmj-mark[data-shape="circle"] { border-radius: 50%; }
+.kmj-mark[data-shape="square"] { border-radius: .18em; }
+.kmj-mark[data-shape="diamond"] { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); } .kmj-mark[data-shape="diamond"] i { font-size: .66em; }
+.kmj-mark[data-shape="triangle"] { clip-path: polygon(50% 0, 100% 100%, 0 100%); padding-top: .35em; } .kmj-mark[data-shape="triangle"] i { font-size: .62em; }
+.kmj-mark[data-shape="hex"] { clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); }
+.kmj-mark[data-shape="pill"] { border-radius: 1em; width: 2.3em; height: 1.45em; }
+.kmj-mark[data-shape="bar"] { width: .45em; border-radius: .1em; } .kmj-mark[data-shape="bar"] i { display: none; }
+.kmj-name { text-decoration-line: underline; text-decoration-thickness: .1em; text-underline-offset: .22em; }
+.kmj-name[data-ul="solid"] { text-decoration-style: solid; } .kmj-name[data-ul="dotted"] { text-decoration-style: dotted; }
+.kmj-name[data-ul="dashed"] { text-decoration-style: dashed; } .kmj-name[data-ul="double"] { text-decoration-style: double; }
+.kmj-name[data-ul="wavy"] { text-decoration-style: wavy; } .kmj-name[data-ul="none"] { text-decoration: none; }
+.kmj-tag { font-weight: 600; opacity: .85; }
+
+/* ---- Classic: white text, outline plus soft shadow; contrast on any image. Background opacity optional. ---- */
+.kmj-root[data-style="classic"] .kmj-text, .kmj-root[data-style="classic"] .kmj-who { text-shadow: 0 0 .08em #000, 0 0 .2em rgba(0,0,0,.9), 0 .04em .28em rgba(0,0,0,.85), .06em .06em 0 #000, -.06em -.06em 0 #000, .06em -.06em 0 #000, -.06em .06em 0 #000; }
+.kmj-root[data-style="classic"] .kmj-l { background: rgba(0,0,0,calc(var(--kmj-bg, 0) * 1)); border-radius: .3em; padding: 0 .35em; }
+.kmj-root[data-style="classic"] .kmj-mark { box-shadow: 0 0 0 .1em #000; }
+
+/* ---- Boxed: semi-opaque rounded boxes per line ---- */
+.kmj-root[data-style="boxed"] .kmj-l, .kmj-root[data-style="karaoke"] .kmj-l, .kmj-root[data-style="typewriter"] .kmj-l { background: rgba(0,0,0,var(--kmj-bg, .72)); border-radius: .35em; padding: .08em .6em; margin-top: .1em; }
+.kmj-root[data-style="boxed"] .kmj-who, .kmj-root[data-style="karaoke"] .kmj-who, .kmj-root[data-style="typewriter"] .kmj-who { background: rgba(0,0,0,var(--kmj-bg, .72)); border-radius: .5em; padding: .2em .6em .2em .3em; }
+
+/* ---- Karaoke: monochrome word emphasis. upcoming words dimmer, the current word inverse, past words underlined (no layout shift) ---- */
+.kmj-root[data-style="karaoke"] .kmj-w { border-radius: .22em; padding: 0 .1em; margin: 0 -.1em; box-decoration-break: clone; }
+.kmj-root[data-style="karaoke"] .kmj-w[data-s="f"] { opacity: .62; }
+.kmj-root[data-style="karaoke"] .kmj-w[data-s="p"] { text-decoration: underline; text-decoration-thickness: .07em; text-underline-offset: .2em; }
+.kmj-root[data-style="karaoke"] .kmj-w[data-s="n"] { background: #fff; color: #000; text-shadow: none; }
+.kmj-root[data-style="karaoke"][data-motion="full"] .kmj-w { transition: background-color .08s, color .08s, opacity .08s; }
+
+/* ---- Cinematic: small caps lower-third, left aligned ---- */
+.kmj-root[data-style="cinematic"] .kmj-stack { align-items: flex-start; }
+.kmj-root[data-style="cinematic"] .kmj-cue { text-align: start; border-inline-start: .14em solid #fff; padding: .15em 0 .15em .75em; margin-inline-start: .9em; max-width: calc(100% - 1em);
+  background: linear-gradient(to right, rgba(0,0,0,calc(var(--kmj-bg, .45) * 1)), transparent 92%); }
+.kmj-root[data-style="cinematic"] .kmj-text { font-weight: 500; font-variant-caps: all-small-caps; font-feature-settings: "smcp", "c2sc"; letter-spacing: .08em; text-shadow: 0 0 .1em #000, 0 .05em .3em rgba(0,0,0,.9); }
+.kmj-root[data-style="cinematic"] .kmj-l { margin-inline: 0; }
+.kmj-root[data-style="cinematic"] .kmj-who { text-shadow: 0 0 .12em #000; margin-bottom: .1em; }
+
+/* ---- Typewriter: monospaced, characters appear in step with the words (instant under reduced motion) ---- */
+.kmj-root[data-style="typewriter"] .kmj-text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Noto Sans Mono CJK JP", monospace; font-weight: 600; }
+.kmj-root[data-style="typewriter"] .kmj-c[data-r="0"] { visibility: hidden; }
+.kmj-root[data-style="typewriter"] .kmj-typing .kmj-l:last-child::after { content: ""; display: inline-block; width: .5em; height: 1em; margin-inline-start: .08em; background: #fff; vertical-align: -.12em; }
+.kmj-root[data-style="typewriter"][data-motion="full"] .kmj-typing .kmj-l:last-child::after { animation: kmj-blink 1s steps(2) infinite; }
+@keyframes kmj-blink { 50% { opacity: 0; } }
+
+/* ---- Comic bubble: anchored to a character position, kept inside the safe area, with a tail ---- */
+.kmj-root[data-style="bubble"] .kmj-safe { display: none; }
+.kmj-root[data-style="bubble"] .kmj-cue { position: absolute; left: 0; top: 0; max-width: 56%; width: max-content; text-align: center; color: #111; background: #fff; border: .12em solid #111; border-radius: 1.1em;
+  padding: .5em .8em .55em; box-shadow: 0 .14em 0 rgba(0,0,0,.4); --tail-x: 50%; }
+.kmj-root[data-style="bubble"] .kmj-l { margin-inline: auto; }
+.kmj-root[data-style="bubble"] .kmj-who { color: #111; margin-bottom: .2em; }
+.kmj-root[data-style="bubble"] .kmj-mark { background: #111; color: #fff; }
+.kmj-root[data-style="bubble"] .kmj-av img { border-color: #111; }
+.kmj-root[data-style="bubble"] .kmj-cue[data-tail="down"]::after, .kmj-root[data-style="bubble"] .kmj-cue[data-tail="up"]::after { content: ""; position: absolute; left: var(--tail-x); width: .9em; height: .9em; background: #fff; border: .12em solid #111; border-top: 0; border-left: 0; }
+.kmj-root[data-style="bubble"] .kmj-cue[data-tail="down"]::after { bottom: -.5em; transform: translateX(-50%) rotate(45deg) skew(8deg, 8deg); border-radius: 0 0 .25em 0; }
+.kmj-root[data-style="bubble"] .kmj-cue[data-tail="up"]::after { top: -.5em; transform: translateX(-50%) rotate(225deg) skew(8deg, 8deg); border-radius: 0 0 .25em 0; }
+.kmj-root[data-style="bubble"] .kmj-cue[data-presence="vo"], .kmj-root[data-style="bubble"] .kmj-cue[data-presence="os"] { border-style: dashed; }
+.kmj-root[data-style="bubble"] .kmj-cue[data-kind="narration"] { border-radius: .2em; background: #f4f1e6; box-shadow: .14em .14em 0 #111; }
+.kmj-root[data-style="bubble"] .kmj-cue[data-kind="sfx"], .kmj-root[data-style="bubble"] .kmj-cue[data-kind="music"] { border-radius: .3em; border-style: double; border-width: .22em; background: #fff; }
+.kmj-root[data-style="bubble"] .kmj-text { text-shadow: none; }
+.kmj-root[data-style="bubble"] .kmj-w[data-s="f"] { opacity: 1; }
+
+/* high-contrast users: opaque boxes in every preset */
+@media (forced-colors: active) { .kmj-root .kmj-l, .kmj-root .kmj-cue { background: Canvas; color: CanvasText; border: 1px solid CanvasText; text-shadow: none; } }
+@media (prefers-contrast: more) { .kmj-root[data-style="classic"] .kmj-l, .kmj-root[data-style="cinematic"] .kmj-cue { background: rgba(0,0,0,.85); } }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 276 118" role="img" aria-label="Kamiji">
+  <title>Kamiji</title>
+  <defs>
+    <g id="k" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 24V82M46 24L20 54M28 50L48 82"/>
+      <circle cx="80" cy="64" r="16"/>
+      <path d="M96 48V82"/>
+      <path d="M120 48V82M120 60Q120 48 134 48Q148 48 148 62V82M148 62Q148 48 162 48Q176 48 176 62V82"/>
+      <path d="M198 48V82M198 26V26"/>
+      <path d="M224 48V86Q224 98 210 98M224 26V26"/>
+      <path d="M250 48V82M250 26V26"/>
+    </g>
+  </defs>
+  <use href="#k" stroke="#1d2a20" stroke-width="30"/>
+  <use href="#k" stroke="#ffd23f" stroke-width="18"/>
+  <use href="#k" stroke="#fff" stroke-opacity=".6" stroke-width="3.5" transform="translate(-3.5 -3.5)"/>
+</svg>

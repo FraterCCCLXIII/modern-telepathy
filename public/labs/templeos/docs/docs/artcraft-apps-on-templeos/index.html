@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html" aria-current="page">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Engine and platform</span></li><li aria-current="page">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/artcraft-apps-on-templeos.md</span></div>
+        <div class="doc-body">
+
+<p>Date 2026-10-27, branch <code>task/templeos-shell</code>. Research only: nothing was cloned, downloaded or run; everything below comes from web pages, the GitHub API and raw.githubusercontent.com files read today.</p>
+<p>Labels: <strong>[V]</strong> read or fetched today (source named). <strong>[R]</strong> measured in our repo's earlier notes (cited). <strong>[M]</strong> memory, inference or estimate, not checked. Effort sizes (S, M, L) are <strong>[M]</strong>.</p>
+<h2 id="1-answer">1. Answer<a class="headerlink" href="#1-answer" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Do not run the Crafting Apps as windows in the desktop as the main plan.</strong> The best fit is <strong>R3: use the headless <code>*-cli</code> binaries (and their stdio MCP servers) as host services behind our hub</strong>, feeding our own HolyC UIs: GridCraft for xlsx/xlsb/ods import, export and a formula oracle; PdfCraft for page render, text and page organise; WordCraft and DeckCraft for docx/odt/pptx conversion and page PNGs. Each CLI is a single local process with no network need [V].</li>
+<li>The second route is <strong>R2: the WebAssembly builds in headless Chrome under appd, shown as tiles</strong>. All are egui canvases, so tiles are the only route; it works with infrastructure we already have, but is slow over serial and mostly gives us the apps' own UI rather than our native look.</li>
+<li>R1 (native window streaming) is possible without Screen Recording because the apps expose <code>ui.screenshot</code> and input calls over a JSON channel, but it has no advantage over R2 for us. R5 (Rust staticlib inside Aiwnios) is real but later. R4 (no_std to a <code>.BIN</code>) is blocked by <code>std</code>, <code>alloc</code>, <code>chrono</code> and <code>regex</code>. R6 (port to HolyC) is rejected.</li>
+<li><strong>Handle with care:</strong> the projects are weeks old and move extremely fast (section 2.1). Pin a release by SHA-256, expect breakage, and make no plan depend on a single version.</li>
+<li><strong>Day-one prototype:</strong> GridCraft CLI behind the hub (needs one 11.7 MB approved download). An optional hour-long R2 tile test with the 7.7 MB GridCraft web zip.</li>
+</ul>
+<h2 id="2-what-they-really-are-question-1">2. What they really are (question 1)<a class="headerlink" href="#2-what-they-really-are-question-1" title="Link to this section">#</a></h2>
+<h3 id="21-organisation-maturity-licences">2.1 Organisation, maturity, licences<a class="headerlink" href="#21-organisation-maturity-licences" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Org</td>
+<td><code>github.com/storytold</code>; 18 repos listed in the first 100 KB of the API reply (the reply was truncated, so more may exist)</td>
+<td>[V] API <code>orgs/storytold/repos</code></td>
+</tr>
+<tr>
+<td>Apps</td>
+<td>13 repos, all "pure Rust", engine plus swappable egui UI</td>
+<td>[V] repo descriptions and READMEs</td>
+</tr>
+<tr>
+<td>GridCraft repo</td>
+<td>created 2026-10-07, last push 2026-10-27, 6,677 stars, 3,084 forks, 1,372 open issues; Rust 8.1 MB of source, workspace version 0.12.1</td>
+<td>[V] API</td>
+</tr>
+<tr>
+<td>PdfCraft repo</td>
+<td>created 2026-09-30, 18,235 stars, 6,925 forks, 2,356 open issues, version 0.14.0</td>
+<td>[V] API</td>
+</tr>
+<tr>
+<td>Release cadence</td>
+<td>GridCraft v0.11.1 on 2026-10-22, v0.12.1 on 2026-10-25</td>
+<td>[V] API releases</td>
+</tr>
+<tr>
+<td>Merge rate</td>
+<td>GridCraft PR #2704 merged 2026-10-27</td>
+<td>[V] API commits</td>
+</tr>
+<tr>
+<td>Launcher</td>
+<td><code>storytold/craft-launcher</code>, Apache-2.0, "early alpha"</td>
+<td>[V]</td>
+</tr>
+<tr>
+<td>Shared libs</td>
+<td><code>storytold/craft-libs</code> (Apache-2.0, created 2026-10-09), pinned by git rev <code>92d392c</code>; egui and winit are pinned to <code>storytold</code> forks</td>
+<td>[V] Cargo.toml</td>
+</tr>
+<tr>
+<td>Agent files</td>
+<td>GridCraft and others carry <code>AGENTS.md</code> and <code>CLAUDE.md</code></td>
+<td>[V] contents listing</td>
+</tr>
+</tbody>
+</table></div>
+<p>How to read this: about four weeks of history, thousands of PRs, huge star and fork counts. I cannot verify what produced those numbers, so treat popularity as <strong>unverified</strong> and judge the code, not the stars. The repos are heavily agent-assisted (agent instruction files, "clean-room" framing, parity percentages), so quality is uneven. Self-reported readiness: GridCraft "about 50%" (alpha), PdfCraft 55% (alpha), WordCraft 60% (alpha), DeckCraft 55% (alpha), SoundCraft "roughly 40%" (pre-alpha), VectorCraft 65%, FilmCraft 56%, LightCraft 61%, EffectCraft 45%, FigCraft 49% (early alpha), DesignCraft "pre-alpha", CADCraft "early development", PhotoCraft "early alpha" [V] READMEs.</p>
+<p>Discrepancies found, so do not trust the marketing page alone:
+- getartcraft.com/apps says GridCraft is "In development" with v0.5.0; GitHub releases are at 0.12.1 [V].
+- The apps page lists FilmCraft as having no web build; the FilmCraft README says a web build exists and ships as a zip [V].
+- The page says "permissive licences" without naming one; the repos say <strong>MIT OR Apache-2.0</strong> (GridCraft and PdfCraft READMEs; API reports Apache-2.0) [V].</p>
+<p><strong>Licences that matter.</strong> Code: MIT OR Apache-2.0. The ArtCraft name and logos are trademarks under a separate brand licence; forks and modified builds must remove them [V]. GridCraft's attribution file lists fonts under MIT, Bitstream Vera, SIL OFL 1.1 and Ubuntu Font Licence 1.0, and no GPL, LGPL or MPL [V]. FilmCraft uses <code>symphonia</code> (MPL-2.0, per its README) for MP3, FLAC, ALAC and Vorbis [V]. CADCraft's DWG support uses the <code>acadrust</code> library, whose licence I did not check <strong>[M: unknown]</strong>. Licences of egui, wgpu, hayro, lopdf, vello_cpu, krilla and skrifa are <strong>[M]</strong> (all believed MIT and/or Apache-2.0); run <code>cargo deny</code> before any redistribution. We would run the binaries as separate processes (R3), so even a copyleft crate would not link into our code.</p>
+<h3 id="22-stack-gridcraft-in-detail-others-from-readmes">2.2 Stack (GridCraft in detail, others from READMEs)<a class="headerlink" href="#22-stack-gridcraft-in-detail-others-from-readmes" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Workspace layers (enforced by <code>cargo xtask layers</code>)</strong> [V] architecture.md: L0 <code>core</code> (cell addresses up to 1,048,576 x 16,384, values, errors, date serials), <code>numfmt</code>; L1 <code>formula</code> (tokenizer, parser, A1/R1C1), <code>functions</code> (513 worksheet functions listed, per the README's own caveat a parity inventory); L2 <code>model</code>, <code>calc</code>, <code>xlsx</code> (XLSX/CSV/TSV, XLSB and ODS import, pivot caches, DrawingML charts); <code>pdf</code> (small PDF 1.7 writer); L3 <code>chart</code>; L5 <code>engine</code> (<code>Session</code>, 313 commands through <code>Session::execute(id, params)</code>); L6 <code>ui-egui</code>, <code>mcp</code>; L7 <code>gridcraft</code>, <code>gridcraft-cli</code>, <code>gridcraft-web</code>.</li>
+<li><strong>Nothing below L6 depends on egui, eframe, winit or rfd</strong> [V]. This is the key fact for R3.</li>
+<li><strong>Dependencies of the core crates</strong> [V] Cargo.toml files: <code>gridcraft-core</code> = serde, thiserror, chrono (std), <code>js-sys</code> on wasm32; <code>gridcraft-formula</code> = core, serde, thiserror; <code>gridcraft-functions</code> = core, <code>regex</code>; <code>gridcraft-calc</code> = core, formula, functions, numfmt, model, <code>log</code>; <code>gridcraft-engine</code> = those plus serde_json, xlsx, chart, pdf, <code>image</code>. Workspace root also has rayon, quick-xml, zip, sha1/sha2/aes (encrypted workbooks), skrifa. <code>unsafe_code = "forbid"</code> workspace-wide.</li>
+<li><strong>Threads:</strong> <code>calc</code> is single-threaded (listed as a known gap) [V]. VectorCraft and DesignCraft render multithreaded on CPU (vello_cpu) [V].</li>
+<li><strong>UI and renderer:</strong> egui 0.37 / eframe 0.37 on <strong>wgpu</strong> (Metal, Vulkan, DX12, WebGPU), winit via a <code>storytold</code> fork [V]. Variations: WordCraft and DesignCraft rasterise pages with <strong>vello_cpu</strong> and use the GPU only for UI compositing [V]; PhotoCraft has a CPU reference compositor and a wgpu one [V]; FigCraft uses <strong>tiny-skia</strong> with HarfRust/skrifa [V]; PdfCraft draws pages with the third-party <strong>hayro</strong> crate while its own <code>pdfcraft-render</code> is built [V]; FilmCraft and LightCraft use wgpu compute with CPU fallback [V]. No Skia, no iced.</li>
+<li><strong>File formats</strong> [V]: GridCraft xlsx r/w, xlsb/ods import, csv/tsv, json/html export. WordCraft docx/odt/rtf/html/md/tex/txt r/w, <code>.doc</code> read, PDF export. DeckCraft pptx r/w, PDF/PNG/JPEG/GIF export. PdfCraft PDF (own COS layer, 33 crates). PhotoCraft PSD/PSB/layered TIFF/ORA r/w and many flat formats. VectorCraft SVG, PDF/AI, EPS, DXF. CADCraft DXF and DWG, SVG/PNG/PDF out. SoundCraft WAV/AIFF/FLAC r/w, MP3/Ogg/AAC in.</li>
+<li><strong>WebAssembly build</strong> [V]: <code>apps/&lt;app&gt;-web</code>, <code>trunk build --release</code>, eframe + wgpu (WebGPU with WebGL2 fallback), <code>wasm-bindgen</code>, <code>web-sys</code>, one <code>&lt;canvas&gt;</code>; open uses the browser file picker and save downloads a file. Shipped as a static zip: GridCraft web 7,660,730 B, PdfCraft web 15,961,263 B [V]. Uncompressed <code>.wasm</code> sizes reported by a third-party review: PhotoCraft 24.2 MB, PdfCraft 37.9 MB [V search result, secondary source]. <strong>No hosted URL</strong>: you self-host the zip [V search result, apps page lists none]. DesignCraft's web build has no control channel [V].</li>
+<li><strong>Windowing/threading:</strong> winit fork, one UI thread plus app-specific workers [M].</li>
+</ul>
+<h3 id="23-cli-control-channel-and-mcp">2.3 CLI, control channel and MCP<a class="headerlink" href="#23-cli-control-channel-and-mcp" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>CLI (GridCraft)</strong> [V] cli.md: <code>info</code>, <code>convert</code> (xlsx/csv/tsv/json/html by extension), <code>eval</code>, <code>cat</code>, <code>check</code> (accuracy and round trip, JSON schema <code>gridcraft-check/1</code>), <code>run</code> (repeatable <code>--cmd 'id={json}'</code>, scripts), <code>commands --json</code>, <code>functions --json</code>, <code>mcp</code>, <code>send &lt;port&gt; &lt;method&gt;</code>. No PNG or PDF export is documented for GridCraft headless.</li>
+<li><strong>Other CLIs</strong> [V]: PdfCraft <code>info text edit combine extract split run tools ui mcp</code>; WordCraft <code>convert text inspect run mcp</code> (PNG page images via <code>convert</code>); DeckCraft <code>render --all</code> (headless slide PNGs), <code>mcp</code>; SoundCraft <code>run --bounce</code> (WAV/AIFF/FLAC with LUFS report); VectorCraft <code>run --export</code>; DesignCraft <code>run --all-pages out/</code>; FigCraft <code>render export run</code>; EffectCraft <code>render --comp Main --out main.mp4</code>; CADCraft <code>info convert run commands mcp</code>.</li>
+<li><strong>Control channel (desktop app only)</strong> [V] control-protocol.md: plain TCP on <code>127.0.0.1:&lt;port&gt;</code> (<code>--control</code>), newline-delimited JSON <code>{id, method, params}</code>; mandatory 256-bit token, either from <code>GRIDCRAFT_CONTROL_TOKEN</code> or a 0600 file in a 0700 directory; first line must be <code>auth</code> within 10 s. Methods include <code>engine.execute</code>, <code>engine.commands</code>, <code>sheet.read</code>, <code>cell.get</code>, <code>ui.click/drag/move</code>, <code>ui.key/text</code>, <code>ui.dialog*</code>, <code>ui.resize</code>, <code>ui.screenshot</code> (PNG, base64 or to a path, 8 s timeout, 64 MiB reply cap), <code>app.open/save/quit</code>. PdfCraft's variant is off by default and takes a control file with the token; it refuses symlinked or shared files [V].</li>
+<li><strong>MCP</strong> [V] mcp.md: hand-written JSON-RPC over <strong>stdio</strong>; GridCraft has 22 tools (<code>read_range</code>, <code>write_range</code>, <code>evaluate_formula</code>, <code>insert_chart</code>, <code>sort_range</code>, <code>execute_command</code>, <code>screenshot</code> in remote mode). Headless mode uses an in-process session with no window and no documented network use. PdfCraft MCP: <code>render_preview(page, max_side&lt;=4096)</code>, <code>text_extract</code>, <code>doc_combine</code>, <code>doc_split</code>, <code>page_extract</code>, <code>command_run</code>, plus <code>--root</code>, <code>--automation-read-root</code>, <code>--automation-write-root</code> path confinement, symlinks resolved [V]. MCP stdio plus a roots flag is exactly the shape our hub wants.</li>
+</ul>
+<h2 id="3-routes-into-templeos-question-2">3. Routes into TempleOS (question 2)<a class="headerlink" href="#3-routes-into-templeos-question-2" title="Link to this section">#</a></h2>
+<p>Relevant measurements from our own notes <strong>[R]</strong> (<code>web-apps.md</code>, <code>electron-apps.md</code>, <code>browser-architecture.md</code>): host-side type-to-new-display-list p50 17 ms; screenshot 600x400 PNG 35 ms, 900x600 JPEG 28 ms; the guest has no JPEG decoder, so tiles use palette/RLE rects with 16-row strip diffs; raw 900x600 RGB565 is 1.08 MB (23 s at 47 KB/s); serial 16 to 47 KB/s (16.3 end to end measured, 47 reported); Aiwnios has native sockets; second-tab input needed <code>Page.bringToFront</code> (5 s to 17 ms); about 129 MB of Chrome per extra app tab; hub round trip 18 ms, a 20 KB reply 0.58 s at 34 KB/s [V weather-music-status.md].</p>
+<p><strong>R1. Native app on the Mac, stream its window.</strong> Mechanics without Screen Recording: start the app with <code>--control &lt;port&gt;</code>, read the token file, then loop <code>ui.screenshot</code> (PNG), diff in our 16-row strips (the apps send no dirty rects), and forward guest mouse/keys as <code>ui.click</code>, <code>ui.drag</code>, <code>ui.key</code>, <code>ui.text</code> in window points (so no coordinate mapping error), with <code>ui.resize</code> to match the guest window. Costs: a real window on the user's Mac that must stay visible (minimised windows queue captures) <strong>[V]</strong>; each frame is a full render plus GPU readback plus PNG plus base64 over JSON, which I estimate at 50 to 150 ms <strong>[M]</strong>; a visible GUI process outside appd's CDP controls; <code>sandbox-exec</code> around a GUI app is awkward <strong>[M]</strong>. Effort M. Verdict: works, but strictly dominated by R2 for apps that have a web build.</p>
+<p><strong>R2. WASM build in headless Chrome under appd, tiles.</strong> Fit: the egui canvas is pixels, so display lists cannot express it; tiles are the only route [V: egui draws one canvas; R: tiles are the labelled fallback]. Plan: appd serves the zip on loopback, kind <code>web</code>, <code>render: "tiles"</code>, the existing <code>stream.py</code> strip diff and RLE, input via <code>Input.dispatchMouseEvent/KeyEvent</code> with CSS px = surface px (DSF 1), focus emulation fix from the Electron work. Unknowns <strong>[M]</strong>: whether headless Chrome 156 on this Mac gives eframe a WebGPU or WebGL2 context (both are claimed fallbacks [V], not tested); egui IME and clipboard through its hidden text input; wasm load time (PdfCraft 38 MB uncompressed). Latency estimate: host side 50 to 150 ms; over serial a full first frame may be 30 to 120 KB of RLE (about 1 to 3 s at 47 KB/s) and later deltas a few KB (about 100 to 300 ms); over an Aiwnios socket close to host cost. Good for demos and for tools whose value is the UI itself (PhotoCraft, VectorCraft, FigCraft, PdfCraft). Effort S to M, since appd and stream.py exist. Canvas apps are the only kind that have no alternative.</p>
+<p><strong>R3. Core as host service behind the hub.</strong> The hub already does REQ/RES/APPROVE with a 20 KB reply in 0.58 s [R]. Each service is a child process of the CLI. Two protocols are available: one-shot CLI commands with <code>--json</code> (GridCraft <code>eval --json</code>, <code>info --json</code>, <code>convert</code>), or a long-lived stdio MCP session (GridCraft 22 tools, PdfCraft <code>render_preview</code>) confined with <code>--root</code>. Separability from the UI is verified in the manifests for GridCraft, PdfCraft and the layering claims of WordCraft, SoundCraft, VectorCraft, DesignCraft, CADCraft, FigCraft, FilmCraft [V]. Cost: start-up per call for one-shots (not measured <strong>[M]</strong>), process memory, a JSON-RPC client in <code>hostd.py</code> (about 150 lines <strong>[M]</strong>). Effort S per service. Caveat: payloads are PNG or text, and the guest cannot decode PNG, so page images must be re-encoded on the host into our RLE/RGB565 image path (the browser already does this for IMAGE ops [S: browser-architecture.md]).</p>
+<p><strong>R4. Core crates as no_std x86-64 <code>.BIN</code>.</strong> Proven so far is only a <code>no_std</code>, no-alloc blob with SSE2 (<code>engine-on-templeos.md</code>, 25x slower than native under TCG) [R]. The candidate crates are not that: <code>gridcraft-core</code> pulls <code>chrono</code> with <code>std</code>; <code>functions</code> pulls <code>regex</code> with <code>std, unicode, perf</code>; serde, <code>Arc</code> copy-on-write bands, and <code>String</code> all need <code>alloc</code>; PdfCraft needs <code>image</code>, <code>icu_properties</code>, <code>url</code> and filesystem-free but allocation-heavy parsers. <code>gridcraft-formula</code> (core + serde + thiserror) is the most plausible, with <code>alloc</code>, if <code>chrono</code> is isolated behind a feature. Blockers: no allocator story in the proven spike (needs a bump allocator or <code>MAlloc</code> import), <code>libm</code> for transcendentals, <code>regex</code> replacement, TCG speed, upstream churn (a weekly 0.x release stream will not stay compatible with a fork). Effort L for formula only, XL for engine. Rejected for now.</p>
+<p><strong>R5. Rust staticlib with a C ABI, linked into Aiwnios.</strong> Wrap <code>gridcraft-engine</code> in a 100-line <code>crate-type = ["staticlib"]</code> shim (<code>gc_open</code>, <code>gc_execute(json) -&gt; json</code>, <code>gc_free</code>), build with rustc 1.95 or later, register the symbols with <code>PrsAddSymbol</code> as <code>aiwnios/README.md</code> describes <strong>[S]</strong>. No serial hop, so edits answer in microseconds; <code>Session::execute</code> already restores state on a panic [V]. But it exists on the arm64 Aiwnios build only; the x86 TempleOS guest cannot load it, which breaks the single-source rule of <code>desk3/0*.HC</code> <strong>[S]</strong>. Effort M. Rank it after R3, as an optimisation of the same service API if hub latency proves too high for interactive recalculation.</p>
+<p><strong>R6. Port to HolyC.</strong> Rejected. GridCraft alone is 8.1 MB of Rust source with 313 commands and 513 listed functions [V]; our spreadsheets plan scopes a calculator-grade P0/P1/P2 of about 60 functions in HolyC [S: spreadsheets.md]. HolyC has no generics, no iterators, no JSON, a stack-ABI and x87 float; the upstream changes weekly; XL and permanent.</p>
+<p><strong>Ranking:</strong> R3 &gt; R2 &gt; R5 &gt; R1 &gt; R4 &gt; R6. R1 and R5 swap places if the user wants the apps' own UI (R1) versus speed (R5): for the stated aim (spreadsheet, slides, docs, PDF, image, music, design tools) the services in R3 give more value for less cost.</p>
+<h2 id="4-per-app-fit-question-3">4. Per-app fit (question 3)<a class="headerlink" href="#4-per-app-fit-question-3" title="Link to this section">#</a></h2>
+<p>"Best route" assumes the guest keeps its HolyC UI and the host does the heavy work. Effort <strong>[M]</strong>.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>Status [V]</th>
+<th>Best route</th>
+<th>Effort</th>
+<th>Value to us</th>
+<th>Blockers</th>
+<th>Licence note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GridCraft</td>
+<td>alpha, v0.12.1</td>
+<td>R3 now (CLI/MCP: xlsx, xlsb, ods to JSON/CSV, <code>eval</code>, <code>check</code>, <code>commands</code>); R5 later; R2 demo</td>
+<td>S</td>
+<td>High: Spreadsheets import/export, formula oracle, function spec</td>
+<td>no PNG/PDF export headless; 513 functions are an inventory, not proven</td>
+<td>MIT or Apache-2.0; ArtCraft marks removed from forks</td>
+</tr>
+<tr>
+<td>PdfCraft</td>
+<td>alpha, v0.14.0</td>
+<td>R3 (MCP: render_preview, text_extract, organise, merge/split/rotate)</td>
+<td>M</td>
+<td>High: PDF viewer and organiser, text search</td>
+<td>CLI zip is 63 MB; fuzzing still finds crashes and hangs (README); hayro render is a stopgap</td>
+<td>MIT or Apache-2.0; OCR models via <code>cargo xtask models</code> (extra download)</td>
+</tr>
+<tr>
+<td>WordCraft</td>
+<td>alpha</td>
+<td>R3 (<code>convert</code>, <code>inspect</code>, <code>render_page</code>; docx/odt/rtf/md in, PDF/PNG out)</td>
+<td>M</td>
+<td>High: Docs import/export, page images</td>
+<td>no version stated in README; sizes of releases not checked</td>
+<td>MIT or Apache-2.0; PDF via krilla [V]</td>
+</tr>
+<tr>
+<td>DeckCraft</td>
+<td>alpha</td>
+<td>R3 (<code>render --all</code> PNGs, pptx r/w, PDF)</td>
+<td>M</td>
+<td>High: Slides pptx import, thumbnails, PDF export</td>
+<td>crates list not in README; pptx fidelity unknown</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>SoundCraft</td>
+<td>pre-alpha</td>
+<td>R3 for convert/bounce/LUFS/FFT; never a DAW in the guest</td>
+<td>S</td>
+<td>Low to medium: Music conversion and analysis</td>
+<td>audio devices need CoreAudio in a visible app; no guest audio</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>PhotoCraft</td>
+<td>early alpha</td>
+<td>R3 batch convert/decode (PSD, WebP, EXR, HEIC) for the image viewer; R2 for editing</td>
+<td>M</td>
+<td>Medium</td>
+<td>24 crates, wasm 24 MB [secondary]; no generative AI</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>VectorCraft</td>
+<td>alpha</td>
+<td>R3 SVG/PDF raster export; R2 for editing</td>
+<td>M</td>
+<td>Medium: design tools, SVG rasteriser for our browser tile</td>
+<td>rasteriser not named in README</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>DesignCraft</td>
+<td>pre-alpha</td>
+<td>R3 page PNG/PDF export; skip editing</td>
+<td>S</td>
+<td>Low</td>
+<td>pre-alpha; IDML/INDD paths niche</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>FigCraft</td>
+<td>early alpha</td>
+<td>R2 or R3 export (tiny-skia SVG/PNG); disable sharing</td>
+<td>M</td>
+<td>Medium: design tools</td>
+<td><code>.fig</code> import best effort; default collab server <code>collab.craftapps.dev</code></td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>LightCraft</td>
+<td>alpha</td>
+<td>R3 <code>render</code> of raw files for the image viewer</td>
+<td>S</td>
+<td>Low to medium</td>
+<td>WebGPU still in progress on web</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>CADCraft</td>
+<td>early dev</td>
+<td>R3 <code>convert</code>/render of DXF/DWG</td>
+<td>S</td>
+<td>Low</td>
+<td><code>acadrust</code> licence unchecked</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>EffectCraft</td>
+<td>alpha</td>
+<td>none (video render); optional R2 demo</td>
+<td>n/a</td>
+<td>Low</td>
+<td>heavy; no guest video</td>
+<td>MIT or Apache-2.0</td>
+</tr>
+<tr>
+<td>FilmCraft</td>
+<td>alpha</td>
+<td>none</td>
+<td>n/a</td>
+<td>None</td>
+<td>video; apps page vs README conflict on wasm</td>
+<td>MIT or Apache-2.0; symphonia is MPL-2.0</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-reuse-as-spec-code-or-build-ourselves-question-4">5. Reuse as spec, code, or build ourselves (question 4)<a class="headerlink" href="#5-reuse-as-spec-code-or-build-ourselves-question-4" title="Link to this section">#</a></h2>
+<p><strong>Reuse as spec (zero risk, high value).</strong> <code>gridcraft-cli functions --json</code> and <code>commands --json</code> give a machine-readable list of 513 functions and 313 commands; <code>docs/function-parity.md</code> (17.8 KB), <code>file-format-parity.md</code> (31.3 KB) and <code>parity-checklist.md</code> exist in the repo and can be read by the spreadsheet plan's P0/P1/P2 lists. PdfCraft's <code>pdf-spec-parity.md</code>, WordCraft's 422-command catalog and DeckCraft's 200+ commands play the same role for PDF viewer, Docs and Slides.</p>
+<p><strong>Reuse as code (host side only).</strong>
+- Replace IronCalc as the first-choice oracle and host converter in <code>docs/apps/spreadsheets.md</code> section 8 with GridCraft: it reads xlsx, xlsb and ods, writes xlsx/csv/tsv/json/html, and has a <code>check</code> accuracy runner. Keep IronCalc and calamine as a second opinion; HyperFormula stays blocked (GPLv3) [S].
+- In <code>docs/apps/slides.md</code>, <code>python-pptx</code> and <code>pptxgenjs</code> can drop to fallback status once DeckCraft's pptx round trip is checked; its <code>render --all</code> gives slide PNGs the plan did not have.
+- For Docs, WordCraft's <code>convert</code> covers docx/odt/rtf/md/tex import and PDF export that nothing in the current plan does.
+- LibreOffice stays the outside-reference oracle; the plans call it "never linked" [S].</p>
+<p><strong>Build ourselves.</strong> The HolyC grid editing, native recalculation for sub-30 ms edits (the spreadsheet plan's budget), our window chrome, and the approvals UI. Interactive latency over the hub is unmeasured (one-shot CLI start-up times are not known <strong>[M]</strong>), so the native engine stays the P0 plan; the hub engine becomes import/export and oracle.</p>
+<p><strong>What we can drop.</strong> The converter choice among SheetJS, openpyxl, calamine (if GridCraft's reader passes our corpus), a custom pptx text-run importer, and any plan to port a PDF reader. We keep sound playback (host <code>afplay</code>, already built).</p>
+<h2 id="6-security-and-privacy-question-5">6. Security and privacy (question 5)<a class="headerlink" href="#6-security-and-privacy-question-5" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>What the apps send where.</strong> The READMEs of PdfCraft and PhotoCraft claim no AI features, no telemetry and no network at runtime for documents: PdfCraft "no account, no telemetry, no cloud" [V]. FigCraft contacts no server until a user shares; sharing uploads to <code>collab.craftapps.dev</code> by default, unencrypted at rest [V]. GridCraft's page makes no privacy claim; its only AI claim is agent-driven automation through MCP/CLI/JSON [V]. The AI layer lives in <code>craft-ai-integrations</code> ("first draft", 111 stars): OpenAI-compatible APIs, Black Forest Labs, Vertex Gemini, BytePlus Seedance, "ArtCraft Omni API-key route", local ComfyUI and SAM; keys in the OS keychain, an encrypted file or env vars; the README does not say what data goes to each provider and does not mention telemetry; its own test coverage is local mock servers only [V]. The ArtCraft studio itself is a separate AI product with a 62-model catalog [V]. Self-update: <code>craft-update</code> is a dependency of GridCraft and PdfCraft [V]; what it contacts at runtime I did not read <strong>[M]</strong>. The launcher checks GitHub releases [V].</li>
+<li><strong>Our approval rules.</strong> The hub keeps tokens and keys on the host and grants live in <code>approvals.json</code> [S]. Rules for these services: no network for any ArtCraft child process (macOS <code>sandbox-exec</code> profile with <code>(deny network*)</code>, read access limited to the user-approved folder, write access limited to a scratch directory) <strong>[M: profile text is mine, untested]</strong>; the MCP <code>--root</code>/<code>--automation-*-root</code> flags as the second fence [V]; no <code>craft-ai-*</code> feature ever enabled without its own PROMPT naming the provider and the data; the control channel is never used for services (it is for R1 only), and if used, the token stays on the host.</li>
+<li><strong>Running untrusted alpha binaries.</strong> We never run a downloaded binary without approval. The install flow <code>apps-host/install.py</code> already requires an explicit <code>--sha256</code>, safe extraction, codesign checks and a registry [S]. It handles <code>.app</code> bundles with Electron; a <strong>Mach-O CLI kind</strong> needs a small addition. The guest dialog must show: name, version tag, source URL, exact file name and size, the SHA-256 from the release's <code>SHA256SUMS.txt</code> and the one we computed, the codesign/notarisation result, the folder it may read, the statement "no network", and Yes/No. On Yes: host downloads, hashes, extracts, runs <code>codesign -dv --verbose=2</code> and <code>spctl --assess</code> (a notarised DMG is claimed signed and notarised by the launcher README [V]; whether the CLI zip is signed is <strong>unverified</strong>), stores it under <code>apps/artcraft/&lt;version&gt;/</code>, and records the grant. A SHA-256 taken from the same release proves integrity, not authorship: say so in the dialog. Do not use <code>craft-launcher</code>: it installs into <code>/Applications</code>, may prompt for admin rights, and self-updates [V]. Pin one release, and let updates be a new approval each.</li>
+<li><strong>Source build instead of binaries.</strong> Building runs their <code>build.rs</code> and downloads git dependencies from <code>storytold</code> forks of egui and winit [V]. It needs a clone, which is also approval-gated, and is no safer than a binary. Not recommended.</li>
+<li><strong>Prompt injection.</strong> MCP returns document text; hub rows and tool output are data, never instructions, and an MCP session must not receive guest-supplied instructions as commands [S: hub policy].</li>
+</ul>
+<h2 id="7-prototype-plan-with-gates-question-6">7. Prototype plan with gates (question 6)<a class="headerlink" href="#7-prototype-plan-with-gates-question-6" title="Link to this section">#</a></h2>
+<p><strong>Evidence favours GridCraft CLI behind the hub for day one</strong> over a WASM tile demo: smallest useful artefact, fastest to verify, and it exercises the pieces (hub, approvals, host install) every later step shares. The WASM tile test is an optional hour.</p>
+<p>Downloads that need approval (sizes from release asset lists [V]):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>File</th>
+<th>Source</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>gridcraft-cli-0.12.1-macos-universal.zip</code></td>
+<td><code>https://github.com/storytold/gridcraft/releases/download/v0.12.1/</code></td>
+<td>11,677,900 B</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>SHA256SUMS.txt</code></td>
+<td>same release</td>
+<td>2,806 B</td>
+</tr>
+<tr>
+<td>3 (optional)</td>
+<td><code>gridcraft-web-0.12.1.zip</code></td>
+<td>same release</td>
+<td>7,660,730 B</td>
+</tr>
+<tr>
+<td>Week 1</td>
+<td><code>pdfcraft-cli-0.14.0-macos-universal.zip</code></td>
+<td><code>https://github.com/storytold/pdfcraft/releases/download/v0.14.0/</code></td>
+<td>63,140,735 B</td>
+</tr>
+<tr>
+<td>Week 1 (optional)</td>
+<td><code>pdfcraft-web-0.14.0.zip</code></td>
+<td>same</td>
+<td>15,961,263 B</td>
+</tr>
+<tr>
+<td>Week 1</td>
+<td>WordCraft and DeckCraft CLI zips</td>
+<td>their releases</td>
+<td>sizes not read</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>One day</strong>
+1. Ask the user to approve items 1 and 2 (and optionally 3). Do not download before the yes.
+2. Fetch into a new empty directory (not the repo): <code>mkdir -p ~/Library/Caches/KosmosArtcraft/dl &amp;&amp; curl -fL -o dl/cli.zip &lt;url&gt;</code>; <code>shasum -a 256 dl/cli.zip</code> must equal the line in <code>SHA256SUMS.txt</code>.
+3. Extract with <code>install.py</code>'s safe extractor (rejects absolute paths, <code>..</code>, symlinks, size bombs [S]); <code>codesign -dv</code> and <code>spctl --assess</code> on the binary; <strong>first run only with <code>sandbox-exec</code> denying network</strong>: <code>gridcraft-cli version</code>, then <code>gridcraft-cli eval '=PMT(5%/12,360,-300000)' --json</code>.
+4. Add <code>apps-host/hub/services/grid.py</code>: request <code>grid:eval:&lt;formula&gt;</code>, <code>grid:info:&lt;path&gt;</code>, <code>grid:cat:&lt;path&gt;:&lt;range&gt;</code>, <code>grid:convert:&lt;in&gt;:&lt;out&gt;</code>; paths pass a <code>perms.py</code> folder grant; reply is JSON.
+5. HolyC test window (prototype only, not in <code>desk3</code>'s main files): a one-line formula box that calls the hub and prints the reply.
+- <strong>Gate 1:</strong> eval round trip under 150 ms in the VM, <code>convert</code> of a 200-row xlsx to CSV matches the host-computed result, and a 20 KB <code>cat</code> reply returns with CRC intact (the hub already passes a 20 KB reply [V]).
+- <strong>Gate 2 (optional, an hour):</strong> unzip item 3 into an appd directory, <code>appd web run ./gridcraft-web</code> with <code>render: tiles</code>; gate: first frame appears in a guest window, a click on A1 and typing <code>=1+2</code> shows 3 within 500 ms host side. Record the headless-Chrome GPU result (WebGPU vs WebGL2) as the important unknown.</p>
+<p><strong>One week (MVP)</strong>
+- Generalise to a service registry: <code>grid</code>, <code>pdf</code> (MCP stdio, <code>render_preview</code> PNG re-encoded to our RLE image format, <code>text_extract</code>, <code>page_extract</code>), <code>docs</code> (WordCraft <code>convert</code> to PDF/PNG), <code>slides</code> (DeckCraft <code>render --all</code>).
+- Guest apps: a PDF viewer that shows host-rendered pages with scroll and text search (bytes: a page tile at 600x800 RLE budget to be measured), and an import button in the planned Spreadsheets and Slides apps.
+- Install flow for CLI kind with the dialog in section 6; the sandbox profile enforced and tested with a deliberate network attempt (must fail).
+- <strong>Gate 3:</strong> a 10-page PDF renders at 3 pages/second host side, page 1 visible in the guest in under 3 s over serial; hub exchange for xlsx import under 2 s; the network-deny test fails closed; a malformed xlsx and a malformed pdf return an error without hanging the hub (a timeout and kill is in the service wrapper).</p>
+<p><strong>Three months</strong>
+- Month 1: corpus. Run <code>gridcraft-cli check</code> over a corpus beside our own HolyC engine's goldens; adopt the function list as the spreadsheet P1/P2 spec; pptx and docx round-trip corpus against DeckCraft and WordCraft.
+- Month 2: if hub latency blocks interactive recalculation, build the R5 shim on the Aiwnios build behind the same service API; keep the HolyC engine for the x86 path.
+- Month 3: R2 tile apps for PhotoCraft/VectorCraft in appd as "Applications" entries (manifest kind <code>web</code>), only if the GPU question has a good answer; re-vet the upstream release, re-hash, re-approve.
+- <strong>Gate 4:</strong> the same <code>.xlsx</code> opens identically (values) in our HolyC sheet and GridCraft for all P0 functions; services survive a fresh install on a clean checkout with the approval dialog; every process runs under the deny-network profile.</p>
+<h2 id="8-risks-question-7">8. Risks (question 7)<a class="headerlink" href="#8-risks-question-7" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Likelihood / impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upstream is 4 to 5 weeks old and changes daily (0.5 to 0.12 in 3 weeks); formats and CLI flags will shift</td>
+<td>high / medium</td>
+<td>pin tag + SHA-256, wrap each CLI in one adapter, contract tests per call</td>
+</tr>
+<tr>
+<td>Unknown code quality (agent-heavy repos, fuzz crashes per PdfCraft README)</td>
+<td>high / medium</td>
+<td>sandbox, timeouts, kill; never feed secrets; treat output as untrusted</td>
+</tr>
+<tr>
+<td>Supply chain (storytold forks of egui and winit, git-pinned)</td>
+<td>medium / high</td>
+<td>no source builds without review; binary hash pinning; no auto-update</td>
+</tr>
+<tr>
+<td>Hidden runtime network (update checks, AI layer)</td>
+<td>medium / high</td>
+<td><code>sandbox-exec</code> deny network; <code>lsof</code>/Little Snitch style check once at first run</td>
+</tr>
+<tr>
+<td>Trademark/brand terms</td>
+<td>low / low</td>
+<td>do not ship ArtCraft names or logos inside the desktop; refer to "GridCraft" textually only after reading the brand licence</td>
+</tr>
+<tr>
+<td>Headless Chrome may lack WebGPU/WebGL2 for eframe</td>
+<td>medium / high for R2 only</td>
+<td>test in the optional hour; fall back to native window (R1)</td>
+</tr>
+<tr>
+<td>25x slowdown for any x86-in-QEMU compute (R4)</td>
+<td>certain / high for R4</td>
+<td>R4 stays rejected</td>
+</tr>
+<tr>
+<td>Disk and memory: PdfCraft CLI zip 63 MB; Chrome tab about 129 MB</td>
+<td>medium / low</td>
+<td>install on demand</td>
+</tr>
+<tr>
+<td>Marketing page and repos disagree (versions, FilmCraft wasm)</td>
+<td>certain / low</td>
+<td>use repo data and release assets only</td>
+</tr>
+<tr>
+<td>Per-call process start-up unknown</td>
+<td>medium / medium</td>
+<td>measure on day one; keep the MCP session open for hot paths</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-verified-versus-memory">9. Verified versus memory<a class="headerlink" href="#9-verified-versus-memory" title="Link to this section">#</a></h2>
+<p><strong>Verified today by fetch (sources: getartcraft.com/apps and /apps/gridcraft; GitHub API for the org, gridcraft, pdfcraft, craft-libs, gridcraft and pdfcraft releases and commits; raw files from gridcraft: README, Cargo.toml, docs/architecture.md, control-protocol.md, mcp.md, cli.md, ATTRIBUTION.md, crate manifests for core, formula, functions, calc, engine, pdf, gridcraft-web; pdfcraft: README, Cargo.toml, mcp.md, crates listing, cos/render/engine manifests; README files of photocraft, vectorcraft, wordcraft, deckcraft, soundcraft, cadcraft, filmcraft, lightcraft, effectcraft, designcraft, figcraft, craft-ai-integrations, artcraft, craft-launcher):</strong> everything tagged [V], including repo dates, stars, release assets and sizes, layering, dependencies, control protocol, MCP tools, licence statements.</p>
+<p><strong>Secondary source:</strong> wasm sizes for PhotoCraft (24.2 MB) and PdfCraft (37.9 MB), and the absence of a hosted demo, come from a web search summary of a third-party review, not from the project.</p>
+<p><strong>From memory or inference [M]:</strong> licences of egui, wgpu, hayro, lopdf, vello_cpu, krilla, skrifa, <code>acadrust</code>; whether the CLI zips are signed or notarised; whether <code>craft-update</code> contacts a server at runtime; headless Chrome GPU support for eframe; per-call CLI start-up time; PNG-per-frame latency for R1; tile byte estimates for egui frames; <code>sandbox-exec</code> behaviour for GUI apps; all effort sizes; the <code>hostd.py</code> wrapper size; thread usage outside <code>calc</code>.</p>
+<p><strong>Not read:</strong> <code>docs/apps/ai-ide.md</code>, <code>music.md</code>, <code>fonts.md</code>, <code>maps.md</code> and the other app plans in detail (only <code>spreadsheets.md</code>, <code>slides.md</code>, <code>applications-folder.md</code> and the cited sections of <code>web-apps.md</code>, <code>electron-apps.md</code>, <code>browser-architecture.md</code>, <code>engine-on-templeos.md</code> and <code>aiwnios/README.md</code> were consulted); the rest of the org's repos beyond the first API page; any app's source files (I read manifests and docs only); <code>craft-update</code>, <code>craft-window</code>, <code>craft-pdf</code>; the ROADMAP files. No statement here about code quality rests on running anything.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/electron-apps/index.html" rel="prev"><span>Previous</span>Electron apps in the HolyC desktop (prototype)</a><a class="next" href="../../docs/kamiji-on-templeos/index.html" rel="next"><span>Next</span>Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-answer">1. Answer</a></li><li><a href="#2-what-they-really-are-question-1">2. What they really are (question 1)</a><ul><li><a href="#21-organisation-maturity-licences">2.1 Organisation, maturity, licences</a></li><li><a href="#22-stack-gridcraft-in-detail-others-from-readmes">2.2 Stack (GridCraft in detail, others from READMEs)</a></li><li><a href="#23-cli-control-channel-and-mcp">2.3 CLI, control channel and MCP</a></li></ul></li><li><a href="#3-routes-into-templeos-question-2">3. Routes into TempleOS (question 2)</a></li><li><a href="#4-per-app-fit-question-3">4. Per-app fit (question 3)</a></li><li><a href="#5-reuse-as-spec-code-or-build-ourselves-question-4">5. Reuse as spec, code, or build ourselves (question 4)</a></li><li><a href="#6-security-and-privacy-question-5">6. Security and privacy (question 5)</a></li><li><a href="#7-prototype-plan-with-gates-question-6">7. Prototype plan with gates (question 6)</a></li><li><a href="#8-risks-question-7">8. Risks (question 7)</a></li><li><a href="#9-verified-versus-memory">9. Verified versus memory</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

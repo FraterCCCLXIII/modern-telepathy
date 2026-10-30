@@ -1,0 +1,30 @@
+/* "In motion" section. Light theme only; uses the tokens from style.css. */
+.mo-head { max-width: 44rem; margin-bottom: 28px; }
+.mo-head .sub { margin: 1em 0 0; }
+.mo-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; background: var(--card); border-radius: 22px; padding: 14px 20px; margin-bottom: 24px; box-shadow: 0 1px 0 var(--faint), 0 18px 40px -28px var(--shadow); }
+.mo-ctl { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.mo-ctl .pills { flex-wrap: nowrap; }
+.mo-speed { display: flex; align-items: center; gap: 10px; }
+.mo-speed input[type="range"] { width: 9rem; max-width: 100%; accent-color: var(--sel); height: 36px; margin: 0; }
+.mo-speed output { font: .72rem/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; min-width: 4.5em; color: var(--fg); }
+.mo-btn { min-width: 5.5rem; text-transform: none; }
+.mo-btn:disabled, .mo-speed input:disabled { opacity: .45; cursor: not-allowed; }
+.mo-note { font: .72rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: -8px 0 20px; }
+.mo-note[hidden] { display: none; }
+.mo-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 18px; }
+.mo-item { min-width: 0; }
+.mo-fig { margin: 0; }
+.mo-stage { aspect-ratio: 1; width: 100%; background: var(--card); border-radius: 24px; box-shadow: 0 1px 0 var(--faint), 0 18px 40px -30px var(--shadow); }
+figcaption { display: grid; gap: 2px; padding: 10px 4px 0; min-width: 0; }
+.mo-name { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.mo-state, .mo-acc { font: .68rem/1.5 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); overflow-wrap: anywhere; }
+.mo-acc { color: var(--accent); }
+.mo-foot { margin: 28px 0 0; max-width: 46rem; font: .72rem/1.7 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.mo-fail { grid-column: 1 / -1; color: var(--muted); }
+@media (max-width: 1000px) { .mo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .mo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+  .mo-controls { padding: 14px 16px; border-radius: 20px; gap: 12px 16px; }
+  .mo-speed input[type="range"] { width: 7rem; }
+  .mo-stage { border-radius: 18px; }
+}

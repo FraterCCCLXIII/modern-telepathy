@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Porting method: Kosmos OS shell primitives to the Temple desktop | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html" aria-current="page">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Porting method: Kosmos OS shell primitives to the Temple desktop</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Porting method: Kosmos OS shell primitives to the Temple desktop</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/01-porting-method.md</span></div>
+        <div class="doc-body">
+
+<p>Written 2026-10-27 from kosmos-os-frame at 636534e. The repo is "Kosmos OS" in the brief and "Arco OS" (package <code>arco-os</code>) in its README; this doc uses repo names. Marked (read) = checked in files this session. Marked (inferred) = estimate or reasoning, not run.</p>
+<h2 id="1-classes-and-the-decision-rule">1. Classes and the decision rule<a class="headerlink" href="#1-classes-and-the-decision-rule" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>N, native</strong>: UI written in HolyC on desk3 widgets, or as a tree for the interpreter (section 4).</li>
+<li><strong>H, host service</strong>: logic stays on the Mac in Node; the guest calls it over the channel (section 3). Reused unchanged when the module has no DOM or React.</li>
+<li><strong>S, spec only</strong>: read the behaviour, write new code. Used for web-specific code and for anything whose licence does not allow reuse (section 8).</li>
+<li><strong>X, skip</strong>: web, Electron, mobile or media-bound code, or not wanted on the desk.</li>
+</ul>
+<p>Decision order: no DOM and no React gives H (run it, do not rewrite). Data the host owns gives N view plus H data. Pure UI gives N. Browser media (audio, video, map tiles, canvas-heavy) gives X, or H for the data only.</p>
+<p>Effort uses the core-apps units: S about a day, M about three days, L about a week, XL more (inferred).</p>
+<h2 id="2-classification-table">2. Classification table<a class="headerlink" href="#2-classification-table" title="Link to this section">#</a></h2>
+<p>Line counts are recursive over the directory, excluding tests and <code>.d.ts</code>. Dependency signals come from grep over those files. <code>src/components/</code> (11307 lines, 92 files) is shared web UI that most apps import; it is ported per app, not as a block.</p>
+<p>Shell (<code>src/os/</code>)</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Source (lines)</th>
+<th>Deps</th>
+<th>Class</th>
+<th>Effort</th>
+<th>Blocked by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windowing</td>
+<td>windowStore.ts 662, WindowFrame.tsx 225, WindowControls.tsx 98</td>
+<td>React, DOM</td>
+<td>N</td>
+<td>M</td>
+<td>framework step; desk3 already has Frame and retained layers</td>
+</tr>
+<tr>
+<td>Desktop, wallpapers</td>
+<td>Desktop.tsx 222, wallpaper/ 807</td>
+<td>React, canvas</td>
+<td>N</td>
+<td>S</td>
+<td>desk3 has Aurora, Mist, Grid; starfield and game wallpapers X</td>
+</tr>
+<tr>
+<td>Dock</td>
+<td>Dock.tsx 227, HoverDock.tsx 97</td>
+<td>React</td>
+<td>N</td>
+<td>S</td>
+<td>none, Dock() exists</td>
+</tr>
+<tr>
+<td>Menu bar</td>
+<td>MenuBar.tsx 278, HoverMenuBar.tsx 101, status items 430</td>
+<td>React</td>
+<td>N chrome, H status</td>
+<td>S</td>
+<td>status needs host services</td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td>no module; OsNotification in osStore.ts, shown by Desktop.tsx</td>
+<td>React state</td>
+<td>N</td>
+<td>S</td>
+<td>framework step; desk3 has no Notify</td>
+</tr>
+<tr>
+<td>Lock, idle lock</td>
+<td>auth/AuthGate.tsx 174, auth/screens.tsx 329</td>
+<td>React, DOM, fetch</td>
+<td>S</td>
+<td>M</td>
+<td>text field (password), host auth</td>
+</tr>
+<tr>
+<td>Login, install wizard</td>
+<td>auth/InstallFlow.tsx 763, auth/authStore.ts 165</td>
+<td>React, fetch</td>
+<td>X</td>
+<td>-</td>
+<td>web server setup; desk has one owner</td>
+</tr>
+<tr>
+<td>Command palette</td>
+<td>CommandPalette.tsx 216, commandPaletteEntries.ts 166</td>
+<td>React; entries pure TS</td>
+<td>N UI, H entries</td>
+<td>S</td>
+<td>text field, list</td>
+</tr>
+<tr>
+<td>App launch, registry</td>
+<td>shellApps.ts 63, systemApps.tsx 158, pinnedApps.ts 136, nativeAppWindows.ts 67</td>
+<td>React</td>
+<td>N</td>
+<td>S</td>
+<td>section 5</td>
+</tr>
+<tr>
+<td>OS store, actions</td>
+<td>osStore.ts 469, osActions.ts 401, shellEvents.ts 90, shellNavigation.ts 165</td>
+<td>DOM, fetch</td>
+<td>H actions, S store</td>
+<td>M</td>
+<td>host bridge</td>
+</tr>
+<tr>
+<td>Hover card</td>
+<td>AppHoverCard.tsx 344, appHoverCardHandlers.ts 65</td>
+<td>React, DOM</td>
+<td>X</td>
+<td>-</td>
+<td>low value</td>
+</tr>
+<tr>
+<td>Keyboard map</td>
+<td>keyboardLayouts.ts 529, keyboardInsert.ts 165, physicalKeyHighlight.ts 80</td>
+<td>DOM events</td>
+<td>H</td>
+<td>S</td>
+<td>guest sends raw keys; host maps layout</td>
+</tr>
+<tr>
+<td>IME</td>
+<td>ime/ 772, inputMethodStore.ts 242</td>
+<td>DOM</td>
+<td>X now</td>
+<td>-</td>
+<td>needs a text field first</td>
+</tr>
+<tr>
+<td>Theme tokens</td>
+<td>themeTokens.ts 229</td>
+<td>DOM, localStorage</td>
+<td>N</td>
+<td>S</td>
+<td>token table, section 4.5</td>
+</tr>
+<tr>
+<td>Agent backends, tool status</td>
+<td>useAgentBackendsMenu.ts 128, AddAgentBackendWizard.tsx 300, useToolsStatus.ts 366</td>
+<td>React, fetch</td>
+<td>H data, N menu</td>
+<td>M</td>
+<td>host status service</td>
+</tr>
+<tr>
+<td>Agent UI driver</td>
+<td>cursor/ 922</td>
+<td>DOM, iframe</td>
+<td>X</td>
+<td>-</td>
+<td>drives web DOM; the desk equivalent is the tree</td>
+</tr>
+<tr>
+<td>Bento widgets</td>
+<td>bento/ 2200</td>
+<td>React, pointer, fetch</td>
+<td>N tiles, H data</td>
+<td>L</td>
+<td>widget kit v2, grid layout</td>
+</tr>
+<tr>
+<td>Mobile shell</td>
+<td>MobileShell 192, MobileDock 69, MobileStatusBar 132, SwipeRevealTray 140, mobileLocalBoot 106</td>
+<td>React, touch</td>
+<td>X</td>
+<td>-</td>
+<td>desktop target</td>
+</tr>
+<tr>
+<td>Server connect, updates</td>
+<td>os/server/ 896, UpdateModal.tsx 132, useDesktopUpdate.ts 108</td>
+<td>fetch, Electron</td>
+<td>X</td>
+<td>-</td>
+<td>web and Electron only</td>
+</tr>
+<tr>
+<td>i18n</td>
+<td>src/i18n/ 1903</td>
+<td>React context</td>
+<td>H strings</td>
+<td>S</td>
+<td>generated string table</td>
+</tr>
+</tbody>
+</table></div>
+<p>Apps (<code>src/apps/</code> unless stated)</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Source (lines)</th>
+<th>Deps</th>
+<th>Class</th>
+<th>Effort</th>
+<th>Blocked by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent chat, tool cards</td>
+<td>chat/ 2149</td>
+<td>React, SSE, fetch</td>
+<td>H agent, N cards</td>
+<td>L</td>
+<td>streaming channel, scroll view, text wrap</td>
+</tr>
+<tr>
+<td>Generative apps (OpenUI)</td>
+<td>appview/ 813, generator/ 619, shared/manifest.ts 233</td>
+<td>React, @openuidev</td>
+<td>N via tree</td>
+<td>M</td>
+<td>interpreter, widget kit v2</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td>terminal/ 108; server/shellChannel.ts 65, runManager.ts 91</td>
+<td>child process</td>
+<td>H exec, N grid</td>
+<td>M</td>
+<td>streamed exec on host</td>
+</tr>
+<tr>
+<td>Files</td>
+<td>files/ 3671; server/services/filesService.ts 595</td>
+<td>React, fetch</td>
+<td>H store, N view</td>
+<td>L</td>
+<td>list, text field, host file service</td>
+</tr>
+<tr>
+<td>Studio</td>
+<td>studio/ 8026; server/stores/workspaceStore.ts 405</td>
+<td>React, DOM, git</td>
+<td>H backend, X UI</td>
+<td>XL</td>
+<td>after Files and Terminal</td>
+</tr>
+<tr>
+<td>Model hub</td>
+<td>models/ 634; server/stores/modelStore.ts 487</td>
+<td>React, fetch</td>
+<td>N, H</td>
+<td>M</td>
+<td>list and form widgets</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>memory/ 1505; server/memory/ 869</td>
+<td>React, SQLite</td>
+<td>H, N</td>
+<td>L</td>
+<td>store, list</td>
+</tr>
+<tr>
+<td>Automations</td>
+<td>automations/ 1489; server/stores/automationStore.ts 309; server/automations/ 221</td>
+<td>React, cron</td>
+<td>H, N</td>
+<td>M</td>
+<td>list, form</td>
+</tr>
+<tr>
+<td>Skills</td>
+<td>skills/ 568; server/skills/ 445</td>
+<td>React, fs</td>
+<td>H, N</td>
+<td>S</td>
+<td>host registry</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>server/mcp/ 667</td>
+<td>child processes</td>
+<td>H</td>
+<td>M</td>
+<td>host only, no UI</td>
+</tr>
+<tr>
+<td>Calendar</td>
+<td>calendar/ 1789; server/services/calendarService.ts 159</td>
+<td>React, SQLite on host</td>
+<td>N view, H store</td>
+<td>M</td>
+<td>month grid, host store</td>
+</tr>
+<tr>
+<td>Tasks</td>
+<td>tasks/ 1444; server/services/tasksService.ts 215</td>
+<td>React</td>
+<td>N, H</td>
+<td>M</td>
+<td>list, drawer, host store</td>
+</tr>
+<tr>
+<td>Contacts</td>
+<td>contacts/ 1369</td>
+<td>React, DOM</td>
+<td>N</td>
+<td>M</td>
+<td>list, form; store not located</td>
+</tr>
+<tr>
+<td>Notes</td>
+<td>notes/ 3479</td>
+<td>React, DOM</td>
+<td>N</td>
+<td>M</td>
+<td>text field, undo</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>settings/ 7326</td>
+<td>React, DOM</td>
+<td>N, per page</td>
+<td>S per page</td>
+<td>widget kit v2</td>
+</tr>
+<tr>
+<td>Sheets</td>
+<td>sheets/ 1145; shared/sheetFormula.ts 175</td>
+<td>React</td>
+<td>H formulas, N grid</td>
+<td>L</td>
+<td>grid widget</td>
+</tr>
+<tr>
+<td>Board</td>
+<td>board/ 946; server/services/boardService.ts 305</td>
+<td>React</td>
+<td>N, H</td>
+<td>M</td>
+<td>list, drag</td>
+</tr>
+<tr>
+<td>Calculator</td>
+<td>server/services/calculatorService.ts 82; shared/math/ 271</td>
+<td>none in math</td>
+<td>H evaluate, keep desk UI</td>
+<td>S</td>
+<td>host channel</td>
+</tr>
+<tr>
+<td>Timer</td>
+<td>apps/timer/app.js 449 (+ html 97, css 368)</td>
+<td>DOM, localStorage</td>
+<td>H logic, N UI</td>
+<td>S</td>
+<td>interpreter v0, notify</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>email/ 1157; server/mail/ 1649</td>
+<td>React, IMAP</td>
+<td>H, N</td>
+<td>L</td>
+<td>HTML to text, approval prompts</td>
+</tr>
+<tr>
+<td>Documents, slides</td>
+<td>packages/doc-interop/ 1566, packages/editor-kit/ 843, apps/docs 425, apps/slides 1273</td>
+<td>React, DOM</td>
+<td>H convert, S editor</td>
+<td>XL</td>
+<td>rich text view</td>
+</tr>
+<tr>
+<td>Music, podcast, video</td>
+<td>music/ 3121, podcast/ 3131, video/ 1034</td>
+<td>Web Audio, media</td>
+<td>H library, X playback</td>
+<td>L</td>
+<td>host playback</td>
+</tr>
+<tr>
+<td>Maps</td>
+<td>maps/ 963; shared/maps 52; server/services/mapsService.ts 167</td>
+<td>DOM map</td>
+<td>X</td>
+<td>-</td>
+<td>web tiles</td>
+</tr>
+<tr>
+<td>Social, messenger, groups</td>
+<td>social/ 2276, server/social/ 6026, messenger/ 1108, groups/ 463</td>
+<td>React, fetch</td>
+<td>X</td>
+<td>-</td>
+<td>network products</td>
+</tr>
+<tr>
+<td>Downloads</td>
+<td>downloads/ 1444; torrentService.ts</td>
+<td>React</td>
+<td>X</td>
+<td>-</td>
+<td>product decision first</td>
+</tr>
+<tr>
+<td>Payments, key wallet</td>
+<td>pay/ 1157, key-wallet/ 375</td>
+<td>React</td>
+<td>X</td>
+<td>-</td>
+<td>financial; needs a spec</td>
+</tr>
+<tr>
+<td>Others</td>
+<td>longformer 3563, imagegen 423, search 370, meet 500, kamiji 651, library 577, apis 524, startup 466, onboarding 377, keyboard 310</td>
+<td>mostly React</td>
+<td>X now</td>
+<td>-</td>
+<td>low value or web-specific</td>
+</tr>
+</tbody>
+</table></div>
+<p>Data and platform</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Source (lines)</th>
+<th>Deps</th>
+<th>Class</th>
+<th>Effort</th>
+<th>Blocked by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS-owned stores</td>
+<td>server/stores/db.ts 68; server/services/ 7650 (6 files use better-sqlite3)</td>
+<td>better-sqlite3 (MIT)</td>
+<td>H</td>
+<td>M per store</td>
+<td>host bridge</td>
+</tr>
+<tr>
+<td>App SDK, manifest</td>
+<td>packages/app-sdk/ 384; shared/manifest.ts 233; server/platform/ 657</td>
+<td>postMessage</td>
+<td>H validate, S SDK</td>
+<td>S</td>
+<td>section 5</td>
+</tr>
+<tr>
+<td>Platform bridges</td>
+<td>packages/platform-bridge/ 428</td>
+<td>Electron, Capacitor, Tauri</td>
+<td>X</td>
+<td>-</td>
+<td>shell-specific</td>
+</tr>
+<tr>
+<td>Widget registry</td>
+<td>shared/widgets/ 330</td>
+<td>none</td>
+<td>H validate, N render</td>
+<td>S</td>
+<td>section 4</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-the-host-service-pattern">3. The host-service pattern<a class="headerlink" href="#3-the-host-service-pattern" title="Link to this section">#</a></h2>
+<p><strong>3.1 Process.</strong> <code>kosmos-hostd</code> is a Node 22 process on the Mac, the runtime the Kosmos server already uses. It loads modules with no DOM or React: shared/math, shared/sheetFormula, shared/widgets, shared/manifest, shared/capabilities, server/stores, server/services, server/automations, server/mcp, server/skills (import graphs not traced, inferred). Not hostable: src/*, packages/app-sdk and platform-bridge (DOM), packages/editor-kit (React). packages/doc-interop touches DOM names in six files; check before loading. Server modules import <code>server/env.ts</code> (dataDirs) and <code>server/bus.ts</code>; hostd supplies both as small shims (read: calculatorService.ts).</p>
+<p><strong>3.2 Channel.</strong> Today, desk3 talks to <code>scripts/browser-bridge.py</code> over COM1 with a line protocol (03b-browser.HC: GET, W, ERR, OK). Each request is one round trip; core-apps measured the lockstep loader at about 1.4 KB/s. The plan's streaming gate is 50 KB/s with no per-chunk acknowledgement (inferred that this is unmeasured). Use the framing below, plus a sequence number and CRC. On Aiwnios, <code>platform.HC</code> declares only KsOpen, KsPresent, KsPresentRect, KsPoll, KsInject and KsExec (read). KsExec starts a process per call: fine for one-shot requests, wrong for events. Add loopback TCP natives (KsSockOpen, KsSockRead, KsSockWrite) to <code>aiwnios-sdl32.patch</code> (inferred: S to M).</p>
+<p><strong>3.3 Wire format.</strong> Records, not JSON. One record per line; fields separated by TAB; <code>\t</code>, <code>\n</code> and <code>\\</code> escaped; first field is the op. Blobs over 4 KB go as <code>BLOB n</code> then n raw bytes. HolyC has no JSON parser; a TAB splitter is about 40 lines.</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>guest -&gt; host   REQ 17 calendar.events.list 2026-10-27 2026-11-03
+host -&gt; guest   RSP 17 ok 2
+host -&gt; guest   ROW evt-1 Standup 09:30
+host -&gt; guest   EV  notify &quot;Focus block finished&quot;</code></pre></figure>
+<p><strong>3.4 Typed bindings.</strong> One schema, two generated sides, one check.
+- <code>hostproto/protocol.json</code>: ops, field names and types, reply shapes. The only definition of a message.
+- <code>tools/hostproto/gen.mjs</code>: Node stdlib only, modelled on <code>kosmos-engine/tools/protocol-sdk/gen.mjs</code> (179 lines, <code>--check</code> fails when the committed output differs). It emits <code>hostd/src/proto.ts</code> (types, encode, decode, exhaustive dispatch) and <code>desk3/hostproto.HC</code> (op and field-index constants, encode and split helpers, no per-op logic).
+- <code>hostproto/fixtures/*.rec</code>: sample records that both sides must decode to equal fields.
+- Run <code>--check</code> in the pre-PR script.</p>
+<p>Precedent in kosmos-os-frame: <code>scripts/generate-prompts.ts</code> writes build-time artifacts that the server reads (read).</p>
+<p><strong>3.5 Data stores.</strong> The host is the single source of truth. Each namespace is one SQLite file under the host data directory (read: server/stores/db.ts, <code>data/db/&lt;ns&gt;.sqlite</code>). Rules:
+1. The guest never opens a database. It calls an intent (<code>tasks.list</code>, <code>calendar.event.create</code>), and hostd checks the app's grant first. This keeps one choke point, as the app-platform plan requires.
+2. The guest keeps only the last reply, for drawing. On disconnect it shows a stale view with a banner. It does not write locally.
+3. Anything that sends, deletes or spends needs a prompt answered in the UI before hostd runs it.
+4. One hostd process owns each file (better-sqlite3 is synchronous).
+5. The desk has one owner. Set the owner in hostd config and drop multi-user checks on the desk path.</p>
+<h2 id="4-ui-translation">4. UI translation<a class="headerlink" href="#4-ui-translation" title="Link to this section">#</a></h2>
+<p><strong>4.1 Tree format.</strong> The guest does not parse JSON. A tree is indented records: indentation is depth, <code>key=value</code> are attributes, quoted strings are text.</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>ui 1
+col pad=16 gap=10
+ text f=big c=ink &quot;Timer&quot;
+ row gap=6
+  button id=p.300000 &quot;5m&quot;
+  button id=p.900000 &quot;15m&quot;
+ list id=entries
+  row id=e.k3 gap=8
+   text f=bold c=ink &quot;Focus block&quot;
+   text id=r.k3 f=reg c=accent &quot;4:58&quot;
+   button id=pause.k3 &quot;Pause&quot;
+   button id=remove.k3 &quot;Remove&quot;</code></pre></figure>
+<p>Ids are host strings (up to 24 characters). The guest maps each id to a node index and sends the id back in events. Colours are palette slot names, never hex.</p>
+<p><strong>4.2 Interpreter.</strong> <code>desk3/ui/tree.HC</code>: a fixed pool of 512 nodes. TREE parses into the pool in one pass and lays out. Every frame paints with the existing Txt, RRFill, Button, Toggle, Check, Radio and Slider, and each interactive node gets a Hit with aux set to its index. Events leave as <code>EV &lt;id&gt; &lt;kind&gt; [value]</code>. SET changes one node's text and relayouts only if its width changes.</p>
+<p>Widget set, by phase:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Tree node</th>
+<th>Kosmos source (catalog.ts group or shared/widgets registry)</th>
+<th>Desk primitive</th>
+<th>Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>row, col, card</td>
+<td>Layout</td>
+<td>RRFill plus layout</td>
+<td>v0</td>
+</tr>
+<tr>
+<td>text</td>
+<td>Content</td>
+<td>Txt, Wrap</td>
+<td>v0</td>
+</tr>
+<tr>
+<td>button</td>
+<td>Actions</td>
+<td>Button</td>
+<td>v0</td>
+</tr>
+<tr>
+<td>toggle, check, radio, slider</td>
+<td>Forms</td>
+<td>exist</td>
+<td>v0</td>
+</tr>
+<tr>
+<td>input</td>
+<td>Forms</td>
+<td>none; text field</td>
+<td>v1</td>
+</tr>
+<tr>
+<td>list, table</td>
+<td>Lists, Data</td>
+<td>none; scroll view</td>
+<td>v1</td>
+</tr>
+<tr>
+<td>tabs</td>
+<td>Navigation</td>
+<td>none</td>
+<td>v1</td>
+</tr>
+<tr>
+<td>metric, progress</td>
+<td>registry metric, progress</td>
+<td>Rect, Txt</td>
+<td>v1</td>
+</tr>
+<tr>
+<td>image, chart</td>
+<td>Content, Charts</td>
+<td>raw blit, LineN</td>
+<td>v2</td>
+</tr>
+</tbody>
+</table></div>
+<p>The registry (shared/widgets/registry.ts) defines at least metric, progress and timeline (read); the full list needs checking against the file.</p>
+<p><strong>4.3 Layout subset.</strong> Measure, then arrange. Supported: row and col, gap, pad, fixed size, <code>w=fill</code> (equal share of remaining main-axis space), cross-axis start, center and end. Not supported: wrap, absolute positioning, percentages, min and max, grow weights, baselines, grids. Cost (inferred): one measure and one arrange per TREE, O(nodes), with text widths cached per (font, string). At 500 nodes this should be well under a millisecond, against the 3.9 ms full-redraw figure in the aiwnios README. Kosmos generated apps reflow through ResizeObserver; the desk re-lays out on window resize only.</p>
+<p><strong>4.4 Text and fonts.</strong> Four faces exist: F_REG, F_BOLD, F_SMALL, F_BIG, in one atlas (read: 01-core.HC). TW gives widths and Wrap gives paragraphs. Kosmos presets include Inter, IBM Plex, Source Serif and Space Grotesk; the desk has none. The font service is a foundation item.</p>
+<p><strong>4.5 Tokens.</strong> Kosmos OS has five preset families in src/os/themeTokens.ts: accent, radius, font, text scale, spacing (read). The desk has five styles (ks_sn: Longformer light and dark, macOS, Windows 11, Kosmica glass), each with 16 palette slots (ks_pal, names in ks_pn). Mapping: accent to ks_accov; radius to ks_rad and ks_radadj; text scale to a choice of F_SMALL, F_REG or F_BIG; spacing to default pad and gap; font ignored (one atlas). If the brief's "five token sets" meant something else, only this table changes.</p>
+<p><strong>4.6 Worked example: Timer.</strong></p>
+<p>Source (apps/timer/app.js, read). State is <code>entries</code> of <code>{id, kind, label, endsAt, durationMs, remainingMs, status}</code>. Presets run 1m to 1h. Functions: startTimer, pauseEntry, resumeEntry, removeEntry, tickDue, setAlarm. Persistence is localStorage key <code>core.timer.v1</code>, which is per viewer. Alerts call <code>os.shell.notify</code> and a Web Audio tone.</p>
+<p>Split:
+- <strong>H</strong>: <code>apps/timer/logic.mjs</code>, extracted from app.js (inferred about 120 lines). The pure functions move out, with <code>now</code> and <code>nextId</code> injected for tests. hostd keeps entries in namespace <code>core.timer</code>, and a one-second interval calls tickDue. localStorage state moves to the host store.
+- <strong>N</strong>: <code>apps/timer/ui.tree</code> (v0: presets and list; custom durations and alarms wait for the text field) plus a small HolyC event handler.
+- <strong>Dropped</strong>: the tone. Options are the PC speaker that core-apps describes (unverified in desk3) or host playback.</p>
+<p>Message flow:
+1. guest to host: <code>HELLO app=core.timer v=1</code>
+2. host to guest: <code>TREE</code> followed by the tree lines.
+3. user clicks Pause: guest sends <code>EV pause.k3 click</code>.
+4. host runs pauseEntry, saves, sends <code>TREE</code> (status changed).
+5. each second, host sends <code>SET r.k3 4:57</code>, with no relayout.
+6. at zero, tickDue marks the entry ringing; host sends <code>NOTIFY core.timer "Focus block finished"</code>; the guest queues a desk notification.
+7. Remove: <code>EV remove.k3 click</code>; host removes it and sends <code>TREE</code>.</p>
+<p>Effort (inferred): logic extraction S, notify S, timer UI S. The interpreter and the bridge messages (HELLO, TREE, EV, SET, NOTIFY) are M each and shared by later apps. About a week once they exist.</p>
+<p>Tests: Node unit tests of logic with a fake clock; a TREE fixture; a golden at 1440x900 with the same entries as the web timer.</p>
+<h2 id="5-app-manifest-bridge">5. App-manifest bridge<a class="headerlink" href="#5-app-manifest-bridge" title="Link to this section">#</a></h2>
+<p>Source: shared/manifest.ts (read). The desk registry reads <code>apps/&lt;id&gt;/manifest.txt</code> at boot (key=value lines, same escaping as the wire) and builds the Applications folder. This replaces the fixed 11-entry arrays in desk3/02-ui.HC (read).</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Manifest</th>
+<th>Desk meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>folder name and registry key</td>
+</tr>
+<tr>
+<td>name, version</td>
+<td>title and About</td>
+</tr>
+<tr>
+<td>icon (Lucide, kebab-case)</td>
+<td>one of the 20 Lucide icons already in desk assets; else a generic glyph</td>
+</tr>
+<tr>
+<td>tier declarative</td>
+<td>tree only</td>
+</tr>
+<tr>
+<td>tier code</td>
+<td>native main.HC, or tree plus host logic</td>
+</tr>
+<tr>
+<td>entry bundle</td>
+<td><code>apps/&lt;id&gt;/</code></td>
+</tr>
+<tr>
+<td>entry openui appId</td>
+<td>hostd returns the stored app's tree</td>
+</tr>
+<tr>
+<td>entry url</td>
+<td>X; open in Browser instead</td>
+</tr>
+<tr>
+<td>implements os.x@1</td>
+<td>hostd capability registry; provider chosen per contract</td>
+</tr>
+<tr>
+<td>permission intent, contract read or write</td>
+<td>checked in hostd per call</td>
+</tr>
+<tr>
+<td>permission storage own</td>
+<td>host namespace <code>app_&lt;id&gt;</code></td>
+</tr>
+<tr>
+<td>shell notify</td>
+<td>desk notification queue</td>
+</tr>
+<tr>
+<td>shell windows, clipboard, agent</td>
+<td>window API; clipboard not yet built; agent channel</td>
+</tr>
+<tr>
+<td>tools</td>
+<td>registered in hostd; agent UI calls them</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rule: grants are written only by hostd, after the user answers the install prompt. The guest shows the prompt and forwards the answer; it never stores a grant.</p>
+<h2 id="6-porting-checklist-and-tests">6. Porting checklist and tests<a class="headerlink" href="#6-porting-checklist-and-tests" title="Link to this section">#</a></h2>
+<p>Checklist, per primitive:
+1. Classify with section 1 and fill its table row.
+2. List imports: grep the directory for <code>from ['"]react</code>, <code>document.</code>, <code>better-sqlite3</code>, <code>node:</code>.
+3. Write the behaviour spec: states, events, data, store owner. Check the licence (section 8).
+4. H: add ops to protocol.json, regenerate, then <code>--check</code>.
+5. N: draw with desk3 widgets, or add tree node types. List the events.
+6. Add a scene to aiwnios/golden.HC and capture at 1440x900 with golden.py. Any pixel change needs a stated cause, as in the aiwnios README.
+7. Keyboard: tab order, Enter, Esc, focus returns.
+8. Frame cost: check the Monitor's per-phase timers against the full-redraw budget.
+9. Add a port note under apps/templeos-holyc/docs/apps/.</p>
+<p>Tests:
+- <strong>Protocol</strong>: fixture records decode to equal fields on TypeScript and HolyC; Node tests for the TS side; a kernel-test-style harness on Aiwnios for HolyC.
+- <strong>Logic</strong>: Node tests with an injected clock (timer, calculator, tasks).
+- <strong>Golden</strong>: golden.HC scenes compared with golden.py and pxdiff.py.
+- <strong>Parity harness</strong>: one seeded SQLite fixture; the web shell (Playwright against the dev server) and the desk (drive.HC on Aiwnios) show the same data. Compare structure, not pixels: labels as text, rectangles within 2 logical px, and a hash of the store after a fixed event script. Pixel parity cannot hold across two renderers; the aiwnios gate only holds desk against desk.</p>
+<h2 id="7-ranked-backlog">7. Ranked backlog<a class="headerlink" href="#7-ranked-backlog" title="Link to this section">#</a></h2>
+<p>Desk prerequisites: P1 framework step (app table, resize, focus), M. P2 widget kit v2 (text field, scroll list, tabs, dialog), M. P3 host bridge v1 (framed records, HELLO, store queries, NOTIFY, streamed exec), M. P4 tree interpreter v0, then v1 (list, input), M. P5 font service, L; not needed before item 14.</p>
+<p>Order is build order, not value. Efforts are inferred.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Primitive</th>
+<th>Effort</th>
+<th>Value</th>
+<th>Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Notification queue</td>
+<td>S</td>
+<td>high</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Timer (section 4.6)</td>
+<td>S</td>
+<td>medium</td>
+<td>P3, P4 v0, item 1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Calculator evaluate on host (shared/math)</td>
+<td>S</td>
+<td>medium</td>
+<td>P3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Theme tokens, five families</td>
+<td>S</td>
+<td>medium</td>
+<td>none</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Calendar month and list, host store</td>
+<td>M</td>
+<td>high</td>
+<td>P2, P3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Tasks list and drawer, host store</td>
+<td>M</td>
+<td>high</td>
+<td>P2, P3</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Command palette</td>
+<td>S to M</td>
+<td>high</td>
+<td>P2 text field</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Files on host file service</td>
+<td>M</td>
+<td>high</td>
+<td>P2, P3</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Notes with text field and undo</td>
+<td>M</td>
+<td>high</td>
+<td>P2 text field</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Terminal with streamed exec</td>
+<td>M</td>
+<td>high</td>
+<td>P3 streaming, P2 scroll</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Generative apps via tree</td>
+<td>M</td>
+<td>high, multiplier</td>
+<td>P4 v1</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Automations list and host scheduler</td>
+<td>M</td>
+<td>medium</td>
+<td>P3, P4 v1</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Model hub list</td>
+<td>M</td>
+<td>medium</td>
+<td>P2, P3</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Agent chat and tool cards</td>
+<td>L</td>
+<td>high</td>
+<td>P3 streaming, P2 scroll, P5</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Contacts</td>
+<td>M</td>
+<td>medium</td>
+<td>P2, P3; store to locate</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-risks-licences-verification">8. Risks, licences, verification<a class="headerlink" href="#8-risks-licences-verification" title="Link to this section">#</a></h2>
+<p><strong>Licence.</strong> kosmos-os-frame has no LICENSE or NOTICE file, at the root or to depth 4 (read: find). No package.json, root or workspace, has a <code>license</code> field (read: grep). Treat all code as all rights reserved. The default for every primitive is S: rewrite from behaviour. H, which runs their modules unchanged on our Mac, needs the owner's written permission even though it is use, not redistribution. Dependencies in node_modules are MIT: @openuidev/react-lang, @openuidev/react-ui, better-sqlite3 and react (read: package.json and LICENSE). The Lucide and Inter licences come from core-apps-plan and were not re-checked.</p>
+<p><strong>Risks.</strong>
+- The stores assume multiple users and server auth. The desk has one. Strip the checks; do not fork the code.
+- The streaming rate is a target, not a measurement.
+- Layout cost on large pages and long text is unmeasured.
+- Scope: about 60 rows, of which roughly 40 are X or deferred. Studio, Social and Documents must wait for the framework.
+- Pixel parity across renderers is impossible; see section 6.</p>
+<p><strong>Verified by reading:</strong> line and dependency counts; desk3 widget, app and style signatures; aiwnios README and platform.HC natives; timer source; app-sdk and manifest types; db.ts; themeTokens families; widget registry names; catalog groups; protocol-sdk generator header; licence fields; absence of LICENSE and socket natives.</p>
+<p><strong>Inferred:</strong> all effort figures; layout cost; channel rates; the hostd import graph; the timer extraction size; doc-interop Node compatibility; the contacts store location (not found). The inventory docs/apps/00-kosmos-os-primitives.md did not exist when this was written. Reconcile this table with it when it lands.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/00-kosmos-os-primitives/index.html" rel="prev"><span>Previous</span>Kosmos OS primitives for the HolyC native apps</a><a class="next" href="../../../docs/apps/ai-ide/index.html" rel="next"><span>Next</span>AI IDE for the Kosmos Temple Desktop</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-classes-and-the-decision-rule">1. Classes and the decision rule</a></li><li><a href="#2-classification-table">2. Classification table</a></li><li><a href="#3-the-host-service-pattern">3. The host-service pattern</a></li><li><a href="#4-ui-translation">4. UI translation</a></li><li><a href="#5-app-manifest-bridge">5. App-manifest bridge</a></li><li><a href="#6-porting-checklist-and-tests">6. Porting checklist and tests</a></li><li><a href="#7-ranked-backlog">7. Ranked backlog</a></li><li><a href="#8-risks-licences-verification">8. Risks, licences, verification</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+/* Shared game widgets (prefix g-). Monochrome chrome; games add their own palettes. */
+.g-root { position: absolute; inset: 0; display: flex; flex-direction: column; font-family: var(--sans); color: #1d1d1b; user-select: none; -webkit-tap-highlight-color: transparent; }
+.g-btn { appearance: none; font: inherit; font-size: .85rem; font-weight: 600; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(31, 42, 34, .22); background: #fff; color: #1d1d1b; cursor: pointer; touch-action: manipulation; }
+.g-btn:hover:not(:disabled) { background: #f1f0ea; }
+.g-btn:active:not(:disabled) { transform: translateY(1px); }
+.g-btn:disabled { opacity: .4; cursor: default; }
+.g-btn.pri { background: #1d1d1b; color: #fff; border-color: #1d1d1b; }
+.g-btn.pri:hover:not(:disabled) { background: #3a3a37; }
+.g-btn[aria-pressed="true"], .g-btn[aria-checked="true"] { background: #1d1d1b; color: #fff; }
+.g-btn.sm { min-height: 34px; padding: 0 10px; font-size: .78rem; }
+.g-bar { height: 8px; border-radius: 4px; background: rgba(29, 29, 27, .12); overflow: hidden; }
+.g-bar > i { display: block; height: 100%; width: var(--p, 0%); background: var(--c, #1d1d1b); border-radius: 4px; transition: width .25s; }
+.g-overlay { position: absolute; inset: 0; z-index: 15; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 18px; text-align: center; background: rgba(252, 252, 248, .94); }
+.g-overlay[hidden] { display: none; }
+.g-overlay h4 { margin: 0; font-size: 1.15rem; font-weight: 650; text-transform: none; letter-spacing: 0; }
+.g-overlay p { margin: 0; font-size: .88rem; color: #5f665a; }
+.g-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
+@media (prefers-reduced-motion: reduce) { .g-bar > i { transition: none; } }

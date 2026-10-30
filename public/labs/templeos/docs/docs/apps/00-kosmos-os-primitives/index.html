@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos OS primitives for the HolyC native apps | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html" aria-current="page">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Kosmos OS primitives for the HolyC native apps</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kosmos OS primitives for the HolyC native apps</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/00-kosmos-os-primitives.md</span></div>
+        <div class="doc-body">
+
+<p>Recon for the planned native apps on our TempleOS desktop (<code>desk3/</code>): email, spreadsheets, slides, maps, applications folder, font manager,
+weather, music, contacts and an AI IDE. Written 2026-10-27 from a read-only pass over the Kosmos OS repo.</p>
+<p>Source repos (read only):</p>
+<ul>
+<li>Kosmos OS: <code>/Users/paulbloch/kosmos-os-frame</code> (GitHub Kosmos-computer/Kosmos, branch <code>feat/kosmos-engine-window</code>). The README title is "Arco OS". The
+  product is called Kosmos or Arco in different places; code uses <code>arco-*</code> for shell internals and brand-free <code>os.*</code>, <code>core.*</code>, <code>x-app-token</code>, <code>--os-*</code>
+  at the platform boundary.</li>
+<li>Marketing site: <code>/Users/paulbloch/Documents/github/kosmos-www</code> (its brief in <code>docs/CONTENT-BRIEF.md</code> still says "Longformer"; treat it as stale copy).</li>
+<li>Five desk styles: <code>/Users/paulbloch/Documents/github/kosmos-engine/apps/os-styles</code>.</li>
+</ul>
+<p>Verification tags: <strong>[V]</strong> read in the source; <strong>[I]</strong> inferred from names, comments or memory, not run.</p>
+<hr />
+<h2 id="1-what-kosmos-os-is-and-how-an-app-is-defined">1. What Kosmos OS is, and how an app is defined<a class="headerlink" href="#1-what-kosmos-os-is-and-how-an-app-is-defined" title="Link to this section">#</a></h2>
+<p>Kosmos OS is a browser-based desktop shell (Vite + React on the client, a Hono/Node server with SQLite) where an agent can build apps. It has a window
+manager, dock, menu bar, command palette, a chat agent, generated OpenUI apps, system services and a bridge that all app calls pass through. [V]
+<code>README.md</code>, <code>src/os/Desktop.tsx</code>, <code>src/os/Dock.tsx</code>, <code>src/os/MenuBar.tsx</code>, <code>src/os/WindowFrame.tsx</code>.</p>
+<h3 id="11-the-platform-rules-from-docsapp-platform-planmd">1.1 The platform rules (from <code>docs/app-platform-plan.md</code>)<a class="headerlink" href="#11-the-platform-rules-from-docsapp-platform-planmd" title="Link to this section">#</a></h3>
+<ol>
+<li>Contracts over implementations: apps implement versioned contracts (<code>os.calendar@1</code>); callers never bind to an app. [V]</li>
+<li>One choke point: every privileged call goes through <code>dispatchAppBridge</code> with a caller identity. [V] <code>server/platform/bridge.ts</code></li>
+<li>Tier decides the container, not the surface. Same manifest, identity, grants and bus for every app. [V] (plan)</li>
+<li>The OS owns PIM and file data; apps are clients. [V] (plan, <code>shared/capabilities/files.ts</code>)</li>
+<li>No private shell APIs: core apps use the same SDK and manifest as third-party apps. [V] (plan)</li>
+<li>Typed intents on the wire, not natural language, between components. [V] (plan)</li>
+<li>Brand-free platform boundary: <code>os.*</code> contracts, <code>core.*</code> app ids, <code>x-app-token</code>, <code>/app-sdk.js</code>, <code>--os-*</code> theme tokens. [V]</li>
+</ol>
+<h3 id="12-manifest">1.2 Manifest<a class="headerlink" href="#12-manifest" title="Link to this section">#</a></h3>
+<p>Type: <code>AppManifest</code> in <code>shared/manifest.ts</code>; validated by Zod in <code>server/platform/manifestSchema.ts</code>. [V]</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Shape</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>reverse-dns, <code>^[a-z0-9]+(\.[a-z0-9-]+)+$</code></td>
+<td>core apps use <code>core.*</code></td>
+</tr>
+<tr>
+<td><code>name</code>, <code>version</code>, <code>description</code></td>
+<td>strings, semver</td>
+<td></td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>Lucide kebab name, e.g. <code>calendar-days</code>, <code>file-text</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tier</code></td>
+<td><code>declarative</code> or <code>code</code></td>
+<td>all bundled apps are <code>code</code> [V]</td>
+</tr>
+<tr>
+<td><code>entry</code></td>
+<td><code>url</code> / <code>bundle</code> (path under <code>apps/</code>) / <code>openui</code> (StoredApp id)</td>
+<td>bundle paths are validated as lowercase segments</td>
+</tr>
+<tr>
+<td><code>implements</code></td>
+<td>contract ids, e.g. <code>["os.docs@1"]</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td><code>intent</code>, <code>contract</code> (read or write), <code>storage: own</code>, <code>shell</code> (<code>notify</code>, <code>windows</code>, <code>clipboard</code>, <code>agent</code>)</td>
+<td>grant keys like <code>contract:os.files@1:write</code></td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td>up to 20 agent tools; binding is <code>intent</code> or <code>storage-query</code> (SELECT only)</td>
+<td>JSON Schema parameters</td>
+</tr>
+<tr>
+<td><code>events</code></td>
+<td><code>emits</code> and <code>subscribes</code> topic lists</td>
+<td>bridge checks <code>emits</code></td>
+</tr>
+<tr>
+<td><code>chrome</code></td>
+<td><code>{ toolbar: false }</code> hides the version strip</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Example (<code>apps/docs/manifest.json</code>, [V]): <code>core.docs</code>, <code>tier: code</code>, <code>entry: { kind: bundle, path: docs/dist }</code>, <code>implements: [os.docs@1]</code>,
+permissions for <code>os.files@1</code> and <code>os.docs@1</code> read and write, <code>events.subscribes: [files.changed]</code>.</p>
+<h3 id="13-lifecycle">1.3 Lifecycle<a class="headerlink" href="#13-lifecycle" title="Link to this section">#</a></h3>
+<ul>
+<li>Seeds: <code>ensureSeeds()</code> reads <code>apps/*/manifest.json</code> on boot and installs them as <code>source: seed</code>; they are served at <code>/apps/&lt;folder&gt;/</code>. [V]
+  (<code>server/platform/installedAppStore.ts</code>, <code>docs/office-suite-plan.md</code>)</li>
+<li>Install paths: seed folder, URL, raw JSON (all through <code>parseManifest</code>). [V] <code>shared/manifest.ts</code> <code>AppSource</code></li>
+<li>Grants: <code>granted | denied | ask</code>, keyed per permission (<code>grantStore.ts</code>). Install grants every requested key by default. [V]</li>
+<li>Launch: the shell mints a 24-byte per-window token (<code>POST /api/installed-apps/:id/token</code>, 12 h TTL) and the AppHost attaches it. The app cannot
+  claim its own identity. [V] <code>bridge.ts</code></li>
+<li>Window: <code>{ type: "installed", appId }</code> in <code>windowStore</code>; installed apps sit in the Dock, not the NavRail. [V] (office-suite plan)</li>
+</ul>
+<h3 id="14-sdk-and-bridge">1.4 SDK and bridge<a class="headerlink" href="#14-sdk-and-bridge" title="Link to this section">#</a></h3>
+<ul>
+<li>SDK: <code>packages/app-sdk/sdk.js</code> (324 lines, zero dependencies, served at <code>/app-sdk.js</code>); types in <code>index.d.ts</code>. [V]</li>
+<li><code>createAppClient()</code> exposes <code>intents.invoke(intent, params)</code>, <code>storage.query/execute</code> (own SQLite namespace, needs <code>storage:own</code>), <code>shell.notify</code>,
+  <code>shell.askAgent</code>, <code>shell.setWindowGeometry</code> (aspect lock), <code>shell.toolbar.set/onInput</code>, <code>events.on(topic)</code>, <code>theme.current/onChange</code>. [V]</li>
+<li>Wire: <code>window.parent.postMessage({ appBridge: true, type: "request", id, method, params })</code>; host replies with <code>ui.result</code>; ready is <code>type: "ready"</code>. [V]</li>
+<li>Also handles host <code>ui.command</code> messages, so the agent cursor can click inside the app (<code>data-arco-cid</code> ids). [V]</li>
+<li>Bridge methods (<code>dispatchAppBridge</code>): <code>intent.invoke</code> (grant check, audit, then <code>invokeIntent</code>), <code>storage.query</code>, <code>storage.execute</code>,
+  <code>events.emit</code>. Unknown method is an error. Every call writes <code>appendAudit</code>. [V]</li>
+<li>HTTP: <code>POST /api/bridge</code> (<code>server/index.ts</code>), audit read at the audit route. [V]</li>
+</ul>
+<h3 id="15-contracts-the-intent-vocabulary">1.5 Contracts (the intent vocabulary)<a class="headerlink" href="#15-contracts-the-intent-vocabulary" title="Link to this section">#</a></h3>
+<p>Registry: <code>shared/capabilities/index.ts</code> <code>CONTRACTS</code> map, routed by <code>server/capabilities/registry.ts</code> (<code>invokeIntent</code>). [V]</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Contract</th>
+<th>Intents (access)</th>
+<th>Backing store</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.calculator@1</code></td>
+<td>calculator.evaluate, history.list</td>
+<td>SQLite <code>history</code> table</td>
+<td>core.calculator</td>
+</tr>
+<tr>
+<td><code>os.calendar@1</code></td>
+<td>events.list, event.get (r); event.create/update/delete (w)</td>
+<td>SQLite <code>events</code></td>
+<td>core.calendar</td>
+</tr>
+<tr>
+<td><code>os.files@1</code></td>
+<td>list, get, search, content.read (r); create, rename, move, star, trash, restore, delete, content.write (w)</td>
+<td>SQLite <code>files</code> + blobs in <code>data/files/</code></td>
+<td>Drive, docs, sheets, slides</td>
+</tr>
+<tr>
+<td><code>os.docs@1</code></td>
+<td>docs.create, open, export, import</td>
+<td>files (<code>application/x-os-doc+json</code>)</td>
+<td>core.docs</td>
+</tr>
+<tr>
+<td><code>os.sheets@1</code></td>
+<td>sheets.create, open, query, write_range, export, import</td>
+<td>files (<code>application/x-os-sheet+json</code>)</td>
+<td>Sheets</td>
+</tr>
+<tr>
+<td><code>os.slides@1</code></td>
+<td>slides.create, open, write, export, import</td>
+<td>files (<code>application/x-os-slides+json</code>)</td>
+<td>core.slides</td>
+</tr>
+<tr>
+<td><code>os.tasks@1</code></td>
+<td>tasks.list, get, create, update, complete, archive, delete</td>
+<td>SQLite <code>tasks</code></td>
+<td>Tasks app, menubar, agent</td>
+</tr>
+<tr>
+<td><code>os.music@1</code></td>
+<td>music intents (imports, scan, tracks)</td>
+<td><code>data/music-library/</code></td>
+<td>Music</td>
+</tr>
+<tr>
+<td><code>os.downloads@1</code>, <code>os.shares@1</code>, <code>os.board@1</code>, <code>os.memory@1</code>, <code>os.voice@1</code>, <code>os.engine@1</code></td>
+<td>present, schemas in <code>shared/capabilities/</code></td>
+<td>services</td>
+<td>various</td>
+</tr>
+</tbody>
+</table></div>
+<p>No contract exists for mail, contacts, maps, weather, fonts or a code editor (see section 7).</p>
+<p>Intent schemas are JSON Schema 2020-12 objects and are reusable as tool definitions. [V]</p>
+<h3 id="16-data-stores">1.6 Data stores<a class="headerlink" href="#16-data-stores" title="Link to this section">#</a></h3>
+<ul>
+<li>System stores are owned by the server: <code>filesService</code> (<code>data/db/system-files.sqlite</code> plus <code>data/files/&lt;id&gt;</code> blobs), calendar, tasks, calculator,
+  music library, mail (<code>server/mail/mailStore.ts</code>, secret-safe JSON via <code>secureFs</code>, not SQLite). [V]</li>
+<li>Per-app private namespace: <code>app_&lt;appId&gt;</code> via <code>storageNamespace()</code>, gated by <code>storage:own</code>. [V]</li>
+<li>Client-only stubs: contacts vault (<code>localStorage</code> key <code>arco-contacts-vault</code>, zustand persist); timer history (<code>localStorage</code>). [V]</li>
+</ul>
+<h3 id="17-agent-tools">1.7 Agent tools<a class="headerlink" href="#17-agent-tools" title="Link to this section">#</a></h3>
+<ul>
+<li>System tools live in <code>server/agent/tools.ts</code> (<code>agentTools[]</code>, e.g. <code>tasks_list</code>, <code>tasks_create</code>, <code>sheets_query</code>, <code>docs_export</code>). [V] (README, <code>docs/office-format-interop.md</code>)</li>
+<li>App tools compile from manifests: <code>server/platform/appTools.ts</code> (74 lines) turns <code>tools[]</code> into LLM tool defs, namespaced <code>app__&lt;id&gt;__&lt;name&gt;</code>. [V] (<code>shared/manifest.ts</code> comment)</li>
+<li>Dispatch is deterministic code; the app's grant sheet is enforced on every call. [V]</li>
+<li>Per-tool agent policy <code>auto | confirm | deny</code> is planned (Phase 3), not confirmed built. [I]</li>
+</ul>
+<h3 id="18-intents-events-and-confirmation">1.8 Intents, events and confirmation<a class="headerlink" href="#18-intents-events-and-confirmation" title="Link to this section">#</a></h3>
+<ul>
+<li><code>files.changed</code>, <code>calendar.changed</code>, <code>calculator.changed</code> are the subscribed topics; <code>server/bus.ts</code> republishes app events as <code>app-event:&lt;topic&gt;</code>. [V]</li>
+<li>Confirmation: <code>confirm_required</code> SSE flow is reused for first-use prompts (plan). [V] (plan)</li>
+</ul>
+<hr />
+<h2 id="2-design-tokens-icons-chrome-and-components">2. Design tokens, icons, chrome and components<a class="headerlink" href="#2-design-tokens-icons-chrome-and-components" title="Link to this section">#</a></h2>
+<h3 id="21-shell-tokens-srcstylestokenscss-srcosthemetokensts-v">2.1 Shell tokens (<code>src/styles/tokens.css</code>, <code>src/os/themeTokens.ts</code>) [V]<a class="headerlink" href="#21-shell-tokens-srcstylestokenscss-srcosthemetokensts-v" title="Link to this section">#</a></h3>
+<p>Light and dark palettes on <code>html[data-theme]</code>. Every value is a CSS custom property. Apps get them as <code>--os-*</code> through the AppHost.</p>
+<ul>
+<li><strong>Colour (dark / light)</strong>: desktop bg <code>#0d0d0f</code> / <code>#dfe4ec</code>; surface <code>rgba(26,26,28,.92)</code> / <code>rgba(252,253,255,.92)</code>; solid surface <code>#1a1a1c</code> / <code>#fcfdff</code>;
+  elevated <code>rgba(40,40,44,.95)</code> / white 98%; hover 6% / 5%; active 10% / 9%; chrome <code>rgba(18,18,20,.78)</code> / <code>rgba(248,250,253,.8)</code>.
+  Text primary <code>#ececee</code> / <code>#171b23</code>; secondary <code>#a8a8ae</code> / <code>#4e5665</code>; tertiary <code>#717178</code> / <code>#8a92a3</code>.
+  Accent <code>#7c9dff</code> / <code>#3b64e0</code> (strong <code>#5b82ff</code> / <code>#2b51c7</code>); success <code>#58c98b</code> / <code>#23985e</code>; warning <code>#e5b567</code> / <code>#b57f24</code>; danger <code>#e5737d</code> / <code>#cc4450</code>.
+  Border <code>rgba(255,255,255,.09)</code> / <code>rgba(15,20,30,.1)</code>.</li>
+<li><strong>Accent presets</strong>: blue, violet, green, amber, rose, cyan, monochrome (<code>themeTokens.ts</code>). <strong>Font presets</strong>: system, inter, ibm-plex, source-serif, space-grotesk.</li>
+<li><strong>Type scale</strong>: xs 11, sm 12.5, md 14, lg 16, xl 20 px. UI font stack: <code>-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, ...</code>. Mono: SF Mono / Menlo.</li>
+<li><strong>Spacing</strong>: 2, 4, 8, 12, 16, 24, 32 px (2xs to 2xl).</li>
+<li><strong>Radii</strong>: s 6, m 10, l 14, window 12 px.</li>
+<li><strong>Shadows</strong>: <code>--arco-shadow-window</code> (0 24/64 px, two layers) and <code>--arco-shadow-chrome</code> (0 8/32 px). Backdrop <code>saturate(160%) blur(22px)</code>.</li>
+<li><strong>Motion</strong>: ease <code>cubic-bezier(0.32, 0.72, 0, 1)</code>; fast 140 ms; med 240 ms; full-screen crossfade 600 ms.</li>
+<li><strong>Z layers</strong>: windows 10, chrome 1000, overlay 2000, modal 2100.</li>
+<li><strong>Wallpapers</strong>: aurora, dusk, graphite, forest gradients (<code>tokens.css</code>).</li>
+</ul>
+<h3 id="22-five-styles-in-appsos-styles-v">2.2 Five styles in <code>apps/os-styles</code> [V]<a class="headerlink" href="#22-five-styles-in-appsos-styles-v" title="Link to this section">#</a></h3>
+<p><code>apps/os-styles/styles.css</code> (generated by <code>scripts/gen-styles.py</code>, WCAG AAA 7:1 text) defines nine <code>data-style</code> values: <code>longformer-light</code>,
+<code>longformer-dark</code>, <code>temple</code>, <code>kosmica</code>, <code>platinum</code>, <code>paper</code>, <code>macos</code>, <code>windows</code>, <code>brutalist</code>. Each sets <code>--lf-*</code> tokens (accent, surfaces 1 to 3, text,
+border, focus ring, radii, font family, durations) and <code>--s-*</code> shell tokens (desk, bar, shadow, lift, title style). Targets: 44 px hit area, 16 px body,
+1.6 line height. [V]</p>
+<p>Our desk3 implements five (<code>desk3/01-core.HC</code> lines 40 to 48, README): <strong>Longformer light, Longformer dark, macOS, Windows 11, Kosmica glass</strong>. The
+<code>temple</code>, <code>platinum</code>, <code>paper</code> and <code>brutalist</code> styles are not in desk3 [V]. The user brief said "five styles"; this matches.</p>
+<h3 id="23-desk3-mapping-v">2.3 Desk3 mapping [V]<a class="headerlink" href="#23-desk3-mapping-v" title="Link to this section">#</a></h3>
+<p><code>desk3/01-core.HC</code>:</p>
+<ul>
+<li>16 colour slots, in order: ink, accent, ok, teal, bad, purple, warn, surface, muted, accent2, card, border, shadow, dock, amber, page
+  (<code>ks_pn</code>). Each style has its own 16 values in <code>ks_pal[NS*16]</code>.</li>
+<li>Per-style: <code>ks_kind</code> (window chrome kind 0 rounded card, 1 traffic lights, 2 caption buttons), <code>ks_rad</code> (12, 12, 14, 8, 16), <code>ks_glass</code>
+  (true only for Kosmica).</li>
+<li>Corner radius adjust <code>ks_radadj</code>, accent override <code>ks_accov</code>, animation and magnification toggles, dock size 52.</li>
+</ul>
+<p>Token mapping (proposed; [I] unless noted):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Kosmos token</th>
+<th>desk3 slot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--arco-text-primary</code></td>
+<td>ink (0)</td>
+</tr>
+<tr>
+<td><code>--arco-accent</code></td>
+<td>accent (1)</td>
+</tr>
+<tr>
+<td><code>--arco-success</code></td>
+<td>ok (2)</td>
+</tr>
+<tr>
+<td><code>--arco-danger</code></td>
+<td>bad (4)</td>
+</tr>
+<tr>
+<td><code>--arco-warning</code></td>
+<td>warn (6)</td>
+</tr>
+<tr>
+<td><code>--arco-text-secondary</code> / <code>tertiary</code></td>
+<td>muted (8)</td>
+</tr>
+<tr>
+<td><code>--arco-bg-surface-solid</code></td>
+<td>surface (7) and card (10)</td>
+</tr>
+<tr>
+<td><code>--arco-border</code></td>
+<td>border (11)</td>
+</tr>
+<tr>
+<td><code>--arco-shadow-chrome</code></td>
+<td>shadow (12)</td>
+</tr>
+<tr>
+<td><code>--arco-bg-chrome</code></td>
+<td>dock (13)</td>
+</tr>
+<tr>
+<td><code>--arco-bg-desktop</code></td>
+<td>page (15)</td>
+</tr>
+<tr>
+<td><code>--arco-accent-soft</code></td>
+<td>no slot: compute by alpha blend at paint time</td>
+</tr>
+</tbody>
+</table></div>
+<p>Radii: <code>--arco-radius-window</code> 12 px matches <code>ks_rad</code> for Longformer. Spacing and type scale are not in desk3; desk3 uses pixel constants in code. [I]</p>
+<h3 id="24-icons-v">2.4 Icons [V]<a class="headerlink" href="#24-icons-v" title="Link to this section">#</a></h3>
+<ul>
+<li>Client: Lucide (<code>lucide-react</code> ^0.575.0 in the root package, ISC licence). Manifests name icons in Lucide kebab case.</li>
+<li>Vendored subset: <code>apps/os-styles/kamiji-ui/targets/lit/icons.js</code> (generated; Lucide ISC plus some Feather-derived MIT icons; see <code>ICONS-LICENSE.md</code>).</li>
+<li>Desk3: an enum of 21 icon indices (<code>L_GRID</code> 0 to <code>L_GLOBE</code> 20, in <code>01-core.HC</code>) and an ASCII cursor (<code>ks_cur</code>). How each icon is drawn was not checked.</li>
+<li>Mapping task: each manifest icon name maps to an <code>L_*</code> index or a new vector path. Lucide paths need rasterising or a stroke renderer in HolyC.</li>
+</ul>
+<h3 id="25-window-chrome-v">2.5 Window chrome [V]<a class="headerlink" href="#25-window-chrome-v" title="Link to this section">#</a></h3>
+<ul>
+<li>Kosmos: <code>src/os/WindowFrame.tsx</code>, <code>WindowControls.tsx</code>. Control looks are <code>traffic | glyph | circles | outline | capsules</code>, aligned left or right
+  (<code>themeTokens.ts</code>). The 44 px title bar is in the os-styles prototype (<code>apps/os-styles/index.html</code>), not confirmed in Kosmos code. [V]</li>
+<li>desk3: chrome kinds 0, 1, 2, plus glass. Title bar <code>TBAR</code> 44, menu bar <code>MBAR</code> 32, dock height 76 (<code>DOCK_H</code>). [V] <code>desk3/01-core.HC</code></li>
+</ul>
+<h3 id="26-component-inventory">2.6 Component inventory<a class="headerlink" href="#26-component-inventory" title="Link to this section">#</a></h3>
+<p>Kosmos <code>src/components/ui/</code> [V]: <code>Avatar</code>, <code>Badge</code>, <code>Button</code> (variant default, primary, danger, ghost; size default or icon), <code>Chip</code>, <code>EmptyState</code>,
+<code>Input</code>, <code>PasswordInput</code>, <code>Switch</code>. Also <code>src/components/patterns/</code>, <code>Menu.tsx</code>, <code>useDismiss.ts</code>, <code>richmarkdown/</code>, <code>composer/</code>, <code>chat/</code>.
+Shell: <code>CommandPalette</code>, <code>Dock</code>, <code>HoverDock</code>, <code>MenuBar</code>, <code>NavRail</code>, <code>WindowFrame</code>, <code>SwipeRevealTray</code>, <code>FloatingKeyboard</code>.</p>
+<p>desk3 widgets [V] (<code>desk3/02-ui.HC</code>, <code>04-main.HC</code>): <code>Button(kind)</code>, <code>Toggle</code>, <code>Radio</code>, <code>Slider</code>, <code>Check</code>, <code>Icon</code>, <code>Frame</code>, <code>Menubar</code>, <code>KMenu</code>, <code>Dock</code>,
+<code>Cursor</code>, <code>Input</code> (a basic keyboard handler in <code>04-main.HC</code>).</p>
+<p>Missing in desk3 and needed by every native app: text field with caret, selection and clipboard; scroll view; list and table with rows and
+columns; tabs; menus with submenus; dialogs and sheets; toolbar; split view; tree view. This matches the widget kit v2 gate in
+<code>docs/holyc-native-apps-plan.md</code>.</p>
+<h3 id="27-layout-patterns-v">2.7 Layout patterns [V]<a class="headerlink" href="#27-layout-patterns-v" title="Link to this section">#</a></h3>
+<ul>
+<li>Sidebar plus main plus optional right panel (Drive, Tasks, Sheets, Mail): <code>FilesWorkspace</code>, <code>TaskDrawer</code>, <code>EmailSidebar</code>/<code>EmailThreadList</code>.</li>
+<li>Toolbar on top with search (<code>--arco-search-*</code> tokens); status line; empty states via <code>EmptyState</code>.</li>
+<li>Adaptive: <code>ResizeObserver</code> plus <code>data-arco-size</code> and CSS container queries (<code>os-styles</code> uses <code>@container</code>); mobile shell below a width threshold. [V]</li>
+</ul>
+<hr />
+<h2 id="3-existing-apps-data-model-features-and-what-can-become-spec">3. Existing apps: data model, features, and what can become spec<a class="headerlink" href="#3-existing-apps-data-model-features-and-what-can-become-spec" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>Source</th>
+<th>Data model</th>
+<th>Features (verified)</th>
+<th>What to take as spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Calendar</strong></td>
+<td><code>apps/calendar/</code> (app.js 243 lines, styles 257), contract <code>shared/capabilities/calendar.ts</code>, service <code>server/services/calendarService.ts</code></td>
+<td><code>events(id, title, start, end, allDay, location, notes, createdAt, updatedAt)</code>, ISO 8601, indexed by start</td>
+<td>list by range, create, update, delete via intents; no tools in manifest</td>
+<td>Event shape and intent set. View modes (day, week, month) were not checked in the source. iCal bridge is planned, not built.</td>
+</tr>
+<tr>
+<td><strong>Tasks</strong></td>
+<td><code>src/apps/tasks/</code> (TasksApp, TaskDrawer, TaskList, AddTaskModal, MiniCalendar, AssignToPicker), <code>shared/capabilities/tasks.ts</code>, <code>server/services/tasksService.ts</code></td>
+<td><code>tasks(id, title, description, status, priority, assigneeJson, dueDateISO, archived, createdAt, updatedAt)</code>; status pending, in_progress, completed, cancelled</td>
+<td>list with filters, drawer editing, due dates, assignees (self, agent, contact, custom), history, archive</td>
+<td>Full spec for a HolyC Tasks app. Also the menubar capture contract.</td>
+</tr>
+<tr>
+<td><strong>Docs</strong></td>
+<td><code>apps/docs/</code> (src App.tsx), <code>packages/editor-kit/</code>, <code>shared/capabilities/docs.ts</code>, <code>files.ts</code></td>
+<td>TipTap JSON in <code>application/x-os-doc+json</code>; images as sibling files</td>
+<td>headings, lists, bold, italic, code, links, tables, images (v1 scope per plan)</td>
+<td>Document JSON schema and v1 feature list. Editor engine is TipTap and cannot port.</td>
+</tr>
+<tr>
+<td><strong>Sheets</strong></td>
+<td><code>src/apps/sheets/</code> (SheetsApp 141 lines, SheetGridView, SheetsSidebar, SheetsToolbar, workbookFormat), <code>shared/sheetFormula.ts</code>, <code>shared/capabilities/sheets.ts</code></td>
+<td>workbook JSON <code>{version, title, sheets:[{id,name,cells}]}</code>; cells keyed by A1 address; mime <code>application/x-os-sheet+json</code></td>
+<td>multi-sheet, A1 parsing, ranges, formulas via <code>evaluateFormula</code>, <code>recalculateSheet</code>; query and write-range intents; CSV, XLSX export via doc-interop</td>
+<td>Formula grammar and A1 rules (<code>sheetFormula.ts</code> is pure TS and testable). Grid UI must be built natively.</td>
+</tr>
+<tr>
+<td><strong>Slides</strong></td>
+<td><code>apps/slides/</code> (src App.tsx, styles), <code>shared/capabilities/slides.ts</code></td>
+<td>DeckDoc: <code>{version:1,width:960,height:540,slides:[{id,boxes:[]}]}</code>; boxes <code>text | shape | image</code> with x, y, w, h</td>
+<td>DOM canvas, drag and resize, shapes (rect, ellipse, triangle, line, diamond), text boxes in TipTap</td>
+<td>DeckDoc schema and box rules; present mode is planned but not verified in source.</td>
+</tr>
+<tr>
+<td><strong>Calculator</strong></td>
+<td><code>apps/calculator/</code> (app.js 946 lines, skins Datamath, Omron, Scientific), <code>server/services/calculatorService.ts</code>, <code>shared/capabilities/calculator.ts</code></td>
+<td><code>history(id, expression, result, createdAt)</code></td>
+<td>arithmetic and scientific expressions, DEG or RAD, history list</td>
+<td>Expression grammar; skins are a visual spec for desk3 styles.</td>
+</tr>
+<tr>
+<td><strong>Timer</strong></td>
+<td><code>apps/timer/</code> (app.js 449 lines)</td>
+<td>localStorage entries; no contract; alerts through <code>shell.notify</code></td>
+<td>countdowns and clock-time alarms, optional beep</td>
+<td>Behaviour only; small enough to rewrite.</td>
+</tr>
+<tr>
+<td><strong>Files (Drive)</strong></td>
+<td><code>src/apps/files/</code> (FilesApp, FilesWorkspace, FileRow, FileCard, PdfViewer, ShareLinkModal, DriveMoveModal), <code>server/services/filesService.ts</code> (595 lines), <code>shared/capabilities/files.ts</code>, <code>shares.ts</code></td>
+<td>files table with id, name, parentId, mimeType, size, starred, trashed; blobs on disk</td>
+<td>list and grid, breadcrumbs, rename, move, star, trash and restore, search, share links, PDF preview</td>
+<td>Core spec for a HolyC Applications and file browser. The file contract is the same one editor apps use.</td>
+</tr>
+<tr>
+<td><strong>Terminal</strong></td>
+<td><code>src/apps/terminal/TerminalApp.tsx</code> (108 lines)</td>
+<td>in-memory history only</td>
+<td>one-shot commands against the workspace <code>exec</code>; not a pty</td>
+<td>Little to take. Native terminal is better built from scratch.</td>
+</tr>
+<tr>
+<td><strong>Studio (AI IDE)</strong></td>
+<td><code>src/apps/studio/</code> (StudioApp 577 lines, sidebar, board panel, browser preview, editor, diff comments, worktree picker, conversation groups), <code>server/agent</code>, <code>server/git.ts</code>, Monaco in deps</td>
+<td>conversations, worktrees, diff comments in client stores; project files on disk</td>
+<td>multi-conversation chat, git worktrees, diffs with comments, live browser preview, model picker, status dots, board</td>
+<td>The approval flow and conversation model. A HolyC IDE needs a text engine first.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Other apps for the brief (not in your list, but relevant):</p>
+<ul>
+<li><strong>Email</strong>: <code>src/apps/email/</code> (useEmail 240 lines, EmailHtmlBody, EmailThreadList) with <code>server/mail/</code> (<code>adapters/gmail.ts</code>, <code>adapters/imap.ts</code>, <code>googleOAuth.ts</code>, <code>mailGateway.ts</code>, <code>tools.ts</code>). Tokens stay server side.</li>
+<li><strong>Contacts</strong>: <code>src/apps/contacts/</code> (ContactsApp, DialPad, ContactImport, ContactDetail). The store is a localStorage stub with a comment saying it is waiting for <code>os.contacts@1</code>.</li>
+<li><strong>Maps</strong>: <code>src/apps/maps/</code> (MapCanvas with Leaflet, MapsApp, useMaps) and <code>server/services/mapsService.ts</code>, which proxies Nominatim and OSRM with a user agent.</li>
+<li><strong>Music</strong>: <code>src/apps/music/</code> (MusicApp, musicStore 718 lines, catalogs) and <code>server/services/musicLibraryService.ts</code> (595 lines), <code>musicRssService.ts</code>.</li>
+<li><strong>Weather</strong>: no app. A bento widget (<code>src/os/bento/bentoCatalog.ts</code>, <code>templateId: "weather"</code>) shows live data from Open-Meteo (<code>src/styles/bento.css</code>). [V]</li>
+</ul>
+<hr />
+<h2 id="4-packages-reuse-as-spec-or-as-host-service">4. Packages: reuse as spec or as host service<a class="headerlink" href="#4-packages-reuse-as-spec-or-as-host-service" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Package</th>
+<th>What it is</th>
+<th>HolyC use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/doc-interop</code> (<code>@arco/doc-interop</code>, private)</td>
+<td>Import and export for ODT, DOCX, ODS, XLSX, ODP, PPTX, Markdown, HTML, CSV, TSV. Deps: <code>docx</code>, <code>exceljs</code>, <code>jszip</code>, <code>mammoth</code>, <code>pptxgenjs</code>. <code>FIDELITY.md</code> documents the matrix. <code>src/roundtrip.test.ts</code> holds golden tests. [V]</td>
+<td><strong>Host service</strong> for XLSX, DOCX, PPTX and ODF import and export. The guest sends bytes over the channel and receives canonical JSON (workbook, DeckDoc, doc JSON). Keep <code>FIDELITY.md</code> as the spec. Do not port the parsers into HolyC.</td>
+</tr>
+<tr>
+<td><code>packages/editor-kit</code> (<code>@arco/editor-kit</code>)</td>
+<td>TipTap React editor with toolbar, bubble menu, slash menu, widget node views. [V]</td>
+<td><strong>Spec only</strong>: document schema and command list. The engine is React and cannot run in TempleOS.</td>
+</tr>
+<tr>
+<td><code>packages/app-sdk</code></td>
+<td>Zero-dependency postMessage client and types. [V]</td>
+<td><strong>Spec</strong> for the HolyC app API (method names, <code>ui.result</code>, toolbar slots, <code>events.on</code>). Could be the host-side message format for an embedded browser later.</td>
+</tr>
+<tr>
+<td><code>packages/platform-bridge</code></td>
+<td>Runtime detection and shell bridges for Electron, Tauri, Capacitor, web. [V]</td>
+<td>Not needed. Shell-specific.</td>
+</tr>
+<tr>
+<td><code>packages/cli</code></td>
+<td><code>kosmos</code> / <code>arco</code> CLI for worktrees and sessions. [V]</td>
+<td>Not needed.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Services that could run behind the channel (host side, not inside the guest): doc-interop; mail (IMAP and Gmail adapters, OAuth stays on the host);
+maps proxy (Nominatim and OSRM); weather (Open-Meteo); music library and RSS; the file store (<code>filesService</code>); tasks and calendar stores; the agent.</p>
+<hr />
+<h2 id="5-reusable-for-the-native-apps">5. Reusable for the native apps<a class="headerlink" href="#5-reusable-for-the-native-apps" title="Link to this section">#</a></h2>
+<p>Licence status: the Kosmos OS repo has <strong>no LICENSE file</strong> at the root, no <code>license</code> field in any <code>package.json</code> (root, <code>packages/*</code>, <code>apps/*</code>), and the
+<code>kosmos-www</code> repo has no LICENSE file either [V]. Treat all Kosmos OS code and docs as <strong>unlicensed, all rights reserved</strong> until the owner says otherwise.
+Ask before copying code. The only explicit licence statements are in <code>apps/os-styles/kamiji-ui</code> (see row 2). Dependency licences below are [I] (from
+memory), to verify in <code>node_modules</code>.</p>
+<p>Effort: S under a day, M a few days, L one or more weeks, measured on the HolyC side.</p>
+<p>| Item | Source path | Licence | What to take | Effort |
+| --- | --- | --- | --- |
+| 1. Shell design tokens | <code>src/styles/tokens.css</code>, <code>src/os/themeTokens.ts</code> | Unclear (no repo licence) | Values only (colour, type, radius, spacing, motion) as desk3 palette and constants | S |
+| 2. Five styles and <code>--lf-*</code> tokens | <code>apps/os-styles/styles.css</code>, <code>apps/os-styles/kamiji-ui/dist/tokens.css</code> | Kamiji UI: "provisional MIT, IP clearance open" (<code>PROVENANCE.md</code>); not for publishing | Values for the desk3 palettes (already partly done in desk3) | S |
+| 3. Icon paths | <code>apps/os-styles/kamiji-ui/targets/lit/icons.js</code>, <code>ICONS-LICENSE.md</code> | Lucide ISC; Feather-derived MIT. Licence text is in the file | Path data for the 20 or so icons we need | S to M (rasterising) |
+| 4. Manifest and permission model | <code>shared/manifest.ts</code>, <code>server/platform/manifestSchema.ts</code>, <code>server/platform/grantStore.ts</code> | Unclear | Spec: fields, grant keys, plain-language permission text | S (spec); M (port the grant store) |
+| 5. Bridge protocol | <code>server/platform/bridge.ts</code>, <code>packages/app-sdk/sdk.js</code>, <code>index.d.ts</code> | Unclear (SDK has no licence header) | Methods, audit model, token rules; spec for the HolyC call API | M |
+| 6. Calendar contract and app | <code>shared/capabilities/calendar.ts</code>, <code>apps/calendar/app.js</code>, <code>calendarService.ts</code> | Unclear | Event shape, intent set, range view behaviour | S (spec); M (app) |
+| 7. Tasks contract and app | <code>shared/capabilities/tasks.ts</code>, <code>src/apps/tasks/</code>, <code>tasksService.ts</code> | Unclear | Full behaviour and schema for the Tasks app | M |
+| 8. Files contract and store | <code>shared/capabilities/files.ts</code>, <code>server/services/filesService.ts</code> | Unclear | Entry shape, mime conventions, trash and restore rules; host store for the Applications folder and Drive | M |
+| 9. Formula engine | <code>shared/sheetFormula.ts</code> (+ <code>sheetFormula.test.ts</code>) | Unclear | Port to HolyC, or run as host service; grammar is the spec | M |
+| 10. Sheets workbook schema | <code>shared/capabilities/sheets.ts</code>, <code>src/apps/sheets/workbookFormat.ts</code> | Unclear | JSON schema, parse and serialize rules | S |
+| 11. Slides DeckDoc schema | <code>shared/capabilities/slides.ts</code>, <code>apps/slides/src/App.tsx</code> | Unclear | DeckDoc JSON, box rules, layout tips, shape list | S (spec); M (editor) |
+| 12. Docs schema | <code>shared/capabilities/docs.ts</code>, <code>packages/editor-kit/src/</code> | Unclear; TipTap deps MIT [I] | Document JSON and v1 feature list | S |
+| 13. doc-interop | <code>packages/doc-interop/</code> (+ <code>FIDELITY.md</code>, roundtrip test) | Unclear; deps <code>docx</code> MIT, <code>exceljs</code> MIT, <code>mammoth</code> BSD-2, <code>pptxgenjs</code> MIT, <code>jszip</code> MIT or GPL (dual) [I] | Host service plus fidelity matrix; golden tests | M (service) |
+| 14. Calculator logic | <code>server/services/calculatorService.ts</code>, <code>apps/calculator/app.js</code> | Unclear | Grammar, DEG or RAD rules, history model; skins as visual spec | S to M |
+| 15. Timer behaviour | <code>apps/timer/app.js</code> | Unclear | Countdown and alarm rules | S |
+| 16. Maps proxy | <code>server/services/mapsService.ts</code>, <code>shared/maps/format.js</code> | Unclear; Leaflet BSD-2 [I]; OSM data ODbL and Nominatim and OSRM usage policies [I] | Host service only (User-Agent, rate limits, attribution) | S (service) |
+| 17. Mail | <code>server/mail/</code> (<code>adapters/imap.ts</code>, <code>adapters/gmail.ts</code>, <code>mailStore.ts</code>), <code>src/apps/email/</code> | Unclear; <code>imapflow</code>, <code>mailparser</code>, <code>nodemailer</code> MIT [I] | Host service; the approval rule for send. The UI is React and not portable. | L |
+| 18. Music library | <code>server/services/musicLibraryService.ts</code>, <code>musicRssService.ts</code>, <code>shared/musicFeeds.ts</code> | Unclear | Host service for library and feeds; playback needs an audio path on TempleOS (none yet) | M (service); L (playback) |
+| 19. Weather | Bento weather in <code>src/os/bento/bentoCatalog.ts</code>; Open-Meteo | Unclear; Open-Meteo terms [I] | Host fetch of forecast JSON; layout only | S |
+| 20. Studio approval and conversation model | <code>src/apps/studio/</code>, <code>server/agent/</code> | Unclear | Approval-before-write and command rules, conversation model | M (spec); L (IDE) |
+| 21. Desk3 widgets and styles | <code>apps/templeos-holyc/desk3/</code> | Ours | Already ours | n/a |</p>
+<hr />
+<h2 id="6-app-model-for-the-applications-folder">6. App model for the Applications folder<a class="headerlink" href="#6-app-model-for-the-applications-folder" title="Link to this section">#</a></h2>
+<p>Goal: a HolyC app and a Kosmos app share one manifest shape, one permission vocabulary and one call API, so the same app id and grants work in both.</p>
+<p>Proposed (for discussion; no code changed):</p>
+<ol>
+<li><strong>Folder</strong>: <code>apps/templeos-holyc/apps/&lt;name&gt;/manifest.json</code> plus the HolyC source (<code>&lt;name&gt;.HC</code>). The desk3 <code>ks_an</code>, <code>ks_aw</code>, <code>ks_ah</code>, <code>ks_fx</code>, <code>ks_fy</code> and
+   <code>ks_dord</code> arrays become a scanned list, which matches the framework step in <code>holyc-native-apps-plan.md</code>.</li>
+<li><strong>Manifest</strong>: the <code>AppManifest</code> fields from section 1.2, unchanged. Add one entry kind, <code>{ kind: "holyc", path: "&lt;name&gt;.HC" }</code>, to both
+   <code>shared/manifest.ts</code> and <code>manifestSchema.ts</code>. This is a schema change on the Kosmos side; decide with the owner first. [I]</li>
+<li><strong>Icon</strong>: manifest <code>icon</code> is a Lucide name; the desk3 loader maps it to an <code>L_*</code> icon or a vector path (section 2.4).</li>
+<li><strong>Permissions</strong>: the same grant keys (<code>contract:os.files@1:write</code>, <code>shell:notify</code>). The Settings Apps panel reads one grants file shared by both shells.</li>
+<li><strong>One call gate</strong>: a single HolyC function (<code>KsCall(appId, method, params)</code>) that checks grants, writes an audit line, then calls either a local
+   HolyC service or a host service over the channel. Nothing calls a service directly. Mirrors <code>dispatchAppBridge</code>.</li>
+<li><strong>Contracts</strong>: HolyC apps implement and consume the same <code>os.*@1</code> ids. The HolyC Tasks app reads <code>os.tasks@1</code> the same way the Kosmos Tasks app does.</li>
+<li><strong>Tools</strong>: <code>tools[]</code> in the manifest stays data-only; the agent calls it through the same gate.</li>
+<li><strong>Store</strong>: the file contract (<code>os.files@1</code>) is the shared document store. A HolyC Applications folder lists installed manifests. Documents keep
+   their mime types so HolyC editors can open Kosmos documents and the reverse.</li>
+</ol>
+<p>Open decisions for the owner: whether the HolyC app ids are <code>core.*</code> (preinstalled) or <code>holyc.*</code>; whether the HolyC channel is a new entry kind or
+reuses <code>url</code>; whether an app that needs the network must always go through the host fetch service.</p>
+<hr />
+<h2 id="7-what-is-missing-in-kosmos-os-today">7. What is missing in Kosmos OS today<a class="headerlink" href="#7-what-is-missing-in-kosmos-os-today" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>Present</th>
+<th>Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Email</strong></td>
+<td>UI (<code>src/apps/email/</code>), Gmail and IMAP adapters, OAuth setup, mail store, agent tools</td>
+<td><code>os.mail@1</code> contract (planned as Phase 4 in <code>app-platform-plan.md</code>); a bundled <code>core.mail</code> app; a headless sync process; approval rules for send</td>
+</tr>
+<tr>
+<td><strong>Contacts</strong></td>
+<td>UI (<code>src/apps/contacts/</code>), import, dial pad</td>
+<td>Server store (today a localStorage stub); <code>os.contacts@1</code>; sync; a contact picker for tasks and mail</td>
+</tr>
+<tr>
+<td><strong>Maps</strong></td>
+<td>Leaflet UI, Nominatim and OSRM proxy, history</td>
+<td><code>os.maps@1</code>; offline tiles; a bundled <code>core.maps</code> app; attribution review</td>
+</tr>
+<tr>
+<td><strong>Weather</strong></td>
+<td>A bento widget with Open-Meteo</td>
+<td>Weather app; <code>os.weather@1</code>; location permission (<code>shell</code> feature set has no location)</td>
+</tr>
+<tr>
+<td><strong>Music</strong></td>
+<td>UI, library import, RSS and live feeds, <code>os.music@1</code> contract</td>
+<td>Playback path for TempleOS (no audio driver); bundled app manifest for the Applications folder</td>
+</tr>
+<tr>
+<td><strong>Fonts</strong></td>
+<td>Shell font presets only (<code>themeTokens.ts</code>)</td>
+<td>Font manager of any kind: no font files store, no install, no preview; no <code>os.fonts@1</code></td>
+</tr>
+<tr>
+<td><strong>Spreadsheets</strong></td>
+<td><code>os.sheets@1</code>, formula engine, doc-interop export</td>
+<td>Native grid engine (custom, no Fortune-sheet in deps); charts; a bundled <code>core.sheets</code> manifest; formula coverage is partial</td>
+</tr>
+<tr>
+<td><strong>Slides</strong></td>
+<td><code>os.slides@1</code>, <code>apps/slides</code> editor, PPTX export</td>
+<td>Present mode not verified; no presenter view; no PPTX import verified end to end</td>
+</tr>
+<tr>
+<td><strong>AI IDE</strong></td>
+<td>Studio app (worktrees, diffs, Monaco, browser preview, agent)</td>
+<td>Not an app contract (<code>os.code@1</code> or similar); bundled manifest; editor engine for TempleOS; the approval rule for every write and command is the spec to copy</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cross-cutting gaps: no shared file-open routing for a MIME type (planned in <code>office-suite-plan.md</code> Stage 1, not confirmed built); no installed-app
+windows for the agent cursor (opaque DOM, per the office plan); no audit viewer in the shell (the audit route exists).</p>
+<hr />
+<h2 id="8-verified-versus-inferred">8. Verified versus inferred<a class="headerlink" href="#8-verified-versus-inferred" title="Link to this section">#</a></h2>
+<p><strong>Verified by reading:</strong> repo layout; <code>shared/manifest.ts</code>; <code>manifestSchema.ts</code>; <code>bridge.ts</code> (methods and token flow); <code>packages/app-sdk</code> (surface and wire
+messages); the contract registry and per-contract intent lists; the SQLite schemas of calendar, tasks, files and calculator; the five desk3 styles and
+their palette slots; <code>tokens.css</code> values; the os-styles data-style list; the existence and size of each app folder; the missing contracts for mail,
+contacts, maps, weather, fonts and code; the absence of any LICENSE file; the bento weather widget.</p>
+<p><strong>Inferred or not run:</strong> dependency licences (from memory); Open-Meteo, Nominatim, OSRM and OSM usage terms; whether present mode works in Slides;
+whether per-tool agent policy is built; whether the file-open routing by MIME type exists; whether sheet formula coverage matches the plan; the
+effort estimates in section 5; the desk3 token mapping in section 2.3.</p>
+<p><strong>Not checked:</strong> the contents of <code>docs/</code> files other than the ones named; <code>server/agent/tools.ts</code>; the Studio conversation store; running any app.
+Also not read: <code>apps/templeos-holyc/docs/core-apps-plan.md</code> and <code>os-foundation-plan.md</code> in depth (they overlap with this document).</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/wallpapers/index.html" rel="prev"><span>Previous</span>Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a><a class="next" href="../../../docs/apps/01-porting-method/index.html" rel="next"><span>Next</span>Porting method: Kosmos OS shell primitives to the Temple desktop</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-what-kosmos-os-is-and-how-an-app-is-defined">1. What Kosmos OS is, and how an app is defined</a><ul><li><a href="#11-the-platform-rules-from-docsapp-platform-planmd">1.1 The platform rules (from docs/app-platform-plan.md)</a></li><li><a href="#12-manifest">1.2 Manifest</a></li><li><a href="#13-lifecycle">1.3 Lifecycle</a></li><li><a href="#14-sdk-and-bridge">1.4 SDK and bridge</a></li><li><a href="#15-contracts-the-intent-vocabulary">1.5 Contracts (the intent vocabulary)</a></li><li><a href="#16-data-stores">1.6 Data stores</a></li><li><a href="#17-agent-tools">1.7 Agent tools</a></li><li><a href="#18-intents-events-and-confirmation">1.8 Intents, events and confirmation</a></li></ul></li><li><a href="#2-design-tokens-icons-chrome-and-components">2. Design tokens, icons, chrome and components</a><ul><li><a href="#21-shell-tokens-srcstylestokenscss-srcosthemetokensts-v">2.1 Shell tokens (src/styles/tokens.css, src/os/themeTokens.ts) [V]</a></li><li><a href="#22-five-styles-in-appsos-styles-v">2.2 Five styles in apps/os-styles [V]</a></li><li><a href="#23-desk3-mapping-v">2.3 Desk3 mapping [V]</a></li><li><a href="#24-icons-v">2.4 Icons [V]</a></li><li><a href="#25-window-chrome-v">2.5 Window chrome [V]</a></li><li><a href="#26-component-inventory">2.6 Component inventory</a></li><li><a href="#27-layout-patterns-v">2.7 Layout patterns [V]</a></li></ul></li><li><a href="#3-existing-apps-data-model-features-and-what-can-become-spec">3. Existing apps: data model, features, and what can become spec</a></li><li><a href="#4-packages-reuse-as-spec-or-as-host-service">4. Packages: reuse as spec or as host service</a></li><li><a href="#5-reusable-for-the-native-apps">5. Reusable for the native apps</a></li><li><a href="#6-app-model-for-the-applications-folder">6. App model for the Applications folder</a></li><li><a href="#7-what-is-missing-in-kosmos-os-today">7. What is missing in Kosmos OS today</a></li><li><a href="#8-verified-versus-inferred">8. Verified versus inferred</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

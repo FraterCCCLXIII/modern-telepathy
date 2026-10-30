@@ -1,8 +1,15 @@
+import type { GroupId } from "@/lib/groups";
+
 export type ProjectLink = { label: string; href: string };
 export type Milestone = { label: string; note: string; status: "done" | "active" | "planned" };
 
 export type Project = {
   slug: string;
+  /** Logo is a bare glyph with no tile of its own: show it padded instead of full-bleed. */
+  logoPad?: boolean;
+  /** Own page instead of /projects/$slug. */
+  href?: string;
+  group: GroupId;
   name: string;
   tagline: string;
   description: string;
@@ -14,11 +21,495 @@ export type Project = {
   pitchBody: string;
   links: ProjectLink[];
   progress: Milestone[];
+  /** "What it does": short titled blurbs shown as a grid. */
+  features?: { title: string; body: string }[];
+  /** Extra images under the pitch. */
+  gallery?: { src: string; alt: string; caption?: string }[];
+  /** "At a glance" facts for the sidebar. */
+  facts?: { label: string; value: string }[];
 };
 
 export const projects: Project[] = [
   {
+    slug: "yakopop",
+    group: "language",
+    name: "Yakopop",
+    tagline: "Word-synced, colour-coded bilingual subtitles for language learners.",
+    description: "Every word shows its script, reading, meaning and grammar, and lights up with its translation while the video plays.",
+    logoSrc: "/projects/yakopop/logo.png",
+    imageSrc: "/projects/yakopop/preview.webp",
+    role: "Creator. Product, learning player, creator studio and translation pipeline.",
+    about: [
+      "Yakopop turns a video into a lesson. Each word carries its original script, reading, transliteration, meaning and grammar, and it lights up together with the part of the translation it matches while the video plays.",
+      "Learners can hover for dictionary cards and audio, cut short clips into a personal library, and publish them to Reels. Creators import YouTube videos, playlists or whole channels in a Studio and choose languages, layers and level. Lessons cover Japanese, Mandarin, Korean, Russian, Spanish, Hindi, Nepali, Thai and Tibetan, with translations into 12 languages and a 12-language interface.",
+    ],
+    pitchHeadline: "Learn from the video you already want to watch",
+    pitchBody: "Pick a video, read along word by word, and keep the clips you want to remember.",
+    links: [{ label: "Website", href: "https://yakopop.com" }],
+    features: [
+      { title: "Layers you can read at a glance", body: "Each word is stacked with its script, reading, romanization, meaning and grammar, colour-linked to the part of the translation it matches." },
+      { title: "Tap any word", body: "Hover or tap for a word card with the dictionary entry and audio, and play that single word from the video." },
+      { title: "Practice that sticks", body: "Every video comes with a five-minute quiz built from its own words, with hearts, XP and streaks, and a word list to keep." },
+      { title: "Clips and Reels", body: "Cut a 2 second to 3 minute clip with a word-snapped trimmer, loop it, keep it in a personal library and publish it to Reels." },
+      { title: "A Studio for creators", body: "Import YouTube videos, playlists or whole channels and choose languages, caption source, annotator, level, style and glossary before publishing." },
+      { title: "Nine languages, twelve translations", body: "Videos in Japanese, Mandarin, Korean, Russian, Spanish, Hindi, Nepali, Thai and Tibetan, translated into 12 languages, with a 12-language interface." },
+    ],
+    gallery: [
+      { src: "/projects/yakopop/g1.webp", alt: "Tap any word: a word card with its reading, meaning and audio", caption: "Screenshot of yakopop.com" },
+      { src: "/projects/yakopop/g2.webp", alt: "Practice: a quiz built from the words in a video", caption: "Screenshot of yakopop.com" },
+    ],
+    facts: [
+      { label: "Status", value: "Live, free in beta" },
+      { label: "Where", value: "Web, plus a browser extension for Netflix and YouTube" },
+      { label: "Video languages", value: "9" },
+      { label: "Interface languages", value: "12" },
+      { label: "Source", value: "Private repository" },
+    ],
+    progress: [
+      { label: "Learning player, clips and Reels", note: "Live", status: "done" },
+      { label: "Creator Studio and YouTube import", note: "Live", status: "done" },
+      { label: "Video uploads and speech-to-text", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "arco",
+    group: "systems",
+    name: "Arco",
+    tagline: "Generative UI for agents: cards and components an agent can compose.",
+    description: "The generative UI library inside Kosmos, with a component library and public documentation.",
+    logoSrc: "/projects/arco/logo.svg",
+    imageSrc: "/projects/arco/preview.webp",
+    role: "Creator. Design system, component library and docs.",
+    about: [
+      "Arco is the generative UI library inside Kosmos. Instead of replying in text alone, an agent can answer with cards and components drawn from a shared design system, in the same session as the rest of the work.",
+      "It has its own documentation site and an open repository. The demo page here shows the card renderer with made-up content.",
+    ],
+    pitchHeadline: "Let the agent answer with an interface",
+    pitchBody: "Read the docs for the components, or open the demo to see cards rendered.",
+    links: [
+      { label: "Docs", href: "https://docs.kosmos.computer" },
+      { label: "GitHub", href: "https://github.com/FraterCCCLXIII/arco-os" },
+    ],
+    features: [
+      { title: "Typed cards, not walls of text", body: "An agent picks typed cards from a fixed vocabulary, and Arco draws them themed and consistent." },
+      { title: "Nine block types", body: "Task lists, stats, calendars, weather and more. Each type has its own schema in the card prototype." },
+      { title: "Live demo", body: "Pick a prompt and watch the agent reply and the cards stream into the feed one by one. It is scripted: nothing is sent over the network." },
+      { title: "Design tokens", body: "Light and dark surfaces and a single accent, so a generated screen looks like the rest of the system." },
+      { title: "Documentation", body: "The library has its own docs site with guides and a reference." },
+    ],
+    gallery: [
+      { src: "/projects/arco/g1.webp", alt: "The scripted demo: a plan arrives as a checklist, a calendar and more cards", caption: "The Arco demo page, with made-up content" },
+      { src: "/projects/arco/g2.webp", alt: "Card types drawn from the same renderer", caption: "The Arco demo page" },
+      { src: "/projects/arco/g4.webp", alt: "The Kosmos documentation site", caption: "docs.kosmos.computer" },
+    ],
+    facts: [
+      { label: "Part of", value: "Kosmos" },
+      { label: "Docs", value: "docs.kosmos.computer" },
+      { label: "Status", value: "Prototype, with public docs" },
+      { label: "Source", value: "Open repository" },
+    ],
+    progress: [
+      { label: "Component library and card renderer", note: "Prototype", status: "active" },
+      { label: "Public documentation", note: "Live", status: "done" },
+    ],
+  },
+  {
+    slug: "kosmos-engine",
+    group: "systems",
+    name: "Kosmos engine",
+    tagline: "A Rust reality engine, and a TypeScript SDK for the Kosmos platform.",
+    description: "The 3D and simulation engine behind the Kosmos family, plus the official TypeScript client for Kosmos servers.",
+    logoSrc: "/projects/kosmos-engine/logo.svg",
+    imageSrc: "/projects/kosmos-engine/preview.webp",
+    role: "Creator. Engine architecture, SDK and tooling.",
+    about: [
+      "The Kosmos Reality Engine is written in Rust and runs headless for replay and testing as well as in a window, so a scene can be stepped, snapshotted and compared by state hash. It is the engine behind the Kosmos experiments.",
+      "The Kosmos SDK is a separate, MIT-licensed TypeScript client. It connects scripts and apps to a Kosmos environment (a local desktop, a self-hosted server or a hosted tenant) for chat, streaming and tools.",
+    ],
+    pitchHeadline: "An engine you can replay",
+    pitchBody: "The engine repository is private for now. The SDK is open, and the engine page here explains how it works.",
+    links: [{ label: "SDK on GitHub", href: "https://github.com/Kosmos-computer/kosmos-sdk" }],
+    features: [
+      { title: "Replayable simulation", body: "A fixed 1/64 second tick, seeded random numbers, a state hash, snapshot, restore and replay. CI compares the hash of native builds with the wasm32 build." },
+      { title: "A wgpu renderer", body: "Flat, toon and PBR looks, shadows, sky and clouds, grass, water, motion blur and an HDR tone map." },
+      { title: "A headless protocol", body: "Typed JSON messages over stdio or WebSocket, a typed TypeScript client and an MCP server, so people and AI agents can build and test through the same commands." },
+      { title: "An editor", body: "An egui editor in the native app with a scene tree, inspector, gizmos and undo." },
+      { title: "Characters and faces", body: "An animation graph with 45 face channels, a face plate for heads without morph targets, and importers for glTF, FBX, OBJ and mochi." },
+      { title: "The Kosmos SDK", body: "A separate MIT-licensed TypeScript client that connects scripts and apps to a Kosmos environment for chat, streaming and tools." },
+    ],
+    gallery: [
+      { src: "/projects/kosmos-engine/g1.webp", alt: "Kamikin characters in the engine", caption: "Capture from the native app" },
+      { src: "/projects/kosmos-engine/g2.webp", alt: "A Kosmica prototype running on the engine", caption: "Capture from the native app" },
+      { src: "/projects/kosmos-engine/g3.webp", alt: "The editor beside a scene of cubes", caption: "Capture from the native app" },
+      { src: "/projects/kosmos-engine/g4.webp", alt: "The Kosmos documentation site, for the platform the SDK talks to", caption: "docs.kosmos.computer" },
+    ],
+    facts: [
+      { label: "Language", value: "Rust, edition 2024" },
+      { label: "Renderer", value: "wgpu 30 (Metal, Vulkan, DX12, WebGPU)" },
+      { label: "Size", value: "45 crates plus runner apps" },
+      { label: "Runners", value: "Native window, headless CLI and MCP" },
+      { label: "Licence", value: "MIT or Apache-2.0" },
+      { label: "Started", value: "15 October 2026" },
+      { label: "Source", value: "Private repository; SDK is open" },
+    ],
+    progress: [
+      { label: "Rust engine with replay and state hashing", note: "Active", status: "active" },
+      { label: "TypeScript SDK", note: "Open source", status: "done" },
+      { label: "Public engine release", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "relay",
+    group: "knowledge",
+    name: "Relay and MESH",
+    tagline: "Open specifications for decentralized social networks.",
+    description: "Relay is a stack spec of signed, content-addressed facts and deterministic views. MESH combines ideas from Nostr, ActivityPub, SSB and AT Protocol.",
+    logoSrc: "/projects/relay/logo.svg",
+    imageSrc: "/projects/relay/preview.webp",
+    role: "Author. Protocol specifications and reference implementations.",
+    about: [
+      "Relay splits a social protocol into two layers. The truth layer holds signed, content-addressed facts: identities, an append-only event log, state and attestations. The view layer holds deterministic projections over those facts, such as feeds and ordered lists. The stack spec has gone through several drafts and is now at version 2.",
+      "MESH, the Modular Extensible Social Hybrid Protocol, is a sibling specification that layers privacy, integrity, moderation, views and network over a self-sovereign identity, with a Python implementation.",
+    ],
+    pitchHeadline: "Facts first, feeds second",
+    pitchBody: "Read the specifications and the reference code.",
+    links: [
+      { label: "Relay on GitHub", href: "https://github.com/FraterCCCLXIII/Relay" },
+      { label: "MESH on GitHub", href: "https://github.com/FraterCCCLXIII/mesh-protocol" },
+    ],
+    features: [
+      { title: "Facts first", body: "Relay's truth layer is signed, content-addressed facts: identity, an append-only event log, state and attestations." },
+      { title: "Deterministic views", body: "Feeds and lists are projections over those facts. Anyone who computes a view from the same inputs gets the same answer." },
+      { title: "Self-sovereign identity", body: "In MESH an Ed25519 key is your identity, with device keys for multiple devices and optional social, custodial or hardware recovery." },
+      { title: "Private by default", body: "MESH uses X25519 and AES-256-GCM for direct messages and groups." },
+      { title: "Composable moderation", body: "Third parties publish attestations, and each person chooses whose to trust." },
+      { title: "A working reference", body: "MESH has a Python implementation on SQLite or PostgreSQL, and the repository reports its own benchmarks." },
+    ],
+    facts: [
+      { label: "Relay", value: "Stack spec, drafts v1.0 to v2" },
+      { label: "MESH", value: "Spec v1.1 with a Python implementation" },
+      { label: "Compared with", value: "Nostr, ActivityPub, SSB, AT Protocol" },
+      { label: "Source", value: "Open repositories" },
+    ],
+    progress: [
+      { label: "Relay stack spec", note: "Draft 2.0", status: "active" },
+      { label: "MESH spec and Python implementation", note: "v1.1", status: "done" },
+    ],
+  },
+  {
+    slug: "pressmark",
+    group: "tools",
+    name: "Pressmark",
+    tagline: "Design and print labels from your desktop or browser.",
+    description: "A label editor for NIIMBOT printers over Bluetooth or USB. Offline by default; your labels stay in your browser.",
+    logoSrc: "/projects/pressmark/logo.svg",
+    imageSrc: "/projects/pressmark/preview.webp",
+    role: "Maintainer. A NiimBlue-based fork, adapted and rebranded.",
+    about: [
+      "Pressmark is a label designer and printer client. It works completely offline in the browser, stores labels locally, shows a print preview with several post-processing options, and prints over Bluetooth or USB.",
+      "It also ships as standalone apps for desktop (Electron), Android (Capacitor) and Windows (Tauri). It is based on the open-source NiimBlue project and its NIIMBOT protocol library, and is MIT licensed.",
+    ],
+    pitchHeadline: "Labels without the account",
+    pitchBody: "Design a label, preview how it will print, and print it. No sign-in and no data leaves the browser.",
+    links: [
+      { label: "GitHub", href: "https://github.com/FraterCCCLXIII/pressmark" },
+      { label: "Upstream: NiimBlue", href: "https://github.com/MultiMote/niimblue" },
+    ],
+    features: [
+      { title: "Private and offline", body: "The app works completely in the browser and stores labels there. It sends nothing except downloading the app files." },
+      { title: "Bluetooth and USB", body: "Connect a NIIMBOT printer either way." },
+      { title: "A real label editor", body: "Design labels, save, import and export them, and check a print preview with several post-processing options such as threshold and dithering." },
+      { title: "Batch and templates", body: "Print many labels from a table of data with variables, and use date templates in label text." },
+      { title: "Runs everywhere", body: "Browser, desktop (Electron), Android (Capacitor) and Windows (Tauri, Edge-backed)." },
+      { title: "The NIIMBOT protocol", body: "It uses NiimBlueLib for printer communication, a very complete implementation of the protocol." },
+    ],
+    gallery: [
+      { src: "/projects/pressmark/g1.webp", alt: "Saving and loading labels in browser storage", caption: "Screenshot from the repository" },
+      { src: "/projects/pressmark/g2.webp", alt: "Date templates in label text", caption: "Screenshot from the repository" },
+      { src: "/projects/pressmark/g3.webp", alt: "Label size, density and layout settings", caption: "Screenshot from the repository" },
+    ],
+    facts: [
+      { label: "Platforms", value: "Browser, desktop, Android, Windows" },
+      { label: "Printers", value: "NIIMBOT, over Bluetooth or USB" },
+      { label: "Licence", value: "MIT" },
+      { label: "Based on", value: "NiimBlue" },
+    ],
+    progress: [
+      { label: "Browser editor and printing", note: "Working", status: "done" },
+      { label: "Desktop, Android and Windows apps", note: "Included", status: "done" },
+    ],
+  },
+  {
+    slug: "page",
+    group: "tools",
+    name: "Page",
+    tagline: "A calm, private, text-first Android launcher.",
+    description: "Replaces the home screen with a quiet list of actions and one search field. No network permission, no ads, no tracking.",
+    logoSrc: "/projects/page/logo.svg",
+    imageSrc: "/projects/page/preview.webp",
+    role: "Creator. Android app and design.",
+    about: [
+      "Page is a launcher, not a custom ROM: install it like any app and set it as your home screen. The home screen asks one question, what do you need, and offers a short list of actions plus a search and command field. Type is large, icons are off by default, and the theme is a quiet monochrome.",
+      "It is built to be audited quickly. The manifest has no internet permission, there is no telemetry or Google Play Services dependency, and settings stay on the device. It is licensed GPL v3.",
+    ],
+    pitchHeadline: "A phone that asks one question",
+    pitchBody: "Page is an early build. The launcher, app search, default actions and settings shortcuts work today.",
+    links: [{ label: "GitHub", href: "https://github.com/FraterCCCLXIII/Page" }],
+    features: [
+      { title: "Text first", body: "Large type, an alphabetical app list and no icons by default. The home screen asks one question." },
+      { title: "Actions, not grids", body: "Phone, Messages, Maps, Books, Notes, Music, Camera, Calendar, Files and Settings each open your chosen companion app." },
+      { title: "A search and command bar", body: "Find an app or type a simple command." },
+      { title: "Safe fallbacks", body: "If your preferred app is missing, Page falls back to a generic Android intent, and says so if nothing can handle the action." },
+      { title: "Private by construction", body: "No internet permission, no analytics or ads, no Google Play Services, and settings stay on the device." },
+      { title: "Bring your own apps", body: "A script sets up Page and companion apps over ADB from F-Droid and GitHub releases. An in-app first-run setup is planned." },
+    ],
+    facts: [
+      { label: "Version", value: "0.1.0, early MVP" },
+      { label: "Android", value: "10 and up (API 29), built for 35" },
+      { label: "Permissions", value: "None for the network" },
+      { label: "Licence", value: "GPL v3" },
+    ],
+    progress: [
+      { label: "Launcher, search, actions, settings", note: "v0.1.0", status: "done" },
+      { label: "Light Phone style app set", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "kosmica",
+    group: "games",
+    name: "Kosmica",
+    tagline: "A game in development, with a pre-launch waitlist.",
+    description: "Sign up for news and early access, with parent sign-up for younger players and referral ranks for invites.",
+    logoSrc: "/projects/kosmica/logo.svg",
+    imageSrc: "/projects/kosmica/preview.webp",
+    role: "Creator.",
+    about: [
+      "Kosmica is a game in development. Its pre-launch site collects a waitlist with double opt-in email, so only confirmed addresses count.",
+      "Players who could be under 16 are switched to a parent or guardian sign-up for the rest of their visit. Confirmed players get an invite link and a rank that grows with referrals: Deckhand, Navigator, Captain, Admiral. Sign-ups are stored on our own server in the EU.",
+    ],
+    pitchHeadline: "Get in line early",
+    pitchBody: "The waitlist site is built and runs on our own server. More about the game will be shared here as it is ready.",
+    links: [],
+    features: [
+      { title: "Wake worlds", body: "Find the old names, restore the land, and watch colour roll back across a planet." },
+      { title: "Sail the sky, then space", body: "Build and fly airships, trim sails against the wind, then climb out of the atmosphere." },
+      { title: "Pilot mechs", body: "Take the helm of walkers and striders built for the hardest worlds." },
+      { title: "Befriend creatures", body: "Log every creature in your Kosmodex and raise a companion." },
+      { title: "Talk to anyone", body: "Characters answer in their own voices, and many quests are won with words." },
+      { title: "Fight when you must", body: "Turn-based battles, sword action and arena duels, with enemies who can be talked down." },
+    ],
+    gallery: [
+      { src: "/projects/kosmica/g1.webp", alt: "A Kosmica prototype running in the Kosmos engine", caption: "Capture from the native app, not a final build" },
+    ],
+    facts: [
+      { label: "Status", value: "In development; rating pending" },
+      { label: "Waitlist", value: "Site built; not yet live" },
+      { label: "Engine", value: "Kosmos engine" },
+      { label: "Privacy", value: "Confirmed emails only, stored in the EU" },
+    ],
+    progress: [
+      { label: "Pre-launch waitlist site", note: "Built", status: "done" },
+      { label: "Game", note: "In development", status: "active" },
+    ],
+  },
+  {
+    slug: "formscaler",
+    group: "business",
+    name: "Formscaler",
+    tagline: "Model anything. Let AI help. Stay in control.",
+    description: "An open-core, AI-ready CMS for dynamic data: collections and permissions as data, published pages, and agents bound by the same rules as editors.",
+    logoSrc: "/projects/formscaler/logo.svg",
+    imageSrc: "/projects/formscaler/preview.webp",
+    role: "Creator. Product, marketing site and demo.",
+    about: [
+      "Formscaler lets you define collections and permissions as data, publish pages from them, and let agents work through the same rules your editors use.",
+      "It is open core. The marketing site has an interactive demo and a brand page; pricing and limits on the site are still placeholders.",
+    ],
+    pitchHeadline: "Agents that follow the same rules",
+    pitchBody: "Try the interactive demo on the product site.",
+    links: [{ label: "Website", href: "https://formscaler-website.vercel.app" }],
+    features: [
+      { title: "Collections and fields", body: "Define your own content types with field types, validation and relations. Shipped." },
+      { title: "Schema versioning", body: "Every schema change is diffed. Shipped." },
+      { title: "Generated admin", body: "An editing screen generated from your schema. Planned." },
+      { title: "Agents under the same rules", body: "AI agents work through the same permissions as your editors." },
+      { title: "Open core", body: "Self-host the free core, or start a 14-day Team trial with no credit card." },
+      { title: "Honest status", body: "Every capability on the site is tagged shipped or planned." },
+    ],
+    gallery: [
+      { src: "/projects/formscaler/g1.webp", alt: "The interactive demo: a dashboard with an AI assistant proposing a change", caption: "Screenshot of formscaler-website.vercel.app" },
+      { src: "/projects/formscaler/g2.webp", alt: "The features page, with each capability tagged shipped or planned", caption: "Screenshot of formscaler-website.vercel.app" },
+    ],
+    facts: [
+      { label: "Status", value: "Early access" },
+      { label: "Model", value: "Open core" },
+      { label: "Trial", value: "14-day Team trial" },
+      { label: "Source", value: "Private repository" },
+    ],
+    progress: [
+      { label: "Marketing site and demo", note: "Live", status: "done" },
+      { label: "Product", note: "In development", status: "active" },
+    ],
+  },
+  {
+    slug: "longformer",
+    group: "language",
+    name: "Longformer",
+    tagline: "From long-form audio to a book plan.",
+    description: "Add podcast episodes, video, text and documents as sources, get a chapter plan, and edit it.",
+    logoSrc: "/projects/longformer/logo.svg",
+    imageSrc: "/projects/longformer/preview.webp",
+    role: "Creator. Product design and front end.",
+    about: [
+      "Longformer is a book planner. You add sources, such as audio, video, text and documents or the episodes of a podcast feed, and it proposes a chapter outline: a title, a summary and the sources each chapter draws on.",
+      "Today it is a working front end on a mock backend. The upload, feed import and chapter screens exist; transcription, AI planning and export to DOCX, EPUB, PDF and Markdown are designed but not built.",
+    ],
+    pitchHeadline: "Plan the book your episodes already contain",
+    pitchBody: "Open the prototype to walk through the screens with sample data.",
+    links: [{ label: "GitHub", href: "https://github.com/FraterCCCLXIII/longformer" }],
+    features: [
+      { title: "Upload or import", body: "Drop audio, video, text or documents, or paste a podcast RSS feed and pick episodes. The screens exist; the server side is simulated." },
+      { title: "Plan chapters", body: "The planner turns the chosen sources into chapters, each with a title, a summary and the sources it draws on. The mock returns the same three chapters every time." },
+      { title: "Edit the plan", body: "The planner store can rename, add, remove and reorder chapters. There is no editing screen yet." },
+      { title: "Export", body: "The data model knows DOCX, EPUB, PDF and Markdown. Nothing builds a file yet." },
+      { title: "Transcription and AI", body: "Planned. No transcription or AI code exists in the repository yet." },
+    ],
+    gallery: [
+      { src: "/projects/longformer/g1.webp", alt: "How it works: four steps, each marked prototype or planned", caption: "The Longformer page" },
+      { src: "/projects/longformer/g2.webp", alt: "What the app offers, with honest status badges", caption: "The Longformer page" },
+    ],
+    facts: [
+      { label: "Status", value: "Early prototype on a mock backend" },
+      { label: "Stack", value: "Nuxt" },
+      { label: "Inside it is called", value: "Podbook" },
+      { label: "Source", value: "Open repository" },
+    ],
+    progress: [
+      { label: "Source upload, feed import, chapter plan screens", note: "Prototype", status: "active" },
+      { label: "Transcription and AI planning", note: "Planned", status: "planned" },
+      { label: "Export to DOCX, EPUB, PDF, Markdown", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "podbook",
+    group: "language",
+    name: "Podbook",
+    tagline: "Turn any RSS feed into a professionally formatted book.",
+    description: "AI-powered conversion of feeds and podcasts into books for offline reading and curation.",
+    logoSrc: "/projects/podbook/logo.svg",
+    imageSrc: "/projects/podbook/preview.webp",
+    logoPad: true,
+    role: "Product/engineering at Fathom Labs.",
+    about: [
+      "Podbook turns an RSS feed into a book. The idea is to transform a podcast or blog into something you can read offline and keep, with the structure and formatting of a real book instead of a pile of posts.",
+      "The web app has user accounts, projects and a full API behind a React front end, and a separate landing site. Feed processing, AI content generation and export to PDF and EPUB are still to be built, so treat it as a work in progress.",
+    ],
+    pitchHeadline: "From feed to book",
+    pitchBody: "Longformer is a related book planner built on the same idea.",
+    links: [
+      { label: "Web app on GitHub", href: "https://github.com/Fathom-labs/podbook-web" },
+      { label: "Landing site on GitHub", href: "https://github.com/Fathom-labs/podbook-landing" },
+    ],
+    features: [
+      { title: "RSS in, book out", body: "Point it at a feed and get a formatted book for offline reading." },
+      { title: "Projects and accounts", body: "Sign up, log in and manage book projects. Done." },
+      { title: "A real backend", body: "An Express server with PostgreSQL and a REST API for users, projects, content and AI processing." },
+      { title: "AI formatting", body: "Content extraction and AI-generated book structure. In progress." },
+      { title: "Export", body: "PDF, EPUB and more. Planned." },
+      { title: "Billing", body: "Subscriptions and usage limits. Planned." },
+    ],
+    facts: [
+      { label: "Stack", value: "React, Express, PostgreSQL, Prisma, Docker" },
+      { label: "From", value: "Fathom Labs" },
+      { label: "Status", value: "Work in progress" },
+      { label: "Related", value: "Longformer" },
+    ],
+    progress: [
+      { label: "Accounts, projects and API", note: "Built", status: "done" },
+      { label: "Feed processing and AI generation", note: "In progress", status: "active" },
+      { label: "Book export", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "caret",
+    group: "creative",
+    name: "Caret",
+    tagline: "A Notion-style Markdown and RTF editor with AI writing help, inside VS Code.",
+    description: "Rich text editing for .md and .rtf files, with inline AI, footnotes and review comments.",
+    logoSrc: "/projects/caret/logo.png",
+    imageSrc: "/projects/caret/preview.webp",
+    role: "Creator. Editor extension and the Caret build of VS Code.",
+    about: [
+      "Caret is a custom editor for Markdown and RTF files, built on TipTap. It gives you a Notion-style document view instead of raw markup, with footnotes and review comments kept in a side panel, not in the file.",
+      "Write Next continues your text at the cursor in the style of the surrounding passage. It can read other files in the workspace, such as outlines, research notes or chapter drafts, before it writes. It runs on whichever language model VS Code offers, such as GitHub Copilot.",
+    ],
+    pitchHeadline: "Write next, with your notes open",
+    pitchBody: "Press Cmd+Return at the cursor, and Caret continues from what you have written, using the files in your workspace.",
+    links: [{ label: "GitHub", href: "https://github.com/FraterCCCLXIII/vscode-writer" }],
+    features: [
+      { title: "A document, not markup", body: "Edit .md and .rtf files in a Notion-style view built on TipTap, with tables, task lists and images." },
+      { title: "Write Next", body: "Press Cmd+Return, or click the Write button that appears when the cursor rests, and Caret continues in the style and tone of the passage." },
+      { title: "Reads your workspace", body: "Before writing it can open outlines, research notes or chapter drafts from your workspace, and search them for facts." },
+      { title: "Review comments", body: "Comments sit in a side panel, not in the file, and an agent in Chat can add one to your selection." },
+      { title: "Footnotes", body: "Insert footnotes from the editor or from an agent." },
+      { title: "Your model", body: "It uses whichever language model VS Code offers, such as GitHub Copilot." },
+    ],
+    facts: [
+      { label: "Works in", value: "VS Code (custom editor)" },
+      { label: "Files", value: "Markdown and RTF" },
+      { label: "Version", value: "1.0.0" },
+      { label: "Licence", value: "MIT" },
+    ],
+    progress: [
+      { label: "Rich editor, comments, footnotes", note: "Working", status: "done" },
+      { label: "Write Next with workspace context", note: "Working", status: "done" },
+    ],
+  },
+  {
+    slug: "kamiji",
+    group: "creative",
+    name: "Kamiji",
+    tagline: "A rigged, expressive 3D hand avatar, plus the characters and tools around it.",
+    description: "A three.js hand avatar for React with faces, poses and motions, a character Studio and the Kamikin cast.",
+    logoSrc: "/projects/kamiji/logo.png",
+    role: "Creator. Rig, characters, library and tools.",
+    about: [
+      "Kamiji gives each agent or character a tinted, animated hand with a morph-target face: expressions, poses, whole-hand motions, emotes and status icons. One shared WebGL renderer draws many avatars on a page, with a flat SVG fallback.",
+      "Around the hand sit the Studio character creator, the Kamikin and Rubbernose casts, a voice lab and a subtitles playground. All of them run here in the browser.",
+    ],
+    pitchHeadline: "Give your agent a hand",
+    pitchBody: "Open the Studio to build a character, or the workshop to try poses and expressions.",
+    links: [],
+    progress: [
+      { label: "Hand rig, poses and motions", note: "Done", status: "done" },
+      { label: "Studio character creator", note: "Prototype", status: "active" },
+      { label: "Embeddable JS library on this site", note: "Planned", status: "planned" },
+    ],
+  },
+  {
+    slug: "templeos",
+    href: "/templeos",
+    group: "systems",
+    name: "TempleOS desktop",
+    tagline: "A HolyC desktop with its own browser, apps and a host bridge.",
+    description: "Plans, specs and status for rebuilding a modern desktop and browser inside TempleOS.",
+    logoSrc: "/projects/templeos/logo.svg",
+    role: "Author. Architecture, HolyC apps and host services.",
+    about: [
+      "The TempleOS desktop project explores how far a HolyC system can go as a daily desktop: a browser, mail, contacts, a dev box and ports of existing apps, with a host hub that does the work TempleOS cannot.",
+      "The documentation site collects the plans, feasibility studies and specs in one place.",
+    ],
+    pitchHeadline: "A modern desktop in HolyC",
+    pitchBody: "Read the browser architecture, the app plans and the dev box study.",
+    links: [{ label: "Docs", href: "/templeos" }, { label: "GitHub", href: "https://github.com/Modern-Telepathy/templeos" }],
+    progress: [
+      { label: "Desktop shell and host hub", note: "Active", status: "active" },
+      { label: "Browser v0", note: "In progress", status: "active" },
+    ],
+  },
+  {
     slug: "keybox",
+    group: "systems",
     name: "Keybox",
     tagline: "Seal a secret. The agent can spend it. The model never reads it.",
     description:
@@ -44,6 +535,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kosmos",
+    group: "systems",
     name: "Kosmos",
     tagline: "A generative AI operating system for integrated work and life.",
     description: "One shell for chat, code, files, and generated apps — agents and UI sharing a single session.",
@@ -71,6 +563,7 @@ export const projects: Project[] = [
   },
   {
     slug: "doctransit",
+    group: "business",
     name: "DocTransit",
     tagline: "E-signatures that just work.",
     description: "Send, sign, and track agreements — with Agents API, MCP, CLI, and webhooks for AI-driven contract flows.",
@@ -97,6 +590,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nextpresser",
+    group: "business",
     name: "NextPresser",
     tagline: "Next.js headless toolkit for WordPress and WooCommerce.",
     description: "Faust.js + WPGraphQL storefront with cart, checkout, auth, and multi-gateway payments.",
@@ -122,6 +616,7 @@ export const projects: Project[] = [
   },
   {
     slug: "prompt",
+    group: "creative",
     name: "Prompt",
     tagline: "A minimal anonymous writing app.",
     description: "Leave a text post — public or link-only — at a human-readable five-word URL.",
@@ -145,6 +640,8 @@ export const projects: Project[] = [
   },
   {
     slug: "newsphere",
+    logoPad: true,
+    group: "language",
     name: "Newsphere",
     tagline: "Built to read, not to scroll.",
     description: "Desktop RSS/Atom reader with a column grid, focused reader, and optional on-device AI.",
@@ -169,6 +666,7 @@ export const projects: Project[] = [
   },
   {
     slug: "castflow",
+    group: "creative",
     name: "Castbook",
     tagline: "Casting companion for actors, projects, roles, and assignments.",
     description: "Manage talent and productions — with public actor submissions and multilingual UI.",
@@ -191,6 +689,8 @@ export const projects: Project[] = [
   },
   {
     slug: "openbook",
+    logoPad: true,
+    group: "business",
     name: "OpenBook",
     tagline: "TypeScript appointment platform — NestJS API + React SPA.",
     description: "Modern booking for services and providers with public scheduling and staff tools.",
@@ -212,6 +712,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kosmographica",
+    group: "knowledge",
     name: "Kosmographica",
     tagline: "A knowledge graph of human thought, culture, and history.",
     description: "Federated, citation-backed encyclopedia with trust-rated claims across religion and mythology.",
@@ -235,6 +736,8 @@ export const projects: Project[] = [
   },
   {
     slug: "holons",
+    logoPad: true,
+    group: "knowledge",
     name: "Holons",
     tagline: "Learning communities of people evolving together.",
     description: "LMS where each Holon hosts courses, modules, members, and a social feed.",
@@ -256,6 +759,7 @@ export const projects: Project[] = [
   },
   {
     slug: "public-search",
+    group: "knowledge",
     name: "Public Search",
     tagline: "Private, peer-to-peer search for the free web.",
     description: "Modern YaCy front end — no tracking, themeable UI, optional SearxNG.",
@@ -279,6 +783,7 @@ export const projects: Project[] = [
   },
   {
     slug: "public-translate",
+    group: "language",
     name: "Public Translate",
     tagline: "Open-source live voice translation for cross-cultural dialogue.",
     description: "Speech-to-text, bilingual display, and TTS — built for temples, classrooms, and cast-to-TV.",
@@ -301,6 +806,7 @@ export const projects: Project[] = [
   },
   {
     slug: "dharma-atlas",
+    group: "knowledge",
     name: "Dharma Atlas",
     tagline: "Discover temples, monasteries, and ashrams worldwide.",
     description: "Interactive map and list of 5,600+ spiritual places with tradition filters.",
@@ -325,6 +831,7 @@ export const projects: Project[] = [
   },
   {
     slug: "podium",
+    group: "language",
     name: "Podium",
     tagline: "AI show notes, chapters, transcripts, and clips for podcasts.",
     description: "Podcast post-production that turns episodes into editable transcripts and shareable collateral.",
@@ -349,6 +856,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fathom",
+    group: "language",
     name: "Fathom",
     tagline: "Audio intelligence — ingest, transcribe, chapterize, enrich.",
     description: "The podcast pipeline behind diarized transcripts, vectors, and episode enrichment at fathom.fm.",
@@ -373,3 +881,6 @@ export const projects: Project[] = [
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+export const projectsInGroup = (id: GroupId) => projects.filter((p) => p.group === id);
+export const projectHref = (p: Project) => p.href ?? `/projects/${p.slug}`;

@@ -1,0 +1,13 @@
+/* Scoping for the owner's --lf-* tokens on this light page. The kit's own light theme is used as is, with the canvas made
+   transparent so previews sit on the tile card. The kit's dark default on :root is removed in the build (see build.mjs). */
+.uix-lf[data-lf-theme="light"] {
+  --lf-surface-canvas: transparent;
+  background: transparent;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+.uix-lf img { max-width: 100%; }
+.ux-cv > * { flex: 1 1 auto; min-height: 0; }
+.ux-fill { height: 100%; display: flex; flex-direction: column; min-height: 0; }
+.ux-fill > * { flex: 1 1 auto; min-height: 0; }

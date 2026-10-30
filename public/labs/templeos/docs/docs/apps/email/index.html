@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email client for the Kosmos HolyC desktop: plan | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html" aria-current="page">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Apps</span></li><li aria-current="page">Email client for the Kosmos HolyC desktop: plan</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Email client for the Kosmos HolyC desktop: plan</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/apps/email.md</span></div>
+        <div class="doc-body">
+
+<p>Status: plan only, no code. Branch task/templeos-shell. Written 2026-10-27. Read with <code>docs/holyc-native-apps-plan.md</code> (rule: nothing sent, deleted or purchased without a UI prompt), <code>docs/browser-architecture.md</code> sections a, b and e (host services over a channel, security) and <code>aiwnios/README.md</code> (also runs natively on Apple Silicon). Companion: <code>docs/apps/contacts.md</code>.</p>
+<p>Tags: <strong>[verified]</strong> = checked in this pass (GitHub API, LICENSE file, RFC index or vendor page); <strong>[memory]</strong> = not re-checked.</p>
+<h2 id="1-purpose-and-users">1. Purpose and users<a class="headerlink" href="#1-purpose-and-users" title="Link to this section">#</a></h2>
+<p>A native mail reader and composer on the desktop. The guest draws everything; the Mac host does all network I/O, TLS and credential handling. Users: people with a personal mailbox (Fastmail, Gmail over IMAP, a self-hosted server) who want to read and answer mail from the retro desktop, and keyboard-first users. Out of scope: Exchange, calendars, rich HTML composition, server-side rules.</p>
+<h2 id="2-feature-inventory">2. Feature inventory<a class="headerlink" href="#2-feature-inventory" title="Link to this section">#</a></h2>
+<p>Reference clients: Apple Mail (support.apple.com/mail), Gmail (support.google.com/mail), Thunderbird (support.mozilla.org), Fastmail (fastmail.com/help, [verified] setup and comparison pages found), Hey (hey.com). Gmail's exact undo window (5 to 30 s) came from third-party guides [verified as a search result, not on Google's page]; confirm before a gate uses it.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Ref</th>
+<th>Pri</th>
+<th>Effort</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Folder list with unread counts, special-use roles (Inbox, Sent, Drafts, Archive, Trash, Spam)</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>IMAP LIST and SPECIAL-USE, RFC 6154 [memory]</td>
+</tr>
+<tr>
+<td>Message list: from, subject, date, flags, paging</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>virtual list, headers in pages of 50</td>
+</tr>
+<tr>
+<td>Reader: plain text, folded quotes, attachment list</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>MIME to text blocks (section 4)</td>
+</tr>
+<tr>
+<td>Compose: To, Cc, Bcc, subject, body; reply, reply-all, forward</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>multi-line editor needed</td>
+</tr>
+<tr>
+<td>Send via SMTP submission behind a Send prompt</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>587 STARTTLS, 465 implicit TLS (RFC 8314 [memory])</td>
+</tr>
+<tr>
+<td>Read, unread, flag, move, delete to Trash</td>
+<td>all</td>
+<td>P0</td>
+<td>S</td>
+<td>bulk actions prompt; no permanent delete in v1</td>
+</tr>
+<tr>
+<td>Search (sender, subject, body, date)</td>
+<td>all</td>
+<td>P0</td>
+<td>M</td>
+<td>server IMAP SEARCH</td>
+</tr>
+<tr>
+<td>Threads</td>
+<td>Apple, Gmail, Thunderbird</td>
+<td>P1</td>
+<td>M</td>
+<td>IMAP THREAD, RFC 5256 [memory]</td>
+</tr>
+<tr>
+<td>Drafts saved to server Drafts</td>
+<td>all</td>
+<td>P1</td>
+<td>S</td>
+<td>APPEND</td>
+</tr>
+<tr>
+<td>Save attachment to guest disk (prompted)</td>
+<td>all</td>
+<td>P1</td>
+<td>M</td>
+<td>never opened or run (section 6)</td>
+</tr>
+<tr>
+<td>Multiple accounts</td>
+<td>all</td>
+<td>P1</td>
+<td>M</td>
+<td>one host session per account</td>
+</tr>
+<tr>
+<td>Keyboard navigation</td>
+<td>Gmail, Hey</td>
+<td>P1</td>
+<td>S</td>
+<td>j, k, r, f, e, /, c</td>
+</tr>
+<tr>
+<td>Undo send window</td>
+<td>Gmail</td>
+<td>P1</td>
+<td>S</td>
+<td>host holds the message, not the guest</td>
+</tr>
+<tr>
+<td>Offline cache and outbox</td>
+<td>all</td>
+<td>P1</td>
+<td>L</td>
+<td>section 3</td>
+</tr>
+<tr>
+<td>Scheduled send</td>
+<td>Gmail</td>
+<td>P2</td>
+<td>M</td>
+<td>needs a host scheduler</td>
+</tr>
+<tr>
+<td>Snooze</td>
+<td>Gmail</td>
+<td>P2</td>
+<td>M</td>
+<td>local only</td>
+</tr>
+<tr>
+<td>Screener for first-time senders</td>
+<td>Hey</td>
+<td>P2</td>
+<td>M</td>
+<td>a rule and a folder, not a default</td>
+</tr>
+<tr>
+<td>Server Sieve filters</td>
+<td>Fastmail, Thunderbird</td>
+<td>P2</td>
+<td>L</td>
+<td>ManageSieve; out of scope</td>
+</tr>
+<tr>
+<td>HTML rendering</td>
+<td>all</td>
+<td>P2</td>
+<td>L</td>
+<td>excluded; section 6</td>
+</tr>
+<tr>
+<td>Import and export mbox, EML, maildir</td>
+<td>Thunderbird, Apple</td>
+<td>P2</td>
+<td>M</td>
+<td>prompted, host-side files</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-architecture">3. Architecture<a class="headerlink" href="#3-architecture" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>TempleOS guest (HolyC, desk3)                      Mac host (Python services bridge)
+ Mail app (apps/mail/*.HC)                         mail-service (scripts/mail-bridge.py)
+  folders | list | reader | compose                 +-- account store (keychain references only)
+  bounded disk cache (last 100 bodies)              +-- IMAP session pool (imaplib)
+  prompts, search field, outbox view                +-- SMTP send (smtplib, STARTTLS)
+        |  framed messages (browser-architecture b1)+-- MIME parse, text render, HTML sanitiser
+        +-------------------------------------------+-- sqlite3: headers, bodies, outbox, sync state
+                                                    +-- OAuth 2 loopback helper (host only)</code></pre></figure>
+<p><strong>Guest:</strong> layout, list paging, reader and compose painting, keyboard, prompts, disk cache of recent bodies. It never opens a socket.</p>
+<p><strong>Host:</strong> every network byte, TLS, credentials, IMAP state, MIME parsing, sanitising, search, sync and the outbox. No password, token or certificate key crosses the channel.</p>
+<p><strong>Protocol.</strong> A mail message family on the same frame (sync 0xA5, CRC-32, 16-byte overhead). Each request carries a request id and account id; each reply echoes them.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Dir</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MAIL_ACCOUNTS</code></td>
+<td>H to G</td>
+<td>account id, name, state (ok, auth needed, offline)</td>
+</tr>
+<tr>
+<td><code>MAIL_FOLDERS</code></td>
+<td>H to G</td>
+<td>account id; folders with role and unread count</td>
+</tr>
+<tr>
+<td><code>MAIL_LIST</code></td>
+<td>G to H</td>
+<td>folder, sort, offset, count; reply: compact binary header records</td>
+</tr>
+<tr>
+<td><code>MAIL_GET</code></td>
+<td>G to H</td>
+<td>message id; reply: text blocks, attachment metadata, phishing flags</td>
+</tr>
+<tr>
+<td><code>MAIL_ACTION</code></td>
+<td>G to H</td>
+<td>op (read, flag, move, delete), ids; runs only with a token</td>
+</tr>
+<tr>
+<td><code>MAIL_COMPOSE</code></td>
+<td>G to H</td>
+<td>draft id, recipients, subject, body, reply refs; stored in outbox</td>
+</tr>
+<tr>
+<td><code>MAIL_SEND</code></td>
+<td>G to H</td>
+<td>draft id and the token from the Send prompt</td>
+</tr>
+<tr>
+<td><code>MAIL_SEARCH</code></td>
+<td>G to H</td>
+<td>account, folder, terms, offset</td>
+</tr>
+<tr>
+<td><code>MAIL_SYNC</code></td>
+<td>H to G</td>
+<td>folder, new count, changed flags, removed ids (pushed)</td>
+</tr>
+<tr>
+<td><code>MAIL_PROMPT</code> / <code>MAIL_PROMPT_ANS</code></td>
+<td>both</td>
+<td>prompt id, kind, text; answer carries the token</td>
+</tr>
+<tr>
+<td><code>MAIL_ERR</code></td>
+<td>H to G</td>
+<td>request id, class (auth, network, server, quota), scrubbed text</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Tokens.</strong> For each prompt the host creates a random nonce. An action or send runs only when the answer repeats that nonce, so a replayed or forged message does nothing. Prompt timeout means No.</p>
+<p><strong>Caching and offline.</strong> Headers cached per folder with UIDVALIDITY and HIGHESTMODSEQ (CONDSTORE, RFC 7162 [memory]); a UIDVALIDITY change drops that folder. The host caches rendered text, not raw HTML, for 500 messages per account. The guest caches 100 bodies under <code>T:/Mail/cache</code>. Offline: lists and reader work from cache, compose and actions queue as "pending", and queued sends retry with backoff.</p>
+<h2 id="4-data-formats-and-protocols">4. Data formats and protocols<a class="headerlink" href="#4-data-formats-and-protocols" title="Link to this section">#</a></h2>
+<p>Start with <strong>IMAP and SMTP</strong>: every target provider speaks them, Python's stdlib clients are mature, and the wire is plain text that is easy to log in tests.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Format or protocol</th>
+<th>Use</th>
+<th>First?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IMAP4rev2, RFC 9051 [verified: rfc-editor.org/rfc/rfc9051.html, Proposed Standard, Aug 2021]</td>
+<td>folders, headers, bodies, flags, search</td>
+<td>yes, with IMAP4rev1 fallback</td>
+</tr>
+<tr>
+<td>SMTP submission, RFC 6409 and RFC 5321 [memory]</td>
+<td>sending</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Implicit TLS ports, RFC 8314 [memory]</td>
+<td>993, 465</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>MIME, RFC 2045 to 2049, and RFC 5322 [memory]</td>
+<td>bodies, attachments</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>OAuth 2.0, RFC 6749 [memory]; SASL XOAUTH2 [memory]</td>
+<td>Gmail-style sign-in</td>
+<td>M6</td>
+</tr>
+<tr>
+<td>mbox, maildir, EML</td>
+<td>import and export</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>JMAP mail, RFC 8621 [memory]</td>
+<td>Fastmail-native</td>
+<td>later (M8 candidate)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fastmail offers IMAP, SMTP, CardDAV and JMAP [verified: Fastmail help pages]. Gmail offers IMAP and SMTP with OAuth 2 [memory].</p>
+<p><strong>OAuth 2 (host only).</strong> The host opens the system browser to the provider's authorise endpoint with PKCE, receives the redirect on a loopback address (127.0.0.1, random port), exchanges the code, and stores the refresh token in the macOS keychain. The guest sees "account connected" and an account id. For a self-hosted server, the password is typed once into a host sheet and stored in the keychain.</p>
+<p><strong>MIME to text.</strong> Python's stdlib <code>email</code> package on the host, producing text blocks (paragraph, quote level, link, preformatted), attachment metadata and placeholders for inline images. No raw HTML leaves the host.</p>
+<h2 id="5-open-source-reuse">5. Open-source reuse<a class="headerlink" href="#5-open-source-reuse" title="Link to this section">#</a></h2>
+<p>Licence and activity from the GitHub API unless noted.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Lang</th>
+<th>Licence</th>
+<th>Latest</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Himalaya (pimalaya/himalaya)</td>
+<td>Rust CLI</td>
+<td>Apache-2.0 [verified]</td>
+<td>v2.2.1, 2026-10-02 [verified]</td>
+<td>Use as a test cross-check and to prototype the protocol. Do not embed.</td>
+</tr>
+<tr>
+<td>io-imap, io-smtp, io-email (pimalaya)</td>
+<td>Rust</td>
+<td>Apache-2.0 each [verified]</td>
+<td>active 2026-06 to 10 [verified]</td>
+<td>Sans-I/O libraries, few stars. Watch; candidate host core if Python fails a gate.</td>
+</tr>
+<tr>
+<td>imap-codec (duesee)</td>
+<td>Rust</td>
+<td>Apache-2.0 [verified]</td>
+<td>no release tag</td>
+<td>Strict IMAP parser; not needed for M1.</td>
+</tr>
+<tr>
+<td>mailparse (staktrace)</td>
+<td>Rust</td>
+<td>0BSD [verified]</td>
+<td>no release tag</td>
+<td>Permissive MIME parser; candidate.</td>
+</tr>
+<tr>
+<td>mail-parser (stalwartlabs)</td>
+<td>Rust</td>
+<td>GitHub reports none [verified]</td>
+<td>v0.11.1, 2025-08-18</td>
+<td>Check the LICENSE file before any use.</td>
+</tr>
+<tr>
+<td>jmap-client (stalwartlabs)</td>
+<td>Rust</td>
+<td>Apache-2.0 [verified]</td>
+<td>v0.4.1, 2026-04-13</td>
+<td>For M8 only.</td>
+</tr>
+<tr>
+<td>Stalwart (stalwartlabs/stalwart)</td>
+<td>Rust server</td>
+<td>GitHub reports none [verified]</td>
+<td>v1.0.0, 2026-10-26</td>
+<td>A server, not a client. Test-fixture candidate for JMAP and IMAP.</td>
+</tr>
+<tr>
+<td>aerc (rjarry/aerc, mirror)</td>
+<td>Go, terminal</td>
+<td>MIT [verified]</td>
+<td>no GitHub release</td>
+<td>Keyboard model reference. Reuse nothing directly.</td>
+</tr>
+<tr>
+<td>NeoMutt (neomutt/neomutt)</td>
+<td>C, terminal</td>
+<td>GPL-2.0 [verified]</td>
+<td>20260616 [verified]</td>
+<td>Ideas only, no code (GPL).</td>
+</tr>
+<tr>
+<td>mblaze (leahneukirchen/mblaze)</td>
+<td>C, Maildir tools</td>
+<td>LICENSE not at the expected path (404) [verified]</td>
+<td>v0.2, 2017</td>
+<td>Unknown licence; check before reuse.</td>
+</tr>
+<tr>
+<td>Thunderbird</td>
+<td>C++/JS</td>
+<td>MPL-2.0 [memory]</td>
+<td>active [verified]</td>
+<td>Account-setup UX reference.</td>
+</tr>
+<tr>
+<td>Python imaplib, smtplib, email, sqlite3</td>
+<td>Python</td>
+<td>PSF [memory]</td>
+<td>stdlib</td>
+<td>Adopt for the host service.</td>
+</tr>
+<tr>
+<td>aiosmtpd (aio-libs)</td>
+<td>Python</td>
+<td>Apache-2.0 [verified]</td>
+<td>v1.4.6, 2024-05-18 [verified]</td>
+<td>Adopt for the test SMTP server.</td>
+</tr>
+<tr>
+<td>GreenMail (greenmail-mail-test)</td>
+<td>Java</td>
+<td>Apache-2.0 [verified]</td>
+<td>release-2.1.15, 2026-10-25 [verified]</td>
+<td>Alternative IMAP and SMTP fixture; needs a JVM.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recommendation: host in Python stdlib, Himalaya and aerc as references and cross-checks, aiosmtpd plus a small IMAP fixture (or GreenMail) for tests. Rule: no GPL code in our tree.</p>
+<h2 id="6-security-and-privacy">6. Security and privacy<a class="headerlink" href="#6-security-and-privacy" title="Link to this section">#</a></h2>
+<p><strong>Prompts (no default-yes; timeout is No).</strong> Send (shows recipients and count), delete and bulk move (count and folder), mark as spam (may train the provider), import and export (file, count), sync-back of local changes after reconnect, attachment save to the guest disk (name, size, warning for executables and archives), add account (host sheet).</p>
+<p><strong>HTML mail.</strong> Shown as text or as a sanitised display list. The host strips script, forms, objects and styles, shows real link targets, and fetches no remote content (images, fonts, tracking pixels) unless the user allows that sender in a prompt. Remote fetches, when allowed, run on the host and are logged. No JavaScript runs anywhere.</p>
+<p><strong>Attachments never run.</strong> The guest lists name, type and size. Save goes to a host staging folder; a prompt then copies to the guest disk. Nothing is opened automatically.</p>
+<p><strong>Phishing indicators.</strong> The host shows: display name and domain mismatch, Reply-To differing from From, link text domain differing from href, and SPF, DKIM and DMARC results from Authentication-Results (RFC 8601 [memory]). Shown as a line in the reader, never as a silent block.</p>
+<p><strong>Tokens.</strong> macOS keychain, one item per account (service <code>kosmos-mail</code>). Logs redact AUTHENTICATE, LOGIN and Authorization. Guest error text is scrubbed.</p>
+<p><strong>Storage.</strong> Host store under <code>~/Library/Application Support/KosmosMail/</code>, mode 0600. Guest cache under <code>T:/Mail/</code> is unencrypted (a local disk image); stated to the user.</p>
+<p><strong>Test data.</strong> No real account in CI or in gates. Fixtures are synthetic.</p>
+<h2 id="7-ui-spec-desk-style-ascii-mockups">7. UI spec (desk style, ASCII mockups)<a class="headerlink" href="#7-ui-spec-desk-style-ascii-mockups" title="Link to this section">#</a></h2>
+<p>Tokens from <code>desk3/01-core.HC</code> (C_INK, C_ACC, C_MUT, C_CARD, C_BRD, C_DOCK, C_BAD, C_WARN) and heights from the browser spec (title 44, toolbar 44, status 22). [verified: <code>docs/apps/00-kosmos-os-primitives.md</code> does not exist in this repo; no further tokens are taken. Follow it when it lands.]</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-- Mail ----------------------------------------------------------------------+
+| [Compose] [Reply] [All] [Fwd] [Archive] [Delete] [Flag]        [ Search    ] |
++-----------------+------------------------------+----------------------------+
+| &gt; Fastmail      | Fri 10:14  Alice Kim         | From: Alice Kim            |
+|   Inbox      12 | Re: budget draft             | To: me    Fri 24 Oct 10:14 |
+|   Drafts     1  | Thu 18:02  Ops Bot           | ---------------------------|
+|   Sent          | Invoice 4411 ready           | Thanks, the numbers look ok|
+|   Archive       | Wed 09:40  Sam Ruiz          | &gt; quoted (14 lines folded) |
+|   Spam          | Lunch?                       |                            |
+|   Trash         |                              | [ budget.csv  4 KB ] [Save]|
+| LOCAL           |                              |                            |
+|   Outbox 2      |                              |                            |
++-----------------+------------------------------+----------------------------+
+| 2 accounts online   synced 10:15   outbox 2 waiting                 Esc     |
++-----------------------------------------------------------------------------+</code></pre></figure>
+<p>Compose, with single-line fields and a multi-line body:</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-- Compose -------------------------------------------------+
+| To:   [alice@example.com                              ]    |
+| Cc:   [                                               ]    |
+| Subj: [Re: budget draft                               ]    |
+| -------------------------------------------------------    |
+| Thanks, I changed the Q3 line.                             |
+| |                                                          |
+| Attach: budget.csv (4 KB)                                  |
++------------------------------------------------------------+
+| [Send]  [Save draft]  [Discard]          undo window 5 s   |
++------------------------------------------------------------+</code></pre></figure>
+<p>Send prompt:</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+-- Send this message? ----------------------------+
+|  To: alice@example.com, sam@example.com (2)      |
+|  Subject: Re: budget draft                       |
+|  Held 5 s for Undo, then sent via Fastmail.      |
+|          [ Cancel ]        [ Send now ]         |
++--------------------------------------------------+</code></pre></figure>
+<p>Search: one pill field above the list, scope chip (folder or all), result count. Enter runs SEARCH on the host; Esc clears.</p>
+<p>Keys: j and k move, Enter opens, r replies, a reply-all, f forward, e archive, # delete (prompted if bulk), / search, c compose, Esc back.</p>
+<h2 id="8-what-the-guest-needs-from-the-framework">8. What the guest needs from the framework<a class="headerlink" href="#8-what-the-guest-needs-from-the-framework" title="Link to this section">#</a></h2>
+<p>Present in <code>desk3/02-ui.HC</code> [verified]: Button, Toggle, Radio, Slider, Check, Icon, Frame, Menubar, KMenu, Dock, hit regions, damage tracking.</p>
+<p>Missing (blocking marked):
+- <strong>Single-line text field</strong>, with caret, selection, paste and key repeat. Blocking for M2; the browser omnibox needs it too.
+- <strong>Multi-line editor</strong> with wrap, selection and undo. Blocking for M3.
+- <strong>List view</strong>, virtualised, keyboard focus, multi-select. Blocking for M2.
+- <strong>Split view</strong> with a draggable splitter. M2.
+- <strong>Menus and context menus</strong> on rows. KMenu exists; row menus do not. M2.
+- <strong>Dialogs</strong> for prompts, modal focus. M3.
+- <strong>Toasts</strong> for new mail. P1.
+- <strong>Drag and drop.</strong> P2; menus cover v1.
+- <strong>Unicode.</strong> The guest font is ASCII-only Inter bitmaps. Mail names and bodies are often non-ASCII. Plan: transliterate on the host for display, keep full UTF-8 in the host cache, mark lossy spots. Real fix: the glyph service in the browser plan.</p>
+<h2 id="9-shared-data-with-contacts">9. Shared data with Contacts<a class="headerlink" href="#9-shared-data-with-contacts" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Completion.</strong> Compose To, Cc and Bcc call the contacts search with the typed prefix (limit 8). Only name and address come back.</li>
+<li><strong>Sender card.</strong> "Show contact" in the reader fetches the card for the exact normalised address. "Add to contacts" is a prompt that opens the editor pre-filled.</li>
+<li><strong>Contracts.</strong> The Kosmos OS repo puts OS-owned PIM data behind typed intents (<code>docs/app-platform-plan.md</code>, principle 4), with <code>os.contacts@1</code> first and <code>os.mail@1</code> after (Phase 4). Mail calls the contact contract, never the store. The HolyC build uses the same message shapes over the channel until an intent bus exists.</li>
+<li><strong>Only shared key:</strong> the lower-cased, trimmed email address.</li>
+</ul>
+<h2 id="10-optional-ai-features-host-separate">10. Optional AI features (host, separate)<a class="headerlink" href="#10-optional-ai-features-host-separate" title="Link to this section">#</a></h2>
+<p>Thread summaries and draft replies, off by default, in a separate host process. A draft is inserted into compose only and never sent. The model sees only the text the user selects. Nothing is logged. Milestone M9, optional.</p>
+<h2 id="11-milestones-and-gates">11. Milestones and gates<a class="headerlink" href="#11-milestones-and-gates" title="Link to this section">#</a></h2>
+<p>Test setup, no real account: <strong>aiosmtpd</strong> (Apache-2.0) on 127.0.0.1:1025 recording messages, and <strong>GreenMail</strong> (Apache-2.0, needs Java) or a small Python IMAP fixture on 127.0.0.1:1143. Fixture mailbox: 2,000 synthetic messages with UTF-8 names, attachments, HTML-only bodies, quoted replies, a tracking pixel, a phishing mismatch and a 10 MB attachment.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scope</th>
+<th>Gate (pass or fail)</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>Host skeleton, framing, fixtures, CI job</td>
+<td>Pass: 100 round trips of <code>MAIL_ACCOUNTS</code> and <code>MAIL_FOLDERS</code> with injected CRC errors, zero corruption; fixtures start with one command</td>
+<td>S</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>Read-only IMAP: folders, headers, bodies to text</td>
+<td>Pass: 2,000 headers listed in under 2 s on host; text blocks match goldens for 20 messages; Himalaya agrees on subjects and flags</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>Guest reader and list on the framework</td>
+<td>Pass: first 200 headers shown and any message opened in under 1 s at channel rate; no clipped text at 2x; scripted keyboard drive passes</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>Compose and SMTP send behind the prompt</td>
+<td>Pass: message with attachment arrives at aiosmtpd with correct MIME; a send with a forged token is refused; Undo cancels inside the window</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>Actions and bulk prompts, sync-back</td>
+<td>Pass: each action changes fixture state; bulk over one message always prompts; replayed token refused; UIDVALIDITY change clears cache</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>Search, cache, offline view, outbox</td>
+<td>Pass: 100 SEARCH queries match a local filter; with the host stopped, cached lists and bodies open; outbox sends after restart</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M6</td>
+<td>Real provider (user-run): OAuth 2 or app password, keychain</td>
+<td>Pass: connect, list, and send one message to the user's own address after an explicit yes; log grep finds no token. Needs the user's go.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M7</td>
+<td>HTML safety, remote-content block, phishing lines, attachment prompts</td>
+<td>Pass: 50-message HTML corpus (script, form, remote image, tracker) makes zero outbound connections in a recording proxy and emits no script</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M8</td>
+<td>JMAP spike (Fastmail), optional</td>
+<td>Pass: same list and send gates pass over JMAP; decision recorded</td>
+<td>M</td>
+</tr>
+<tr>
+<td>M9</td>
+<td>AI summaries (optional)</td>
+<td>Pass: off by default; stubbed model output only enters compose; no mail text in logs</td>
+<td>S</td>
+</tr>
+</tbody>
+</table></div>
+<p>Plan of record: M0 to M5 and M7 on fixtures; M6 needs the user's approval; M8 and M9 optional. Each gate runs on the x86 (QEMU) and Apple Silicon (Aiwnios) builds.</p>
+<h2 id="12-risks">12. Risks<a class="headerlink" href="#12-risks" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>HolyC speed.</strong> Long folders under emulation. Mitigation: pages of 50, frame budget, measured at M2.</li>
+<li><strong>Non-ASCII.</strong> Transliteration loses names. Mitigation: host keeps full text; glyph service is the real fix.</li>
+<li><strong>Provider drift</strong> (OAuth and IMAP behaviour changes). Mitigation: M6 re-run before release; pinned libraries.</li>
+<li><strong>Channel rate</strong> for header listings. Mitigation: compact binary records.</li>
+<li><strong>Scope creep into HTML mail.</strong> Mitigation: section 6 rules; no HTML rendering.</li>
+<li><strong>Licences</strong> of mail-parser and mblaze unconfirmed. Mitigation: not used until checked.</li>
+</ul>
+<h2 id="13-effort">13. Effort<a class="headerlink" href="#13-effort" title="Link to this section">#</a></h2>
+<p>M0 to M5 about 6 to 8 engineer-weeks, after the framework work (text field, list view, split view, dialogs) lands; M6 1 to 2 weeks with the user; M7 one week; M8 and M9 about a week together. The framework prerequisites dominate the schedule.</p>
+<h2 id="14-verified-versus-memory">14. Verified versus memory<a class="headerlink" href="#14-verified-versus-memory" title="Link to this section">#</a></h2>
+<p>Verified in this pass: GitHub licences and latest tags for Himalaya, neomutt, aerc, mblaze, Stalwart, imap-codec, mailparse, mail-parser, jmap-client, aiosmtpd, GreenMail; RFC 9051 title and status (rfc-editor); Fastmail IMAP, SMTP, CardDAV and JMAP availability (Fastmail help pages, via search); Gmail undo and scheduled send (third-party guides only).</p>
+<p>From memory, not re-checked: RFC numbers other than 9051 (5321, 6409, 6154, 5256, 7162, 8314, 8621, 6749, 8601, 2045 to 2049, 5322); Hey's screener behaviour; Gmail OAuth scope names; Thunderbird's MPL-2.0 licence; the PSF licence of the stdlib; the keyring package.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../docs/apps/contacts/index.html" rel="prev"><span>Previous</span>Contacts app for the Kosmos HolyC desktop: plan</a><a class="next" href="../../../docs/apps/fonts/index.html" rel="next"><span>Next</span>Font Manager: plan</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-purpose-and-users">1. Purpose and users</a></li><li><a href="#2-feature-inventory">2. Feature inventory</a></li><li><a href="#3-architecture">3. Architecture</a></li><li><a href="#4-data-formats-and-protocols">4. Data formats and protocols</a></li><li><a href="#5-open-source-reuse">5. Open-source reuse</a></li><li><a href="#6-security-and-privacy">6. Security and privacy</a></li><li><a href="#7-ui-spec-desk-style-ascii-mockups">7. UI spec (desk style, ASCII mockups)</a></li><li><a href="#8-what-the-guest-needs-from-the-framework">8. What the guest needs from the framework</a></li><li><a href="#9-shared-data-with-contacts">9. Shared data with Contacts</a></li><li><a href="#10-optional-ai-features-host-separate">10. Optional AI features (host, separate)</a></li><li><a href="#11-milestones-and-gates">11. Milestones and gates</a></li><li><a href="#12-risks">12. Risks</a></li><li><a href="#13-effort">13. Effort</a></li><li><a href="#14-verified-versus-memory">14. Verified versus memory</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

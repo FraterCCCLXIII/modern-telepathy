@@ -1,0 +1,111 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Experiments gallery</title>
+<meta name="description" content="A gallery of UI components from the owner's UI Experiments workspace: shells, chat pieces, primitives, cards, full app views and site sections, with live previews, source paths and honest status.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='9' fill='%231d1d1b'/%3E%3Cpath d='M9 9h6v6H9zM17 9h6v3h-6zM17 15h6v8h-6zM9 18h6v5H9z' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-uix" href="index.html" aria-label="UI Experiments, top of page">
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="9" fill="#1d1d1b"/><path d="M9 9h6v6H9zM17 9h6v3h-6zM17 15h6v8h-6zM9 18h6v5H9z" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
+      <span>UI Experiments</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#gallery">Gallery</a>
+      <a href="#sources">Sources</a>
+      <a href="../arco/docs/index.html">Arco docs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="uix-head">
+  <div class="wrap">
+    <p class="mono-h">Gallery of experiments</p>
+    <h1>Pieces of an interface kit, side by side.</h1>
+    <p class="lead">Shells, chat parts, form controls, cards, full app views and site sections from one workspace. Every preview is the real React component, running on sample data. <span id="hero-count"></span></p>
+    <p class="notice" role="note"><strong>Where this comes from.</strong> These components are from the owner's private <code>UI Experiments</code> workspace (<code>longformer-ui</code> v<span id="kit-ver"></span> with its demo and site). They are <strong>not</strong> a released package. Each tile says which file it comes from and how far it goes: <span class="badge ok">available</span> is named as a settled primitive or has a strict schema, <span class="badge proto">prototype</span> exists but is demo or planned-extraction tier, <span class="badge unv">unverified</span> is not classified anywhere in the workspace, and <span class="badge plan">planned</span> is a placeholder for something the plans name but no source exists for. The blocks and primitives already shown on the <a href="../arco/docs/index.html">Arco components and docs</a> page are not repeated here.</p>
+  </div>
+</section>
+
+<section class="ux-strip" id="featured" aria-labelledby="strip-h">
+  <div class="wrap">
+    <h2 id="strip-h">Featured mini apps</h2>
+    <p class="ux-strip-sub"><span id="mini-count"></span> small working apps built only from the kit's components and local state: no network, nothing saved. Open one full size, or find all of them under Mini apps below.</p>
+    <div class="ux-strip-row" id="strip" role="region" tabindex="0" aria-label="Featured mini apps, scrolls sideways on small screens"></div>
+  </div>
+</section>
+
+<div class="wrap ux-layout" id="gallery">
+  <div class="ux-bar" id="ux-bar">
+    <button type="button" id="nav-toggle" aria-expanded="false" aria-controls="ux-nav"><span class="ux-ico" aria-hidden="true"></span>Browse and filter <span id="nav-badge" class="ux-n"></span></button>
+    <p class="ux-count" id="count-bar" aria-hidden="true"></p>
+  </div>
+  <div class="ux-scrim" id="ux-scrim" hidden></div>
+  <aside class="ux-nav" id="ux-nav" aria-label="Browse and filter components">
+    <div class="ux-nav-head">
+      <h2 class="ux-nav-title">Browse</h2>
+      <button type="button" class="ux-close" id="nav-close" aria-label="Close filters">Close</button>
+    </div>
+    <div class="ux-nav-body" id="ux-nav-body"></div>
+  </aside>
+  <div class="ux-main" id="ux-main">
+    <h2 id="gallery-h" class="ux-sr">Component gallery</h2>
+    <p class="ux-count" id="count" role="status" aria-live="polite"></p>
+    <div id="grid"><p class="ux-loading">Loading components&hellip;</p></div>
+    <p class="ux-none" id="none" hidden>No component matches these filters. Use Clear filters in the left panel.</p>
+  </div>
+</div>
+
+<section class="uix-sources" id="sources" aria-labelledby="sources-h">
+  <div class="wrap">
+    <h2 id="sources-h">Sources and provenance</h2>
+    <div class="src-cols">
+      <div>
+        <h3>What is shown</h3>
+        <ul class="ux-plain" id="shown"></ul>
+        <h3>How it is built</h3>
+        <p>The sources are copied to a temp folder and bundled with esbuild and React 18.3.1 into three lazy-loaded bundles (<code>assets/uix-core.js</code>, <code>uix-apps.js</code>, <code>uix-site.js</code>, sharing chunks), each loaded only when a tile of that kind scrolls near the screen. The kit's dark default is removed from <code>:root</code> so nothing leaks to this page. Props tables are read from the TypeScript sources. Steps are in <code>README.md</code> beside this page.</p>
+      </div>
+      <div>
+        <h3>What was skipped, and why</h3>
+        <ul class="ux-plain" id="skipped"></ul>
+      </div>
+    </div>
+    <h3>What is not verified</h3>
+    <ul class="ux-plain" id="claims"></ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Imported from the owner's UI Experiments workspace; third-party <code>reference/</code> clones were excluded. Icons are <a href="https://lucide.dev">lucide</a> (ISC). Build notes are in <code>README.md</code> next to this page.</p>
+  </div>
+</footer>
+
+<div class="ux-modal" id="mini-modal" hidden>
+  <div class="ux-modal-card" role="dialog" aria-modal="true" aria-labelledby="mini-modal-title">
+    <div class="ux-modal-head">
+      <h2 id="mini-modal-title"></h2>
+      <div class="ux-modal-btns"><button type="button" id="mini-modal-reset">Reset</button><button type="button" id="mini-modal-close">Close</button></div>
+    </div>
+    <div class="ux-modal-body" id="mini-modal-body"></div>
+  </div>
+</div>
+<div id="lf-portal-root" class="lf-root lf-portal uix-lf" data-lf-theme="light"></div>
+<script type="module" src="page.js"></script>
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

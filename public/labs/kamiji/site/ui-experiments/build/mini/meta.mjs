@@ -1,0 +1,22 @@
+// Metadata of the mini apps. Each is one file in this folder, composed only from the kit's components plus local state.
+// device sizes are the design size (the page scales them to fit). `uses` is derived by build.mjs from each file's imports.
+const P = { device: "phone", w: 360, h: 680 }, T = { device: "tablet", w: 780, h: 520 }, D = { device: "desktop", w: 920, h: 540 };
+export const MINI_APPS = [
+  { id: "habits", file: "Habits", name: "Habit tracker", ...P, featured: true, desc: "Tick off today's habits and watch the completion ring and streak update.", demonstrates: "Ring and streak cards fed by local state; checkbox list; add form." },
+  { id: "focus-timer", file: "FocusTimer", name: "Focus timer", ...P, featured: true, desc: "A pomodoro timer with focus and break modes and a session counter.", demonstrates: "Real interval timer, tabs as modes, a demo-speed switch, a live region for state changes." },
+  { id: "expense-splitter", file: "Expenses", name: "Expense splitter", ...P, featured: true, desc: "Add shared expenses and see who owes whom, recomputed on every change.", demonstrates: "Derived totals and settle-up suggestions rendered as insight cards." },
+  { id: "recipe", file: "Recipe", name: "Recipe and timer", ...T, featured: true, desc: "Scale a recipe's servings, tick steps and run a step timer.", demonstrates: "Media card header, timeline progress driven by checkboxes, per-step timers." },
+  { id: "flashcards", file: "Flashcards", name: "Flashcards", ...P, featured: true, desc: "Flip word cards, mark what you knew, finish a deck.", demonstrates: "Keyboard-operable flip card, deck tabs, an end-of-deck empty state with restart." },
+  { id: "itinerary", file: "Itinerary", name: "Travel itinerary", ...T, desc: "Plan stops per day; the event cards sort by start time.", demonstrates: "Tabs per day, add and remove, event cards from local data." },
+  { id: "mood-journal", file: "Mood", name: "Mood journal", ...P, desc: "Pick a mood, write a note, and see the average and a bar chart move.", demonstrates: "Chips with icons, textarea, stat card with bars computed from entries." },
+  { id: "kanban", file: "Kanban", name: "Kanban board", ...T, featured: true, desc: "Move cards across To do, Doing and Done with buttons (no drag needed).", demonstrates: "Keyboard-friendly moves, per-column counts, announcements." },
+  { id: "music-queue", file: "MusicQueue", name: "Music queue", ...P, desc: "A simulated player: play, skip, shuffle and jump around a queue.", demonstrates: "Music player card with a simulated progress interval (no audio plays)." },
+  { id: "meeting-notes", file: "MeetingNotes", name: "Meeting notes", ...D, desc: "Type notes; lines like '- [ ] @sam task' become action items you can tick.", demonstrates: "Text parsed live into a checklist with owner avatars." },
+  { id: "standup-bot", file: "Standup", name: "Standup bot", ...P, featured: true, desc: "A scripted chat bot asks three questions and builds a summary.", demonstrates: "Chat bubbles, quick-reply chips, composer, agent todo card (no model, no network)." },
+  { id: "agent-monitor", file: "AgentMonitor", name: "Agent task monitor", ...D, desc: "Start simulated agent runs, watch steps advance, hit a failure and retry.", demonstrates: "Task list, status line and action log blocks driven by a timer." },
+  { id: "converter", file: "Converter", name: "Unit converter", ...P, desc: "Convert length, weight and temperature, with the kit's calculator in a tab.", demonstrates: "Derived result, swap, the kit's CalculatorPad." },
+  { id: "agent-cards", file: "GenChat", name: "Chat that answers with cards", ...T, featured: true, desc: "Ask for your week, a budget or a trip; the agent replies with generated-UI cards.", demonstrates: "Generative-UI style: scripted replies embed registry card blocks inside chat messages." },
+  { id: "plant-care", file: "PlantCare", name: "Plant care", ...P, desc: "Water plants, skip a day and see reminders appear.", demonstrates: "Date-like state, conditional reminder card, switch." },
+  { id: "reading-list", file: "ReadingList", name: "Reading list", ...P, desc: "Move books from To read to Reading to Done, add your own.", demonstrates: "Tabs with live counts, empty states, icon-button actions." },
+  { id: "crm", file: "Crm", name: "Mini CRM", ...D, featured: true, desc: "Search contacts, change a deal stage and log activity on a timeline.", demonstrates: "List pane plus detail; timeline block grows as you log." },
+];

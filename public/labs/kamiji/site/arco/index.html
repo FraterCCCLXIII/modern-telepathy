@@ -1,0 +1,325 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arco UI: generative UI for agents</title>
+<meta name="description" content="Arco is the generative UI library of the kosmos.computer operating system: typed tokens, components and blocks that agents assemble into cards. A scripted demo, the real component names, design tokens and SDK, with honest status labels.">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/svg+xml" href="img/arco-orb.svg">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="arco.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-arco" href="#top" aria-label="Arco UI, top of page">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <span>Arco UI</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#demo">Demo</a>
+      <a href="#cards">Cards</a>
+      <a href="#feed">Feed</a>
+      <a href="#how">How it works</a>
+      <a href="#libraries">Libraries</a>
+      <a href="docs/index.html">Components &amp; docs</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#shell">Shell</a>
+      <a href="#start">Get started</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <p class="mono-h">Generative UI for agents</p>
+      <h1>Agents that answer with apps.</h1>
+      <p class="lead">Arco is the UI library of the kosmos.computer operating system. An agent does not paste a wall of text: it picks typed cards from a fixed vocabulary, and Arco draws them, themed and consistent.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#demo">Try the demo</a>
+        <a class="btn" href="#libraries">See what exists</a>
+      </p>
+      <p class="quiet">Everything on this page is labelled <span class="badge ok">available</span> <span class="badge">prototype</span> or <span class="badge plan">planned</span>, from the owner's archive.</p>
+    </div>
+    <div class="hero-mock">
+      <div class="win arco" aria-hidden="true">
+        <div class="win-top"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">Arco chat</span></div>
+        <div class="win-body hero-feed" id="hero-feed"></div>
+      </div>
+      <p class="mock-note">An illustration drawn with Arco tokens (light surface, accent #7c9dff), not a screenshot of the running product.</p>
+    </div>
+  </div>
+</section>
+
+<section id="demo" class="section">
+  <div class="wrap">
+    <p class="mono-h">Live demo</p>
+    <h2>Ask for a plan. Watch the cards appear.</h2>
+    <p class="sub lead-sub">Pick a prompt. The agent streams a reply, then generates cards one by one into the feed. Tick the checklist, use the form, and open &ldquo;Spec&rdquo; on any card to see the data the agent emitted.</p>
+
+    <div class="win arco demo" id="demo-win">
+      <div class="win-top"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">Arco chat</span><span class="win-state" id="demo-state">Idle</span></div>
+      <div class="demo-grid">
+        <div class="chat">
+          <div class="log" id="log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation with the agent" tabindex="0"></div>
+          <div class="chips" role="group" aria-label="Suggested prompts" id="chips">
+            <button type="button" class="chip-btn" data-script="week" aria-pressed="false">Plan my week</button>
+            <button type="button" class="chip-btn" data-script="sales" aria-pressed="false">Sales dashboard</button>
+            <button type="button" class="chip-btn" data-script="trip" aria-pressed="false">Plan a trip</button>
+            <button type="button" class="chip-btn replay" id="replay">Replay</button>
+          </div>
+          <div class="composer"><input type="text" disabled placeholder="Scripted demo: pick a prompt above" aria-label="Message box (disabled in this scripted demo)"><span class="send" aria-hidden="true">&uarr;</span></div>
+        </div>
+        <div class="feedpane">
+          <p class="pane-h">Feed <span id="feed-count">0 cards</span></p>
+          <div class="feed-list" id="demo-feed" aria-label="Generated cards"><p class="empty" id="feed-empty">Cards the agent generates show up here.</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="small-print">This is a scripted demo. No AI model runs and nothing is sent over the network: every reply, card and number is written into <code>arco.js</code> and played back. The card specs are illustrative, shaped after the kosmic-app-cards prototype types. Numbers and places are made up.</p>
+    <noscript><p class="small-print">The demo needs JavaScript.</p></noscript>
+  </div>
+</section>
+
+<section id="cards" class="section">
+  <div class="wrap">
+    <p class="mono-h">Components</p>
+    <h2>Cards an agent can generate</h2>
+    <p class="sub lead-sub">Nine block types have a schema in the <code>kosmic-app-cards</code> prototype. Each one below is drawn from its own spec by the same small renderer the demo uses, in Arco dark tokens. The type names are the real ones.</p>
+    <div class="gstage arco" id="gallery"></div>
+    <ul class="list status-list">
+      <li><h3>weatherCard <span class="badge">prototype</span></h3><p>The only block with a React component in kosmic-app-cards: current conditions and a forecast, with 14 condition names. Source: <code>src/blocks/WeatherCard</code>.</p></li>
+      <li><h3>taskCard, statCard, calendarCard, musicPlayerCard, codeBlock, terminalBlock, textBlock, formBlock <span class="badge">prototype</span></h3><p>Each has a type and a Zod schema. taskCard and statCard also have a registry entry with a prompt description and an example, but their renderer there is a placeholder that returns nothing. The cards above are this page's own CSS drawings of those specs.</p></li>
+      <li><h3>StatCards, CalendarSchedule, MediaCards <span class="badge">prototype</span></h3><p>The Tier 2 block names in the Arco docs for the Kosmos shell, next to tool result panels. They run through OpenUI Lang today; the chat library has cards, charts, forms, tabs and follow-ups.</p></li>
+    </ul>
+    <p class="src">Sources: kosmic-app-cards <code>src/types/blocks.ts</code>, <code>src/registry/*.ts</code>; docs.kosmos.computer reference/component-tiers and guide/generative-blocks; Kosmos <code>docs/rich-content-widgets-plan.md</code>. The sources show no table block.</p>
+  </div>
+</section>
+
+<section id="feed" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>The feed</h2>
+      <p class="sub">Cards stack in a feed, newest at the bottom. Each one is a small app: it has its own data, actions and state, so you can tick, edit or submit in place.</p>
+      <ul class="notes">
+        <li><b>A micro app is a card.</b> In the Arco docs, ephemeral blocks stay in the chat; durable ones become apps through <code>app_create</code>.</li>
+        <li><b>Card anatomy</b> in the prototype notes: header with icon, title and badge; a body that is specific to the block; an optional footer of actions. <span class="badge">prototype</span></li>
+        <li><b>A related prototype.</b> The Hands (OpenHands Agent Canvas) <code>feat/conversation-feed</code> branch lists conversations as cards with a composer, reply, agent avatars, usage and diff stats, subagent and notification cards. That is a feed of conversations, not Arco code. <span class="badge">prototype</span></li>
+        <li><b>Card actions, pinning and refresh</b> exist as fields (<code>actions</code>, <code>meta.pinnable</code>, <code>meta.refreshInterval</code>) in the types. No renderer for them was found. <span class="badge plan">planned</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="win arco" id="feed-mock-win">
+        <div class="win-top"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">Feed</span></div>
+        <div class="win-body feed-posts" id="feed-mock"></div>
+      </div>
+      <p class="small-print">Illustration with made-up content, drawn from the same card renderer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap">
+    <p class="mono-h">Generation</p>
+    <h2>How agents generate UI</h2>
+    <p class="sub lead-sub">The agent never writes HTML or CSS. It emits data for blocks it was told about, the data is checked, and a renderer turns it into a card. Tokens do the rest, so every card looks like it belongs. This is the flow in the Arco docs.</p>
+    <ol class="flow">
+      <li><span class="n">1</span><h3>Prompt <span class="badge">prototype</span></h3><p>The allowed vocabulary is generated for the target surface. In kosmic-app-cards, <code>generateSystemPrompt()</code> builds it from the registry. In the Kosmos prototype the prompts are still hand-maintained files.</p></li>
+      <li><span class="n">2</span><h3>Emit <span class="badge ok">available</span></h3><p>The agent streams OpenUI Lang in an <code>openui-lang</code> fence, or returns block JSON. Fences render while streaming in the Kosmos chat.</p></li>
+      <li><span class="n">3</span><h3>Validate <span class="badge">prototype</span></h3><p>Zod schemas check and repair output (<code>safeValidateBlock</code>). The Kosmos chat path has no render-time validation yet.</p></li>
+      <li><span class="n">4</span><h3>Render <span class="badge">prototype</span></h3><p>Each node resolves through a registry to a component: <code>KosmicSurface</code> in the cards library, <code>AssistantBlock</code> and <code>AppSurface</code> in Kosmos.</p></li>
+      <li><span class="n">5</span><h3>Persist <span class="badge">prototype</span></h3><p>Ephemeral blocks stay in the chat. A durable one becomes an app through <code>app_create</code>.</p></li>
+    </ol>
+    <div class="cols code-cols">
+      <article class="panel">
+        <h3>Render a surface <span class="badge">prototype</span></h3>
+        <p>From the header of <code>kosmic-app-cards/src/index.ts</code>. The agent's output is a surface: an id and a list of blocks.</p>
+<pre><code>import { KosmicSurface } from '@kosmos/app-cards';
+import '@kosmos/app-cards/styles';
+
+const schema = {
+  id: 'weather-surface',
+  blocks: [{
+    id: 'weather-sf',
+    type: 'weatherCard',
+    location: 'San Francisco',
+    current: { temp: 72, condition: 'sunny' },
+  }],
+};
+
+&lt;KosmicSurface schema={schema} /&gt;</code></pre>
+      </article>
+      <article class="panel">
+        <h3>One definition per block <span class="badge plan">planned</span></h3>
+        <p>The planned <code>defineBlock()</code> contract from the docs: one manifest drives validation, JSON Schema, the system prompt, the catalogue and rendering. Docs call it the highest-leverage Arco milestone.</p>
+<pre><code>defineBlock({
+  type: "statCards",
+  schema: z.object({ /* ... */ }),
+  description: "Grid of KPI stat cards...",
+  adaptivity: {
+    inputProfiles: ["pointer", "touch"],
+    minWidth: 220,
+    idealColumns: { compact: 1, medium: 2, expanded: 4 },
+    onCompact: "stack",
+  },
+  examples: [ /* golden samples */ ],
+  render: (props) =&gt; &lt;StatCards {...props} /&gt;,
+});</code></pre>
+      </article>
+    </div>
+    <p class="src">Sources: docs.kosmos.computer guide/generative-blocks, reference/block-registry and reference/standards-map; kosmic-app-cards <code>src/index.ts</code>, <code>src/registry/registry.ts</code>; Kosmos <code>docs/rich-content-widgets-plan.md</code> (verified 5 Jul 2026 in that file). Arco says it defines the generative UI language, component vocabulary and tokens, and adopts MCP, ACP and JSON Schema.</p>
+  </div>
+</section>
+
+<section id="libraries" class="section">
+  <div class="wrap">
+    <p class="mono-h">Libraries and SDK</p>
+    <h2>What is in the box</h2>
+    <p class="sub lead-sub">Arco is organised in four tiers. Names are from the Kosmos prototype repository and the docs.</p>
+    <ul class="grid-cards">
+      <li><h3>Tier 0: Tokens <span class="badge">prototype</span></h3><p>CSS custom properties <code>--arco-*</code>, switched with <code>html[data-theme]</code>. Installed apps get them as <code>--os-*</code>.</p><p class="src">src/styles/tokens.css</p></li>
+      <li><h3>Tier 1: Primitives <span class="badge">prototype</span></h3><p>Button, Input, Switch, Badge, Chip, EmptyState, plus Avatar and PasswordInput in the folder. BEM classes such as <code>.arco-btn--primary</code>. Agents never generate these directly.</p><p class="src">src/components/ui/</p></li>
+      <li><h3>Patterns <span class="badge">prototype</span></h3><p>MasterDetail, Section with FormRow and FormActions, SettingsLayout, ModuleDashboard, NavSidebar, ListItem, PreviewPane and more.</p><p class="src">src/components/patterns/</p></li>
+      <li><h3>Tier 2: Blocks <span class="badge">prototype</span></h3><p>Data-driven composites the AI assembles: StatCards, CalendarSchedule, MediaCards. Chat blocks in the repo: AgentTodoCard, AgentActionBlock, AgentThoughtBlock, AgentStatusLine, TurnMeter.</p><p class="src">src/components/agent-blocks/</p></li>
+      <li><h3>Tier 3: Containers <span class="badge">prototype</span></h3><p>AppShell slots, WindowFrame, MobileShell, AppSurface (generated reactive app host) and GeneratedSurface (inline chat host).</p><p class="src">src/os/, src/apps/appview/</p></li>
+      <li><h3>Block registry <span class="badge plan">planned</span></h3><p>The defineBlock contract above, with Zod validation, generated prompts and a Design System workspace as living catalogue.</p><p class="src">docs: reference/block-registry</p></li>
+      <li><h3>@kosmos/app-cards <span class="badge">prototype</span></h3><p>A separate package for cards in agent conversations: KosmicSurface, a registry, nine Zod schemas, <code>--kosmic-*</code> tokens, one finished block. MIT in its package.json. Its OpenHands extension scaffold is not built.</p><p class="src">kosmic-app-cards (one commit)</p></li>
+      <li><h3>Kosmos SDK <span class="badge ok">available</span></h3><p><code>@kosmos-computer/sdk</code> and <code>@kosmos-computer/types</code>, MIT. Streams typed <code>AgentEvent</code>s from a Kosmos environment, including <code>os_ui</code> events that the shell draws with Arco. Whether it is on npm was not checked.</p><p class="src">kosmos-sdk, docs: sdk/*</p></li>
+      <li><h3>App Bridge SDK <span class="badge">prototype</span></h3><p>For third-party apps running inside the shell, talking to it by postMessage.</p><p class="src">packages/app-sdk in Kosmos</p></li>
+      <li><h3>OpenUI Lang <span class="badge ok">available</span></h3><p>The renderer Arco uses today: <code>@openuidev/lang-core</code>, <code>react-lang</code> and <code>react-ui</code>, third-party packages the Kosmos prototype depends on.</p><p class="src">docs: guide/generative-blocks</p></li>
+    </ul>
+    <p class="src">Licences: the SDK is MIT; the Kosmos and docs repositories have no licence file in the archive. Kosmos and Arco are separate things: Kosmos is the OS, Arco is the library inside it.</p>
+  </div>
+</section>
+
+<section id="tokens" class="section">
+  <div class="wrap">
+    <p class="mono-h">Design tokens</p>
+    <h2>One set of tokens, dark and light</h2>
+    <p class="sub lead-sub">Every shell and Arco surface reads <code>--arco-*</code> variables, never raw hex in new code. These swatches are the values from <code>tokens.css</code> (dark) and the archive's style catalogue (light). The accent is <code>#7c9dff</code> in dark.</p>
+    <div class="tsw" id="swatches" aria-label="Dark theme swatches"></div>
+    <div class="tsw" id="swatches-light" aria-label="Light theme swatches"></div>
+    <div class="cols tok-cols">
+      <article class="panel">
+        <h3>Scales <span class="badge">prototype</span></h3>
+        <ul class="scale">
+          <li><b>Type</b> 11, 12.5, 14, 16, 20 px (<code>--arco-text-xs</code> to <code>-xl</code>)</li>
+          <li><b>Space</b> 2, 4, 8, 12, 16, 24, 32 px (<code>--arco-space-2xs</code> to <code>-2xl</code>)</li>
+          <li><b>Radii</b> 6, 10, 14 px, window 12 px</li>
+          <li><b>Motion</b> <code>cubic-bezier(0.32, 0.72, 0, 1)</code>, 140 ms and 240 ms</li>
+          <li><b>Window shadow</b> <code>0 24px 64px rgba(0,0,0,.55)</code>, backdrop <code>saturate(160%) blur(22px)</code></li>
+          <li><b>Fonts</b> system UI stack and SF Mono</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Use them <span class="badge">prototype</span></h3>
+<pre><code>.my-panel {
+  background: var(--arco-bg-surface);
+  color: var(--arco-text-primary);
+  border: 1px solid var(--arco-border);
+  border-radius: var(--arco-radius-m);
+  padding: var(--arco-space-l);
+}</code></pre>
+        <p class="small">From the Arco getting-started guide. The cards prototype has its own <code>--kosmic-*</code> tokens (light accent <code>#3b82f6</code>), not yet aligned with these. A DTCG export of the tokens is <span class="badge plan">planned</span>.</p>
+      </article>
+    </div>
+    <p class="src">Sources: Kosmos <code>src/styles/tokens.css</code>; docs: guide/design-tokens; archive <code>docs/kosmos-computer-archive.md</code>.</p>
+  </div>
+</section>
+
+<section id="shell" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>The Arco shell</h2>
+      <p class="sub">Arco generates the content; the kosmos.computer shell holds it. Windows, a dock, a menu bar, a nav rail and a command palette are the containers cards live in.</p>
+      <ul class="notes">
+        <li><b>Desktop:</b> WindowFrame, Dock, HoverDock, MenuBar, NavRail, CommandPalette. <span class="badge">prototype</span></li>
+        <li><b>Phone:</b> MobileShell and MobileDock at 767 px and below. <span class="badge">prototype</span></li>
+        <li><b>Default dock:</b> chat, studio, apps, skills, files, maps, notes, email, tasks, contacts, terminal, settings.</li>
+        <li>The shell runs only with its backend, so no screenshot of it exists in the archive.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="desk arco" role="img" aria-label="Illustration of the Arco shell: a window containing a generated task card, and a dock of app tiles below. Drawn with Arco dark tokens.">
+        <div class="desk-win" aria-hidden="true">
+          <div class="win-top"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">Tasks</span></div>
+          <div class="desk-body" id="desk-body"></div>
+        </div>
+        <div class="dock" aria-hidden="true">
+          <span><i style="--c:#7c9dff"></i>Chat</span><span><i style="--c:#e879a8"></i>Studio</span><span><i style="--c:#58c98b"></i>Apps</span><span><i style="--c:#e5b567"></i>Files</span><span><i style="--c:#f59a4a"></i>Notes</span><span><i style="--c:#7c9dff"></i>Tasks</span>
+        </div>
+      </div>
+      <p class="small-print">An illustration rebuilt from the shell's window frame and dock names and the tokens. It is not a screenshot, and the dock colours are mine.</p>
+    </div>
+  </div>
+  <div class="wrap"><p class="src">Sources: Kosmos <code>src/os/*</code> (WindowFrame.tsx, Dock.tsx, MobileShell.tsx, pinnedApps.ts), docs: reference/component-tiers.</p></div>
+</section>
+
+<section id="start" class="section">
+  <div class="wrap">
+    <p class="mono-h">Get started</p>
+    <h2>Get started</h2>
+    <div class="cols">
+      <article class="panel">
+        <h3>Run the Kosmos prototype <span class="badge">prototype</span></h3>
+        <p>You need Node.js 22 or newer. Arco lives inside the Kosmos monorepo. From its root, the docs give:</p>
+<pre><code>npm install
+npm run setup   # first run
+npm run dev     # shell :4610 + API :4600</code></pre>
+        <p class="src">Source: docs.kosmos.computer guide/getting-started. Repo: github.com/Kosmos-computer/Kosmos.</p>
+      </article>
+      <article class="panel">
+        <h3>Talk to it with the SDK <span class="badge ok">available</span></h3>
+        <p>Mint an external client token in Settings, External Access, then:</p>
+<pre><code>npm install @kosmos-computer/sdk</code></pre>
+<pre><code>import { KosmosClient } from "@kosmos-computer/sdk";
+
+const kosmos = new KosmosClient({
+  baseUrl: process.env.KOSMOS_URL!,
+  token: process.env.KOSMOS_TOKEN!,
+});
+await kosmos.ping();
+const result = await kosmos.chat.complete({
+  message: "What can you help me with?",
+  mode: "ask",
+});</code></pre>
+        <p class="src">Source: docs: sdk/getting-started. Not run for this page.</p>
+      </article>
+    </div>
+    <div class="cols">
+      <article class="panel">
+        <h3>Cards library <span class="badge">prototype</span></h3>
+        <p>The kosmic-app-cards package has these scripts in its package.json: <code>npm run dev</code>, <code>npm run build</code>, <code>npm test</code>. Its repository URL is github.com/kosmos-computer/kosmic-app-cards; whether that is public was not checked.</p>
+      </article>
+      <article class="panel">
+        <h3>Read the docs <span class="badge ok">available</span></h3>
+        <p><a href="https://docs.kosmos.computer/guide/what-is-arco">What is Arco?</a>, design tokens, UI primitives, layout patterns and generative blocks are live at docs.kosmos.computer. The product site is <a href="https://www.kosmos.computer/">kosmos.computer</a>; its pages other than the splash are behind a passcode.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Arco UI, the generative UI library of the kosmos.computer operating system. It is a different product from the <a href="../kosmos/index.html">Kosmos 3D engine</a> and from <a href="../index.html">Kamiji</a>. Facts from the owner's archive of 24 Oct 2026 and the kosmic-app-cards repository; status labels may be out of date. The demo is scripted and runs no AI model.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+<script type="module" src="arco.js"></script>
+</body>
+</html>

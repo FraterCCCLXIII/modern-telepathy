@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DLIST binary format (guest reader spec) | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../../readme/index.html">Desktop README</a></li><li><a href="../../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../../browser/host/dlist-format/index.html" aria-current="page">DLIST binary format (guest reader spec)</a></li><li><a href="../../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><span>Browser</span></li><li aria-current="page">DLIST binary format (guest reader spec)</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">DLIST binary format (guest reader spec)</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">browser/host/dlist-format.md</span></div>
+        <div class="doc-body">
+
+<p>Status: v1, written with stream 2 (M2 host half). The reference encoder is
+<code>browser/host/dlist.py</code>; the reference painter is <code>browser/host/dlist_paint_ref.py</code>;
+<code>tests/browser/dlist_test.py</code> decodes the hex example below. Decisions where the spec
+(<code>docs/browser-architecture.md</code> c) was ambiguous are listed at the top of <code>dlist.py</code> (D1 to D19).</p>
+<h2 id="conventions">Conventions<a class="headerlink" href="#conventions" title="Link to this section">#</a></h2>
+<ul>
+<li>All integers little endian. Coordinates are i32 in 1/16 CSS px, page origin (scroll 0).
+  Band <code>i</code> covers 4096 units (256 CSS px): <code>[i*4096, (i+1)*4096)</code>.</li>
+<li>Colour refs are u8: <code>0xFF</code> none, <code>0..254</code> index into the band colour table.</li>
+<li>String refs are u16: <code>0xFFFF</code> none. Strings are UTF-8, ASCII in v1.</li>
+<li>Scale: device px = units * scale / 16 (scale 1 or 2).</li>
+</ul>
+<h2 id="band-payload-one-dlist-message-type-0x06">Band payload (one DLIST message, type 0x06)<a class="headerlink" href="#band-payload-one-dlist-message-type-0x06" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Size</th>
+<th>Field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>2</td>
+<td>band index (u16)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>flags (u16): bit0 last band, bit1 band holds FIXED ops</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>band version (u32)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>band hash (u64), FNV-1a 64 over bytes 16 to end</td>
+</tr>
+<tr>
+<td>16</td>
+<td>4</td>
+<td>band top y (i32, units)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>4</td>
+<td>band bottom y (i32, units, exclusive)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>2</td>
+<td>n_colours (u16, 0..255)</td>
+</tr>
+<tr>
+<td>26</td>
+<td>2</td>
+<td>n_strings (u16)</td>
+</tr>
+<tr>
+<td>28</td>
+<td>4</td>
+<td>n_ops (u32)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>4 x n_colours</td>
+<td>colour table: R, G, B, A bytes</td>
+</tr>
+<tr>
+<td>then</td>
+<td>per string: 2 + len</td>
+<td>u16 length, UTF-8 bytes</td>
+</tr>
+<tr>
+<td>then</td>
+<td>per op</td>
+<td>opcode (u8), fields in the order below</td>
+</tr>
+</tbody>
+</table></div>
+<p>The guest reads header, colours and strings, then ops until n_ops are consumed. Any
+other byte count after the last op is an error. The hash lets the guest skip a band it
+already holds (BANDREQ/HAVE in b5).</p>
+<h2 id="ops">Ops<a class="headerlink" href="#ops" title="Link to this section">#</a></h2>
+<p>Field codes: i i32, I u32, Q u64, H u16, B u8, h i16, b i8. Sizes include the opcode.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Code</th>
+<th>Fields</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BOX</td>
+<td>01</td>
+<td>x y w h i, fill B, border B, bw B, rad B, flags B</td>
+<td>22</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>02</td>
+<td>x y i, w H (px), str H, face B, col B, deco B, flags B</td>
+<td>17</td>
+</tr>
+<tr>
+<td>IMAGE</td>
+<td>03</td>
+<td>x y w h i, id Q, fit B (0 fill, 1 contain, 2 cover, 3 none), flags B</td>
+<td>27</td>
+</tr>
+<tr>
+<td>CLIP</td>
+<td>04</td>
+<td>x y w h i</td>
+<td>17</td>
+</tr>
+<tr>
+<td>CLIP_POP</td>
+<td>05</td>
+<td>none</td>
+<td>1</td>
+</tr>
+<tr>
+<td>LINK</td>
+<td>06</td>
+<td>x y w h i, str H</td>
+<td>19</td>
+</tr>
+<tr>
+<td>CONTROL</td>
+<td>07</td>
+<td>kind B, id H, x y w h i, val H, label H, state B</td>
+<td>25</td>
+</tr>
+<tr>
+<td>SCROLL_BEGIN</td>
+<td>08</td>
+<td>sid H, x y w h i, content_h i, offset i, overflow B</td>
+<td>28</td>
+</tr>
+<tr>
+<td>SCROLL_END</td>
+<td>09</td>
+<td>none</td>
+<td>1</td>
+</tr>
+<tr>
+<td>RUNIMG</td>
+<td>0A</td>
+<td>hash Q, x y w h i</td>
+<td>25</td>
+</tr>
+<tr>
+<td>TILE</td>
+<td>0B</td>
+<td>id I, x y w h i, kind B (low nibble kind, high nibble alpha 0..15)</td>
+<td>22</td>
+</tr>
+<tr>
+<td>FIXED</td>
+<td>0C</td>
+<td>prefix for the next op (viewport coordinates)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>STICKY</td>
+<td>0D</td>
+<td>min i, max i, top i; prefix for the next op</td>
+<td>13</td>
+</tr>
+<tr>
+<td>(XFORM)</td>
+<td>0E</td>
+<td>reserved, never emitted</td>
+<td></td>
+</tr>
+<tr>
+<td>DECOR</td>
+<td>0F</td>
+<td>x y w h i, kind B, col B</td>
+<td>19</td>
+</tr>
+<tr>
+<td>(STR)</td>
+<td>10</td>
+<td>reserved</td>
+<td></td>
+</tr>
+<tr>
+<td>GRAD</td>
+<td>11</td>
+<td>x y w h i, a B, b B, angle B, rad B</td>
+<td>21</td>
+</tr>
+<tr>
+<td>SHADOW</td>
+<td>12</td>
+<td>x y w h i, dx h, dy h, blur B, spread b, col B, rad B</td>
+<td>25</td>
+</tr>
+</tbody>
+</table></div>
+<p>BOX: <code>fill</code> and <code>border</code> are colour refs; <code>border</code> is drawn <code>bw</code> px wide inside the box
+rectangle. <code>flags</code> bits are reserved (0). TEXT: <code>face</code> bits are bold (bit0),
+size class (bits 1-2: 0 &lt;= 12 px, 1 &lt;= 16, 2 &lt;= 24, 3 larger), mono (bit3), italic (bit4),
+serif (bit5). <code>deco</code> bits: underline 1, line-through 2, overline 4. IMAGE: <code>flags</code> bits
+0-3 alpha 0..15 (15 opaque), bit4 placeholder (no content yet), bit5 CSS background. TILE kind:
+0 svg, 1 canvas or webgl, 2 video, 4 embed. CONTROL kind: 0 text, 1 password (val is
+0xFFFF, never sent), 2 checkbox, 3 radio, 4 button, 5 select, 6 textarea, 7 file, 8 range,
+9 submit, 10 reset, 11 other. CONTROL state bits: 0 disabled, 1 checked, 2 readonly,
+3 required. GRAD: linear two-stop from <code>a</code> to <code>b</code>; angle 0 = to top, 64 = to right,
+128 = to bottom, 192 = to left. SHADOW: offsets in units, blur and spread in px.</p>
+<p>Prefix ops: FIXED and STICKY apply to the op that follows them, and nothing else. A
+STICKY op paints at <code>y + shift</code>, where <code>shift = clamp(scroll_y + top, min, max) - min</code>.
+Paint an op only in the band that holds its shifted top. FIXED ops are in band 0 and use
+viewport coordinates.</p>
+<p>Clip groups: CLIP (or SCROLL_BEGIN) opens a group, CLIP_POP (or SCROLL_END) closes it.
+Groups do not nest; the encoder never opens one inside another.</p>
+<h2 id="worked-example-hex">Worked example (hex)<a class="headerlink" href="#worked-example-hex" title="Link to this section">#</a></h2>
+<p>A 200 x 200 px page: white background, "Hello" in black, a link "Example" underlined in blue,
+and a button with the value "Go". Source: <code>dlist_test.py</code> decodes this block and compares it
+with the listing below. Each line is hex bytes, then <code>;</code> and the annotation.</p>
+<!-- hex-example:begin -->
+<p>00 00 ; band index u16 = 0
+01 00 ; flags u16 = 1 (bit0 last band)
+01 00 00 00 ; band version u32 = 1
+c1 45 ce 40 34 8c 86 33 ; band hash u64 (FNV-1a 64 over bytes 16..end)
+00 00 00 00 ; band top y i32 = 0 (1/16 px units)
+00 10 00 00 ; band bottom y i32 = 4096
+04 00 ; n_colours u16 = 4
+04 00 ; n_strings u16 = 4
+06 00 00 00 ; n_ops u32 = 6
+ff ff ff ff ; colour C0 = R G B A
+00 00 00 ff ; colour C1 = R G B A
+00 00 ee ff ; colour C2 = R G B A
+e0 e0 e0 ff ; colour C3 = R G B A
+07 00 45 78 61 6d 70 6c 65 ; string S0: u16 length 7 + UTF-8 "Example"
+05 00 48 65 6c 6c 6f ; string S1: u16 length 5 + UTF-8 "Hello"
+14 00 68 74 74 70 73 3a 2f 2f 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f ; string S2: u16 length 20 + UTF-8 "https://example.com/"
+02 00 47 6f ; string S3: u16 length 2 + UTF-8 "Go"
+01 00 00 00 00 00 00 00 00 80 0c 00 00 80 07 00 00 00 ff 00 00 00 ; op BOX (0x01) 0 0 3200 1920 0 255 0 0 0
+02 80 00 00 00 80 00 00 00 38 00 01 00 02 01 00 00 ; op TEXT (0x02) 128 128 56 1 2 1 0 0
+06 80 00 00 00 c0 00 00 00 e8 03 00 00 00 01 00 00 02 00 ; op LINK (0x06) 128 192 1000 256 2
+02 80 00 00 00 c0 00 00 00 38 00 00 00 02 02 01 00 ; op TEXT (0x02) 128 192 56 0 2 2 1 0
+01 40 06 00 00 60 09 00 00 00 0a 00 00 80 02 00 00 03 ff 00 00 00 ; op BOX (0x01) 1600 2400 2560 640 3 255 0 0 0
+07 04 01 00 40 06 00 00 60 09 00 00 00 0a 00 00 80 02 00 00 03 00 ff ff 00 ; op CONTROL (0x07) 4 1 1600 2400 2560 640 3 65535 0</p>
+<!-- hex-example:end -->
+
+<p>Decoded listing (the output of <code>dlist.dump_band</code>):</p>
+<!-- dump-example:begin -->
+
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>BAND 0 flags=1 version=1 y=0..4096 ops=6 colours=4 strings=4
+  C0 #ffffff/255
+  C1 #000000/255
+  C2 #0000ee/255
+  C3 #e0e0e0/255
+  S0 Example
+  S1 Hello
+  S2 https://example.com/
+  S3 Go
+  BOX 0 0 3200 1920 0 255 0 0 0
+  TEXT 128 128 56 1 2 1 0 0
+  LINK 128 192 1000 256 2
+  TEXT 128 192 56 0 2 2 1 0
+  BOX 1600 2400 2560 640 3 255 0 0 0
+  CONTROL 4 1 1600 2400 2560 640 3 65535 0</code></pre></figure>
+<!-- dump-example:end -->
+
+<h2 id="reading-order-for-the-guest">Reading order for the guest<a class="headerlink" href="#reading-order-for-the-guest" title="Link to this section">#</a></h2>
+<ol>
+<li>Read the 32-byte header. Check the hash if the band is new (guest FNV-1a 64 over
+   the bytes from offset 16 to the end).</li>
+<li>Read the colour table and the string table into arrays.</li>
+<li>Read n_ops ops. Keep a clip state (none, CLIP rect, or SCROLL rect) and the pending
+   FIXED or STICKY prefix.</li>
+<li>Paint ops in order. Ops of bands are painted in band index order; band 0 FIXED ops last.</li>
+</ol>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../../browser/engine/readme/index.html" rel="prev"><span>Previous</span>Browser engine (spike)</a><a class="next" href="../../../tests/browser/results/m1-summary/index.html" rel="next"><span>Next</span>Kosmos Browser M1: host engine site run</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#conventions">Conventions</a></li><li><a href="#band-payload-one-dlist-message-type-0x06">Band payload (one DLIST message, type 0x06)</a></li><li><a href="#ops">Ops</a></li><li><a href="#worked-example-hex">Worked example (hex)</a></li><li><a href="#reading-order-for-the-guest">Reading order for the guest</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../../assets/search-index.js"></script>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

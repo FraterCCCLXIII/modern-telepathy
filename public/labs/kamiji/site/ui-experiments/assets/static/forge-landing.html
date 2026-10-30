@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forge — Build apps from a prompt</title>
+<style>
+  :root{
+    --bg:#f6f7fb;
+    --surface:#ffffff;
+    --border:#e3e7f0;
+    --ink-900:#0b1224;
+    --ink-700:#3a4257;
+    --ink-500:#69708a;
+    --ink-400:#9298ac;
+    --accent:#4f46e5;
+    --accent-600:#4338ca;
+    --accent-soft:#eef0ff;
+    --radius-lg:18px;
+    --radius-md:12px;
+    --radius-sm:8px;
+    --shadow-card:0 1px 2px rgba(11,18,36,.04), 0 12px 28px -18px rgba(11,18,36,.18);
+    --shadow-hover:0 20px 44px -20px rgba(11,18,36,.28);
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink-900);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Top nav ---------- */
+  .topnav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .topnav__inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
+  .brand__mark{
+    width:30px;height:30px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),#8b7bff);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    font-size:14px;font-weight:800;
+  }
+  .topnav__links{display:flex;align-items:center;gap:26px;font-size:14px;color:var(--ink-700);}
+  .topnav__links a{text-decoration:none;font-weight:500;}
+  .topnav__links a:hover{color:var(--accent);}
+  .btn-ghost-nav{
+    border:1px solid var(--border);background:#fff;border-radius:999px;
+    padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;
+  }
+  .btn-ghost-nav:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 0 40px;text-align:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:16px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  .hero h1{
+    font-size:44px;line-height:1.12;font-weight:700;letter-spacing:-.02em;margin:0 0 14px;
+  }
+  .hero h1 i{
+    font-style:normal;
+    background:linear-gradient(120deg,var(--accent),#22c3d6 70%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.sub{
+    max-width:620px;margin:0 auto 34px;color:var(--ink-500);font-size:17px;
+  }
+
+  .prompt-card{
+    max-width:840px;margin:0 auto;
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:20px;
+    text-align:left;
+  }
+  .prompt-card textarea{
+    width:100%;min-height:88px;resize:vertical;border:none;outline:none;
+    font-family:inherit;font-size:16px;color:var(--ink-900);line-height:1.5;
+    background:transparent;
+  }
+  .prompt-card textarea::placeholder{color:var(--ink-400);}
+  .prompt-card__footer{
+    display:flex;align-items:center;justify-content:space-between;
+    border-top:1px solid var(--border);margin-top:10px;padding-top:14px;gap:12px;flex-wrap:wrap;
+  }
+  .prompt-card__hint{font-size:13px;color:var(--ink-400);}
+
+  .btn{
+    appearance:none;cursor:pointer;border-radius:10px;font-weight:600;font-size:14px;
+    padding:11px 18px;border:1px solid transparent;
+    display:inline-flex;align-items:center;gap:8px;transition:transform .08s ease, background .15s ease, border-color .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{background:var(--accent-600);}
+  .btn-secondary{background:#fff;color:var(--ink-900);border-color:var(--border);}
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-block{width:100%;justify-content:center;}
+  .btn-sm{padding:8px 12px;font-size:13px;}
+
+  .quick-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;justify-content:center;}
+  .quick-chip{
+    border:1px solid var(--border);background:#fff;border-radius:999px;
+    padding:8px 14px;font-size:13px;color:var(--ink-700);cursor:pointer;font-weight:500;
+  }
+  .quick-chip:hover{border-color:var(--accent);color:var(--accent);}
+
+  .flash{border-color:var(--accent) !important; box-shadow:0 0 0 4px var(--accent-soft) !important;}
+
+  /* ---------- Filter bar ---------- */
+  .filter-section{padding:48px 0 8px;}
+  .filter-section h2{font-size:26px;margin:0 0 6px;text-align:center;}
+  .filter-section p.lead{text-align:center;color:var(--ink-500);margin:0 0 28px;font-size:15px;}
+
+  .toolbar{
+    display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .search-box{
+    position:relative;flex:1;min-width:220px;max-width:320px;
+  }
+  .search-box input{
+    width:100%;padding:10px 14px 10px 36px;border:1px solid var(--border);border-radius:10px;
+    font-size:14px;outline:none;background:#fff;
+  }
+  .search-box input:focus{border-color:var(--accent);}
+  .search-box svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--ink-400);}
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    appearance:none;border:1px solid var(--border);background:#fff;color:var(--ink-700);
+    padding:8px 15px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.active{background:var(--ink-900);color:#fff;border-color:var(--ink-900);}
+  .chip .count{opacity:.6;font-weight:500;}
+  .chip.active .count{opacity:.75;}
+
+  /* ---------- Grid ---------- */
+  .grid-section{padding:8px 0 60px;}
+  .tpl-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+  }
+  @media (max-width:980px){ .tpl-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:680px){ .tpl-grid{grid-template-columns:1fr;} .hero h1{font-size:32px;} }
+
+  .tpl-card{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .tpl-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:#d7d9ff;}
+
+  .tpl-preview{
+    position:relative;aspect-ratio:16/9;
+    display:flex;align-items:center;justify-content:center;
+    cursor:zoom-in;overflow:hidden;
+  }
+  .tpl-preview svg.icon{width:44px;height:44px;position:relative;z-index:2;color:#fff;}
+  .tpl-preview::after{
+    content:"";position:absolute;inset:0;background:rgba(10,12,30,0);transition:background .18s ease;
+  }
+  .tpl-preview:hover::after{background:rgba(10,12,30,.28);}
+  .tpl-preview__badge{
+    position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--ink-900);
+    font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;z-index:3;
+  }
+  .tpl-preview__zoom{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.85);
+    width:40px;height:40px;border-radius:50%;background:#fff;color:var(--ink-900);
+    display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .18s ease, transform .18s ease;
+    z-index:4;box-shadow:0 8px 20px -6px rgba(0,0,0,.4);
+  }
+  .tpl-preview:hover .tpl-preview__zoom{opacity:1;transform:translate(-50%,-50%) scale(1);}
+
+  .tpl-body{padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .tpl-body h3{margin:0;font-size:16px;font-weight:700;}
+  .tpl-tagline{margin:0;font-size:13.5px;color:var(--ink-500);}
+
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .pill{
+    font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:6px;
+    background:var(--accent-soft);color:var(--accent-600);
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  .pill.repo{background:#f1f2f5;color:var(--ink-700);}
+  .pill.repo svg{width:12px;height:12px;}
+
+  .skills-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .skill-chip{
+    font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;
+    border:1px dashed var(--border);color:var(--ink-500);
+  }
+
+  .prompt-preview{
+    background:#f7f8fb;border:1px dashed var(--border);border-radius:10px;padding:10px 12px;
+  }
+  .prompt-preview .label{
+    margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);
+  }
+  .prompt-preview p{
+    margin:0;font-size:13px;color:var(--ink-700);
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+
+  .card-actions{display:flex;gap:8px;margin-top:auto;}
+  .card-actions .btn{flex:1;justify-content:center;}
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(10,12,30,.55);
+    display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:#fff;border-radius:20px;max-width:920px;width:100%;max-height:88vh;overflow:hidden;
+    display:grid;grid-template-columns:1fr 1.15fr;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);
+  }
+  @media (max-width:760px){ .modal{grid-template-columns:1fr;max-height:92vh;overflow-y:auto;} }
+
+  .modal-visual{
+    display:flex;align-items:center;justify-content:center;padding:30px;position:relative;min-height:220px;
+  }
+  .modal-visual svg.icon{width:72px;height:72px;color:#fff;position:relative;z-index:2;}
+
+  .modal-content{padding:26px 28px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
+  .modal-close{
+    position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;
+    border:none;background:rgba(255,255,255,.9);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    z-index:5;
+  }
+  .modal-content .modal-close{background:#f1f2f5;position:static;margin-left:auto;}
+  .modal-titlebar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .modal-eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+  .modal-content h2{margin:4px 0 0;font-size:22px;}
+  .modal-desc{color:var(--ink-500);font-size:14px;margin:0;}
+
+  .modal-section h4{
+    margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-400);
+  }
+  .repo-link{
+    display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink-900);
+    background:#f7f8fb;border:1px solid var(--border);padding:8px 12px;border-radius:10px;text-decoration:none;
+  }
+  .repo-link:hover{border-color:var(--accent);color:var(--accent);}
+  .repo-link svg{width:14px;height:14px;flex-shrink:0;}
+
+  .steps-list{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-700);display:flex;flex-direction:column;gap:6px;}
+  .steps-list li{padding-left:2px;}
+
+  .modal-content textarea{
+    width:100%;min-height:100px;border:1px solid var(--border);border-radius:10px;padding:12px;
+    font-size:13.5px;font-family:inherit;color:var(--ink-900);resize:vertical;outline:none;
+  }
+  .modal-content textarea:focus{border-color:var(--accent);}
+
+  .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+
+  .toast{
+    position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink-900);color:#fff;padding:12px 20px;border-radius:999px;font-size:13.5px;font-weight:600;
+    opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:200;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  .empty-state{text-align:center;padding:60px 20px;color:var(--ink-400);display:none;}
+  .empty-state.show{display:block;}
+
+  footer.site-footer{
+    border-top:1px solid var(--border);padding:26px 0;text-align:center;color:var(--ink-400);font-size:12.5px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="container topnav__inner">
+    <div class="brand">
+      <span class="brand__mark">F</span>
+      Forge
+    </div>
+    <nav class="topnav__links">
+      <a href="#templates">Templates</a>
+      <a href="#" onclick="return false;">Docs</a>
+      <a href="#" onclick="return false;">Skills &amp; Plugins</a>
+    </nav>
+    <button class="btn-ghost-nav" type="button" onclick="return false;">Sign in</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow"><span class="dot"></span> APP TEMPLATES</div>
+    <h1>Build apps from a prompt,<br><i>backed by real templates.</i></h1>
+    <p class="sub">Every template is a git repo, a curated set of skills &amp; plugins, and step-by-step build instructions. Describe what you want, or start from one and remix it.</p>
+
+    <div class="prompt-card">
+      <textarea id="hero-prompt" placeholder="Describe the app you want to build — e.g. &quot;A support agent that triages tickets and answers from our docs&quot;"></textarea>
+      <div class="prompt-card__footer">
+        <span class="prompt-card__hint">Pick a template below to auto-fill this, or write your own.</span>
+        <button class="btn btn-primary" type="button" id="generate-btn">
+          Generate scaffold
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h7m0 0L7 4m3 3L7 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="quick-chips">
+      <button class="quick-chip" data-quick="A subscription SaaS dashboard with team workspaces, PayCo billing, and role-based access control.">SaaS dashboard</button>
+      <button class="quick-chip" data-quick="A support agent that triages tickets, answers FAQs from our docs, and escalates billing issues to a human.">Support agent</button>
+      <button class="quick-chip" data-quick="A Chrome extension that summarizes the current page and lets me save the summary to my notes.">Browser extension</button>
+      <button class="quick-chip" data-quick="A CLI tool that audits a repo's git history and test coverage, then prints a health report.">CLI tool</button>
+    </div>
+  </div>
+</section>
+
+<section class="filter-section" id="templates">
+  <div class="container">
+    <h2>Browse app templates</h2>
+    <p class="lead">Each card is a starting point — a repo, its skills/plugins, and the build steps that turn it into your app.</p>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" id="search-input" placeholder="Search templates…">
+      </div>
+      <div class="chip-row" id="chip-row"></div>
+    </div>
+  </div>
+</section>
+
+<section class="grid-section">
+  <div class="container">
+    <div class="tpl-grid" id="tpl-grid"></div>
+    <div class="empty-state" id="empty-state">No templates match your search or filter.</div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <div class="modal-visual" id="modal-visual"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-titlebar">
+        <div>
+          <div class="modal-eyebrow" id="modal-category"></div>
+          <h2 id="modal-title"></h2>
+        </div>
+      </div>
+      <p class="modal-desc" id="modal-desc"></p>
+
+      <div class="modal-section">
+        <h4>Git repository</h4>
+        <a class="repo-link" id="modal-repo" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 20 6v11c0 5.25-3.5 9.74-8 11-4.5-1.26-8-5.75-8-11V6l8-4Z"/></svg>
+          <span id="modal-repo-text"></span>
+        </a>
+      </div>
+
+      <div class="modal-section">
+        <h4>Skills &amp; plugins</h4>
+        <div class="skills-row" id="modal-skills"></div>
+      </div>
+
+      <div class="modal-section">
+        <h4>Build instructions</h4>
+        <ol class="steps-list" id="modal-steps"></ol>
+      </div>
+
+      <div class="modal-section">
+        <h4>Build prompt</h4>
+        <textarea id="modal-prompt"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="modal-use">
+          Use this template
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h7m0 0L7 4m3 3L7 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn btn-secondary" id="modal-copy">Copy git clone</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer class="site-footer">Forge — templates are illustrative starting points, not published packages.</footer>
+
+<script>
+(function(){
+
+  /* ---------------- Data ---------------- */
+  const CATEGORIES = [
+    { id: 'webapp',      label: 'Web Apps',              color: '#4f46e5' },
+    { id: 'agents',      label: 'AI Agents & Chatbots',  color: '#7c3aed' },
+    { id: 'extensions',  label: 'Browser Extensions',    color: '#d97706' },
+    { id: 'cli',         label: 'CLI & Automation',      color: '#334155' },
+    { id: 'api',         label: 'APIs & Backends',       color: '#0d9488' },
+    { id: 'data',        label: 'Data & Analytics',      color: '#e11d48' },
+  ];
+
+  const ICONS = {
+    webapp: '<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16" stroke="currentColor" stroke-width="1.6"/><circle cx="6.5" cy="7" r=".6" fill="currentColor"/><circle cx="8.5" cy="7" r=".6" fill="currentColor"/>',
+    agents: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="10.5" r="1" fill="currentColor"/><circle cx="13.5" cy="10.5" r="1" fill="currentColor"/>',
+    extensions: '<path d="M13 3h4a2 2 0 0 1 2 2v4h-1.5a1.75 1.75 0 1 0 0 3.5H19v4a2 2 0 0 1-2 2h-4v-1.5a1.75 1.75 0 1 0-3.5 0V19H6a2 2 0 0 1-2-2v-4h1.5a1.75 1.75 0 1 0 0-3.5H4V5a2 2 0 0 1 2-2h4v1.5a1.75 1.75 0 1 0 3.5 0V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>',
+    cli: '<path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 10.5 9 13l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+    api: '<circle cx="6" cy="6" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="6" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="18" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M7.8 7.3 10.5 16M16.2 7.3 13.5 16M8.4 6h7.2" stroke="currentColor" stroke-width="1.4"/>',
+    data: '<path d="M5 19V10M11 19V5M17 19v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 19h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  };
+
+  const REPO_ICON = '<path d="M12 2 20 6v11c0 5.25-3.5 9.74-8 11-4.5-1.26-8-5.75-8-11V6l8-4Z" stroke="currentColor" stroke-width="1.4"/>';
+
+  const TEMPLATES = [
+    {
+      id: 'saas-dashboard', category: 'webapp',
+      name: 'SaaS Dashboard Starter',
+      tagline: 'Next.js + Tailwind, team workspaces, billing built in.',
+      description: 'A multi-tenant dashboard shell with authenticated workspaces, role-based permissions, and PayCo billing already wired up. Good starting point for any B2B product.',
+      stack: 'Next.js · Tailwind · Postgres',
+      repo: 'github.com/forge-templates/saas-dashboard',
+      repoUrl: 'https://github.com/forge-templates/saas-dashboard',
+      skills: ['PayCo Billing Skill', 'Clerk Auth Plugin', 'Prisma/Postgres MCP'],
+      steps: [
+        'Clone the repo and run the setup script to install dependencies.',
+        'Connect a Postgres database and run the Prisma migrations.',
+        'Add your PayCo test keys and configure the pricing plans.',
+        'Run the dev server and invite a test teammate to a workspace.',
+      ],
+      prompt: 'Build a subscription SaaS dashboard with team workspaces, PayCo billing, and role-based access control. Include a settings page for managing members and an admin view for usage metrics.',
+    },
+    {
+      id: 'marketing-cms', category: 'webapp',
+      name: 'Marketing Site + CMS',
+      tagline: 'Astro site with a lightweight Markdown CMS and SEO baked in.',
+      description: 'A fast, content-driven marketing site. Pages and blog posts live as Markdown, with structured metadata and image optimization handled automatically.',
+      stack: 'Astro · Markdown · Vercel',
+      repo: 'github.com/forge-templates/astro-marketing',
+      repoUrl: 'https://github.com/forge-templates/astro-marketing',
+      skills: ['SEO Metadata Skill', 'Image Optimization Plugin'],
+      steps: [
+        'Clone the repo and install dependencies.',
+        'Edit the content collection under /content to add pages and posts.',
+        'Customize the theme tokens in tailwind.config for your brand.',
+        'Deploy to Vercel or any static host.',
+      ],
+      prompt: 'Create a fast marketing website with a home page, pricing page, and blog powered by Markdown content, optimized for SEO and Core Web Vitals.',
+    },
+    {
+      id: 'support-agent', category: 'agents',
+      name: 'Customer Support Agent',
+      tagline: 'Triage tickets, answer from docs, escalate what matters.',
+      description: 'An agent scaffold built on the Assistant Agent SDK that reads incoming tickets, searches your knowledge base for answers, and hands off billing or account issues to a human queue.',
+      stack: 'Node · Assistant Agent SDK',
+      repo: 'github.com/forge-templates/support-agent',
+      repoUrl: 'https://github.com/forge-templates/support-agent',
+      skills: ['Zendesk MCP', 'Knowledge Base Retrieval Skill', 'Escalation Workflow Plugin'],
+      steps: [
+        'Clone the repo and set your model provider API key.',
+        'Point the retrieval skill at your docs or knowledge base source.',
+        'Connect the Zendesk (or Helpdesk) MCP with your support inbox.',
+        'Define escalation rules for when the agent should hand off to a human.',
+      ],
+      prompt: 'Create a support agent that triages incoming tickets, answers FAQs from our documentation, and escalates billing or account-security issues to a human agent.',
+    },
+    {
+      id: 'research-copilot', category: 'agents',
+      name: 'Research Copilot',
+      tagline: 'RAG pipeline that reads, cites, and summarizes sources.',
+      description: 'A Python agent that pulls in web and PDF sources, builds a retrieval index, and answers research questions with inline citations.',
+      stack: 'Python · RAG · Vector DB',
+      repo: 'github.com/forge-templates/research-copilot',
+      repoUrl: 'https://github.com/forge-templates/research-copilot',
+      skills: ['Web Search MCP', 'PDF Parsing Skill', 'Citation Formatter Plugin'],
+      steps: [
+        'Clone the repo and install the Python requirements.',
+        'Configure the vector store connection for your embeddings.',
+        'Drop source PDFs or URLs into the ingestion queue.',
+        'Ask a research question and review the cited answer.',
+      ],
+      prompt: 'Build a research copilot that searches the web and uploaded PDFs, builds a source index, and answers questions with inline citations back to the original documents.',
+    },
+    {
+      id: 'page-summarizer', category: 'extensions',
+      name: 'Page Summarizer Extension',
+      tagline: 'One-click summaries of the page you’re reading.',
+      description: 'A Chrome MV3 extension that extracts the main content of the current page and produces a short summary, with a history of recently summarized pages.',
+      stack: 'Chrome MV3 · Assistant API',
+      repo: 'github.com/forge-templates/page-summarizer-ext',
+      repoUrl: 'https://github.com/forge-templates/page-summarizer-ext',
+      skills: ['Content Extraction Skill', 'Summarization Plugin'],
+      steps: [
+        'Clone the repo and run the build script to produce the extension bundle.',
+        'Load the unpacked extension in chrome://extensions (developer mode).',
+        'Add your API key in the extension options page.',
+        'Click the toolbar icon on any article to generate a summary.',
+      ],
+      prompt: 'Build a Chrome extension that summarizes the article on the current page in three bullet points and saves a history of past summaries.',
+    },
+    {
+      id: 'price-tracker', category: 'extensions',
+      name: 'Shopping Price Tracker',
+      tagline: 'Watch product pages and get notified on price drops.',
+      description: 'An extension that lets you track prices on product pages you visit and notifies you when a tracked item drops below your target price.',
+      stack: 'Chrome MV3 · Service Worker',
+      repo: 'github.com/forge-templates/price-tracker-ext',
+      repoUrl: 'https://github.com/forge-templates/price-tracker-ext',
+      skills: ['Price Scraper MCP', 'Notification Plugin'],
+      steps: [
+        'Clone the repo and install dependencies.',
+        'Load the unpacked extension in your browser.',
+        'Track a product page and set a target price.',
+        'The background worker checks prices on a schedule and notifies you.',
+      ],
+      prompt: 'Build a browser extension that lets me track prices on product pages I visit, set a target price, and get a notification when the price drops.',
+    },
+    {
+      id: 'repo-health-cli', category: 'cli',
+      name: 'Repo Health CLI',
+      tagline: 'One command, a full report on your codebase’s health.',
+      description: 'A Node CLI that inspects a repository’s commit history, test coverage, and lint status, then prints a readable health report — great as a pre-PR check.',
+      stack: 'Node · Commander.js',
+      repo: 'github.com/forge-templates/repo-health-cli',
+      repoUrl: 'https://github.com/forge-templates/repo-health-cli',
+      skills: ['Git Analysis Skill', 'Lint/Test Runner Plugin', 'Report Generator Skill'],
+      steps: [
+        'Clone the repo and run npm link to install the CLI globally.',
+        'Run the CLI inside any git repository you want to audit.',
+        'Review the generated report in the terminal or as a Markdown file.',
+        'Wire it into a pre-commit hook or CI step if useful.',
+      ],
+      prompt: 'Build a CLI tool that audits a git repository’s commit history, test coverage, and lint status, then prints a readable health report to the terminal.',
+    },
+    {
+      id: 'deploy-bot', category: 'cli',
+      name: 'Deploy Bot',
+      tagline: 'Automate releases and post status to Teamchat.',
+      description: 'A CLI + CodeHub Actions combo that runs your build and deploy pipeline, then reports success or failure straight to a Teamchat channel.',
+      stack: 'CodeHub Actions · Node CLI',
+      repo: 'github.com/forge-templates/deploy-bot',
+      repoUrl: 'https://github.com/forge-templates/deploy-bot',
+      skills: ['CI/CD MCP', 'Teamchat Notify Plugin'],
+      steps: [
+        'Clone the repo and copy the workflow file into .github/workflows.',
+        'Set your deploy target and Teamchat webhook as repo secrets.',
+        'Push to your release branch to trigger a deploy.',
+        'Check the Teamchat channel for the deploy status message.',
+      ],
+      prompt: 'Build a deploy automation tool that runs the build and deploy pipeline on push to main, and posts a success or failure message to a Teamchat channel.',
+    },
+    {
+      id: 'graphql-api', category: 'api',
+      name: 'GraphQL API Starter',
+      tagline: 'Apollo server with auth, schema, and rate limiting.',
+      description: 'A production-shaped GraphQL API with schema-first resolvers, JWT auth, and per-client rate limiting, ready to model your own domain on top of.',
+      stack: 'Node · Apollo · Postgres',
+      repo: 'github.com/forge-templates/graphql-api-starter',
+      repoUrl: 'https://github.com/forge-templates/graphql-api-starter',
+      skills: ['Schema Generator Skill', 'Auth Plugin', 'Rate Limiting Skill'],
+      steps: [
+        'Clone the repo and install dependencies.',
+        'Configure your Postgres connection string.',
+        'Define your schema types under /schema and run codegen.',
+        'Start the server and explore the schema in the GraphQL playground.',
+      ],
+      prompt: 'Build a GraphQL API with JWT authentication, a Postgres-backed schema for users and posts, and per-client rate limiting on mutations.',
+    },
+    {
+      id: 'webhook-relay', category: 'api',
+      name: 'Webhook Relay Service',
+      tagline: 'Reliable webhook ingestion with retries and replay.',
+      description: 'A small Go service that accepts inbound webhooks, queues them, and delivers them to downstream consumers with automatic retry and backoff.',
+      stack: 'Go · Queue · Postgres',
+      repo: 'github.com/forge-templates/webhook-relay',
+      repoUrl: 'https://github.com/forge-templates/webhook-relay',
+      skills: ['Queue MCP', 'Retry/Backoff Plugin'],
+      steps: [
+        'Clone the repo and run go mod download.',
+        'Configure your queue backend and destination endpoints.',
+        'Start the service and point your webhook source at it.',
+        'Use the replay endpoint to redeliver any failed events.',
+      ],
+      prompt: 'Build a webhook relay service that accepts inbound webhooks, queues them reliably, and delivers them to downstream consumers with retry and backoff on failure.',
+    },
+    {
+      id: 'data-pipeline', category: 'data',
+      name: 'Data Pipeline Starter',
+      tagline: 'Scheduled ETL with data quality checks built in.',
+      description: 'An Airflow + dbt pipeline scaffold for extracting data from sources, transforming it, and loading it into a warehouse, with quality checks at each stage.',
+      stack: 'Python · dbt · Airflow',
+      repo: 'github.com/forge-templates/data-pipeline-starter',
+      repoUrl: 'https://github.com/forge-templates/data-pipeline-starter',
+      skills: ['ETL Skill', 'Data Quality Plugin', 'Warehouse MCP'],
+      steps: [
+        'Clone the repo and set up the Python virtual environment.',
+        'Configure source connections and warehouse credentials.',
+        'Define your dbt models under /models.',
+        'Trigger the Airflow DAG and monitor the run in the UI.',
+      ],
+      prompt: 'Build a data pipeline that extracts data from a source database on a schedule, transforms it with dbt, loads it into a warehouse, and runs data quality checks after each load.',
+    },
+    {
+      id: 'analytics-dashboard', category: 'data',
+      name: 'Analytics Dashboard',
+      tagline: 'Charts and metrics wired to your warehouse.',
+      description: 'A React dashboard that aggregates metrics from your warehouse and renders them as interactive charts, with CSV export for any view.',
+      stack: 'React · Recharts · SQL',
+      repo: 'github.com/forge-templates/analytics-dashboard',
+      repoUrl: 'https://github.com/forge-templates/analytics-dashboard',
+      skills: ['Metrics Aggregator Skill', 'Export Plugin'],
+      steps: [
+        'Clone the repo and install dependencies.',
+        'Connect your warehouse read-replica credentials.',
+        'Define metric queries in /metrics as SQL files.',
+        'Run the dev server and arrange charts on the dashboard.',
+      ],
+      prompt: 'Build an analytics dashboard that pulls metrics from our warehouse, displays them as interactive charts grouped by category, and lets users export any chart’s data as CSV.',
+    },
+  ];
+
+  /* ---------------- Rendering ---------------- */
+  const chipRow = document.getElementById('chip-row');
+  const grid = document.getElementById('tpl-grid');
+  const emptyState = document.getElementById('empty-state');
+  const searchInput = document.getElementById('search-input');
+
+  let activeCategory = 'all';
+  let searchTerm = '';
+
+  function categoryLabel(id){
+    return (CATEGORIES.find(c => c.id === id) || {}).label || id;
+  }
+  function categoryColor(id){
+    return (CATEGORIES.find(c => c.id === id) || {}).color || '#4f46e5';
+  }
+  function previewGradient(id){
+    const c = categoryColor(id);
+    return `radial-gradient(120% 120% at 20% 15%, ${c}dd 0%, ${c} 55%, #0b1224 130%)`;
+  }
+
+  function renderChips(){
+    const counts = { all: TEMPLATES.length };
+    CATEGORIES.forEach(c => counts[c.id] = TEMPLATES.filter(t => t.category === c.id).length);
+
+    const chips = [{ id: 'all', label: 'All' }, ...CATEGORIES];
+    chipRow.innerHTML = chips.map(c => `
+      <button class="chip${activeCategory === c.id ? ' active' : ''}" data-cat="${c.id}">
+        ${c.label} <span class="count">${counts[c.id]}</span>
+      </button>
+    `).join('');
+
+    chipRow.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.dataset.cat;
+        renderChips();
+        renderGrid();
+      });
+    });
+  }
+
+  function matchesFilters(t){
+    const inCategory = activeCategory === 'all' || t.category === activeCategory;
+    const term = searchTerm.trim().toLowerCase();
+    const inSearch = !term ||
+      t.name.toLowerCase().includes(term) ||
+      t.tagline.toLowerCase().includes(term) ||
+      t.stack.toLowerCase().includes(term) ||
+      t.skills.some(s => s.toLowerCase().includes(term));
+    return inCategory && inSearch;
+  }
+
+  function renderGrid(){
+    const list = TEMPLATES.filter(matchesFilters);
+    emptyState.classList.toggle('show', list.length === 0);
+
+    grid.innerHTML = list.map(t => `
+      <article class="tpl-card" data-id="${t.id}">
+        <div class="tpl-preview" style="background:${previewGradient(t.category)}" data-open="${t.id}">
+          <span class="tpl-preview__badge">${categoryLabel(t.category)}</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none">${ICONS[t.category]}</svg>
+          <span class="tpl-preview__zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+        <div class="tpl-body">
+          <h3>${t.name}</h3>
+          <p class="tpl-tagline">${t.tagline}</p>
+          <div class="meta-row">
+            <span class="pill repo"><svg viewBox="0 0 24 24" fill="none">${REPO_ICON}</svg>${t.repo}</span>
+            <span class="pill">${t.stack}</span>
+          </div>
+          <div class="skills-row">
+            ${t.skills.map(s => `<span class="skill-chip">${s}</span>`).join('')}
+          </div>
+          <div class="prompt-preview">
+            <p class="label">Build prompt</p>
+            <p>${t.prompt}</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-primary use-btn" data-id="${t.id}">Use this template</button>
+            <button class="btn btn-secondary details-btn" data-id="${t.id}">Details</button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+
+    grid.querySelectorAll('[data-open]').forEach(el => el.addEventListener('click', () => openModal(el.dataset.open)));
+    grid.querySelectorAll('.details-btn').forEach(el => el.addEventListener('click', () => openModal(el.dataset.id)));
+    grid.querySelectorAll('.use-btn').forEach(el => el.addEventListener('click', () => useTemplate(el.dataset.id)));
+  }
+
+  /* ---------------- Hero prompt / use-template ---------------- */
+  const heroPrompt = document.getElementById('hero-prompt');
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function useTemplate(id){
+    const t = TEMPLATES.find(x => x.id === id);
+    if (!t) return;
+    heroPrompt.value = t.prompt;
+    heroPrompt.closest('.prompt-card').classList.add('flash');
+    setTimeout(() => heroPrompt.closest('.prompt-card').classList.remove('flash'), 900);
+    heroPrompt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    heroPrompt.focus();
+    showToast(`Loaded "${t.name}" prompt`);
+  }
+
+  document.querySelectorAll('.quick-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      heroPrompt.value = chip.dataset.quick;
+      heroPrompt.closest('.prompt-card').classList.add('flash');
+      setTimeout(() => heroPrompt.closest('.prompt-card').classList.remove('flash'), 900);
+      heroPrompt.focus();
+    });
+  });
+
+  document.getElementById('generate-btn').addEventListener('click', () => {
+    if (!heroPrompt.value.trim()){
+      heroPrompt.focus();
+      showToast('Describe the app you want to build first');
+      return;
+    }
+    showToast('Scaffold request queued — this is a UI demo');
+  });
+
+  /* ---------------- Modal ---------------- */
+  const overlay = document.getElementById('modal-overlay');
+  const modalVisual = document.getElementById('modal-visual');
+  const modalCategory = document.getElementById('modal-category');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalRepo = document.getElementById('modal-repo');
+  const modalRepoText = document.getElementById('modal-repo-text');
+  const modalSkills = document.getElementById('modal-skills');
+  const modalSteps = document.getElementById('modal-steps');
+  const modalPrompt = document.getElementById('modal-prompt');
+  const modalUse = document.getElementById('modal-use');
+  const modalCopy = document.getElementById('modal-copy');
+
+  let currentModalId = null;
+
+  function openModal(id){
+    const t = TEMPLATES.find(x => x.id === id);
+    if (!t) return;
+    currentModalId = id;
+
+    modalVisual.style.background = previewGradient(t.category);
+    modalVisual.innerHTML = `<svg class="icon" viewBox="0 0 24 24" fill="none">${ICONS[t.category]}</svg>`;
+    modalCategory.textContent = categoryLabel(t.category);
+    modalTitle.textContent = t.name;
+    modalDesc.textContent = t.description;
+    modalRepo.href = t.repoUrl;
+    modalRepoText.textContent = t.repo;
+    modalSkills.innerHTML = t.skills.map(s => `<span class="skill-chip">${s}</span>`).join('');
+    modalSteps.innerHTML = t.steps.map(s => `<li>${s}</li>`).join('');
+    modalPrompt.value = t.prompt;
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    currentModalId = null;
+  }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  modalUse.addEventListener('click', () => {
+    const t = TEMPLATES.find(x => x.id === currentModalId);
+    if (!t) return;
+    heroPrompt.value = modalPrompt.value;
+    closeModal();
+    heroPrompt.closest('.prompt-card').classList.add('flash');
+    setTimeout(() => heroPrompt.closest('.prompt-card').classList.remove('flash'), 900);
+    heroPrompt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    heroPrompt.focus();
+    showToast(`Loaded "${t.name}" prompt`);
+  });
+
+  modalCopy.addEventListener('click', async () => {
+    const t = TEMPLATES.find(x => x.id === currentModalId);
+    if (!t) return;
+    const cmd = `git clone https://${t.repo}.git`;
+    try {
+      await navigator.clipboard.writeText(cmd);
+      showToast('Copied git clone command');
+    } catch (e) {
+      showToast(cmd);
+    }
+  });
+
+  /* ---------------- Search ---------------- */
+  searchInput.addEventListener('input', (e) => {
+    searchTerm = e.target.value;
+    renderGrid();
+  });
+
+  /* ---------------- Init ---------------- */
+  renderChips();
+  renderGrid();
+
+})();
+</script>
+
+</body>
+</html>

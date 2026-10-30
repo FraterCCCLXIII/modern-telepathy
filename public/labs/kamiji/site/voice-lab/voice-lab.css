@@ -1,0 +1,24 @@
+/* Voice lab only. Differences from ../style.css and ../voice-settings.css. */
+.lab-hero { min-height: 0; padding-top: 148px; padding-bottom: 8px; }
+.lab-hero h1 { font-size: clamp(2.6rem, 5.2vw, 5.5rem); margin-bottom: .3em; }
+.lab-hero .lead { max-width: 40rem; }
+.lab-section { padding: 4rem 0; }
+.lab-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 56px; align-items: start; }
+@media (max-width: 900px) { .lab-grid { grid-template-columns: minmax(0, 1fr); } .lab-hero { padding-top: 120px; } .lab-section { padding: 3rem 0; } }
+.lab-grid h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin-bottom: 18px; }
+.lab-mouth { width: 96px; height: 56px; border-radius: 28px; background: var(--card); display: grid; place-items: center; margin-bottom: 12px; }
+.lab-mouth i { display: block; width: 44px; height: 4px; border-radius: 22px; background: var(--fg); transition: height .06s linear, width .06s linear; }
+.lab-last { font: .75rem/1.5 var(--mono); color: var(--muted); min-height: 2.6em; overflow-wrap: anywhere; }
+.lab-samples { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.lab-samples button { min-height: 44px; padding: 8px 16px; border-radius: 14px; border: 0; background: var(--pill); color: var(--fg); font: inherit; font-size: .9rem; text-align: left; cursor: pointer; max-width: 100%; }
+.lab-samples button:hover { background: var(--faint); }
+.lab-samples .ja { font-family: system-ui, "Hiragino Sans", sans-serif; }
+.lab-label { display: block; font: .64rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 0 0 6px; }
+#custom { width: 100%; border-radius: 14px; border: 1px solid var(--faint); background: var(--card); color: var(--fg); padding: 12px 14px; font: inherit; resize: vertical; }
+.lab-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 20px; border-radius: 999px; border: 1px solid var(--faint); background: var(--card); color: var(--fg); font: .72rem/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; cursor: pointer; }
+.btn:hover { border-color: var(--fg); }
+.btn.primary { background: var(--sel); border-color: var(--sel); color: var(--sel-fg); }
+.lab-status { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); }
+.lab-status .kv-dot { width: 10px; height: 10px; margin-top: .55em; border-radius: 50%; background: var(--muted); flex: none; }
+.lab-status .kv-dot.on { background: #3b8a4a; } .lab-status .kv-dot.off { background: #b3563c; }

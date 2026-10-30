@@ -1,0 +1,188 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sutraya ancient text library</title>
+<meta name="description" content="Sutraya is a search-first library and layered reader for ancient texts, built with Next.js and Postgres. The first corpus is SuttaCentral Pali, and an Ask feature answers questions with citations to passages.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/sutraya-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="sutraya.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-sutraya" href="#top" aria-label="Sutraya, top of page">
+      <img src="img/sutraya-logo.svg" alt="" width="28" height="28">
+      <span>Sutraya</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#reader">Reader mock</a>
+      <a href="#corpus">Corpus</a>
+      <a href="#status">Status</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Search ancient texts, then read them in layers.</h1>
+      <p class="lead">Sutraya is a library where the original text, its translation and notes sit side by side, and a question you ask is answered with quotes you can check against the passage.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#reader">See the layered reader</a>
+        <a class="btn" href="#status">What runs today</a>
+      </p>
+      <p class="quiet">A working prototype that runs on a laptop with Docker. First corpus: SuttaCentral Pali, released as CC0.</p>
+    </div>
+
+    <figure class="hero-art">
+      <div class="sut" role="img" aria-label="Illustrative mock, not a screenshot: a reader with a Pali line, an English translation layer under it, and a note beside it.">
+        <div class="sut-bar" aria-hidden="true"><b>Placeholder work title</b><span>Pali root, English layer</span><em>illustrative mock</em></div>
+        <div class="sut-body" aria-hidden="true">
+          <div class="sut-text">
+            <div class="psg"><b>1.1</b><div><p class="orig">Evaṁ me sutaṁ.</p><p class="tr"><small>Translation layer</small>Thus have I heard.</p></div></div>
+          </div>
+          <div class="sut-side"><div class="note"><small>Note</small>Placeholder note about the opening formula.</div></div>
+        </div>
+      </div>
+      <figcaption>Illustrative mock, not a screenshot. Layout drawn from the app's data model; the line is the standard opening of Pali suttas.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap">
+    <h2>What it is and how it works</h2>
+    <p class="sub">The README calls it a search-first library and reader for ancient texts. It is a Next.js (App Router) and TypeScript app with Tailwind, PostgreSQL through Drizzle, and Better Auth for accounts. The planned screens are home search, library catalog, search results, a work landing page and the layered reader.</p>
+    <ol class="steps-n">
+      <li><div>
+        <h3>Import with provenance <span class="badge ok">in the repo</span></h3>
+        <p>Importer scripts fetch each source and store works, witnesses (one version of a text, such as a root or a translation), divisions and passages. Every witness records its source, an SPDX licence, attribution text and the import time. The docs say sources with unknown rights block ingestion.</p>
+        <p class="from">Source: docs/CORPUS.md, src/db/schema.ts, src/scripts</p>
+      </div></li>
+      <li><div>
+        <h3>Keep layers aligned <span class="badge ok">in the repo</span></h3>
+        <p>Each passage has a layer (original, transliteration or translation) and a language. For SuttaCentral, the root and the translation are fetched together under the same segment IDs, so the layers stay aligned. Passage text is stored raw so it stays citable, with a separate normalized search form.</p>
+        <p class="from">Source: docs/CORPUS.md, src/db/schema.ts (passages)</p>
+      </div></li>
+      <li><div>
+        <h3>Search, then read <span class="badge ok">in the repo</span></h3>
+        <p>Search runs on PostgreSQL with diacritic-insensitive matching. Results open the reader for a witness at <code>/read/[witnessId]</code>, with stacked or parallel layers and commentary, parallels and footnote panels.</p>
+        <p class="from">Source: README.md, src/components/PassageLayers.tsx, src/components/reader</p>
+      </div></li>
+      <li><div>
+        <h3>Ask, with checks <span class="badge proto">needs a model</span></h3>
+        <p>Ask is a retrieval-augmented chat. It embeds the question, recalls passages by vector and keyword search, runs a bounded tool loop, then checks quotes against the text and citations against what was retrieved before showing a trust badge. It needs an embedding and chat model, for example Ollama or another OpenAI-compatible API.</p>
+        <p class="from">Source: docs/ASK.md</p>
+      </div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>Features</h2>
+    <ul class="grid-cards">
+      <li><h3>Library and works</h3><p>Catalog, work pages, authors, sources and collections.</p><p class="from">src/app/library, works, authors, sources</p></li>
+      <li><h3>Layered reader</h3><p>Original, transliteration and translation layers, a witness selector and division navigation.</p><p class="from">src/components/ReaderView.tsx</p></li>
+      <li><h3>Parallels</h3><p>Panels that show related passages in other works.</p><p class="from">src/components/reader/ParallelsPanel.tsx</p></li>
+      <li><h3>Ask</h3><p>Grounded Q&amp;A with citations that link to passages and a stable <code>sutraya:</code> URN. Modes scope answers to a tradition.</p><p class="from">docs/ASK.md</p></li>
+      <li><h3>Translate and OCR</h3><p>A translation helper with an AI drafting dialog, and an OCR page that sends PDFs or images to an external OCR service.</p><p class="from">README.md, src/app/translate, src/app/ocr</p></li>
+      <li><h3>Saved, history, workspace</h3><p>Saved items, reading history, documents and sheets, each scoped to a user.</p><p class="from">src/app/saved, history, workspace</p></li>
+      <li><h3>MCP server</h3><p>Tools to search the corpus, read a passage, get parallels and resolve a URN, over the read API.</p><p class="from">mcp-server/</p></li>
+      <li><h3>Local or hosted</h3><p>Single implicit local reader by default, or multi-user accounts with usage limits for AI features.</p><p class="from">README.md "Auth"</p></li>
+      <li><h3>Retrieval checks</h3><p>A regression test set and gate for Ask.</p><p class="from">eval/, npm run eval:gate</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="reader" class="section">
+  <div class="wrap">
+    <h2>The layered reader, as a mock</h2>
+    <p class="sub">No screenshots exist in the repository. This is an illustrative mock, not a screenshot. It follows the passage model: one row per passage, with an original layer and a translation layer sharing a position, and notes beside them. The text is a short sample, the notes are placeholders.</p>
+    <div class="sut" style="margin-top:2rem" role="img" aria-label="Illustrative mock, not a screenshot: a reader view with two passages, each with a Pali line and an English layer, and a side column of notes.">
+      <div class="sut-bar" aria-hidden="true"><b>Placeholder work title</b><span>Witness: Pali root with English layer</span><em>illustrative mock, not a screenshot</em></div>
+      <div class="sut-tools" aria-hidden="true"><span class="on">Original</span><span class="on">Translation</span><span>Transliteration</span><span>Stacked</span><span>Parallel</span></div>
+      <div class="sut-body" aria-hidden="true">
+        <div class="sut-text">
+          <div class="psg"><b>1.1</b><div><p class="orig">Evaṁ me sutaṁ.</p><p class="tr"><small>English, translation layer</small>Thus have I heard.</p></div></div>
+          <div class="psg"><b>1.2</b><div><p class="orig">Placeholder <mark>Pali</mark> line two.</p><p class="tr"><small>English, translation layer</small>Placeholder English line two.</p></div></div>
+        </div>
+        <div class="sut-side">
+          <div class="note"><small>Note on 1.1</small>Placeholder note: the standard opening formula.</div>
+          <div class="note"><small>Parallels</small>Placeholder: linked passages in other works would list here.</div>
+        </div>
+      </div>
+    </div>
+    <p class="mockcap">Illustrative mock, not a screenshot.</p>
+  </div>
+</section>
+
+<section id="corpus" class="section">
+  <div class="wrap">
+    <h2>Corpus and licences</h2>
+    <p class="sub">The first corpus is a curated set of Pali root texts, and Bhikkhu Sujato's segmented English translations, from SuttaCentral. The repository's corpus notes record both as CC0-1.0. Other sources the importers can load carry different licences, so check the source before reusing any text.</p>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Source</th><th>Content</th><th>Licence as recorded</th></tr></thead>
+      <tbody>
+        <tr><td data-l="Source">SuttaCentral</td><td data-l="Content">Selected Pali roots and Sujato English translation</td><td data-l="Licence">CC0-1.0</td></tr>
+        <tr><td data-l="Source">GRETIL</td><td data-l="Content">Abhinavagupta Saiva works</td><td data-l="Licence">CC-BY-NC-SA-4.0</td></tr>
+        <tr><td data-l="Source">Esukhia Derge Kangyur</td><td data-l="Content">Two demo Tibetan roots, no English</td><td data-l="Licence">Public domain / CC0-1.0</td></tr>
+        <tr><td data-l="Source">CBETA and 84000</td><td data-l="Content">Optional importers for Chinese and Tibetan translations</td><td data-l="Licence">Non-CC0; readable, but blocked from embedding for Ask. Check corpus licence.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="from">Source: docs/CORPUS.md. This page repeats the repo's records and has not re-checked them with the publishers. Corpus text is credited to SuttaCentral and its translators.</p>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>Status</h2>
+    <ul class="legend" aria-label="Status key">
+      <li><span class="badge ok">in the repo</span> code and docs describe it</li>
+      <li><span class="badge proto">needs a model</span> works only with a model or service you supply</li>
+      <li><span class="badge plan">planned</span> a roadmap or gap list item</li>
+      <li><span class="badge unv">unverified</span> not run for this page</li>
+    </ul>
+    <ul class="inv">
+      <li><h4>Local prototype <span class="badge ok">in the repo</span></h4><div><p>Setup is Node 20 or newer, Docker for Postgres with pgvector, then <code>npm run setup</code> and <code>npm run dev</code>, on port 3010. The app was not started for this page.</p></div></li>
+      <li><h4>Ask <span class="badge proto">needs a model</span></h4><div><p>Requires an embedding model and a chat model that you provide. Answer quality was not tested here.</p></div></li>
+      <li><h4>OCR <span class="badge proto">needs a model</span></h4><div><p>Calls an external OCR service, with an optional vision-model fallback for images.</p></div></li>
+      <li><h4>Hosted prototype <span class="badge unv">unverified</span></h4><div><p>The docs describe a hosted prototype and a multi-user mode. Whether one is live now is not stated, and no public address is given here.</p></div></li>
+      <li><h4>Wider corpus <span class="badge plan">planned</span></h4><div><p>Gap lists for East Asian and Saiva sources, Zen texts and rights decisions are in the docs. Several items are marked as pending a licence decision.</p></div></li>
+      <li><h4>Tests <span class="badge unv">unverified</span></h4><div><p>Unit tests, a Playwright smoke test and a retrieval eval exist. None were run for this page.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap">
+    <h2>Links</h2>
+    <p class="sub">The README does not give a public address for the project, so none is claimed here.</p>
+    <ul class="inv">
+      <li><h4>Source repository</h4><div><p>Local folder <code>sutraya</code>. Start with <code>README.md</code>, then <code>docs/CORPUS.md</code>, <code>docs/ASK.md</code> and <code>docs/ROADMAP.md</code>.</p></div></li>
+      <li><h4>Corpus source</h4><div><p>SuttaCentral, credited above. Its site is named in the repository's corpus notes.</p></div></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Sutraya. A library and layered reader for ancient texts. Prototype.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

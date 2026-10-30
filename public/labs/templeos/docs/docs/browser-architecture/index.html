@@ -1,0 +1,1457 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos Browser: architecture and specification | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html" aria-current="page">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Browser</span></li><li aria-current="page">Kosmos Browser: architecture and specification</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Kosmos Browser: architecture and specification</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/browser-architecture.md</span></div>
+        <div class="doc-body">
+
+<p>Status: specification, not code. Branch task/templeos-shell. Written 2026-10-27. Read with <code>browser-features.md</code> (what each feature is, priority, provider) and <code>browser-test-sites.md</code> (what we test on). It replaces the v0 design in <code>browser-plan.md</code> where they differ; v0 stays as the reader-mode fallback.</p>
+<p>Every number here is one of three kinds, and the text says which: <strong>[measured]</strong> (taken from this repo or the local Mac, with the command or file named), <strong>[reported]</strong> (taken from a source or from the project notes, not reproduced here), or <strong>[estimate]</strong> (our arithmetic; the M1 or M2 gate must confirm it). Anything marked <strong>(memory)</strong> is an API or flag name from memory, to be checked against the Chrome 156 protocol JSON at M1.</p>
+<h2 id="0-summary-of-decisions">0. Summary of decisions<a class="headerlink" href="#0-summary-of-decisions" title="Link to this section">#</a></h2>
+<ol>
+<li><strong>The host runs a real engine.</strong> Google Chrome 156 (local, found at <code>/Applications/Google Chrome.app</code>) driven over CDP. We do not write HTML, CSS or JavaScript engines in the guest.</li>
+<li><strong>Transport to Chrome is <code>--remote-debugging-pipe</code>, not a port.</strong> No listening socket, no WebSocket client needed, no other program can attach. Requires a non-default <code>--user-data-dir</code> (Chrome 136+ rule, verified fact 2 in <code>browser-features.md</code>).</li>
+<li><strong>The guest receives a display list</strong> (positioned text runs, boxes, images, clip and scroll regions, link and control hit areas), cut into 256-px bands that the guest caches and asks for on demand. Input and navigation go back as binary messages. Pages are never rendered as pixels except in a fallback tile for canvas, video and WebGL.</li>
+<li><strong>Extensions run in our own extension host</strong> on the host, because Chrome 137+ branded builds ignore <code>--load-extension</code> (verified fact 3). We implement a <code>chrome.*</code> shim for the MV3 subset in <code>browser-features.md</code> section 11.</li>
+<li><strong>One throwaway profile per run, never the user's real Chrome profile.</strong> History, bookmarks and settings live in our SQLite store. Cookies live only in the throwaway profile and the host never sends them to the guest.</li>
+</ol>
+<h2 id="a-components">a. Components<a class="headerlink" href="#a-components" title="Link to this section">#</a></h2>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+--------------------------------- TempleOS guest (HolyC, desk3) ---------------------------------+
+|  Browser app (03b-browser.HC -&gt; browser/*.HC)                                                   |
+|   +------------+  +----------+  +-------------+  +-----------------+  +---------------------+   |
+|   | Shell      |  | Omnibox  |  | Page view   |  | Panels          |  | DevTools UI         |   |
+|   | tab strip, |  | and menu |  | display-list|  | history, marks, |  | Elements, Console,  |   |
+|   | toolbar,   |  | suggest. |  | painter,    |  | downloads,      |  | Network, Application|   |
+|   | bookmarks  |  |          |  | scroll, hits|  | settings, perms |  | (Sources, Perf later)|  |
+|   +-----+------+  +----+-----+  +------+------+  +--------+--------+  +----------+----------+   |
+|         +---------------+----------------+----------------+-----------------------+              |
+|                                          |  Browser protocol client (protocol.HC)                |
++------------------------------------------|-----------------------------------------------------------+
+                                           | Channel: COM1 (QEMU, lockstep chunks) or Aiwnios socket
+                                           | binary frames, section b
++------------------------------------------|-----------------------------------------------------------+
+| Host (macOS, Python stdlib; our bridge process)                                                    |
+|                                                                                                    |
+|  kb-bridge  (scripts/browser-bridge.py, grows into browser/host/)                                  |
+|   +------------------+  +--------------------+  +-------------------+  +-----------------------+   |
+|   | channel server   |  | session / tab      |  | DLIST builder     |  | Extension host       |   |
+|   | framing, flow    |  | manager: tabs,     |  | DOMSnapshot -&gt;    |  | manifest, shim,      |   |
+|   | control, coalesce|  | nav, input routing |  | ops, bands, hits  |  | background, content  |   |
+|   +------------------+  +---------+----------+  +---------+---------+  | scripts, popups      |   |
+|                                   |                       |            +----------+------------+   |
+|   +-------------------------------+-----------------------+-----------+            |                |
+|   | Engine adapter: CDP over --remote-debugging-pipe (cdp.py, engine.py)  &lt;----------+                |
+|   +-----------------------------------------------+------------------------------------+               |
+|                                                   | fd 3 / fd 4, NUL-terminated JSON                   |
+|   +----------------------------------------------+ v                                                    |
+|   | Profile store (store.py, sqlite3 stdlib):    |  Google Chrome 156 (headless, unified mode),        |
+|   | history, bookmarks, settings, downloads,     |  throwaway --user-data-dir, one browser context      |
+|   | extensions registry, per-site settings       |  per tab, page targets, service workers             |
+|   +----------------------------------------------+                                                    |
++----------------------------------------------------------------------------------------------------+</code></pre></figure>
+<p>Component responsibilities:</p>
+<ul>
+<li><strong>Channel server.</strong> Owns the byte link to the guest. Frames, checksums, sequence numbers, flow control, input coalescing (section b).</li>
+<li><strong>Session and tab manager.</strong> One record per tab: browser context id, page target id, session id, navigation history, last display-list version per band, dirty flags. Routes guest input to the right tab and turns Chrome events into guest messages.</li>
+<li><strong>Engine adapter.</strong> The only code that knows CDP. Everything else calls <code>engine.navigate(tab, url)</code>, <code>engine.input(tab, event)</code>, <code>engine.snapshot(tab) -&gt; snapshot</code>, <code>engine.screenshot(tab, clip, scale)</code>. This is the portability seam for the Aiwnios build (the guest-side transport is in section b1).</li>
+<li><strong>DLIST builder.</strong> Turns DOMSnapshot output into ops (section c). Pure Python, no Chrome calls, so it can be tested on saved snapshots.</li>
+<li><strong>Extension host.</strong> Section g.</li>
+<li><strong>Profile store.</strong> SQLite via <code>sqlite3</code>. Schema in section i (stream 6).</li>
+<li><strong>Guest protocol client and painter.</strong> Section b and d.</li>
+</ul>
+<h3 id="host-language-and-dependencies">Host language and dependencies<a class="headerlink" href="#host-language-and-dependencies" title="Link to this section">#</a></h3>
+<ul>
+<li>Python 3 standard library only: <code>subprocess</code> (with <code>pass_fds</code>), <code>json</code>, <code>sqlite3</code>, <code>base64</code>, <code>zlib</code> (host side only), <code>struct</code>, <code>hashlib</code>, <code>http.server</code> (extension and helper pages on 127.0.0.1), <code>threading</code>, <code>select</code>.</li>
+<li>Not needed: a WebSocket client (the pipe transport avoids one), Node, Playwright or Puppeteer. Playwright is a fine reference for CDP usage but adds a Node dependency; we do not need it.</li>
+<li>Engine check at start-up: <code>GOOGLE_CHROME=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</code>, version from <code>--version</code>. Refuse to run below a version we tested (start at 156).</li>
+<li><strong>Not bundled.</strong> We do not ship Chrome. The user installs Chrome (or a Chrome for Testing build) and the bridge finds it. See section k2 for the licence reasoning.</li>
+</ul>
+<h3 id="why-cdp-over-the-pipe-and-not-chromes-own-headless-server">Why CDP over the pipe, and not Chrome's own headless server<a class="headerlink" href="#why-cdp-over-the-pipe-and-not-chromes-own-headless-server" title="Link to this section">#</a></h3>
+<ul>
+<li><code>--remote-debugging-pipe</code> gives a bidirectional channel on file descriptors 3 and 4 with no TCP port. A port would let any local process attach to the engine, including other user processes, which is the same risk Chrome's own Chrome 136 change was made to reduce (verified fact 2).</li>
+<li><code>--headless</code> (new mode, unified with headful in Chrome 132+; verified fact 5) gives the full rendering path, including fonts, images and Canvas, which we need for fidelity. The old headless shell is not enough for fonts.</li>
+</ul>
+<h2 id="b-wire-protocol-guest-and-host">b. Wire protocol: guest and host<a class="headerlink" href="#b-wire-protocol-guest-and-host" title="Link to this section">#</a></h2>
+<h3 id="b1-transport-and-framing">b1. Transport and framing<a class="headerlink" href="#b1-transport-and-framing" title="Link to this section">#</a></h3>
+<p>Transport: COM1 at the QEMU server socket (the v0 path, <code>KS_SERIAL_PORT</code>, default 4555), or a Unix socket on Aiwnios (the native build). The framing is the same on both.</p>
+<p>Frame layout (all integers little endian):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Size</th>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td><code>sync</code></td>
+<td>0xA5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><code>type</code></td>
+<td>message type (table b2)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td><code>flags</code></td>
+<td>bit 0 more-fragments, bit 1 compressed (reserved, always 0 in v1), bit 2 urgent (input, navigation)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td><code>tab</code></td>
+<td>tab id (0 = global, 1..255)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td><code>seq</code></td>
+<td>sender sequence number, increments per frame</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td><code>len</code></td>
+<td>payload length, 0 to 1 MB</td>
+</tr>
+<tr>
+<td>12</td>
+<td>len</td>
+<td><code>payload</code></td>
+<td></td>
+</tr>
+<tr>
+<td>12+len</td>
+<td>4</td>
+<td><code>crc32</code></td>
+<td>CRC-32 (IEEE 802.3, the zlib polynomial) over bytes 0 to 11+len</td>
+</tr>
+</tbody>
+</table></div>
+<p>Overhead is 16 bytes per frame. Receivers scan for <code>sync</code>, then check length and CRC; a bad frame is dropped and the receiver sends a NAK (type 0x7F) with the expected <code>seq</code>. Frames are limited to 64 KB on serial (fragment with <code>more-fragments</code>) and 1 MB on sockets.</p>
+<p>Why CRC-32: the serial link is emulated, so errors are unlikely, but a corrupt display list shows as garbage text on screen and is hard to diagnose. CRC-32 table in HolyC is 1 KB and costs one table lookup per byte; measure (M1) before choosing a cheaper one (Fletcher-32 is the fallback).</p>
+<p>Encoding: binary throughout. ASCII (the v0 KDoc form) is kept only for the debug dump (<code>--dump</code>), not for the wire, because hex or decimal text doubles the bytes. v0's <code>OK &lt;n&gt; &lt;c&gt;</code> header is replaced by framed messages; v0 and v1 are not wire-compatible, and that is fine because the guest and host ship together.</p>
+<h3 id="b2-message-types">b2. Message types<a class="headerlink" href="#b2-message-types" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Direction</th>
+<th>Payload (summary)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>HELLO</td>
+<td>both</td>
+<td>version u16, capabilities u32, guest viewport w,h (u16, device px), scale u8</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>NAV</td>
+<td>G to H</td>
+<td>op u8 (load, back, forward, reload, stop, new-tab, close-tab), url string (UTF-8 bytes, ASCII in v1)</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>INPUT</td>
+<td>G to H</td>
+<td>kind u8 (mouse-move, mouse-down, mouse-up, wheel, key-down, key-up, char), x, y (CSS px * 16), button, modifiers, key code, char</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>SCROLL</td>
+<td>G to H</td>
+<td>container id u16 (0 = root), dx, dy (CSS px * 16)</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>RESIZE</td>
+<td>G to H</td>
+<td>viewport w, h (device px), scale (1 or 2)</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>DLIST</td>
+<td>H to G</td>
+<td>band index u16, band version u32, count of ops, string table, op stream (section c)</td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>TILE</td>
+<td>H to G</td>
+<td>rect, format, pixel data (fallback for canvas, video, WebGL)</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>IMAGE</td>
+<td>H to G</td>
+<td>image id (hash), width, height, format (rgb565-rle, alpha-rle, rgba8-rle), data</td>
+</tr>
+<tr>
+<td>0x09</td>
+<td>RUNIMG</td>
+<td>H to G</td>
+<td>run hash, width, height, alpha or colour, data (non-Latin text, section h)</td>
+</tr>
+<tr>
+<td>0x0A</td>
+<td>CURSOR</td>
+<td>H to G</td>
+<td>cursor kind (arrow, hand, text, wait, crosshair, not-allowed)</td>
+</tr>
+<tr>
+<td>0x0B</td>
+<td>META</td>
+<td>H to G</td>
+<td>tab title, url, loading state, can-back, can-forward, zoom, security state</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>DOWNLOAD</td>
+<td>H to G</td>
+<td>download id, name, size, state, progress</td>
+</tr>
+<tr>
+<td>0x0D</td>
+<td>PROMPT</td>
+<td>both</td>
+<td>prompt id, kind (permission, outward-send, download, install, dangerous-file, cert), text, default answer</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td>PROMPT-ANS</td>
+<td>G to H</td>
+<td>prompt id, answer (yes, no, always, never)</td>
+</tr>
+<tr>
+<td>0x0F</td>
+<td>DEVT</td>
+<td>both</td>
+<td>DevTools domain id, JSON or binary event (section f)</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>EXT</td>
+<td>both</td>
+<td>extension id, event name, JSON</td>
+</tr>
+<tr>
+<td>0x11</td>
+<td>BANDREQ</td>
+<td>G to H</td>
+<td>band index list (what to send next, priority order)</td>
+</tr>
+<tr>
+<td>0x12</td>
+<td>HAVE</td>
+<td>G to H</td>
+<td>image and run hashes the guest holds (bloom or short list), cache state</td>
+</tr>
+<tr>
+<td>0x13</td>
+<td>ACK</td>
+<td>G to H</td>
+<td>highest contiguous seq received, window bytes free</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td>STATS</td>
+<td>both</td>
+<td>frame counters, bytes, ms, for the benchmark</td>
+</tr>
+<tr>
+<td>0x7F</td>
+<td>NAK</td>
+<td>G to H</td>
+<td>expected seq</td>
+</tr>
+<tr>
+<td>0x7E</td>
+<td>PING</td>
+<td>both</td>
+<td>nonce</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="b3-flow-control">b3. Flow control<a class="headerlink" href="#b3-flow-control" title="Link to this section">#</a></h3>
+<p>Two modes, chosen at HELLO by the channel's <code>caps</code> flags:</p>
+<ul>
+<li><strong>Lockstep chunks (serial, v1).</strong> The sender transmits at most <code>c</code> bytes, waits for one acknowledgement byte (0x06, as in v0), then transmits the next chunk. The guest reads its FIFO fully on every acknowledgement. M1 measures <code>c</code> in {32, 128, 512} on the emulated link as v0 did; the default follows the best result that passes a 20 KB checksum test.</li>
+<li><strong>Sliding window (socket, Aiwnios; and serial if the M1 test shows the FIFO holds).</strong> Window of W bytes unacknowledged (initial 16 KB), the guest sends ACK with its free buffer, the sender stops at zero window. NAK retransmits from the expected seq.</li>
+</ul>
+<p>Caution (memory, to confirm in M1): QEMU's emulated 16550 holds a small FIFO, and the guest must drain it on each poll or bytes are lost. This is why the serial mode stays lockstep until M1 shows otherwise. The sliding window is not enabled on serial by default.</p>
+<h3 id="b4-throughput-budget">b4. Throughput budget<a class="headerlink" href="#b4-throughput-budget" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Serial figure.</strong> The v0 note reports about 47 KB/s over the QEMU serial socket <strong>[reported]</strong>. The native-apps plan records the older lockstep loader at 1.4 to 2.7 KB/s <strong>[reported]</strong> and sets a channel gate of 50 KB/s sustained <strong>[reported]</strong>. The 47 KB/s number is not in the repo's measured results that this pass read; M1 must reproduce it with the <code>bench:N</code> URL (<code>browser-plan.md</code> M1 gate) before any budget depends on it.</li>
+<li><strong>Real hardware.</strong> A physical UART at 115200 baud carries about 11.5 KB/s (10 bits per byte) <strong>[estimate]</strong>. We target QEMU and Aiwnios, not a real PC serial port, so this only matters if the guest is ever run on hardware.</li>
+<li><strong>Consequence for pages [estimate at 47 KB/s].</strong></li>
+</ul>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Payload</th>
+<th>Time over serial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20 KB display list (a small article's first band set)</td>
+<td>0.4 s</td>
+</tr>
+<tr>
+<td>120 KB first-paint budget (bands 0 to 2 plus a few images)</td>
+<td>2.6 s</td>
+</tr>
+<tr>
+<td>400 KB (Wikipedia article with a long display list)</td>
+<td>8.5 s</td>
+</tr>
+<tr>
+<td>one 400 x 300 photo, RGB565 uncompressed (240 KB)</td>
+<td>5.1 s</td>
+</tr>
+<tr>
+<td>one 120 x 80 thumbnail, RGB565 (19 KB)</td>
+<td>0.4 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rules that follow: first paint is capped at 120 KB of data; images are sent only when visible and downscaled (section d); the rest of the page streams in the background at low priority, cancelled by any new request.</p>
+<h3 id="b5-delta-updates-and-caching">b5. Delta updates and caching<a class="headerlink" href="#b5-delta-updates-and-caching" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Bands.</strong> The page is split into horizontal bands of 256 CSS px. A band's ops are positioned relative to the page origin in its own range. The host keeps a hash of each band's op bytes and a version number (band version increments only when the hash changes).</li>
+<li><strong>Delta.</strong> When the page changes (SPA update, input, timer), the host re-snapshots, rebuilds bands, and sends only bands whose hash changed. A band the guest does not hold is sent in full. There is no op-level diff in v1; band granularity is simple and the cost is at most one band (256 px) extra per change.</li>
+<li><strong>Images.</strong> Keyed by a 64-bit hash of the downscaled bytes (FNV-1a 64 in HolyC; SHA-256 truncated on the host is also fine; the hash is over what is sent, so the key matches the bytes). The guest keeps an LRU of images within a memory budget (section d). <code>HAVE</code> lets the host skip resends after a reconnect.</li>
+<li><strong>Fonts.</strong> Built-in bitmap faces are referenced by id and never sent (section h). Non-built-in text is sent as RUNIMG with a hash of (font, size, string, colour).</li>
+<li><strong>Strings.</strong> Each DLIST has a string table; ops refer to strings by index. Repeated link URLs and class labels cost one entry each.</li>
+</ul>
+<h3 id="b6-input-coalescing-guest-side-host-side">b6. Input coalescing (guest side, host side)<a class="headerlink" href="#b6-input-coalescing-guest-side-host-side" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mouse-move</td>
+<td>keep the latest position; send at most one per 16 ms; send immediately when a button is down (drag selection)</td>
+</tr>
+<tr>
+<td>wheel</td>
+<td>sum deltas for one frame; one SCROLL per frame</td>
+</tr>
+<tr>
+<td>mouse-down, mouse-up</td>
+<td>never coalesced; each sent with urgent flag</td>
+</tr>
+<tr>
+<td>key-down, key-up, char</td>
+<td>never coalesced, in order; a burst of char events may be packed into one frame of up to 64 bytes</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>last value wins, 100 ms debounce</td>
+</tr>
+<tr>
+<td>zoom keys</td>
+<td>sent as NAV op, not as key events, so the host handles them once</td>
+</tr>
+</tbody>
+</table></div>
+<p>The host coalesces <code>Page.scrollBy</code> (or <code>Input.dispatchMouseEvent</code> wheel) the same way: summed per 16 ms.</p>
+<h2 id="c-display-list-format">c. Display list format<a class="headerlink" href="#c-display-list-format" title="Link to this section">#</a></h2>
+<h3 id="c1-what-the-host-produces">c1. What the host produces<a class="headerlink" href="#c1-what-the-host-produces" title="Link to this section">#</a></h3>
+<p>The host takes a DOMSnapshot per navigation or dirty tick and emits, in paint order, a sequence of ops. Coordinates are CSS px in units of 1/16 px (i32), so 800 px is 12800. The guest multiplies by the scale (1 or 2) when it paints.</p>
+<p>Opcodes (proposed; the M1 spike may reorder them):</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Name</th>
+<th>Fields</th>
+<th>Bytes [estimate]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>BOX</td>
+<td>x, y, w, h (i32 each), fill (colour token, u8), border (token u8), border width (u8), radius (u8 in px), flags (u8)</td>
+<td>21</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>TEXT</td>
+<td>x, y (i32), string index (u16), face (u8: built-in face id, see h), colour token (u8), decoration (u8: underline, strike, selected), flags (u8)</td>
+<td>14</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>IMAGE</td>
+<td>x, y, w, h (i32), image id (u64), fit (u8: fill, contain, cover, none), flags</td>
+<td>26</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>CLIP</td>
+<td>push: x, y, w, h (i32)</td>
+<td>17 (push), 1 (pop, op 0x05)</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>CLIP-POP</td>
+<td>none</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>LINK</td>
+<td>hit x, y, w, h, link string index (u16)</td>
+<td>18</td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>CONTROL</td>
+<td>kind (u8: text, password (drawn as dots, no value sent), checkbox, radio, button, select, textarea, file, range), id (u16), x, y, w, h, value string index (u16), label string index (u16), state (u8: disabled, checked, focused)</td>
+<td>26</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>SCROLL-BEGIN</td>
+<td>container id (u16), clip x, y, w, h, content h (i32), offset y (i32), overflow (u8)</td>
+<td>23</td>
+</tr>
+<tr>
+<td>0x09</td>
+<td>SCROLL-END</td>
+<td>none</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0x0A</td>
+<td>RUN-IMG</td>
+<td>run hash (u64), x, y, w, h</td>
+<td>26</td>
+</tr>
+<tr>
+<td>0x0B</td>
+<td>TILE</td>
+<td>tile id (u32), x, y, w, h</td>
+<td>21</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>FIXED</td>
+<td>marks the next op as viewport-fixed (drawn at a fixed offset from the viewport)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0x0D</td>
+<td>STICKY</td>
+<td>the next op's y is clamped to [min, max] as scroll changes, with <code>top</code> inset; fields min, max, top (i32)</td>
+<td>13</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td>XFORM</td>
+<td>2 x 3 matrix, i16 fixed 1/1000 (guest honours translate and uniform scale only)</td>
+<td>13</td>
+</tr>
+<tr>
+<td>0x0F</td>
+<td>DECOR</td>
+<td>x, y, w, h, kind (u8: hr, underline, strike, focus-ring, selection-rect)</td>
+<td>18</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>STR</td>
+<td>string index (u16), length (u16), UTF-8 bytes (ASCII in v1; non-ASCII as RUNIMG)</td>
+<td>5 + n</td>
+</tr>
+</tbody>
+</table></div>
+<p>Token values (colour and face) are indices into the guest's palette, not RGB: <code>C_INK</code>, <code>C_PAGE</code> and so on from <code>desk3/01-core.HC</code>. Page colours that are not in the palette map to the nearest token in the host (or go to a RUN-IMG if the difference is large, decided at M2 by eye and by the golden tests). This keeps the wire small and the guest palette consistent with the desktop; page colours that matter for legibility (text on a background) are preserved by the nearest-token mapping in the M2 gate.</p>
+<h3 id="c2-worked-example">c2. Worked example<a class="headerlink" href="#c2-worked-example" title="Link to this section">#</a></h3>
+<p>A small page, illustrative numbers (not captured from a live browser; the M1 spike replaces them with real values):</p>
+<figure class="code"><figcaption><span class="lang">html</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code><span class="tk-cp">&lt;!doctype html&gt;</span>
+<span class="tk-p">&lt;</span><span class="tk-nt">html</span><span class="tk-p">&gt;&lt;</span><span class="tk-nt">head</span><span class="tk-p">&gt;&lt;</span><span class="tk-nt">title</span><span class="tk-p">&gt;</span>Example<span class="tk-p">&lt;/</span><span class="tk-nt">title</span><span class="tk-p">&gt;&lt;/</span><span class="tk-nt">head</span><span class="tk-p">&gt;</span>
+<span class="tk-p">&lt;</span><span class="tk-nt">body</span> <span class="tk-na">style</span><span class="tk-o">=</span><span class="tk-s">&quot;margin:8px;font-family:Inter,sans-serif&quot;</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">&lt;</span><span class="tk-nt">h1</span> <span class="tk-na">style</span><span class="tk-o">=</span><span class="tk-s">&quot;font-size:32px;margin:21px 0 0&quot;</span><span class="tk-p">&gt;</span>Example Domain<span class="tk-p">&lt;/</span><span class="tk-nt">h1</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">&lt;</span><span class="tk-nt">p</span> <span class="tk-na">style</span><span class="tk-o">=</span><span class="tk-s">&quot;font-size:16px&quot;</span><span class="tk-p">&gt;</span>This domain is for illustrative examples.
+     <span class="tk-p">&lt;</span><span class="tk-nt">a</span> <span class="tk-na">href</span><span class="tk-o">=</span><span class="tk-s">&quot;https://www.iana.org/domains/example&quot;</span><span class="tk-p">&gt;</span>More information<span class="tk-p">&lt;/</span><span class="tk-nt">a</span><span class="tk-p">&gt;&lt;/</span><span class="tk-nt">p</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">&lt;</span><span class="tk-nt">img</span> <span class="tk-na">src</span><span class="tk-o">=</span><span class="tk-s">&quot;logo.png&quot;</span> <span class="tk-na">width</span><span class="tk-o">=</span><span class="tk-s">&quot;32&quot;</span> <span class="tk-na">height</span><span class="tk-o">=</span><span class="tk-s">&quot;32&quot;</span> <span class="tk-na">alt</span><span class="tk-o">=</span><span class="tk-s">&quot;&quot;</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">&lt;</span><span class="tk-nt">button</span><span class="tk-p">&gt;</span>Go<span class="tk-p">&lt;/</span><span class="tk-nt">button</span><span class="tk-p">&gt;</span>
+<span class="tk-p">&lt;/</span><span class="tk-nt">body</span><span class="tk-p">&gt;&lt;/</span><span class="tk-nt">html</span><span class="tk-p">&gt;</span>
+</code></pre></figure>
+<p>Readable dump (<code>--dump</code> output; the wire carries the binary form of the same ops). Viewport 800 x 600 CSS px, scale 2:</p>
+<figure class="code"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>DLIST band=0 version=1 viewport=800x600 scale=2 page_h=600
+STR 0 &quot;Example Domain&quot;
+STR 1 &quot;This domain is for illustrative examples.&quot;
+STR 2 &quot;More information&quot;
+STR 3 &quot;https://www.iana.org/domains/example&quot;
+STR 4 &quot;Go&quot;
+BOX    x=0   y=0   w=800 h=600 fill=C_PAGE border=-     flags=root
+TEXT   x=8   y=21  str=0 face=H1 col=C_INK
+TEXT   x=8   y=72  str=1 face=REG16 col=C_INK
+TEXT   x=326 y=72  str=2 face=REG16 col=C_ACC decor=underline
+LINK   x=326 y=72  w=131 h=20 str=3
+IMAGE  x=8   y=108 w=32 h=32 id=0x7c1f0e3a5d2b9a10 fit=none
+CONTROL kind=button x=48 y=108 w=44 h=28 str=4 state=-</code></pre></figure>
+<p>Binary size of this band: 5 strings (about 90 bytes including headers) plus 8 ops (about 130 bytes) plus a 32-byte band header, about 250 bytes [estimate]. Compare: the v0 KDoc for the same page would be about 200 bytes of text but has no positions, colours or images, so the cost is roughly 1.3 times for a much better result.</p>
+<h3 id="c3-how-the-hard-cases-are-handled">c3. How the hard cases are handled<a class="headerlink" href="#c3-how-the-hard-cases-are-handled" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Handling</th>
+<th>Fidelity limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scroll (root)</td>
+<td>the guest scrolls its own band cache; the host is told only the new offset (SCROLL) so it can prefetch bands; the list is in page coordinates</td>
+<td>none for static content</td>
+</tr>
+<tr>
+<td>Scroll containers (overflow: auto/scroll)</td>
+<td>SCROLL-BEGIN with clip and content height; the host owns the container's offset and reports it in META; the guest sends SCROLL with the container id; the host re-sends the band that holds the container's content</td>
+<td>a little latency (one round trip) when wheel-scrolling a nested container</td>
+</tr>
+<tr>
+<td>position: fixed</td>
+<td>FIXED flag; the guest draws the op at viewport coordinates and ignores the scroll</td>
+<td>fixed elements that depend on transforms are drawn as tiles</td>
+</tr>
+<tr>
+<td>position: sticky</td>
+<td>STICKY with min, max and top; the guest clamps y as the root scrolls, with no round trip</td>
+<td>the containing block must be a single band; very complex sticky chains fall back to a tile</td>
+</tr>
+<tr>
+<td>overflow: hidden</td>
+<td>CLIP push and pop around the children</td>
+<td>none</td>
+</tr>
+<tr>
+<td>z-index and stacking contexts</td>
+<td>DOMSnapshot paint order is used; the host emits in paint order, so the guest paints ops sequentially and no z-sort is needed</td>
+<td>the guest does not composite blend modes; mix-blend-mode is ignored (drawn normal)</td>
+</tr>
+<tr>
+<td>opacity</td>
+<td>drawn as a tile when the opacity is not 1 and the element has children; for leaf elements the host multiplies the colour token's nearest match</td>
+<td>approximate</td>
+</tr>
+<tr>
+<td>transforms</td>
+<td>translate and uniform scale use XFORM; rotate, skew and 3D go to TILE</td>
+<td>rotated text is a tile (not selectable)</td>
+</tr>
+<tr>
+<td>box-shadow, gradients</td>
+<td>not in the op set in v1; the host renders a TILE for the box area when the computed style has a shadow or gradient (the common ones: card shadow, header gradient)</td>
+<td>tile cost; this is the largest visual gap</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>BOX radius (up to 16 px)</td>
+<td>larger radii are drawn as tiles</td>
+</tr>
+<tr>
+<td>text selection</td>
+<td>the host runs selection through Input events (drag or double-click) and reports the selected ranges as DECOR selection-rect ops; the guest never computes selection geometry</td>
+<td>selection on text in tiles is not possible</td>
+</tr>
+<tr>
+<td>form controls</td>
+<td>CONTROL ops; the guest draws a native-looking widget; the value comes from the host; typing goes to the host as key events, which edit the real input; the caret position is sent in META</td>
+<td>the guest's widget look is not the page's own look (fine); password values never leave the host (drawn as dots)</td>
+</tr>
+<tr>
+<td>iframes</td>
+<td>the host flattens same-origin iframes into the page's band (clip to the iframe rectangle); cross-origin iframes are attached as separate targets and flattened with the same mechanism (out-of-process frames need Target auto-attach and per-frame snapshots, M4)</td>
+<td>a cross-origin iframe with its own scroll or its own fixed elements is drawn approximately</td>
+</tr>
+<tr>
+<td>canvas, video, WebGL, <code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code></td>
+<td>TILE: the host screenshots the element's rectangle at device scale (Page.captureScreenshot with clip) at 2 to 5 frames a second for video, on change for canvas and WebGL</td>
+<td>no sound, no selection, latency of a tile round trip (about 100 to 200 ms [estimate])</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>inline SVG drawn as a TILE in v1; SVG images are rasterised by Chrome as IMAGE</td>
+<td>vector quality lost at zoom; tile re-render on zoom change</td>
+</tr>
+<tr>
+<td><code>&lt;select&gt;</code> dropdowns</td>
+<td>the host reports the option list in CONTROL; the guest draws the menu</td>
+<td>native OS popups are not used</td>
+</tr>
+<tr>
+<td>Print styles, <code>@media print</code></td>
+<td>not used (we render the screen media)</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Dark mode (<code>prefers-color-scheme</code>)</td>
+<td>the host sets the emulated media to light (default)</td>
+<td>pages that follow the OS setting are light</td>
+</tr>
+<tr>
+<td>Hover</td>
+<td>the host reports the hover target in META after each mouse move; hover-only styles are applied by Chrome, so the next band reflects them</td>
+<td>one band round trip of lag on hover</td>
+</tr>
+<tr>
+<td>Animations and transitions</td>
+<td>the host snapshots at settle time; animations are sampled at 4 Hz on change for visible bands (flag, off by default)</td>
+<td>not smooth</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="c4-honest-fidelity-limits-for-the-user">c4. Honest fidelity limits (for the user)<a class="headerlink" href="#c4-honest-fidelity-limits-for-the-user" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Layout is Chrome's</strong>, so line breaks, wrapping, tables and flex and grid are exact. This is the main gain over any custom engine.</li>
+<li><strong>Glyphs are not Chrome's.</strong> Latin text is drawn with our bitmap faces (section h), so letter shapes differ from the page's own font, and widths can differ by a pixel or two per run. The positions come from Chrome, so lines do not drift. For non-Latin text, RUN-IMG uses Chrome's own rasteriser and the shapes are exact.</li>
+<li><strong>Gradients, shadows and blend modes</strong> are approximate or drawn as tiles.</li>
+<li><strong>Anything in a tile</strong> is not text: no selection, no find match, no accessible text.</li>
+<li><strong>Latency</strong> of interactions is one channel round trip plus one Chrome frame. Scroll of the root is local and instant; clicks and typing are not.</li>
+<li><strong>Video and audio</strong> are not played in the guest (section 15 of the features doc).</li>
+</ul>
+<h2 id="d-rendering-budget">d. Rendering budget<a class="headerlink" href="#d-rendering-budget" title="Link to this section">#</a></h2>
+<h3 id="d1-what-the-guest-draws-per-frame">d1. What the guest draws per frame<a class="headerlink" href="#d1-what-the-guest-draws-per-frame" title="Link to this section">#</a></h3>
+<ul>
+<li>Only ops in the visible bands and only inside the dirty rectangle. Visible bands are found by a binary search on the band index (bands are sorted by y).</li>
+<li>Text: one blit per glyph from a bitmap atlas. A glyph at scale 2 is about 18 x 30 device px [estimate]; a run of 40 glyphs is about 22 000 px of copying.</li>
+<li>Boxes: fill rectangles, border as four rectangles, radius as a small corner table (the desk already has shadow and corner tiles, <code>NTK</code> cache, see <code>01-core.HC</code>).</li>
+<li>Images: blit of a cached bitmap, scaled only when the fit mode says so (scaling is done on the host, so the guest blits 1:1 wherever possible).</li>
+</ul>
+<h3 id="d2-budgets-targets-to-be-measured-at-m2">d2. Budgets (targets, to be measured at M2)<a class="headerlink" href="#d2-budgets-targets-to-be-measured-at-m2" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Target on Aiwnios (arm64)</th>
+<th>Target on QEMU x86 (TCG)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scroll by one wheel tick (dirty rectangle = the whole page area)</td>
+<td>under 16 ms</td>
+<td>under 150 ms (accept a visible step)</td>
+</tr>
+<tr>
+<td>Full redraw of the page area, 2880 x 1800 device px</td>
+<td>under 8 ms</td>
+<td>under 300 ms</td>
+</tr>
+<tr>
+<td>New band arrives and is painted</td>
+<td>under 20 ms of guest CPU</td>
+<td>under 200 ms</td>
+</tr>
+<tr>
+<td>Idle</td>
+<td>zero (no redraw without a change)</td>
+<td>zero</td>
+</tr>
+</tbody>
+</table></div>
+<p>Reference points, from <code>aiwnios/README.md</code> <strong>[measured]</strong>: the desk's full redraw is 3.9 ms (4.2 worst) on Aiwnios at 2880 x 1800, and the desktop with ten windows runs at 35 frames a second under the scripted drive. No measurement of the browser exists yet; these are targets, not facts.</p>
+<h3 id="d3-tile-cache-and-band-cache">d3. Tile cache and band cache<a class="headerlink" href="#d3-tile-cache-and-band-cache" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Band cache.</strong> The guest keeps parsed ops per band (array of op records). Budget 4 MB of ops per tab, LRU by band. A 1 MB op budget is about 4000 BOX and TEXT ops [estimate] which is a long article's first screen-fulls.</li>
+<li><strong>Page bitmap cache (optional, M4).</strong> Rendered 256-px bands at device scale kept as bitmaps (2880 x 512 px at 4 bytes per px is about 5.9 MB per band, too large to keep many); so the default is no bitmap cache, and the optional one is only for the 3 bands around the viewport. Measure first; the desk's own shadow tiles (<code>NTK</code>) are the reference for what TempleOS can hold.</li>
+<li><strong>Image cache.</strong> LRU, 8 MB budget in the guest (RGB565 bitmaps: about 1 MB per 1000 x 500 px image [estimate]).</li>
+</ul>
+<h3 id="d4-image-downscaling-on-the-host-to-exact-paint-size">d4. Image downscaling on the host to exact paint size<a class="headerlink" href="#d4-image-downscaling-on-the-host-to-exact-paint-size" title="Link to this section">#</a></h3>
+<ol>
+<li>The host knows each IMAGE's paint rectangle in device px (box size times scale, from the layout snapshot).</li>
+<li>A helper page (<code>about:blank</code> in a hidden target, a canvas) draws the decoded image at exactly that size with <code>imageSmoothingQuality = "high"</code>, then reads the pixels back with <code>getImageData</code> <strong>(memory: canvas API; verify the read-back size limit at M2)</strong>. Chrome does the decode, so AVIF, WebP and SVG work with no code of ours.</li>
+<li>The result is quantised to RGB565, run-length encoded per row, and hashed. Transparent images use an alpha plane (RLE) with the colour.</li>
+<li>Images are sent when their band is requested, not with the page. Images above a 300 KB per-page budget are sent in priority order (visible first) and the rest are placeholders with the alt text until requested.</li>
+<li>Paint size changes (zoom, resize) re-request the image at the new size; the old hash stays in the cache.</li>
+</ol>
+<p>Cost check <strong>[estimate]</strong>: a 400 x 300 px photo is 120 000 px, 240 KB as RGB565 raw; RLE does not help photos, so photos are the expensive case. Mitigations: the 300 KB budget, the size cap, and a later option of an 8-bit palette for flat graphics (M6).</p>
+<h2 id="e-security-model">e. Security model<a class="headerlink" href="#e-security-model" title="Link to this section">#</a></h2>
+<h3 id="e1-isolation-on-the-host">e1. Isolation on the host<a class="headerlink" href="#e1-isolation-on-the-host" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Per-tab browser context.</strong> Each tab is a <code>Target.createBrowserContext</code> (<strong>memory</strong>; the method exists in the Target domain) with <code>disposeOnDetach</code>. Tabs do not share cookies, storage or cache unless the user opens a link in the same context (the default for ordinary tabs is a context per window, so tabs in one window share cookies as in Chrome).</li>
+<li><strong>Incognito.</strong> A separate context with no store writes, cookies discarded when the window closes.</li>
+<li><strong>Throwaway profile.</strong> <code>--user-data-dir</code> points at <code>~/Library/Caches/KosmosBrowser/run-&lt;pid&gt;</code> (created at start, removed at exit). It is never <code>~/Library/Application Support/Google/Chrome</code>. Verified fact 2 explains why the non-default directory is also required by Chrome for the debugging pipe.</li>
+<li><strong>No port.</strong> <code>--remote-debugging-pipe</code> only. The bridge must refuse to start if a <code>--remote-debugging-port</code> argument is ever added (a test in stream 9).</li>
+<li><strong>Launch flags (to verify on 156).</strong> <code>--no-first-run</code>, <code>--no-default-browser-check</code>, <code>--disable-sync</code>, <code>--disable-background-networking</code>, <code>--disable-component-update</code>, <code>--password-store=basic</code>, <code>--use-mock-keychain</code> (<strong>memory</strong>: the mock keychain flag exists in Chromium builds; check it still applies to Google Chrome 156), <code>--disable-extensions</code> (we run our own host), <code>--disable-features=...</code> only for a named, tested need.</li>
+<li><strong>Preferences</strong> written into the throwaway profile before start: password manager and autofill off, default search as configured, third-party cookie setting, download directory set to the staging folder (section e4).</li>
+</ul>
+<h3 id="e2-the-guest-never-receives-secrets">e2. The guest never receives secrets<a class="headerlink" href="#e2-the-guest-never-receives-secrets" title="Link to this section">#</a></h3>
+<ul>
+<li>No cookies, no <code>Set-Cookie</code>, no <code>Authorization</code> headers, no tokens, no password values, no form autofill, no certificate private data. The host sends the page's own DOM values for visible controls (what the user sees), except password fields, which are drawn as dots with no value.</li>
+<li>The Network DevTools panel shows headers, with Cookie, Set-Cookie and Authorization redacted by default. Revealing one needs a per-request prompt (P2).</li>
+<li>Passwords and payment data are out of scope (features doc, section 8); the host does no keychain access unless the user approves each use.</li>
+</ul>
+<h3 id="e3-outward-actions-and-prompts">e3. Outward actions and prompts<a class="headerlink" href="#e3-outward-actions-and-prompts" title="Link to this section">#</a></h3>
+<p>Every action that sends data out or changes state outside the page needs an explicit prompt in the guest. The guest is the only UI; the page cannot answer a prompt, and a prompt has no default-yes.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Prompt</th>
+<th>Default if the timer runs out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Form submission by POST (the destination host is shown)</td>
+<td>"Send form data to host X?"</td>
+<td>No (the form is not sent)</td>
+</tr>
+<tr>
+<td>Downloads (name, size, source host)</td>
+<td>"Download name (size) from host?"</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Dangerous file types (executables, disk images, scripts, archives with executables)</td>
+<td>second prompt, plus a warning</td>
+<td>No; nothing is run anywhere</td>
+</tr>
+<tr>
+<td>Permission requests (camera, microphone, location, notifications, clipboard read, MIDI, USB, Bluetooth)</td>
+<td>"Site X asks for Y?"</td>
+<td>Deny</td>
+</tr>
+<tr>
+<td>Extension install and each added permission</td>
+<td>the manifest's permissions list</td>
+<td>No; an installed extension is disabled until a new permission is accepted (the Chrome rule, verified fact 7)</td>
+</tr>
+<tr>
+<td>Print to PDF, save page, save to the host Downloads folder</td>
+<td>file name and folder</td>
+<td>No</td>
+</tr>
+<tr>
+<td>External protocols (mailto:, tel:, custom app schemes)</td>
+<td>"Open in another app?" (on the host, only after yes)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Certificate error interstitial</td>
+<td>the host's own page, "Continue anyway" needs a prompt</td>
+<td>No; the page does not load</td>
+</tr>
+<tr>
+<td>Page-initiated purchases and sign-ins</td>
+<td>none by us (a click on a page button is the user's own click)</td>
+<td>the status line shows the destination host so the user can see it</td>
+</tr>
+<tr>
+<td>Popups</td>
+<td>blocked, with an indicator to open once</td>
+<td>Blocked</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note the last row. We cannot tell a purchase from a click on a page button; the browser does not classify page actions, and the user is the one clicking. We mitigate with no autofill, no stored card data, and a visible destination host. The user may want a stricter rule (for example, a prompt on any navigation to a new host after a form has been filled); that is an open question in the features doc.</p>
+<h3 id="e4-storage-and-file-locations">e4. Storage and file locations<a class="headerlink" href="#e4-storage-and-file-locations" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Where</th>
+<th>Who can read it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Throwaway Chrome profile (cookies, cache, service workers)</td>
+<td><code>~/Library/Caches/KosmosBrowser/run-&lt;pid&gt;</code></td>
+<td>Chrome, and deleted at exit</td>
+</tr>
+<tr>
+<td>Profile store (history, bookmarks, settings, downloads list, site settings)</td>
+<td><code>~/Library/Application Support/KosmosBrowser/store.sqlite3</code></td>
+<td>the bridge</td>
+</tr>
+<tr>
+<td>Downloads staging</td>
+<td><code>~/Library/Caches/KosmosBrowser/downloads/</code></td>
+<td>the bridge; the guest gets a copy only after a prompt</td>
+</tr>
+<tr>
+<td>Extensions (unpacked folders)</td>
+<td><code>~/Library/Application Support/KosmosBrowser/extensions/&lt;id&gt;/</code></td>
+<td>the bridge and the extension host</td>
+</tr>
+<tr>
+<td>Guest copies (saved files)</td>
+<td>the TempleOS disk (<code>B:/</code>)</td>
+<td>the guest</td>
+</tr>
+</tbody>
+</table></div>
+<p>The store is outside the throwaway directory so it survives. Clear-data commands delete rows and call <code>Storage.clearDataForOrigin</code> (engine), never delete the real Chrome profile (there is none to delete).</p>
+<h3 id="e5-extension-permission-model">e5. Extension permission model<a class="headerlink" href="#e5-extension-permission-model" title="Link to this section">#</a></h3>
+<ul>
+<li>An extension has declared permissions and host permissions in its manifest. Each is shown at install (the warning list), and a new one disables the extension until accepted.</li>
+<li>Content scripts run only on URLs matched by their <code>matches</code>, in an isolated world. The extension's background cannot read a page's JavaScript objects except through its own content scripts.</li>
+<li>An extension cannot read another extension's storage. Storage is per-extension in the store (stream 8).</li>
+<li>The host never gives an extension cookies unless the <code>cookies</code> permission was accepted, and then only for the matched hosts.</li>
+</ul>
+<h2 id="f-how-devtools-maps-onto-cdp">f. How DevTools maps onto CDP<a class="headerlink" href="#f-how-devtools-maps-onto-cdp" title="Link to this section">#</a></h2>
+<p>The DevTools UI is a guest app. It talks to the host over DEVT messages (type 0x0F). The host adapts each panel to CDP domains:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>CDP domains used</th>
+<th>Adapter behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elements</td>
+<td>DOM (getDocument, requestChildNodes, setAttributeValue, highlightNode), DOMSnapshot, Overlay (highlightNode, hideHighlight)</td>
+<td>tree is fetched lazily by node; highlight on the page through Overlay and as a guest box; select-in-page uses DOM.getNodeForLocation on a click (inspect mode)</td>
+</tr>
+<tr>
+<td>Elements: Styles</td>
+<td>CSS (getMatchedStylesForNode, getComputedStyleForNode, setStyleTexts)</td>
+<td>P2; read-only first</td>
+</tr>
+<tr>
+<td>Console</td>
+<td>Runtime (enable, consoleAPICalled, exceptionThrown, evaluate), Log (entryAdded)</td>
+<td>the input line calls Runtime.evaluate in the page's main world; results are serialised with returnByValue for primitives and previews for objects</td>
+</tr>
+<tr>
+<td>Sources</td>
+<td>Debugger (enable, setBreakpointByUrl, pause, stepOver), Runtime, Page.getResourceContent</td>
+<td>P2; large; the guest shows source text and line numbers</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Network (enable, requestWillBeSent, responseReceived, loadingFinished, loadingFailed, getResponseBody)</td>
+<td>events are summarised (method, URL, status, type, size, time); headers are redacted (section e2); bodies on request only</td>
+</tr>
+<tr>
+<td>Application</td>
+<td>Storage (getCookies, getUsageAndQuota, clearDataForOrigin), DOMStorage, IndexedDB, CacheStorage, ServiceWorker</td>
+<td>cookies, localStorage, sessionStorage, IndexedDB list, cache list, service worker list</td>
+</tr>
+<tr>
+<td>Performance (basic, P2)</td>
+<td>Tracing (start, end, dataCollected), Profiler (start, stop)</td>
+<td>start, stop, a summary of top functions and the main-thread busy time; the Chrome Performance panel is much larger than this (official page)</td>
+</tr>
+<tr>
+<td>Memory (P2)</td>
+<td>HeapProfiler (takeHeapSnapshot, samplingHeapProfiler)</td>
+<td>size-capped summary, no full heap viewer</td>
+</tr>
+<tr>
+<td>Security (P2)</td>
+<td>Security (enable, securityStateChanged)</td>
+<td>padlock state and mixed content</td>
+</tr>
+<tr>
+<td>Accessibility tree (P2)</td>
+<td>Accessibility (getFullAXTree)</td>
+<td>dump to Console</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two adapter rules:
+1. The host never sends a DEVT event the guest did not ask for (subscriptions per panel). A panel that is closed unsubscribes and its domain is disabled, which keeps the host fast when DevTools is shut.
+2. DevTools runs against the page's own target. It never attaches to the user's real Chrome (which is not used) and never to another tab's context.</p>
+<h2 id="g-extension-system-design">g. Extension system design<a class="headerlink" href="#g-extension-system-design" title="Link to this section">#</a></h2>
+<h3 id="g1-manifest-subset">g1. Manifest subset<a class="headerlink" href="#g1-manifest-subset" title="Link to this section">#</a></h3>
+<p>Supported keys (MV3): <code>manifest_version</code> (must be 3), <code>name</code>, <code>version</code>, <code>description</code>, <code>icons</code>, <code>permissions</code>, <code>host_permissions</code>, <code>optional_permissions</code> (requested at run time through the permissions API), <code>content_scripts</code> (<code>matches</code>, <code>exclude_matches</code>, <code>js</code>, <code>css</code>, <code>run_at</code> document_start, document_end, document_idle, <code>all_frames</code>, <code>world</code> ISOLATED only), <code>action</code> (<code>default_title</code>, <code>default_popup</code>, <code>default_icon</code>), <code>background</code> (<code>service_worker</code> as a file name; <code>type</code> module is accepted), <code>web_accessible_resources</code> (matches only), <code>options_page</code> (P2), <code>commands</code> (P2), <code>minimum_chrome_version</code> (ignored, reported).</p>
+<p>Not supported: <code>externally_connectable</code>, <code>content_security_policy</code> overrides (we apply our own strict CSP to extension pages), <code>oauth2</code>, <code>key</code>, <code>update_url</code> (no auto-update in v1), <code>incognito</code> split (incognito mode off for extensions in v1), <code>sandbox</code>, MV2 keys.</p>
+<h3 id="g2-where-extensions-live-and-how-they-run">g2. Where extensions live and how they run<a class="headerlink" href="#g2-where-extensions-live-and-how-they-run" title="Link to this section">#</a></h3>
+<ul>
+<li>Folders: <code>~/Library/Application Support/KosmosBrowser/extensions/&lt;id&gt;/</code>, with <code>&lt;id&gt;</code> the SHA-256-based ID (32 characters, a–p alphabet, as Chrome does <strong>(memory)</strong>). Each folder is a copy of the unpacked source; the originals are never modified.</li>
+<li>Pages: extension pages are served by the bridge's local HTTP server on 127.0.0.1 at <code>http://127.0.0.1:&lt;port&gt;/ext/&lt;id&gt;/...</code> with a strict CSP. (A single port and a path prefix avoids a fake <code>chrome-extension://</code> scheme. The origin is different from any web origin.)</li>
+<li>Background: a <strong>page target</strong> (not a Chrome service worker) loads <code>background.html</code> (generated by us from the <code>service_worker</code> file if it is not already a page) in its own browser context. This is not MV3 service-worker semantics: no DOM is a difference we accept (the background can use DOM APIs that an MV3 worker could not), and the background does not stop when idle (memory cost; a P2 timer can unload it). Alarms keep it alive when needed.</li>
+<li>Shim: before any extension script runs, <code>Page.addScriptToEvaluateOnNewDocument</code> installs <code>chrome.*</code> (the shim, <code>host/ext_shim.js</code>). The shim calls the host through <code>Runtime.addBinding</code> (a binding named <code>__kosmosExt</code>) with JSON messages; the host answers through <code>Runtime.evaluate</code> on the target (<strong>memory</strong>: the binding API exists in the Runtime domain).</li>
+<li>Content scripts: <code>Page.createIsolatedWorld</code> gives each extension its own world on each frame; the content script is evaluated there (<code>Runtime.evaluate</code> with the world's context id). The page's own JavaScript cannot see the isolated world's objects.</li>
+<li>Popup: <code>default_popup</code> is a page target at <code>http://127.0.0.1:&lt;port&gt;/ext/&lt;id&gt;/popup.html</code>, painted by the guest in a popup area (the same painter as pages, section c). Its size comes from the popup's content size, capped at 800 x 600 CSS px.</li>
+</ul>
+<h3 id="g3-chrome-subset-implemented-by-the-bridge">g3. chrome.* subset implemented by the bridge<a class="headerlink" href="#g3-chrome-subset-implemented-by-the-bridge" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Subset</th>
+<th>Where it runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chrome.runtime</td>
+<td>id, getURL, getManifest, sendMessage, onMessage, connect (port, P2), lastError</td>
+<td>shim plus host router</td>
+</tr>
+<tr>
+<td>chrome.storage</td>
+<td>local (get, set, remove, clear, onChanged); sync is an alias of local (documented)</td>
+<td>host-store, per extension</td>
+</tr>
+<tr>
+<td>chrome.tabs</td>
+<td>query, get, create, update, remove, sendMessage, onUpdated (basic)</td>
+<td>host tab manager; the <code>tabs</code> permission</td>
+</tr>
+<tr>
+<td>chrome.scripting</td>
+<td>executeScript (func or files), insertCSS, removeCSS, registerContentScripts (P2)</td>
+<td>host, into isolated worlds</td>
+</tr>
+<tr>
+<td>chrome.action</td>
+<td>setBadgeText, setBadgeBackgroundColor, setTitle, setIcon, setPopup, onClicked</td>
+<td>guest toolbar button</td>
+</tr>
+<tr>
+<td>chrome.alarms</td>
+<td>create, get, clear, onAlarm</td>
+<td>host scheduler</td>
+</tr>
+<tr>
+<td>chrome.i18n</td>
+<td>getMessage, getUILanguage</td>
+<td>from <code>_locales</code> in the extension</td>
+</tr>
+<tr>
+<td>chrome.permissions</td>
+<td>contains, request (prompt), remove</td>
+<td>guest prompt</td>
+</tr>
+<tr>
+<td>chrome.bookmarks, chrome.history, chrome.downloads, chrome.cookies</td>
+<td>P2, behind permission prompts</td>
+<td>host-store and engine</td>
+</tr>
+<tr>
+<td>chrome.contextMenus, chrome.commands</td>
+<td>P2</td>
+<td>guest menus</td>
+</tr>
+</tbody>
+</table></div>
+<p>Everything else in <code>browser-features.md</code> section 11 is out of scope or P2. The namespaces the MV3 reference lists that are not in this table (for example identity, management, enterprise, debugger, nativeMessaging) are not present; calling them throws a clear error so extension authors see the gap.</p>
+<h3 id="g4-install-flow">g4. Install flow<a class="headerlink" href="#g4-install-flow" title="Link to this section">#</a></h3>
+<ol>
+<li>The user chooses "Load unpacked" in the Extensions page (guest) and picks a folder. The guest sends EXT "install-request" with the folder name, and the host opens a host-side folder chooser (Finder, through <code>osascript</code>; <strong>memory</strong>: a standard approach, verify in the stream) so the user picks the folder on the Mac.</li>
+<li>The host reads <code>manifest.json</code>, validates it (the subset above), computes the ID and the permission list, and sends a PROMPT with the warnings from <code>browser-features.md</code> section 11.</li>
+<li>The user answers Yes or No in the guest. On Yes the host copies the folder into the extensions directory and registers it. On No nothing is copied.</li>
+<li>Updating an extension shows a diff of new permissions and disables the extension until the user accepts them.</li>
+<li>Chrome Web Store installs and <code>.crx</code> files are <strong>not</strong> supported in v1 (features doc, section 11; untrusted download path). A <code>.crx</code> is not unpacked or run without the user's explicit folder choice.</li>
+</ol>
+<h3 id="g5-testing-extensions">g5. Testing extensions<a class="headerlink" href="#g5-testing-extensions" title="Link to this section">#</a></h3>
+<ul>
+<li>A sample extension lives in <code>tests/browser/extensions/sample-title/</code> (content script that changes <code>document.title</code> and a popup with a button). Gate in M5.</li>
+<li>Each extension's background console goes to the DevTools Console for that extension (a separate target id).</li>
+</ul>
+<h2 id="h-ui-specification">h. UI specification<a class="headerlink" href="#h-ui-specification" title="Link to this section">#</a></h2>
+<h3 id="h1-design-tokens">h1. Design tokens<a class="headerlink" href="#h1-design-tokens" title="Link to this section">#</a></h3>
+<p>From the desktop (<code>desk3/01-core.HC</code>, <code>desk3/02-ui.HC</code>):</p>
+<ul>
+<li>Colour tokens are palette indices: <code>C_INK</code>, <code>C_ACC</code>, <code>C_OK</code>, <code>C_TEAL</code>, <code>C_BAD</code>, <code>C_PUR</code>, <code>C_WARN</code>, <code>C_SUR</code>, <code>C_MUT</code>, <code>C_ACC2</code>, <code>C_CARD</code>, <code>C_BRD</code>, <code>C_SHD</code>, <code>C_DOCK</code>, <code>C_AMB</code>, <code>C_PAGE</code> (sixteen entries). The browser uses only these. Page colours are mapped to the nearest token (section c1).</li>
+<li>Heights in the desktop's units: menu bar <code>MBAR</code> 32, title bar <code>TBAR</code> 44, dock <code>DOCK_H</code> 76 (<code>02-ui.HC</code>).</li>
+<li>Icons: Lucide, 20 icons loaded in <code>01-core.HC</code> (the enum <code>L_*</code>). The browser needs more (back, forward, reload, stop, home, star, star-filled, more-vertical, shield, lock, download, zoom-in, zoom-out, code-xml for DevTools, puzzle for extensions, plus-circle for new tab, x for close, panel-right for DevTools dock). Add these to the icon set (stream 5); each is a Lucide icon at 16 or 20 px.</li>
+<li>Fonts: the desk's <code>B:/KSFONT.BIN</code> holds Inter bitmaps: four faces (<code>F_REG</code>, <code>F_BOLD</code>, <code>F_SMALL</code>, <code>F_BIG</code>) at two scales (1 and 2) [measured: <code>01-core.HC</code> lines 1007 to 1011; glyph range to be confirmed in <code>FontLoad</code>]. The browser uses the same bitmaps for its own chrome text.</li>
+<li>Scale: the device is drawn at 2x (2880 x 1800 physical for a 1440 x 900 logical desktop, <code>aiwnios/README.md</code>). In this section, <strong>logical px</strong> means the desk's logical unit, and the values below are logical; device px is twice that.</li>
+</ul>
+<h3 id="h2-layout">h2. Layout<a class="headerlink" href="#h2-layout" title="Link to this section">#</a></h3>
+<p>Logical px, window client area:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Height or width</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Window title bar (desk frame)</td>
+<td>44 (<code>TBAR</code>)</td>
+<td>from the desktop, not the browser</td>
+</tr>
+<tr>
+<td>Tab strip</td>
+<td>36</td>
+<td>tabs sit on the strip; the strip background is <code>C_DOCK</code></td>
+</tr>
+<tr>
+<td>Tab</td>
+<td>height 32 (top 4 under the strip), min width 120, max width 220, top corner radius 8</td>
+<td>active tab fill <code>C_CARD</code>, inactive tab fill <code>C_DOCK</code> with label <code>C_MUT</code>, hover fill mid-tone</td>
+</tr>
+<tr>
+<td>New-tab button</td>
+<td>28 x 28, radius 14</td>
+<td><code>plus</code> icon</td>
+</tr>
+<tr>
+<td>Toolbar</td>
+<td>44</td>
+<td>back, forward, reload or stop, home (optional), then the omnibox</td>
+</tr>
+<tr>
+<td>Toolbar icon buttons</td>
+<td>32 x 32, icons 16 px</td>
+<td>hover background <code>C_BRD</code></td>
+</tr>
+<tr>
+<td>Omnibox</td>
+<td>height 32, radius 16 (pill), fill <code>C_CARD</code>, border <code>C_BRD</code>, focus border <code>C_ACC</code></td>
+<td>the lock or info icon at the left; the host name in <code>C_INK</code>, the path and query in <code>C_MUT</code> when unfocused</td>
+</tr>
+<tr>
+<td>Overflow and menu button</td>
+<td>right of omnibox, 32 x 32</td>
+<td><code>more-vertical</code> icon</td>
+</tr>
+<tr>
+<td>Bookmarks bar (on)</td>
+<td>28</td>
+<td>bookmark chips, radius 6, fill <code>C_CARD</code></td>
+</tr>
+<tr>
+<td>Page area</td>
+<td>the rest, minus the status line</td>
+<td>page background from the page, or <code>C_PAGE</code> for the new-tab page</td>
+</tr>
+<tr>
+<td>Status line</td>
+<td>22</td>
+<td>the link URL on hover (bottom-left), load state and the download count (right)</td>
+</tr>
+<tr>
+<td>DevTools docked bottom</td>
+<td>default 40 percent of the window height, min 160, splitter 6</td>
+<td></td>
+</tr>
+<tr>
+<td>DevTools docked right</td>
+<td>default 40 percent of the width, min 280, splitter 6</td>
+<td></td>
+</tr>
+<tr>
+<td>DevTools detached</td>
+<td>a separate desk window</td>
+<td>uses the same window frame</td>
+</tr>
+<tr>
+<td>Find bar</td>
+<td>40, below the toolbar, right-aligned omnibox-like pill</td>
+<td>Escape closes it</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="h3-ascii-mockups">h3. ASCII mockups<a class="headerlink" href="#h3-ascii-mockups" title="Link to this section">#</a></h3>
+<p>Window with tabs, omnibox and bookmarks bar (logical, not to scale):</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+------------------------------------------------------------------------------+
+| [o] Kosmos Browser                                                  _  []  x |  &lt;- desk title bar (TBAR 44)
++------------------------------------------------------------------------------+
+| [Example Domain  x][Wikipedia - Oscilloscope  x][ + ]                       |  &lt;- tab strip (36)
++------------------------------------------------------------------------------+
+| (&lt;)  (&gt;)  (R)  | ( lock  https://en.wikipedia.org/wiki/Oscilloscope       ) [*] [:] |  &lt;- toolbar (44)
++------------------------------------------------------------------------------+
+| [Docs][Python][Wiki: Oscilloscope][+ Add]                                    |  &lt;- bookmarks bar (28)
++------------------------------------------------------------------------------+
+|                                                                              |
+|   Oscilloscope                                                               |  &lt;- page area
+|   An oscilloscope, previously called an oscillograph, is a type of           |
+|   electronic test instrument that allows observation of ...                  |
+|                                                                              |
++------------------------------------------------------------------------------+
+| https://en.wikipedia.org/wiki/Cathode-ray_tube             loaded in 1.8 s   |  &lt;- status line (22)
++------------------------------------------------------------------------------+</code></pre></figure>
+<p>New-tab page (logical):</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+------------------------------------------------------------------------------+
+| [ Tab: New tab  x ][ + ]                                                     |
++------------------------------------------------------------------------------+
+| (&lt;)  (&gt;)  (R)  | ( lock  Search or type an address                          ) [:] |
++------------------------------------------------------------------------------+
+|                                                                              |
+|                         Kosmos Browser                                        |
+|                 [  Search or type an address               ]                  |
+|                                                                              |
+|       +---------+   +---------+   +---------+   +---------+   +---------+     |
+|       | Python  |   | Wiki    |   | MDN     |   | HN      |   | Example |     |
+|       | docs    |   | Oscillo |   | Web     |   |         |   |         |     |
+|       +---------+   +---------+   +---------+   +---------+   +---------+     |
+|       (most visited tiles, 96 x 80 each, gap 16, centred)                    |
++------------------------------------------------------------------------------+</code></pre></figure>
+<p>DevTools docked to the bottom (logical):</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+------------------------------------------------------------------------------+
+| page area (60 percent)                                                       |
+|                                                                              |
++============================== splitter (6) ==================================+
+| Elements | Console | Network | Application | Performance | &gt;&gt;     x          |  &lt;- panel tabs (28)
++------------------------------------------------------------------------------+
+| &lt;html&gt;                                                                       |
+|   &lt;head&gt;...&lt;/head&gt;                                                           |
+|   &lt;body&gt;                                                                     |
+|     &lt;h1&gt;Example Domain&lt;/h1&gt;                                                  |
+|   &lt;/body&gt;                                                                    |
++------------------------------------------------------------------------------+</code></pre></figure>
+<p>DevTools docked right (logical):</p>
+<figure class="code diagram"><figcaption><span class="lang">text</span><button type="button" class="copy" aria-label="Copy code">Copy</button></figcaption><pre tabindex="0"><code>+--------------------------------------+-----------------------------------------+
+| page area (60 percent)               | Elements | Console | Network | ... x  |
+|                                      +-----------------------------------------+
+|                                      | &lt;html&gt;                                  |
+|                                      |   &lt;body&gt;                                |
+|                                      |     &lt;h1&gt;Example Domain&lt;/h1&gt;             |
++--------------------------------------+-----------------------------------------+</code></pre></figure>
+<h3 id="h4-interaction-rules">h4. Interaction rules<a class="headerlink" href="#h4-interaction-rules" title="Link to this section">#</a></h3>
+<ul>
+<li>Clicking a link uses the same path as a page click (host). Middle-click, Ctrl-click and Shift-click open a new tab or window.</li>
+<li>Ctrl+L focuses the omnibox and selects all. Escape restores the URL.</li>
+<li>Ctrl+T, Ctrl+W, Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+1 to Ctrl+9 (tab select), Ctrl+R (reload), Ctrl+F (find), Ctrl+Plus, Ctrl+Minus, Ctrl+0 (zoom), Ctrl+Shift+I (DevTools), Ctrl+D (bookmark). On TempleOS the Ctrl key is the same as on Mac's Command key only by mapping; the M3 gate defines the mapping table.</li>
+<li>Escape still quits the desktop when nothing in the browser has focus (v0 rule kept).</li>
+<li>Tab close: middle-click, or the x. Close of the last tab closes the window after a confirm only if a download is running.</li>
+</ul>
+<h3 id="h5-new-tab-page">h5. New-tab page<a class="headerlink" href="#h5-new-tab-page" title="Link to this section">#</a></h3>
+<p>Layout above. Content: the omnibox (centred, 560 logical wide, 40 tall), most-visited tiles (96 x 80, gap 16, up to ten, from the store, local only), a bookmarks list (P1). No network request is made by the new-tab page.</p>
+<h3 id="h5a-fonts-for-the-browsers-own-text-and-for-pages-font-plan">h5a. Fonts for the browser's own text and for pages (font plan)<a class="headerlink" href="#h5a-fonts-for-the-browsers-own-text-and-for-pages-font-plan" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Font coverage</th>
+<th>Source</th>
+<th>Used for</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A (M2)</td>
+<td>existing Inter bitmaps (<code>KSFONT.BIN</code>): ASCII only [measured by the comment in the README and the <code>B:/KSFONT.BIN</code> loader; confirm the glyph range]</td>
+<td><code>desk3</code></td>
+<td>all Latin page text, browser chrome</td>
+<td>five static pages legible at 2x</td>
+</tr>
+<tr>
+<td>A+ (M2)</td>
+<td>a monospace bitmap face for <code>pre</code> and <code>code</code>: Latin subset, two sizes; license must be OFL or similar (<strong>candidates, to check</strong>: Iosevka or JetBrains Mono, both OFL per their repos (<strong>memory</strong>))</td>
+<td>new asset</td>
+<td>code blocks, DevTools Console and Elements</td>
+<td>Console readable at 2x</td>
+</tr>
+<tr>
+<td>B (M4)</td>
+<td>extend Inter bitmaps to Latin-1, Latin Extended-A, Greek and Cyrillic (Inter covers these) (about 350 glyphs per face and size; about 0.5 MB total [estimate])</td>
+<td>Inter (OFL, <strong>memory</strong>)</td>
+<td>European-language pages</td>
+<td>a Russian and a German article legible</td>
+</tr>
+<tr>
+<td>B+ (M4)</td>
+<td>a serif face for pages that use serif fonts (for example, classic articles): a bundled OFL serif at the same sizes (<strong>candidate</strong>: Source Serif or Literata, both OFL (<strong>memory</strong>))</td>
+<td>new asset</td>
+<td>serif body text</td>
+<td>the Gutenberg test page legible</td>
+</tr>
+<tr>
+<td>C (M4)</td>
+<td>everything else (CJK, Arabic, Hebrew, Devanagari, Thai, emoji, any other font the page asks for): RUN-IMG, rasterised by Chrome in the page's font, cached by hash</td>
+<td>Chrome</td>
+<td>non-Latin text, exact shapes and bidi</td>
+<td>Japanese and Arabic pages legible; one run shows correct shaping</td>
+</tr>
+<tr>
+<td>D (M6, optional)</td>
+<td>a TrueType rasteriser in HolyC (stb_truetype port, M to L per the native-apps plan) so the guest can draw any font at any size</td>
+<td>port</td>
+<td>only if stage C's cost is too high</td>
+<td>not planned unless M6 measures a problem</td>
+</tr>
+</tbody>
+</table></div>
+<p>Asset rules: every bundled font needs its licence file in the repo (OFL text), and the font binary is not generated on the host at run time. The desk's font file grows by roughly 1 MB for stages A+ to B+ [estimate]; check the boot time (<code>KS-READY</code> at 0.5 to 0.7 s on Aiwnios <strong>[measured in aiwnios/README.md]</strong>) after each stage.</p>
+<h3 id="h6-non-latin-text-in-more-detail">h6. Non-Latin text, in more detail<a class="headerlink" href="#h6-non-latin-text-in-more-detail" title="Link to this section">#</a></h3>
+<ul>
+<li>The host knows, from the layout snapshot, the font family and the glyph coverage of each text run. A run that needs a font outside stage A and B is sent as RUN-IMG.</li>
+<li>The helper page draws the run with <code>fillText</code> in the same font family and size at device scale, then reads the pixels back with <code>getImageData</code> <strong>(memory)</strong>. Right-to-left and mixed-direction runs are drawn as one string, so shaping and bidi are Chrome's.</li>
+<li>A RUN-IMG has an alpha mask and the colour token; selection colour is applied in the guest.</li>
+<li>Hash key: (font family, weight, size, scale, string, colour token). Cached in the guest's image cache, with the same budget as images.</li>
+<li>Cost [estimate]: a 20-character CJK run at 16 px at scale 2 is about 640 x 40 px; an alpha mask at 8 bits is 25 KB raw and compresses about 3 to 1 with row RLE, so about 8 KB per run. A page with 200 such runs costs 1.6 MB, which is too large for serial; the first-paint budget will hold only the first screen's runs, and the rest stream in. This is the main reason non-Latin pages are slow on the serial link (section k, risk 4).</li>
+</ul>
+<h2 id="i-work-breakdown-into-streams">i. Work breakdown into streams<a class="headerlink" href="#i-work-breakdown-into-streams" title="Link to this section">#</a></h2>
+<p>Each stream names the files it owns. Files under <code>apps/templeos-holyc/browser/</code> are new (they do not exist today); <code>desk3/03b-browser.HC</code> is the v0 app, which stream 3 replaces. Streams never edit the same file. Shared interfaces are the wire protocol (b) and the DLIST format (c), which are frozen by the M1 gate and changed only by a version bump in HELLO.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Stream</th>
+<th>Goal</th>
+<th>Owns (files)</th>
+<th>Depends on</th>
+<th>Milestone</th>
+<th>Pass or fail gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Host engine and CDP service</td>
+<td>Launch Chrome 156 with a throwaway profile and the pipe, navigate, read events, run JS in a target, take screenshots, manage contexts</td>
+<td><code>browser/host/cdp.py</code>, <code>browser/host/engine.py</code>, <code>browser/host/launch.py</code>; <code>tests/browser/engine_test.py</code></td>
+<td>none</td>
+<td>M1</td>
+<td>Pass: 22 of 25 test sites load and report their title and final URL, each in under 8 s; no TCP listener (lsof shows none); the throwaway directory is removed at exit. Fail: any site crashes the engine; a port listener appears</td>
+</tr>
+<tr>
+<td>2</td>
+<td>DLIST builder</td>
+<td>DOMSnapshot to ops, bands, hashes, string table, stacking and paint order, sticky and fixed, controls, links, tiles for canvas, video and WebGL</td>
+<td><code>browser/host/dlist.py</code>, <code>browser/host/bands.py</code>; <code>tests/browser/dlist_test.py</code> (golden dumps)</td>
+<td>1</td>
+<td>M2</td>
+<td>Pass: on five static sites, text run positions are within 2 px of <code>Range.getBoundingClientRect</code> values from the same page (checked by the test); box count matches the layout; the first-paint band set for each page is under 120 KB. Fail otherwise</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Guest protocol and painter</td>
+<td>Frames, CRC, the band cache, the op painter, the scroll, the hit map, the image cache</td>
+<td><code>desk3/browser/proto.HC</code>, <code>desk3/browser/dlist.HC</code>, <code>desk3/browser/paint.HC</code>, <code>desk3/browser/cache.HC</code>; <code>desk3/03b-browser.HC</code> (v0, replaced at M2)</td>
+<td>the wire spec (b), op format (c)</td>
+<td>M2</td>
+<td>Pass: five static sites legible at scale 2; scroll step under the d2 target (Aiwnios); 20 KB checksum test passes on the chosen chunk size. Fail otherwise</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Images and runs (host side)</td>
+<td>Image decode through Chrome, downscale to paint size, RGB565 RLE and alpha planes, RUN-IMG rasterising, hashing</td>
+<td><code>browser/host/images.py</code>, <code>browser/host/runs.py</code>, <code>browser/host/helper_page.html</code></td>
+<td>1, 2</td>
+<td>M4</td>
+<td>Pass: a page with 10 images of mixed size shows correctly at scale 2; a Japanese and an Arabic page legible; per-page image budget holds</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Chrome shell and tabs</td>
+<td>Tab strip, omnibox, toolbar, bookmarks bar, new-tab page, main menu, find bar, zoom, keyboard map, status line</td>
+<td><code>desk3/browser/shell.HC</code>, <code>desk3/browser/tabs.HC</code>, <code>desk3/browser/omnibox.HC</code>, <code>desk3/browser/newtab.HC</code>, <code>desk3/browser/menu.HC</code>, <code>desk3/browser/icons-browser.HC</code> (new icons)</td>
+<td>3 (painter and widgets)</td>
+<td>M3</td>
+<td>Pass: scripted run of 15 shell actions (open, close, switch, reopen, navigate, back, forward, reload, zoom, find, new tab, incognito, bookmark, menu, zoom reset) with screenshots at each step</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Data stores and history, bookmarks, downloads UI</td>
+<td>SQLite schema, migrations, the history page, bookmarks manager, downloads list and prompts, clear data, session restore</td>
+<td><code>browser/host/store.py</code>, <code>browser/host/schema.sql</code>, <code>desk3/browser/history.HC</code>, <code>desk3/browser/bookmarks.HC</code>, <code>desk3/browser/downloads.HC</code>, <code>desk3/browser/prompts.HC</code></td>
+<td>1 (events), 5 (UI)</td>
+<td>M3 (downloads, prompts), M4 (history, bookmarks)</td>
+<td>Pass: after restart, tabs, bookmarks and history are restored; incognito writes nothing (checked by row count)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>DevTools</td>
+<td>Adapter for each panel, guest panels, subscriptions</td>
+<td><code>browser/host/devtools.py</code>, <code>desk3/browser/devtools.HC</code>, <code>desk3/browser/dt-elements.HC</code>, <code>desk3/browser/dt-console.HC</code>, <code>desk3/browser/dt-network.HC</code>, <code>desk3/browser/dt-app.HC</code></td>
+<td>1, 2, 3</td>
+<td>M5</td>
+<td>Pass: Elements tree matches the DOM on five pages; the Console shows a page error; Network lists the page's requests with status and size; Application lists cookies for a site. Fail otherwise</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Extensions</td>
+<td>Manifest parser, install flow, shim, content scripts, popup, storage, the MV3 subset</td>
+<td><code>browser/host/extensions.py</code>, <code>browser/host/ext_shim.js</code>, <code>browser/host/ext_router.py</code>, <code>desk3/browser/extensions.HC</code>, <code>tests/browser/extensions/sample-title/</code></td>
+<td>1, 5 (popup area), 6 (storage)</td>
+<td>M5</td>
+<td>Pass: the sample extension changes a page title on five sites and its popup button works; a permission added in an update disables the extension until accepted</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Test and benchmark harness</td>
+<td>Site list, scripted UI runs, golden pixel comparisons, channel soak test, latency probes, memory logs, the forbidden-flags test</td>
+<td><code>tests/browser/sites.txt</code>, <code>tests/browser/run_sites.py</code>, <code>tests/browser/soak.py</code>, <code>tests/browser/latency.py</code>, <code>tests/browser/check_flags.py</code>; reuses <code>aiwnios/golden.py</code></td>
+<td>none (starts at M1)</td>
+<td>M1 onward</td>
+<td>Pass: the harness runs in CI-less mode on the Mac and writes a summary table per milestone; the port-flag test fails the build if a port flag is added</td>
+</tr>
+</tbody>
+</table></div>
+<p>Interfaces between streams (frozen at M1 and M2):</p>
+<ul>
+<li>Stream 1 to 2: the engine returns a <code>Snapshot</code> object (DOMSnapshot document list, layout tree with rects and paint orders, text boxes, computed styles for the requested property list, screenshot function). Stream 2 never calls CDP directly.</li>
+<li>Stream 2 to 3: <code>DLIST</code> bytes per band (format c), <code>BANDREQ</code> and <code>HAVE</code> (b2).</li>
+<li>Stream 1 to 6: engine events (navigated, title, download, permission request) as a Python callback list; stream 6 turns them into store rows and guest messages.</li>
+<li>Stream 5 to 3: <code>paint.HC</code> exports <code>PaintBand(tab, band)</code> and <code>HitTest(tab, x, y)</code>; the shell owns the rest of the window.</li>
+<li>Stream 8 to 1 and 2: the extension host uses the engine's <code>Runtime.addBinding</code> and isolated world API; it does not create its own CDP connection.</li>
+</ul>
+<h2 id="j-milestones-and-gates">j. Milestones and gates<a class="headerlink" href="#j-milestones-and-gates" title="Link to this section">#</a></h2>
+<h3 id="m1-engine-spike-host-only">M1: Engine spike (host only)<a class="headerlink" href="#m1-engine-spike-host-only" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Scope.</strong> Launch Chrome 156 with the pipe and the throwaway profile. Navigate the 25 test sites in <code>browser-test-sites.md</code>. Produce a DLIST dump per site. Reproduce the 47 KB/s channel with <code>bench:N</code> and measure chunk sizes 32, 128 and 512 at 20 KB with checksum. Confirm the CDP method names listed in section a against the protocol JSON that Chrome 156 ships.</li>
+<li><strong>Gate.</strong> 22 of 25 sites produce text and boxes with a title and final URL within 8 s each (host time). No TCP listener. Throwaway directory removed. Channel: a chosen chunk size passes the 20 KB checksum and is reported in bytes per second. Pass if all four hold. Fail: report which hold.</li>
+<li><strong>Risks.</strong> CDP method names differ from memory; pipe mode is blocked on the installed Chrome (Chrome 136 rule); channel rate under 20 KB/s (then first paint budget must shrink).</li>
+</ul>
+<h3 id="m2-static-paint">M2: Static paint<a class="headerlink" href="#m2-static-paint" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Scope.</strong> The guest paints bands for five v0 URLs and five more static sites (test sites tier 1 and 2). Links are clickable and navigate. Scroll uses cached bands. Stage A fonts (section h5a).</li>
+<li><strong>Gate.</strong> Screenshots of all ten legible at scale 2. First paint over the channel under 5 s on a 200 KB page. A 20 KB checksum passes on the chosen transport. Scroll step within the d2 target on Aiwnios; on QEMU, the measured number is recorded even if above target, and the gate is a pass if it is under 300 ms.</li>
+<li><strong>Risks.</strong> HolyC speed under TCG (measure in this milestone, first); band boundary bugs (golden tests from stream 2); colour mapping to tokens looks wrong for dark pages.</li>
+</ul>
+<h3 id="m3-chrome-shell-tabs-downloads-prompts">M3: Chrome shell, tabs, downloads, prompts<a class="headerlink" href="#m3-chrome-shell-tabs-downloads-prompts" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Scope.</strong> Tab strip, omnibox (search and URL), toolbar, navigation, new-tab page, main menu, find, zoom, status line, downloads with prompts, permission prompts (deny by default), error pages, the security indicator, keyboard map.</li>
+<li><strong>Gate.</strong> The scripted 15-action run passes (stream 5 gate) with screenshots. Downloads of a PDF and of a <code>.dmg</code> (refused) behave as specified. Permission prompt for geolocation on a test page denies by default.</li>
+<li><strong>Risks.</strong> Keyboard mapping on TempleOS (no key-up on the desk's keyboard path, per the native-apps plan's risk list); widget kit v2 may not exist yet (native-apps plan gate 2), in which case the shell uses the desk's current widgets.</li>
+</ul>
+<h3 id="m4-interaction-javascript-forms-images-non-latin-text">M4: Interaction, JavaScript, forms, images, non-Latin text<a class="headerlink" href="#m4-interaction-javascript-forms-images-non-latin-text" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Scope.</strong> Click, type, form controls (text, checkbox, select, submit with prompt), selection through host events, SPA route updates, same-origin and cross-origin iframe flattening, image downscaling and RUN-IMG, stage B and B+ fonts, history and bookmarks.</li>
+<li><strong>Gate.</strong> Todomvc: add an item and tick it using only guest input. react.dev: navigate by the in-page menu. A Japanese page and an Arabic page legible. A page with 10 images shows all of them at scale 2 within the image budget. Form POST shows the prompt; declining sends nothing (checked on a local test server at <code>localhost</code>).</li>
+<li><strong>Risks.</strong> Latency of typing (each key is a round trip, may feel slow on serial); OOPIF handling for complex iframes; the run-image cost (section h6).</li>
+</ul>
+<h3 id="m5-devtools-and-extensions">M5: DevTools and extensions<a class="headerlink" href="#m5-devtools-and-extensions" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Scope.</strong> Elements, Console, Network, Application (stream 7); MV3 subset, content scripts, popup, storage, install flow (stream 8).</li>
+<li><strong>Gate.</strong> The sample extension works (stream 8 gate). Elements matches the DOM on five pages. Console shows a page error. Network lists requests. Application lists cookies.</li>
+<li><strong>Risks.</strong> Chrome's own extension behaviour differs from our host (service worker versus page target); the guest's text editing for the Console is limited (no selection in the input line in v1, to confirm).</li>
+</ul>
+<h3 id="m6-hardening-media-benchmark-port">M6: Hardening, media, benchmark, port<a class="headerlink" href="#m6-hardening-media-benchmark-port" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Scope.</strong> The 25-site benchmark three times; video poster plus tile stream; WebGL and canvas tiles; error and crash pages; memory cap and tab discard; security checklist; licence review (section k); the Aiwnios transport (native socket, sliding window); a short user guide.</li>
+<li><strong>Gate.</strong> 25 of 25 sites open with no crash in three runs. p95 input-to-update latency: under 150 ms on serial, under 60 ms on the Aiwnios socket (both measured by stream 9). No flag or port test failures. Licence review written and signed off by the user.</li>
+<li><strong>Risks.</strong> See section k.</li>
+</ul>
+<p>Target latency budgets (used by stream 9): click or key to visible change, p95 under 150 ms (serial, one round trip plus one frame) and under 60 ms (socket); first paint of a 200 KB page under 5 s (serial), under 2 s (socket); navigation to a site's title under 8 s on a good network (host-side, the site decides).</p>
+<h2 id="k-risks-licences-and-legal">k. Risks, licences and legal<a class="headerlink" href="#k-risks-licences-and-legal" title="Link to this section">#</a></h2>
+<h3 id="k1-risks-ranked">k1. Risks (ranked)<a class="headerlink" href="#k1-risks-ranked" title="Link to this section">#</a></h3>
+<ol>
+<li><strong>JS-heavy sites.</strong> Chrome runs them, so they work, but every interaction costs a round trip, and tiles hide text. Mitigation: the M4 gate with two SPAs; the tile fallback measured at M4.</li>
+<li><strong>Video.</strong> No decode in the guest; tile streaming at 2 to 5 frames a second is far from smooth, and audio plays only on the host with approval. Mitigation: poster frames and short clips only in v1; say so in the UI.</li>
+<li><strong>WebGL and canvas.</strong> Tiles only. Interaction works through the host, but the view is an image, so it does not look sharp at zoom. Mitigation: tile at device scale, re-render on zoom.</li>
+<li><strong>Fonts and non-Latin text.</strong> Stage A covers Latin only. Non-Latin pages depend on RUN-IMG, which is large (about 8 KB a run at 16 px). Mitigation: lazy and budgeted sending; a stage D (HolyC rasteriser) decision at M6 if the measured cost is too high.</li>
+<li><strong>Latency.</strong> Serial is a bottleneck (47 KB/s reported, to be reproduced). Every click and key is a round trip. Mitigation: coalescing (b6), bands, local scroll, budgets (j).</li>
+<li><strong>Memory.</strong> The guest has a fixed heap; the desk's own heap use is unmeasured for a browser. Each tab holds bands and images. Mitigation: LRU caches with explicit budgets (d3), discard of background tabs (features section 1), and a per-tab memory counter in STATS.</li>
+<li><strong>HolyC speed.</strong> Under TCG the painter may be too slow (d2 targets for QEMU are guesses). Mitigation: measure at M2 before any further design; if the guest is the bottleneck, move work to the host (for example, pre-sorted bands).</li>
+<li><strong>Chrome changes.</strong> Chrome ships every four weeks; flags and protocol details move. Mitigation: pin the tested version (156), run the M1 spike on each update, and keep the engine adapter as the only CDP code.</li>
+<li><strong>Extensions diverge from Chrome.</strong> Our background is a page, not a service worker; the chrome.* subset is small. Mitigation: explicit error for missing APIs; sample extension tests.</li>
+<li><strong>Security of the bridge itself.</strong> A bug in the bridge could expose the Mac. Mitigation: no listening port for Chrome, the bridge listens only on the serial or socket channel, prompts for every outward action (e3).</li>
+</ol>
+<h3 id="k2-licences-and-legal">k2. Licences and legal<a class="headerlink" href="#k2-licences-and-legal" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Google Chrome.</strong> Chrome is licensed under the Google Chrome Terms of Service, not open source (secondary reading, verified fact 9 context). Our use is local automation of a copy the user installed, which we treat as fine for personal use, as the user stated. We do not bundle, redistribute, or modify Chrome. Users install it themselves. Check the current Terms before any public release (memory of the terms' automation clauses; this is a point for a lawyer, not us).</li>
+<li><strong>Chromium and Chrome for Testing.</strong> Chromium is BSD-licensed with Google's additions; Chrome for Testing is built for automation (<strong>memory</strong>: the Chrome for Testing page describes it as a build for testing; check its terms). Either can be used instead of branded Chrome if the user prefers; neither is bundled.</li>
+<li><strong>Widevine.</strong> Not included in Chromium and not redistributable (verified fact 9). DRM content is out of scope and shows a placeholder. We do not try to unlock DRM or copy a CDM from a Chrome install (the sources warn that this is outside the licence).</li>
+<li><strong>Trademarks and branding.</strong> The product is "Kosmos Browser". The UI resembles Chrome's layout but uses no Google logo, no "Chrome" name, and no Chrome icon; the About page names the engine ("Chromium-based engine, Chrome 156 installed by the user") and credits the open-source licences. The user should confirm this wording.</li>
+<li><strong>Fonts.</strong> Inter (OFL, <strong>memory</strong>), the monospace and serif candidates (OFL, <strong>memory</strong>). Each needs its licence text in the repo at the time it is added.</li>
+<li><strong>Readability.js</strong> (Apache-2.0, <strong>memory</strong>) if used; check the licence file at the time.</li>
+<li><strong>Site terms.</strong> Automated browsing of sites is subject to each site's terms. The test list (<code>browser-test-sites.md</code>) uses public pages and no logins; the harness must not crawl beyond the list, must respect rate limits (one request per site per run), and must not send form data to sites other than the local test server.</li>
+<li><strong>Downloads and files.</strong> Downloads are never run. Dangerous types are refused by default (features section 6).</li>
+<li><strong>Privacy.</strong> The throwaway profile and the store are on the user's Mac, not sent anywhere. The bridge sends no telemetry. The browser's own "About" page says so.</li>
+</ul>
+<h2 id="l-what-was-verified-and-what-was-taken-from-memory">l. What was verified and what was taken from memory<a class="headerlink" href="#l-what-was-verified-and-what-was-taken-from-memory" title="Link to this section">#</a></h2>
+<p>Verified in this pass (with sources in <code>browser-features.md</code>):
+- Chrome 156.0.8078.48 is installed (<code>--version</code> run on this Mac).
+- Chrome 136+ requires a non-default <code>--user-data-dir</code> for debugging (Chromium issue 417456892, secondary reports).
+- Chrome 137+ branded builds ignore <code>--load-extension</code> (Chromium extensions group PSA, Chrome Extensions news June 2025).
+- Chrome 132 moved the old headless mode to <code>chrome-headless-shell</code> (Chrome headless docs, Chrome for Testing).
+- The MV3 <code>chrome.*</code> namespace list (developer.chrome.com reference page).
+- Permission warning behaviour (developer.chrome.com).
+- DevTools panel list (developer.chrome.com DevTools overview).
+- Widevine is closed source and not in Chromium builds (Chromium Widevine page; secondary reading of licensing).
+- <code>aiwnios/README.md</code>, <code>browser-plan.md</code>, <code>holyc-native-apps-plan.md</code>, <code>scripts/browser-bridge.py</code> (structure, protocol and KDoc format), <code>desk3/03b-browser.HC</code> (function list), <code>desk3/01-core.HC</code> (palette tokens, fonts, MBAR, TBAR, <code>NTK</code>) were read in this repo.</p>
+<p>Not verified (flagged in the text):
+- The CDP method names and parameter shapes (the protocol index returned 404 and the DOMSnapshot page returned only a redirect). Everything about specific CDP calls is memory.
+- The 47 KB/s serial rate (reported in the task, not reproduced).
+- Font glyph range of <code>KSFONT.BIN</code> (comment says ASCII; <code>FontLoad</code> not read line by line).
+- Chrome launch flag names on 156 (<code>--use-mock-keychain</code>, <code>--password-store=basic</code>, others).
+- Chrome 144 per-connection consent prompt (secondary reports only; not relevant to our launch path).</p>
+<h2 id="m-open-questions-for-the-user">m. Open questions for the user<a class="headerlink" href="#m-open-questions-for-the-user" title="Link to this section">#</a></h2>
+<ol>
+<li>Stage B fonts (Latin-1 to Cyrillic) are worth about 0.5 MB of the desk's font file. Accept?</li>
+<li>The guest painter reads a 47 KB/s serial link; if M1 confirms it, is a first-paint budget of 120 KB acceptable (about 2.6 s)?</li>
+<li>Form POST prompt on every submission: confirm (it adds one click to every search form that POSTs).</li>
+<li>Should the new-tab page show most-visited tiles by default (local only)? Proposed yes.</li>
+<li>Should downloads go to the host Downloads folder by default, or the guest disk (proposed: guest disk after a prompt; host Downloads as P2)?</li>
+</ol>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../docs/apps/window-style-editor/index.html" rel="prev"><span>Previous</span>Window Style Editor (app 12, &quot;Windows&quot;)</a><a class="next" href="../../docs/browser-features/index.html" rel="next"><span>Next</span>Kosmos Browser: feature inventory</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#0-summary-of-decisions">0. Summary of decisions</a></li><li><a href="#a-components">a. Components</a><ul><li><a href="#host-language-and-dependencies">Host language and dependencies</a></li><li><a href="#why-cdp-over-the-pipe-and-not-chromes-own-headless-server">Why CDP over the pipe, and not Chrome&#x27;s own headless server</a></li></ul></li><li><a href="#b-wire-protocol-guest-and-host">b. Wire protocol: guest and host</a><ul><li><a href="#b1-transport-and-framing">b1. Transport and framing</a></li><li><a href="#b2-message-types">b2. Message types</a></li><li><a href="#b3-flow-control">b3. Flow control</a></li><li><a href="#b4-throughput-budget">b4. Throughput budget</a></li><li><a href="#b5-delta-updates-and-caching">b5. Delta updates and caching</a></li><li><a href="#b6-input-coalescing-guest-side-host-side">b6. Input coalescing (guest side, host side)</a></li></ul></li><li><a href="#c-display-list-format">c. Display list format</a><ul><li><a href="#c1-what-the-host-produces">c1. What the host produces</a></li><li><a href="#c2-worked-example">c2. Worked example</a></li><li><a href="#c3-how-the-hard-cases-are-handled">c3. How the hard cases are handled</a></li><li><a href="#c4-honest-fidelity-limits-for-the-user">c4. Honest fidelity limits (for the user)</a></li></ul></li><li><a href="#d-rendering-budget">d. Rendering budget</a><ul><li><a href="#d1-what-the-guest-draws-per-frame">d1. What the guest draws per frame</a></li><li><a href="#d2-budgets-targets-to-be-measured-at-m2">d2. Budgets (targets, to be measured at M2)</a></li><li><a href="#d3-tile-cache-and-band-cache">d3. Tile cache and band cache</a></li><li><a href="#d4-image-downscaling-on-the-host-to-exact-paint-size">d4. Image downscaling on the host to exact paint size</a></li></ul></li><li><a href="#e-security-model">e. Security model</a><ul><li><a href="#e1-isolation-on-the-host">e1. Isolation on the host</a></li><li><a href="#e2-the-guest-never-receives-secrets">e2. The guest never receives secrets</a></li><li><a href="#e3-outward-actions-and-prompts">e3. Outward actions and prompts</a></li><li><a href="#e4-storage-and-file-locations">e4. Storage and file locations</a></li><li><a href="#e5-extension-permission-model">e5. Extension permission model</a></li></ul></li><li><a href="#f-how-devtools-maps-onto-cdp">f. How DevTools maps onto CDP</a></li><li><a href="#g-extension-system-design">g. Extension system design</a><ul><li><a href="#g1-manifest-subset">g1. Manifest subset</a></li><li><a href="#g2-where-extensions-live-and-how-they-run">g2. Where extensions live and how they run</a></li><li><a href="#g3-chrome-subset-implemented-by-the-bridge">g3. chrome.* subset implemented by the bridge</a></li><li><a href="#g4-install-flow">g4. Install flow</a></li><li><a href="#g5-testing-extensions">g5. Testing extensions</a></li></ul></li><li><a href="#h-ui-specification">h. UI specification</a><ul><li><a href="#h1-design-tokens">h1. Design tokens</a></li><li><a href="#h2-layout">h2. Layout</a></li><li><a href="#h3-ascii-mockups">h3. ASCII mockups</a></li><li><a href="#h4-interaction-rules">h4. Interaction rules</a></li><li><a href="#h5-new-tab-page">h5. New-tab page</a></li><li><a href="#h5a-fonts-for-the-browsers-own-text-and-for-pages-font-plan">h5a. Fonts for the browser&#x27;s own text and for pages (font plan)</a></li><li><a href="#h6-non-latin-text-in-more-detail">h6. Non-Latin text, in more detail</a></li></ul></li><li><a href="#i-work-breakdown-into-streams">i. Work breakdown into streams</a></li><li><a href="#j-milestones-and-gates">j. Milestones and gates</a><ul><li><a href="#m1-engine-spike-host-only">M1: Engine spike (host only)</a></li><li><a href="#m2-static-paint">M2: Static paint</a></li><li><a href="#m3-chrome-shell-tabs-downloads-prompts">M3: Chrome shell, tabs, downloads, prompts</a></li><li><a href="#m4-interaction-javascript-forms-images-non-latin-text">M4: Interaction, JavaScript, forms, images, non-Latin text</a></li><li><a href="#m5-devtools-and-extensions">M5: DevTools and extensions</a></li><li><a href="#m6-hardening-media-benchmark-port">M6: Hardening, media, benchmark, port</a></li></ul></li><li><a href="#k-risks-licences-and-legal">k. Risks, licences and legal</a><ul><li><a href="#k1-risks-ranked">k1. Risks (ranked)</a></li><li><a href="#k2-licences-and-legal">k2. Licences and legal</a></li></ul></li><li><a href="#l-what-was-verified-and-what-was-taken-from-memory">l. What was verified and what was taken from memory</a></li><li><a href="#m-open-questions-for-the-user">m. Open questions for the user</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

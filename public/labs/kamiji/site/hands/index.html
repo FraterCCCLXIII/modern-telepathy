@@ -1,0 +1,283 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hands: your code could use a hand</title>
+<meta name="description" content="Hands is an open source platform for software engineering agents: a canvas, an agent server, an SDK, a CLI and a cloud. Formerly OpenHands.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ffd23f'/%3E%3Ccircle cx='11' cy='14' r='2' fill='%23222'/%3E%3Ccircle cx='21' cy='14' r='2' fill='%23222'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="hands.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Hands">Hands</a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#tribe">Introducing</a>
+      <a href="#compatible">Libraries</a>
+      <a href="#what">What it is</a>
+      <a href="#products">Products</a>
+      <a href="#how">How it works</a>
+      <a href="#start">Get started</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#agents">Agents</a>
+      <a href="#licence">Licence</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Your code<br>could use a hand.</h1>
+      <p class="lead">Hands is an open source platform for software engineering agents. Start them from one canvas, run them on your machine, your servers or a cloud, and let them work while you do something else.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#start">Get started</a>
+        <a class="btn" href="https://docs.openhands.dev">Docs</a>
+        <a class="btn" href="https://github.com/OpenHands/OpenHands">GitHub</a>
+      </p>
+    </div>
+    <div class="stage">
+      <div class="viewer hero-viewer" id="hero-hand" role="img" aria-label="Live 3D Kamiji hand with an idle animation">
+        <canvas></canvas>
+        <p class="fallback" hidden></p>
+      </div>
+      <div class="shadow" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tribe" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <h2>Introducing Hands</h2>
+      <p class="intro-sub">The new agent avatars.</p>
+      <p class="sub">Twelve hands on one plane, each with its own colour and its own cycle of moves. An idea for how a team of agents could look when they all work at once.</p>
+    </div>
+    <div class="viewer tribe-viewer" id="tribe-viewer" role="img" aria-label="Twelve 3D hands of different colours standing on a plane, each waving, thinking or celebrating on its own cycle">
+      <canvas></canvas>
+      <p class="fallback" hidden></p>
+    </div>
+  </div>
+</section>
+
+<section id="introducing" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <p class="sub">Every agent in a conversation gets a little hand of its own: a colour, a mood that follows what it is doing, and a motion for waiting, thinking and finishing. They are made with Kosmos, the same characters and engine work behind Kamiji.</p>
+      <div class="powered-row">
+        <a class="powered" href="../kosmos/index.html" aria-label="Powered by Kosmos"><span>Powered by</span><img src="../img/kosmos-logo.svg" alt="Kosmos" height="14"></a>
+        <span class="powered-plus" aria-hidden="true">+</span>
+        <a class="powered kamiji-mark" href="../index.html" aria-label="Kamiji"><span class="kamiji-word">Kamiji<i>.</i></span></a>
+      </div>
+    </div>
+    <ul class="intro-avatars" id="intro-avatars">
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#ffd23f" role="img" aria-label="Hands avatar, yellow"><canvas></canvas><span class="fallback" hidden></span></span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#ff7a59" role="img" aria-label="Hands avatar, coral"><canvas></canvas><span class="fallback" hidden></span></span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#5ec27a" role="img" aria-label="Hands avatar, green"><canvas></canvas><span class="fallback" hidden></span></span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#4aa8ff" role="img" aria-label="Hands avatar, blue"><canvas></canvas><span class="fallback" hidden></span></span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#b583ff" role="img" aria-label="Hands avatar, violet"><canvas></canvas><span class="fallback" hidden></span></span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#ff7eb6" role="img" aria-label="Hands avatar, pink"><canvas></canvas><span class="fallback" hidden></span></span></li>
+    </ul>
+    <p class="intro-row-label">Git, in 3D</p>
+    <ul class="intro-avatars intro-git" id="git-avatars">
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#2fc4b2" data-icon="git_commit" role="img" aria-label="Hands avatar, teal, holding a 3D commit icon"><canvas></canvas><span class="fallback" hidden></span></span><span>committing</span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#ffa83d" data-icon="git_pull_request" role="img" aria-label="Hands avatar, orange, holding a 3D pull request icon"><canvas></canvas><span class="fallback" hidden></span></span><span>opening a PR</span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#8d7bff" data-icon="git_pull_request_merged" role="img" aria-label="Hands avatar, indigo, holding a 3D merged pull request icon"><canvas></canvas><span class="fallback" hidden></span></span><span>merged</span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#a8d94a" data-icon="git_check_pass" role="img" aria-label="Hands avatar, lime, holding a 3D passed check icon"><canvas></canvas><span class="fallback" hidden></span></span><span>checks passed</span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#e86a8e" data-icon="git_ci_fail" role="img" aria-label="Hands avatar, raspberry, holding a 3D failed check icon"><canvas></canvas><span class="fallback" hidden></span></span><span>checks failed</span></li>
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#5fd0e8" data-icon="git_conflict" role="img" aria-label="Hands avatar, cyan, holding a 3D conflict icon"><canvas></canvas><span class="fallback" hidden></span></span><span>resolving a conflict</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="compatible" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <h2>Works with the Kamiji libraries</h2>
+      <p class="sub">A Hands avatar is a Kamiji character, so everything in the Kamiji libraries is compatible: any character, face, emoji, gesture or icon can be an agent's avatar or accessory, with the same colours, outlines and shadows.</p>
+    </div>
+    <ul class="compat-grid">
+      <li class="compat-card"><h3>Kamikin mochi</h3><p class="compat-count">14 characters</p><p>Any of the 14 Kamikin characters can be an agent's avatar, with six faces and nine clips.</p><a href="../index.html#lib=kamikin">See the library</a></li>
+      <li class="compat-card"><h3>Rubbernose</h3><p class="compat-count">6 characters</p><p>1930s cartoon things with faces (an eraser, a clock, a soda can and more) as an agent's avatar, with six faces, nine clips and a tintable body.</p><a href="../index.html#lib=rubbernose">See the library</a></li>
+      <li class="compat-card"><h3>Hand poses</h3><p class="compat-count">13 poses</p><p>Thumbs up, OK, victory, wave, clap, pray and more, as an agent's gesture for a state.</p><a href="../index.html#lib=hands">See the library</a></li>
+      <li class="compat-card"><h3>Emoji faces</h3><p class="compat-count">33 faces</p><p>Round emoji heads with their own expressions, for agents that should look like a face.</p><a href="../index.html#lib=faces">See the library</a></li>
+      <li class="compat-card"><h3>Emotes and reactions</h3><p class="compat-count">24 emotes, 6 reactions</p><p>Hearts, sparkles, zzz and more, popped in around an avatar or tapped as reactions.</p><a href="../index.html#lib=emotes">See the library</a></li>
+      <li class="compat-card"><h3>Symbols and objects</h3><p class="compat-count">36 symbols, 34 objects</p><p>Status and tool symbols and everyday objects, usable as badges and accessories.</p><a href="../index.html#lib=symbols">See the library</a></li>
+      <li class="compat-card"><h3>Body shapes</h3><p class="compat-count">36 shapes</p><p>Spheres, beans, drops and character heads, tweened from the base mesh.</p><a href="../index.html#lib=shapes">See the library</a></li>
+      <li class="compat-card"><h3>Outlines, toon and shadow</h3><p class="compat-count">options</p><p>Ink outline, banded toon shading and a soft ground shadow on any of the above.</p><a href="../index.html#gallery">See the library</a></li>
+    </ul>
+    <p class="small">Counts are the files in the Kamiji repository today. The libraries are free for non-commercial use under CC BY-NC 4.0; for-profit use needs the Premium Licence (draft). See the licence section.</p>
+  </div>
+</section>
+
+<section id="what" class="section">
+  <div class="wrap split">
+    <h2>What Hands is</h2>
+    <div class="prose">
+      <p>Hands brings coding agents together in one place. You start a conversation, point it at a project, and an agent reads the code, runs commands, edits files and reports back. You can also set agents to run on a schedule or when something happens, such as a GitHub event.</p>
+      <p>It is a control center rather than a single model. It runs its own open source agent out of the box, can drive other agents that speak the Agent Client Protocol, and works with the language model of your choice.</p>
+    </div>
+  </div>
+</section>
+
+<section id="products" class="section">
+  <div class="wrap">
+    <h2>Products</h2>
+    <ul class="grid-cards">
+      <li><h3>Agent Canvas <span class="badge ok">GUI</span></h3><p>The browser control center for agent conversations and automations. It runs locally by default and can switch between several backends. The README marks it as beta.</p></li>
+      <li><h3>Agent Server <span class="badge ok">server</span></h3><p>A REST and WebSocket server that runs agents on a host. Run it on a laptop, a dedicated machine, a virtual machine or in the cloud, and connect the canvas to as many as you like.</p></li>
+      <li><h3>Software Agent SDK <span class="badge ok">SDK</span></h3><p>A Python library for building agents that use tools, workspaces and conversations. Use it to put agents inside your own tools.</p></li>
+      <li><h3>CLI <span class="badge ok">terminal</span></h3><p>The same agent in your terminal, installed with uv or an install script.</p></li>
+      <li><h3>Automation Server <span class="badge ok">schedules</span></h3><p>Starts agents on a schedule or from webhook events, and keeps a run history. It is a separate repository that pairs with the Agent Server.</p></li>
+      <li><h3>Cloud and Enterprise <span class="badge ok">hosted</span></h3><p>A managed cloud with hosted execution, integrations and usage controls, and an enterprise option for licensed self-hosting or managed deployment.</p></li>
+    </ul>
+    <p class="src">Sources: Agent Canvas README, docs.openhands.dev, openhands.dev, github.com/OpenHands.</p>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap split">
+    <h2>How it works</h2>
+    <ul class="list">
+      <li><h3>Agents</h3><p>The built-in OpenHands agent, plus Claude Code, Codex, Gemini CLI, Pi, OpenCode or any agent that speaks the Agent Client Protocol (ACP).</p></li>
+      <li><h3>Runtimes</h3><p>Run on the host directly, in one Docker sandbox, or in a separate container for every conversation. The SDK also documents Apptainer and API-based sandboxes.</p></li>
+      <li><h3>Backends</h3><p>Connect the canvas to local, remote and cloud agent servers and switch between them without leaving the page. Share one server with a team and keep a personal one on your laptop.</p></li>
+      <li><h3>Subagents</h3><p>An agent can hand work to other agents. The SDK has a task tool set and file-based agent definitions for this.</p></li>
+      <li><h3>Automations</h3><p>Reports to Slack, GitHub issues broken into tasks, and similar jobs, run on a schedule or from a webhook.</p></li>
+      <li><h3>MCP and skills</h3><p>Connect tools through the Model Context Protocol and give agents reusable skills. Public skills live in the extensions repository.</p></li>
+      <li><h3>Any model</h3><p>Bring your own language model and keep several LLM profiles.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="start" class="section">
+  <div class="wrap">
+    <h2>Get started</h2>
+    <p class="quiet" role="note"><strong>Check the sources.</strong> Package and image names still say openhands. Commands are copied from the files named under each block.</p>
+    <div class="cols">
+      <article class="panel">
+        <h3>Agent Canvas <span class="badge ok">from the repo</span></h3>
+        <p>Needs Node.js 24 or later and <code>uv</code>. This runs the agent server on your machine with access to your files, so read the README warning first.</p>
+<pre><code>npm install -g @openhands/agent-canvas
+agent-canvas</code></pre>
+        <p class="src">Source: README.md, Option 1. Then open <code>http://localhost:8000</code>.</p>
+        <p class="label">Docker sandbox</p>
+<pre><code>export PROJECTS_PATH="$HOME/projects"
+mkdir -p "$PROJECTS_PATH" "$HOME/.openhands"
+
+docker run -it --rm \
+  -p 127.0.0.1:8000:8000 \
+  -e AGENT_CANVAS_ALLOW_LAN_SESSION_KEY=true \
+  -v "$HOME/.openhands:/home/openhands/.openhands" \
+  -v "${PROJECTS_PATH}:/projects" \
+  ghcr.io/openhands/agent-canvas:1.29.0</code></pre>
+        <p class="src">Source: README.md, Option 2. Docker serves the UI at <code>http://localhost:8000/canvas</code>.</p>
+        <p class="label">One container per conversation</p>
+<pre><code>npm install -g @openhands/agent-canvas
+OH_CONVERSATION_RUNTIME=docker agent-canvas</code></pre>
+        <p class="src">Source: README.md, Option 3.</p>
+        <p class="label">From source</p>
+<pre><code>git clone https://github.com/OpenHands/OpenHands.git
+cd OpenHands
+npm install
+npm run dev</code></pre>
+        <p class="src">Source: README.md, Option 4.</p>
+      </article>
+
+      <article class="panel">
+        <h3>CLI and SDK <span class="badge ok">from the docs</span></h3>
+        <p class="label">CLI</p>
+<pre><code>uv tool install openhands --python 3.12
+openhands</code></pre>
+        <p class="src">Source: docs.openhands.dev, CLI installation page, fetched 24 Oct 2026. Needs Python 3.12 or later.</p>
+        <p class="label">Python SDK</p>
+<pre><code>pip install -U openhands-sdk openhands-tools</code></pre>
+        <p class="src">Source: docs.openhands.dev/sdk/getting-started. Install both packages together so versions match.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="integrations" class="section">
+  <div class="wrap split">
+    <h2>Integrations</h2>
+    <ul class="list">
+      <li><h3>GitHub <span class="badge ok">documented</span></h3><p>Cloud and Enterprise installation guides exist, and automations can react to GitHub events.</p></li>
+      <li><h3>GitLab <span class="badge ok">documented</span></h3><p>Cloud and Enterprise installation guides exist.</p></li>
+      <li><h3>Slack <span class="badge ok">documented</span></h3><p>Cloud and Enterprise guides exist, and automations can publish reports to Slack.</p></li>
+      <li><h3>Linear and Notion <span class="badge ok">automations</span></h3><p>Named in the Agent Canvas README as services that automations can connect to.</p></li>
+      <li><h3>MCP servers <span class="badge ok">documented</span></h3><p>Add tools through the Model Context Protocol in settings or in the SDK.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="agents" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <h2>Meet the agents</h2>
+      <p class="sub">An idea, not a shipped feature: each agent in a conversation gets its own little character as a profile picture, so you can tell them apart at a glance. These are live Kamiji models. The names are examples.</p>
+    </div>
+    <ul class="agent-grid" id="agent-grid">
+      <li class="agent"><span class="viewer" data-kind="hand" data-tint="#ffd23f" role="img" aria-label="Kamiji hand, yellow"><canvas></canvas><span class="fallback" hidden></span></span><b>Planner</b><span>Kamiji hand</span></li>
+      <li class="agent"><span class="viewer" data-kind="mochi" data-id="kamikin-hana" role="img" aria-label="Kamikin mochi Hana"><canvas></canvas><span class="fallback" hidden></span></span><b>Reviewer</b><span>Kamikin Hana</span></li>
+      <li class="agent"><span class="viewer" data-kind="mochi" data-id="kamikin-kon" role="img" aria-label="Kamikin mochi Kon"><canvas></canvas><span class="fallback" hidden></span></span><b>Fixer</b><span>Kamikin Kon</span></li>
+      <li class="agent"><span class="viewer" data-kind="mochi" data-id="kamikin-pip" role="img" aria-label="Kamikin mochi Pip"><canvas></canvas><span class="fallback" hidden></span></span><b>Scribe</b><span>Kamikin Pip</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="licence" class="section">
+  <div class="wrap split">
+    <h2>Open source and licence</h2>
+    <div>
+      <ul class="licence">
+        <li><strong>Hands code:</strong> MIT. The Agent Canvas repository carries the MIT licence, and GitHub lists MIT for the SDK, automation and extensions repositories too.</li>
+        <li><strong>Kamiji avatar assets on this page</strong> (the hand and the Kamikin mochi) are not part of the Hands licence. They are CC BY-NC 4.0 with a paid Premium Licence for commercial use. See <code>LICENSE.md</code> in the Kamiji repository. Credit: "Kamiji by Paul Bloch".</li>
+        <li>The page shows no OpenHands logos or third-party marks.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="community" class="section">
+  <div class="wrap split">
+    <h2>Community and links</h2>
+    <ul class="list links">
+      <li><a href="https://docs.openhands.dev">Documentation</a><p>Guides for the canvas, SDK, cloud and enterprise.</p></li>
+      <li><a href="https://github.com/OpenHands">GitHub organization</a><p>All repositories, including the canvas, the SDK, automation and extensions.</p></li>
+      <li><a href="https://openhands.dev/joinslack">Slack community</a><p>Questions and feedback.</p></li>
+      <li><a href="https://www.npmjs.com/package/@openhands/agent-canvas">npm package</a><p><code>@openhands/agent-canvas</code></p></li>
+      <li><a href="https://app.openhands.dev">Cloud</a><p>The hosted option.</p></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Hands. Formerly <a href="https://openhands.dev">OpenHands</a>. The rename is stated by the owner and not verified externally.</p>
+    <p>Avatars: Kamiji by Paul Bloch, CC BY-NC 4.0. Product facts paraphrased from public OpenHands sources.</p>
+  </div>
+</footer>
+
+<script type="module" src="hands.js"></script>
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

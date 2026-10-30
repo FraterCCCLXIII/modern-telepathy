@@ -1,0 +1,17 @@
+openhands.svg  - copy of site/hands/img/openhands-logo-dark.svg (OpenHands logo, MIT-licensed project; trademark of its owner). Used as a CSS mask, shown in one ink colour.
+jetbrains.svg, modelcontextprotocol.svg - simple-icons 16.35.0 (CC0 1.0). Brand marks remain trademarks of their owners.
+Other items (Odysseus, Hermes WebUI, OpenClaw, openclaw-os, VS Code, ACP) are plain text wordmark chips: no verified free mark was available. Terminal is a generic >_ glyph.
+
+Rail v3 additions (originals only; converted/cropped, never redrawn). Brand marks remain trademarks of their owners.
+odysseus.png - /Users/paulbloch/Documents/github/odysseus/static/icons/icon-512.png (Odysseus sailboat app icon), cropped to its alpha bounding box. Odysseus is AGPL-3.0 (LICENSE in that repo).
+hermes-webui.svg - "/Users/paulbloch/Documents/github/UI Experiments/reference/hermes-webui/static/favicon.svg", unchanged. MIT (Hermes Web UI Contributors).
+openclaw.svg - "/Users/paulbloch/Documents/github/UI Experiments/reference/openclaw/apps/linux/src-tauri/icons/icon.svg" (static claw mark; ui/public/favicon.svg is animated so not used), unchanged. MIT (OpenClaw Foundation).
+openclaw-os.svg - "/Users/paulbloch/Documents/github/UI Experiments/reference/openclaw-os/packages/claw-client/public/favicon.svg", unchanged. MIT (Thesys Inc).
+vscode.png - "/Users/paulbloch/Documents/github/UI Experiments/reference/vscode/resources/linux/code.png" (identical to microsoft/vscode main resources/linux/code.png), cropped to alpha bbox, scaled to 256 px wide. This is the Code - OSS product icon from the open-source repo (MIT code; Microsoft's branded Visual Studio Code ribbon logo is not in any local source).
+acp.svg - https://github.com/agentclientprotocol/agent-client-protocol/blob/main/docs/logo/light.svg (ACP's own wordmark logo), unchanged. Repo licence Apache-2.0.
+Terminal - inline generic >_ glyph in site/index.html (not a brand).
+Rendering: OpenHands, JetBrains, MCP, ACP as one-colour CSS masks; the others as <img> with grayscale(1) at 60% opacity (100% on hover/focus).
+
+claude.svg   simple-icons 16.35.0 (icons/claude.svg), CC0 icon file; Claude is a trademark of Anthropic.
+cursor.svg   simple-icons 16.35.0 (icons/cursor.svg), CC0 icon file; Cursor is a trademark of Anysphere.
+openai.svg   copy of the OpenAI mark shipped as docs/assets/sponsors/openai.svg in the MIT-licensed OpenClaw repo clone (UI Experiments/reference/openclaw); simple-icons no longer carries it. Format unchanged (rendered as a one-colour mask). OpenAI is a trademark of OpenAI.

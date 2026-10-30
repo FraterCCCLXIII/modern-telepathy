@@ -1,0 +1,387 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kamiji: give your AI more character</title>
+<meta name="description" content="Kamiji is a rigged, expressive 3D hand avatar and a set of Kamikin mochi characters for AI agents, tinted per agent.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ffd23f'/%3E%3Ccircle cx='11' cy='14' r='2' fill='%23222'/%3E%3Ccircle cx='21' cy='14' r='2' fill='%23222'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="threads.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="chat-widget.css">
+<link rel="stylesheet" href="voice-settings.css">
+<link rel="stylesheet" href="subtitles/subtitles.css">
+<link rel="stylesheet" href="plush.css">
+<link rel="stylesheet" href="tama.css">
+<link rel="stylesheet" href="chat-demo.css">
+<script type="importmap">
+{ "imports": {
+  "three": "/labs/kamiji/vendor/three/build/three.module.js",
+  "three/addons/": "/labs/kamiji/vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-bubble" href="#top" aria-label="Kamiji home"><img src="img/kamiji-bubble.svg" alt="" width="104" height="44"></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#what">What you get</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#motion">In motion</a>
+      <a href="#threads">In conversations</a>
+      <a href="#chat">Agent chat</a>
+      <a href="#install">Install</a>
+      <a href="#works-with">Works with</a>
+      <a href="#history">History</a>
+      <a href="#licence">Licence</a>
+      <a href="#contact">Contact</a>
+      <a href="kamikin/index.html">Kamikin</a>
+    </nav>
+    <div class="ws" data-ws-menu>
+      <button type="button" class="ws-btn" id="ws-btn" aria-expanded="false" aria-controls="ws-menu">Workshops <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="ws-menu" id="ws-menu" hidden></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>Give your AI<br>more character.</h1>
+      <p class="lead">Welcome to the age of <strong>Awesome</strong> Intelligence.<br>Shows what your agent is doing.<br>Tinted per agent, with faces, poses and shapes.</p>
+    <a class="powered" href="https://kosmos.computer" aria-label="Powered by Kosmos">
+      <span>Powered by</span>
+      <picture>
+        <img src="img/kosmos-logo.svg" alt="Kosmos" height="14">
+      </picture>
+    </a>
+    </div>
+    <div class="stage">
+      <div class="viewer hero-viewer" id="hero-hand" role="img" aria-label="Live 3D Kamiji hand with an idle animation">
+        <canvas></canvas>
+        <p class="fallback" hidden></p>
+      </div>
+      <div class="shadow" aria-hidden="true"></div>
+      <p class="hero-cap" id="hero-cap" aria-live="polite" hidden></p>
+      <div class="card controls" data-selector="rail" role="group" aria-label="Hand controls">
+        <div class="row"><span class="lbl" id="l-expr">Expression</span><div class="pills" id="g-expr" role="group" aria-labelledby="l-expr"></div></div>
+        <div class="row"><span class="lbl" id="l-shape">Shape</span><div class="pills" id="g-shape" role="group" aria-labelledby="l-shape"></div></div>
+        <div class="row"><span class="lbl" id="l-clip">Clip</span><div class="pills" id="g-clip" role="group" aria-labelledby="l-clip"></div></div>
+        <div class="row"><span class="lbl" id="l-mouth">Mouth</span><div class="pills" id="g-mouth" role="group" aria-labelledby="l-mouth"></div></div>
+        <div class="row" hidden><span class="lbl" id="l-accessory">Accessory</span><div class="pills" id="g-accessory" role="group" aria-labelledby="l-accessory"></div></div>
+        <div class="row"><span class="lbl" id="l-effect">Effect</span><div class="pills" id="g-effect" role="group" aria-labelledby="l-effect"></div></div>
+        <div class="row"><span class="lbl" id="l-tint">Tint</span><div class="swatches" id="g-tint" role="group" aria-labelledby="l-tint"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap roster-wrap" id="lib">
+    <div class="lib-head">
+      <div class="tabs" id="lib-tabs" role="tablist" aria-label="Model libraries"></div>
+      <div class="car-nav">
+        <button type="button" class="car-btn" id="car-prev" aria-label="Scroll left" disabled><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="car-btn" id="car-next" aria-label="Scroll right"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div class="lib-panels" id="lib-panels"></div>
+  </div>
+  <div class="wrap ww-rail-wrap">
+    <nav class="ww-rail ww-logos" aria-label="Works with">
+      <span class="ww-lbl" aria-hidden="true">Works with</span>
+      <a class="ww-logo" href="#works-with" aria-label="OpenHands" title="OpenHands"><span class="ww-mark" style="--m:url(img/works-with/openhands.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo" href="#works-with" aria-label="Odysseus" title="Odysseus"><img class="ww-img" src="img/works-with/odysseus.png" alt="" width="32" height="32"></a>
+      <a class="ww-logo" href="#works-with" aria-label="Hermes WebUI" title="Hermes WebUI"><img class="ww-img" src="img/works-with/hermes-webui.svg" alt="" width="32" height="32"></a>
+      <a class="ww-logo" href="#works-with" aria-label="OpenClaw" title="OpenClaw"><img class="ww-img" src="img/works-with/openclaw.svg" alt="" width="32" height="32"></a>
+      <a class="ww-logo" href="#works-with" aria-label="openclaw-os" title="openclaw-os"><img class="ww-img" src="img/works-with/openclaw-os.svg" alt="" width="32" height="32"></a>
+      <a class="ww-logo" href="#works-with" aria-label="VS Code" title="VS Code"><img class="ww-img" src="img/works-with/vscode.png" alt="" width="32" height="32"></a>
+      <a class="ww-logo" href="#works-with" aria-label="JetBrains" title="JetBrains"><span class="ww-mark" style="--m:url(img/works-with/jetbrains.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo" href="#works-with" aria-label="Model Context Protocol" title="Model Context Protocol"><span class="ww-mark" style="--m:url(img/works-with/modelcontextprotocol.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo ww-wide" href="#works-with" aria-label="Agent Client Protocol" title="Agent Client Protocol"><span class="ww-mark" style="--m:url(img/works-with/acp.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo" href="#works-with" aria-label="Claude" title="Claude"><span class="ww-mark" style="--m:url(img/works-with/claude.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo" href="#works-with" aria-label="OpenAI" title="OpenAI"><span class="ww-mark" style="--m:url(img/works-with/openai.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo" href="#works-with" aria-label="Cursor" title="Cursor"><span class="ww-mark" style="--m:url(img/works-with/cursor.svg)" aria-hidden="true"></span></a>
+      <a class="ww-logo" href="#works-with" aria-label="Terminal" title="Terminal"><svg class="ww-glyph" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><path d="M6 9l9 7-9 7M17 24h9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </nav>
+  </div>
+</section>
+
+<section id="what" class="section">
+  <div class="wrap split">
+    <h2>What you get</h2>
+    <ul class="list">
+      <li><h3>Kamiji hand <span class="badge ok">available</span></h3><p>One rigged GLB with a finger skeleton, face morph targets and four clips: Idle, Wave, Think, Celebrate. The React component adds more motions such as Spin, Bounce and Typing.</p></li>
+      <li><h3>Tint per agent <span class="badge ok">available</span></h3><p>Any CSS colour. A helper picks a stable colour from an agent name, so every agent keeps its own look.</p></li>
+      <li><h3>Expressions and poses <span class="badge ok">available</span></h3><p>Eight expressions (neutral, happy, excited, thinking, sad, angry, surprised, sleepy), hand poses, and a talking mouth.</p></li>
+      <li><h3>Shape morphs <span class="badge ok">available</span></h3><p>The hand blends into a sphere or a rounded cube and back.</p></li>
+      <li><h3>Emotes and Git icons <span class="badge ok">available</span></h3><p>Small animated emotes over the avatar, and GitHub status icons, as React components.</p></li>
+      <li><h3>14 Kamikin mochi <span class="badge ok">available</span></h3><p>Skinned GLB characters with idle clips and six swappable face states (neutral, blink, happy, joy, surprised, sad). Listed in <code>assets/mochi/index.json</code>.</p></li>
+      <li><h3>16 Rubbernose characters <span class="badge ok">available</span></h3><p>Skinned 1930s cartoon GLBs (eraser, alarm clock, soda can, sunflower, mug, pudding, light bulb, rocket, bell, cake, gift box, trash can, padlock, apple, cloud, trophy) with nine clips, six face states and a tintable body. Listed in <code>assets/rubbernose/index.json</code>.</p></li>
+      <li><h3>Emoji prop library <span class="badge ok">available</span></h3><p>24 clay-style 3D props (heart, star, check, fire, gear and more) in <code>assets/props/</code>, tintable by material colour. First batch; a React component for them is in progress.</p></li>
+      <li><h3>Framework-free core and web component <span class="badge plan">planned</span></h3><p>A <code>&lt;kamiji-avatar&gt;</code> element so non-React apps can use the hand.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="gallery" class="section">
+  <div class="wrap">
+    <div class="lb-intro">
+      <h2>Live gallery</h2>
+      <p class="sub">The real GLB files from the repository, rendered in your browser with three.js. The hand above uses the same file. Pick a library on the left.</p>
+    </div>
+    <div class="lb" id="lb">
+      <div class="lb-navwrap"><div class="lb-nav" id="lb-nav" role="listbox" aria-label="Libraries" aria-orientation="vertical"></div></div>
+      <div class="lb-main" id="lb-main" role="region" aria-label="Library">
+        <div class="lb-body" id="lb-body">
+          <header class="lb-head">
+            <div class="lb-titlerow"><h3 class="lb-title" id="lb-title">Kamikin mochi</h3><span class="badge lb-badge" id="lb-count">14</span><img class="lb-logo" id="lb-logo" src="img/kamikin-game-logo-light.svg" alt="Kamikin" width="96" height="24" hidden></div>
+            <p class="lb-desc" id="lb-desc"></p>
+            <p class="lb-note" id="lb-note" hidden></p>
+          </header>
+          <div class="lb-tools">
+            <div class="lb-tintwrap" id="lb-tintwrap"><span class="lbl" id="lb-tintlbl">Tint</span><div class="swatches" id="lb-tint" role="group" aria-labelledby="lb-tintlbl"></div></div>
+            <div class="lb-searchwrap"><label class="lb-sr" for="lb-search">Search this library</label><input class="lb-search" id="lb-search" type="search" placeholder="Search name or keyword" autocomplete="off" spellcheck="false"><span class="lb-status" id="lb-status" role="status" aria-live="polite"></span></div>
+          </div>
+          <aside class="lb-detail" id="lb-detail" aria-label="Selected item" hidden>
+            <div class="viewer lb-dv" id="lb-dv" role="img" aria-label="Live 3D preview"><canvas></canvas><p class="fallback" hidden></p></div>
+            <div class="lb-dt">
+              <h4 id="lb-dname"></h4>
+              <p class="lb-dmeta" id="lb-dmeta"></p>
+              <div class="lb-mats" id="lb-dmats"></div>
+              <ul class="lb-chips" id="lb-dchips" aria-label="Keywords"></ul>
+              <p class="lb-path"><code id="lb-dpath"></code></p>
+              <div class="lb-dact"><button type="button" class="pill" id="lb-dhero">Show in hero</button><button type="button" class="pill" id="lb-dclose">Close</button></div>
+            </div>
+          </aside>
+          <ul class="lb-grid" id="lb-grid" aria-label="Library items"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="motion" class="section">
+  <div class="wrap">
+    <div class="mo-head">
+      <h2>In motion</h2>
+      <p class="sub">Live Kamiji samples cycling through movements and expressions. Around each one, a 3D emoji from the prop library pops in, stays a moment and pops out. Never more than one at a time, and every accessory is followed by a beat with none. Prototype: Spin, Bounce, TurnPoint, Hello and Typing come from the component; Nod, Shake, Droop and Sway are demo-only.</p>
+    </div>
+    <div class="mo-controls" role="group" aria-label="Motion controls">
+      <div class="mo-ctl"><span class="lbl" id="mo-acc-l">Accessory</span><div class="pills" role="group" aria-labelledby="mo-acc-l"><button type="button" class="pill" data-mo-acc="auto" aria-pressed="true">Auto</button><button type="button" class="pill" data-mo-acc="none" aria-pressed="false">None</button></div></div>
+      <div class="mo-ctl mo-speed"><label class="lbl" for="mo-speed">Speed</label><input id="mo-speed" type="range" min="0" max="2" step="1" value="1" aria-describedby="mo-speed-out"><output id="mo-speed-out" for="mo-speed">normal</output></div>
+      <button type="button" class="pill mo-btn" id="mo-play" aria-pressed="false">Pause</button>
+    </div>
+    <p class="mo-note" id="mo-note" role="note" hidden>Reduced motion is on: each sample shows one still frame with its own accessory.</p>
+    <ul class="mo-grid" id="mo-grid" aria-label="Animated Kamiji samples"><li class="mo-fail">Loading 3D samples</li></ul>
+    <p class="mo-foot">Emoji are the 3D props from assets/props. Loading starts when a sample scrolls into view.</p>
+  </div>
+</section>
+
+<section id="threads" class="section" aria-labelledby="threads-h">
+  <div class="wrap">
+    <div class="th-intro">
+      <h2 id="threads-h">In conversations</h2>
+      <p class="sub">How the component libraries look inside a threaded conversation: avatars, moods, emotes, reactions, Git status with a metadata rail, thread layouts and the subtitle stack. Pick a library on the left. Prototype.</p>
+    </div>
+    <div id="th-app"><noscript><p class="hint-note">These demos need JavaScript.</p></noscript></div>
+  </div>
+</section>
+
+<section id="chat" class="section kcd" aria-labelledby="kcd-h">
+  <div class="wrap">
+    <div data-kcd><noscript><p class="hint-note">This demo needs JavaScript.</p></noscript></div>
+  </div>
+</section>
+
+<section id="tama" class="section" aria-labelledby="tama-h">
+  <div class="wrap">
+    <div class="tm-intro">
+      <h2 id="tama-h">A pocket Kamiji</h2>
+      <p class="sub">A playful demo: feed, play with and tuck in a tiny Kamiji, or switch the style and meet Kamiji in seven other tiny game genres. Prototypes, mini versions of familiar genres. Nothing is sent anywhere; each style saves only in your browser.</p>
+    </div>
+    <div data-tama><noscript><p class="hint-note">This demo needs JavaScript.</p></noscript></div>
+  </div>
+</section>
+
+<section id="install" class="section">
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="quiet" role="note"><strong>Private repository.</strong> You need access to the repo to follow the Today steps. There is no public download, npm package or CDN build yet.</p>
+
+    <div class="cols">
+      <article class="panel">
+        <h3>Today <span class="badge ok">works now</span></h3>
+        <p>Use the React component by vendoring it into your app. This is how OpenHands uses it.</p>
+        <ol class="steps">
+          <li>Clone the repository (access required):
+<pre><code>git clone https://github.com/FraterCCCLXIII/kamiji.git</code></pre></li>
+          <li>In your app (React 19 or newer), install the three dependencies the library uses, at the pinned versions:
+<pre><code>npm install three@0.186.1 react-icons@5.6.0</code></pre></li>
+          <li>Copy <code>src/</code> and <code>assets/kamiji.glb</code> into your app, keeping that layout, for example:
+<pre><code>vendor/kamiji/src/
+vendor/kamiji/assets/kamiji.glb</code></pre>
+            The component finds the model with <code>new URL("../assets/kamiji.glb", import.meta.url)</code>, so the relative path must stay, and your bundler must support that pattern (Vite does).</li>
+          <li>Use it:
+<pre><code>import { KamijiAvatar } from "./vendor/kamiji/src";
+import "./vendor/kamiji/src/kamiji.css"; // emote animations
+
+export function Agent() {
+  return (
+    &lt;KamijiAvatar
+      color="#ffd23f"
+      expression="happy"
+      pose="peace"
+      size={96}
+      alt="Planner agent"
+    /&gt;
+  );
+}</code></pre></li>
+        </ol>
+        <p>Props: <code>color</code>, <code>expression</code>, <code>animation</code>, <code>pose</code>, <code>poseDurationMs</code>, <code>speaking</code>, <code>lockFace</code>, <code>shape</code>, <code>shapeDurationMs</code>, <code>size</code>, <code>className</code>, <code>alt</code>. The index also exports <code>KamijiWithEmote</code>, <code>KamijiGitIcon</code> and <code>KamijiHandsUp</code>.</p>
+        <p>The 3D scene loads lazily and one WebGL renderer serves every avatar. Without WebGL, or with reduced motion on, it shows a flat SVG hand.</p>
+        <p>Mochi: copy <code>assets/mochi/</code> and load the GLBs with three.js yourself. There is no mochi React component yet.</p>
+      </article>
+
+      <article class="panel">
+        <h3>Soon <span class="badge plan">planned</span></h3>
+        <p>None of this is published. The names and snippets show the intended shape and may change.</p>
+        <p class="label">npm <span class="badge plan">planned</span></p>
+<pre><code># planned, not published
+npm install kamiji</code></pre>
+        <p class="label">Web component <span class="badge plan">planned</span></p>
+<pre><code>&lt;!-- planned, not published --&gt;
+&lt;script type="module" src="kamiji-avatar.js"&gt;&lt;/script&gt;
+&lt;kamiji-avatar color="#ffd23f" expression="happy"&gt;&lt;/kamiji-avatar&gt;</code></pre>
+        <p>The plan is a framework-free core, a custom element with <code>color</code>, <code>expression</code>, <code>pose</code>, <code>animation</code>, <code>shape</code> and <code>emote</code>, and a React wrapper over it with the same API as today.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="works-with" class="section">
+  <div class="wrap split">
+    <h2>Works with</h2>
+    <ul class="list">
+      <li><h3>OpenHands <span class="badge ok">works today</span></h3><p>Vendored in OpenHands Agent Canvas for feed and agent avatars.</p></li>
+      <li><h3>Odysseus <span class="badge plan">planned</span></h3><p>Plain JS UI. Drop <code>&lt;kamiji-avatar&gt;</code> into the HTML strings that build today's initials circle. First adapter planned.</p></li>
+      <li><h3>Hermes WebUI <span class="badge plan">planned</span></h3><p>Plain JS UI with no avatar today. Add an avatar slot beside the assistant turn.</p></li>
+      <li><h3>OpenClaw <span class="badge plan">planned</span></h3><p>Lit control UI. Custom elements work natively; keep the existing image or emoji as a fallback.</p></li>
+      <li><h3>openclaw-os <span class="badge plan">planned</span></h3><p>pnpm workspace. Not yet checked for a fit.</p></li>
+      <li><h3>VS Code <span class="badge plan">planned</span></h3><p>A webview that hosts the web component.</p></li>
+      <li><h3>JetBrains <span class="badge plan">planned</span></h3><p>A JCEF panel that hosts the web component.</p></li>
+      <li><h3>MCP and ACP <span class="badge plan">planned</span></h3><p>A mood hook so any agent can signal status, mood, colour and emote through a small JSON protocol.</p></li>
+      <li><h3>Terminal <span class="badge plan">planned</span></h3><p>Terminals have no WebGL, so pre-rendered sprite sheets (PNG or ANSI).</p></li>
+    </ul>
+    <p class="small">Logos are trademarks of their owners. Listed to show compatibility, not endorsement.</p>
+  </div>
+</section>
+
+<section id="history" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>History</h2>
+      <p class="sub">Kamiji grew out of several earlier face and avatar engines. Dates come from git history and file times; items marked unverified in <code>docs/history.md</code> are not certain.</p>
+    </div>
+    <ol class="timeline" id="timeline" aria-label="Development history"><li class="tl-loading">Loading history</li></ol>
+  </div>
+</section>
+<section id="licence" class="section">
+  <div class="wrap split">
+    <h2>Licence and trademarks</h2>
+    <div>
+    <ul class="licence">
+      <li><strong>Code:</strong> MIT.</li>
+      <li><strong>Characters and assets</strong> (the hand, Kamikin mochi, models, textures, props): free for non-commercial use under CC BY-NC 4.0, with credit.</li>
+      <li><strong>For-profit apps</strong> need the paid Premium Licence. It is a draft term sheet, not yet a contract. Contact <a href="mailto:openartist@gmail.com">openartist@gmail.com</a>.</li>
+      <li>"Kamiji" and "Kamikin" are trademarks of Paul Bloch.</li>
+    </ul>
+    <p>Credit line: "Kamiji by Paul Bloch" (or "Kamikin by Paul Bloch"), with a link to the licence and a note of any changes. Full text is in <code>LICENSE.md</code>, <code>LICENSE-COMMERCIAL.md</code> and <code>TRADEMARKS.md</code> in the repository.</p>
+    </div>
+  </div>
+</section>
+<section id="plush" class="section" aria-labelledby="plush-h">
+  <div class="wrap split plush-split">
+    <div class="plush-copy">
+      <h2 id="plush-h">Plush with a screen face</h2>
+      <p class="sub">A concept: a soft plush animal whose head is a screen, showing a Kamiji face. Your brand's mascot as a plush with a screen face.</p>
+      <ul class="list"><li><h3>Kamiji faces on the screen</h3><p>The same expressions, eyes, mouth and colour as the 3D characters on this page, drawn on the screen: happy, thinking, sleepy, surprised.</p></li><li><h3>Your animal, your face style</h3><p>A bear, a bunny, a cat or your own mascot, with a hand-drawn crayon look. Colour dots pick the pen colour, and a stylus draws.</p></li><li><h3>Could speak too</h3><p>It could speak with the same voice setup as the site.</p></li></ul>
+      <p class="cta-row"><a class="cta" href="#contact">Contact us</a></p>
+    </div>
+    <figure class="plush-fig">
+      <div class="plush-frame"><picture><source type="image/webp" srcset="img/plush/plush-bear-screen-800.webp 800w, img/plush/plush-bear-screen.webp 1312w" sizes="(max-width: 900px) calc(100vw - 32px), 560px"><img src="img/plush/plush-bear-screen.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="Concept render of a cream teddy-bear plush with a glossy screen face showing a smiling drawn face and a row of colour dots"></picture></div>
+      <figcaption>Concept render</figcaption>
+    </figure>
+  </div>
+</section>
+</main>
+
+<section id="contact" class="section">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Your own branded Kamiji</h2>
+      <p class="sub">Commission a Kamiji set made for your brand: your colours, your mascots, emoji and hands, your expressions, motion and props, delivered in formats you can use in your product.</p>
+      <p class="cta-row"><a class="cta" href="mailto:openartist@gmail.com?subject=Custom%20Kamiji%20set%20for%20our%20brand&body=Hi%2C%0A%0AWe%20would%20like%20a%20custom%20Kamiji%20set%20for%20our%20brand.%0A%0ABrand%20/%20company%3A%0AWebsite%3A%0AWhat%20it%20is%20for%20%28app%2C%20product%2C%20community%2C%20game%2C%20ads%29%3A%0ACharacters%20or%20emoji%20we%20have%20in%20mind%3A%0ABrand%20colours%3A%0AWhere%20it%20will%20be%20shown%20%28web%2C%20mobile%2C%20print%2C%20video%29%3A%0ARough%20timeline%3A%0A%0AThanks%2C%0A">Contact us</a></p>
+      <p class="quiet">The button opens an email to openartist@gmail.com. Nothing is sent from this page.</p>
+    </div>
+    <div>
+      <ul class="list">
+        <li><h3>Your colours</h3><p>The hand, the sphere head and the mochi tinted to your palette, with matching outline and shading options.</p></li>
+        <li><h3>Your mascots, emoji and hands</h3><p>A mascot, a small cast or a set of emoji and hands built like the ones on this page, so they work in the same avatars, reactions and threads.</p></li>
+        <li><h3>Your expressions, motion and props</h3><p>Faces, poses and short animation cycles for the moments your product needs, such as thinking, success, errors and waiting, plus props to go with them.</p></li>
+        <li><h3>Delivered to use</h3><p>Rigged glTF models and the React component that plays them, as in the install steps above. A web component for non-React apps is planned, not built.</p></li>
+        <li><h3>Licensing</h3><p>Custom sets for commercial use come under the Premium Licence, which is still a draft term sheet. We will agree the terms with you before any work starts.</p></li>
+      </ul>
+      <p class="small">Tell us about your brand, where the characters will appear and roughly when you need them, and we will reply with what a set could include. No prices or delivery times are fixed yet. Your mascot as a plush with a screen face is a concept we can talk about too.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tech-band" aria-label="Built with">
+  <div class="wrap tech-rail">
+    <span class="tech-lbl">Built with</span>
+    <div class="tech-scroll">
+      <ul class="tech-list">
+        <li><a class="tech-logo tech-vite" href="https://vite.dev" rel="noopener" aria-label="Vite" title="Vite"><span class="tech-mark" style="--m:url(img/tech/vite.svg)" aria-hidden="true"></span></a></li>
+        <li><a class="tech-logo tech-typescript" href="https://www.typescriptlang.org" rel="noopener" aria-label="TypeScript" title="TypeScript"><span class="tech-mark" style="--m:url(img/tech/typescript.svg)" aria-hidden="true"></span></a></li>
+        <li><a class="tech-logo tech-javascript" href="https://developer.mozilla.org/docs/Web/JavaScript" rel="noopener" aria-label="JavaScript" title="JavaScript"><span class="tech-mark" style="--m:url(img/tech/javascript.svg)" aria-hidden="true"></span></a></li>
+        <li><a class="tech-logo tech-threedotjs" href="https://threejs.org" rel="noopener" aria-label="Three.js" title="Three.js"><span class="tech-mark" style="--m:url(img/tech/threedotjs.svg)" aria-hidden="true"></span></a></li>
+        <li><a class="tech-logo tech-godotengine" href="https://godotengine.org" rel="noopener" aria-label="Godot" title="Godot"><span class="tech-mark" style="--m:url(img/tech/godotengine.svg)" aria-hidden="true"></span></a></li>
+        <li><a class="tech-logo tech-playcanvas" href="https://playcanvas.com" rel="noopener" aria-label="PlayCanvas" title="PlayCanvas"><span class="tech-mark" style="--m:url(img/tech/playcanvas.svg)" aria-hidden="true"></span></a></li>
+        <li><a class="tech-logo tech-kosmos" href="https://kosmos.computer" rel="noopener" aria-label="Kosmos" title="Kosmos"><span class="tech-mark" style="--m:url(img/tech/kosmos.svg)" aria-hidden="true"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="powered powered-foot" href="https://kosmos.computer" aria-label="Powered by Kosmos">
+      <span>Powered by</span>
+      <picture>
+        <img src="img/kosmos-logo.svg" alt="Kosmos" height="14">
+      </picture>
+    </a>
+    <a class="brand brand-old" href="#top" aria-label="Kamiji home">Kamiji<span class="dot">.</span></a>
+    <p>Kamiji and Kamikin by Paul Bloch. Code MIT, assets CC BY-NC 4.0. <a href="voice-lab/">Voice lab</a></p>
+    <p>Contact: <a href="mailto:openartist@gmail.com">openartist@gmail.com</a></p>
+    <p class="tech-fine">Logos are trademarks of their owners.</p>
+  </div>
+</footer>
+
+<script type="module" src="main.js"></script>
+<script type="module" src="logo3d.js"></script>
+<script type="module" src="motion.js"></script>
+<script type="module" src="threads.js"></script>
+<script type="module" src="workshop/menu.js"></script>
+<script type="module" src="history.js"></script>
+<script type="module" src="rail.js"></script>
+<script type="module" src="tama.js"></script>
+<script type="module" src="chat-demo.js"></script>
+<script type="module" src="shared-header.js"></script>
+<script type="module" src="chat-widget.js"></script>
+</body>
+</html>

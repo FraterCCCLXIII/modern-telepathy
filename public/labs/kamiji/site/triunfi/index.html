@@ -1,0 +1,192 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triunfi Card Lab</title>
+<meta name="description" content="Triunfi is an open, modular trading card game system and a lab for finding what makes one fun: cards as JSON, swappable resource rules, a deterministic engine, headless AI-vs-AI simulation and a playable web app.">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="triunfi.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-p" href="#top" aria-label="Triunfi, top of page"><span>Triunfi</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#cards">Cards</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#features">Features</a>
+      <a href="#status">Status</a>
+      <a href="#related">TCGL</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <p class="mono-h">Open card lab <span class="badge proto">prototype</span></p>
+      <h1>Triunfi</h1>
+      <p class="lead">An open card game system where the rules are data, so you can measure what makes a card game fun before you print anything.</p>
+      <p class="cta-row">
+        <a class="btn primary" href="#how">How it works</a>
+        <a class="btn" href="#numbers">See the numbers</a>
+      </p>
+    </div>
+    <ul aria-label="Three sample cards from the prototype set" class="cards hero-cards">
+      <li><article class="tcard"><div class="top"><span class="nm">Hawk</span><span class="cost" aria-label="Cost 1">1</span></div><div class="art">Art slot</div><p class="tx"><b>Swift.</b> Can attack the turn it enters.</p><div class="st"><span>1 / 1</span><span class="ty">Unit · Beast</span></div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">Bolt</span><span class="cost" aria-label="Cost 1">1</span></div><div class="art">Art slot</div><p class="tx">Deal 2 damage to a chosen enemy character.</p><div class="st"><span class="ty">Action</span></div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">War Banner</span><span class="cost" aria-label="Cost 3">3</span></div><div class="art">Art slot</div><p class="tx">Your units get +1 power.</p><div class="st"><span class="ty">Relic</span></div></article></li>
+    </ul>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="wrap split">
+    <h2>What it is</h2>
+    <div>
+      <p class="sub">Triunfi is two things at once: a small open format for trading card games, and a lab for testing how a game plays. Its starting question is Magic's resource problem. When your resources are cards in your deck, you get mana screw and flood, and Triunfi tries other answers and counts what happens.</p>
+      <p class="sub">The name comes from <em>trionfi</em>, the first tarot decks, which were a shared structure that many printers reinterpreted. The vision document says theme and genre are deliberately not decided yet.</p>
+      <div class="layers" role="list" aria-label="The three layers">
+        <div role="listitem"><b>Card data</b><span>Sets and decks are JSON files with namespaced ids (publisher:set:card) and a JSON Schema. Anyone can write one. Effects are a vocabulary such as damage, draw, buff and summon, not code.</span></div>
+        <div role="listitem"><b>Rules modules</b><span>The engine never mentions lands or ink. It asks the active resource system what you can afford and how to pay. The same cards play under any module, which is what makes comparison fair.</span></div>
+        <div role="listitem"><b>Core engine</b><span>TypeScript: turns, zones, targeting, effects and a seeded random generator, so a game with the same seed replays the same way. The web game and the headless simulation run the same engine.</span></div>
+      </div>
+      <p class="from">Source: docs/VISION.md; README.md; docs/RULES.md</p>
+      <h3 style="margin-top:2rem">Seven resource modules</h3>
+      <ul class="mods" aria-label="Resource modules">
+        <li>ramp</li><li>lands</li><li>inkwell</li><li>pitch</li><li>bank</li><li>tide</li><li>surge</li>
+      </ul>
+      <p class="sub" style="margin-top:1rem">Ramp is Hearthstone-style automatic growth, lands is Magic's, inkwell and pitch are in the spirit of Lorcana and Flesh and Blood, and bank follows Runeterra. Tide and surge are the project's own: tide makes you choose each turn between growing your energy and drawing a card, and surge lets you borrow up to 2 energy against next turn. The mechanics notebook credits the inspirations by name; this page only uses those names to describe the rules, with no affiliation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cards" class="section">
+  <div class="wrap">
+    <h2>Real cards from the JSON</h2>
+    <p class="sub">The prototype core set has 77 cards under a CC-BY-4.0 licence, with generic names and no art. These six are rebuilt as HTML from <code>sets/proto-core.json</code>. The rules text is my plain-language reading of each card's data; the app generates its own text from the same data.</p>
+    <ul class="cards">
+      <li><article class="tcard"><div class="top"><span class="nm">Spark Wisp</span><span class="cost" aria-label="Cost 1">1</span></div><div class="art">No art in set</div><p class="tx">When this dies, deal 1 damage to a random enemy character.</p><div class="st"><span>1 / 2</span><span class="ty">Unit · Spirit</span></div><div class="id">triunfi:proto:spark-wisp</div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">Bulwark Drone</span><span class="cost" aria-label="Cost 1">1</span></div><div class="art">No art in set</div><p class="tx"><b>Guard.</b> Enemies must attack this unit first.</p><div class="st"><span>0 / 3</span><span class="ty">Unit · Construct</span></div><div class="id">triunfi:proto:bulwark-drone</div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">Raider</span><span class="cost" aria-label="Cost 2">2</span></div><div class="art">No art in set</div><p class="tx">No abilities. A plain, fast attacker.</p><div class="st"><span>3 / 2</span><span class="ty">Unit · Soldier</span></div><div class="id">triunfi:proto:raider</div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">Forge</span><span class="cost" aria-label="Cost 3">3</span></div><div class="art">No art in set</div><p class="tx">Pay 2: summon a Recruit token.</p><div class="st"><span class="ty">Relic</span></div><div class="id">triunfi:proto:forge</div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">Last Stand</span><span class="cost" aria-label="Cost 2">2</span></div><div class="art">No art in set</div><p class="tx">Heal 3. If your life is 10 or less, heal 3 more and draw a card.</p><div class="st"><span class="ty">Action</span></div><div class="id">triunfi:proto:last-stand</div></article></li>
+      <li><article class="tcard"><div class="top"><span class="nm">Sweep</span><span class="cost" aria-label="Cost 4">4</span></div><div class="art">No art in set</div><p class="tx">Deal 2 damage to every enemy unit.</p><div class="st"><span class="ty">Action</span></div><div class="id">triunfi:proto:sweep</div></article></li>
+    </ul>
+    <p class="from" style="margin-top:1.2rem">Card names and stats checked against sets/proto-core.json. Hawk, Bolt and War Banner above come from the same file. The set has no art fields; the hatched panels are placeholders I added.</p>
+  </div>
+</section>
+
+<section id="numbers" class="section">
+  <div class="wrap">
+    <h2>What the simulations say</h2>
+    <p class="sub">Source: <code>reports/latest.md</code>, generated 2026-09-30. Midrange deck against midrange deck, 1,000 games per resource system, a simple greedy AI on both sides, seed 1, no second-player bonus. These are lab numbers for a prototype card pool, not a balance claim.</p>
+    <div class="scroll-x">
+    <table class="tbl">
+      <caption class="from" style="text-align:left;caption-side:bottom;padding-top:10px">P1 win: first player's win rate (50% is fair). Stuck: share of turns with cards in hand but nothing playable. Empty hand: share of turns starting with almost no cards.</caption>
+      <thead><tr><th>System</th><th>Avg turns</th><th>P1 win</th><th>Stuck</th><th>Empty hand</th><th>Energy / turn</th></tr></thead>
+      <tbody>
+        <tr><td>Ramp</td><td class="n">7.31</td><td class="n">73.7%</td><td class="n">6.8%</td><td class="n">1.7%</td><td class="n">4.08</td></tr>
+        <tr><td>Lands</td><td class="n">7.80</td><td class="n">44.2%</td><td class="n">26.3%</td><td class="n">16.5%</td><td class="n">2.12</td></tr>
+        <tr><td>Inkwell</td><td class="n">7.92</td><td class="n">39.8%</td><td class="n">14.5%</td><td class="n">29.6%</td><td class="n">2.65</td></tr>
+        <tr><td>Pitch</td><td class="n">4.26</td><td class="n">72.9%</td><td class="n">3.2%</td><td class="n">0.0%</td><td class="n">6.23</td></tr>
+        <tr><td>Bank</td><td class="n">7.34</td><td class="n">74.8%</td><td class="n">7.2%</td><td class="n">1.8%</td><td class="n">4.14</td></tr>
+        <tr><td>Tide</td><td class="n">7.48</td><td class="n">70.7%</td><td class="n">6.8%</td><td class="n">0.0%</td><td class="n">3.87</td></tr>
+        <tr><td>Surge</td><td class="n">7.02</td><td class="n">74.9%</td><td class="n">4.4%</td><td class="n">2.0%</td><td class="n">4.25</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="grid-cards">
+      <li><h3>Lands really does screw</h3><p>One turn in four, a player holds cards and can play none (26.3% stuck), the highest of the seven.</p><p class="from">Source: reports/latest.md; docs/MECHANICS.md</p></li>
+      <li><h3>Going first is strong</h3><p>The first player wins 71 to 75 percent under five of the seven systems. Only lands and inkwell, where every card is also a resource, flip it below 50 percent.</p><p class="from">Source: reports/latest.md; docs/FIRST-PLAYER.md</p></li>
+      <li><h3>Pitch breaks the cost curve</h3><p>Players spend over 6 energy a turn from turn one and games last about 4 turns, against 7 to 8 for the rest. A cost of 5 does not mean the same thing under every module.</p><p class="from">Source: reports/latest.md; docs/MECHANICS.md</p></li>
+    </ul>
+    <div class="note-card">
+      <p class="mono-h">Second-player fixes, tested</p>
+      <p>With the stronger Planner AI (500-game runs in the reports), the first player wins 81.0% under ramp with no compensation. Giving the second player one extra card and a Coin moves that to 51.3%, close to fair. The same fix pushes inkwell down to 12.3%, so one fix does not suit every module.</p>
+      <p class="from">Source: reports/first-player.md (300 games per cell, AI planner)</p>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>What is in the repository</h2>
+    <ul class="legend" aria-label="Badge key"><li><span class="badge ok">in code</span> present and described in the README</li><li><span class="badge proto">prototype</span> works as a lab, not a finished game</li><li><span class="badge unv">unverified</span> not tested by us</li></ul>
+    <ul class="grid-cards">
+      <li><h3>Deterministic engine <span class="badge ok">in code</span></h3><p>Seeded random numbers and one engine for play and simulation. Engine tests live in <code>tests/engine.test.ts</code> and run with <code>npm test</code>.</p><p class="from">Source: README; src/engine/</p></li>
+      <li><h3>Ability grammar <span class="badge ok">in code</span></h3><p>Triggers, conditions, effects, targets, auras, activated abilities and keywords such as swift, guard, barrier and deadly. Rules text is generated from the data.</p><p class="from">Source: docs/RULES.md</p></li>
+      <li><h3>Two AIs <span class="badge proto">prototype</span></h3><p>A fast greedy player, and a Planner that searches whole turns and simulates the opponent's reply. The docs say the Planner beats the greedy AI about 67 percent overall.</p><p class="from">Source: docs/MECHANICS.md (round 3); src/ai/</p></li>
+      <li><h3>Headless simulation <span class="badge ok">in code</span></h3><p><code>npm run sim</code> plays AI against AI and writes Markdown and JSON reports. Options pick systems, decks, seed, games, bonus cards and a deck matrix.</p><p class="from">Source: README; src/sim/</p></li>
+      <li><h3>Playable web app <span class="badge proto">prototype</span></h3><p>React and Vite. Three tabs: Play against the AI, a Sim Lab, and a card gallery. We did not launch it for this page.</p><p class="from">Source: README; src/web/ (PlayView, SimLab, CardGallery)</p></li>
+      <li><h3>Open licensing <span class="badge unv">unverified</span></h3><p>The card sets say CC-BY-4.0. The package file says UNLICENSED for the code, and no licence file was found at the top level, so the code's terms are unclear.</p><p class="from">Source: sets/proto-core.json; package.json</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>Status</h2>
+    <ul class="grid-cards">
+      <li><h3>Run, per the repository <span class="badge ok">in code</span></h3><p>Reports dated 2026-09-30 exist, so the simulator was run on its author's machine. Two commits are in the history.</p></li>
+      <li><h3>Not run by us <span class="badge unv">unverified</span></h3><p>We read the code, docs and reports and did not run the tests, the simulator or the web app. The numbers above are quoted, not reproduced.</p></li>
+      <li><h3>Open questions <span class="badge plan">planned</span></h3><p>The vision lists balancing independent sets, colour or faction identity, the minimal stable core, and who versions the format. The theme is also undecided.</p></li>
+      <li><h3>Simple AI caveat <span class="badge proto">prototype</span></h3><p>The notebook says synergy decks under-perform with a simple AI, so balance numbers for them should not be trusted yet.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="related" class="section">
+  <div class="wrap">
+    <div class="related">
+      <h2>Related: TCGL <span class="badge proto">prototype</span></h2>
+      <p class="sub">A separate sibling repository, not part of Triunfi. TCGL is a monorepo for a rules core plus a presentation layer:</p>
+      <ul class="grid-cards">
+        <li><h3>Headless rules core</h3><p><code>@tcgl/core</code>: a game action goes in, events and a new state come out. No React or DOM, so it runs in Node and the browser. Replays re-fold the accepted actions.</p></li>
+        <li><h3>3D presentation</h3><p>React Three Fiber cards, playmat and zones, drawn from the game state. Presentation only, not rules.</p></li>
+        <li><h3>Authoritative server</h3><p>A WebSocket gateway where only the server applies actions. Clients send requests and receive state patches in order.</p></li>
+      </ul>
+      <p class="from" style="margin-top:1.2rem">Source: TCGL/README.md; packages/core/ARCHITECTURE.md. A stub module for an MTG-like rules layer exists. We did not run or view the demo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap">
+    <h2>Links</h2>
+    <div class="cols">
+      <article class="panel">
+        <h3>The repository</h3>
+        <p>A local checkout named <code>Triunfi</code>; this page does not link to a public address because the README gives none. Read <code>docs/VISION.md</code>, <code>docs/MECHANICS.md</code>, <code>docs/SURVEY.md</code>, <code>docs/FIRST-PLAYER.md</code> and <code>docs/RULES.md</code>.</p>
+      </article>
+      <article class="panel">
+        <h3>Try it</h3>
+<pre><code>npm install
+npm run dev    # play, Sim Lab, cards
+npm run sim    # writes reports/latest.md
+npm test</code></pre>
+        <p class="src">Commands from the README.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Triunfi. Research prototype; card sets licensed CC-BY-4.0 per the repository.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>

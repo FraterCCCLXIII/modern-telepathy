@@ -1,0 +1,140 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT · Copyright (c) 2026 Paul Bloch (Kosmos Engine)
+     Serve the repo root (python3 -m http.server) and open /assets/props/shapes/preview.html -->
+<meta charset="utf-8">
+<title>Kamiji shapes and reactions</title>
+<style>
+  body{margin:0;font:13px system-ui;background:#f1ece4;color:#333}
+  header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:#fff;position:sticky;top:0;z-index:2}
+  h2{margin:14px 16px 0;font-size:14px}
+  #morph{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:10px 12px;padding:10px;background:#fff;border-radius:10px}
+  #morph canvas{width:220px;height:220px}
+  #morph label{display:block;margin:4px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:12px}
+  .cell{background:#fff;border-radius:10px;padding:6px;text-align:center}
+  canvas{width:100%;height:150px;display:block}
+  .row{display:flex;justify-content:center;gap:8px;align-items:center}
+  .small{width:48px;height:48px}
+  small{color:#888}
+  #sl{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 14px;max-width:760px;font-size:11px}
+  #sl label{display:flex;gap:6px;align-items:center;margin:0}
+  #sl input{flex:1;min-width:0}
+  details{flex:1 1 320px}
+  body.big .grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  body.big .cell canvas:not(.small){height:290px}
+</style>
+<header>
+  <b>Kamiji shapes and reactions</b>
+  <label>tint <input type="color" id="tint" value="#ffd23f"></label>
+  <label><input type="checkbox" id="useDefault" checked> per-item suggested tint</label>
+  <small>only Clay is tinted; role materials keep their baked colours</small>
+  <span id="count"></span>
+</header>
+<div id="morphwrap"><h2>Morph tween (kamiji-shapes-morph.glb, one mesh, <span id="mcount"></span> shape keys)</h2>
+<div id="morph">
+  <canvas id="mc" width="440" height="440"></canvas>
+  <div>
+    <label>from <select id="ma"></select></label>
+    <label>to <select id="mb"></select></label>
+    <label>mix <input type="range" id="mt" min="0" max="1" step="0.01" value="0"></label>
+    <label><input type="checkbox" id="auto" checked> auto cycle through all shapes</label>
+    <small id="minfo"></small>
+  </div>
+  <details id="sliders" open><summary>per-target influence sliders (blend several shapes at once)</summary><div id="sl"></div></details>
+</div></div>
+<h2>Body shapes <span id="scount"></span></h2>
+<div id="g-shape" class="grid"></div>
+<h2>Reactions</h2>
+<div id="g-reaction" class="grid"></div>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+const index = await (await fetch("index.json")).json();
+const only = new URLSearchParams(location.search).get("cat");
+if (location.search.includes("big")) document.body.classList.add("big");
+const items0 = index.filter(p => (p.category === "shape" || p.category === "reaction") && (!only || p.category === only));
+if (only) document.getElementById("morphwrap").style.display = "none";
+document.getElementById("count").textContent = items0.length + " items";
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(2);
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8a890, 1.6));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(2, 3, 4); scene.add(key);
+const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 20); cam.position.set(0, 0, 3.6);
+const loader = new GLTFLoader();
+const tint = document.getElementById("tint"), useDef = document.getElementById("useDefault");
+const items = [];
+const sw = location.search.includes("still");
+function setup(root) {
+  // Only the "Clay" material is tinted; every other material keeps its baked glTF colour.
+  const clay = new THREE.MeshStandardMaterial({ roughness: 0.6 });
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    const mats = Array.isArray(o.material) ? o.material : [o.material];
+    const m = mats.map(x => (x.name === "Clay" ? clay : x));
+    o.material = Array.isArray(o.material) ? m : m[0];
+  });
+  return { clay };
+}
+for (const p of items0) {
+  const cell = document.createElement("div"); cell.className = "cell";
+  cell.innerHTML = `<canvas width=300 height=300></canvas><div class=row><canvas class=small width=96 height=96></canvas><div><b>${p.name}</b><br><small>${p.triangles} tris · ${(p.bytes/1024).toFixed(0)} KB${p.materials && Object.keys(p.materials).length ? " · " + Object.keys(p.materials).join(" ") : ""}</small></div></div>`;
+  document.getElementById("g-" + p.category).append(cell);
+  const [big, small] = cell.querySelectorAll("canvas");
+  const gltf = await loader.loadAsync(p.file);
+  const m = setup(gltf.scene);
+  items.push({ p, root: gltf.scene, m, c: [big.getContext("2d"), small.getContext("2d")] });
+}
+// morph panel
+const mg = await loader.loadAsync("kamiji-shapes-morph.glb");
+const mm = setup(mg.scene);
+let mesh; mg.scene.traverse(o => { if (o.isMesh) mesh = o; });
+const names = ["sphere", ...Object.keys(mesh.morphTargetDictionary)];
+for (const id of ["ma", "mb"]) for (const n of names) document.getElementById(id).add(new Option(n, n));
+document.getElementById("mb").value = names[1];
+document.getElementById("mcount").textContent = names.length - 1;
+document.getElementById("scount").textContent = "(" + items0.filter(p => p.category === "shape").length + ", morph:false are standalone only)";
+const sliders = {};
+for (const n of names.slice(1)) {
+  const l = document.createElement("label"); l.innerHTML = `${n}<input type="range" min="0" max="1" step="0.01" value="0">`;
+  sliders[n] = l.querySelector("input");
+  sliders[n].addEventListener("input", () => { document.getElementById("auto").checked = false; });
+  document.getElementById("sl").append(l);
+}
+document.getElementById("minfo").textContent = names.length + " shapes, " + mesh.geometry.attributes.position.count + " vertices each";
+const mc = document.getElementById("mc").getContext("2d");
+function setMix(a, b, t) {
+  mesh.morphTargetInfluences.fill(0);
+  if (a !== "sphere") mesh.morphTargetInfluences[mesh.morphTargetDictionary[a]] += 1 - t;
+  if (b !== "sphere") mesh.morphTargetInfluences[mesh.morphTargetDictionary[b]] += t;
+  if (!document.getElementById("auto").checked) {
+    for (const n in sliders) if (+sliders[n].value > 0) mesh.morphTargetInfluences[mesh.morphTargetDictionary[n]] += +sliders[n].value;
+  }
+}
+const tmp = new THREE.Color();
+function draw(root, canv, rot) {
+  const s = canv.canvas.width; renderer.setSize(s, s, false);
+  scene.add(root); root.rotation.y = rot; renderer.render(scene, cam);
+  canv.clearRect(0, 0, s, s); canv.drawImage(renderer.domElement, 0, 0, s, s); scene.remove(root);
+}
+function frame(t) {
+  for (const it of items) {
+    tmp.set(useDef.checked ? it.p.tint : tint.value); it.m.clay.color.copy(tmp);
+    const rot = sw ? 0.5 : Math.sin(t / 1500 + items.indexOf(it)) * 0.7;
+    for (const c of it.c) draw(it.root, c, rot);
+  }
+  tmp.set(useDef.checked ? "#ffd23f" : tint.value); mm.clay.color.copy(tmp);
+  if (document.getElementById("auto").checked) {
+    for (const n in sliders) sliders[n].value = 0;
+    const k = (t / 1400) % names.length, i = Math.floor(k), f = k - i;
+    const e = f * f * (3 - 2 * f);
+    const a = names[i], b = names[(i + 1) % names.length];
+    document.getElementById("ma").value = a; document.getElementById("mb").value = b; document.getElementById("mt").value = e;
+  }
+  setMix(document.getElementById("ma").value, document.getElementById("mb").value, +document.getElementById("mt").value);
+  draw(mg.scene, mc, sw ? 0.5 : Math.sin(t / 2500) * 0.6);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>

@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can the kosmos engine run on TempleOS, and what is the best way | TempleOS Desktop Docs</title>
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("td-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="../../assets/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="page font">
+<a class="skip" href="#content">Skip to the article</a>
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="topbar-title" href="../../index.html">TempleOS Desktop Docs</a>
+  <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+<div class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+  <div class="side-head">
+    <a class="brand" href="../../index.html"><span class="brand-mark" aria-hidden="true">&#x2720;</span><span>TempleOS Desktop Docs</span></a>
+    <button type="button" class="icon-btn theme-btn" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.5 5.5 0 0 1 10 2.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="search">
+    <label class="sr-only" for="q">Search the documentation</label>
+    <input id="q" type="search" placeholder="Search docs   ( / )" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="results" class="results" role="region" aria-live="polite" hidden></div>
+  <nav id="tree" class="tree" aria-label="Pages">
+<details class="nav-sec" data-sec="Overview"><summary>Overview<span class="count">4</span></summary><ul><li><a href="../../readme/index.html">Desktop README</a></li><li><a href="../../docs/os-foundation-plan/index.html">Kosmos OS foundation: apps that run normally, no capture</a></li><li><a href="../../docs/core-apps-plan/index.html">Kosmos Temple Desktop: core apps and how to build them</a></li><li><a href="../../docs/holyc-native-apps-plan/index.html">HolyC-native apps, including a web browser</a></li></ul></details>
+<details class="nav-sec" data-sec="Desktop and renderer"><summary>Desktop and renderer<span class="count">3</span></summary><ul><li><a href="../../docs/font-format-v2/index.html">KSFONT2.BIN, font file format v2 (2026-10-27)</a></li><li><a href="../../docs/kamiji-tab/index.html">Settings &gt; Kamiji: characters, creator, host service</a></li><li><a href="../../docs/wallpapers/index.html">Wallpapers: photos on the desk (phase A host side done, phase B guest side planned)</a></li></ul></details>
+<details class="nav-sec" data-sec="Apps"><summary>Apps<span class="count">16</span></summary><ul><li><a href="../../docs/apps/00-kosmos-os-primitives/index.html">Kosmos OS primitives for the HolyC native apps</a></li><li><a href="../../docs/apps/01-porting-method/index.html">Porting method: Kosmos OS shell primitives to the Temple desktop</a></li><li><a href="../../docs/apps/ai-ide/index.html">AI IDE for the Kosmos Temple Desktop</a></li><li><a href="../../docs/apps/applications-folder/index.html">Applications folder: plan</a></li><li><a href="../../docs/apps/contacts/index.html">Contacts app for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/email/index.html">Email client for the Kosmos HolyC desktop: plan</a></li><li><a href="../../docs/apps/fonts/index.html">Font Manager: plan</a></li><li><a href="../../docs/apps/icon-style-editor/index.html">Icon Style Editor (app &quot;Icons&quot;, desk3/03c-iconstyle.HC)</a></li><li><a href="../../docs/apps/maps/index.html">Maps app: plan</a></li><li><a href="../../docs/apps/music/index.html">Music app: plan</a></li><li><a href="../../docs/apps/podcast-port/index.html">Podcasts: port of the Kosmos OS podcast app (phase A: host and spec; phase B: the HolyC app)</a></li><li><a href="../../docs/apps/slides/index.html">Slides for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/spreadsheets/index.html">Spreadsheets for the TempleOS desktop (HolyC)</a></li><li><a href="../../docs/apps/weather-music-prototype/index.html">Weather and Music prototype: design notes</a></li><li><a href="../../docs/apps/weather/index.html">Weather app: plan</a></li><li><a href="../../docs/apps/window-style-editor/index.html">Window Style Editor (app 12, &quot;Windows&quot;)</a></li></ul></details>
+<details class="nav-sec" data-sec="Browser"><summary>Browser<span class="count">8</span></summary><ul><li><a href="../../docs/browser-architecture/index.html">Kosmos Browser: architecture and specification</a></li><li><a href="../../docs/browser-features/index.html">Kosmos Browser: feature inventory</a></li><li><a href="../../docs/browser-plan/index.html">Browser v0 for the HolyC desktop</a></li><li><a href="../../docs/browser-painter-status/index.html">Browser M2 painter: status (stream 3)</a></li><li><a href="../../docs/browser-test-sites/index.html">Kosmos Browser: test sites</a></li><li><a href="../../browser/engine/readme/index.html">Browser engine (spike)</a></li><li><a href="../../browser/host/dlist-format/index.html">DLIST binary format (guest reader spec)</a></li><li><a href="../../tests/browser/results/m1-summary/index.html">Kosmos Browser M1: host engine site run</a></li></ul></details>
+<details class="nav-sec" data-sec="Hub and host services"><summary>Hub and host services<span class="count">3</span></summary><ul><li><a href="../../apps-host/readme/index.html">apps-host: run Electron apps on the host, show them in the desktop</a></li><li><a href="../../apps-host/hub/podcast/index.html">Podcast service (svcpodcast.py): protocol for the HolyC side</a></li><li><a href="../../apps-host/hub/sheet/index.html">sheet service (host half of Spreadsheets)</a></li></ul></details>
+<details class="nav-sec" open data-sec="Engine and platform"><summary>Engine and platform<span class="count">7</span></summary><ul><li><a href="../../docs/engine-on-templeos/index.html" aria-current="page">Can the kosmos engine run on TempleOS, and what is the best way</a></li><li><a href="../../aiwnios/readme/index.html">Aiwnios desktop</a></li><li><a href="../../docs/dev-box/index.html">Dev Box: complete software development from the HolyC desktop</a></li><li><a href="../../docs/web-apps/index.html">Web-technology apps on the HolyC desktop: design study</a></li><li><a href="../../docs/electron-apps/index.html">Electron apps in the HolyC desktop (prototype)</a></li><li><a href="../../docs/artcraft-apps-on-templeos/index.html">ArtCraft Crafting Apps on the HolyC TempleOS desktop: feasibility study</a></li><li><a href="../../docs/kamiji-on-templeos/index.html">Kamiji on the HolyC TempleOS desktop and on Aiwnios: study</a></li></ul></details>
+<details class="nav-sec" data-sec="Research and reviews"><summary>Research and reviews<span class="count">4</span></summary><ul><li><a href="../../docs/plan-review/index.html">Review of the HolyC-native apps plan</a></li><li><a href="../../docs/holyc-improvement-analysis/index.html">Improving HolyC on all of its deficits: analysis and ranked plan</a></li><li><a href="../../docs/kosmos-app-port-research/index.html">Porting kosmos-app into the TempleOS desktop: feasibility report</a></li><li><a href="../../docs/electron-tauri-support-research/index.html">Running Electron and Tauri apps inside the TempleOS desktop: research and route</a></li></ul></details>
+<details class="nav-sec" data-sec="Status reports"><summary>Status reports<span class="count">3</span></summary><ul><li><a href="../../docs/apps/clock-launchpad-status/index.html">Clock suite and Launchpad: status (2026-10-27)</a></li><li><a href="../../docs/apps/statusbar-status/index.html">Menu bar status items: status (work stopped early, unfinished)</a></li><li><a href="../../docs/apps/weather-music-status/index.html">Weather and Music: status (2026-10-27, branch task/templeos-shell)</a></li></ul></details>
+  </nav>
+</aside>
+<div class="main">
+  <div class="layout">
+    <main id="content" class="article-col" tabindex="-1">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><span>Engine and platform</span></li><li aria-current="page">Can the kosmos engine run on TempleOS, and what is the best way</li></ol></nav>
+      <article class="doc">
+        <h1 class="doc-title">Can the kosmos engine run on TempleOS, and what is the best way</h1>
+        <div class="doc-meta"><span>Edited 2026-10-27</span><span class="src">docs/engine-on-templeos.md</span></div>
+        <div class="doc-body">
+
+<p>Feasibility study, 2026-10-27, branch task/templeos-shell. No engine crate was touched; all experiment code lives in the session scratchpad (<code>.../scratchpad/engine-on-templeos/</code>, not in the repo).</p>
+<p>Tags: <strong>[R]</strong> verified by running something this session. <strong>[S]</strong> verified by reading source (path given). <strong>[M]</strong> from memory or inference, not checked.</p>
+<h2 id="1-answer-in-one-paragraph">1. Answer in one paragraph<a class="headerlink" href="#1-answer-in-one-paragraph" title="Link to this section">#</a></h2>
+<p>Yes, in a limited and well-defined form. A deterministic slice of the engine, compiled by rustc as <code>no_std</code> for x86-64 and wrapped as a TempleOS <code>.BIN</code>, <strong>was loaded into TempleOS V5.03, called from HolyC, and returned the same 64-bit values as the native aarch64 build</strong> (blake3 state hash and a 10,000-tick f32/libm physics loop) [R]. That settles the hard questions for route 1 (ABI, loader format, SSE, float determinism, task switching). What is not settled is size: the real <code>kosmos-sim</code> and <code>kosmos-physics</code> pull <code>bevy_ecs</code>, <code>rapier3d</code>, <code>serde_json</code>, <code>thiserror</code> and <code>HashMap</code>, which need <code>alloc</code> and a std-free port of our own crates; that is weeks, not days, and was not attempted. The whole engine (wgpu renderer, winit, threads, files, network, MCP) cannot and should not run inside TempleOS. Recommended: route 3 now (already how the desktop works, zero risk), route 1 as a gated spike for the sim core only, and route 4 on Aiwnios as a cheap by-product of a C-ABI build. Do not hand-port to HolyC.</p>
+<h2 id="2-hard-facts-established-section-b">2. Hard facts established (section B)<a class="headerlink" href="#2-hard-facts-established-section-b" title="Link to this section">#</a></h2>
+<h3 id="toolchain-available-r">Toolchain available [R]<a class="headerlink" href="#toolchain-available-r" title="Link to this section">#</a></h3>
+<ul>
+<li><code>rustup target list --installed</code> for the active toolchain (1.97.1): <code>aarch64-apple-darwin</code>, <code>wasm32-unknown-unknown</code>, <code>x86_64-unknown-linux-gnu</code>. <strong><code>x86_64-unknown-none</code> is not installed.</strong> Nothing was installed.</li>
+<li><code>nightly-2025-12-04</code> (rustc 1.93.0-nightly) has <code>rust-src</code>. <code>rustc -Zunstable-options --print target-spec-json --target x86_64-unknown-none</code> works without the target installed (the spec is built in), so a custom JSON can be derived from it.</li>
+<li><code>cargo -Zbuild-std=core,compiler_builtins</code> <strong>fails offline</strong>: build-std resolves the whole std workspace and the registry cache has no <code>dlmalloc</code> (and no <code>compiler_builtins</code>). Using it needs network access to crates.io (downloading source crates, no tool install). <strong>What the user would need to approve: either <code>rustup target add x86_64-unknown-none</code> (a tier-2 prebuilt <code>core</code>+<code>compiler_builtins</code>, about 30 MB, no network use at build time after that), or letting <code>-Zbuild-std</code> fetch std's dependencies.</strong> Either is needed for the soft-float variant with float code (see below).</li>
+<li>Workaround that needed neither: build <code>libcore</code> by hand with the nightly rustc from <code>rust-src</code> (7 s) into a private sysroot for the custom target, supply a 20-line stand-in <code>compiler_builtins</code> (memcpy, memmove, memset, memcmp, bcmp), and point cargo at it with <code>RUSTFLAGS=--sysroot=...</code>. That built <code>libm</code>, <code>blake3</code> and the test crate with plain <code>cargo build --offline</code> [R]. For the rest of the plan, installing the target is cleaner.</li>
+</ul>
+<h3 id="trap-found-the-target-json-must-be-named-x86_64-r">Trap found: the target JSON must be named <code>x86_64-...</code> [R]<a class="headerlink" href="#trap-found-the-target-json-must-be-named-x86_64-r" title="Link to this section">#</a></h3>
+<p><code>blake3</code>'s build script reads the first dash-separated component of <code>$TARGET</code>. A target file called <code>ks-sse2.json</code> gave <code>TARGET=ks-sse2</code>, the script concluded "not x86_64", configured no SIMD modules, and the build failed with "could not find <code>sse2</code> in the crate root". Renaming to <code>x86_64-ks-sse2.json</code> fixed it. Any crate with an arch-sniffing build script will do the same.</p>
+<h3 id="two-custom-targets-derived-from-the-builtin-x86_64-unknown-none">Two custom targets (derived from the builtin <code>x86_64-unknown-none</code>)<a class="headerlink" href="#two-custom-targets-derived-from-the-builtin-x86_64-unknown-none" title="Link to this section">#</a></h3>
+<ul>
+<li><code>x86_64-ks-sse2</code>: <code>code-model small</code> (the builtin one is <code>kernel</code>, which assumes addresses in the top 2 GB and is wrong for TempleOS, whose code heap is the low 2 GB), <code>relocation-model pic</code>, <code>disable-redzone</code>, <code>panic-strategy abort</code>, SSE and SSE2 enabled, no SSE3 and up, no x87 use for f32/f64.</li>
+<li><code>x86_64-ks-soft</code>: same but <code>-mmx,-sse,-sse2 ... +soft-float</code> and <code>rustc-abi x86-softfloat</code>. Float ops become <code>compiler_builtins</code> calls (<code>__addsf3</code> and so on). <strong>Not built with float code</strong> (needs the real <code>compiler_builtins</code>); built and checked with integer-only code.</li>
+</ul>
+<h3 id="the-test-crate-ks-eng-no_std-no-alloc-r">The test crate (<code>ks-eng</code>, no_std, no alloc) [R]<a class="headerlink" href="#the-test-crate-ks-eng-no_std-no-alloc-r" title="Link to this section">#</a></h3>
+<p>Exports <code>ks_add</code>, <code>ks_hash_abc</code> (blake3 first 8 bytes, byte-identical to <code>kosmos_core::state_hash</code>; same locked versions <code>blake3 1.8.7</code> with <code>pure</code>, <code>libm 0.2.16</code> as <code>Cargo.lock</code> pins), and <code>ks_run(seed, ticks)</code>: 16 bodies, f32 state, <code>libm::sinf/cosf/sqrtf</code>, a SplitMix64 kick, final state hashed. It stands in for the engine's float policy (rust-engine.md 4.2: IEEE f32, <code>libm</code> transcendentals, no <code>mul_add</code>).</p>
+<p>Inspection with <code>objdump -d</code> (Apple's LLVM objdump reads x86-64 ELF) [R]:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>build</th>
+<th>size</th>
+<th>xmm instructions</th>
+<th>x87</th>
+<th>calls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sse2, with float</td>
+<td>3,644 disassembly lines, 19 KB <code>.BIN</code></td>
+<td>1,744 lines mention xmm (expected)</td>
+<td>0</td>
+<td>11 calls, all internal: blake3, libm <code>rem_pio2_large</code>, <code>core::panicking</code> (loops forever), plus <code>memcpy</code>/<code>memset</code> through two GOT slots. No libc symbol.</td>
+</tr>
+<tr>
+<td>soft, integer only</td>
+<td>1,032 lines, 3.9 KB <code>.BIN</code></td>
+<td><strong>0</strong></td>
+<td>0</td>
+<td>1 internal call (blake3 portable compress)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Blake3 under the soft target selects only its portable path (the SSE modules are <code>cfg</code>-gated off), so no hidden xmm. Under the sse2 target it also links its SSE4.1 module (dispatch is a compile-time <code>cfg!</code>, no CPUID in no_std); harmless but dead weight.</p>
+<p>Link step: <code>rust-lld -flavor gnu -pie --no-dynamic-linker --gc-sections -T ks.ld</code>, base address 0, one blob. The only relocations are 2 <code>R_X86_64_RELATIVE</code> (the GOT slots for mem*), which map exactly onto TempleOS <code>IET_ABS_ADDR</code>.</p>
+<h2 id="3-route-1-in-detail-the-bin-wrapper-format-read-from-source-s-and-run-r">3. Route 1 in detail: the <code>.BIN</code> wrapper (format read from source) [S] and run [R]<a class="headerlink" href="#3-route-1-in-detail-the-bin-wrapper-format-read-from-source-s-and-run-r" title="Link to this section">#</a></h2>
+<p>Format, from <code>Kernel/KLoad.HC</code>, <code>Kernel/KernelA.HH:383-427</code>, <code>Compiler/CMain.HC:534-560</code> in the extracted ISO sources:</p>
+<ul>
+<li>Header <code>CBinFile</code> is <strong>32 bytes</strong>, not 40 as <code>holyc-improvement-analysis.md</code> section C says (U16 jmp, U8 module_align_bits, U8 reserved, U32 signature, then three I64: org, patch_table_offset, file_size). <code>jmp</code> = <code>0xEB | (30 &lt;&lt; 8)</code>; signature <code>'TOSB'</code> = 0x42534F54; <strong><code>org</code> must be <code>INVALID_PTR</code>, which is <code>I64_MAX</code> (0x7FFF...F), not -1</strong> (<code>KernelA.HH:40</code>), or <code>Load</code> copies to a fixed address; <code>module_align_bits</code> 4 gives a 16-byte aligned <code>module_base</code> (needed for SSE constant loads).</li>
+<li>Image bytes follow at offset 32 (<code>module_base</code>). Exports are made visible to HolyC through the hash table.</li>
+<li>Patch table at <code>patch_table_offset</code>, records <code>U8 type; U32 value; NUL-terminated name</code>, then payload: <code>IET_REL32_EXPORT</code>=16 (value = offset, symbol = base + offset), <code>IET_ABS_ADDR</code>=20 (value = count, empty name, then <code>count</code> U32 offsets; the loader does <code>*(U32*)(base+off) += base</code>, so the 64-bit slot must hold the link-time address in its low 32 bits, which works because the code heap is below 2 GB), <code>IET_END</code>=0 followed by 16 zero bytes. File size rounded to 16.</li>
+<li>The writer is 25 lines of Python (<code>mkbin.py</code>: <code>rust-objcopy -O binary</code>, symbols from <code>objdump -t</code>, relative relocs from <code>objdump --dynamic-reloc</code>).</li>
+</ul>
+<p>Calling convention: the <code>.BIN</code> is SysV, TempleOS is stack-based, callee-pops. One HolyC <code>asm{}</code> trampoline serves every export (<code>KseSysV2(fn, a, b)</code>): load fn from <code>SF_ARG1[RBP]</code>, args from <code>SF_ARG2/3</code> into RDI/RSI, save RBX/RSI/RDI/R10/R11 (SysV callee clobbers RSI, RDI, R10, R11 that TempleOS expects preserved; R12-R15, RBX, RBP are preserved by SysV), <code>AND RSP,-16</code> because TempleOS gives no alignment and rustc spills with <code>movaps</code>, <code>CALL RAX</code>, restore, <code>RET1 24</code>. The exported address is fetched with <code>HashFind("KsEngRun", Fs-&gt;hash_table, HTT_EXPORT_SYS_SYM)-&gt;val</code>. Generating one trampoline per signature (2 to 6 integer args) is trivial; floats and structs pass through memory pointers.</p>
+<h3 id="what-ran-r">What ran [R]<a class="headerlink" href="#what-ran-r" title="Link to this section">#</a></h3>
+<p>TempleOS V5.03 ISO, QEMU TCG, headless, <code>-m 1024M</code>, <code>KS_TVM=/tmp/tvm-eng</code>, <code>KS_SERIAL_PORT=4564</code>. The <code>.BIN</code> and the HolyC test went in over the serial <code>Rx</code> receiver (<code>serial-send.py</code>; I booted with <code>boot-vm.sh</code> and defined <code>Rx</code> by hand instead of <code>snap.sh</code>, because <code>snap.sh</code> regenerates <code>ProjectsData.HC</code> inside the repo). Results are printed on COM1 and compared with the native aarch64 host build of the same source:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>call</th>
+<th>TempleOS x86 (TCG, SSE2 on)</th>
+<th>host aarch64</th>
+<th>match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add(40,2)</code></td>
+<td>0x2A</td>
+<td>42</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>hash_abc</code></td>
+<td>33514638ACB33764</td>
+<td>33514638acb33764</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>run(7,1)</code></td>
+<td>C049312FC87B5352</td>
+<td>c049312fc87b5352</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>run(7,64)</code></td>
+<td>F429E7AA152561B5</td>
+<td>f429e7aa152561b5</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>run(7,1000)</code></td>
+<td>25C96999908C8471</td>
+<td>25c96999908c8471</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>run(7,10000)</code></td>
+<td>8F53F2C9CCFD7243</td>
+<td>8f53f2c9ccfd7243</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>SSE was enabled by <code>MOV_RAX_CR4; OR RAX,0x600; MOV_CR4_RAX</code> (OSFXSR bit 9 plus OSXMMEXCPT bit 10) in a 5-instruction asm routine, run once on core 0. Nothing in TempleOS objected. The integer-only soft-float <code>.BIN</code> also loaded and returned the same <code>hash_abc</code> with SSE untouched.</li>
+<li><strong>Task switching:</strong> the main task plus two <code>Spawn</code>ed tasks each ran <code>run(7,10000)</code> 8 times (24 runs, <code>Yield</code> between), single core; <strong>0 mismatches</strong>. The scheduler's <code>FXSAVE</code>/<code>FXRSTOR</code> per task (<code>Kernel/Sched.HC:87,119</code>, 512-byte <code>CFPU</code> per task, <code>KTask.HC:211</code>) preserves XMM once OSFXSR is on, as the analysis doc predicted. Not tested: a second core (<code>-smp</code>; each core needs its own CR4 write), a timer interrupt landing mid-call (the Yield-based test did not prove preemption), and the fault path (a #UD from SSE with OSFXSR off would drop into the TempleOS debugger; I did not trigger it because it hangs the VM).</li>
+<li>Speed: <code>run(7,10000)</code> takes <strong>43 ms in the guest (<code>cnts.jiffies</code>) against 1.72 ms native</strong>, about 25x, which is TCG's cost for SSE2 scalar float plus <code>sinf/cosf</code> in pure-Rust <code>libm</code>. On KVM or an x86 host it would be near native; on this Mac the engine inside TempleOS is TCG-bound.</li>
+<li>VM stopped with <code>KS_TVM=/tmp/tvm-eng scripts/stop-vm.sh</code>; three other QEMU processes (not mine) kept running.</li>
+</ul>
+<h2 id="4-routes-compared-section-a">4. Routes compared (section A)<a class="headerlink" href="#4-routes-compared-section-a" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th></th>
+<th>1 no_std to <code>.BIN</code></th>
+<th>2 port sim to HolyC</th>
+<th>3 engine on host, TempleOS as client</th>
+<th>4 Aiwnios native, C-ABI lib</th>
+<th>5 TempleOS guest, engine in Linux/host</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What runs in TempleOS</td>
+<td>real Rust sim code</td>
+<td>rewritten sim</td>
+<td>display, input, HUD</td>
+<td>the whole desktop (arm64) plus the real engine in-process</td>
+<td>the UI</td>
+</tr>
+<tr>
+<td>Proven here</td>
+<td>yes, hash and float loop match</td>
+<td>no</td>
+<td>existing channel (browser spec b)</td>
+<td>no, not built</td>
+<td>what ships today</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>M for a tiny core (days); L to XL for <code>kosmos-sim</code> with bevy_ecs and rapier (weeks)</td>
+<td>XL, permanent fork</td>
+<td>S, already designed</td>
+<td>M: cdylib plus <code>PrsAddSymbol</code> entries and a rebuild of the Aiwnios runtime per function</td>
+<td>zero</td>
+</tr>
+<tr>
+<td>Speed under TCG</td>
+<td>about 25x native (measured), fine for a small scene, not for rapier at scale [M]</td>
+<td>worse: x87 and no f32</td>
+<td>host speed, serial or socket latency</td>
+<td>native arm64</td>
+<td>host speed</td>
+</tr>
+<tr>
+<td>Determinism</td>
+<td>bit-identical on this test; depends on SSE2 f32 and <code>libm</code></td>
+<td><strong>breaks</strong>, see below</td>
+<td>engine hash is the host's own</td>
+<td>same as the host (same binary)</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Maintenance</td>
+<td>one source (Rust), one more target and CI job</td>
+<td>two sources forever</td>
+<td>one source</td>
+<td>one source, C ABI surface to keep</td>
+<td>one source</td>
+</tr>
+<tr>
+<td>Parity with x86 desktop build</td>
+<td>exact, same <code>.BIN</code> runs on x86 TempleOS only (Aiwnios cannot load x86 code)</td>
+<td>exact</td>
+<td>exact</td>
+<td>not the same binary: arm64 only</td>
+<td>exact</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="determinism-assessment">Determinism assessment<a class="headerlink" href="#determinism-assessment" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Float.</strong> IEEE f32 <code>+ - * /</code> and <code>sqrt</code> are bit-identical on SSE2, AArch64 and wasm, and the test confirms it across x86-under-TCG and aarch64. The risks are the ones the plan already names (4.2): no <code>mul_add</code>, no <code>-C target-feature=+fma</code>, transcendentals only from <code>libm</code> (done: <code>libm 0.2.16</code> is the locked version and was the one linked), no fast-math. x87 must never be used for engine f32 or f64: TempleOS's own compiler uses x87 with 80-bit intermediates, and the Aiwnios README already documents the consequence for the desktop (0.36 percent of wallpaper pixels and some graph pixels differ by one level between x86 TempleOS and Aiwnios, <code>aiwnios/README.md</code>) [S]. HolyC has only F64 (no f32 type) [M], so route 2 cannot reproduce f32 hashes at all, and <code>kosmos-crowd</code> (all f64) would differ in the last bits [M, from the README evidence].</li>
+<li><strong>Hashing.</strong> blake3 <code>pure</code> produced the same digests as the std build with its runtime-dispatched SIMD. No platform dependence found. State serialisation uses <code>to_le_bytes</code>, which is fine on x86.</li>
+<li><strong>Threads.</strong> The sim is single-threaded by contract (rust-engine.md principle 1: iteration by <code>SimId</code>). <code>bevy_ecs</code> runs systems on a thread pool by default but is <code>#![no_std]</code> with a single-threaded executor available [S for no_std: <code>bevy_ecs-0.20.0/src/lib.rs:16</code>; M for executor choice]. <code>kosmos-host</code>, <code>-genai</code>, <code>-human</code> use <code>std::thread</code>/<code>rayon</code> and stay outside the slice.</li>
+<li><strong>libm.</strong> Only the <code>libm</code> crate; never <code>f32::sin</code> (a <code>disallowed_methods</code> rule already exists per the plan).</li>
+</ul>
+<h2 id="5-engine-requirements-versus-templeos-section-c">5. Engine requirements versus TempleOS (section C)<a class="headerlink" href="#5-engine-requirements-versus-templeos-section-c" title="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Engine side</th>
+<th>TempleOS side</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memory</td>
+<td><code>bevy_ecs</code>, <code>rapier3d</code>, <code>serde_json</code> need <code>alloc</code>; scene tens of MB</td>
+<td>Code heap is the low 2 GB, data heap above; <code>MAlloc</code> from any task; freed when the task dies (<code>Doc/MemOverview.DD</code>) [S]. Under <code>-m 1024M</code> there is roughly 1 GB total; the desktop's framebuffers already use a large share [M]</td>
+<td>Fits a small scene. Give the Rust side one arena (one <code>MAlloc</code>, passed at init) behind a bump or simple free-list <code>#[global_allocator]</code>; no per-allocation HolyC calls.</td>
+</tr>
+<tr>
+<td>Threads</td>
+<td>none in the sim core</td>
+<td>single address space, <code>Spawn</code> tasks, cooperative plus timer; one core per default VM</td>
+<td>No problem for single-threaded sim. Multi-core needs CR4 per core.</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>tick count only, no wall clock in sim</td>
+<td><code>cnts.jiffies</code> (1000 Hz) and <code>GetTSC</code> [R: both read in the test]</td>
+<td>Fine; host passes ticks.</td>
+</tr>
+<tr>
+<td>File IO</td>
+<td><code>kosmos-assets</code>, scene loading from files, glb</td>
+<td>RedSea on RAM drive or disk; files arrive over serial today</td>
+<td>Pass scenes as byte buffers (postcard snapshot or JSON string); never open files from Rust.</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>f32, libm</td>
+<td>x87 only in HolyC; SSE2 off until CR4.OSFXSR/OSXMMEXCPT set</td>
+<td>Verified safe on one core. Add the CR4 write to desktop start-up, per core if SMP.</td>
+</tr>
+<tr>
+<td>Panics, abort</td>
+<td><code>panic=abort</code></td>
+<td>faults are uncatchable, go to the debugger [S analysis doc]</td>
+<td>Panic handler should write a line to COM1 and execute <code>UD2</code> or spin; never unwind. Today's test handler just loops.</td>
+</tr>
+<tr>
+<td>Stack</td>
+<td>blake3 hasher is about 2 KB; rapier and bevy use much more, recursion depth unknown</td>
+<td>task stack size is a <code>Spawn</code> parameter [M, not checked]</td>
+<td>Run the engine in its own spawned task with a big explicit stack (say 1 MB); measure high-water mark. Not measured.</td>
+</tr>
+<tr>
+<td>Allocator</td>
+<td>std default</td>
+<td><code>MAlloc</code> exists, HolyC convention</td>
+<td>See Memory.</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>wgpu</td>
+<td>none</td>
+<td>wgpu is not portable here at all (needs a GPU API). <code>kosmos-render</code> is out. The software renderer in HolyC (desk3) is the display; it consumes scene state or display lists. Only the sim, layers and command crates are candidates.</td>
+</tr>
+<tr>
+<td>Network, MCP</td>
+<td>tungstenite, <code>kosmos serve --port</code>, <code>kosmos-mcp</code> stdio/ws</td>
+<td>no TCP stack in V5.03 (serial only)</td>
+<td>Stay on the host (route 3).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Which crates can plausibly go bare metal [S: Cargo.toml and source reads; not compiled]:
+- <code>kosmos-core</code> (220 lines): blake3, <code>rand_pcg</code>, serde, uses <code>std::hash</code>; trivial to make <code>no_std</code>.
+- <code>kosmos-math</code> (243 lines): <code>glam</code> (has a <code>libm</code> feature, <code>#![cfg_attr(not(feature="std"), no_std)]</code>) and <code>libm</code>. Easy.
+- <code>kosmos-airship</code> (9.8 k lines), <code>kosmos-crowd</code> (4.3 k, uses <code>HashMap</code> and <code>serde_json</code>, f64): pure sims, <code>libm</code>, need <code>alloc</code>, <code>HashMap</code> must become <code>BTreeMap</code> or <code>hashbrown</code> with a fixed hasher. Moderate; this changes iteration order, so the golden hashes must be rechecked.
+- <code>kosmos-sim</code> (6.1 k): <code>bevy_ecs 0.20</code> (declares <code>#![no_std]</code>), <code>postcard</code>, <code>serde_json</code>, <code>thiserror</code>; snapshot/replay use <code>serde_json</code> and files in two places. Moderate to large.
+- <code>kosmos-physics</code> (1.4 k wrapper): <code>rapier3d 0.36</code> declares <code>#![no_std]</code> (<code>rapier3d-0.36.1/src/lib.rs:13</code>), but pulls <code>nalgebra</code>, <code>parry</code>, and whatever float intrinsics those use [M]; the repo's own wasm hash harness (<code>apps/kosmos-hash</code>) already proves it runs without OS services on wasm32. Unknown until compiled.
+- Out: <code>kosmos-render</code>, <code>-app</code>, <code>-host</code>, <code>-genai</code>, <code>-human</code>, <code>-audio</code>, <code>-protocol</code> (tungstenite), <code>-assets</code>, <code>-scene</code> (jsonschema).</p>
+<p>What the engine would give TempleOS users: deterministic physics and walking/vehicle/airship sims, crowd, seeded replays whose hash can be checked against the host, snapshot/restore, and (through the host) the agent surface. In every route except 4 the MCP/agent control stays on the host, because TempleOS has no sockets; a TempleOS user would see it as an app that talks to the host over serial. A HolyC-visible API of 6 to 10 integer-argument entry points (<code>engine_init(arena, size)</code>, <code>load(buf,len)</code>, <code>step(n)</code>, <code>hash()</code>, <code>pose(id, out)</code>, <code>snapshot(out)</code>, <code>restore(buf,len)</code>) is enough.</p>
+<h2 id="6-route-notes">6. Route notes<a class="headerlink" href="#6-route-notes" title="Link to this section">#</a></h2>
+<p><strong>Route 2, port the sim to HolyC.</strong> About 6 k lines for <code>kosmos-sim</code> alone plus the physics (rapier is not portable by hand), and the crowd/airship ports are 14 k lines of f64. HolyC has F64 on x87 only (<code>analysis</code> section on floating point), no f32, a different operator-precedence table, no <code>continue</code>, one compiler. The hashes would not match the engine's f32 values, which defeats the purpose of the engine's replay contract. Measured float cost today: 67 ns per multiply-add (x87 under TCG) against 6 ns for hand SSE2 (<code>holyc-improvement-analysis.md</code>). Rejected.</p>
+<p><strong>Route 3, host engine, TempleOS client.</strong> What the repo already does. <code>kosmos serve --port</code> speaks line-delimited JSON/WebSocket (<code>apps/kosmos-cli/src/main.rs</code>; rust-engine.md 4.15); TempleOS has serial only, so the same bridge as the browser spec (framed binary over COM1 with CRC, <code>browser-architecture.md</code> section b1) would carry <code>step</code>, <code>query</code>, <code>hash</code> and a state or display-list stream, with a small Python or Rust bridge on the Mac translating serial to the WebSocket. The TempleOS side draws with its own software renderer. Cost S to M; no determinism question since the engine runs once, on the host.</p>
+<p><strong>Route 4, Aiwnios.</strong> Aiwnios binds native C through <code>PrsAddSymbol(name, int64_t (*)(int64_t *stk), arity)</code> and has no <code>dlopen</code> [S, <code>aiwnios/README.md</code> and the analysis doc], so the engine would be linked into the Aiwnios runtime itself (a static library, <code>crate-type = ["staticlib"]</code> with a C header) and registered at start-up, then called from HolyC like any function. This is the one route where the <strong>full</strong> engine (std, threads, files, even wgpu) can sit next to HolyC, because it is a normal arm64 process. It costs a patch and rebuild of the Aiwnios runtime for each new entry, but each entry is a few lines. It does not run the x86 TempleOS build and it is not the OS showcase; it is a development vehicle. Not built or run here (the analysis doc records that the Aiwnios build was earlier blocked by the permission classifier).</p>
+<p><strong>Route 5.</strong> Status quo: TempleOS UI in QEMU, everything else on the host. It is route 3 without the dedicated protocol work.</p>
+<h2 id="7-recommendation-section-d">7. Recommendation (section D)<a class="headerlink" href="#7-recommendation-section-d" title="Link to this section">#</a></h2>
+<p>Ranked:
+1. <strong>Route 3 as the product path</strong> (now). It is the only route that gives TempleOS users the whole engine, including rendering assets, physics at full speed and the MCP surface, and it adds no new risk. Build the serial protocol once; it also serves the browser.
+2. <strong>Route 1 as a research spike, sim core only</strong>, because it is the only route that puts engine code <em>inside</em> the OS and the experiment shows it works. Value: a TempleOS-native "engine state hash" check, offline deterministic replays, and a stress test of the engine's no_std hygiene that also benefits wasm. Do not promise physics at scale under TCG (25x slower in the test).
+3. <strong>Route 4</strong> only if Aiwnios becomes the desktop's daily driver; almost free once a <code>staticlib</code> with a C header exists.
+4. Route 2: no. Route 5: keep as fallback, it is what runs now.</p>
+<h3 id="incremental-plan-with-gates">Incremental plan with gates<a class="headerlink" href="#incremental-plan-with-gates" title="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><table>
+<thead>
+<tr>
+<th>step</th>
+<th>work</th>
+<th>gate</th>
+<th>effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S0 (done here)</td>
+<td><code>no_std</code> hash and float loop to <code>.BIN</code>, load, compare</td>
+<td>hashes equal host on 4 inputs</td>
+<td>done, 1 session</td>
+</tr>
+<tr>
+<td>S1</td>
+<td>Make <code>kosmos-core</code> and <code>kosmos-math</code> build under <code>x86_64-ks-sse2</code> (<code>no_std</code>, feature <code>std</code> default-on); add the 25-line <code>mkbin</code> as a repo tool and a HolyC <code>engine.HC</code> with the trampoline, CR4 enable and <code>EngineStateHash()</code>; <strong>first engine spike: <code>EngineStateHash()</code> returns <code>Sim::hash</code> of a tiny scene (3 entities, 64 ticks, from <code>apps/kosmos-hash</code>'s fixed scene) equal to <code>kosmos-hash</code>'s native and wasm values</strong></td>
+<td>HolyC prints the same u64 as <code>cargo run -p kosmos-hash</code></td>
+<td>S to M (3 to 5 days). Needs approval to install <code>x86_64-unknown-none</code> or allow <code>-Zbuild-std</code> network fetch</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>add <code>alloc</code> with the arena allocator; compile <code>kosmos-sim</code> with <code>bevy_ecs</code> no_std; snapshot and replay through byte buffers</td>
+<td>the three phase-0 replays give the repo's golden hashes from HolyC</td>
+<td>M (2 to 3 weeks)</td>
+</tr>
+<tr>
+<td>S3</td>
+<td><code>rapier3d</code> under the target; panic handler writing to COM1; stack high-water mark in a spawned task; SMP CR4 check</td>
+<td>physics goldens equal; no fault in 10 min soak</td>
+<td>M to L</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>CI job <code>engine-templeos</code> builds the <code>.BIN</code> and runs it in headless QEMU with serial result compare (this session's flow)</td>
+<td>job green, adds &lt; 5 min</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Stop rule</td>
+<td>if S2 needs more than three crate forks or any hash differs after S1</td>
+<td>stop, stay on route 3</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="risks">Risks<a class="headerlink" href="#risks" title="Link to this section">#</a></h3>
+<ul>
+<li><strong>Hash drift</strong>: <code>HashMap</code>-to-<code>BTreeMap</code> swaps change iteration order; every hash golden would need a hash-epoch bump (core <code>HASH_EPOCH</code> policy). Keep <code>std</code> builds as source of truth and prove the bare-metal build matches them, not the reverse.</li>
+<li><strong>Toolchain coupling</strong>: bare-metal build needs nightly features (<code>-Zbuild-std</code> or a prebuilt target, custom JSON), while the workspace builds on stable; isolate it in one CI job and pin the nightly (2025-12-04 here).</li>
+<li><strong>TempleOS fragility</strong>: faults are uncatchable and drop to a debugger; an out-of-arena write corrupts the single address space (no MMU protection). Run the engine only in a throwaway VM snapshot during development.</li>
+<li><strong>TCG speed</strong>: 25x on float-heavy code; acceptable for hashes and small scenes only.</li>
+<li><strong>blake3 SIMD dead code</strong> and <code>compiler_builtins</code> float helpers in the soft-float variant are unverified; choose the SSE2 variant, which was verified.</li>
+</ul>
+<h3 id="relation-to-the-linux-and-wayland-fallback-os-foundation-planmd">Relation to the Linux and Wayland fallback (<code>os-foundation-plan.md</code>)<a class="headerlink" href="#relation-to-the-linux-and-wayland-fallback-os-foundation-planmd" title="Link to this section">#</a></h3>
+<p>That plan (Linux with our own Wayland compositor, apps run unmodified) is the real OS direction. It makes the engine a normal native Linux process, so nothing in this study is needed for it. The TempleOS-hosted engine is therefore a showcase and research track, not a dependency: a TempleOS desktop on Linux or on this Mac is route 3/5 whichever kernel is underneath. If the Linux shell lands, route 3 becomes "TempleOS-style shell talks to the same <code>kosmos serve</code>" with the Wayland shell as client, and route 1 remains optional.</p>
+<h2 id="8-what-was-not-verified">8. What was not verified<a class="headerlink" href="#8-what-was-not-verified" title="Link to this section">#</a></h2>
+<p>Real engine crates were not compiled for bare metal (only reading their manifests and sources); <code>rapier3d</code> and <code>bevy_ecs</code> on this target are untested. The soft-float variant with float code needs the real <code>compiler_builtins</code> (network) and was only built integer-only. No SMP, no real preemption proof, no stack-depth measurement, no fault test, no Aiwnios build. The 25x speed figure is one measurement of one loop under TCG on an Apple Silicon Mac. TempleOS behaviour for <code>Spawn</code> stack size and heap limits under <code>-m 1024M</code> is from memory.</p>
+<p>Experiment files (scratchpad, not in the repo): <code>engine-on-templeos/ks-eng/</code> (crate), <code>host-ref/</code> (native reference), <code>x86_64-ks-sse2.json</code>, <code>x86_64-ks-soft.json</code>, <code>ks.ld</code>, <code>mkbin.py</code>, <code>KSENGT.HC</code>, <code>KSENGT2.HC</code>, <code>sse2.dis</code>, <code>soft.dis</code>, <code>serial*.out</code>.</p>
+        </div>
+      </article>
+      <nav class="pn" aria-label="Previous and next page"><a class="prev" href="../../apps-host/hub/sheet/index.html" rel="prev"><span>Previous</span>sheet service (host half of Spreadsheets)</a><a class="next" href="../../aiwnios/readme/index.html" rel="next"><span>Next</span>Aiwnios desktop</a></nav>
+      <footer class="foot">
+        <span>TempleOS Desktop Docs. Built from the Markdown sources; offline, no external requests.</span>
+        <a href="#content">Back to top</a>
+      </footer>
+    </main>
+    <aside class="toc-rail"><nav class="toc" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#1-answer-in-one-paragraph">1. Answer in one paragraph</a></li><li><a href="#2-hard-facts-established-section-b">2. Hard facts established (section B)</a><ul><li><a href="#toolchain-available-r">Toolchain available [R]</a></li><li><a href="#trap-found-the-target-json-must-be-named-x86_64-r">Trap found: the target JSON must be named x86_64-... [R]</a></li><li><a href="#two-custom-targets-derived-from-the-builtin-x86_64-unknown-none">Two custom targets (derived from the builtin x86_64-unknown-none)</a></li><li><a href="#the-test-crate-ks-eng-no_std-no-alloc-r">The test crate (ks-eng, no_std, no alloc) [R]</a></li></ul></li><li><a href="#3-route-1-in-detail-the-bin-wrapper-format-read-from-source-s-and-run-r">3. Route 1 in detail: the .BIN wrapper (format read from source) [S] and run [R]</a><ul><li><a href="#what-ran-r">What ran [R]</a></li></ul></li><li><a href="#4-routes-compared-section-a">4. Routes compared (section A)</a><ul><li><a href="#determinism-assessment">Determinism assessment</a></li></ul></li><li><a href="#5-engine-requirements-versus-templeos-section-c">5. Engine requirements versus TempleOS (section C)</a></li><li><a href="#6-route-notes">6. Route notes</a></li><li><a href="#7-recommendation-section-d">7. Recommendation (section D)</a><ul><li><a href="#incremental-plan-with-gates">Incremental plan with gates</a></li><li><a href="#risks">Risks</a></li><li><a href="#relation-to-the-linux-and-wayland-fallback-os-foundation-planmd">Relation to the Linux and Wayland fallback (os-foundation-plan.md)</a></li></ul></li><li><a href="#8-what-was-not-verified">8. What was not verified</a></li></ul></nav></aside>
+  </div>
+</div>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

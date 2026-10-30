@@ -1,0 +1,39 @@
+/* voice-settings.css: the voice settings button + popover (voice-settings.js). Uses the site's tokens when present, with fallbacks. */
+.kv-wrap { position: relative; display: inline-block; font: 14px/1.4 var(--sans, system-ui, sans-serif); color: var(--fg, #1f2a22); }
+.kv-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--faint, rgba(31,42,34,.13)); background: var(--card, #fafaf3); color: inherit; cursor: pointer; font: .72rem/1 var(--mono, ui-monospace, monospace); text-transform: uppercase; letter-spacing: .14em; }
+.kv-btn:hover { border-color: var(--fg, #1f2a22); }
+.kv-btn[aria-expanded="true"] { background: var(--sel, #1d1d1b); color: var(--sel-fg, #fff); border-color: var(--sel, #1d1d1b); }
+.kv-btn svg { width: 18px; height: 18px; flex: none; }
+
+.kv-panel { box-sizing: border-box; width: min(360px, calc(100vw - 32px)); max-height: min(78vh, 640px); overflow: auto; padding: 16px 18px 18px; border-radius: 20px; background: var(--card, #fafaf3); border: 1px solid var(--faint, rgba(31,42,34,.13)); box-shadow: 0 18px 40px -22px var(--shadow, rgba(31,42,34,.35)); text-align: left; }
+.kv-wrap:not(.kv-inline) .kv-panel { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; }
+.kv-wrap:not(.kv-inline) .kv-panel[hidden] { display: none; }
+.kv-inline .kv-panel { width: 100%; max-height: none; box-shadow: none; }
+.kv-inline { display: block; }
+@media (max-width: 480px) { .kv-wrap:not(.kv-inline) .kv-panel { position: fixed; left: 16px; right: 16px; top: auto; bottom: 16px; width: auto; } }
+
+.kv-panel fieldset { border: 0; margin: 0 0 12px; padding: 0; min-width: 0; }
+.kv-panel legend, .kv-panel .kv-h { padding: 0; margin: 0 0 6px; font: .64rem/1 var(--mono, ui-monospace, monospace); text-transform: uppercase; letter-spacing: .14em; color: var(--muted, #5f665a); }
+.kv-radio { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; cursor: pointer; }
+.kv-radio input { margin: 3px 0 0; accent-color: var(--sel, #1d1d1b); width: 18px; height: 18px; flex: none; }
+.kv-radio small { display: block; color: var(--muted, #5f665a); font-size: .78rem; }
+.kv-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 10px; margin: 0 0 8px; }
+.kv-row label { font-size: .85rem; }
+.kv-row output { font: .72rem/1 var(--mono, ui-monospace, monospace); color: var(--muted, #5f665a); min-width: 3.2em; text-align: right; }
+.kv-row input[type="range"] { grid-column: 1 / -1; width: 100%; margin: 4px 0; accent-color: var(--sel, #1d1d1b); min-height: 24px; }
+.kv-row select, .kv-select { grid-column: 1 / -1; width: 100%; min-height: 40px; border-radius: 12px; border: 1px solid var(--faint, rgba(31,42,34,.13)); background: var(--bg, #f0efe7); color: inherit; padding: 6px 10px; font: inherit; }
+.kv-check { display: flex; gap: 10px; align-items: center; margin: 0 0 6px; min-height: 32px; cursor: pointer; font-size: .88rem; }
+.kv-check input { width: 18px; height: 18px; accent-color: var(--sel, #1d1d1b); }
+.kv-better[disabled], .kv-better[aria-disabled="true"] { opacity: .45; }
+.kv-actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 8px; }
+.kv-act { min-height: 44px; padding: 8px 18px; border-radius: 999px; border: 1px solid var(--faint, rgba(31,42,34,.13)); background: var(--card, #fafaf3); color: inherit; cursor: pointer; font: .7rem/1 var(--mono, ui-monospace, monospace); text-transform: uppercase; letter-spacing: .12em; }
+.kv-act.primary { background: var(--sel, #1d1d1b); border-color: var(--sel, #1d1d1b); color: var(--sel-fg, #fff); }
+.kv-act:hover { filter: brightness(1.06); }
+.kv-status { margin: 0; font-size: .8rem; color: var(--muted, #5f665a); display: flex; gap: 8px; align-items: flex-start; }
+.kv-dot { width: 9px; height: 9px; margin-top: .4em; border-radius: 50%; background: var(--muted, #888); flex: none; }
+.kv-dot.on { background: #3b8a4a; } .kv-dot.off { background: #b3563c; }
+.kv-btn:focus-visible, .kv-act:focus-visible, .kv-panel :focus-visible { outline: 3px solid var(--focus, #2f6fd6); outline-offset: 2px; }
+.kv-panel .kv-caps { margin: 4px 0 8px; padding-top: 10px; border-top: 1px solid var(--faint, rgba(31,42,34,.13)); }
+.kv-check { flex-wrap: wrap; }
+.kv-hint { flex-basis: 100%; margin-left: 28px; color: var(--muted, #5f665a); font-size: .76rem; }
+.kv-caps input:disabled { opacity: .45; }

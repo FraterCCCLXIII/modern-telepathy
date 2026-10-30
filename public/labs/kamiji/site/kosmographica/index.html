@@ -1,0 +1,260 @@
+<!doctype html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmographica knowledge graph</title>
+<meta name="description" content="Kosmographica is a claim-based, provenance-first knowledge graph of culture and developmental history. Every statement is a claim with sources, a confidence score and a trust tier. Design stage with a working engine.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="img/kosmographica-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="kosmographica.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand brand-ko" href="#top" aria-label="Kosmographica, top of page">
+      <img src="img/kosmographica-logo.svg" alt="" width="28" height="28">
+      <span>Kosmographica</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#what">What it is</a>
+      <a href="#claims">Claim model</a>
+      <a href="#features">Features</a>
+      <a href="#cosmographs">Cosmographs</a>
+      <a href="#docs">Docs</a>
+      <a href="#status">Status</a>
+      <a href="#links">Links</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <h1>A graph that<br>shows its sources.</h1>
+      <p class="lead">A knowledge graph for culture and developmental history where nothing is a bare fact: every statement is a claim, with sources, a confidence and a trust tier.</p>
+      <p><span class="badge proto">Early build</span> <span class="badge plan">Docs partly planned</span></p>
+      <p class="cta-row">
+        <a class="btn primary" href="#claims">See the claim model</a>
+        <a class="btn" href="#status">Honest status</a>
+      </p>
+    </div>
+
+    <div class="mock">
+      <div class="mini">
+        <svg viewBox="0 0 520 300" role="img" aria-label="Illustrative claim card: an entity, a claim with an assertion, a confidence value and a trust tier, linked to two sources. Example values are invented.">
+          <g fill="none" stroke="#1d1d1b" stroke-width="1.5">
+            <rect x="8" y="110" width="130" height="70" rx="16" fill="#f0efe7"/>
+            <rect x="190" y="30" width="170" height="240" rx="18" fill="#fafaf3"/>
+            <rect x="410" y="40" width="102" height="64" rx="14" fill="#f0efe7"/>
+            <rect x="410" y="190" width="102" height="64" rx="14" fill="#f0efe7"/>
+            <path d="M138 145L190 145" marker-end="url(#a1)"/>
+            <path d="M360 90L410 72" marker-end="url(#a1)"/>
+            <path d="M360 210L410 222" marker-end="url(#a1)"/>
+            <path d="M200 118H350" stroke-opacity=".25"/>
+          </g>
+          <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1d1d1b"/></marker></defs>
+          <g font-size="12">
+            <text x="73" y="141" text-anchor="middle" font-weight="700">Entity</text>
+            <text class="mut" x="73" y="159" text-anchor="middle" font-size="10">a cosmograph</text>
+            <text x="275" y="56" text-anchor="middle" font-weight="700">Claim</text>
+            <text class="mut" x="202" y="92" font-size="10">ASSERTION</text>
+            <text x="202" y="110" font-size="11">&ldquo;Three realms are</text>
+            <text x="202" y="125" font-size="11">described.&rdquo;</text>
+            <text class="mut" x="202" y="155" font-size="10">CONFIDENCE</text>
+            <rect x="202" y="162" width="146" height="8" rx="4" fill="#e7e6e1"/>
+            <rect x="202" y="162" width="104" height="8" rx="4" fill="#1d1d1b"/>
+            <text x="202" y="188" font-size="11">0.72</text>
+            <text class="mut" x="202" y="214" font-size="10">TRUST TIER</text>
+            <text x="202" y="232" font-size="11">machine_validated</text>
+            <text x="461" y="68" text-anchor="middle" font-weight="700">Source</text>
+            <text class="mut" x="461" y="86" text-anchor="middle" font-size="10">citation</text>
+            <text x="461" y="218" text-anchor="middle" font-weight="700">Source</text>
+            <text class="mut" x="461" y="236" text-anchor="middle" font-size="10">citation</text>
+          </g>
+        </svg>
+      </div>
+      <p class="mock-note">Illustrative diagram. The field names come from the engine&rsquo;s schema; the example values are invented.</p>
+    </div>
+  </div>
+</section>
+
+<section id="what" class="section">
+  <div class="wrap split">
+    <h2>What it is, and how it works</h2>
+    <div>
+      <p class="sub">Kosmographica aims at a record of human thought, culture and development through an integral, developmental lens. It does not start from scratch: it pulls together four existing sibling datasets, namely comparative mythology, guru-to-disciple lineages, developmental models such as AQAL and Spiral Dynamics, and a historical timeline, into one graph.</p>
+      <p class="sub">The design is a thin universal core plus pluggable domain modules. The core defines only what every domain shares: entities, relationships, claims and sources. Modules such as Religion and Mythology add their own types and vocabulary on top.</p>
+      <p class="sub">The engine is a Python service on Postgres with an author-and-verifier pipeline, and a Next.js web app. A second Next.js app is a read-only public encyclopedia that only shows records past a trust threshold.</p>
+      <ul class="tags" aria-label="Parts of the repository">
+        <li>docs</li><li>engine (Python, Postgres)</li><li>web audit console</li><li>public site</li><li>cosmograph data</li><li>database snapshots</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="claims" class="section">
+  <div class="wrap">
+    <h2>The claim and provenance model</h2>
+    <p class="sub"><span class="badge plan">Illustrative diagram</span> Drawn from the engine&rsquo;s database models and the decision log. The boxes and field names are real; it is a simplification, and no data is shown.</p>
+
+    <figure class="diag" role="group" aria-labelledby="diag-cap">
+      <svg viewBox="0 0 880 330" role="img" aria-label="Diagram of the claim model. A claim is about an entity or a relationship. A claim has an assertion, a confidence from zero to one, supporting text spans and a disputed flag. Claims cite many sources and sources back many claims. Every record carries a trust tier, generator, batch, sensitivity and a recorded time, and newer records supersede older ones.">
+        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1d1d1b"/></marker></defs>
+        <g fill="none" stroke="#1d1d1b" stroke-width="1.6">
+          <rect x="10" y="40" width="190" height="90" rx="18" fill="#f0efe7"/>
+          <rect x="10" y="170" width="190" height="90" rx="18" fill="#f0efe7"/>
+          <rect x="280" y="20" width="320" height="270" rx="20" fill="#fafaf3"/>
+          <rect x="690" y="40" width="180" height="90" rx="18" fill="#f0efe7"/>
+          <rect x="690" y="170" width="180" height="90" rx="18" fill="#f0efe7"/>
+          <rect x="296" y="222" width="288" height="56" rx="12" stroke-dasharray="5 4"/>
+          <path d="M280 85L200 85" marker-end="url(#a2)"/>
+          <path d="M280 215L200 215" marker-end="url(#a2)"/>
+          <path d="M600 85L690 85" marker-end="url(#a2)"/>
+          <path d="M600 215L690 215" marker-end="url(#a2)"/>
+        </g>
+        <g font-size="13">
+          <text x="105" y="75" text-anchor="middle" font-weight="700">Entity</text>
+          <text class="mut" x="105" y="95" text-anchor="middle" font-size="11">module, type, label</text>
+          <text class="mut" x="105" y="112" text-anchor="middle" font-size="11">valid_from, valid_to</text>
+          <text x="105" y="205" text-anchor="middle" font-weight="700">Relationship</text>
+          <text class="mut" x="105" y="225" text-anchor="middle" font-size="11">subject, predicate, object</text>
+          <text x="440" y="46" text-anchor="middle" font-weight="700">Claim</text>
+          <text x="300" y="76" font-size="12">assertion</text>
+          <text x="300" y="98" font-size="12">confidence (0.0 to 1.0)</text>
+          <text x="300" y="120" font-size="12">support_spans (exact text)</text>
+          <text x="300" y="142" font-size="12">disputed (true / false)</text>
+          <text class="mut" x="300" y="170" font-size="11">about: entity or relationship</text>
+          <text class="mut" x="300" y="190" font-size="11">on every record:</text>
+          <text x="312" y="244" font-size="11">tier, generator, batch_id</text>
+          <text x="312" y="262" font-size="11">sensitivity, recorded_at, superseded_by</text>
+          <text x="780" y="75" text-anchor="middle" font-weight="700">Source</text>
+          <text class="mut" x="780" y="95" text-anchor="middle" font-size="11">citation, uri</text>
+          <text class="mut" x="780" y="112" text-anchor="middle" font-size="11">source_system, external_id</text>
+          <text x="780" y="205" text-anchor="middle" font-weight="700">Source</text>
+          <text class="mut" x="780" y="225" text-anchor="middle" font-size="11">a source can back many</text>
+          <text class="mut" x="780" y="242" text-anchor="middle" font-size="11">claims</text>
+        </g>
+      </svg>
+      <figcaption id="diag-cap">Claim, source and record fields from the engine models. A claim may cite several sources.</figcaption>
+    </figure>
+
+    <div class="cols" style="margin-top:2.5rem">
+      <article class="panel">
+        <h3>Claims, not facts</h3>
+        <p>The unit of trust is the claim: a sentence about an entity or a relationship, a confidence between 0 and 1, the exact supporting text from the cited sources, and a disputed flag. A contradicting claim opens a dispute and both are kept with their provenance, rather than one overwriting the other.</p>
+      </article>
+      <article class="panel">
+        <h3>Append-only history</h3>
+        <p>Records are never changed in place. A new write supersedes the older one, so every change, including each AI write, stays auditable and reversible. Each record also notes which generator and batch produced it.</p>
+      </article>
+    </div>
+
+    <h3 style="margin-top:3rem">Four trust tiers</h3>
+    <p class="sub">The tiers are defined in code. The decision log (ADR-013) sets a publish-then-verify rule: an AI author may write straight to the canonical store, and an automated verifier plus later audit decide what readers can see. The public API hides the lowest tier.</p>
+    <ol class="tiers">
+      <li><b>machine_unverified</b><span>Hidden from the public API.</span></li>
+      <li><b>machine_validated</b><span>Public, shown with a badge.</span></li>
+      <li><b>human_reviewed</b><span>A person has checked it.</span></li>
+      <li><b>expert_endorsed</b><span>Highest trust.</span></li>
+    </ol>
+
+    <div class="note-card">
+      <p class="mono-h">Specified, not confirmed in code</p>
+      <p>The core design doc also describes derived confidence bands (high from 0.8, medium from 0.55, low from 0.3, speculative below), claim types such as historical, mythological and doctrinal, and a developmental layer that records stage, state and quadrant as claims of their own. We read these as the design; we did not check that every one is implemented.</p>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="wrap">
+    <h2>What is in the repository</h2>
+    <ul class="grid-cards">
+      <li><h3>Federation and reconciliation</h3><p>Adapters for two sibling datasets (Mythographica and Sacred-Lineage). Records sharing an external id are linked automatically; fuzzier name matches go to a review queue.</p></li>
+      <li><h3>Author and verifier</h3><p>A provider-agnostic LLM client drafts claims; a deterministic structural gate and a verifier check them before they count. An eval command compares the verifier with a plain lexical baseline.</p></li>
+      <li><h3>Audit console</h3><p>A read-only Next.js app for entities, claims, disputes, a review queue, reconciliation and search.</p></li>
+      <li><h3>Public encyclopedia</h3><p>A second Next.js app with browse, search and entity pages, each showing claims with trust badges. It sends no tier override, so the engine&rsquo;s public clamp applies.</p></li>
+      <li><h3>Sacred and restricted care</h3><p>Records carry a sensitivity level (public, sensitive, sacred, restricted), and sacred or restricted material is gated.</p></li>
+      <li><h3>Graph explorer</h3><p>The plan lists a D3 neighbourhood view around an entity as shipped. It is not yet a general graph editor.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="cosmographs" class="section">
+  <div class="wrap">
+    <h2>Cosmograph seed data</h2>
+    <p class="sub">A cosmograph is a culture&rsquo;s map of reality. The repository ships a catalog of 162 of them as seed data (an older 74-row CSV is the starting subset), with tradition, region, dates, topology, the human&rsquo;s position and the path of liberation. Five real rows:</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">Cosmograph</th><th scope="col">Dates</th><th scope="col">Topology</th><th scope="col">Human position</th><th scope="col">Path</th><th scope="col">Primary sources</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Vedic Three Worlds</th><td>1500 BCE</td><td>Triple Realm</td><td>Sacrificer</td><td>Ritual ascent</td><td>Rig Veda</td></tr>
+          <tr><th scope="row">Sumerian Cosmos</th><td>3500 BCE</td><td>Layered</td><td>Servant of gods</td><td>Divine order</td><td>ETCSL, Enuma Elish</td></tr>
+          <tr><th scope="row">Egyptian Cosmos</th><td>3000 BCE</td><td>Layered Geography</td><td>Participant in Ma&rsquo;at</td><td>Afterlife navigation</td><td>Pyramid Texts</td></tr>
+          <tr><th scope="row">Zoroastrian Cosmos</th><td>1000 BCE</td><td>Dualistic</td><td>Cosmic combatant</td><td>Frashokereti</td><td>Avesta</td></tr>
+          <tr><th scope="row">Jain Lokapurusha</th><td>500 BCE</td><td>Cosmic Person</td><td>Jiva</td><td>Liberation</td><td>Tiloya Pannatti</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-note">Source: <code>data/cosmographs/catalog.json</code>. Copied as text; no images are shown.</p>
+    <div class="note-card">
+      <p class="mono-h">About the images</p>
+      <p>The catalog does not contain image files. Every one of the 162 rows has image metadata that points to a Wikimedia Commons file, with its title and licence (73 are marked public domain, the rest mostly Creative Commons). A script is meant to fetch them. We have not downloaded or reproduced any of them here, so this page shows no cosmograph images.</p>
+    </div>
+  </div>
+</section>
+
+<section id="docs" class="section">
+  <div class="wrap split">
+    <h2>The documents</h2>
+    <ul class="list">
+      <li><h3>Written drafts <span class="badge ok">Drafts</span></h3><p>The core meta-model, the Religion and Mythology module (over a thousand lines), the architecture, governance and AI workflow papers, and a large ontology folder with a cosmograph catalog spec and a gap analysis.</p></li>
+      <li><h3>Decision log <span class="badge ok">Active</span></h3><p>Architecture decisions, including the move to publish-then-verify.</p></li>
+      <li><h3>Outline stubs <span class="badge plan">Planned</span></h3><p>The glossary and the Philosophy and Science, Art and Culture, Polity and Society and Technology modules are listed as stubs in the plan. About two dozen doc files carry a stub or outline note near the top, so some may be older than the plan&rsquo;s status table.</p></li>
+      <li><h3>Build waves</h3><p>Waves 1 and 2 are marked shipped. Wave 3, the public encyclopedia, is in progress: the site, stable URLs and graph view are done; the vector search backend and a human review layer are pending.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="status" class="section">
+  <div class="wrap">
+    <h2>Status, honestly</h2>
+    <p class="sub">Last commit is dated 14 July 2026. The README still says design stage; the plan and the code have moved well beyond that.</p>
+    <ul class="status">
+      <li><span class="badge ok">In the repo</span><p>Engine code with models, an API, reconciliation, a verifier, a command-line tool and migrations; an audit console; a public site; a seed catalog; two database snapshots.</p></li>
+      <li><span class="badge proto">Early build</span><p>A snapshot from 4 June 2026 is recorded as roughly 4,376 entities, 3,989 relationships and 6,985 claims. That count is from the snapshot&rsquo;s own readme, not something we counted.</p></li>
+      <li><span class="badge unv">Tests unverified</span><p>The engine has a tests folder with a few dozen test functions across fourteen files. We counted them but did not run them, and the web apps have none.</p></li>
+      <li><span class="badge unv">Not run</span><p>We did not start the engine, restore the snapshot, or run either app. Statements about behaviour come from reading code and docs.</p></li>
+      <li><span class="badge plan">Planned</span><p>Vector search, a human review and promotion layer, the four stub modules, and a licence: the README says licence information will be added soon.</p></li>
+      <li><span class="badge plan">Care needed</span><p>AI-authored claims are only as good as the verifier and the audit. Treat anything below human_reviewed as a lead, not a finding, and respect the sensitivity flags.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="links" class="section">
+  <div class="wrap split">
+    <h2>Where to look</h2>
+    <ul class="list">
+      <li><h3>Repository</h3><p>A local project folder named <code>kosmographica</code>. No public address is stated in its README.</p></li>
+      <li><h3>Start with the plan</h3><p><code>docs/PLAN.md</code> is the master index and build order; <code>docs/core-meta-model.md</code> is the model.</p></li>
+      <li><h3>Run it</h3><p>The engine&rsquo;s own README describes a Docker database and a command-line tool; the public site&rsquo;s README describes how to point it at a running engine.</p></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Kosmographica. A claim-based, provenance-first knowledge graph.</p>
+  </div>
+</footer>
+
+<script type="module" src="../shared-header.js"></script>
+<script type="module" src="../shared-contact.js"></script>
+</body>
+</html>
