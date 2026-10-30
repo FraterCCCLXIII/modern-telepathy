@@ -16,7 +16,7 @@
 })();
 
 const base = new URL(".", import.meta.url).href; // .../site/
-const PAGES = [
+const KAMIJI_PAGES = [
   { id: "kamiji", label: "Kamiji", href: "index.html", match: /\/site\/(index\.html)?$/ },
   { id: "kamikin", label: "Kamikin", href: "kamikin/index.html", match: /\/site\/kamikin\// },
   { id: "hands", label: "Hands", href: "hands/index.html", match: /\/site\/hands\// },
@@ -27,6 +27,14 @@ const PAGES = [
   { id: "longformer", label: "Longformer", href: "longformer/index.html", match: /\/site\/longformer\// },
   { id: "computer", label: "Computer", href: "kosmos-computer/index.html", match: /\/site\/kosmos-computer\// },
 ];
+// On the TempleOS website (/labs/templeos/site/) the second row links within that product instead of the Kamiji family.
+const TEMPLEOS_PAGES = [
+  { id: "templeos", label: "TempleOS desktop", href: "/templeos", match: /^\/templeos\/?$/ },
+  { id: "website", label: "Website", href: "/labs/templeos/site/", match: /\/labs\/templeos\/site\// },
+  { id: "docs", label: "Docs", href: "/labs/templeos/docs/", match: /\/labs\/templeos\/docs\// },
+];
+const PAGES = location.pathname.indexOf("/labs/templeos/site") === 0 ? TEMPLEOS_PAGES : KAMIJI_PAGES;
+
 // Modern Telepathy: the parent site. Keep in step with SiteHeader in src/components/site-chrome.tsx.
 const MT = [
   { label: "Products", href: "/" },

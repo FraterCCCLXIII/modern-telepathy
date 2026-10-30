@@ -136,8 +136,11 @@ function TempleOSPage() {
             Windows, a dock, a browser, ten themes and a set of apps. All written in HolyC and drawn by its own renderer.
           </p>
           <div className="mt-10 flex flex-wrap gap-3 justify-center">
-            <a href={DOCS} className={`${mono} inline-flex items-center rounded-full bg-primary text-primary-foreground px-6 py-3.5`}>
-              Read the docs →
+            <a href="/labs/templeos/site/" className={`${mono} inline-flex items-center rounded-full bg-primary text-primary-foreground px-6 py-3.5`}>
+              Website →
+            </a>
+            <a href={DOCS} className={`${mono} inline-flex items-center rounded-full bg-secondary px-6 py-3.5`}>
+              Read the docs
             </a>
             <a
               href="https://github.com/Modern-Telepathy/templeos"

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download · TempleOS</title>
+<meta name="description" content="Download the TempleOS desktop for macOS, Linux and Windows, on Apple Silicon, arm64 and x86.">
+<link rel="canonical" href="https://example.invalid/download/">
+<meta property="og:title" content="Download · TempleOS">
+<meta property="og:description" content="Download the TempleOS desktop for macOS, Linux and Windows, on Apple Silicon, arm64 and x86.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/download/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Download</p>
+  <h1>Pick your platform.</h1>
+  <p class="lead">Two versions of the app, for every architecture we know how to support. We tell you which ones we have actually tried.</p>
+  
+  <p class="hero-note">No packaged installers yet. Today you build from source; the table says where each platform stands. See also <a href="/labs/templeos/site/requirements/">Requirements</a> and <a href="/labs/templeos/site/compare/">Compare</a>.</p>
+</div></section>
+<section class="section"><div class="wrap">
+  
+  <div class="detected" data-detected hidden><div><span class="muted small">We think you are on</span><b data-detected-label></b></div><a class="btn btn-primary" data-detected-link href="#">Go to your download</a></div>
+<div class="grid cols-2 versions-dl"><article class="card"><p class="eyebrow">Version</p><h3>Native</h3><p>Runs on the host CPU through Aiwnios, a HolyC runtime. Starts in about half a second.</p><p class="muted small" style="margin-top:10px">Host CPU: arm64</p></article><article class="card"><p class="eyebrow">Version</p><h3>Classic</h3><p>The x86 TempleOS image in QEMU. The full original system underneath.</p><p class="muted small" style="margin-top:10px">Host CPU: x86_64</p></article></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>All platforms.</h2><p class="lead">Filter by operating system. Your row is highlighted.</p></div>
+  <div class="fgroup"><div class="chips" role="group" aria-label="Platform"><button type="button" data-filter="all" aria-pressed="true">Everything</button><button type="button" data-filter="mac" aria-pressed="false">macOS</button><button type="button" data-filter="linux" aria-pressed="false">Linux</button><button type="button" data-filter="windows" aria-pressed="false">Windows</button><button type="button" data-filter="mobile" aria-pressed="false">Phones and tablets</button></div>
+<div class="tablewrap"><table class="ref dltable"><thead><tr><th>Platform</th><th>Architecture</th><th>Version</th><th>Device</th><th>Status</th><th>Get it</th></tr></thead><tbody>
+<tr id="mac-arm" data-kind="mac" data-arch="arm64" data-platform="mac"><td><b>macOS, Apple Silicon</b><br><span class="muted small">Tested. Build Aiwnios, then run the desktop in a window.</span></td><td><code>arm64</code></td><td>Native</td><td>Mac with an M-series chip</td><td><span class="chip chip-source">Build from source</span></td><td><a class="btn btn-ghost btn-sm" href="/labs/templeos/site/get-started/">Build from source</a></td></tr><tr id="mac-arm-classic" data-kind="mac" data-arch="arm64" data-platform="mac"><td><b>macOS, Apple Silicon (Classic)</b><br><span class="muted small">Tested. QEMU emulates x86, so it is slower than Native.</span></td><td><code>arm64</code></td><td>Classic</td><td>Mac with an M-series chip</td><td><span class="chip chip-source">Build from source</span></td><td><a class="btn btn-ghost btn-sm" href="/labs/templeos/site/get-started/">Build from source</a></td></tr><tr id="mac-x86" data-kind="mac" data-arch="x86_64" data-platform="mac"><td><b>macOS, Intel</b><br><span class="muted small">Should work with QEMU. Not tried here.</span></td><td><code>x86_64</code></td><td>Classic</td><td>Intel Mac</td><td><span class="chip chip-untested">Untested</span></td><td><span class="muted small">Coming</span></td></tr><tr id="linux-x86" data-kind="linux" data-arch="x86_64" data-platform="linux"><td><b>Linux, x86_64</b><br><span class="muted small">QEMU with KVM should be the fastest way to run it. Not tried here.</span></td><td><code>x86_64</code></td><td>Classic</td><td>PC or laptop</td><td><span class="chip chip-untested">Untested</span></td><td><span class="muted small">Coming</span></td></tr><tr id="linux-arm" data-kind="linux" data-arch="arm64" data-platform="linux"><td><b>Linux, arm64</b><br><span class="muted small">Aiwnios supports arm64. Not tried on Linux here.</span></td><td><code>arm64</code></td><td>Native</td><td>ARM laptop, Raspberry Pi 4 or 5</td><td><span class="chip chip-untested">Untested</span></td><td><span class="muted small">Coming</span></td></tr><tr id="win-x86" data-kind="windows" data-arch="x86_64" data-platform="windows"><td><b>Windows, x86_64</b><br><span class="muted small">Through QEMU for Windows. Not tried here.</span></td><td><code>x86_64</code></td><td>Classic</td><td>PC or laptop</td><td><span class="chip chip-untested">Untested</span></td><td><span class="muted small">Coming</span></td></tr><tr id="win-arm" data-kind="windows" data-arch="arm64" data-platform="windows"><td><b>Windows, arm64</b><br><span class="muted small">QEMU would emulate x86. Not tried here.</span></td><td><code>arm64</code></td><td>Classic</td><td>Windows on ARM laptop</td><td><span class="chip chip-untested">Untested</span></td><td><span class="muted small">Coming</span></td></tr><tr id="mobile" data-kind="mobile" data-arch="any" data-platform="mobile"><td><b>Phones and tablets</b><br><span class="muted small">Not supported. Use the in-browser version.</span></td><td><code>any</code></td><td>-</td><td>iPhone, iPad, Android</td><td><span class="chip chip-no">Not supported</span></td><td><a href="/labs/templeos/site/try/">Try in browser</a></td></tr>
+</tbody></table></div>
+<p class="muted small">Status: <b>Build from source</b> works today and was tested on this project's own Mac. <b>Untested</b> means we expect it to work but have not run it. Installer sizes and checksums will appear here once packages exist.</p></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Which one?</h2></div>
+  <div class="grid cols-3"><article class="card"><h3>Native, for arm64</h3><p>A window on your desktop, no emulator. About half a second to the desktop on an M-series Mac, and fast window drags.</p></article><article class="card"><h3>Classic, for x86</h3><p>The original TempleOS image in QEMU, with everything underneath it. Slower where it has to emulate x86.</p></article><article class="card"><h3>In your browser</h3><p>No install: a sketch of the desktop that runs in this page, on any device. <a href="/labs/templeos/site/try/">Try it</a>.</p></article></div>
+</div></section>
+<section class="cta"><div class="wrap">
+  <h2>Not ready to install?</h2><p class="lead">Open the desktop in your browser first.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

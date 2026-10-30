@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HolyC · TempleOS</title>
+<meta name="description" content="A tour of HolyC and the sixteen-colour palette.">
+<link rel="canonical" href="https://example.invalid/holyc/">
+<meta property="og:title" content="HolyC · TempleOS">
+<meta property="og:description" content="A tour of HolyC and the sixteen-colour palette.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/holyc/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">HolyC</p>
+  <h1>The language the whole system is written in.</h1>
+  <p class="lead">One compiler is the shell, the scripting language and the application language. Pick an example.</p>
+  
+  
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Take the tour</h2></div>
+  <div class="tabs" data-tabs><div class="tablist" role="tablist"><button type="button" role="tab" data-tab="hello">Hello</button><button type="button" role="tab" data-tab="fn">Functions</button><button type="button" role="tab" data-tab="class">Classes</button><button type="button" role="tab" data-tab="types">Types</button><button type="button" role="tab" data-tab="draw">Draw</button></div><div class="tabpanel" data-panel="hello"><pre><code>"Hello, world!\n";</code></pre><div class="note"><h3>No main, no printf</h3><p>A string on its own is a statement that prints. Top-level statements run as you type them, so the command line and the language are the same thing.</p></div></div><div class="tabpanel" data-panel="fn"><pre><code>U0 Count(I64 n=3)
+{
+  I64 i;
+  for (i=0;i&lt;n;i++)
+    "Line %d\n",i;
+}
+Count;
+Count(5);</code></pre><div class="note"><h3>Default arguments, no parentheses</h3><p>A call with no arguments needs no parentheses. Default values make short calls the norm.</p></div></div><div class="tabpanel" data-panel="class"><pre><code>class Pt
+{
+  I64 x,y;
+};
+Pt p;
+p.x=3; p.y=4;
+"%d\n",p.x*p.x+p.y*p.y;</code></pre><div class="note"><h3>Plain structs with methods of thought</h3><p>A class is a struct. There is no inheritance machinery to learn before you can read the code.</p></div></div><div class="tabpanel" data-panel="types"><pre><code>U8  a=255;   // unsigned 8 bit
+I64 b=-1;    // signed 64 bit
+F64 c=2.5;   // 64 bit float
+U0  Nothing; // void</code></pre><div class="note"><h3>Sizes in the name</h3><p>U8, I16, U32, I64, F64 and U0 say what they are. I64 is the default integer.</p></div></div><div class="tabpanel" data-panel="draw"><pre><code>// a sketch of the Demo style
+CDC *dc=DCAlias;
+dc->color=RED;
+GrCircle(dc,100,100,40);
+DCDel(dc);</code></pre><div class="note"><h3>The screen is a few calls away</h3><p>Graphics is a library call, not a toolkit. Kosmos builds its windows, fonts and dock on this layer.</p></div></div></div>
+<p class="muted small" style="margin-top:12px">Snippets are short sketches of the style, not tested programs. The graphics one assumes the Demo-folder conventions.</p>
+</div></section>
+<section id="why" class="chapter alt"><div class="wrap"><h2 class="chapter-h">Why HolyC is worth learning.</h2><p class="chapter-lead">What stands out when you come from C or C++.</p><div class="snap" tabindex="0" aria-label="Scrolling cards"><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></svg></span><h3>The shell is the language</h3><p>Type an expression and get the answer, or write a whole program on the prompt. There is no separate scripting layer and no built-in calculator, because the compiler is the shell.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span><h3>Compiled as you type</h3><p>Code is compiled just in time, so there is no main function. A statement at the top of a file simply runs.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16h.01"/><path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M21.946 12.013H2.054"/><path d="M6 16h.01"/></svg></span><h3>No linker, no object files</h3><p>Include a file and it is compiled and loaded straight into the live namespace. One walkthrough reports compiling about 50,000 lines in under a second.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span><h3>Everything is indexed</h3><p>Names complete everywhere, including symbols, and you can jump to any definition from anywhere, the shell included.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="m8 13 4-7 4 7"/><path d="M9.1 11h5.7"/></svg></span><h3>Output you can click</h3><p>Files, directories, documents and disassembly are hyperlinks. Disassemble a function, then click a symbol to land in its source.</p></article></div><div style="height:16px"></div><div class="snap" tabindex="0" aria-label="Scrolling cards"><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect x="14" y="2" width="8" height="8" rx="1"/></svg></span><h3>Reflection built in</h3><p>Every class member can be enumerated with its name and offset, and given extra metadata such as defaults, ranges and format strings. C++ developers have wanted this for decades.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg></span><h3>Draw with a loop</h3><p>Animation is a loop that writes pixels. No window class, no message pump and no invalidate call.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><h3>Starts at once</h3><p>No virtual memory to set up, no drivers to probe and no service manager. The walkthrough reports about half a second to boot, from an ISO of about 16 MB.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></span><h3>One unified thing</h3><p>The shell, the editor, the documentation and the file browser share one hyperlink system, instead of four tools that barely talk to each other.</p></article></div><p class="muted small" style="margin-top:20px"><b>The trade-off:</b> everything runs at the highest privilege level, so there is no safety net. A bad pointer or an uncaught exception takes the whole system down. That is why we run it in a VM and add protection around it; see <a href="/labs/templeos/site/security/">Security</a> and <a href="/labs/templeos/site/hc-plus/">HC+</a>.<br>Source: a C++ developer's walkthrough of TempleOS. We have not independently checked every figure in it.</p></div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Sixteen colours, and that is all of them.</h2><p class="lead">TempleOS draws in the classic VGA palette. The desktop gets its greys and its softness from dithering and smoothing, not from more colours.</p></div>
+  <div class="palette" id="palette"><button type="button" style="--c:#000000" data-name="BLACK" data-i="0" data-hex="#000000" aria-label="BLACK" aria-pressed="false"></button><button type="button" style="--c:#0000aa" data-name="BLUE" data-i="1" data-hex="#0000aa" aria-label="BLUE" aria-pressed="false"></button><button type="button" style="--c:#00aa00" data-name="GREEN" data-i="2" data-hex="#00aa00" aria-label="GREEN" aria-pressed="false"></button><button type="button" style="--c:#00aaaa" data-name="CYAN" data-i="3" data-hex="#00aaaa" aria-label="CYAN" aria-pressed="false"></button><button type="button" style="--c:#aa0000" data-name="RED" data-i="4" data-hex="#aa0000" aria-label="RED" aria-pressed="false"></button><button type="button" style="--c:#aa00aa" data-name="PURPLE" data-i="5" data-hex="#aa00aa" aria-label="PURPLE" aria-pressed="false"></button><button type="button" style="--c:#aa5500" data-name="BROWN" data-i="6" data-hex="#aa5500" aria-label="BROWN" aria-pressed="false"></button><button type="button" style="--c:#aaaaaa" data-name="LTGRAY" data-i="7" data-hex="#aaaaaa" aria-label="LTGRAY" aria-pressed="false"></button><button type="button" style="--c:#555555" data-name="DKGRAY" data-i="8" data-hex="#555555" aria-label="DKGRAY" aria-pressed="false"></button><button type="button" style="--c:#5555ff" data-name="LTBLUE" data-i="9" data-hex="#5555ff" aria-label="LTBLUE" aria-pressed="false"></button><button type="button" style="--c:#55ff55" data-name="LTGREEN" data-i="10" data-hex="#55ff55" aria-label="LTGREEN" aria-pressed="false"></button><button type="button" style="--c:#55ffff" data-name="LTCYAN" data-i="11" data-hex="#55ffff" aria-label="LTCYAN" aria-pressed="false"></button><button type="button" style="--c:#ff5555" data-name="LTRED" data-i="12" data-hex="#ff5555" aria-label="LTRED" aria-pressed="false"></button><button type="button" style="--c:#ff55ff" data-name="LTPURPLE" data-i="13" data-hex="#ff55ff" aria-label="LTPURPLE" aria-pressed="false"></button><button type="button" style="--c:#ffff55" data-name="YELLOW" data-i="14" data-hex="#ffff55" aria-label="YELLOW" aria-pressed="false"></button><button type="button" style="--c:#ffffff" data-name="WHITE" data-i="15" data-hex="#ffffff" aria-label="WHITE" aria-pressed="false"></button></div><p class="palette-out" id="palette-out">Click a colour. Its HolyC name is copied.</p>
+</div></section>
+<section class="cta"><div class="wrap">
+  <h2>Boot it and look around.</h2><p class="lead">Build the image, run it in QEMU, and the desktop is there in a few seconds.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

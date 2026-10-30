@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HC+ · TempleOS</title>
+<meta name="description" content="HC+, our improved HolyC: compatible, faster, safer and better tooled.">
+<link rel="canonical" href="https://example.invalid/hc-plus/">
+<meta property="og:title" content="HC+ · TempleOS">
+<meta property="og:description" content="HC+, our improved HolyC: compatible, faster, safer and better tooled.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/hc-plus/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">HC+</p>
+  <h1>HolyC, fixed where it hurts.</h1>
+  <p class="lead">HC+ is our improved HolyC. It keeps the language, the live compiler and the edit-and-run loop, and fixes the handful of things that cost us the most: speed, precedence, a missing keyword, crashes and tooling.</p>
+  
+  <p class="hero-note">Status: a plan backed by measurements. HC+ is not released; items marked Planned are not built yet.</p>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Principles</h2></div>
+  <div class="grid cols-3"><article class="card"><h3>Compatible by default</h3><p>Existing HolyC keeps its meaning. New behaviour is switched on for our own code and switched off again before the prompt returns.</p></article><article class="card"><h3>Keep the live loop</h3><p>The compiler rebuilds and hot-loads in about three seconds on the live CD. Editing and running stays instant. No transpiler, no LLVM front end.</p></article><article class="card"><h3>Measure first</h3><p>Every item below carries a number from the same VM, or says it is an estimate.</p></article></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Fixing precedence.</h2><p class="lead">The most common source of quiet bugs when moving code between C and HolyC. Drag the sliders.</p></div>
+  <div class="bench prec" id="prec"><div class="bench-head"><b>One expression, two readings: <code>a*b>>1</code></b></div>
+<div class="prec-grid"><label>a <b id="prec-av"></b><input id="prec-a" type="range" min="1" max="20" value="6"></label><label>b <b id="prec-bv"></b><input id="prec-b" type="range" min="1" max="20" value="7"></label></div>
+<div class="prec-out"><div><span class="muted small">HolyC today, shift first: a*(b>>1)</span><b id="prec-holyc"></b></div><div><span class="muted small">HC+ with C precedence: (a*b)>>1</span><b id="prec-c"></b></div></div>
+<p class="muted small" style="margin:14px 0 0">In HolyC the shift operators bind tighter than multiplication. HC+ switches the compiler to C order around our own code, so code ported from C means what it says.</p></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Faster, with numbers.</h2></div>
+  <div id="bench" class="bench"><div class="bench-head"><b>Measured in the same VM</b><div class="seg" role="group" aria-label="Before or after"><button type="button" data-mode="before" aria-pressed="false">Before</button><button type="button" data-mode="after" aria-pressed="true">After</button></div></div>
+<div class="bar-row" data-before="11" data-after="0.8" data-unit="ns"><span>Blend, per pixel</span><span class="bar-track"><i class="bar-fill"></i></span><span class="bar-val"></span></div><div class="bar-row" data-before="67" data-after="6" data-unit="ns"><span>Float multiply-add</span><span class="bar-track"><i class="bar-fill"></i></span><span class="bar-val"></span></div><div class="bar-row" data-before="150" data-after="2.36" data-unit="s"><span>Rebuild the compiler</span><span class="bar-track"><i class="bar-fill"></i></span><span class="bar-val"></span></div>
+<p class="muted small" style="margin:14px 0 0">Blend: naive loop against two pixels a pass with register variables. Float: x87 against SSE2. The last row compares a full OS rebuild with rebuilding only the compiler in the running system; the 150 s figure is a rough comparison, not a measurement.</p></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>The change list.</h2><p class="lead">Twelve changes, filtered by area.</p></div>
+  <div class="fgroup"><div class="chips" role="group" aria-label="Filter"><button type="button" data-filter="all" aria-pressed="true">Everything</button><button type="button" data-filter="speed" aria-pressed="false">Speed</button><button type="button" data-filter="language" aria-pressed="false">Language</button><button type="button" data-filter="safety" aria-pressed="false">Safety</button><button type="button" data-filter="tooling" aria-pressed="false">Tooling</button></div>
+<div class="tablewrap"><table class="ref"><thead><tr><th>#</th><th>Change</th><th>What it does</th><th>Effort</th><th>Evidence</th></tr></thead><tbody><tr data-kind="speed"><td>1</td><td><b>Hot loops as pointer walks</b></td><td>Write per-pixel loops as pointer walks in small functions, two pixels a pass. The blend loop falls from 11 ns to 0.8 ns a pixel.</td><td>S</td><td>Measured</td></tr><tr data-kind="speed"><td>2</td><td><b>SSE2 for floating point</b></td><td>Enable the SSE registers once at start-up and move float kernels to SSE2: 67 ns to 6 ns a multiply-add under emulation.</td><td>S</td><td>Measured</td></tr><tr data-kind="tooling"><td>3</td><td><b>Test harness over serial</b></td><td>Boot or restore the snapshot, send a test file, read results over the serial port, assert from Python.</td><td>S</td><td>Prototype exists</td></tr><tr data-kind="language"><td>4</td><td><b>C precedence, switched in</b></td><td>The precedence table is runtime data. Sixteen assignments switch the live compiler to C order, sixteen restore it.</td><td>S</td><td>Verified</td></tr><tr data-kind="language"><td>5</td><td><b><code>continue</code></b></td><td>Add the missing keyword to the statement parser. Loops already carry a break label.</td><td>S</td><td>Planned</td></tr><tr data-kind="safety"><td>6</td><td><b>Catchable faults for the desktop</b></td><td>A page fault in an app becomes an exception the desktop catches, so a bad pointer drops one frame instead of opening the debugger.</td><td>M</td><td>Planned</td></tr><tr data-kind="speed"><td>7</td><td><b>Peephole passes</b></td><td>Drop a redundant move, fold address arithmetic, reuse constants: about 1.4x on integer loops.</td><td>M</td><td>Estimated</td></tr><tr data-kind="tooling"><td>8</td><td><b>Sampling profiler</b></td><td>A timer-driven sampler that reports where frames go, without guessing.</td><td>M</td><td>Planned</td></tr><tr data-kind="speed"><td>9</td><td><b>SSE2 in the compiler backend</b></td><td>Float code fast everywhere, without hand assembly: 8 to 11x on F64.</td><td>L</td><td>Planned</td></tr><tr data-kind="speed"><td>10</td><td><b>Register arguments for flagged functions</b></td><td>Cheaper calls for callbacks and widgets: about 2x on call-heavy paths.</td><td>M</td><td>Estimated</td></tr><tr data-kind="tooling"><td>11</td><td><b>Host lint and formatter</b></td><td>A checker for mixed operators, ASCII-only source and unescaped dollar signs, and a token-based indenter.</td><td>M</td><td>Planned</td></tr><tr data-kind="safety"><td>12</td><td><b>Debug allocator and bounds checks</b></td><td>Canaries around allocations and checked array indexes in debug builds.</td><td>S</td><td>Planned</td></tr></tbody></table></div>
+<p class="muted small">Effort: S is days, M is weeks, L is a project. Ranked by payoff for effort.</p></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>A small keyword.</h2></div>
+  <div class="tabs" data-tabs><div class="tablist" role="tablist"><button type="button" role="tab" data-tab="now">HolyC today</button><button type="button" role="tab" data-tab="hcp">With HC+</button></div>
+<div class="tabpanel" data-panel="now"><pre><code>I64 i;
+for (i=0;i&lt;n;i++) {
+  if (!Keep(i))
+    goto skip;   // no continue
+  Work(i);
+skip:;
+}</code></pre><div class="note"><h3>A goto for every skip</h3><p>There is no <code>continue</code>, so skipped iterations need labels, and each label is another place to slip.</p></div></div>
+<div class="tabpanel" data-panel="hcp"><pre><code>I64 i;
+for (i=0;i&lt;n;i++) {
+  if (!Keep(i))
+    continue;
+  Work(i);
+}</code></pre><div class="note"><h3>The keyword you expected</h3><p>The loop parsers already carry a break label, so adding a continue label is a small change. Planned, not built.</p></div></div></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Pleasant to write, pleasant to read.</h2><p class="lead">Speed and safety make HC+ better. These changes make it nicer to live in. Each one is judged by what it removes from real desktop code.</p></div>
+  <div class="tabs" data-tabs><div class="tablist" role="tablist"><button type="button" role="tab" data-tab="loops">Range loops</button><button type="button" role="tab" data-tab="ternary">Ternary and names</button><button type="button" role="tab" data-tab="colour">Colour literals</button><button type="button" role="tab" data-tab="hooks">Optional calls</button><button type="button" role="tab" data-tab="debug">dbg and test</button></div><div class="tabpanel" data-panel="loops"><div><pre><code>Bool LpMatch(I64 a)
+{
+  I64 i,j;
+  U8 *s=ks_an[a];
+  if (!lp_ql) return TRUE;
+  for (i=0;s[i];i++) {
+    for (j=0;j&lt;lp_ql &amp;&amp; s[i+j] &amp;&amp; LpLow(s[i+j])==LpLow(lp_q[j]);j++);
+    if (j==lp_ql) return TRUE;
+  }
+  return FALSE;
+}</code></pre><pre><code>Bool LpMatch(I64 a)
+{
+  if (!lp_ql) return TRUE;
+  s := ks_an[a];
+  for (i in 0..StrLen(s)) {
+    j := 0;
+    while (j&lt;lp_ql &amp;&amp; s[i+j] &amp;&amp; LpLow(s[i+j])==LpLow(lp_q[j])) j++;
+    if (j==lp_ql) return TRUE;
+  }
+  return FALSE;
+}</code></pre></div><div class="note"><p class="eyebrow">Before, then with HC+</p><h3>Range loops</h3><p>The declaration block and the loop header shrink to what you mean.</p><p>No <code>I64 i,j;</code> block, and the empty-bodied inner <code>for</code> becomes a <code>while</code> that says what it does. <code>:=</code> declares a variable where it is first used and takes its type from the value.</p></div></div><div class="tabpanel" data-panel="ternary"><div><pre><code>for (n=0;n&lt;lp_nv;n++) {
+  target=1.0;
+  if (id==ID_LP+n || (n==lp_sel &amp;&amp; id&lt;ID_LP)) target=1.16;
+  old=lp_sc[n];
+  if (old&lt;1.0) old=1.0;
+  if (!ks_anim) lp_sc[n]=target;
+  else lp_sc[n]=old+(target-old)*0.35;
+  if (AbsI64((lp_sc[n]-old)*1000)>0) LpDirtyTile(n);
+}</code></pre><pre><code>for (n in 0..lp_nv) {
+  hot    := id==ID_LP+n || (n==lp_sel &amp;&amp; id&lt;ID_LP);
+  target := hot ? 1.16 : 1.0;
+  old    := lp_sc[n] &lt; 1.0 ? 1.0 : lp_sc[n];
+  lp_sc[n] = ks_anim ? old+(target-old)*0.35 : target;
+  if (Abs(lp_sc[n]-old) > 0.001) LpDirtyTile(n);
+}</code></pre></div><div class="note"><p class="eyebrow">Before, then with HC+</p><h3>Ternary and names</h3><p>Five lines of set, test, set again become four lines that read in order.</p><p>Naming <code>hot</code> makes the intent obvious, and the <code>AbsI64(x*1000)&gt;0</code> trick becomes a plain comparison. HolyC has no <code>?:</code> today.</p></div></div><div class="tabpanel" data-panel="colour"><div><pre><code>if (lp_ql) StrPrint(buf,"%s",lp_q); else StrPrint(buf,"Type to search");
+RRFill(x,MBAR+52,w,36,18,0xFFFFFF,40*fa/256);
+LIcon(L_GRID,x+22,MBAR+70,16,0xF4F4F6,fa);
+Txt(x+40,MBAR+60,F_REG,0xB8B8C4,buf,fa);</code></pre><pre><code>#define LP_TEXT #F4F4F6
+#define LP_DIM  #B8B8C4
+
+text := lp_ql ? lp_q : "Type to search";
+RRFill(x, MBAR+52, w, 36, 18, #FFFFFF, 40*fa/256);
+LIcon(L_GRID, x+22, MBAR+70, 16, LP_TEXT, fa);
+Txt(x+40, MBAR+60, F_REG, LP_DIM, text, fa);</code></pre></div><div class="note"><p class="eyebrow">Before, then with HC+</p><h3>Colour literals</h3><p>Colours look like colours, and repeated values get names.</p><p>The <code>buf[80]</code> array existed only to get a string pointer, so it and the <code>if/else</code> go away. About 40 hex literals in this one file would become named or recognisable colours.</p></div></div><div class="tabpanel" data-panel="hooks"><div><pre><code>if (ks_wtdraw) (*ks_wtdraw)();
+...
+if (ks_wtframe) (*ks_wtframe)(dt);</code></pre><pre><code>ks_wtdraw?.();
+...
+ks_wtframe?.(dt);</code></pre></div><div class="note"><p class="eyebrow">Before, then with HC+</p><h3>Optional calls</h3><p>A hook that may or may not be set takes one token, not two checks.</p><p>The launchpad file has four of these hooks already. <code>?.</code> means "call it if it is set".</p></div></div><div class="tabpanel" data-panel="debug"><div><pre><code>U0 LpMove(I64 d)
+{
+  I64 old=lp_sel;
+  if (!lp_nv) return;
+  lp_sel=ClampI64(lp_sel+d,0,lp_nv-1);
+  Print("LpMove d=%d old=%d new=%d (03g:%d)\n",d,old,lp_sel,__LINE__);
+  if (old!=lp_sel) { LpDirtyTile(old); LpDirtyTile(lp_sel); }
+}</code></pre><pre><code>U0 LpMove(I64 d)
+{
+  if (!lp_nv) return;
+  old := lp_sel;
+  lp_sel = Clamp(lp_sel+d, 0, lp_nv-1);
+  dbg d, old, lp_sel;   // d=1 old=2 lp_sel=3  (03g-launchpad.HC:158)
+  if (old != lp_sel) { LpDirtyTile(old); LpDirtyTile(lp_sel); }
+}
+
+test "LpMove stays inside the list" {
+  lp_nv = 5; lp_sel = 4;
+  LpMove(3);
+  assert lp_sel == 4;
+}</code></pre></div><div class="note"><p class="eyebrow">Before, then with HC+</p><h3>dbg and test</h3><p>Debugging and tests become one line, and live next to the code.</p><p><code>dbg</code> prints names, values and <code>file:line</code> from one line. A <code>test</code> block is run by the serial test harness and stripped from release builds.</p></div></div></div>
+<p class="muted small" style="margin-top:12px">The "before" code is taken from <code>desk3/03g-launchpad.HC</code>. The "after" uses proposed syntax: none of it exists yet.</p>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>What other languages do well</h2></div>
+  <div class="grid cols-3"><article class="card"><h3>Go: boring on purpose</h3><p>One formatter with no options, a small language, and tooling that ships with it. HC+ takes the formatter and the restraint.</p></article><article class="card"><h3>Rust: the compiler teaches</h3><p>Errors that show the line, the reason and a fix. This is the most transferable idea, and patching the compiler's messages is cheap with the three-second reload.</p></article><article class="card"><h3>Ruby: reads like prose</h3><p>Blocks, methods on values and readable literals. HC+ takes lambdas, method calls on structs and units such as <code>250ms</code>, but not the magic.</p></article></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Writing both side by side.</h2><p class="lead">HC+ is plain HolyC plus a few extra tokens. A host pass rewrites the extras and passes everything else through byte for byte.</p></div>
+  <div class="bench"><div class="bench-head"><b>Both dialects in one project</b></div>
+<pre><code>desk3/01-core.HC          copied as-is
+desk3/03g-launchpad.HCP   --&gt; hcpp --&gt; 03g-launchpad.HC (generated)
+                                         |
+                      send-to-vm.sh ships every .HC to the VM</code></pre></div>
+<div class="grid cols-3"><article class="card"><h3>The extension picks the dialect</h3><p><code>.HC</code> files are never touched. <code>.HCP</code> files go through a host-side pass and come out as ordinary HolyC. Files convert one at a time and the build never breaks halfway.</p></article><article class="card"><h3>Only invalid HolyC is rewritten</h3><p>Tokens such as <code>:=</code>, <code>?.</code>, <code>dbg</code> and <code>test</code> do not compile today, so a plain <code>.HC</code> file cannot be changed by accident. Strings, comments and DolDoc <code>$</code> commands are skipped.</p></article><article class="card"><h3>Line numbers never move</h3><p>Every rewrite stays on its original line, so a compiler error at line 158 points at line 158 of the source, with no source maps.</p></article></div>
+<div class="honest"><h3>The proof, and the sharp edges</h3><ul>
+<li><b>The proof:</b> run the pass over every existing <code>.HC</code> file and require the output to equal the input. If that passes, original HolyC is valid HC+ by construction.</li>
+<li><b>New keywords can collide</b> with existing names such as a variable called <code>test</code>. The pass warns on any collision.</li>
+<li><b><code>..</code> next to <code>...</code>:</b> HolyC already uses <code>case 1...5</code>, so the lexer must treat both explicitly.</li>
+<li><b>Method calls are the hard one.</b> Class members can be function pointers, so <code>obj.fn(x)</code> already means something. A text pass cannot tell them apart, so the first version would use a distinct spelling such as <code>rect:Contains(p)</code>.</li>
+<li><b>Editing generated code on the VM loses the sugar.</b> That is the weakness of this route, and the reason features should move into the compiler once they have proved worth keeping.</li></ul></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Roadmap</h2></div>
+  <div class="grid cols-3"><article class="card"><h3>First week</h3><p>Items 1 to 5: hot loops, SSE2 kernels, the serial test harness, C precedence and <code>continue</code>. All are small and each can be checked with the benchmark set.</p></article><article class="card"><h3>Six months</h3><p>A lightly patched compiler carried as a small patch series, hot kernels assembled on the host, host-side lint, formatter and benchmarks, and a fault policy for the desktop.</p></article><article class="card"><h3>Not doing</h3><p>No LLVM front end, no HolyC-to-C transpiler and no ARM kernel. The gain over fixed HolyC is a few times at best, and the cost is the live edit loop.</p></article></div>
+</div></section>
+<section class="section"><div class="wrap narrow prose"><p class="muted small">Source: the repository note <a href="https://github.com/FraterCCCLXIII/templeos/blob/main/docs/holyc-improvement-analysis.md">Improving HolyC on all of its deficits</a>, which has the measurements, the compiler locations and what could not be verified. Numbers here are from that note; read it before relying on them.</p></div></section>
+<section class="cta"><div class="wrap">
+  <h2>Learn the base language first.</h2><p class="lead">HC+ is HolyC with fixes, so the reference applies.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

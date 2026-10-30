@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ · TempleOS</title>
+<meta name="description" content="Short answers to the common questions.">
+<link rel="canonical" href="https://example.invalid/faq/">
+<meta property="og:title" content="FAQ · TempleOS">
+<meta property="og:description" content="Short answers to the common questions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/faq/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">FAQ</p>
+  <h1>Questions about the desktop.</h1>
+  <p class="lead">Short answers, with links to the long ones.</p>
+  
+  
+</div></section>
+<section class="section"><div class="wrap">
+  
+  <div class="specs"><details><summary>Is it safe to run?</summary><div class="spec-body"><p>Run it in a VM, which is where it belongs. TempleOS has no memory protection, so a bad HolyC app can take the guest down. What we add is protection around it: signed packages, permissions you approve, and keys that stay on your Mac. <a href="/labs/templeos/site/security/">Security</a> lists what is and is not promised.</p></div></details><details><summary>Why HolyC?</summary><div class="spec-body"><p>It is the language of the system underneath. One compiler is the shell, the scripting language and the app language, and it compiles as you type, so a change is live in seconds. <a href="/labs/templeos/site/hc-plus/">HC+</a> is our plan to fix its rough edges without losing that.</p></div></details><details><summary>Does it replace macOS or Windows?</summary><div class="spec-body"><p>No. It runs in a window on top of your system, as an emulated machine or as a native window.</p></div></details><details><summary>Which Macs does it run on?</summary><div class="spec-body"><p>Native needs an Apple Silicon Mac, and that is the one combination we have tested. Classic should run anywhere QEMU does. See <a href="/labs/templeos/site/requirements/">Requirements</a> and <a href="/labs/templeos/site/download/">Download</a>.</p></div></details><details><summary>Can I use it on Windows or Linux?</summary><div class="spec-body"><p>Classic should, through QEMU. We have not tried it, and the Download page says so.</p></div></details><details><summary>Is it free? What is the licence?</summary><div class="spec-body"><p>TempleOS is in the public domain. The licence for our desktop is not yet decided; this site marks it as a placeholder. Third-party parts are listed on <a href="/labs/templeos/site/notices/">Notices</a>.</p></div></details><details><summary>Is there AI in it?</summary><div class="spec-body"><p>Not yet. It is the direction: agents under rules you set, with your keys on your Mac. <a href="/labs/templeos/site/ai/">AI in the OS</a> shows the plan and the status of each part.</p></div></details><details><summary>What is Creation Studio?</summary><div class="spec-body"><p>The creative suite we are building: sheets, photos, vectors, documents and slides. Sheet is native, Photo and Vector run today as streamed windows, the rest are planned. <a href="/labs/templeos/site/creation-studio/">See the suite</a>.</p></div></details><details><summary>Can I install other apps?</summary><div class="spec-body"><p>The package format and installer are designed and prototyped on the host. The desktop side is written but not yet run in a VM, so apps are loaded from source today.</p></div></details><details><summary>Who made TempleOS?</summary><div class="spec-body"><p>Terry A. Davis. <a href="/labs/templeos/site/history/templeos/">The founder and the creation of TempleOS</a>.</p></div></details><details><summary>How do I report a bug or a security problem?</summary><div class="spec-body"><p>Open an issue in the repository. A dedicated security contact is not set up yet; the Security page marks it as a placeholder.</p></div></details></div>
+</div></section>
+<section class="cta"><div class="wrap">
+  <h2>Still curious?</h2><p class="lead">Try the desktop in your browser, or read the docs.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

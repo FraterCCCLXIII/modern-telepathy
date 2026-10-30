@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developers · TempleOS</title>
+<meta name="description" content="Build apps and services for the TempleOS desktop: HolyC, packages, permissions, tools and the dialect notes.">
+<link rel="canonical" href="https://example.invalid/developers/">
+<meta property="og:title" content="Developers · TempleOS">
+<meta property="og:description" content="Build apps and services for the TempleOS desktop: HolyC, packages, permissions, tools and the dialect notes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/developers/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/" aria-current="page">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero center"><div class="wrap">
+  <p class="eyebrow">Developers</p>
+  <h1>Build on the desktop.</h1>
+  <p class="lead">One language, one live compiler, one package format. Write a window, test it in seconds, and ship it with permissions people can read.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/docs/holyc/">HolyC reference</a><a class="btn btn-ghost" href="#first">Your first app</a></div>
+  
+</div></section>
+<div class="localnav" id="localnav"><div class="wrap localnav-in"><b>Developers</b><nav aria-label="Developers"><a href="#kinds" data-spy="kinds">App kinds</a><a href="#first" data-spy="first">First app</a><a href="#tools" data-spy="tools">Tools</a><a href="#gotchas" data-spy="gotchas">Gotchas</a><a href="#trust" data-spy="trust">Trust</a><a href="#numbers" data-spy="numbers">Numbers</a></nav><a class="btn btn-primary btn-sm" href="/labs/templeos/site/download/">Download</a></div></div>
+<section class="section"><div class="wrap"><div class="quick"><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a><a href="/labs/templeos/site/hc-plus/">HC+ plan</a><a href="/labs/templeos/site/docs/">Docs</a><a href="/labs/templeos/site/security/">Security model</a><a href="https://github.com/FraterCCCLXIII/templeos">Source</a><a href="https://github.com/FraterCCCLXIII/templeos/tree/main/docs">Design notes</a><a href="https://github.com/FraterCCCLXIII/templeos/tree/main/desk3">Sample apps</a></div></div></section>
+<section id="kinds" class="chapter alt"><div class="wrap"><h2 class="chapter-h">Four kinds of app.</h2><p class="chapter-lead">Pick by how much isolation you need.</p><div class="grid cols-2"><article class="card"><h3>HolyC apps</h3><p>One file each, drawn with the shared toolkit. They run inside the desktop with no memory protection, so their permissions gate host services only.</p></article><article class="card"><h3>Web apps</h3><p>A static site in the browser engine, bound by the browser sandbox. Calls to the desktop are checked against grants.</p></article><article class="card"><h3>Electron apps</h3><p>A real process on the Mac, limited to one workspace folder with a minimal environment. Limits, not a wall.</p></article><article class="card"><h3>Host services</h3><p>Python services behind the hub: weather, music, sheets, calendar, wallpapers. They hold the keys; the desktop only asks.</p></article></div></div></section>
+<section id="first" class="chapter "><div class="wrap"><h2 class="chapter-h">Your first app.</h2><p class="chapter-lead">Six steps, from a window to an install.</p><ol class="steps"><li><b>Write a window</b><p>A HolyC function that draws its body in logical units inside a window. The same code runs at 1x and 2x.</p></li><li><b>Run it fast</b><p>Reload the desktop from a saved snapshot in about 20 seconds, or run it headless on the native build with a driver script.</p></li><li><b>Describe it</b><p>A manifest names the app, its version, publisher and the permission words it needs.</p></li><li><b>Package it</b><p>A .ksapp file is a zip with a manifest, a file list of hashes and your payload.</p></li><li><b>Sign it</b><p>An Ed25519 signature over the file list. Unsigned packages still install, with a warning.</p></li><li><b>Install it</b><p>One sheet shows the publisher, the permissions and the verdict. Updates keep the same key.</p></li></ol><h3 style="margin-top:32px">A manifest, illustrative</h3><pre><code>{
+  "id": "com.example.notes",
+  "name": "Example Notes",
+  "version": "1.0.0",
+  "publisher": { "name": "Example Co" },
+  "description": "A small text editor.",
+  "license": "MIT",
+  "icon": { "lucide": "notebook" },
+  "permissions": ["storage:own"]
+}</code></pre><p class="muted small">Field names come from the installer note; check it for the exact schema, entry points and limits. The guest side of the installer is written but not yet run in a VM.</p></div></section>
+<section id="tools" class="chapter alt"><div class="wrap"><h2 class="chapter-h">Tools.</h2><div class="snap" tabindex="0" aria-label="Scrolling cards"><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></svg></span><h3>Fast reload</h3><p>Boot once, save a snapshot, and reload new code in about 20 seconds.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span><h3>Benchmarks</h3><p>Press b in the desktop for twelve scenarios, with the Monitor app showing frame times.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>kslint</h3><p>Catches the dialect traps below: U64 multiplies, continue, zero-assumed locals and stray dollar signs.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg></span><h3>Parity gate</h3><p>Golden scenes compared on x86 and the native build, with a pixel diff.</p></article><article class="snapcard"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16h.01"/><path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M21.946 12.013H2.054"/><path d="M6 16h.01"/></svg></span><h3>Headless drivers</h3><p>Scripted runs on the native build for icons, fonts, browser, sheet and more.</p></article></div></div></section>
+<section id="gotchas" class="chapter "><div class="wrap"><h2 class="chapter-h">Gotchas, in one table.</h2><p class="chapter-lead">The dialect differences that have already cost us time.</p><div class="tablewrap"><table class="ref"><thead><tr><th>Trap</th><th>What to do</th></tr></thead><tbody><tr><td><code>U64</code> multiply truncates to 32 bits on arm64</td><td>Use <code>I64</code> for products.</td></tr><tr><td>Locals are not zeroed on the native build</td><td>Initialise every local.</td></tr><tr><td>No <code>continue</code> in either build</td><td>Use a <code>goto</code> or restructure. HC+ plans the keyword.</td></tr><tr><td>Shifts bind tighter than multiply</td><td>Parenthesise any expression that mixes them.</td></tr><tr><td><code>$</code> starts a DolDoc command</td><td>Write <code>$$</code> in strings and comments.</td></tr><tr><td>Source is ASCII</td><td>Other characters become hyphens.</td></tr><tr><td><code>PrintF</code> with several arguments fails on the native build</td><td>Use <code>Say</code> or <code>StrPrint</code>.</td></tr></tbody></table></div></div></section>
+<section id="trust" class="chapter alt"><div class="wrap"><h2 class="chapter-h">Trust is part of the product.</h2><p class="chapter-lead">More in <a href="/labs/templeos/site/security/">Security</a>.</p><div class="grid cols-3"><article class="card"><h3>Say what you need</h3><p>Permissions are plain words with one sentence each. Ask for less and installs go smoother.</p></article><article class="card"><h3>Sign your releases</h3><p>A known key makes the install sheet calm. A new key asks the user to trust you.</p></article><article class="card"><h3>Be honest about limits</h3><p>The sheet itself says a HolyC app has no memory protection. Do not claim otherwise.</p></article></div></div></section>
+<section id="numbers" class="chapter "><div class="wrap"><div class="stats"><div><b data-count="20">0</b><span>seconds to reload your change</span></div><div><b data-count="0.5" data-dec="1">0</b><span>seconds to the native desktop</span></div><div><b data-count="12">0</b><span>benchmark scenarios</span></div><div><b data-count="92">0</b><span>installer tests</span></div></div></div></section>
+<section class="cta"><div class="wrap">
+  <h2>Start with the language.</h2><p class="lead">The reference is short, and the compiler is live.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

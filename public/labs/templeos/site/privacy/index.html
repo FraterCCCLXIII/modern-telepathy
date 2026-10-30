@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · TempleOS</title>
+<meta name="description" content="What leaves your machine, which app sends it, and where it goes.">
+<link rel="canonical" href="https://example.invalid/privacy/">
+<meta property="og:title" content="Privacy · TempleOS">
+<meta property="og:description" content="What leaves your machine, which app sends it, and where it goes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/privacy/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero center"><div class="wrap">
+  <p class="eyebrow">Privacy</p>
+  <h1>It asks. It does not assume.</h1>
+  <p class="lead">Your files stay on your machine. When something has to go out, you can see which app sends it and where it goes.</p>
+  
+  <p class="hero-note">Describes the design and the code in the repository. The guest side is not independently audited.</p>
+</div></section>
+<div class="localnav" id="localnav"><div class="wrap localnav-in"><b>Privacy</b><nav aria-label="Privacy"><a href="#flow" data-spy="flow">How asking works</a><a href="#apps" data-spy="apps">App by app</a><a href="#site" data-spy="site">This website</a><a href="#more" data-spy="more">Go deeper</a></nav><a class="btn btn-primary btn-sm" href="/labs/templeos/site/security/">Security</a></div></div>
+<section id="flow" class="chapter "><div class="wrap"><h2 class="chapter-h">How a request works.</h2><p class="chapter-lead">The same four steps for every app and service.</p><ol class="steps"><li><b>An app asks</b><p>It names a permission word, such as one folder or one site.</p></li><li><b>The host checks</b><p>Grants live on your Mac, not in the guest. Default is no.</p></li><li><b>The desktop asks you</b><p>A sheet shows who is asking and what for. Decisions are tied to that app, version and package.</p></li><li><b>One use, then gone</b><p>The answer is a one-use token. More permissions in an update are asked again.</p></li></ol></div></section>
+<section id="apps" class="chapter alt"><div class="wrap"><h2 class="chapter-h">App by app.</h2><p class="chapter-lead">What can leave, and where it goes.</p><div class="tablewrap"><table class="ref"><thead><tr><th>App</th><th>What can leave your machine</th><th>Where to</th></tr></thead><tbody><tr><td>Files</td><td>Nothing. Browses local drives.</td><td>-</td></tr><tr><td>Notes</td><td>Nothing. Saved to the guest RAM drive, which is lost on restart.</td><td>-</td></tr><tr><td>Browser</td><td>The pages you ask for, fetched by the host engine.</td><td>The sites you visit</td></tr><tr><td>Weather</td><td>The coordinates of a preset city. Nothing else.</td><td>The Norwegian Meteorological Institute, with an identifying request header</td></tr><tr><td>Music</td><td>Nothing. Reads the host music library.</td><td>-</td></tr><tr><td>Calendar</td><td>Nothing. A local store.</td><td>-</td></tr><tr><td>Sheet</td><td>Nothing. Opens and saves local files.</td><td>-</td></tr><tr><td>Wallpapers</td><td>A one-time fetch tool, run by you with your own key.</td><td>Pexels</td></tr><tr><td>Kamikin</td><td>Nothing. Avatars and chat are local.</td><td>-</td></tr></tbody></table></div><p class="muted small">AI features are planned, not built. When they arrive, keys stay in the Mac keychain and every action waits for your approval. See <a href="/labs/templeos/site/ai/">AI in the OS</a>.</p></div></section>
+<section id="site" class="chapter "><div class="wrap"><h2 class="chapter-h">This website.</h2><div class="grid cols-3"><article class="card"><h3>No trackers</h3><p>This website loads no external scripts, fonts or analytics.</p></article><article class="card"><h3>No cookies</h3><p>It stores your theme choice, and the notes in the Try it desktop, in your own browser only.</p></article><article class="card"><h3>No accounts</h3><p>There is nothing to sign in to.</p></article></div></div></section>
+<section id="more" class="chapter alt"><div class="wrap"><h2 class="chapter-h">Go deeper.</h2><div class="grid cols-2"><article class="card"><h3>Security</h3><p>The layers, the install checks and what is not promised. <a href="/labs/templeos/site/security/">Read it →</a></p></article><article class="card"><h3>Installer note</h3><p>The threat table and trust states. <a href="https://github.com/FraterCCCLXIII/templeos/blob/main/docs/app-installer.md">Read it →</a></p></article></div></div></section>
+<section class="cta"><div class="wrap">
+  <h2>See what is private for yourself.</h2><p class="lead">Run it in a VM and watch the permission sheets.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

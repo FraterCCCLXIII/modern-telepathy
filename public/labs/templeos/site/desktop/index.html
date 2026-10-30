@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The desktop · TempleOS</title>
+<meta name="description" content="Windows, dock, five styles, themes and the boot splash of the Kosmos Temple Desktop.">
+<link rel="canonical" href="https://example.invalid/desktop/">
+<meta property="og:title" content="The desktop · TempleOS">
+<meta property="og:description" content="Windows, dock, five styles, themes and the boot splash of the Kosmos Temple Desktop.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/desktop/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">The desktop</p>
+  <h1>It is TempleOS, and it is also a desktop.</h1>
+  <p class="lead">Kosmos Temple Desktop 3 draws everything itself in logical units, so the same code runs at 1x and 2x.</p>
+  
+  
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>What it does</h2></div>
+  <div class="grid cols-3"><article class="card"><h3>Five styles</h3><p>macOS, Windows 11, Kosmica glass and two more, each light or dark. Style switches crossfade.</p></article><article class="card"><h3>A translucent dock</h3><p>Icons magnify under the pointer. The pill blurs whatever sits behind it.</p></article><article class="card"><h3>Window Style Editor</h3><p>Chrome kind, geometry, title bar gradient, buttons, shadow and motion, with nine colour schemes. Export and import a one-line theme.</p></article><article class="card"><h3>Icon Style Editor</h3><p>Shape, fill, bevel, gloss, glow and grain for every app icon, with eight presets.</p></article><article class="card"><h3>Boot splash</h3><p>A ring with a dot and a thin bar, then a 600 ms crossfade. The TempleOS terminal never shows.</p></article><article class="card"><h3>Fast</h3><p>Dragging a large window at 2880x1800 takes about 9.5 ms a frame. The Monitor app shows the numbers.</p></article></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>How we draw.</h2><p class="lead">The original has no compositor. Ours has one, and it is ours.</p></div>
+  <div class="grid cols-2"><article class="card"><p class="eyebrow">Still the original way</p><h3>Straight to the screen</h3><ul class="plain"><li>HolyC at ring 0, with no system-call boundary.</li><li>The desktop finds the video card's framebuffer and writes to it itself.</li><li>One loop draws and polls the mouse and keyboard. There is no message pump and no window classes.</li><li>TempleOS stays underneath as the runtime.</li></ul></article>
+<article class="card"><p class="eyebrow">Added on top</p><h3>Our own compositor</h3><ul class="plain"><li>A back buffer, and a list of dirty rectangles that plays the part of an invalidate call.</li><li>Alpha blending, shadows, a translucent menubar and a blurred dock backdrop, all written in HolyC.</li><li>A crossfade between styles, and one set of drawing code for 1x and 2x.</li><li>On the native build, a final upload to a Metal texture.</li></ul></article></div>
+<p class="muted small" style="margin-top:14px">So it follows the spirit of the original, not the letter: we replaced the middleman with code we own, at the same privilege. How TempleOS draws its own windows internally is not something we have verified. The full note is in the <a href="https://github.com/FraterCCCLXIII/templeos/blob/main/docs/how-we-draw.md">docs</a>.</p>
+<h3 style="margin-top:36px">Try it without the compositing: the Original style</h3>
+<img class="shot" src="/labs/templeos/site/img/original-style.png" alt="The desktop in the Original style: flat, square, blue title bars on grey" loading="lazy">
+<p class="muted small" style="margin-top:12px">A theme with no shadows, blur or translucency, in the 16 VGA colours. On the native build a full redraw takes about 3.0 ms instead of 6.7, and dragging a large window about 0.9 ms instead of 1.4. One run on one Mac.</p>
+</div></section>
+<section class="cta"><div class="wrap">
+  <h2>Boot it and look around.</h2><p class="lead">Build the image, run it in QEMU, and the desktop is there in a few seconds.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

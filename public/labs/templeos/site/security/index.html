@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security · TempleOS</title>
+<meta name="description" content="How the desktop is secured, what it promises and what it does not.">
+<link rel="canonical" href="https://example.invalid/security/">
+<meta property="og:title" content="Security · TempleOS">
+<meta property="og:description" content="How the desktop is secured, what it promises and what it does not.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.invalid/security/">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/labs/templeos/site/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/labs/templeos/site/styles.css">
+<script>try{var t=localStorage.getItem('tos-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/labs/templeos/site/" aria-label="TempleOS home"><svg class="mark" width="28" height="28" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/labs/templeos/site/creation-studio/">Creation Studio</a><a href="/labs/templeos/site/ai/">AI</a><a href="/labs/templeos/site/apps/">Apps</a><a href="/labs/templeos/site/developers/">Developers</a><a href="/labs/templeos/site/security/" aria-current="page">Security</a><a href="/labs/templeos/site/docs/">Docs</a>
+      <a class="nav-extra" href="https://github.com/FraterCCCLXIII/templeos">GitHub</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+      <a class="btn btn-ghost hide-sm gh-btn" href="https://github.com/FraterCCCLXIII/templeos" aria-label="Source on GitHub"><i class="gh-icon" aria-hidden="true"></i><span class="gh-label">GitHub</span></a>
+      <div class="dl hide-sm" data-dl>
+  <a class="btn btn-primary dl-main" href="/labs/templeos/site/download/" data-dl-main>Download</a><button class="btn btn-primary dl-arrow" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Other downloads" data-dl-toggle><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dl-menu" role="menu" hidden data-dl-menu><a role="menuitem" href="/labs/templeos/site/download/#mac-arm" data-id="mac-arm"><span>macOS, Apple Silicon</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-arm-classic" data-id="mac-arm-classic"><span>macOS, Apple Silicon (Classic)</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#mac-x86" data-id="mac-x86"><span>macOS, Intel</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-x86" data-id="linux-x86"><span>Linux, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#linux-arm" data-id="linux-arm"><span>Linux, arm64</span><small>Native</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-x86" data-id="win-x86"><span>Windows, x86_64</span><small>Classic</small></a><a role="menuitem" href="/labs/templeos/site/download/#win-arm" data-id="win-arm"><span>Windows, arm64</span><small>Classic</small></a><a role="menuitem" class="dl-all" href="/labs/templeos/site/download/">All downloads and platforms</a></div>
+</div>
+      <button class="icon-btn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Security</p>
+  <h1>What is protected, and what is not.</h1>
+  <p class="lead">TempleOS has no memory protection. So the desktop puts its protection where it can: on the host, in the installer, and in the permissions every app asks for. This page says plainly which is which.</p>
+  
+  <p class="hero-note">Source: the installer, Electron and hub notes in the repository. The guest side is not audited. What leaves your machine is on the <a href="/labs/templeos/site/privacy/">Privacy</a> page.</p>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>The short version</h2></div>
+  <div class="grid cols-3"><article class="card"><h3>Run it in a VM</h3><p>Everything in the guest runs at ring 0 in one address space. A bad pointer can take the whole guest down. The VM is the boundary.</p></article><article class="card"><h3>The host owns trust</h3><p>The store, the trust list and every grant live on the host, never in the guest. The guest only shows the questions.</p></article><article class="card"><h3>Default deny</h3><p>An app gets nothing it did not ask for and you did not approve. More permissions in an update are asked again.</p></article></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Four layers, four different promises.</h2></div>
+  <div class="layers"><div class="layer"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span><div><h3>HolyC apps</h3><p>Run inside the desktop with no memory protection. Their permissions gate host services only; they cannot stop a hostile app from reading guest memory.</p></div></div><div class="layer"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span><div><h3>Web apps</h3><p>Bound by the browser sandbox, and calls to the desktop are checked against grants.</p></div></div><div class="layer"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></svg></span><div><h3>Electron apps</h3><p>Run on the host with limits we apply: a fixed profile folder, a minimal environment and one workspace folder. These are limits, not a wall.</p></div></div><div class="layer"><span class="app-ico"><svg class="lu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16h.01"/><path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M21.946 12.013H2.054"/><path d="M6 16h.01"/></svg></span><div><h3>The host hub</h3><p>Owns the registry, the trust list and approvals. This is where the real checks happen.</p></div></div></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Installing an app.</h2><p class="lead">Packages are .ksapp files signed with Ed25519. Pick a trust state to see what the installer does.</p></div>
+  <div class="tabs" data-tabs><div class="tablist" role="tablist"><button type="button" role="tab" data-tab="trusted">Trusted</button><button type="button" role="tab" data-tab="unknown">New publisher</button><button type="button" role="tab" data-tab="unsigned">Unsigned</button><button type="button" role="tab" data-tab="bad">Bad signature</button><button type="button" role="tab" data-tab="revoked">Revoked</button></div><div class="tabpanel one" data-panel="trusted"><div class="note"><p class="eyebrow">Outcome: Installs</p><h3>Trusted</h3><p>The package is signed by a key you already trust. It installs, and a trusted publisher skips the first-launch prompt.</p></div></div><div class="tabpanel one" data-panel="unknown"><div class="note"><p class="eyebrow">Outcome: Asks first</p><h3>New publisher</h3><p>Signed, but the key is new to this Mac. The Install sheet shows the publisher and key fingerprint and asks whether to trust them for future installs and updates.</p></div></div><div class="tabpanel one" data-panel="unsigned"><div class="note"><p class="eyebrow">Outcome: Warns, quarantines</p><h3>Unsigned</h3><p>Nobody vouches for who made it. The sheet says so in words and the button reads Install anyway. The app is quarantined until you open it once.</p></div></div><div class="tabpanel one" data-panel="bad"><div class="note"><p class="eyebrow">Outcome: Never installs</p><h3>Bad signature</h3><p>The files do not match what was signed, or the signature is wrong. This is the red case.</p></div></div><div class="tabpanel one" data-panel="revoked"><div class="note"><p class="eyebrow">Outcome: Never installs</p><h3>Revoked</h3><p>The publisher key was withdrawn. Installs and updates are refused, and rollback re-checks the revocation list.</p></div></div></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>What an app can ask for.</h2><p class="lead">Permissions are words with one plain sentence each. Click one.</p></div>
+  <div class="permx"><div class="permlist" role="group" aria-label="Permission words"><button type="button" data-perm="0" aria-pressed="true"><code>storage:own</code></button><button type="button" data-perm="1" aria-pressed="false"><code>host:files:ro</code></button><button type="button" data-perm="2" aria-pressed="false"><code>host:files:rw</code></button><button type="button" data-perm="3" aria-pressed="false"><code>host:net</code></button><button type="button" data-perm="4" aria-pressed="false"><code>host:downloads</code></button><button type="button" data-perm="5" aria-pressed="false"><code>shell:clipboard</code></button><button type="button" data-perm="6" aria-pressed="false"><code>shell:notify</code></button><button type="button" data-perm="7" aria-pressed="false"><code>shell:agent</code></button><button type="button" data-perm="8" aria-pressed="false"><code>net:https://HOST</code></button><button type="button" data-perm="9" aria-pressed="false"><code>service:NAME</code></button></div>
+<div class="permout" id="perm-out" aria-live="polite"><div data-permtext="0"><h3>Keep its own data</h3><p>A private folder for the app. Nothing else on the Mac.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="1" hidden><h3>Read one workspace folder</h3><p>Read files in the one folder you chose, and nothing outside it.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="2" hidden><h3>Change one workspace folder</h3><p>Read and write files in the one folder you chose.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="3" hidden><h3>Use the network</h3><p>Reach the internet. Without this, the browser engine blocks network requests.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="4" hidden><h3>Save downloads</h3><p>Put downloaded files in the app's own downloads folder.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="5" hidden><h3>Use the clipboard</h3><p>Read and write the clipboard.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="6" hidden><h3>Show notifications</h3><p>Post notifications to the desktop.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="7" hidden><h3>Talk to an agent</h3><p>Let the app drive an AI agent, which is itself bound by the default-deny rules.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="8" hidden><h3>One named site</h3><p>Reach one named host, not the whole internet.</p><p class="muted small">Granted on the host. Revoke any time.</p></div><div data-permtext="9" hidden><h3>One hub service</h3><p>Call one named service on the host, such as weather or music.</p><p class="muted small">Granted on the host. Revoke any time.</p></div></div></div>
+<p class="muted small" style="margin-top:12px">The plain-language sentences here are paraphrased for this page; the installer shows its own.</p>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>In the installer</h2><p class="lead">All tested offline: 92 tests pass.</p></div>
+  <div class="grid cols-3"><article class="card"><h3>Atomic installs</h3><p>Files are verified while they are written, then moved into place in one step. A crash leaves nothing half installed.</p></article><article class="card"><h3>Nothing is executed</h3><p>The installer never runs anything from a package. It only unpacks and checks.</p></article><article class="card"><h3>Hostile archives</h3><p>Symlinks, device files, duplicate names and case or Unicode lookalikes are refused, as are bad paths and over-size packages.</p></article><article class="card"><h3>Updates stay in the family</h3><p>An update needs the same id, a higher version and the same signing key. A different key is refused. Going back is a separate rollback that re-checks everything.</p></article><article class="card"><h3>Quarantine</h3><p>Unsigned, new-publisher and downloaded installs are quarantined until first opened. Updates from the same key inherit the cleared state.</p></article><article class="card"><h3>Approval tokens</h3><p>When a service needs a decision, the hub asks the guest to show a sheet and repeats the call with a one-use token tied to the app, version, package hash, key and permission set.</p></article></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Electron apps on the host</h2><p class="lead">They run as real processes on your Mac, so this is where the limits matter.</p></div>
+  <div class="grid cols-2"><article class="card"><h3>A real folder only</h3><p>The workspace must be an actual directory, not a link, and never the filesystem root, your home folder, .ssh, Library or similar protected places.</p></article><article class="card"><h3>A minimal environment</h3><p>No HOME, no tokens, no SSH agent socket. Profile, extensions and downloads live in fixed folders for the app.</p></article><article class="card"><h3>Network off unless granted</h3><p>Without host:net, the browser engine blocks network requests.</p></article><article class="card"><h3>A kill switch</h3><p>One command stops an app and closes its browser.</p></article></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>AI agents</h2><p class="lead">Default deny, with the question shown in the desktop.</p></div>
+  <div class="grid cols-3"><article class="card"><h3>Reads are free in the workspace</h3><p>An agent can read inside the workspace folder without asking.</p></article><article class="card"><h3>Everything else waits for you</h3><p>Writes, shell commands, network access, git push and secret reads wait for a key press in the guest.</p></article><article class="card"><h3>Nothing outside the workspace</h3><p>Writes outside the workspace are refused outright.</p></article></div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Said out loud.</h2></div>
+  <div class="honest"><h3>What is not promised</h3><ul>
+<li><b>Protection from a malicious HolyC app.</b> There is no memory protection in the guest, and the installer says so on its sheet.</li>
+<li><b>That a trusted publisher is honest.</b> Trust means a known key, not good intentions.</li>
+<li><b>Malware scanning.</b> Packages are checked for integrity and signature, not scanned.</li>
+<li><b>A wall around Electron.</b> An unsandboxed app can read anything the user can; this was tested. A profile that confines the node runtime exists, but the full Chromium app will not start under it.</li>
+<li><b>Safety if the Mac account is already compromised.</b></li>
+<li><b>Replay safety against a hostile guest.</b> A hostile guest can replay a token during its window, which is a known limit of the hub design.</li>
+<li><b>Key succession.</b> A stolen publisher key is handled by revocation and re-trust, not by an automatic hand-over.</li></ul></div>
+</div></section>
+<section class="section alt"><div class="wrap">
+  <div class="section-head"><h2>Coming next.</h2><p class="lead">Part of the <a href="/labs/templeos/site/hc-plus/">HC+</a> plan. None of this is built yet.</p></div>
+  <div class="grid cols-3"><article class="card"><h3>Catchable faults</h3><p>A page fault in an app becomes an exception the desktop catches, so one bad pointer drops a frame rather than opening the debugger.</p></article><article class="card"><h3>Debug allocator</h3><p>Canaries around allocations and checked array indexes in debug builds.</p></article><article class="card"><h3>Crash policy</h3><p>Autosave Notes, count faults, and skip an app that faulted twice. Snapshot restore stays the backstop.</p></article></div>
+</div></section>
+<section class="section"><div class="wrap narrow prose"><h2>Reporting a problem</h2><p>Placeholder: add a security contact and a disclosure policy before this site is published.</p><p class="muted small">Details: <a href="https://github.com/FraterCCCLXIII/templeos/blob/main/docs/app-installer.md">the installer note</a> (threat table, trust states), <a href="https://github.com/FraterCCCLXIII/templeos/blob/main/docs/electron-apps.md">Electron apps</a> and <a href="https://github.com/FraterCCCLXIII/templeos/blob/main/docs/holyc-improvement-analysis.md">the HolyC analysis</a> (the safety section).</p></div></section>
+<section class="cta"><div class="wrap">
+  <h2>See the desktop for yourself.</h2><p class="lead">Run it in a VM, which is where it belongs.</p>
+  <div class="actions"><a class="btn btn-primary" href="/labs/templeos/site/get-started/">Get started</a><a class="btn btn-ghost" href="https://github.com/FraterCCCLXIII/templeos">Read the source</a></div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/labs/templeos/site/"><svg class="mark" width="24" height="24" viewBox="0 0 32 32" role="img" aria-label="TempleOS logo"><circle cx="16" cy="16" r="13" fill="#ffffff" stroke="var(--ink)" stroke-width="2"/></svg><span>TempleOS</span><span class="alpha" aria-hidden="true">α</span></a>
+        <p class="muted small">A modern desktop, written in HolyC, on TempleOS. Written in HolyC. Runs on TempleOS.</p>
+      </div>
+      <div><h4>The desktop</h4><ul><li><a href="/labs/templeos/site/creation-studio/">Creation Studio</a></li><li><a href="/labs/templeos/site/ai/">AI in the OS</a></li><li><a href="/labs/templeos/site/apps/">Apps</a></li><li><a href="/labs/templeos/site/versions/">Versions</a></li><li><a href="/labs/templeos/site/compare/">Compare</a></li><li><a href="/labs/templeos/site/philosophy/">Philosophy</a></li><li><a href="/labs/templeos/site/roadmap/">Roadmap</a></li><li><a href="/labs/templeos/site/try/">Try it</a></li></ul></div><div><h4>Build</h4><ul><li><a href="/labs/templeos/site/developers/">Developers</a></li><li><a href="/labs/templeos/site/holyc/">HolyC</a></li><li><a href="/labs/templeos/site/docs/holyc/">HolyC reference</a></li><li><a href="/labs/templeos/site/hc-plus/">HC+</a></li><li><a href="/labs/templeos/site/docs/">Docs</a></li><li><a href="https://github.com/FraterCCCLXIII/templeos">Source</a></li></ul></div><div><h4>Trust</h4><ul><li><a href="/labs/templeos/site/security/">Security</a></li><li><a href="/labs/templeos/site/privacy/">Privacy</a></li><li><a href="/labs/templeos/site/accessibility/">Accessibility</a></li><li><a href="/labs/templeos/site/notices/">Notices</a></li></ul></div><div><h4>Get it</h4><ul><li><a href="/labs/templeos/site/download/">Download</a></li><li><a href="/labs/templeos/site/community/">Community</a></li><li><a href="/labs/templeos/site/requirements/">Requirements</a></li><li><a href="/labs/templeos/site/whats-new/">What's new</a></li><li><a href="/labs/templeos/site/faq/">FAQ</a></li><li><a href="/labs/templeos/site/history/">History</a></li><li><a href="/labs/templeos/site/history/templeos/">The founder</a></li><li><a href="/labs/templeos/site/about/">About</a></li></ul></div>
+    </div>
+    <p class="muted small legal">TempleOS was created by Terry A. Davis and is public domain. This is an independent desktop built on it. Placeholders: URL and licence to confirm.</p>
+  </div>
+</footer>
+<script src="/labs/templeos/site/site.js" defer></script>
+<script src="/labs/templeos/site/interactive.js" defer></script>
+<script type="module" src="/labs/kamiji/site/shared-header.js"></script></body>
+</html>

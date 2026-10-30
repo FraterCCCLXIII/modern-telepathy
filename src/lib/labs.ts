@@ -35,6 +35,7 @@ export const labs: Lab[] = [
   { id: "kosmos-computer", title: "Kosmos computer", blurb: "The generative AI operating system, as first sketched.", href: `${K}/kosmos-computer/`, group: "systems", project: "kosmos" },
   { id: "kosmographica", title: "Kosmographica", blurb: "Knowledge graph.", href: `${K}/kosmographica/`, group: "knowledge", project: "kosmographica" },
 
+  { id: "templeos-site", title: "TempleOS website", blurb: "The product site: download, apps, developers, security and history.", href: "/labs/templeos/site/", group: "systems", project: "templeos" },
   { id: "templeos-docs", title: "TempleOS desktop docs", blurb: "Plans and specs for the HolyC desktop, its browser and its host apps.", href: "/labs/templeos/docs/", group: "systems", project: "templeos" },
 
   { id: "kamikin", title: "Kamikin", blurb: "Learn Japanese with small friends.", href: `${K}/kamikin/`, group: "language" },
