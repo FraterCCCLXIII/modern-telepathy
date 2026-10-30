@@ -395,8 +395,11 @@ function build() {
   const brand = document.createElement("a");
   brand.className = "sx-brand";
   brand.href = "/";
-  brand.textContent = "Modern Telepathy";
-  lead.append(turn, brand);
+  brand.setAttribute("aria-label", "Modern Telepathy home");
+  brand.style.margin = "0";
+  brand.style.padding = "0";
+  brand.append(turn);
+  lead.append(brand);
   nav.append(lead);
   const still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!still) {

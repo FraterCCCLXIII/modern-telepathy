@@ -188,9 +188,8 @@ export function SiteHeader() {
       <nav aria-label="Sites" className="h-10 border-b border-border">
         <div className={`${pad} h-full flex items-center justify-between gap-x-6 overflow-x-auto no-scrollbar`}>
           <span className="flex items-center gap-x-4 flex-none">
-            <LogoWheel />
-            <Link to="/" className={`${bar} text-ink font-semibold`}>
-              Modern Telepathy
+            <Link to="/" aria-label="Modern Telepathy home">
+              <LogoWheel />
             </Link>
           </span>
           <span className="flex items-center gap-x-6 flex-none">
