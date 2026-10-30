@@ -16,7 +16,7 @@ const mono = "font-mono text-[.7rem] uppercase tracking-[.16em]";
 
 type EyeSet = "dots" | "wide" | "pills";
 type Settings = { eyes: EyeSet; size: number; distance: number; highlight: boolean };
-const DEFAULTS: Settings = { eyes: "dots", size: 100, distance: 100, highlight: true };
+const DEFAULTS: Settings = { eyes: "pills", size: 100, distance: 100, highlight: true };
 
 const BLINK = `.gl-eye{transform-box:fill-box;transform-origin:center;animation:gl-blink 5.5s infinite}
 .gl-eye:nth-of-type(2){animation-delay:.07s}@keyframes gl-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
@@ -24,11 +24,12 @@ const BLINK = `.gl-eye{transform-box:fill-box;transform-origin:center;animation:
 
 /** Eyes for one character with the live settings. Positions are in font units (y up); the group is flipped by the caller. */
 function eyeShapes(g: Glyphling, s: Settings) {
-  const cx = g.eyes.reduce((a, e) => a + e[0], 0) / g.eyes.length;
-  const cy = g.eyes.reduce((a, e) => a + e[1], 0) / g.eyes.length;
+  const eyes = s.eyes === "pills" && g.pillEyes ? g.pillEyes : g.eyes;
+  const cx = eyes.reduce((a, e) => a + e[0], 0) / eyes.length;
+  const cy = eyes.reduce((a, e) => a + e[1], 0) / eyes.length;
   const k = s.size / 100;
   const dk = s.distance / 100;
-  return g.eyes.map(([x0, y0, r0], i) => {
+  return eyes.map(([x0, y0, r0], i) => {
     const x = cx + (x0 - cx) * dk;
     const y = cy + (y0 - cy) * dk;
     const r = r0 * k;
