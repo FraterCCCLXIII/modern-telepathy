@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { labsForProject } from "@/lib/labs";
+import { CreatureCast } from "@/components/creature-cast";
 import { getProject, type Milestone, type ProjectLink } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -180,6 +181,16 @@ function ProjectDetail() {
                     </figure>
                   ))}
                 </div>
+              </section>
+            )}
+
+            {project.cast && project.cast.length > 0 && (
+              <section>
+                <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-6">Characters</h2>
+                <CreatureCast cast={project.cast} />
+                <p className="mt-4 text-sm text-zinc-500">
+                  Kamiji characters used in this app. <Link to="/creatures" className="underline">See the whole library</Link>.
+                </p>
               </section>
             )}
 

@@ -1,4 +1,5 @@
 import type { GroupId } from "@/lib/groups";
+import type { CastMember } from "@/components/creature-cast";
 
 export type ProjectLink = { label: string; href: string };
 export type Milestone = { label: string; note: string; status: "done" | "active" | "planned" };
@@ -25,6 +26,8 @@ export type Project = {
   features?: { title: string; body: string }[];
   /** Extra images under the pitch. */
   gallery?: { src: string; alt: string; caption?: string }[];
+  /** Kamiji characters the product uses, shown as a tiled list. */
+  cast?: CastMember[];
   /** "At a glance" facts for the sidebar. */
   facts?: { label: string; value: string }[];
 };
@@ -38,6 +41,14 @@ export const projects: Project[] = [
     description: "A Canvas App: a list of agents with their latest update, a chat with the one you pick, and their screen and routines beside it.",
     logoSrc: "/projects/hangout/logo.svg",
     imageSrc: "/projects/hangout/g1.webp",
+    cast: [
+      { kind: "wisp", name: "Violet Wisp", fill: "#8B5CF6" },
+      { kind: "wisp", name: "Blue Wisp", fill: "#2D9CF0" },
+      { kind: "wisp", name: "Orange Wisp", fill: "#F5760A" },
+      { kind: "flux", name: "Aurora Flux", variant: "aurora" },
+      { kind: "flux", name: "Sunset Flux", variant: "sunset" },
+      { kind: "cubit", name: "Gradient Cubit", variant: "gradient" },
+    ],
     role: "Creator.",
     about: ["Hangout turns the conversations on an Agent Server into a team you can scan: each agent has a name, a role, a model and a coloured Wisp avatar, and the newest message shows in the list.", "It runs inside Agent Canvas as an extension, and shows sample agents when no server is reachable."],
     pitchHeadline: "Your team of always-on agents",
@@ -76,6 +87,14 @@ export const projects: Project[] = [
     description: "A team space in Agent Canvas where people and AI agents are members, with threads, mentions and requests that wait for approval.",
     logoSrc: "/projects/team-chat/logo.svg",
     imageSrc: "/projects/team-chat/g1.webp",
+    cast: [
+      { kind: "wanderer", name: "Wanderer", fill: "#f59e0b" },
+      { kind: "tinker", name: "Tinker", fill: "#22d3ee" },
+      { kind: "wanderer", name: "Wanderer", fill: "#ec4899" },
+      { kind: "tinker", name: "Tinker", fill: "#34d399" },
+      { kind: "mitt", name: "Mitt", fill: "#8b5cf6" },
+      { kind: "spooklet", name: "Spooklet", fill: "#3b82f6" },
+    ],
     role: "Creator.",
     about: ["Team chat puts people and agents in one room. An agent shows its role and model, who owns it and whether it is online, and it can ask an owner for approval before it runs.", "It can use a Nostr relay, and a sample team lets you explore without signing in."],
     pitchHeadline: "People and agents in one room",
@@ -114,6 +133,14 @@ export const projects: Project[] = [
     description: "A Canvas App for video meetings on an open WebRTC stack: join a room, share camera, mic and screen, and chat.",
     logoSrc: "/projects/meet/logo.svg",
     imageSrc: "/projects/meet/g1.webp",
+    cast: [
+      { kind: "wisp", name: "Green Wisp", fill: "#2FBF71" },
+      { kind: "wisp", name: "Pink Wisp", fill: "#EC4899" },
+      { kind: "flux", name: "Neon Flux", variant: "neon" },
+      { kind: "mitt", name: "Mitt", fill: "#EF4444" },
+      { kind: "spooklet", name: "Spooklet", fill: "#19B5A5" },
+      { kind: "cubit", name: "Rainbow Cubit", variant: "rainbow" },
+    ],
     role: "Creator.",
     about: ["Meet connects to a LiveKit server you run, so meetings stay on your machine or your network.", "It keeps your name, room and server in this browser, and can import contacts."],
     pitchHeadline: "Join from the same room in two tabs",
