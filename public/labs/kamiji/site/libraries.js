@@ -180,7 +180,14 @@ function glyphlingContent(api, v, item, color, opts = {}) {
     });
     v.dirty = true;
   }
-  c.setColor = (col) => { color = col; body.color.set(col || item.colour); v.dirty = true; };
+  // Monotone: black letters get white eyes, so the face still reads; white letters keep dark eyes.
+  c.setColor = (col) => {
+    color = col; body.color.set(col || item.colour);
+    const inverted = !!col && col.toLowerCase() === "#111111";
+    dark.color.set(inverted ? 0xffffff : 0x111111);
+    white.color.set(inverted ? 0x111111 : 0xffffff);
+    v.dirty = true;
+  };
   c.setEyes = (name) => { c.eyeSet = name; if (pivot) buildEyes(); };
   c.attach = async () => {
     try { await attachInner(); } catch (e) { console.error("Glyphlings attach failed", e); throw e; }
@@ -289,8 +296,9 @@ export const LIBRARIES = [
   },
   {
     id: "glyphlings", label: "Glyphlings", group: "Characters", count: 18, tintable: true,
+    monoTints: [["#111111", "Black"], ["#ffffff", "White"]],
     description: "Nine Greek letters, capitals and lowercase, from Courier New Regular, extruded with rounded edges, given eyes in their empty spaces, and rigged on a seven-bone spine so they bend like rubber-hose characters. Hover a tile to see it move. Click to switch between round and pill eyes.",
-    note: "The eyes float in the letter's counters and follow the spine bone nearest them. Set the tint to colour the letters.",
+    note: "The eyes float in the letter's counters and follow the spine bone nearest them. Set the tint to colour the letters, or pick Black or White for a monotone set (black letters get white eyes).",
     async load() {
       const data = await getJson(`${ASSETS}glyphlings/index.json`);
       return data.map((d) => ({ ...d, keywords: [d.letter, d.lower ? "lowercase" : "capital", "greek", "letter"] }));
@@ -444,6 +452,7 @@ export function initLibraryBrowser(api) {
     };
     make(null, "Default colours", true);
     COLORS.forEach((col, i) => make(col, `Tint ${api.TINT_NAMES[i]}`, false));
+    (lib.monoTints || []).forEach(([col, name]) => make(col, `Tint ${name}`, false));
   }
   const colorFor = (item) => tint || item.tint || COLORS[0];
   function applyTint() {
